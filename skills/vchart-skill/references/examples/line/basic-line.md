@@ -28,7 +28,6 @@ const spec = {
 };
 
 const vchart = new VChart(spec, { dom: 'container' });
-// ⚠️ CDN/HTML 环境中须改为: new VChart.default(spec, { dom: 'container' })
 vchart.renderSync();
 ```
 
@@ -195,7 +194,6 @@ const spec = {
 };
 
 const vchart = new VChart(spec, { dom: 'container' });
-// ⚠️ CDN/HTML 环境中须改为: new VChart.default(spec, { dom: 'container' })
 vchart.renderSync();
 ```
 

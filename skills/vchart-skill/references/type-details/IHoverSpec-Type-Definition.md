@@ -255,7 +255,7 @@ hover: {
 - **mouseover/mouseout**: Alternative mouse events
 - **click/dblclick**: Click-based hover activation
 
-### Pointer Events\
+### Pointer Events
 - **pointerenter/pointerleave**: Modern pointer API events
 - **pointerover/pointerout**: Alternative pointer events
 

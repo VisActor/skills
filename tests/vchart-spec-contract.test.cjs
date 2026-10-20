@@ -14,7 +14,7 @@ for (const [name, spec] of [
 for (const [name,data] of [
   ['graph',{values:[graph]}], ['empty',{values:[]}],['empty graph',{values:[{nodes:[],links:[]}]}],
   ['hierarchy',{values:[{nodes:[{name:'Root',children:[{name:'Leaf',value:9}]}]}]}],
-  ['separate',[{id:'nodes',values:graph.nodes},{id:'links',values:edges}]],
+  ['named records',{values:[{id:'nodes',values:graph.nodes},{id:'links',values:edges}]}],
   ['deferred reference',{fromDataId:'upstream'}]
 ]) test(`accepts supported sankey input: ${name}`,()=>assert.equal(validateSpec({type:'sankey',data}).ok,true));
 test('does not validate an unrelated combined-chart dataset as sankey',()=>{
@@ -45,26 +45,23 @@ test('reports deferred runtime globals without claiming spec was checked',()=>{
 });
 test('limits source evaluation',()=>assert.equal(validateSource('while(true) {}').ok,false));
 
-test('treemap example computes shares from changed data and preserves original records',()=>{
-  const fs=require('node:fs'),vm=require('node:vm');
-  const source=fs.readFileSync(require.resolve('../skills/vchart-skill/references/examples/treemap/hierarchy-treemap.js'),'utf8');
-  const ctx={document:{createElement:()=>({getContext:()=>({measureText:text=>({width:text.length*7})})})}};
-  vm.runInNewContext(source,ctx);
+test('treemap example preserves records and optional tooltip reads layout nodes',()=>{
+  const fs=require('node:fs'),vm=require('node:vm'),ctx={};
+  vm.runInNewContext(fs.readFileSync(require.resolve('../skills/vchart-skill/references/examples/treemap/hierarchy-treemap.js'),'utf8'),ctx);
   const rows=[{region:'East',sku:'Blueberry',units:11},{region:'East',sku:'Cherry',units:32},{region:'West',sku:'Apple',units:7}];
-  const spec=ctx.createTreemapSpec(rows,{hierarchyFields:['region','sku'],valueField:'units',groupField:'region',palette:{East:'#123456',West:'#654321'}});
-  const raw=spec.data.values[0].children[0].children[0];
-  const node={datum:[{sku:'Total'},{sku:'East'},raw],x0:0,x1:220,y0:0,y1:100};
-  assert.equal(spec.label.formatMethod('',node),'Blueberry 22%');
-  assert.equal(spec.leaf.style.fill(node),'#123456');
-  assert.equal(spec.tooltip.mark.content[1].value(node),'11');
-  assert.equal(spec.label.formatMethod('',{...node,x1:20}), '');
+  const spec=ctx.createTreemapSpec(rows,{hierarchyFields:['region','sku'],valueField:'units'});
   assert.deepEqual(JSON.parse(JSON.stringify(spec.data.values[0].children.flatMap(p=>p.children))),rows);
+  const tooltip=ctx.createTreemapTooltip('sku','units');
+  for (const node of [rows[0],{datum:rows[0]},{datum:[{sku:'Total'},rows[0]]}]) {
+    assert.equal(tooltip.mark.title.value(node),'Blueberry');
+    assert.equal(tooltip.mark.content[0].value(node),'11');
+  }
 });
 
 test('treemap example preserves empty input without synthetic leaves',()=>{
   const fs=require('node:fs'),vm=require('node:vm'),ctx={};
   vm.runInNewContext(fs.readFileSync(require.resolve('../skills/vchart-skill/references/examples/treemap/hierarchy-treemap.js'),'utf8'),ctx);
-  const spec=ctx.createTreemapSpec([],{hierarchyFields:['category','item'],valueField:'quantity',groupField:'category',palette:{}});
+  const spec=ctx.createTreemapSpec([],{hierarchyFields:['category','item'],valueField:'quantity'});
   assert.equal(spec.data.values.length,0);
 });
 
@@ -79,3 +76,61 @@ test('accepts numeric coordinates and layout callbacks without executing them',(
 });
 test('leaves percentage layout properties and percentage text untouched',()=>assert.equal(validateSpec({type:'bar',padding:'5%',customMark:[{type:'text',style:{x:20,y:30,text:'50%'}}]}).ok,true));
 test('accepts no custom marks after restoring data',()=>assert.equal(validateSpec({type:'bar',data:{values:[{category:'A',count:0}]},customMark:[]}).ok,true));
+
+for (const value of ['(text, datum) => datum.count', '__CALLBACK__', 5, true, {}]) {
+  for (const key of ['label', 'nonLeafLabel']) {
+    test(`rejects non-function ${key}.formatMethod: ${JSON.stringify(value)}`, () => {
+      assert.deepEqual(codes({type:'treemap',[key]:{formatMethod:value}}), ['LABEL_FORMAT_METHOD_FUNCTION']);
+    });
+  }
+}
+test('checks series label callbacks', () => {
+  assert.deepEqual(validateSpec({type:'common',series:[{type:'bar',label:{formatMethod:'bad'}}]}).errors.map(e=>e.path), ['spec.series[0].label.formatMethod']);
+});
+test('preserves declarative formatting, tooltip strings and ordinary data fields', () => {
+  assert.equal(validateSpec({type:'bar',data:{values:[{formatMethod:'ordinary data'}]},label:{formatter:'{count}',formatMethod:(text,datum)=>datum.count},tooltip:{mark:{title:{value:'Total'}}}}).ok,true);
+});
+test('source validation rejects serialized callbacks before HTML generation', () => {
+  assert.deepEqual(validateSource('const spec = {type:"bar",label:{formatMethod:"(text) => text"}};').errors.map(e=>e.code), ['LABEL_FORMAT_METHOD_FUNCTION']);
+});
+
+for (const [name, spec] of [
+  ['root graph object', {type:'sankey',data:{values:graph}}],
+  ['inline series graph object', {type:'common',series:[{type:'sankey',data:{values:graph}}]}],
+  ['referenced graph object', {type:'common',data:[{id:'flow',values:graph}],series:[{type:'sankey',dataId:'flow'}]}],
+  ['indexed graph object', {type:'common',data:[{values:[graph]},{values:graph}],series:[{type:'sankey',dataIndex:1}]}],
+  ['null values', {type:'sankey',data:{values:null}}]
+]) test(`rejects malformed inline Sankey values: ${name}`,()=>assert.deepEqual(codes(spec),['SANKEY_GRAPH_REQUIRED']));
+test('reports the field containing the bare graph',()=>assert.equal(validateSpec({type:'sankey',data:{values:graph}}).errors[0].path,'spec.data[0].values'));
+for (const [name, data] of [
+  ['parsed text', {values:'source,target,value\nA,B,3',parser:{type:'csv'}}],
+  ['parsed object', {values:graph,parser:{type:'custom'}}],
+  ['transformed rows', {values:edges,transforms:[{type:'customGraph'}]}],
+  ['transformed object', {values:graph,transforms:[{type:'customGraph'}]}],
+  ['referenced data', {values:graph,fromDataId:'upstream'}]
+]) test(`defers Sankey input requiring runtime data processing: ${name}`,()=>assert.equal(validateSpec({type:'sankey',data}).ok,true));
+test('does not impose the Sankey graph wrapper on another chart',()=>assert.equal(validateSpec({type:'custom',data:{values:graph}}).ok,true));
+test('source validator catches a bare graph before generation',()=>assert.deepEqual(validateSource('const spec = {type:"sankey", data:{values:{nodes:[],links:[]}}};').errors.map(e=>e.code),['SANKEY_GRAPH_REQUIRED']));
+
+test('does not confuse root datasets with named graph records',()=>assert.deepEqual(codes({type:'sankey',data:[{id:'nodes',values:graph.nodes},{id:'links',values:edges}]}),['SANKEY_GRAPH_REQUIRED','SANKEY_GRAPH_REQUIRED']));
+test('rejects malformed named graph record values',()=>assert.deepEqual(codes({type:'sankey',data:{values:[{id:'nodes',values:{}},{id:'links',values:edges}]}}),['SANKEY_GRAPH_REQUIRED']));
+
+for (const data of [[], [{label:'A'}], 'items', {}]) {
+  test(`rejects non-function discrete legend data: ${JSON.stringify(data)}`,()=>assert.deepEqual(codes({type:'bar',legends:{data}}),['DISCRETE_LEGEND_DATA_FUNCTION']));
+}
+test('checks explicit discrete legends in an array with a field path',()=>assert.deepEqual(validateSpec({legends:[{type:'color',data:[]},{type:'discrete',data:[]}]}).errors.map(({code,path})=>({code,path})),[{code:'DISCRETE_LEGEND_DATA_FUNCTION',path:'spec.legends[1].data'}]));
+test('accepts legend data callbacks without evaluating runtime dependencies',()=>assert.equal(validateSpec({legends:{data:()=>{throw Error('requires runtime legend items')}}}).ok,true));
+for (const legends of [undefined, {}, {data:null}, {type:'color',data:[]}, {type:'size',data:[]}]) {
+  test(`leaves omitted and continuous legend data alone: ${JSON.stringify(legends)}`,()=>assert.equal(validateSpec({legends}).ok,true));
+}
+test('source validation rejects discrete legend arrays',()=>assert.deepEqual(validateSource('const spec={type:"bar",legends:{data:[]}};').errors.map(e=>e.code),['DISCRETE_LEGEND_DATA_FUNCTION']));
+
+
+test('treemap example leaves optional presentation features to the caller',()=>{
+  const fs=require('node:fs'),vm=require('node:vm'),ctx={};
+  vm.runInNewContext(fs.readFileSync(require.resolve('../skills/vchart-skill/references/examples/treemap/hierarchy-treemap.js'),'utf8'),ctx);
+  const spec=ctx.createTreemapSpec([{department:'Ops',name:'Service',amount:9}],{hierarchyFields:['department','name'],valueField:'amount'});
+  for (const key of ['legends','leaf','splitType']) assert.equal(Object.hasOwn(spec,key),false);
+  assert.deepEqual(JSON.parse(JSON.stringify(spec.tooltip)),{visible:true});
+  assert.deepEqual(JSON.parse(JSON.stringify(spec.label)),{visible:true});
+});

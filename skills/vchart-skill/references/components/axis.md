@@ -5,35 +5,35 @@
 ```javascript
 axes: [
   {
-    orient: "bottom", // 位置
-    type: "band", // 类型
+    orient: 'bottom',    // 位置
+    type: 'band',        // 类型
     // ...其他配置
   },
   {
-    orient: "left",
-    type: "linear",
+    orient: 'left',
+    type: 'linear',
     // ...其他配置
-  },
-];
+  }
+]
 ```
 
 ## 位置 (orient)
 
-| 值         | 说明            |
-| ---------- | --------------- |
+| 值 | 说明 |
+|---|------|
 | `'bottom'` | 底部（X轴常用） |
-| `'top'`    | 顶部            |
-| `'left'`   | 左侧（Y轴常用） |
-| `'right'`  | 右侧（双Y轴）   |
+| `'top'` | 顶部 |
+| `'left'` | 左侧（Y轴常用） |
+| `'right'` | 右侧（双Y轴） |
 
 ## 类型 (type)
 
-| 值         | 说明   | 适用场景              |
-| ---------- | ------ | --------------------- |
-| `'band'`   | 类目轴 | 离散数据（柱状图X轴） |
-| `'linear'` | 线性轴 | 连续数值              |
-| `'time'`   | 时间轴 | 时间序列数据          |
-| `'log'`    | 对数轴 | 跨度大的数值          |
+| 值 | 说明 | 适用场景 |
+|---|------|---------|
+| `'band'` | 类目轴 | 离散数据（柱状图X轴） |
+| `'linear'` | 线性轴 | 连续数值 |
+| `'time'` | 时间轴 | 时间序列数据 |
+| `'log'` | 对数轴 | 跨度大的数值 |
 
 ## 数值范围
 
@@ -61,22 +61,6 @@ axes: [
     text: '销售额（万元）',
     position: 'middle',     // 'start' | 'middle' | 'end'
     space: 10,              // 与轴的间距
-    style: {
-      fontSize: 14,
-      fill: '#333',
-      fontWeight: 'bold'
-    }
-  }
-}
-```
-
-## 单位
-
-```javascript
-{
-  unit: {
-    visible: true,
-    text: '万元',
     style: {
       fontSize: 14,
       fill: '#333',
@@ -181,27 +165,27 @@ axes: [
 
 ```javascript
 const spec = {
-  type: "common",
+  type: 'common',
   series: [
-    { type: "bar", id: "bar", xField: "x", yField: "y1" },
-    { type: "line", id: "line", xField: "x", yField: "y2" },
+    { type: 'bar', id: 'bar', xField: 'x', yField: 'y1' },
+    { type: 'line', id: 'line', xField: 'x', yField: 'y2' }
   ],
   axes: [
-    { orient: "bottom", type: "band" },
+    { orient: 'bottom', type: 'band' },
     {
-      orient: "left",
-      type: "linear",
-      seriesId: ["bar"], // 关联柱状图
-      title: { visible: true, text: "销售额" },
+      orient: 'left',
+      type: 'linear',
+      seriesId: ['bar'],        // 关联柱状图
+      title: { visible: true, text: '销售额' }
     },
     {
-      orient: "right",
-      type: "linear",
-      seriesId: ["line"], // 关联折线图
-      title: { visible: true, text: "增长率" },
-      grid: { visible: false }, // 右轴通常不显示网格
-    },
-  ],
+      orient: 'right',
+      type: 'linear',
+      seriesId: ['line'],       // 关联折线图
+      title: { visible: true, text: '增长率' },
+      grid: { visible: false }  // 右轴通常不显示网格
+    }
+  ]
 };
 ```
 
@@ -263,60 +247,60 @@ const spec = {
 ```javascript
 axes: [
   {
-    orient: "bottom",
-    type: "band",
+    orient: 'bottom',
+    type: 'band',
     label: {
       visible: true,
       autoRotate: true,
       autoHide: true,
       style: {
         fontSize: 12,
-        fill: "#666",
-      },
+        fill: '#666'
+      }
     },
     tick: {
-      visible: false,
+      visible: false
     },
     domainLine: {
       visible: true,
-      style: { stroke: "#ddd" },
+      style: { stroke: '#ddd' }
     },
     grid: {
-      visible: false,
-    },
+      visible: false
+    }
   },
   {
-    orient: "left",
-    type: "linear",
+    orient: 'left',
+    type: 'linear',
     min: 0,
     nice: true,
     title: {
       visible: true,
-      text: "数值",
-      style: { fontSize: 12 },
+      text: '数值',
+      style: { fontSize: 12 }
     },
     label: {
       visible: true,
-      formatMethod: (val) => (val >= 1000 ? `${val / 1000}k` : val),
+      formatMethod: (val) => val >= 1000 ? `${val/1000}k` : val,
       style: {
         fontSize: 12,
-        fill: "#666",
-      },
+        fill: '#666'
+      }
     },
     tick: {
       visible: true,
-      style: { stroke: "#ddd" },
+      style: { stroke: '#ddd' }
     },
     domainLine: {
-      visible: false,
+      visible: false
     },
     grid: {
       visible: true,
       style: {
-        stroke: "#eee",
-        lineDash: [0],
-      },
-    },
-  },
-];
+        stroke: '#eee',
+        lineDash: [0]
+      }
+    }
+  }
+]
 ```

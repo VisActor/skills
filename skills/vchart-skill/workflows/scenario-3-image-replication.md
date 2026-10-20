@@ -16,18 +16,6 @@
 | 普通截图/图片 | 需要推断样式值 | 标准图片分析流程   |
 | Figma 设计稿  | 可获取精确样式 | Figma 专属处理流程 |
 
-## P0 执行约束
-
-- 禁止使用 `find`、`grep`、`ls`
-- 本地知识访问统一遵循 [直达路径路由与工具约束](../references/DIRECT_PATH_ROUTING.md)
-- 图片还原场景优先读取：
-  1. `../references/chart/chart-type-guide.md`
-  2. 固定 example 路径表中与图表类型最接近的 1 个 example
-  3. `../references/type-meta/[type].json`
-  4. `../references/topkey/[type].json`
-  5. 需要时再读 1 个 `type-details`
-- 如果没有明确的本地 example 固定路径，直接使用本地检索结果或 `type-meta + topkey` 生成，不做目录扫描
-
 ## 处理步骤
 
 ### 步骤 1：图片分析
@@ -56,44 +44,17 @@
    - 辅助图形
 ```
 
-### 步骤 2：与用户确认
+### 步骤 2：处理必要的不确定性
 
-```markdown
-## 图表分析结果
+图片、真实数据和要求充分时直接还原，不逐项确认图型和样式。只澄清会改变图义、真实数据口径或还原目标的信息。
 
-根据您提供的图片，我识别到以下信息：
-
-**图表类型**：[识别的类型]
-
-**数据结构**：
-
-- X 轴：[类目/时间/数值]，示例值：[从图中读取的示例]
-- Y 轴：[数值范围]
-- 系列：[系列数量及含义]
-
-**视觉特征**：
-
-- [颜色/布局/样式等描述]
-
-**组件配置**：
-
-- [识别到的组件列表]
-
-**请确认**：
-
-1. 以上分析是否准确？
-2. 请提供实际数据（如有），或确认使用模拟数据
-3. 是否有其他细节需要补充？
-```
+从清晰标签读出的数值与估算值需要区分；无法读取的真实业务值不能按柱高猜测后当作真值交付。仅需样式演示且允许模拟数据时明确标注 mock，保留实际数据要求及用户指定的 HTML/spec 交付目标。
 
 ### 步骤 3：生成配置
 
-> **🔍 SOP 检索点**：在生成配置前，先调用 `python3 scripts/search_knowledge.py --kind sops --query "<从图片分析中抽取的问题描述>" --limit 2` 进行关键词检索；同时直接读取 `references/sops/SOP_INDEX.md` 路由表。如果识别到特定格式化需求（如百分比标签、自定义 tooltip 内容、特殊坐标轴格式），命中则加载执行，确保配置细节准确。
+信息充分后，按照以下优先级匹配配置：
 
-
-确认后，按照以下优先级匹配配置：
-
-1. **查找相似示例**：先调用 `python3 scripts/search_knowledge.py --kind examples --query "<图表类型 + 关键样式特征>" --limit 3` 检索最接近的示例；如结果不足，再回退到本地固定 example 路径，具体见 [直达路径路由与工具约束](../references/DIRECT_PATH_ROUTING.md)
+1. **查找相似示例**：在 `../references/examples/` 中查找最接近的示例作为基础
 2. **构建 spec**：
    - 使用 `type-meta/[图表类型].json` 确定可用属性
    - 使用 `type-details/*.md` 获取样式配置的详细类型
@@ -105,21 +66,11 @@
 
 ### 步骤 4：输出还原结果
 
-根据用户需求和对话上下文，灵活选择输出格式：
+遵循 [主文件的交付选择](../SKILL.md#先确定任务与交付目标)。明确只要 spec 或已有宿主消费配置时使用 [spec 流程](scenario-2-spec-generation.md)；独立可查看还原默认使用 [HTML 流程](scenario-2-html-generation.md)。同时要两者时 HTML 使用所交付的同一份 spec。
 
-#### 输出格式选择
+还原范围、读图不确定性和验证证据与配置分开；纯 JSON 要求不混入这些说明。后续调整或诊断保留原交付目标。
 
-```
-if (用户明确要求"可运行的demo" || "能直接打开的文件" || "完整的HTML") {
-  → 输出完整 HTML 文件（使用 Python 脚本生成）
-} else if (用户询问"配置怎么写" || "代码示例" || 在讨论具体配置) {
-  → 输出 JavaScript spec 代码
-} else {
-  → 默认输出 JavaScript spec 代码（更简洁、易于集成）
-}
-```
-
-#### 格式一：输出 JavaScript 代码（推荐）
+#### 格式一：输出还原后的 spec
 
 直接输出基于图片分析的 VChart spec 配置代码。
 
@@ -162,15 +113,10 @@ const spec = {
   }
 };
 
-const vchart = new VChart(spec, { dom: 'chart' });
-// ⚠️ CDN/HTML 环境中须改为: new VChart.default(spec, { dom: 'container' })
-vchart.renderAsync();
 ```
 ````
 
 #### 格式二：输出完整 HTML（按需）
-
-> **🚨 CDN 环境适配**：输出 HTML 时，必须按 `references/sops/cdn-script-adaption.md` 执行全部转换规则（构造函数、静态方法、globalConfig、ThemeManager、注册函数）。
 
 当用户需要完整的可运行演示时，使用 `template/demo.html` + Python 脚本生成视觉还原结果。
 
@@ -198,13 +144,13 @@ python3 scripts/generate_demo_html.py --spec-file spec.js
 **完整示例**（图片还原场景）：
 
 ```bash
-python3 skills/vchart-skill/scripts/generate_demo_html.py \
+python3 scripts/generate_demo_html.py \
   --title "图表还原结果" \
   --desc "基于图片分析生成的可运行示例" \
   --feature "还原了颜色、标签位置、坐标轴与图例布局" \
   --tips "可调整 color/label/axes/legends，优化样式细节" \
   --spec-file spec.js \
-  --output-dir ./chart-output
+  --output output/image-replication.html
 ```
 
 #### 主要参数
@@ -212,9 +158,7 @@ python3 skills/vchart-skill/scripts/generate_demo_html.py \
 - `--spec-file`：基于图片分析构建的完整 VChart spec
 - `--feature`：已还原的特征说明（如：颜色、标签、坐标轴等）
 - `--tips`：可调整的关键配置（如：color/label/axes）
-- `--output-dir`：调用方输出目录；接受绝对路径或相对于命令当前工作目录的路径
-
-示例中的 `./chart-output` 应替换为调用方指定的目录；文件交付遵循 [校验与交付流程](artifact-delivery.md)。
+- `--output`：输出 HTML 文件路径（可选，默认 `output/demo.html`）
 
 #### Spec 文件结构
 
@@ -271,18 +215,18 @@ const spec = {
 **步骤 2：运行脚本生成 HTML**
 
 ```bash
-python3 skills/vchart-skill/scripts/generate_demo_html.py \
+python3 scripts/generate_demo_html.py \
   --title "折线图还原示例" \
   --desc "根据截图还原的折线图" \
   --feature "还原了数据趋势、颜色和标签样式" \
   --tips "可修改 line.style 或 point.style 调整线条和数据点样式" \
   --spec-file spec.js \
-  --output-dir ./chart-output
+  --output output/line_replication.html
 ```
 
 **步骤 3：查看生成结果**
 
-在浏览器中打开 `./chart-output/demo.html` 查看还原效果。
+在浏览器中打开 `output/line_replication.html` 查看还原效果。
 
 **输出模板**：
 
@@ -331,7 +275,7 @@ python3 skills/vchart-skill/scripts/generate_demo_html.py \
 当用户未提供真实数据时：
 
 1. **从图片读取**：尽量从坐标轴、标签中读取数值
-2. **合理估算**：根据图形比例估算数据大小
+2. **明确估算边界**：仅样式演示且允许模拟数据时按图形比例构造 mock，不把估算当作真实业务数值
 3. **保持趋势**：确保模拟数据体现图片中的趋势特征
 4. **数量匹配**：模拟数据的数量与图片中的数据点数量一致
 
@@ -496,7 +440,7 @@ Stop 2: #69C0FF at 100%
 - 图表区域：[宽] x [高]
 - 内边距：[值]
 
-**请确认以上提取的样式值是否准确？**
+存在影响还原目标的歧义时再确认；已取得精确样式且数据充分时直接生成。
 ```
 
 #### 步骤 F3：生成精确配置

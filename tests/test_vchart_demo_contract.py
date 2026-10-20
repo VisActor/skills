@@ -60,6 +60,7 @@ def generated_script(output: Path) -> Path:
     "source,code",
     [
         ("const spec={type:'treemap',data:{value:[]}}", "DATA_VALUES_REQUIRED"),
+        ("const spec={type:'sankey',data:{values:{nodes:[],links:[]}}}", "SANKEY_GRAPH_REQUIRED"),
         ("const spec={type:'treemap',data:{values:{children:[]}}}", "HIERARCHY_ROOT_ARRAY"),
         (
             "const spec={type:'sankey',data:{values:[{source:'a',target:'b',value:2}]}}",

@@ -1,22 +1,8 @@
 # Python 脚本参数参考
 
-本文档提供所有 Python 脚本的参数详细说明。
+本文档提供所有 Python 脚本的参数详细说明。脚本从自身位置读取模板，可在任意工作目录调用。三个生成器均支持 `--output-dir`（优先于 `--output`，使用默认文件名）；相对输出路径基于当前工作目录，成功时输出实际文件的绝对路径。演示生成器默认校验配置，`--validate` 保留为兼容参数。
 
 ---
-
-## search_knowledge.py
-
-仅检索随 Skill 发布的本地资料，无服务端、模型或第三方 Python 依赖。
-
-| 参数 | 说明 |
-| --- | --- |
-| `--kind` | 必填：examples/example 或 sops/sop |
-| `--query` | 必填：非空关键词，中英文均可 |
-| `--limit` | 正整数，默认 3 |
-| `--output` | 可选 JSON 输出文件 |
-| `--compact` | 输出单行 JSON |
-
-输出 `{kind, query, results}`；每条结果含 `path`（相对 Skill 根目录）、`title`、`score`、`excerpt`。无匹配返回空数组；读取匹配文件确认事实后再生成代码。检索不会调用远程接口。
 
 ## generate_diagnosis_html.py
 
@@ -31,7 +17,7 @@
 | `--title`       | string | ❌   | `"VChart 问题诊断报告"`          | 诊断报告的标题，显示在 HTML 页面顶部                            |
 | `--desc`        | string | ❌   | `"基于用户配置的诊断与修复结果"` | 报告描述，概述诊断内容                                          |
 | `--config-file` | path   | ❌   | 使用内置示例                     | 包含 `problemReview`/`diagnosis`/`solutions` 的 JS 配置文件路径 |
-| `--output-dir`  | path   | ❌   | -                                | 调用方输出目录（绝对路径或相对于命令当前工作目录），输出文件固定为 `diagnosis.html` |
+| `--output`      | path   | ❌   | `"output/diagnosis.html"`        | 输出 HTML 文件的保存路径                                        |
 
 ### 配置文件格式
 
@@ -67,19 +53,17 @@ const solutions = [
 **最小示例**（使用默认参数）：
 
 ```bash
-python3 skills/vchart-skill/scripts/generate_diagnosis_html.py \
-  --config-file config.js \
-  --output-dir chart-output
+python3 scripts/generate_diagnosis_html.py --config-file config.js
 ```
 
 **完整示例**（自定义所有参数）：
 
 ```bash
-python3 skills/vchart-skill/scripts/generate_diagnosis_html.py \
+python3 scripts/generate_diagnosis_html.py \
   --title "字段映射错误诊断" \
   --desc "柱状图 Y 轴数据显示问题分析" \
   --config-file configs/bar_yfield_error.js \
-  --output-dir chart-output
+  --output output/diagnosis_bar_yfield.html
 ```
 
 ### 输出文件
@@ -97,10 +81,6 @@ python3 skills/vchart-skill/scripts/generate_diagnosis_html.py \
 
 **用途**：生成 VChart 配置示例演示 HTML
 
-**运行环境**：Python 3.9+ 和 Node.js，`node` 命令必须在 `PATH` 中；无需安装 npm 包。先用 `python3 --version` 和 `node --version` 检查环境，缺少 Node.js 时先安装再执行。
-
-脚本默认检查 JavaScript 语法，并对可在独立环境执行的配置检查已知 API 错误。若源码依赖 `window`、`document`、`VChart` 等宿主全局对象，会打印 `RUNTIME_VALIDATION_DEFERRED` 提示，生成 HTML 后由浏览器使用真实环境执行 Spec 检查。生成成功不代表浏览器渲染或视觉验收通过；需要打开 HTML 检查图表和错误信息。
-
 **适用场景**：
 
 - [scenario-2-generation.md](../workflows/scenario-2-generation.md)（配置生成）
@@ -115,8 +95,7 @@ python3 skills/vchart-skill/scripts/generate_diagnosis_html.py \
 | `--feature`   | string | ❌   | `"补充主要功能说明"`             | 主要功能说明，描述图表实现的核心特性    |
 | `--tips`      | string | ❌   | `"补充编辑提示"`                 | 编辑提示，指导用户可调整的配置项        |
 | `--spec-file` | path   | ❌   | 使用内置示例                     | 包含完整 VChart spec 配置的 JS 文件路径 |
-| `--output-dir` | path  | ❌   | -                                | 调用方输出目录（绝对路径或相对于命令当前工作目录），输出文件固定为 `demo.html` |
-| `--validate` | flag | ❌ | 默认执行校验 | 兼容参数；不改变默认校验行为 |
+| `--output`    | path   | ❌   | `"output/demo.html"`             | 输出 HTML 文件的保存路径                |
 
 ### Spec 文件格式
 
@@ -145,33 +124,31 @@ const spec = {
 **最小示例**（使用默认参数）：
 
 ```bash
-python3 skills/vchart-skill/scripts/generate_demo_html.py \
-  --spec-file spec.js \
-  --output-dir chart-output
+python3 scripts/generate_demo_html.py --spec-file spec.js
 ```
 
 **完整示例**（配置生成场景）：
 
 ```bash
-python3 skills/vchart-skill/scripts/generate_demo_html.py \
+python3 scripts/generate_demo_html.py \
   --title "柱状图标签功能示例" \
   --desc "展示如何配置数据标签" \
   --feature "在柱子上显示数值标签，支持自定义格式化" \
   --tips "可修改 label.position、label.style 调整标签位置和样式" \
   --spec-file specs/bar_with_labels.js \
-  --output-dir chart-output
+  --output output/demo_bar_labels.html
 ```
 
 **完整示例**（图片还原场景）：
 
 ```bash
-python3 skills/vchart-skill/scripts/generate_demo_html.py \
+python3 scripts/generate_demo_html.py \
   --title "销售趋势图还原" \
   --desc "基于设计稿还原的折线图" \
   --feature "还原了渐变填充、数据标签位置、坐标轴样式" \
   --tips "可调整 color、line.style、point.style 优化视觉效果" \
   --spec-file specs/sales_trend_replication.js \
-  --output-dir chart-output
+  --output output/replication_sales_trend.html
 ```
 
 ### 输出文件
@@ -202,7 +179,7 @@ python3 skills/vchart-skill/scripts/generate_demo_html.py \
 | `--solution-N-title` | string | ✅   | -                               | 第 N 个解决方案的标题                 |
 | `--solution-N-desc`  | string | ✅   | -                               | 第 N 个解决方案的描述                 |
 | `--solution-N-code`  | string | ✅   | -                               | 第 N 个解决方案的修复代码             |
-| `--output-dir`       | path   | ❌   | -                               | 调用方输出目录（绝对路径或相对于命令当前工作目录），输出文件固定为 `diagnosis_react.html` |
+| `--output`           | path   | ❌   | `"output/diagnosis_react.html"` | 输出 HTML 文件的保存路径              |
 
 **注意**：
 
@@ -215,7 +192,7 @@ python3 skills/vchart-skill/scripts/generate_demo_html.py \
 **单方案示例**：
 
 ```bash
-python3 skills/vchart-skill/scripts/generate_diagnosis_react_html.py \
+python3 scripts/generate_diagnosis_react_html.py \
   --problem-code "const Chart = () => <BarChart data={data}><Bar xField=\"cat\" yField=\"values\" /></BarChart>" \
   --problem-title "图表 Y 轴没有数据显示" \
   --cause "Bar 组件的 yField 值为 'values'，但数据字段名为 'value'" \
@@ -223,13 +200,13 @@ python3 skills/vchart-skill/scripts/generate_diagnosis_react_html.py \
   --solution-1-title "修正字段映射" \
   --solution-1-desc "将 yField 从 'values' 改为 'value'" \
   --solution-1-code "const Chart = () => <BarChart data={data}><Bar xField=\"cat\" yField=\"value\" /></BarChart>" \
-  --output-dir chart-output
+  --output output/react_yfield_fix.html
 ```
 
 **多方案示例**：
 
 ```bash
-python3 skills/vchart-skill/scripts/generate_diagnosis_react_html.py \
+python3 scripts/generate_diagnosis_react_html.py \
   --problem-code "const Chart = () => { const data = getData(); return <BarChart data={data} />; }" \
   --problem-title "图表渲染性能问题" \
   --cause "getData() 在每次渲染时重新执行，导致不必要的计算" \
@@ -239,7 +216,7 @@ python3 skills/vchart-skill/scripts/generate_diagnosis_react_html.py \
   --solution-2-title "移至组件外部" \
   --solution-2-desc "将静态数据移至组件外部定义" \
   --solution-2-code "const data = getData(); const Chart = () => <BarChart data={data} />;" \
-  --output-dir chart-output
+  --output output/react_performance_fix.html
 ```
 
 ### 特殊字符处理
@@ -293,7 +270,7 @@ python3 skills/vchart-skill/scripts/generate_diagnosis_react_html.py \
 | **代码输入** | 文件中的 `specCode`        | 文件中的 `spec`                   | `--problem-code` 参数            |
 | **方案定义** | 文件中的 `solutions` 数组  | 单一 spec                         | `--solution-N-*` 参数            |
 | **高亮行号** | 支持（`highlightLines`）   | 不支持                            | 不支持                           |
-| **输出路径** | `--output-dir`            | `--output-dir`                   | `--output-dir`                  |
+| **输出路径** | `--output`                 | `--output`                        | `--output`                       |
 
 ---
 
@@ -341,8 +318,8 @@ python3 scripts/generate_diagnosis_react_html.py --help
 所有路径参数都支持相对路径（相对于脚本运行目录）：
 
 ```bash
---spec-file ./specs/bar.js
---output-dir chart-output
+--spec-file ./specs/bar.js           # 当前目录下的 specs 文件夹
+--output ../output/demo.html         # 上级目录的 output 文件夹
 ```
 
 ### Q: 默认值是什么意思？
@@ -350,17 +327,15 @@ python3 scripts/generate_diagnosis_react_html.py --help
 标记为"必需 ❌"的参数可以省略，脚本会使用默认值。例如：
 
 ```bash
-# 使用默认标题和调用方输出目录
-python3 skills/vchart-skill/scripts/generate_demo_html.py \
-  --spec-file spec.js \
-  --output-dir chart-output
+# 使用默认标题和输出路径
+python3 scripts/generate_demo_html.py --spec-file spec.js
 
 # 等同于
-python3 skills/vchart-skill/scripts/generate_demo_html.py \
+python3 scripts/generate_demo_html.py \
   --title "VChart 图表示例" \
   --desc "基于需求生成的可运行图表配置" \
   --spec-file spec.js \
-  --output-dir chart-output
+  --output output/demo.html
 ```
 
 ---

@@ -12,33 +12,9 @@
 ❌ 模板不存在: template/diagnosis-react.html
 ```
 
-**原因**：脚本运行位置不正确，未在项目根目录执行
+**原因**：安装目录缺少模板，或脚本与模板版本不一致。脚本按自身位置读取模板，不要求切换工作目录。
 
-**解决步骤**：
-
-1. 确认当前工作目录：
-
-   ```bash
-   pwd
-   ```
-
-2. 切换到项目根目录：
-
-   ```bash
-   cd /path/to/vchart-skill
-   ```
-
-3. 验证模板文件存在：
-
-   ```bash
-   test -f template/diagnosis.html && echo ok
-   test -f template/demo.html && echo ok
-   test -f template/diagnosis-react.html && echo ok
-   ```
-
-4. 重新运行脚本
-
-**💡 提示**：脚本必须在 `vchart-skill` 目录下运行，因为模板路径是相对路径。
+核对实际 Skill 安装目录下的 `scripts/` 与 `template/` 来自同一版本，检查报错中的绝对路径。用完整脚本路径调用，输入/输出相对路径仍基于当前工作目录。
 
 ---
 
@@ -63,13 +39,13 @@
 2. 检查目录权限：
 
    ```bash
-   test -d chart-output && echo "output exists"
+   ls -la output/
    ```
 
 3. 验证文件是否生成：
 
    ```bash
-   test -f chart-output/demo.html && echo "demo exists"
+   ls -la output/*.html
    ```
 
 4. 使用本地服务器打开（推荐）：
@@ -86,7 +62,7 @@
 
 ```
 ❌ 模板中未找到 {{CONFIG_BLOCK}} 占位符
-❌ 模板中未找到 {{SPEC_CODE}} 占位符
+❌ 模板中未找到 {{INITIAL_CODE}} 占位符
 ```
 
 **原因**：模板文件被意外修改或损坏
@@ -96,9 +72,14 @@
 1. 检查模板文件是否包含必需占位符：
 
    ```bash
-   node -e "console.log(require('fs').readFileSync('template/diagnosis.html','utf8').includes('{{CONFIG_BLOCK}}'))"
-   node -e "console.log(require('fs').readFileSync('template/demo.html','utf8').includes('{{SPEC_CODE}}'))"
-   node -e "console.log(require('fs').readFileSync('template/diagnosis-react.html','utf8').includes('{{CONFIG_BLOCK}}'))"
+   # 检查 diagnosis.html
+   cat template/diagnosis.html | grep "{{CONFIG_BLOCK}}"
+
+   # 检查 demo.html
+   cat template/demo.html | grep "{{INITIAL_CODE}}"
+
+   # 检查 diagnosis-react.html
+   cat template/diagnosis-react.html | grep "{{CONFIG_BLOCK}}"
    ```
 
 2. 如果标记缺失，从版本控制恢复原始模板：
@@ -115,38 +96,11 @@
 
 ---
 
+## 回调代码含模板字符串时页面空白
+
+演示生成器将完整源码序列化为 JSON 字符串，并转义 `<`，避免回调中的模板字符串被提前插值或字符串中的 HTML 标签截断 script。若出现此类错误，检查脚本和模板是否来自同一版本；不要删除回调、只截取 spec 对象或通过 JSON 往返丢掉函数。诊断模板的代码字符串须另外按其输入格式转义。
+
 ## 按脚本分类故障排除
-
-### search_knowledge.py
-
-#### ❌ 本地知识文件缺失
-
-检索不访问网络。若报 `Missing bundled knowledge directory`，检查 Skill 安装是否包含完整的 `references/examples/` 和 `references/sops/`。从完整发布源重新安装，不能使用另一份内部仓库补齐运行时依赖。
-
-#### ❌ 返回结果为空 / 相关性不足
-
-**症状**：
-
-- 脚本执行成功，但返回空数组
-- 返回结果与当前问题不相关
-
-**解决步骤**：
-
-1. 扩展查询词，补充图表类型、问题现象或关键样式：
-
-   ```bash
-   python3 scripts/search_knowledge.py --kind examples --query "折线图 面积填充 数据点 tooltip" --limit 3
-   ```
-
-2. 缩小查询范围，去掉噪音词：
-
-   ```bash
-   python3 scripts/search_knowledge.py --kind sops --query "Y轴 百分比 formatter" --limit 2
-   ```
-
-3. 如果仍无合适结果，回退到 `DIRECT_PATH_ROUTING.md` 里的固定本地路径
-   - 示例场景：读取固定 example 路径
-   - 诊断场景：读取 `references/sops/SOP_INDEX.md`
 
 ### generate_diagnosis_html.py
 
@@ -165,17 +119,16 @@
 1. 检查文件是否存在：
 
    ```bash
-   test -f config.js && echo ok
+   ls -la config.js
    ```
 
 2. 检查文件路径（相对于当前运行目录）：
 
    ```bash
    # 如果文件在子目录
-   test -f output/config.js && echo ok
+   ls -la output/config.js
    ```
 
-   ### ❌ 模板中未找到 {{SPEC_CODE}} 占位符
 
 3. 创建配置文件示例：
 
@@ -189,6 +142,7 @@
      problem: "图表显示问题",
      cause: "配置项错误"
    };
+
    const solutions = [
      {
        title: "修复方案",
@@ -208,7 +162,6 @@
 
 **症状**：HTML 生成成功但无法正确显示
 
-    检查模板中是否有 {{SPEC_CODE}} 占位符
 
 1. 验证配置文件是否为有效 JavaScript：
 
@@ -242,7 +195,7 @@
 1. 检查文件是否存在：
 
    ```bash
-   test -f spec.js && echo ok
+   ls -la spec.js
    ```
 
 2. 创建 Spec 文件示例：
@@ -267,9 +220,7 @@
 
 3. 使用正确路径运行脚本：
    ```bash
-   python3 skills/vchart-skill/scripts/generate_demo_html.py \
-     --spec-file spec.js \
-     --output-dir chart-output
+   python3 scripts/generate_demo_html.py --spec-file spec.js --output output/demo.html
    ```
 
 #### 生成的 HTML 无法运行或显示空白
@@ -285,8 +236,8 @@
    ```
 
 2. 确保数据格式符合 VChart 要求：
-   - `data.values` 必须是数组
-   - 数组中的对象必须包含 `xField` 和 `yField` 指定的字段
+   - 按实际图型核对数据结构，参考 [数据契约](chart/common-issues.md#图数据与层级数据)；不能把所有输入都当作平铺二维表
+   - 字段映射必须对应实际数据；缺少宿主绑定时在宿主中验证
 
 3. 验证字段映射：
 
@@ -420,14 +371,14 @@ python3 scripts/generate_diagnosis_html.py --config-file config.js 2>&1 | less
 
 ```bash
 # 检查 HTML 文件大小（应大于 10KB）
-test -f chart-output/diagnosis.html && wc -c chart-output/diagnosis.html
+ls -lh output/*.html
 
 # 查看 HTML 前几行
-head -n 20 chart-output/diagnosis.html
+head -n 20 output/diagnosis.html
 
 # 在浏览器中打开
-open chart-output/diagnosis.html  # macOS
-xdg-open chart-output/diagnosis.html  # Linux
+open output/diagnosis.html  # macOS
+xdg-open output/diagnosis.html  # Linux
 ```
 
 ### 使用本地服务器（推荐）
@@ -439,8 +390,8 @@ xdg-open chart-output/diagnosis.html  # Linux
 python3 -m http.server 8000
 
 # 访问地址
-# http://localhost:8000/chart-output/diagnosis.html
-# http://localhost:8000/chart-output/demo.html
+# http://localhost:8000/output/diagnosis.html
+# http://localhost:8000/output/demo.html
 ```
 
 ---

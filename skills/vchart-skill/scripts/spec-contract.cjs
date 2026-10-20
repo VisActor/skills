@@ -13,16 +13,26 @@
         if (!mark || typeof mark !== 'object') return;
         for (const axis of ['x', 'y']) {
           if (typeof mark.style?.[axis] === 'string' && mark.style[axis].trim().endsWith('%')) {
-            errors.push({code: 'CUSTOM_MARK_PIXEL_COORDINATE', path: `${path}[${index}].style.${axis}`, message: 'customMark x/y are graphic coordinates, not CSS percentages. Use pixel numbers or layout callbacks returning pixels; see references/sops/empty-state.md.'});
+            errors.push({code: 'CUSTOM_MARK_PIXEL_COORDINATE', path: `${path}[${index}].style.${axis}`, message: 'customMark x/y are graphic coordinates, not CSS percentages. Use pixel numbers or layout callbacks returning pixels; see references/components/mark.md.'});
           }
         }
         checkCustomMarks(mark.children, `${path}[${index}].children`);
       });
     }
     checkCustomMarks(spec.customMark, 'spec.customMark');
+    const legends = Array.isArray(spec.legends) ? spec.legends : spec.legends ? [spec.legends] : [];
+    legends.forEach((legend, index) => {
+      if (legend && (legend.type == null || legend.type === 'discrete') &&
+          legend.data != null && typeof legend.data !== 'function') {
+        errors.push({code: 'DISCRETE_LEGEND_DATA_FUNCTION', path: `spec.legends[${index}].data`, message: 'Discrete legend data must be a callback returning legend items, not an array. Omit data to use generated items; see references/components/legend.md.'});
+      }
+    });
     const charts = [{config: spec, path: 'spec'}, ...(spec.series || []).map((config, index) => ({config, path: `spec.series[${index}]`}))];
     for (const {config, path} of charts) {
       for (const key of ['label', 'nonLeafLabel']) {
+        if (config[key]?.formatMethod != null && typeof config[key].formatMethod !== 'function') {
+          errors.push({code: 'LABEL_FORMAT_METHOD_FUNCTION', path: `${path}.${key}.formatMethod`, message: 'formatMethod must be an executable function (text, datum), not a string or placeholder. Preserve callbacks in JS; use a supported formatter template for JSON.'});
+        }
         if (typeof config[key]?.formatter === 'function') {
           errors.push({code: 'FUNCTION_FORMATTER', path: `${path}.${key}.formatter`, message: 'formatter is a template string; use formatMethod for a function.'});
         }
@@ -61,15 +71,23 @@
         else data = rootData[config.dataIndex ?? 0];
       }
       const entries = sources(data);
-      // The runtime also accepts separate datasets named nodes and links.
-      if (entries.length === 2 && entries.some(d => d.id === 'nodes') && entries.some(d => d.id === 'links')) continue;
       for (const [i, entry] of entries.entries()) {
-        if (!entry || !Array.isArray(entry.values) || entry.values.length === 0 || entry.transforms?.length) continue;
+        if (!entry || !('values' in entry) || entry.parser || entry.transforms?.length ||
+            entry.fromDataId != null || entry.fromDataIndex != null) continue;
+        if (!Array.isArray(entry.values)) {
+          errors.push({code: 'SANKEY_GRAPH_REQUIRED', path: `${path}[${i}].values`, message: 'Inline Sankey values must be an array containing a graph: [{nodes, links}], not a bare graph object. See references/examples/sankey/basic-sankey.md.'});
+          continue;
+        }
+        if (entry.values.length === 0) continue;
+        // Named graph records belong inside one dataset's values array.
+        if (entry.values.length === 2 &&
+            entry.values.some(d => d?.id === 'nodes' && Array.isArray(d.values)) &&
+            entry.values.some(d => d?.id === 'links' && Array.isArray(d.values))) continue;
         const graph = entry.values[0];
         // A nodes-only hierarchy is also valid. Endpoint mapping is controlled
         // by nodeKey/sourceField/targetField, not by a fixed business schema.
         if (entry.values.length !== 1 || !graph || (!Array.isArray(graph.nodes) && !Array.isArray(graph.links))) {
-          errors.push({code: 'SANKEY_GRAPH_REQUIRED', path: `${path}[${i}].values`, message: 'Sankey values must contain one graph object: [{nodes, links}], not flat edge rows. Put the requested edge data in links; derive unique nodes and set nodeKey when endpoints use names. A nodes-only hierarchy or separate nodes/links datasets is also supported.'});
+          errors.push({code: 'SANKEY_GRAPH_REQUIRED', path: `${path}[${i}].values`, message: 'Sankey values must contain one graph object: [{nodes, links}], not flat edge rows. Put the requested edge data in links; derive unique nodes and set nodeKey when endpoints use names. A nodes-only hierarchy or named nodes/links records inside values is also supported.'});
         }
       }
     }

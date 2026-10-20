@@ -119,62 +119,27 @@ interface ITooltipHandlerSpec {
 }
 ```
 
-### Tooltip Line Pattern（内容行配置）
-
-> **⚠️ 关键：`keyFormatter` 和 `valueFormatter` 是 tooltip 中使用 formatter 模板字符串的正确方式**
+### Callback inputs
 
 ```typescript
-interface ITooltipLinePattern extends ITooltipShapePattern, ITooltipLabelPattern {
-  key?: TooltipContentProperty<string>;        // 内容行左侧键名（字符串或函数）
-  keyFormatter?: string;                        // 🆕 key 的 formatter 模板字符串（d3-format/d3-time-format 语法）
-  value?: TooltipContentProperty<string>;       // 内容行右侧数值（字符串或函数）
-  valueFormatter?: string;                      // 🆕 value 的 formatter 模板字符串（d3-format/d3-time-format 语法）
-  visible?: TooltipContentProperty<boolean>;    // 是否可见
-  isKeyAdaptive?: TooltipContentProperty<boolean>; // key 是否自适应宽度
-  spaceRow?: TooltipContentProperty<number>;    // 行间距
-  keyTimeFormat?: string;                       // key 的时间格式化字符串
-  keyTimeFormatMode?: 'utc' | 'local';         // key 时间格式化模式
-  valueTimeFormat?: string;                     // value 的时间格式化字符串
-  valueTimeFormatMode?: 'utc' | 'local';       // value 时间格式化模式
-  hasShape?: TooltipContentProperty<boolean>;   // Show shape
-  shapeType?: TooltipContentProperty<string>;   // Shape type
-  shapeColor?: TooltipContentProperty<string>;  // Shape color
-}
+// Pattern factories receive the tooltip data collection.
+type TooltipPatternCallback<T> = (data?: TooltipData, params?: TooltipHandlerParams) => T | undefined;
+type TooltipPatternProperty<T> = T | TooltipPatternCallback<T>;
+// Line properties receive the current datum.
+type TooltipContentCallback<T> = (datum?: Datum, params?: TooltipHandlerParams) => T | undefined;
+type TooltipContentProperty<T> = T | TooltipContentCallback<T> | { field: string };
 ```
 
-**Tooltip formatter 使用规则**：
-- 在 tooltip 的 `title` 或 `content` 中，**不能**直接在 `key` 或 `value` 字段写 formatter 模板字符串
-- **必须使用专用的 `keyFormatter` 和 `valueFormatter` 字段**来传入模板字符串
-- `key`/`value` 字段用于静态字符串或回调函数
-- `keyFormatter`/`valueFormatter` 使用与坐标轴 `formatter` 相同的 d3-format/d3-time-format 语法
+### Tooltip Line Pattern
 
-**正确示例**：
-```javascript
-tooltip: {
-  dimension: {
-    content: [
-      {
-        key: '销售额',
-        valueFormatter: '{value:,.0f}',      // ✅ 正确：使用 valueFormatter 字段
-        hasShape: true
-      }
-    ]
-  }
-}
-```
-
-**错误示例**：
-```javascript
-tooltip: {
-  dimension: {
-    content: [
-      {
-        key: '销售额',
-        value: '{value:,.0f}',               // ❌ 错误：value 不支持 formatter 模板，会被当作普通字符串
-        hasShape: true
-      }
-    ]
-  }
+```typescript
+interface ITooltipLinePattern {
+  key?: TooltipContentProperty<string>; // Line key
+  value?: TooltipContentProperty<string>; // Line value
+  hasShape?: TooltipContentProperty<boolean>; // Show shape
+  shapeType?: TooltipContentProperty<string>; // Shape type
+  shapeColor?: TooltipContentProperty<string>; // Shape color
+  // ... other shape properties
 }
 ```
 
@@ -295,15 +260,11 @@ interface ITooltipSpec {
     checkOverlap?: boolean;
     title?: {
       key?: string | ((data: any) => string);
-      keyFormatter?: string;          // formatter template for title key
       value?: string | ((data: any) => string);
-      valueFormatter?: string;        // formatter template for title value
     };
     content?: {
       key?: string | ((data: any) => string);
-      keyFormatter?: string;          // formatter template for content key
       value?: string | ((data: any) => string);
-      valueFormatter?: string;        // formatter template for content value
       hasShape?: boolean | ((data: any) => boolean);
       shapeType?: string | ((data: any) => string);
       shapeColor?: string | ((data: any) => string);
@@ -319,15 +280,11 @@ interface ITooltipSpec {
     visible?: boolean | ((data: any) => boolean);
     title?: {
       key?: string | ((data: any) => string);
-      keyFormatter?: string;
       value?: string | ((data: any) => string);
-      valueFormatter?: string;
     };
     content?: {
       key?: string | ((data: any) => string);
-      keyFormatter?: string;
       value?: string | ((data: any) => string);
-      valueFormatter?: string;
       hasShape?: boolean | ((data: any) => boolean);
       shapeType?: string | ((data: any) => string);
       shapeColor?: string | ((data: any) => string);
@@ -344,15 +301,11 @@ interface ITooltipSpec {
     triggerMark?: 'line' | 'area' | 'point' | 'bar' | ('line' | 'area' | 'point' | 'bar')[];
     title?: {
       key?: string | ((data: any) => string);
-      keyFormatter?: string;
       value?: string | ((data: any) => string);
-      valueFormatter?: string;
     };
     content?: {
       key?: string | ((data: any) => string);
-      keyFormatter?: string;
       value?: string | ((data: any) => string);
-      valueFormatter?: string;
       hasShape?: boolean | ((data: any) => boolean);
       shapeType?: string | ((data: any) => string);
       shapeColor?: string | ((data: any) => string);
@@ -388,57 +341,7 @@ const basicTooltip: ITooltipSpec = {
 };
 ```
 
-### Tooltip with Formatter (v1.10.0+)
-
-> **使用 `keyFormatter` / `valueFormatter` 字段实现模板字符串格式化**
-
-```typescript
-// 使用 formatter 模板字符串
-const formatterTooltip: ITooltipSpec = {
-  visible: true,
-  activeType: 'dimension',
-  dimension: {
-    content: [
-      {
-        hasShape: true,
-        valueFormatter: '{value:,.0f}'      // d3-format: 千分位整数
-      }
-    ]
-  }
-};
-
-// 百分比格式化
-const percentTooltip: ITooltipSpec = {
-  visible: true,
-  activeType: 'mark',
-  mark: {
-    content: [
-      {
-        hasShape: true,
-        valueFormatter: '{value:.1%}'       // d3-format: 百分比
-      }
-    ]
-  }
-};
-
-// 时间格式化
-const timeTooltip: ITooltipSpec = {
-  visible: true,
-  dimension: {
-    title: {
-      valueFormatter: '{value:%Y-%m-%d}'    // d3-time-format: 日期
-    },
-    content: [
-      {
-        hasShape: true,
-        valueFormatter: '{value:,.2f}'
-      }
-    ]
-  }
-};
-```
-
-### Mark Tooltip with Custom Content (Function-based)
+### Mark Tooltip with Custom Content
 
 ```typescript
 const markTooltip: ITooltipSpec = {
@@ -630,7 +533,7 @@ const canvasTooltip: ITooltipSpec = {
 
 ## Chart Integration Examples
 
-### Bar Chart with Formatter Tooltip
+### Bar Chart with Mark Tooltip
 
 ```typescript
 const barChart = {
@@ -649,7 +552,7 @@ const barChart = {
       content: [
         {
           key: 'Value',
-          valueFormatter: '{value:,.0f}'    // ✅ 使用 valueFormatter
+          value: data => data.value.toLocaleString()
         }
       ]
     }

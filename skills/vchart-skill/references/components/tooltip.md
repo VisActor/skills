@@ -40,7 +40,16 @@ tooltip: {
 
 ## 内容配置
 
+### 回调参数层级
+
+- `content: (data, params) => [...]` 是内容工厂，接收 `TooltipData` 集合（如 mark 类型的 `[{ datum: [图元数据], series }]`），不是单条记录。不要直接访问 `data.value`。
+- `content: [{ key: ..., value: (datum, params) => ... }]` 中的行回调接收当前图元数据，不保证就是输入的业务记录；`title.value` 同理。普通柱状图等可直接读取业务字段，经过布局转换的图表需按该图表的数据结构取值。只需格式化字段时优先使用行回调。
+- Treemap 的行回调和标题回调接收布局节点。先按 [Treemap 数据与回调](../chart/treemap.md) 解包，再读取业务字段；标签或配色中的解包不会自动应用到 tooltip。完整示例见 [hierarchy-treemap.js](../examples/treemap/hierarchy-treemap.js)。
+- 工厂返回的是行配置，仍可让行的 `value` 回调读取当前记录。dimension/group 的集合结构不同，不要把 mark 的集合索引写成通用取值逻辑。
+
 ### mark 类型内容
+
+以下示例适用于业务字段直接位于图元数据上的普通图表；Treemap 使用上面的专项取值方式。
 
 ```javascript
 tooltip: {
@@ -86,89 +95,9 @@ tooltip: {
 }
 ```
 
-## Tooltip Formatter（模板字符串格式化）
+## 模板字符串格式化
 
-> **v1.10.0+** 支持。Tooltip 中使用 formatter 模板字符串时，**必须使用 `keyFormatter` 和 `valueFormatter` 专用字段**，不能将模板字符串写在 `key` 或 `value` 中。
-
-### ⚠️ 关键规则：keyFormatter / valueFormatter
-
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| `key` | `string \| (datum) => string` | 内容行左侧键名，接受静态字符串或回调函数 |
-| `keyFormatter` | `string` | key 的 **formatter 模板字符串**，使用 d3-format/d3-time-format 语法 |
-| `value` | `string \| (datum) => string` | 内容行右侧数值，接受静态字符串或回调函数 |
-| `valueFormatter` | `string` | value 的 **formatter 模板字符串**，使用 d3-format/d3-time-format 语法 |
-
-### formatter 模板用法
-
-```javascript
-// ✅ 正确用法：千分位格式化
-tooltip: {
-  dimension: {
-    content: [
-      {
-        hasShape: true,
-        valueFormatter: '{value:,.0f}'      // 使用 valueFormatter 字段
-      }
-    ]
-  }
-}
-
-// ✅ 正确用法：百分比格式化
-tooltip: {
-  mark: {
-    content: [
-      {
-        key: '完成率',
-        valueFormatter: '{value:.1%}'       // 值 x100 并显示百分号
-      }
-    ]
-  }
-}
-
-// ✅ 正确用法：时间格式化
-tooltip: {
-  dimension: {
-    title: {
-      valueFormatter: '{value:%Y-%m-%d}'    // 日期格式化
-    },
-    content: [
-      {
-        hasShape: true,
-        valueFormatter: '{value:,.2f}'      // 千分位+两位小数
-      }
-    ]
-  }
-}
-```
-
-### ❌ 常见错误
-
-```javascript
-// ❌ 错误：不能在 value 字段中写 formatter 模板
-tooltip: {
-  mark: {
-    content: [
-      {
-        key: '数值',
-        value: '{value:,.0f}'    // ❌ 这会被当作普通字符串显示
-      }
-    ]
-  }
-}
-
-// ✅ 正确：使用 valueFormatter 字段
-tooltip: {
-  mark: {
-    content: [
-      {
-        key: '数值',
-        valueFormatter: '{value:,.0f}'    // ✅ 正确格式化
-      }
-    ]
-  }
-}
-```
+`key` / `value` 接收普通字符串或回调；模板使用 `keyFormatter` / `valueFormatter`，不能把模板写进 value 后期待求值。例如 `content: [{key: '数量', valueFormatter: '{value:,.0f}'}]`。完整类型见 [ITooltipSpec](../type-details/ITooltipSpec-Type-Definition.md)。
 
 ## 内容格式化（函数方式）
 

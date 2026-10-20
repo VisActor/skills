@@ -17,7 +17,6 @@ resize(width: number, height: number): Promise<IVChart>;
 ```
 
 **参数**：
-
 - `width`: 新宽度
 - `height`: 新高度
 
@@ -38,7 +37,6 @@ updateViewBox(viewBox: IBoundsLike, reRender?: boolean): IVChart;
 ```
 
 **参数**：
-
 - `viewBox`: 绘制区域 { x1, y1, x2, y2 }
 - `reRender`: 是否重新渲染，默认 true
 
@@ -87,14 +85,14 @@ const resizeObserver = new ResizeObserver((entries) => {
   vchart.resize(width, height);
 });
 
-resizeObserver.observe(document.getElementById("chart-container"));
+resizeObserver.observe(document.getElementById('chart-container'));
 ```
 
 ### 场景 2: 窗口 resize
 
 ```javascript
-window.addEventListener("resize", () => {
-  const container = document.getElementById("chart");
+window.addEventListener('resize', () => {
+  const container = document.getElementById('chart');
   vchart.resize(container.clientWidth, container.clientHeight);
 });
 ```
@@ -107,7 +105,7 @@ function toggleFullscreen() {
     document.exitFullscreen();
     vchart.resize(600, 400);
   } else {
-    document.getElementById("chart").requestFullscreen();
+    document.getElementById('chart').requestFullscreen();
     vchart.resize(window.innerWidth, window.innerHeight);
   }
 }
@@ -120,65 +118,59 @@ function toggleFullscreen() {
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://unpkg.com/@visactor/vchart@2.0.21/build/index.min.js"></script>
-    <style>
-      #chart-container {
-        resize: both;
-        overflow: hidden;
-        border: 1px solid #ccc;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="chart-container" style="width: 600px; height: 400px;">
-      <div id="chart" style="width: 100%; height: 100%;"></div>
-    </div>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@visactor/vchart/build/index.min.js"></script>
+  <style>
+    #chart-container { resize: both; overflow: hidden; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <div id="chart-container" style="width: 600px; height: 400px;">
+    <div id="chart" style="width: 100%; height: 100%;"></div>
+  </div>
 
-    <div style="margin-top: 10px;">
-      <button onclick="resizeChart(800, 400)">宽屏</button>
-      <button onclick="resizeChart(400, 400)">正方形</button>
-      <button onclick="fitContainer()">适应容器</button>
-    </div>
+  <div style="margin-top: 10px;">
+    <button onclick="resizeChart(800, 400)">宽屏</button>
+    <button onclick="resizeChart(400, 400)">正方形</button>
+    <button onclick="fitContainer()">适应容器</button>
+  </div>
 
-    <script>
-      const spec = {
-        type: "bar",
-        data: [
-          {
-            id: "data",
-            values: [
-              { category: "A", value: 20 },
-              { category: "B", value: 35 },
-              { category: "C", value: 25 },
-            ],
-          },
-        ],
-        xField: "category",
-        yField: "value",
-      };
+  <script>
+    const spec = {
+      type: 'bar',
+      data: [{
+        id: 'data',
+        values: [
+          { category: 'A', value: 20 },
+          { category: 'B', value: 35 },
+          { category: 'C', value: 25 }
+        ]
+      }],
+      xField: 'category',
+      yField: 'value'
+    };
 
-      const vchart = new VChart(spec, { dom: "chart" });
-      vchart.renderSync();
+    const vchart = new VChart(spec, { dom: 'chart' });
+    vchart.renderSync();
 
-      function resizeChart(w, h) {
-        const container = document.getElementById("chart-container");
-        container.style.width = w + "px";
-        container.style.height = h + "px";
-        vchart.resize(w, h);
-      }
+    function resizeChart(w, h) {
+      const container = document.getElementById('chart-container');
+      container.style.width = w + 'px';
+      container.style.height = h + 'px';
+      vchart.resize(w, h);
+    }
 
-      function fitContainer() {
-        const container = document.getElementById("chart-container");
-        vchart.resize(container.clientWidth, container.clientHeight);
-      }
+    function fitContainer() {
+      const container = document.getElementById('chart-container');
+      vchart.resize(container.clientWidth, container.clientHeight);
+    }
 
-      // 响应容器 resize
-      new ResizeObserver((entries) => {
-        const { width, height } = entries[0].contentRect;
-        vchart.resize(width, height);
-      }).observe(document.getElementById("chart-container"));
-    </script>
-  </body>
+    // 响应容器 resize
+    new ResizeObserver((entries) => {
+      const { width, height } = entries[0].contentRect;
+      vchart.resize(width, height);
+    }).observe(document.getElementById('chart-container'));
+  </script>
+</body>
 </html>
 ```

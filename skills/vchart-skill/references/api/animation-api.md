@@ -22,7 +22,7 @@ isAnimationEnable(): boolean;
 
 ```javascript
 if (vchart.isAnimationEnable()) {
-  console.log("动画已启用");
+  console.log('动画已启用');
 }
 ```
 
@@ -86,7 +86,7 @@ async function quickUpdate() {
   vchart.pauseAnimation();
 
   // 更新数据
-  await vchart.updateData("data", newData);
+  await vchart.updateData('data', newData);
 
   // 停止动画（不播放剩余动画）
   vchart.stopAnimation();
@@ -98,7 +98,7 @@ async function quickUpdate() {
 ```javascript
 let isPaused = false;
 
-document.getElementById("toggle-animation").addEventListener("click", () => {
+document.getElementById('toggle-animation').addEventListener('click', () => {
   if (isPaused) {
     vchart.resumeAnimation();
   } else {
@@ -111,10 +111,10 @@ document.getElementById("toggle-animation").addEventListener("click", () => {
 ### 场景 3: 动画完成后执行操作
 
 ```javascript
-vchart.on("animationFinished", () => {
-  console.log("动画播放完成");
+vchart.on('animationFinished', () => {
+  console.log('动画播放完成');
   // 显示操作提示
-  showTip("可以点击图表进行交互");
+  showTip('可以点击图表进行交互');
 });
 ```
 
@@ -155,7 +155,7 @@ const spec = {
 ```javascript
 // 方式 1: spec 中关闭
 const spec = {
-  type: "bar",
+  type: 'bar',
   animation: false,
   // ...
 };
@@ -171,53 +171,51 @@ vchart.stopAnimation();
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://unpkg.com/@visactor/vchart@2.0.21/build/index.min.js"></script>
-  </head>
-  <body>
-    <div id="chart" style="width: 600px; height: 400px;"></div>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@visactor/vchart/build/index.min.js"></script>
+</head>
+<body>
+  <div id="chart" style="width: 600px; height: 400px;"></div>
 
-    <div style="margin-top: 10px;">
-      <button onclick="vchart.pauseAnimation()">暂停</button>
-      <button onclick="vchart.resumeAnimation()">恢复</button>
-      <button onclick="vchart.stopAnimation()">停止</button>
-      <button onclick="updateData()">更新数据</button>
-    </div>
+  <div style="margin-top: 10px;">
+    <button onclick="vchart.pauseAnimation()">暂停</button>
+    <button onclick="vchart.resumeAnimation()">恢复</button>
+    <button onclick="vchart.stopAnimation()">停止</button>
+    <button onclick="updateData()">更新数据</button>
+  </div>
 
-    <script>
-      const spec = {
-        type: "bar",
-        data: [
-          {
-            id: "data",
-            values: [
-              { category: "A", value: 20 },
-              { category: "B", value: 35 },
-              { category: "C", value: 25 },
-            ],
-          },
-        ],
-        xField: "category",
-        yField: "value",
-        animation: true,
-        animationAppear: { duration: 2000 },
-      };
+  <script>
+    const spec = {
+      type: 'bar',
+      data: [{
+        id: 'data',
+        values: [
+          { category: 'A', value: 20 },
+          { category: 'B', value: 35 },
+          { category: 'C', value: 25 }
+        ]
+      }],
+      xField: 'category',
+      yField: 'value',
+      animation: true,
+      animationAppear: { duration: 2000 }
+    };
 
-      const vchart = new VChart(spec, { dom: "chart" });
-      vchart.renderSync();
+    const vchart = new VChart(spec, { dom: 'chart' });
+    vchart.renderSync();
 
-      function updateData() {
-        const newData = spec.data[0].values.map((d) => ({
-          category: d.category,
-          value: Math.random() * 50,
-        }));
-        vchart.updateDataSync("data", newData);
-      }
+    function updateData() {
+      const newData = spec.data[0].values.map(d => ({
+        category: d.category,
+        value: Math.random() * 50
+      }));
+      vchart.updateDataSync('data', newData);
+    }
 
-      vchart.on("animationFinished", () => {
-        console.log("动画完成");
-      });
-    </script>
-  </body>
+    vchart.on('animationFinished', () => {
+      console.log('动画完成');
+    });
+  </script>
+</body>
 </html>
 ```

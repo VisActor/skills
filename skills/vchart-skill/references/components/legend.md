@@ -1,5 +1,7 @@
 # 图例配置
 
+图例用于解释颜色或符号编码，不是每张图的必选组件。类别已由标签或分组标题清楚表达时可省略。显示图例时，图例项及颜色、符号应与实际数据编码一致；启用筛选交互时，还需验证筛选行为。
+
 ## 基础配置
 
 ```javascript
@@ -175,6 +177,8 @@ legends: {
 
 ## 自定义图例数据
 
+离散图例的 `data` 是返回图例项的回调，不能直接传数组（数组会被忽略）。优先修改自动生成的项目；完全自定义时，项目与数据的对应关系和点击筛选需要另行验证。
+
 ```javascript
 legends: {
   visible: true,
@@ -194,7 +198,7 @@ legends: {
 // 或完全自定义
 legends: {
   visible: true,
-  data: [
+  data: () => [
     { label: '系列A', shape: { fill: '#1890ff', symbolType: 'circle' } },
     { label: '系列B', shape: { fill: '#52c41a', symbolType: 'square' } }
   ]

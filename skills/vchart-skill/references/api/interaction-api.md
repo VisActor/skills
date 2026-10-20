@@ -17,7 +17,6 @@ showTooltip(datum: Datum, options: IShowTooltipOption): boolean;
 ```
 
 **参数**：
-
 - `datum`: 要显示 tooltip 的数据
 - `options`: 显示选项
 
@@ -28,8 +27,8 @@ showTooltip(datum: Datum, options: IShowTooltipOption): boolean;
 ```javascript
 // 显示指定数据的 tooltip
 vchart.showTooltip(
-  { category: "A", value: 20 },
-  { position: { x: 100, y: 100 } },
+  { category: 'A', value: 20 },
+  { position: { x: 100, y: 100 } }
 );
 ```
 
@@ -62,7 +61,6 @@ setDimensionIndex(value: StringOrNumber, options?: DimensionIndexOption): void;
 ```
 
 **参数**：
-
 - `value`: 维度值
 - `options`: 触发配置
 
@@ -70,7 +68,7 @@ setDimensionIndex(value: StringOrNumber, options?: DimensionIndexOption): void;
 
 ```javascript
 // 触发指定维度的交互效果
-vchart.setDimensionIndex("A"); // 显示 'A' 类别的 crosshair 和 tooltip
+vchart.setDimensionIndex('A');  // 显示 'A' 类别的 crosshair 和 tooltip
 ```
 
 ---
@@ -84,7 +82,6 @@ disableTooltip(disabled: boolean): void;
 ```
 
 **参数**：
-
 - `disabled`: true 禁用，false 启用
 
 **使用示例**：
@@ -108,7 +105,6 @@ disableCrossHair(disabled: boolean): void;
 ```
 
 **参数**：
-
 - `disabled`: true 禁用，false 启用
 
 **使用示例**：
@@ -128,7 +124,6 @@ disableDimensionHoverEvent(disabled?: boolean): void;
 ```
 
 **参数**：
-
 - `disabled`: true 禁用，false 启用
 
 **使用示例**：
@@ -146,7 +141,7 @@ vchart.disableDimensionHoverEvent(true);
 ```javascript
 // 通过外部按钮显示 tooltip
 function showTooltipForCategory(category) {
-  const data = chartData.find((d) => d.category === category);
+  const data = chartData.find(d => d.category === category);
   if (data) {
     const position = vchart.convertDatumToPosition(data);
     vchart.showTooltip(data, { position });
@@ -158,13 +153,13 @@ function showTooltipForCategory(category) {
 
 ```javascript
 // 两个图表联动 crosshair
-chart1.on("pointermove", (params) => {
+chart1.on('pointermove', (params) => {
   if (params.value?.dimension) {
     chart2.setDimensionIndex(params.value.dimension);
   }
 });
 
-chart1.on("pointerout", () => {
+chart1.on('pointerout', () => {
   chart2.setDimensionIndex(null);
 });
 ```
@@ -177,7 +172,7 @@ async function reloadData() {
   vchart.disableTooltip(true);
   vchart.disableCrossHair(true);
 
-  await vchart.updateData("data", newData);
+  await vchart.updateData('data', newData);
 
   vchart.disableTooltip(false);
   vchart.disableCrossHair(false);
@@ -188,13 +183,13 @@ async function reloadData() {
 
 ```javascript
 // 点击外部元素显示 tooltip
-document.getElementById("info-panel").addEventListener("mouseenter", (e) => {
+document.getElementById('info-panel').addEventListener('mouseenter', (e) => {
   const category = e.target.dataset.category;
-  const data = chartData.find((d) => d.category === category);
+  const data = chartData.find(d => d.category === category);
   vchart.showTooltip(data, {});
 });
 
-document.getElementById("info-panel").addEventListener("mouseleave", () => {
+document.getElementById('info-panel').addEventListener('mouseleave', () => {
   vchart.hideTooltip();
 });
 ```
@@ -217,17 +212,17 @@ setTooltipHandler(tooltipHandler: ITooltipHandler): void;
 const customHandler = {
   showTooltip: (activeTooltip, params) => {
     // 自定义显示逻辑
-    console.log("显示 tooltip", activeTooltip);
+    console.log('显示 tooltip', activeTooltip);
     return true;
   },
   hideTooltip: () => {
     // 自定义隐藏逻辑
-    console.log("隐藏 tooltip");
+    console.log('隐藏 tooltip');
     return true;
   },
   release: () => {
     // 清理资源
-  },
+  }
 };
 
 vchart.setTooltipHandler(customHandler);
@@ -248,61 +243,59 @@ getTooltipHandler(): ITooltipHandler | undefined;
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://unpkg.com/@visactor/vchart@2.0.21/build/index.min.js"></script>
-  </head>
-  <body>
-    <div id="chart" style="width: 600px; height: 400px;"></div>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@visactor/vchart/build/index.min.js"></script>
+</head>
+<body>
+  <div id="chart" style="width: 600px; height: 400px;"></div>
 
-    <div style="margin-top: 10px;">
-      <button onclick="showTooltipA()">显示 A 的 Tooltip</button>
-      <button onclick="triggerDimension('B')">触发 B 的 Dimension</button>
-      <button onclick="hideAll()">隐藏所有</button>
-      <button onclick="toggleTooltip()">切换 Tooltip</button>
-    </div>
+  <div style="margin-top: 10px;">
+    <button onclick="showTooltipA()">显示 A 的 Tooltip</button>
+    <button onclick="triggerDimension('B')">触发 B 的 Dimension</button>
+    <button onclick="hideAll()">隐藏所有</button>
+    <button onclick="toggleTooltip()">切换 Tooltip</button>
+  </div>
 
-    <script>
-      const spec = {
-        type: "bar",
-        data: [
-          {
-            id: "data",
-            values: [
-              { category: "A", value: 20 },
-              { category: "B", value: 35 },
-              { category: "C", value: 25 },
-            ],
-          },
-        ],
-        xField: "category",
-        yField: "value",
-        tooltip: { visible: true },
-        crosshair: { xField: { visible: true } },
-      };
+  <script>
+    const spec = {
+      type: 'bar',
+      data: [{
+        id: 'data',
+        values: [
+          { category: 'A', value: 20 },
+          { category: 'B', value: 35 },
+          { category: 'C', value: 25 }
+        ]
+      }],
+      xField: 'category',
+      yField: 'value',
+      tooltip: { visible: true },
+      crosshair: { xField: { visible: true } }
+    };
 
-      const vchart = new VChart(spec, { dom: "chart" });
-      vchart.renderSync();
+    const vchart = new VChart(spec, { dom: 'chart' });
+    vchart.renderSync();
 
-      function showTooltipA() {
-        const data = { category: "A", value: 20 };
-        vchart.showTooltip(data, {});
-      }
+    function showTooltipA() {
+      const data = { category: 'A', value: 20 };
+      vchart.showTooltip(data, {});
+    }
 
-      function triggerDimension(cat) {
-        vchart.setDimensionIndex(cat);
-      }
+    function triggerDimension(cat) {
+      vchart.setDimensionIndex(cat);
+    }
 
-      function hideAll() {
-        vchart.hideTooltip();
-        vchart.setDimensionIndex(null);
-      }
+    function hideAll() {
+      vchart.hideTooltip();
+      vchart.setDimensionIndex(null);
+    }
 
-      let tooltipEnabled = true;
-      function toggleTooltip() {
-        tooltipEnabled = !tooltipEnabled;
-        vchart.disableTooltip(!tooltipEnabled);
-      }
-    </script>
-  </body>
+    let tooltipEnabled = true;
+    function toggleTooltip() {
+      tooltipEnabled = !tooltipEnabled;
+      vchart.disableTooltip(!tooltipEnabled);
+    }
+  </script>
+</body>
 </html>
 ```

@@ -13,10 +13,6 @@
 
 ## 模式分类
 
-先读取已有上下文和当前源文件，不向用户索要已经提供的数据。纯解释可以只回答；一旦实际修改作品，必须按 [校验与交付](artifact-delivery.md) 返回本轮文件。诊断页不是修复后的图表，不能用诊断页代替用户要求修复的作品。
-
-诊断以当前源码、校验错误和运行证据为依据，不能把猜测写成已确认原因。按 SOP 路由表读取对应数据契约，再决定修复。
-
 ```
 if (用户提供了现有 spec 配置) {
   → 配置诊断模式：基于用户配置分析问题并修复
@@ -25,48 +21,17 @@ if (用户提供了现有 spec 配置) {
 }
 ```
 
-## P0 执行约束
-
-- 禁止使用 `find`、`grep`、`ls`
-- 本地知识访问统一遵循 [直达路径路由与工具约束](../references/DIRECT_PATH_ROUTING.md)
-- 诊断场景优先读取：
-  1. `../references/chart/common-issues.md`
-  2. `../references/sops/SOP_INDEX.md`
-  3. `../references/type-meta/[type].json`
-  4. 命中的固定 SOP
-  5. 需要时再读取 1 个固定 example
-- 如果图表类型已知，不允许再为 example 或配置文件做目录扫描
-
 ---
 
 ## 配置诊断模式（用户提供了 spec）
 
 ### 步骤 1a：收集信息
 
-请用户提供：
+先复用当前请求和已有上下文中的 spec、实际数据/绑定、错误表现与期望效果。只补充会影响定位的缺项，不重复索取已提供信息，也不要求固定数量的数据样本。
 
-1. 完整的 VChart spec 配置代码
-2. 数据样本（至少 3-5 条）
-3. 错误信息或异常表现描述
-4. 期望的正确效果
-
-### 快速错误匹配（优先于通用诊断流程）
-
-在进入通用诊断前，先检查用户的错误信息是否命中以下已知模式。命中则直接给出修复方案，无需完整诊断流程。
-
-| 错误信息 / 症状                                                                 | 根因                                                                                                           | 修复方案                                                                                                                                 |
-| ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `Cannot read properties of undefined (reading 'transformerConstructor')`        | spec 中存在联合类型属性（如 gauge 背景系列），缺少 `type` 字段导致 VChart 无法查找对应的 SeriesSpecTransformer | 在联合类型配置对象中添加 `type` 字段。如 gauge 背景：添加 `type: 'gauge'`。详见 `references/examples/gauge/basic-gauge.md`               |
-| Tooltip 中 formatter 模板字符串无效果（显示为原始文本如 `{value:,.0f}`）        | 模板写在了 `key`/`value` 字段中，应使用 `keyFormatter`/`valueFormatter` 专用字段                               | 将 `key: '{...}'` 改为 `keyFormatter: '{...}'`，将 `value: '{...}'` 改为 `valueFormatter: '{...}'`。详见 SOP `format-method.md` Step 3.5 |
-| `VChart is not a constructor` 或 `VChart.bindbindbindbindCtx is not a function` | CDN 环境下直接使用 `new VChart()` 而不是 `new VChart.default()`                                                | CDN/HTML 环境中构造函数在 `VChart.default`：`new VChart.default(spec, { dom })`                                                          |
-| 图表渲染但数据为空 / 数据不显示                                                 | xField/yField 与 data.values 中的字段名不一致（大小写、拼写）                                                  | 检查字段映射一致性。详见 `references/chart/common-issues.md` #1                                                                          |
-| `registerFormatPlugin` / formatter 无效果                                       | 使用 formatter 模板但未注册格式化插件                                                                          | CDN：`VChart.default.useRegisters([VChart.registerFormatPlugin])`；npm：`VChart.useRegisters([registerFormatPlugin])`                    |
-
-> 如果未命中上表，继续下方通用诊断流程。
+真实数据来自可访问文件或数据源时按已知来源读取；绑定只能由宿主提供时保留契约并说明本地无法完成的验收，不以内嵌 mock 替代。
 
 ### 步骤 2a：诊断分析
-
-> **🔍 SOP 检索点**：在开始诊断分析前，先调用 `python3 scripts/search_knowledge.py --kind sops --query "<用户问题描述>" --limit 2` 进行关键词检索；同时直接读取 `references/sops/SOP_INDEX.md` 路由表做关键词匹配。优先使用最相关的结果，未命中则使用下方通用诊断流程。
 
 使用 `type-meta/[图表类型].json` 检查配置完整性：
 
@@ -90,36 +55,24 @@ if (用户提供了现有 spec 配置) {
 1. **问题类型**：布局、样式、交互、性能、数据显示等
 2. **图表类型**：推断用户使用的图表类型
 3. **期望效果**：用户想要达到的目标
+4. **数据来源**：当前或已有上下文的真实数据、字段、单位及可用绑定；没有原 spec 不代表没有真实数据
 
 ### 步骤 2b：构建解决方案
 
-> **🔍 SOP 检索点**：在构建解决方案前，先调用 `python3 scripts/search_knowledge.py --kind sops --query "<用户描述的问题>" --limit 2` 进行关键词检索；同时直接读取 `references/sops/SOP_INDEX.md` 路由表做关键词匹配。命中则加载对应 SOP 获取精准解决方案，未命中则使用通用知识库构建方案。
-
-1. **Mock 数据**：根据问题场景构建合理的模拟数据（至少 5 条）
-2. **生成 spec**：创建能体现解决方案的完整配置
-3. **对比方案**：如适用，提供问题现象 vs 修复后的对比
+1. **选择真实数据或演示数据**：遵循 [主文件的数据规则](../SKILL.md#数据与生成自检)。真实数据或可用绑定已知时沿用字段、记录和口径，不因为缺少 spec 就替换或增加记录；缺少影响诊断的数据/字段时询问必要信息，不伪造完整业务修复配置。
+2. **处理不可访问绑定**：保留真实绑定契约，给出有证据的配置分析或排查方向，并区分候选原因与未完成的运行验收。不能通过填 mock 报告原业务问题已修复。
+3. **按目标构建配置**：已有数据足以构建配置时，保持 HTML/spec 交付目标，生成对应完整产物；只有用户明确请求或允许教学/样式演示时才使用标注来源的 mock，没有固定最少条数。演示与实际业务修复结果分开说明。
+4. **说明诊断依据**：没有原代码或运行证据时不声称已定位原问题的根因；只说明实际完成的配置检查、候选原因和验证范围。
 
 ---
 
 ## 输出诊断结果
 
-根据用户需求和对话上下文，灵活选择输出格式：
+遵循 [主文件的交付选择](../SKILL.md#先确定任务与交付目标)，保留用户指定或已有的 HTML/spec/组件目标。尚未建立交付目标时，独立 spec 排错交付整合后的完整修复配置；已有 HTML 内的 spec 排错仍交付完整 HTML。只看改动时才给补丁。没有现有配置的独立演示需求按 HTML 路径处理。
 
-### 输出格式选择
+纯 JSON 请求不混入诊断说明或实例代码；普通对话的原因与验证说明放在配置之外。spec 交付按 [spec 流程](scenario-2-spec-generation.md)，诊断 HTML 按下方既有模板生成。不要因反馈“没显示”就把 JSON 修复变成 HTML。
 
-**判断依据**：
-
-```
-if (用户明确要求"可运行的demo" || "能直接打开的文件" || "完整的HTML") {
-  → 输出完整 HTML 文件
-} else if (用户询问"配置怎么写" || "代码示例" || 在讨论具体配置) {
-  → 输出 JavaScript spec 代码
-} else {
-  → 默认输出 JavaScript spec 代码（更简洁、易于集成）
-}
-```
-
-### 格式一：输出 JavaScript 代码（推荐）
+### 格式一：交付修复后的 spec
 
 直接输出可用的 VChart spec 配置代码，便于用户复制到项目中。
 
@@ -138,50 +91,46 @@ if (用户明确要求"可运行的demo" || "能直接打开的文件" || "完�
 
 ```javascript
 const spec = {
-  type: "bar",
+  type: 'bar',
   data: {
     values: [
-      { category: "A", value: 10 },
-      { category: "B", value: 20 },
-    ],
+      { category: 'A', value: 10 },
+      { category: 'B', value: 20 }
+    ]
   },
-  xField: "category",
-  yField: "values", // ❌ 错误：字段名不匹配
+  xField: 'category',
+  yField: 'values', // ❌ 错误：字段名不匹配
   label: {
-    visible: true,
-  },
+    visible: true
+  }
 };
 
-const vchart = new VChart(spec, { dom: "chart" });
-// ⚠️ CDN/HTML 环境中须改为: new VChart.default(spec, { dom: 'container' })
-vchart.renderAsync();
 ```
 
 ## 修复方案
 
 ```javascript
 const spec = {
-  type: "bar",
+  type: 'bar',
   data: {
     values: [
-      { category: "A", value: 10 },
-      { category: "B", value: 20 },
-    ],
+      { category: 'A', value: 10 },
+      { category: 'B', value: 20 }
+    ]
   },
-  xField: "category",
-  yField: "value", // ✅ 修正：与数据字段名一致
+  xField: 'category',
+  yField: 'value', // ✅ 修正：与数据字段名一致
   label: {
-    visible: true,
-  },
+    visible: true
+  }
 };
 
-const vchart = new VChart(spec, { dom: "chart" });
-// ⚠️ CDN/HTML 环境中须改为: new VChart.default(spec, { dom: 'container' })
-vchart.renderAsync();
 ```
 ````
 
 **描述诊断模式输出示例**：
+
+以下是用户已允许使用 mock 的教学示例，A/B/C 为模拟类别；实际诊断应沿用用户的真实数据或绑定。
 
 ````markdown
 ## 问题诊断
@@ -194,34 +143,29 @@ vchart.renderAsync();
 
 ```javascript
 const spec = {
-  type: "bar",
+  type: 'bar',
   data: {
     values: [
-      { category: "A", value: 10 },
-      { category: "B", value: 20 },
-      { category: "C", value: 15 },
-    ],
+      { category: 'A', value: 10 },
+      { category: 'B', value: 20 },
+      { category: 'C', value: 15 }
+    ]
   },
-  xField: "category",
-  yField: "value",
+  xField: 'category',
+  yField: 'value',
   label: {
     visible: true,
-    position: "top",
+    position: 'top',
     style: {
-      fill: "#333",
-    },
-  },
+      fill: '#333'
+    }
+  }
 };
 
-const vchart = new VChart(spec, { dom: "chart" });
-// ⚠️ CDN/HTML 环境中须改为: new VChart.default(spec, { dom: 'container' })
-vchart.renderAsync();
 ```
 ````
 
 ### 格式二：输出完整 HTML（按需）
-
-> **🚨 CDN 环境适配**：输出 HTML 时，必须按 `references/sops/cdn-script-adaption.md` 执行全部转换规则（构造函数、静态方法、globalConfig、ThemeManager、注册函数）。
 
 当用户需要完整的可运行演示时，使用 `template/diagnosis.html` 模板，通过 Python 脚本生成诊断 HTML。
 
@@ -233,23 +177,21 @@ vchart.renderAsync();
 
 ```bash
 # 最小示例
-python3 skills/vchart-skill/scripts/generate_diagnosis_html.py --config-file config.js --output-dir ./chart-output
+python3 scripts/generate_diagnosis_html.py --config-file config.js
 
 # 完整示例
 python3 scripts/generate_diagnosis_html.py \
   --title "VChart 问题诊断报告" \
   --desc "基于用户配置的诊断与修复结果" \
   --config-file config.js \
-  --output-dir ./chart-output
+  --output output/diagnosis.html
 ```
 
 **主要参数**：
 
 - `--config-file`：包含 `problemReview`/`diagnosis`/`solutions` 的 JS 配置文件
 - `--title`：诊断报告标题（可选）
-- `--output-dir`：调用方输出目录；接受绝对路径或相对于命令当前工作目录的路径
-
-示例中的 `./chart-output` 应替换为调用方指定的目录；文件交付遵循 [校验与交付流程](artifact-delivery.md)。
+- `--output`：输出 HTML 文件路径（可选，默认 `output/diagnosis.html`）
 
 #### 配置文件结构
 
@@ -260,7 +202,7 @@ python3 scripts/generate_diagnosis_html.py \
 ```javascript
 const problemReview = {
   highlightLines: [11], // 可选：需要高亮的行号数组
-  specCode: `[用户原始代码]`, // 完整 JS 代码字符串，可包含函数
+  specCode: `[用户原始代码]` // 完整 JS 代码字符串，可包含函数
 };
 ```
 
@@ -268,9 +210,9 @@ const problemReview = {
 
 ```javascript
 const diagnosis = {
-  problem: "[问题简述]",
-  cause: "[原因分析]",
-  suggestion: "[修复建议]", // 可选
+  problem: '[问题简述]',
+  cause: '[原因分析]',
+  suggestion: '[修复建议]' // 可选
 };
 ```
 
@@ -279,11 +221,11 @@ const diagnosis = {
 ```javascript
 const solutions = [
   {
-    title: "[方案标题]",
-    description: "[方案描述]",
+    title: '[方案标题]',
+    description: '[方案描述]',
     highlightLines: [11], // 可选：需要高亮的行号数组
-    specCode: `[修复代码]`, // 完整 JS 代码字符串，可包含函数
-  },
+    specCode: `[修复代码]` // 完整 JS 代码字符串，可包含函数
+  }
   // 更多方案...
 ];
 ```
@@ -307,22 +249,21 @@ const problemReview = {
   yField: "values",  // 问题行
   label: {
     visible: true,
-    formatter: (d) => d.value + "%"
+    formatMethod: (text, datum) => datum.value + "%"
   }
-};`,
+};`
 };
 
 const diagnosis = {
-  problem: "图表 Y 轴没有数据显示，柱状图高度为 0",
+  problem: '图表 Y 轴没有数据显示，柱状图高度为 0',
   cause: 'yField 配置值为 "values"，但数据字段名为 "value"',
-  suggestion: "确保 xField/yField 与数据字段名严格一致",
+  suggestion: '确保 xField/yField 与数据字段名严格一致'
 };
 
 const solutions = [
   {
-    title: "修正字段映射",
-    description:
-      '将 yField 的值从 "values" 修正为 "value"，与数据字段名保持一致。',
+    title: '修正字段映射',
+    description: '将 yField 的值从 "values" 修正为 "value"，与数据字段名保持一致。',
     highlightLines: [11],
     specCode: `const spec = {
   type: "bar",
@@ -335,19 +276,19 @@ const solutions = [
   xField: "category",
   yField: "value",  // 修复后
   label: { visible: true }
-};`,
-  },
+};`
+  }
 ];
 ```
 
 **步骤 2：运行脚本生成 HTML**
 
 ```bash
-python3 skills/vchart-skill/scripts/generate_diagnosis_html.py \
+python3 scripts/generate_diagnosis_html.py \
   --title "字段映射错误诊断" \
   --desc "柱状图 Y 轴数据显示问题分析" \
   --config-file config.js \
-  --output-dir ./chart-output
+  --output my_diagnosis.html
 ```
 
 **步骤 3：查看生成结果**
@@ -369,7 +310,7 @@ python3 skills/vchart-skill/scripts/generate_diagnosis_html.py \
   <head>
     <meta charset="utf-8" />
     <title>VChart 诊断示例</title>
-    <script src="https://unpkg.com/@visactor/vchart@2.0.21/build/index.min.js"></script>
+    <script src="https://unpkg.com/@visactor/vchart/build/index.min.js"></script>
   </head>
   <body>
     <div id="chart" style="width: 600px; height: 400px;"></div>
@@ -377,31 +318,31 @@ python3 skills/vchart-skill/scripts/generate_diagnosis_html.py \
     <script>
       // 问题代码示例
       const problemSpec = {
-        type: "bar",
+        type: 'bar',
         data: {
           values: [
-            { category: "A", value: 10 },
-            { category: "B", value: 20 },
-          ],
+            { category: 'A', value: 10 },
+            { category: 'B', value: 20 }
+          ]
         },
-        xField: "category",
-        yField: "values", // 问题：字段名错误
+        xField: 'category',
+        yField: 'values' // 问题：字段名错误
       };
 
       // 修复后的代码
       const spec = {
-        type: "bar",
+        type: 'bar',
         data: {
           values: [
-            { category: "A", value: 10 },
-            { category: "B", value: 20 },
-          ],
+            { category: 'A', value: 10 },
+            { category: 'B', value: 20 }
+          ]
         },
-        xField: "category",
-        yField: "value", // 修复：字段名正确
+        xField: 'category',
+        yField: 'value' // 修复：字段名正确
       };
 
-      const vchart = new VChart.default(spec, { dom: "chart" });
+      const vchart = new VChart.default(spec, { dom: 'chart' });
       vchart.renderAsync();
     </script>
   </body>

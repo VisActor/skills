@@ -2,17 +2,6 @@
 
 > 本文档是场景一（问题诊断）的 React-VChart 专项补充，适用于使用 `@visactor/react-vchart` 库的 React 用户。
 
-## P0 执行约束
-
-- 禁止使用 `find`、`grep`、`ls`
-- 本地知识访问统一遵循 [直达路径路由与工具约束](../references/DIRECT_PATH_ROUTING.md)
-- React 诊断优先读取：
-  1. `scenario-1-diagnosis.md`
-  2. `../references/chart/common-issues.md`
-  3. `../references/sops/SOP_INDEX.md`
-  4. `../references/api/API_INDEX.md`
-  5. 命中的固定 API 文档或 SOP
-
 ## 适用情况
 
 当用户代码中出现以下特征时，使用本指南：
@@ -475,21 +464,9 @@ const spec = {
 
 ## 输出诊断结果
 
-根据用户需求和对话上下文，灵活选择输出格式：
+React 组件问题保留组件交付，不因新增 spec 场景就改成纯配置。遵循 [主文件的交付选择](../SKILL.md#先确定任务与交付目标)：默认提供可替换的 React 修复代码；明确要可打开演示时使用下方 React 诊断 HTML；明确只要 spec 时提取并修复配置，按 [spec 流程](scenario-2-spec-generation.md) 交付，不混入组件或实例代码。
 
-### 输出格式选择
-
-**判断依据**：
-
-```
-if (用户明确要求"可运行的demo" || "能直接打开的文件" || "完整的HTML") {
-  → 输出完整 HTML 文件（使用 Python 脚本生成）
-} else if (用户询问"配置怎么写" || "代码示例" || 在讨论具体配置) {
-  → 输出 React 组件代码
-} else {
-  → 默认输出 React 组件代码（更简洁、易于集成）
-}
-```
+事件、hooks 或组件生命周期问题不能只用 spec 修复；如果纯配置不足以完成要求，说明需要修改的组件部分。用户后续改动未改变交付目标时继续沿用原目标。
 
 ### 格式一：输出 React 组件代码（推荐）
 
@@ -590,7 +567,7 @@ python3 scripts/generate_diagnosis_react_html.py \
   --solution-1-title "修正字段映射" \
   --solution-1-desc "将 yField 从 \"values\" 改为 \"value\"" \
   --solution-1-code "修复后的代码" \
-  --output-dir ./chart-output
+  --output diagnosis_result.html
 ```
 
 #### 主要参数
@@ -599,9 +576,7 @@ python3 scripts/generate_diagnosis_react_html.py \
 - `--problem-title`：问题简述
 - `--cause`：问题原因分析
 - `--solution-N-title/desc/code`：第 N 个解决方案（N 从 1 开始连续编号）
-- `--output-dir`：调用方输出目录；接受绝对路径或相对于命令当前工作目录的路径
-
-示例中的 `./chart-output` 应替换为调用方指定的目录。React 诊断 HTML 的最终路径以脚本报告为准。
+- `--output`：输出 HTML 文件路径（可选，默认 `output/diagnosis_react.html`）
 
 #### 配置对象结构
 
@@ -671,7 +646,7 @@ python3 scripts/generate_diagnosis_react_html.py \
     </BarChart>
   );
 };" \
-  --output-dir ./chart-output
+  --output my_diagnosis.html
 ```
 
 #### 多方案输出
@@ -679,7 +654,7 @@ python3 scripts/generate_diagnosis_react_html.py \
 若有多个解决方案，继续添加参数：
 
 ```bash
-python3 skills/vchart-skill/scripts/generate_diagnosis_react_html.py \
+python3 scripts/generate_diagnosis_react_html.py \
   --problem-code "..." \
   --problem-title "..." \
   --cause "..." \
@@ -689,7 +664,7 @@ python3 skills/vchart-skill/scripts/generate_diagnosis_react_html.py \
   --solution-2-title "方案 2（Hook 优化版）" \
   --solution-2-desc "..." \
   --solution-2-code "..." \
-  --output-dir ./chart-output
+  --output result.html
 ```
 
 #### 输出文件
@@ -736,7 +711,9 @@ config_block = generate_config_block(
     problem_title="图表问题",
     cause="原因分析",
     suggestion="修复建议",
-    solutions=[{"title": "方案1", "desc": "描述", "code": "代码"}],
+    solutions=[
+        {"title": "方案1", "desc": "描述", "code": "代码"}
+    ]
 )
 
 # 读取模板并替换
@@ -745,11 +722,11 @@ html = re.sub(
     r"// ====== CONFIG_START ======.*?// ====== CONFIG_END ======",
     config_block,
     template,
-    flags=re.DOTALL,
+    flags=re.DOTALL
 )
 
 # 保存输出
-Path("diagnosis_react.html").write_text(html)
+Path("output.html").write_text(html)
 ```
 
 #### 批量生成多个诊断文件
@@ -758,23 +735,23 @@ Path("diagnosis_react.html").write_text(html)
 #!/bin/bash
 
 # 批量诊断脚本示例
-python3 skills/vchart-skill/scripts/generate_diagnosis_react_html.py \
+python3 scripts/generate_diagnosis_react_html.py \
   --problem-code "问题代码1" \
   --problem-title "问题1" \
   --cause "原因1" \
   --solution-1-title "方案1" \
   --solution-1-desc "描述1" \
   --solution-1-code "代码1" \
-  --output-dir chart-example-1
+  --output "diagnosis_case1.html"
 
-python3 skills/vchart-skill/scripts/generate_diagnosis_react_html.py \
+python3 scripts/generate_diagnosis_react_html.py \
   --problem-code "问题代码2" \
   --problem-title "问题2" \
   --cause "原因2" \
   --solution-1-title "方案1" \
   --solution-1-desc "描述1" \
   --solution-1-code "代码1" \
-  --output-dir chart-example-2
+  --output "diagnosis_case2.html"
 ```
 
 ---

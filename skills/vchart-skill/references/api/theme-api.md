@@ -17,17 +17,16 @@ setCurrentTheme(name: string): Promise<IVChart>;
 ```
 
 **参数**：
-
 - `name`: 主题名称
 
 **使用示例**：
 
 ```javascript
 // 切换到深色主题
-await vchart.setCurrentTheme("dark");
+await vchart.setCurrentTheme('dark');
 
 // 切换回默认主题
-await vchart.setCurrentTheme("default");
+await vchart.setCurrentTheme('default');
 ```
 
 ---
@@ -84,18 +83,18 @@ VChart.ThemeManager.registerTheme(name: string, theme: Partial<ITheme>): void;
 
 ```javascript
 // 注册自定义主题
-VChart.ThemeManager.registerTheme("myTheme", {
-  colors: ["#5B8FF9", "#5AD8A6", "#5D7092"],
-  background: "#f5f5f5",
+VChart.ThemeManager.registerTheme('myTheme', {
+  colors: ['#5B8FF9', '#5AD8A6', '#5D7092'],
+  background: '#f5f5f5',
   title: {
     textStyle: {
-      fill: "#333",
-    },
-  },
+      fill: '#333'
+    }
+  }
 });
 
 // 使用自定义主题
-await vchart.setCurrentTheme("myTheme");
+await vchart.setCurrentTheme('myTheme');
 ```
 
 ---
@@ -144,11 +143,11 @@ VChart.ThemeManager.setCurrentTheme(name: string): void;
 
 VChart 提供以下内置主题：
 
-| 主题名    | 说明     |
-| --------- | -------- |
+| 主题名 | 说明 |
+|-------|------|
 | `default` | 默认主题 |
-| `dark`    | 深色主题 |
-| `cloud`   | 云端主题 |
+| `dark` | 深色主题 |
+| `cloud` | 云端主题 |
 
 ---
 
@@ -161,28 +160,26 @@ let isDarkMode = false;
 
 function toggleDarkMode() {
   isDarkMode = !isDarkMode;
-  vchart.setCurrentTheme(isDarkMode ? "dark" : "default");
+  vchart.setCurrentTheme(isDarkMode ? 'dark' : 'default');
 }
 
 // 监听系统主题变化
-window
-  .matchMedia("(prefers-color-scheme: dark)")
-  .addEventListener("change", (e) => {
-    vchart.setCurrentTheme(e.matches ? "dark" : "default");
-  });
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  vchart.setCurrentTheme(e.matches ? 'dark' : 'default');
+});
 ```
 
 ### 场景 2: 品牌主题
 
 ```javascript
 // 注册品牌主题
-VChart.ThemeManager.registerTheme("brand", {
-  colors: ["#FF6B6B", "#4ECDC4", "#45B7D1"],
-  background: "#FAFAFA",
+VChart.ThemeManager.registerTheme('brand', {
+  colors: ['#FF6B6B', '#4ECDC4', '#45B7D1'],
+  background: '#FAFAFA'
 });
 
 // 应用品牌主题
-await vchart.setCurrentTheme("brand");
+await vchart.setCurrentTheme('brand');
 ```
 
 ### 场景 3: 用户偏好主题
@@ -190,12 +187,12 @@ await vchart.setCurrentTheme("brand");
 ```javascript
 // 保存用户主题偏好
 function saveThemePreference(themeName) {
-  localStorage.setItem("chart-theme", themeName);
+  localStorage.setItem('chart-theme', themeName);
 }
 
 // 加载用户主题偏好
 function loadThemePreference() {
-  const theme = localStorage.getItem("chart-theme") || "default";
+  const theme = localStorage.getItem('chart-theme') || 'default';
   vchart.setCurrentTheme(theme);
 }
 ```
@@ -207,49 +204,47 @@ function loadThemePreference() {
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://unpkg.com/@visactor/vchart@2.0.21/build/index.min.js"></script>
-  </head>
-  <body>
-    <div id="chart" style="width: 600px; height: 400px;"></div>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@visactor/vchart/build/index.min.js"></script>
+</head>
+<body>
+  <div id="chart" style="width: 600px; height: 400px;"></div>
 
-    <div style="margin-top: 10px;">
-      <button onclick="setTheme('default')">默认主题</button>
-      <button onclick="setTheme('dark')">深色主题</button>
-      <button onclick="setTheme('custom')">自定义主题</button>
-    </div>
+  <div style="margin-top: 10px;">
+    <button onclick="setTheme('default')">默认主题</button>
+    <button onclick="setTheme('dark')">深色主题</button>
+    <button onclick="setTheme('custom')">自定义主题</button>
+  </div>
 
-    <script>
-      // 注册自定义主题
-      VChart.ThemeManager.registerTheme("custom", {
-        colors: ["#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4"],
-        background: "#FFF5F5",
-      });
+  <script>
+    // 注册自定义主题
+    VChart.ThemeManager.registerTheme('custom', {
+      colors: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4'],
+      background: '#FFF5F5'
+    });
 
-      const spec = {
-        type: "bar",
-        data: [
-          {
-            id: "data",
-            values: [
-              { category: "A", value: 20 },
-              { category: "B", value: 35 },
-              { category: "C", value: 25 },
-            ],
-          },
-        ],
-        xField: "category",
-        yField: "value",
-      };
+    const spec = {
+      type: 'bar',
+      data: [{
+        id: 'data',
+        values: [
+          { category: 'A', value: 20 },
+          { category: 'B', value: 35 },
+          { category: 'C', value: 25 }
+        ]
+      }],
+      xField: 'category',
+      yField: 'value'
+    };
 
-      const vchart = new VChart(spec, { dom: "chart" });
-      vchart.renderSync();
+    const vchart = new VChart(spec, { dom: 'chart' });
+    vchart.renderSync();
 
-      async function setTheme(name) {
-        await vchart.setCurrentTheme(name);
-        console.log("当前主题:", vchart.getCurrentThemeName());
-      }
-    </script>
-  </body>
+    async function setTheme(name) {
+      await vchart.setCurrentTheme(name);
+      console.log('当前主题:', vchart.getCurrentThemeName());
+    }
+  </script>
+</body>
 </html>
 ```

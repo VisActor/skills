@@ -17,7 +17,6 @@ updateData(id: StringOrNumber, data: Datum[] | string, options?: IParserOptions)
 ```
 
 **参数**：
-
 - `id`: 数据集 ID（spec 中定义的 data.id）
 - `data`: 新数据数组或数据 URL
 - `options`: 数据解析选项（可选）
@@ -27,19 +26,18 @@ updateData(id: StringOrNumber, data: Datum[] | string, options?: IParserOptions)
 **使用示例**：
 
 ```javascript
-const vchart = new VChart(spec, { dom: "container" });
+const vchart = new VChart(spec, { dom: 'container' });
 await vchart.renderAsync();
 
 // 更新数据
-await vchart.updateData("myData", [
-  { category: "A", value: 20 },
-  { category: "B", value: 30 },
-  { category: "C", value: 25 },
+await vchart.updateData('myData', [
+  { category: 'A', value: 20 },
+  { category: 'B', value: 30 },
+  { category: 'C', value: 25 }
 ]);
 ```
 
 **适用场景**：
-
 - ✅ 单个数据集更新
 - ✅ 从 API 获取数据后更新
 - ✅ 数据筛选后更新
@@ -55,7 +53,6 @@ updateDataSync(id: StringOrNumber, data: Datum[], options?: IParserOptions): IVC
 ```
 
 **参数**：
-
 - `id`: 数据集 ID
 - `data`: 新数据数组
 - `options`: 数据解析选项（可选）
@@ -66,14 +63,15 @@ updateDataSync(id: StringOrNumber, data: Datum[], options?: IParserOptions): IVC
 
 ```javascript
 // 同步更新数据
-vchart.updateDataSync("myData", newData);
+vchart.updateDataSync('myData', newData);
 
 // 链式调用
-vchart.updateDataSync("data1", data1).updateDataSync("data2", data2);
+vchart
+  .updateDataSync('data1', data1)
+  .updateDataSync('data2', data2);
 ```
 
 **适用场景**：
-
 - ✅ 需要立即获取更新结果
 - ✅ 实时数据刷新（避免闪烁）
 - ✅ 调试场景
@@ -89,7 +87,6 @@ updateDataInBatches(list: { id: string; data: Datum[]; options?: IParserOptions 
 ```
 
 **参数**：
-
 - `list`: 数据更新列表，每个元素包含 id、data、options
 
 **返回值**：Promise<IVChart>
@@ -99,14 +96,13 @@ updateDataInBatches(list: { id: string; data: Datum[]; options?: IParserOptions 
 ```javascript
 // 批量更新多个数据集
 await vchart.updateDataInBatches([
-  { id: "sales", data: salesData },
-  { id: "profit", data: profitData },
-  { id: "cost", data: costData },
+  { id: 'sales', data: salesData },
+  { id: 'profit', data: profitData },
+  { id: 'cost', data: costData }
 ]);
 ```
 
 **适用场景**：
-
 - ✅ 多个数据集同时更新
 - ✅ 减少渲染次数，提升性能
 - ✅ 组合图数据更新
@@ -122,7 +118,6 @@ updateFullData(data: IDataValues | IDataValues[], reRender?: boolean): Promise<I
 ```
 
 **参数**：
-
 - `data`: 完整数据对象（包含 id、values 等）
 - `reRender`: 是否重新渲染，默认 true
 
@@ -133,22 +128,21 @@ updateFullData(data: IDataValues | IDataValues[], reRender?: boolean): Promise<I
 ```javascript
 // 更新完整数据对象
 await vchart.updateFullData({
-  id: "myData",
+  id: 'myData',
   values: [
-    { category: "A", value: 20 },
-    { category: "B", value: 30 },
-  ],
+    { category: 'A', value: 20 },
+    { category: 'B', value: 30 }
+  ]
 });
 
 // 更新多个数据对象
 await vchart.updateFullData([
-  { id: "data1", values: data1Values },
-  { id: "data2", values: data2Values },
+  { id: 'data1', values: data1Values },
+  { id: 'data2', values: data2Values }
 ]);
 ```
 
 **适用场景**：
-
 - ✅ 完整替换数据结构
 - ✅ 数据格式变化较大
 - ✅ 需要更新数据的元信息
@@ -164,7 +158,6 @@ updateFullDataSync(data: IDataValues | IDataValues[], reRender?: boolean): IVCha
 ```
 
 **参数**：
-
 - `data`: 完整数据对象
 - `reRender`: 是否重新渲染，默认 true
 
@@ -174,8 +167,8 @@ updateFullDataSync(data: IDataValues | IDataValues[], reRender?: boolean): IVCha
 
 ```javascript
 vchart.updateFullDataSync({
-  id: "myData",
-  values: newData,
+  id: 'myData',
+  values: newData
 });
 ```
 
@@ -189,10 +182,10 @@ vchart.updateFullDataSync({
 
 ```javascript
 // WebSocket 实时数据
-const ws = new WebSocket("wss://api.example.com/realtime");
+const ws = new WebSocket('wss://api.example.com/realtime');
 ws.onmessage = (event) => {
   const data = JSON.parse(event.data);
-  vchart.updateDataSync("realtimeData", data);
+  vchart.updateDataSync('realtimeData', data);
 };
 ```
 
@@ -202,8 +195,8 @@ ws.onmessage = (event) => {
 
 ```javascript
 function filterData(category) {
-  const filteredData = allData.filter((d) => d.category === category);
-  vchart.updateData("myData", filteredData);
+  const filteredData = allData.filter(d => d.category === category);
+  vchart.updateData('myData', filteredData);
 }
 ```
 
@@ -215,8 +208,8 @@ function filterData(category) {
 // 批量更新多个数据集
 async function updateComboChart(sales, profit) {
   await vchart.updateDataInBatches([
-    { id: "salesData", data: sales },
-    { id: "profitData", data: profit },
+    { id: 'salesData', data: sales },
+    { id: 'profitData', data: profit }
   ]);
 }
 ```
@@ -227,9 +220,9 @@ async function updateComboChart(sales, profit) {
 
 ```javascript
 async function loadDataFromAPI() {
-  const response = await fetch("/api/chart-data");
+  const response = await fetch('/api/chart-data');
   const data = await response.json();
-  await vchart.updateData("chartData", data);
+  await vchart.updateData('chartData', data);
 }
 ```
 
@@ -239,31 +232,29 @@ async function loadDataFromAPI() {
 
 ### 1. 选择合适的更新方式
 
-| 数据量         | 更新频率 | 推荐 API                    |
-| -------------- | -------- | --------------------------- |
-| 小（< 100 条） | 低频     | `updateData`                |
-| 大（> 100 条） | 低频     | `updateData` + 数据预处理   |
-| 小（< 100 条） | 高频     | `updateDataSync`            |
-| 大（> 100 条） | 高频     | `updateDataSync` + 增量更新 |
+| 数据量 | 更新频率 | 推荐 API |
+|--------|---------|---------|
+| 小（< 100 条） | 低频 | `updateData` |
+| 大（> 100 条） | 低频 | `updateData` + 数据预处理 |
+| 小（< 100 条） | 高频 | `updateDataSync` |
+| 大（> 100 条） | 高频 | `updateDataSync` + 增量更新 |
 
 ### 2. 批量更新优化
 
 **❌ 不推荐**：多次单独更新
-
 ```javascript
-await vchart.updateData("data1", data1);
-await vchart.updateData("data2", data2);
-await vchart.updateData("data3", data3);
+await vchart.updateData('data1', data1);
+await vchart.updateData('data2', data2);
+await vchart.updateData('data3', data3);
 // 渲染 3 次
 ```
 
 **✅ 推荐**：批量更新
-
 ```javascript
 await vchart.updateDataInBatches([
-  { id: "data1", data: data1 },
-  { id: "data2", data: data2 },
-  { id: "data3", data: data3 },
+  { id: 'data1', data: data1 },
+  { id: 'data2', data: data2 },
+  { id: 'data3', data: data3 }
 ]);
 // 只渲染 1 次
 ```
@@ -275,7 +266,7 @@ await vchart.updateDataInBatches([
 ```javascript
 // 预先排序数据
 const sortedData = data.sort((a, b) => b.value - a.value);
-await vchart.updateData("myData", sortedData);
+await vchart.updateData('myData', sortedData);
 ```
 
 ---
@@ -287,7 +278,6 @@ await vchart.updateData("myData", sortedData);
 **原因**：数据 ID 不匹配或数据格式错误
 
 **解决方案**：
-
 ```javascript
 // 检查 spec 中的 data.id
 const spec = {
@@ -301,7 +291,6 @@ await vchart.updateData('myData', newData);
 ### Q2: 高频更新导致性能问题？
 
 **解决方案**：
-
 1. 使用 `updateDataSync` 减少异步开销
 2. 实现数据节流/防抖
 3. 使用增量更新（仅更新变化的数据）
@@ -312,7 +301,7 @@ let updateTimer;
 function throttledUpdate(data) {
   if (updateTimer) clearTimeout(updateTimer);
   updateTimer = setTimeout(() => {
-    vchart.updateDataSync("myData", data);
+    vchart.updateDataSync('myData', data);
   }, 100);
 }
 ```
@@ -320,17 +309,15 @@ function throttledUpdate(data) {
 ### Q3: 如何判断数据更新完成？
 
 **异步 API**：使用 await 或 Promise.then()
-
 ```javascript
-await vchart.updateData("myData", newData);
-console.log("数据更新完成");
+await vchart.updateData('myData', newData);
+console.log('数据更新完成');
 ```
 
 **同步 API**：立即完成，无需等待
-
 ```javascript
-vchart.updateDataSync("myData", newData);
-console.log("数据已更新");
+vchart.updateDataSync('myData', newData);
+console.log('数据已更新');
 ```
 
 ---
@@ -340,47 +327,42 @@ console.log("数据已更新");
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://unpkg.com/@visactor/vchart@2.0.21/build/index.min.js"></script>
-  </head>
-  <body>
-    <div id="chart" style="width: 600px; height: 400px;"></div>
-    <button onclick="updateData()">更新数据</button>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@visactor/vchart/build/index.min.js"></script>
+</head>
+<body>
+  <div id="chart" style="width: 600px; height: 400px;"></div>
+  <button onclick="updateData()">更新数据</button>
 
-    <script>
-      const spec = {
-        type: "bar",
-        data: [
-          {
-            id: "myData",
-            values: [
-              { category: "A", value: 10 },
-              { category: "B", value: 20 },
-              { category: "C", value: 15 },
-            ],
-          },
-        ],
-        xField: "category",
-        yField: "value",
-      };
+  <script>
+    const spec = {
+      type: 'bar',
+      data: [{ id: 'myData', values: [
+        { category: 'A', value: 10 },
+        { category: 'B', value: 20 },
+        { category: 'C', value: 15 }
+      ]}],
+      xField: 'category',
+      yField: 'value'
+    };
 
-      const vchart = new VChart(spec, { dom: "chart" });
-      vchart.renderSync();
+    const vchart = new VChart(spec, { dom: 'chart' });
+    vchart.renderSync();
 
-      function updateData() {
-        const newData = [
-          { category: "A", value: Math.random() * 30 },
-          { category: "B", value: Math.random() * 30 },
-          { category: "C", value: Math.random() * 30 },
-        ];
+    function updateData() {
+      const newData = [
+        { category: 'A', value: Math.random() * 30 },
+        { category: 'B', value: Math.random() * 30 },
+        { category: 'C', value: Math.random() * 30 }
+      ];
 
-        // 方式 1: 异步更新
-        // vchart.updateData('myData', newData);
+      // 方式 1: 异步更新
+      // vchart.updateData('myData', newData);
 
-        // 方式 2: 同步更新
-        vchart.updateDataSync("myData", newData);
-      }
-    </script>
-  </body>
+      // 方式 2: 同步更新
+      vchart.updateDataSync('myData', newData);
+    }
+  </script>
+</body>
 </html>
 ```

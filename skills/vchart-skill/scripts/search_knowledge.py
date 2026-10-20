@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Search bundled VChart examples and SOPs without a service or model."""
+"""Search bundled VChart examples and diagnostic references without a service or model."""
 
 from __future__ import annotations
 
@@ -20,12 +20,14 @@ def terms(text: str) -> set[str]:
 
 
 def search(root: Path, kind: str, query: str, limit: int) -> list[dict]:
-    directory = root / "references" / kind
-    if not directory.is_dir():
-        raise FileNotFoundError(f"Missing bundled knowledge directory: {directory}")
+    groups = {"examples": ("examples",), "sops": ("components", "chart", "api")}
+    directories = [root / "references" / name for name in groups[kind]]
+    for directory in directories:
+        if not directory.is_dir():
+            raise FileNotFoundError(f"Missing bundled knowledge directory: {directory}")
     query_terms = terms(query)
     matches = []
-    for file in sorted(directory.rglob("*.md")):
+    for file in sorted(file for directory in directories for file in directory.rglob("*.md")):
         content = file.read_text(encoding="utf-8")
         title = next(
             (line.lstrip("# ") for line in content.splitlines() if line.startswith("#")), file.stem

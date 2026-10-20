@@ -49,7 +49,7 @@ python3 scripts/generate_diagnosis_html.py \
   --title "诊断报告" \
   --desc "问题分析结果" \
   --config-file config.js \
-  --output-dir chart-output
+  --output output/diagnosis.html
 ```
 
 **适用场景**：
@@ -90,7 +90,7 @@ python3 scripts/generate_demo_html.py \
   --feature "展示柱状图基本配置" \
   --tips "可调整 xField/yField" \
   --spec-file spec.js \
-  --output-dir chart-output
+  --output output/demo.html
 ```
 
 **适用场景**：
@@ -120,14 +120,14 @@ python3 scripts/generate_demo_html.py \
 **使用示例**：
 
 ```bash
-python3 skills/vchart-skill/scripts/generate_diagnosis_react_html.py \
+python3 scripts/generate_diagnosis_react_html.py \
   --problem-code "const Chart = () => <BarChart />" \
   --problem-title "图表不显示" \
   --cause "数据格式错误" \
   --solution-1-title "修正数据格式" \
   --solution-1-desc "添加必需的 values 字段" \
   --solution-1-code "const Chart = () => <BarChart data={...} />" \
-  --output-dir chart-output
+  --output output/diagnosis_react.html
 ```
 
 **适用场景**：
@@ -289,7 +289,9 @@ EOF
 
 ```bash
 # 检查是否包含必需对象
-node -e "const s=require('fs').readFileSync('config.js','utf8'); console.log(s.includes('const problemReview')); console.log(s.includes('const diagnosis')); console.log(s.includes('const solutions'));"
+grep "const problemReview" config.js
+grep "const diagnosis" config.js
+grep "const solutions" config.js
 
 # 验证 JavaScript 语法
 node -c config.js
@@ -299,13 +301,14 @@ node -c config.js
 
 ```bash
 # 检查是否包含 spec 对象
-node -e "const s=require('fs').readFileSync('spec.js','utf8'); console.log(s.includes('const spec'));"
+grep "const spec" spec.js
 
 # 验证 JavaScript 语法
 node -c spec.js
 
 # 检查必需字段
-node -e "const s=require('fs').readFileSync('spec.js','utf8'); console.log(s.includes('type:')); console.log(s.includes('data:'));"
+grep "type:" spec.js
+grep "data:" spec.js
 ```
 
 ---

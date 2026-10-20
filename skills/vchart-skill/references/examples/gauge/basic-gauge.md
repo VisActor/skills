@@ -24,7 +24,6 @@ const spec = {
 };
 
 const vchart = new VChart(spec, { dom: 'container' });
-// ⚠️ CDN/HTML 环境中须改为: new VChart.default(spec, { dom: 'container' })
 vchart.renderSync();
 ```
 
@@ -95,67 +94,6 @@ axes: [
 ]
 ```
 
-## ⚠️ gauge 背景系列配置（关键）
-
-> **必须包含 `type` 字段！** `gauge` 属性用于配置表盘背景，它是一个联合类型 `IGaugeSeriesSpec | ICircularProgressSeriesSpec`，必须通过 `type` 字段指定使用哪种系列。
-
-### gauge 背景系列类型选择
-
-| type 值 | 系列类型 | 说明 | 适用场景 |
-|---------|---------|------|---------|
-| `'gauge'` | 仪表盘系列 | 扇形分段背景，支持渐变色、cornerRadius | 仪表盘、速度表、分段色带 |
-| `'circularProgress'` | 环形进度条系列 | 单一进度弧线 | 简洁进度环、加载指示器 |
-
-### ⚠️ 缺少 type 导致的报错
-
-如果 `gauge` 属性中**不写 `type` 字段**，会报以下错误：
-
-```
-Uncaught TypeError: Cannot read properties of undefined (reading 'transformerConstructor')
-```
-
-**原因**：VChart 内部需要根据 `type` 字段查找对应的系列转换器（SeriesSpecTransformer）。当 `type` 缺失时，VChart 无法确定使用 gauge 系列还是 circularProgress 系列，导致查找到 `undefined` 的 transformer。
-
-**错误示例**：
-
-```javascript
-// ❌ 错误：gauge 属性中缺少 type 字段
-gauge: {
-  style: {
-    fill: {
-      gradient: 'conical',
-      stops: [
-        { offset: 0, color: '#52c41a' },
-        { offset: 0.5, color: '#faad14' },
-        { offset: 1, color: '#f5222d' }
-      ]
-    },
-    cornerRadius: 10
-  }
-}
-// 报错: Cannot read properties of undefined (reading 'transformerConstructor')
-```
-
-**正确示例**：
-
-```javascript
-// ✅ 正确：必须添加 type: 'gauge'
-gauge: {
-  type: 'gauge',               // ← 必须指定！
-  style: {
-    fill: {
-      gradient: 'conical',
-      stops: [
-        { offset: 0, color: '#52c41a' },
-        { offset: 0.5, color: '#faad14' },
-        { offset: 1, color: '#f5222d' }
-      ]
-    },
-    cornerRadius: 10
-  }
-}
-```
-
 ## 环形进度条 (circularProgress)
 
 更简洁的进度展示：
@@ -213,9 +151,8 @@ const spec = {
       fill: '#f0f0f0'
     }
   },
-  // 进度弧 - ⚠️ 注意必须包含 type 字段
+  // 进度弧
   gauge: {
-    type: 'gauge',           // ← 必须！
     style: {
       fill: {
         gradient: 'conical',
@@ -306,7 +243,6 @@ const spec = {
 };
 
 const vchart = new VChart(spec, { dom: 'container' });
-// ⚠️ CDN/HTML 环境中须改为: new VChart.default(spec, { dom: 'container' })
 vchart.renderSync();
 ```
 

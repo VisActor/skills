@@ -17,14 +17,13 @@ exportImg(name?: string): Promise<void>;
 ```
 
 **参数**：
-
 - `name`: 保存的文件名（可选）
 
 **使用示例**：
 
 ```javascript
 // 导出图片（会触发浏览器下载）
-await vchart.exportImg("my-chart");
+await vchart.exportImg('my-chart');
 ```
 
 ---
@@ -46,7 +45,7 @@ const dataURL = await vchart.getDataURL();
 console.log(dataURL); // data:image/png;base64,...
 
 // 用于 img 标签
-document.getElementById("preview").src = dataURL;
+document.getElementById('preview').src = dataURL;
 ```
 
 ---
@@ -67,8 +66,8 @@ exportCanvas(): HTMLCanvasElement | undefined;
 const canvas = vchart.exportCanvas();
 if (canvas) {
   // 进行自定义处理
-  const ctx = canvas.getContext("2d");
-  ctx.fillStyle = "red";
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = 'red';
   ctx.fillRect(0, 0, 10, 10);
 }
 ```
@@ -88,7 +87,7 @@ getImageBuffer(): void;
 ```javascript
 // Node.js 环境
 const buffer = vchart.getImageBuffer();
-require("fs").writeFileSync("chart.png", buffer);
+require('fs').writeFileSync('chart.png', buffer);
 ```
 
 ---
@@ -99,7 +98,7 @@ require("fs").writeFileSync("chart.png", buffer);
 
 ```javascript
 async function downloadChart() {
-  await vchart.exportImg("chart-" + Date.now());
+  await vchart.exportImg('chart-' + Date.now());
 }
 ```
 
@@ -108,7 +107,7 @@ async function downloadChart() {
 ```javascript
 async function showThumbnail() {
   const dataURL = await vchart.getDataURL();
-  document.getElementById("thumbnail").src = dataURL;
+  document.getElementById('thumbnail').src = dataURL;
 }
 ```
 
@@ -124,11 +123,11 @@ async function uploadChart() {
 
   // 上传
   const formData = new FormData();
-  formData.append("chart", blob, "chart.png");
+  formData.append('chart', blob, 'chart.png');
 
-  await fetch("/api/upload", {
-    method: "POST",
-    body: formData,
+  await fetch('/api/upload', {
+    method: 'POST',
+    body: formData
   });
 }
 ```
@@ -139,7 +138,7 @@ async function uploadChart() {
 async function printChart() {
   const dataURL = await vchart.getDataURL();
 
-  const printWindow = window.open("", "_blank");
+  const printWindow = window.open('', '_blank');
   printWindow.document.write(`
     <html>
       <body>
@@ -159,17 +158,17 @@ async function generateReport() {
   const chartImage = await vchart.getDataURL();
 
   const report = {
-    title: "销售报告",
+    title: '销售报告',
     date: new Date().toISOString(),
     chart: chartImage,
-    data: chartData,
+    data: chartData
   };
 
   // 发送到报告生成服务
-  await fetch("/api/report", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(report),
+  await fetch('/api/report', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(report)
   });
 }
 ```
@@ -184,9 +183,9 @@ async function generateReport() {
 
 ```javascript
 const spec = {
-  type: "bar",
-  width: 800, // 导出宽度
-  height: 600, // 导出高度
+  type: 'bar',
+  width: 800,   // 导出宽度
+  height: 600,  // 导出高度
   // ...
 };
 ```
@@ -195,8 +194,8 @@ const spec = {
 
 ```javascript
 const spec = {
-  type: "bar",
-  background: "white", // 导出背景色
+  type: 'bar',
+  background: 'white',  // 导出背景色
   // ...
 };
 ```
@@ -205,11 +204,11 @@ const spec = {
 
 ```javascript
 const vchart = new VChart(spec, {
-  dom: "chart",
-  mode: "desktop-browser",
+  dom: 'chart',
+  mode: 'desktop-browser',
   modeParams: {
-    devicePixelRatio: 2, // 高清导出
-  },
+    devicePixelRatio: 2  // 高清导出
+  }
 });
 ```
 
@@ -233,8 +232,8 @@ await vchart.exportImg();
 
 ```javascript
 // 等待动画完成
-vchart.on("animationFinished", async () => {
-  await vchart.exportImg("chart");
+vchart.on('animationFinished', async () => {
+  await vchart.exportImg('chart');
 });
 ```
 
@@ -253,67 +252,65 @@ vchart.on("animationFinished", async () => {
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://unpkg.com/@visactor/vchart@2.0.21/build/index.min.js"></script>
-  </head>
-  <body>
-    <div id="chart" style="width: 600px; height: 400px;"></div>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@visactor/vchart/build/index.min.js"></script>
+</head>
+<body>
+  <div id="chart" style="width: 600px; height: 400px;"></div>
 
-    <div style="margin-top: 10px;">
-      <button onclick="downloadImage()">下载图片</button>
-      <button onclick="showPreview()">显示预览</button>
-      <button onclick="copyToClipboard()">复制到剪贴板</button>
-    </div>
+  <div style="margin-top: 10px;">
+    <button onclick="downloadImage()">下载图片</button>
+    <button onclick="showPreview()">显示预览</button>
+    <button onclick="copyToClipboard()">复制到剪贴板</button>
+  </div>
 
-    <div id="preview" style="margin-top: 20px;"></div>
+  <div id="preview" style="margin-top: 20px;"></div>
 
-    <script>
-      const spec = {
-        type: "bar",
-        data: [
-          {
-            id: "data",
-            values: [
-              { category: "A", value: 20 },
-              { category: "B", value: 35 },
-              { category: "C", value: 25 },
-            ],
-          },
-        ],
-        xField: "category",
-        yField: "value",
-        background: "white",
-      };
+  <script>
+    const spec = {
+      type: 'bar',
+      data: [{
+        id: 'data',
+        values: [
+          { category: 'A', value: 20 },
+          { category: 'B', value: 35 },
+          { category: 'C', value: 25 }
+        ]
+      }],
+      xField: 'category',
+      yField: 'value',
+      background: 'white'
+    };
 
-      const vchart = new VChart(spec, { dom: "chart" });
-      vchart.renderSync();
+    const vchart = new VChart(spec, { dom: 'chart' });
+    vchart.renderSync();
 
-      async function downloadImage() {
-        await vchart.exportImg("my-chart");
-        alert("图片已下载");
+    async function downloadImage() {
+      await vchart.exportImg('my-chart');
+      alert('图片已下载');
+    }
+
+    async function showPreview() {
+      const dataURL = await vchart.getDataURL();
+      document.getElementById('preview').innerHTML =
+        `<img src="${dataURL}" style="max-width: 300px; border: 1px solid #ccc;">`;
+    }
+
+    async function copyToClipboard() {
+      const dataURL = await vchart.getDataURL();
+      const response = await fetch(dataURL);
+      const blob = await response.blob();
+
+      try {
+        await navigator.clipboard.write([
+          new ClipboardItem({ 'image/png': blob })
+        ]);
+        alert('已复制到剪贴板');
+      } catch (err) {
+        alert('复制失败: ' + err.message);
       }
-
-      async function showPreview() {
-        const dataURL = await vchart.getDataURL();
-        document.getElementById("preview").innerHTML =
-          `<img src="${dataURL}" style="max-width: 300px; border: 1px solid #ccc;">`;
-      }
-
-      async function copyToClipboard() {
-        const dataURL = await vchart.getDataURL();
-        const response = await fetch(dataURL);
-        const blob = await response.blob();
-
-        try {
-          await navigator.clipboard.write([
-            new ClipboardItem({ "image/png": blob }),
-          ]);
-          alert("已复制到剪贴板");
-        } catch (err) {
-          alert("复制失败: " + err.message);
-        }
-      }
-    </script>
-  </body>
+    }
+  </script>
+</body>
 </html>
 ```

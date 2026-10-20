@@ -282,5 +282,18 @@
         "VChart Sankey related-path and HTML tooltip-title library fixes"
       ]
     }
-  ]
+  ],
+  "vchartCanonicalSource": {
+    "repository": "https://github.com/VisActor/VChart",
+    "commit": "733d8a6a34ddbd4ab714ed620071284f8c3433d2",
+    "sourcePath": "skills/vchart-development-assistant",
+    "destinationPath": "skills/vchart-skill",
+    "adaptations": [
+      "Public skill name and standalone installation instructions",
+      "Existing pinned public CDN versions and React VChart binding",
+      "Existing portable generator diagnostics and initial rendering independent of Monaco",
+      "Optional offline search over canonical references; maintenance tests outside runtime"
+    ],
+    "pullRequest": "https://github.com/VisActor/VChart/pull/4718"
+  }
 }

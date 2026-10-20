@@ -226,82 +226,11 @@ tooltip: {
 }
 ```
 
-### 15. Tooltip 使用 formatter 模板
-
-> **v1.10.0+**。Tooltip 中使用 formatter 模板字符串时，必须使用 `keyFormatter` / `valueFormatter` 专用字段。
-
-```javascript
-// ✅ 正确：使用 valueFormatter 字段
-tooltip: {
-  dimension: {
-    content: [
-      {
-        hasShape: true,
-        valueFormatter: '{value:,.0f}'    // 千分位格式化
-      }
-    ]
-  }
-}
-
-// ❌ 错误：不能在 value 字段中写模板字符串
-tooltip: {
-  dimension: {
-    content: [
-      {
-        value: '{value:,.0f}'             // 会被当作普通字符串
-      }
-    ]
-  }
-}
-```
-
----
-
-## 仪表盘（Gauge）问题
-
-### 16. Gauge 报错：Cannot read properties of undefined (reading 'transformerConstructor')
-
-**症状**：配置了 `gauge` 属性的仪表盘图表，页面报错 `Uncaught TypeError: Cannot read properties of undefined (reading 'transformerConstructor')`
-
-**原因**：`gauge` 属性是一个联合类型（`IGaugeSeriesSpec | ICircularProgressSeriesSpec`），VChart 需要通过 `type` 字段来确定使用哪种系列的 transformer。缺少 `type` 字段时，VChart 无法找到对应的系列转换器。
-
-**解决**：在 `gauge` 配置中添加 `type: 'gauge'`：
-
-```javascript
-// ❌ 错误：缺少 type 字段
-gauge: {
-  style: {
-    fill: { gradient: 'conical', stops: [...] },
-    cornerRadius: 10
-  }
-}
-
-// ✅ 正确：添加 type: 'gauge'
-gauge: {
-  type: 'gauge',           // ← 必须指定！
-  style: {
-    fill: { gradient: 'conical', stops: [...] },
-    cornerRadius: 10
-  }
-}
-```
-
-### 17. Gauge 使用 circularProgress 背景
-
-如果希望用环形进度条风格作为背景，使用 `type: 'circularProgress'`：
-
-```javascript
-gauge: {
-  type: 'circularProgress',
-  // circularProgress 系列配置...
-}
-```
-
 ---
 
 ## 性能问题
 
-### 18. 大数据量优化
+### 15. 大数据量优化
 
 ```javascript
 const spec = {
@@ -317,7 +246,7 @@ const spec = {
 };
 ```
 
-### 19. 按需加载图表类型
+### 16. 按需加载图表类型
 
 ```javascript
 import { VChart } from '@visactor/vchart';
@@ -331,7 +260,7 @@ VChart.useRegisters([registerBarChart, registerTooltip]);
 
 ## 交互问题
 
-### 20. 禁用某些交互
+### 17. 禁用某些交互
 
 ```javascript
 // 禁用 hover 效果
@@ -347,7 +276,7 @@ bar: {
 select: false
 ```
 
-### 21. 监听图表事件
+### 18. 监听图表事件
 
 ```javascript
 const vchart = new VChart(spec, { dom: 'container' });
@@ -367,7 +296,7 @@ vchart.on('pointerover', { level: 'mark' }, (params) => {
 
 ## 响应式问题
 
-### 22. 图表自适应容器大小
+### 19. 图表自适应容器大小
 
 ```javascript
 const spec = {
@@ -378,7 +307,7 @@ const spec = {
 };
 ```
 
-### 23. 窗口 resize 后图表不更新
+### 20. 窗口 resize 后图表不更新
 
 ```javascript
 // 监听窗口变化，手动触发 resize
@@ -391,7 +320,7 @@ window.addEventListener('resize', () => {
 
 ## React/Vue 集成问题
 
-### 24. React 中的基本用法
+### 21. React 中的基本用法
 
 ```jsx
 import { BarChart } from '@visactor/react-vchart';
@@ -403,7 +332,7 @@ function App() {
 }
 ```
 
-### 25. Vue 中的基本用法
+### 22. Vue 中的基本用法
 
 ```vue
 <template>
@@ -428,7 +357,7 @@ export default {
 
 ## 版本迁移问题
 
-### 26. 从 1.x 升级到 2.0
+### 23. 从 1.x 升级到 2.0
 
 主要变更：
 1. 主题系统重构
@@ -436,3 +365,28 @@ export default {
 3. 动画配置优化
 
 详细迁移指南请参考：[VChart 2.0 升级指南](https://www.visactor.io/vchart/guide/tutorial_docs/migrate)
+
+
+## 图数据与层级数据
+
+桑基图先核对 [Sankey 数据与配置](../examples/sankey/basic-sankey.md)：数据源描述、图对象、边记录是不同层级；sourceField/targetField 只映射字段，不负责转换数据。
+
+### 层级图数据与回调
+
+Treemap / sunburst 的 `data` 是数据源描述，节点放在 `values` 数组中：
+
+```js
+const root = { name: 'Total', children: [{ name: 'One', amount: 3 }, { name: 'Two', amount: 7 }] };
+const spec = {
+  type: 'treemap', categoryField: 'name', valueField: 'amount',
+  data: { values: [root] }
+};
+```
+
+不要写 `data.value` 或把节点直接放在 `data` 数组里。保留所有叶子与原始字段，按实际层级组织 children；占比分母从完整输入求和。合法空输入为 `values: []`，文本数据可配 csv/dsv/tsv parser，数据引用不当作树节点检查。
+
+Treemap 的布局回调、分组颜色、标签和默认图例见 [Treemap 专项](treemap.md)。
+
+### 空数据与恢复
+
+保留真实空数据；0 值记录不等于无记录。中央提示使用 [图表级 customMark](../components/mark.md#空数据与居中提示)，不要把标题或虚构数据当作空状态。恢复后重新计算提示状态。

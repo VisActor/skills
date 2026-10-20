@@ -83,7 +83,7 @@ type PaddingConfig = {
 };
 ```
 
-#### Smart Invert Configuration\
+#### Smart Invert Configuration
 ```typescript
 type SmartInvertConfig = boolean | {
   /**

@@ -44,7 +44,7 @@ interface IMarkPointXYSpec {
 }
 ```
 
-### 2. Polar Coordinate System\
+### 2. Polar Coordinate System
 ```typescript
 interface IMarkPointAngleRadiusSpec {
   angle: IDataPos | IDataPosCallback;   // Angle axis position
