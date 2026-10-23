@@ -13,6 +13,7 @@ Agent skills for the VisActor visualization ecosystem. Create data stories, edit
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | Analysis reports, business briefings and data features, with chart scrollytelling and annotations, delivered as HTML stories or Web-PPT |
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | Editorial HTML / PNG series for news, biographies, outfits, travel, chronological stories and explainers |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | Biography posters with photo walls, center grids, photo rings and editable timelines |
+| [person-poster](skills/person-poster/SKILL.md) | Person-led data posters with native VChart, editable HTML and high-resolution PNG |
 
 ### Related VisActor Skills
 
@@ -37,6 +38,8 @@ npx skills add VisActor/skills --skill editorial-magazine
 npx skills add VisActor/skills --skill life-chronicle
 ```
 
+`person-poster` is available from a checkout containing this Skill: `npx skills add ./skills/person-poster`. The default-branch command `npx skills add VisActor/skills --skill person-poster` becomes available after promotion to `main`; a release tag is not required for default-branch installation.
+
 For chart and table tasks, install the related Skills from their owning repositories:
 
 ```bash
@@ -58,6 +61,7 @@ Requirements:
 | chart-storytelling | Python 3.10+ (standard library) and Node.js for JavaScript checks; pinned VSeed, VChart, VTable and GSAP load from unpkg |
 | editorial-magazine | Python 3.10+, dependencies in its [requirements.txt](skills/editorial-magazine/requirements.txt), and Chromium/Chrome for PNG export; font CDN with system fallbacks |
 | life-chronicle | Python 3.10+, dependencies in its [requirements.txt](skills/life-chronicle/requirements.txt), and Chromium/Chrome for PNG export; pinned VInfo and font CDN, see [environment setup](skills/life-chronicle/references/environment.md) |
+| person-poster | Python 3.10+, Pillow, Python Playwright/Chromium; public VChart 2.1.7 CDN or a sourced local copy; see [requirements.txt](skills/person-poster/scripts/requirements.txt) and [environment setup](skills/person-poster/references/environment.md) for POSIX/PowerShell installation and capability limits |
 
 Image search, generation and cutout capabilities come from the host; follow the selected Skill's asset requirements. Magazine templates contain placeholders to replace before delivery. See the owning repositories for VChart/VTable Skill requirements.
 
@@ -105,6 +109,7 @@ From the root of your local repository, install the working copy of a Skill:
 npx skills add ./skills/chart-storytelling
 npx skills add ./skills/editorial-magazine
 npx skills add ./skills/life-chronicle
+npx skills add ./skills/person-poster
 ```
 
 Alternatively, copy the complete Skill directory into your agent's skill directory, including its references, templates and scripts. Do not copy only `SKILL.md`. See the [local debugging guide](docs/debugging.md) for Codex and Claude Code workspace setup. Refresh the installed copy after changing a Skill before retesting.
@@ -125,7 +130,7 @@ Fixed browser cases live under [tests/browser/cases/](tests/browser/cases/README
 
 Use Codex, Claude Code or another compatible mature agent to run a [fixed task](cases/README.md) or your own prompt and inputs. Follow [local debugging](docs/debugging.md) to prepare an ignored `.cache/skill-dev/<skill-name>/<run-name>/` workspace and retain artifacts, screenshots and available logs. This repository does not provide a model API harness or unified agent runner.
 
-Fixed tasks currently cover chart-storytelling; browser smoke covers its HTML stories and Web-PPT. Editorial-magazine and life-chronicle have script regressions, but no fixed tasks or browser smoke yet. Review generated results for data accuracy, task requirements and interactions; different correct visual designs are acceptable. Agent tasks are not run in CI.
+Fixed tasks cover chart-storytelling and person-poster. Browser smoke covers story HTML/Web-PPT and poster chart examples, HTML-only delivery with and without charts, PNG delivery without charts, ancestor clipping rejection and failed export. Person-poster also has one same-session real-person generation check; it is not an independent blind evaluation. Editorial-magazine and life-chronicle have script regressions, but no fixed tasks or browser smoke yet. Review generated results for data accuracy, task requirements and interactions; different correct visual designs are acceptable. Agent tasks are not run in CI.
 
 ## Versioning
 

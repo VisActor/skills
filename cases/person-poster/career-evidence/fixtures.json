@@ -1,0 +1,10 @@
+{
+  "facts.json": {
+    "sha256": "daac8ae60dd7b1e55f0d453cfd8caaccf275276df0e3026e300397bb10df198d",
+    "provenance": "Factual award shares from NobelPrize.org; sources embedded in facts.json."
+  },
+  "marie-curie.jpg": {
+    "sha256": "2751b961d2a1bbc4c1708452b7d750df08f9b447937c2fc8b72ea7e38bea0092",
+    "provenance": "Henri Manuel, circa 1920; public domain; https://commons.wikimedia.org/wiki/File:Marie_Curie_c1920.jpg"
+  }
+}

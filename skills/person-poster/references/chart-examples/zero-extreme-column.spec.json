@@ -1,0 +1,86 @@
+{
+  "type": "bar",
+  "animation": false,
+  "background": "transparent",
+  "padding": {
+    "top": 30,
+    "bottom": 10,
+    "left": 12,
+    "right": 12
+  },
+  "data": [
+    {
+      "id": "career",
+      "values": [
+        {
+          "work": "作品一",
+          "value": 0
+        },
+        {
+          "work": "作品二",
+          "value": 170
+        },
+        {
+          "work": "作品三",
+          "value": 280
+        },
+        {
+          "work": "作品四",
+          "value": 725
+        }
+      ]
+    }
+  ],
+  "xField": "work",
+  "yField": "value",
+  "color": [
+    "#ac6632"
+  ],
+  "bar": {
+    "style": {
+      "cornerRadius": 0
+    }
+  },
+  "label": {
+    "visible": true,
+    "position": "top",
+    "style": {
+      "fontSize": 24,
+      "fill": "#233a30",
+      "fontFamily": "sans-serif"
+    }
+  },
+  "axes": [
+    {
+      "label": {
+        "style": {
+          "fontSize": 20,
+          "fill": "#31433c",
+          "fontFamily": "sans-serif"
+        },
+        "autoHide": false,
+        "autoLimit": false,
+        "autoRotate": false
+      },
+      "tick": {
+        "visible": false
+      },
+      "grid": {
+        "visible": false
+      },
+      "orient": "bottom",
+      "type": "band"
+    },
+    {
+      "orient": "left",
+      "type": "linear",
+      "min": 0,
+      "max": 900,
+      "nice": false,
+      "visible": false
+    }
+  ],
+  "legends": {
+    "visible": false
+  }
+}

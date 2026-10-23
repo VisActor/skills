@@ -1,0 +1,89 @@
+{
+  "type": "bar",
+  "animation": false,
+  "background": "transparent",
+  "padding": {
+    "top": 30,
+    "bottom": 10,
+    "left": 100,
+    "right": 12
+  },
+  "data": [
+    {
+      "id": "career",
+      "values": [
+        {
+          "work": "第一部作品 · 完整名称",
+          "value": 35
+        },
+        {
+          "work": "第二部作品 · 完整名称",
+          "value": 170
+        },
+        {
+          "work": "第三部作品 · 完整名称",
+          "value": 280
+        },
+        {
+          "work": "第四部作品 · 完整名称",
+          "value": 725
+        }
+      ]
+    }
+  ],
+  "xField": "value",
+  "yField": "work",
+  "color": [
+    "#ac6632"
+  ],
+  "bar": {
+    "style": {
+      "cornerRadius": 0
+    }
+  },
+  "label": {
+    "visible": true,
+    "position": "right",
+    "style": {
+      "fontSize": 24,
+      "fill": "#233a30",
+      "fontFamily": "sans-serif"
+    }
+  },
+  "axes": [
+    {
+      "label": {
+        "style": {
+          "fontSize": 20,
+          "fill": "#31433c",
+          "fontFamily": "sans-serif"
+        },
+        "autoHide": false,
+        "autoLimit": false,
+        "autoRotate": false
+      },
+      "tick": {
+        "visible": false
+      },
+      "grid": {
+        "visible": false
+      },
+      "orient": "left",
+      "type": "band",
+      "inverse": false,
+      "autoIndent": true
+    },
+    {
+      "orient": "bottom",
+      "type": "linear",
+      "min": 0,
+      "max": 900,
+      "nice": false,
+      "visible": false
+    }
+  ],
+  "legends": {
+    "visible": false
+  },
+  "direction": "horizontal"
+}

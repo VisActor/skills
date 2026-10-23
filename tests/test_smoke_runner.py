@@ -39,6 +39,43 @@ def test_explicit_case_selection_stays_within_selected_skill(smoke):
         smoke.select_cases(smoke.load_cases(), "chart-storytelling", ["removed-chart"])
 
 
+def test_poster_cases_cover_native_html_only_and_failure(smoke):
+    cases = smoke.select_cases(smoke.load_cases(), "person-poster", None)
+    assert {case["id"] for case in cases} == {
+        "poster-chart-matrix", "poster-html-only", "poster-render-failure",
+        "poster-no-charts-png", "poster-charts-html-only", "poster-ancestor-clipping",
+    }
+    assert all(case["expectations"]["engine"] == "poster" for case in cases)
+
+
+@pytest.mark.parametrize('field,value', [('pngExpected', 'false'), ('reviewFailureContains', 'error'),
+                                        ('reviewFailureContains', [None])])
+def test_invalid_poster_expectation_rejected(smoke, tmp_path, field, value):
+    directory = tmp_path / 'person-poster/custom'
+    shutil.copytree(ROOT / 'tests/browser/cases/person-poster/poster-html-only', directory)
+    path = directory / 'expectations.json'
+    expected = json.loads(path.read_text())
+    expected[field] = value
+    path.write_text(json.dumps(expected))
+    with pytest.raises(ValueError, match=field):
+        smoke.load_cases(tmp_path)
+
+
+def test_poster_production_failure_is_not_reported_as_success(smoke, tmp_path, monkeypatch):
+    case = smoke.select_cases(smoke.load_cases(), "person-poster", ["poster-html-only"])[0]
+    monkeypatch.setattr(smoke, "build_poster", lambda *args: None)
+    monkeypatch.setattr(smoke.subprocess, "run", lambda *args, **kwargs:
+                        SimpleNamespace(returncode=0, stdout="browser passed", stderr=""))
+
+    def failed_pipeline(*args):
+        raise RuntimeError("PNG export failed")
+
+    monkeypatch.setattr(smoke, "check_production_pipeline", failed_pipeline)
+    result = smoke.run_case(case, tmp_path / "evidence")
+    assert result["passed"] is False
+    assert "PNG export failed" in (tmp_path / "evidence/poster-html-only/failure.log").read_text()
+
+
 @pytest.mark.parametrize(
     "field, value, message",
     [

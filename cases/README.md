@@ -24,6 +24,12 @@ cases/<skill-name>/<case-name>/
 | [story-supply-assets](chart-storytelling/story-supply-assets/README.md) | 供应链风险分析与 SVG 素材引用 |
 | [story-vegas-feature](chart-storytelling/story-vegas-feature/README.md) | 模拟赛事经营专题与图片降级处理 |
 
+## person-poster
+
+| 用例 | 任务 |
+| --- | --- |
+| [career-evidence](person-poster/career-evidence/README.md) | 玛丽·居里真实肖像与诺贝尔奖份额，原生图表、HTML 和 PNG |
+
 editorial-magazine 和 life-chronicle 暂无固定任务；可提供自己的提示词和素材调试。
 
 ## 执行和验收

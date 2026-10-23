@@ -1,0 +1,42 @@
+{
+  "type": "scatter",
+  "animation": false,
+  "background": "transparent",
+  "data": [
+    {
+      "id": "points",
+      "values": [
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 7
+        },
+        {
+          "x": 4,
+          "y": 5
+        }
+      ]
+    }
+  ],
+  "xField": "x",
+  "yField": "y",
+  "size": 14,
+  "color": [
+    "#376e64"
+  ],
+  "axes": [
+    {
+      "orient": "bottom",
+      "type": "linear",
+      "min": 0
+    },
+    {
+      "orient": "left",
+      "type": "linear",
+      "min": 0
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "examples": [
+    "area",
+    "direct-column",
+    "grouped-bar",
+    "grouped-column",
+    "line",
+    "long-label-bar",
+    "pie",
+    "reference-column",
+    "scatter",
+    "stacked-bar",
+    "stacked-column",
+    "treemap",
+    "waffle",
+    "zero-extreme-column"
+  ],
+  "height": 3300,
+  "emptyMount": false
+}

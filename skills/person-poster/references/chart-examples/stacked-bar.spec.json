@@ -1,0 +1,106 @@
+{
+  "type": "bar",
+  "animation": false,
+  "background": "transparent",
+  "padding": {
+    "top": 30,
+    "bottom": 10,
+    "left": 12,
+    "right": 12
+  },
+  "data": [
+    {
+      "id": "career",
+      "values": [
+        {
+          "period": "阶段一",
+          "series": "A",
+          "value": 12
+        },
+        {
+          "period": "阶段一",
+          "series": "B",
+          "value": 8
+        },
+        {
+          "period": "阶段二",
+          "series": "A",
+          "value": 18
+        },
+        {
+          "period": "阶段二",
+          "series": "B",
+          "value": 9
+        }
+      ]
+    }
+  ],
+  "xField": "value",
+  "yField": "period",
+  "color": [
+    "#ac6632",
+    "#376e64"
+  ],
+  "bar": {
+    "style": {
+      "cornerRadius": 0
+    }
+  },
+  "label": {
+    "visible": true,
+    "position": "inside",
+    "style": {
+      "fontSize": 24,
+      "fill": "#ffffff",
+      "fontFamily": "sans-serif",
+      "stroke": null,
+      "lineWidth": 0
+    }
+  },
+  "axes": [
+    {
+      "label": {
+        "style": {
+          "fontSize": 20,
+          "fill": "#31433c",
+          "fontFamily": "sans-serif"
+        },
+        "autoHide": false,
+        "autoLimit": false,
+        "autoRotate": false
+      },
+      "tick": {
+        "visible": false
+      },
+      "grid": {
+        "visible": false
+      },
+      "orient": "left",
+      "type": "band",
+      "inverse": false,
+      "autoIndent": true
+    },
+    {
+      "orient": "bottom",
+      "type": "linear",
+      "min": 0,
+      "nice": false,
+      "visible": false,
+      "max": 35
+    }
+  ],
+  "legends": {
+    "visible": true,
+    "orient": "bottom",
+    "item": {
+      "label": {
+        "style": {
+          "fontSize": 18
+        }
+      }
+    }
+  },
+  "direction": "horizontal",
+  "seriesField": "series",
+  "stack": true
+}

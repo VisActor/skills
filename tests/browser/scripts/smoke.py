@@ -9,12 +9,13 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+from person_poster_smoke import build_poster, check_production_pipeline
 from story_smoke import build_story
 
 ROOT = Path(__file__).resolve().parents[3]
 SKILLS = sorted(path.parent.name for path in (ROOT / "skills").glob("*/SKILL.md"))
 CASES = ROOT / "tests/browser/cases"
-ENGINES = {"chart-storytelling": "story"}
+ENGINES = {"chart-storytelling": "story", "person-poster": "poster"}
 
 
 def write_json(path: Path, value) -> None:
@@ -64,6 +65,19 @@ def load_cases(root: Path = CASES) -> list[dict]:
                 raise ValueError(f"Missing story preset: {directory}")
             if expected.get("deck", False) != (config["target"] == "ppt"):
                 raise ValueError(f"Deck expectations do not match story target: {directory}")
+        elif config["builder"] == "poster" and skill == "person-poster":
+            if not isinstance(expected.get('pngExpected'), bool):
+                raise ValueError(f'pngExpected must be a boolean: {directory}')
+            review_errors = expected.get('reviewFailureContains', [])
+            if not isinstance(review_errors, list) or not all(isinstance(item, str) and item for item in review_errors):
+                raise ValueError(f'reviewFailureContains must be an array of nonempty strings: {directory}')
+            if (review_errors and expected.get('renderFailure')) or (
+                (review_errors or expected.get('renderFailure')) and expected['pngExpected']
+            ):
+                raise ValueError(f'Conflicting poster failure expectations: {directory}')
+            for name in ["bundle.json", "page.html"]:
+                if name not in inputs:
+                    raise ValueError(f"Missing poster input: {directory / 'inputs' / name}")
         else:
             raise ValueError(f"Unsupported builder for Skill: {directory}")
         filename(expected["html"])
@@ -118,12 +132,15 @@ def run_case(case: dict, output: Path) -> dict:
     workspace = prepare_case(case, directory)
     step = "generate"
     try:
-        build_story(workspace, case["config"])
+        if case["skill"] == "person-poster":
+            build_poster(case, workspace)
+        else:
+            build_story(workspace, case["config"])
         step = "browser"
         result = subprocess.run(
             [
                 "node",
-                str(ROOT / "tests/browser/scripts/check-browser.mjs"),
+                str(ROOT / "tests/browser/scripts" / ("check-poster.mjs" if case["skill"] == "person-poster" else "check-browser.mjs")),
                 str(directory),
                 "--local-assets",
             ],
@@ -133,6 +150,9 @@ def run_case(case: dict, output: Path) -> dict:
         )
         (directory / "browser.log").write_text(result.stdout + result.stderr)
         passed = result.returncode == 0
+        if passed and case["skill"] == "person-poster":
+            step = "production"
+            check_production_pipeline(workspace, case["expectations"])
     except (OSError, ValueError, RuntimeError, subprocess.TimeoutExpired) as error:
         if isinstance(error, (OSError, subprocess.TimeoutExpired)):
             partial = ""

@@ -1,0 +1,137 @@
+# 渲染、导出与验收
+
+## 包内工具与运行环境
+
+先解析 skill 的真实位置，设置：
+
+- `SKILL_DIR`：`person-poster/` 的实际绝对路径。
+- `BUNDLE`：当前产物目录的实际路径，不能指向两个历史实践的目录。
+
+使用 Python 3.10+；Pillow 用于人物测量，Playwright 与 Chromium 用于浏览器渲染。选择当前可用环境，不硬编码前次实践的 `/tmp` 路径。独立环境的 POSIX shell／Windows PowerShell 安装命令、网络和系统依赖见 [运行环境与安装](environment.md)。
+
+后续命令中的 `python3` 替换为所选环境的 Python。`.venv` 是运行环境，不属于可分享的成品文件，不打包到海报中。缺少环境或宿主图片能力时说明具体缺失，并交付已完成的源文件，不声称已导出。
+
+固定本次 preflight 成功的解释器路径为 `POSTER_PYTHON`，检查、导出和最终校验均由它执行。模块/版本兼容失败是未完成的技术检查，不能用“前期技术已通过”或“PNG已存在”代替最后的 complete 校验。
+
+先运行 `scripts/preflight.py` 实际验证浏览器与字体样本；生产顺序和阶段读取见 [高效生产顺序](production-flow.md)。它不自动安装，也不绑定供应商。
+
+编写 manifest 前读取包内 [产物契约](manifest-contract.md)；接入图表时读取 [图表接入](chart-bridge.md) 及 [本地图表索引](charts.md)。所有生成、导出与检查均可仅凭当前 skill 目录执行。
+
+人物视觉系统可记录为 `reference-derived-person-editorial` 或明确的自定义 slug，`source` 写对应 bundle 的 `design-brief.md`；无需外部 style registry。按人物和数据选择视觉语言，不以 slug 代替设计决策。
+
+## 可编辑 HTML 与图表
+
+- 根节点固定为 `#infographic`。最终尺寸以实际布局为准；内容测得浮点宽高时，向上取整为最终画布的CSS像素尺寸，并实际写回根节点。根节点、manifest 的canvas/export/viewport使用同一组宽高，2x导出只改变像素密度。
+- 图片、图标与采用的自定义字体放在当前 bundle 内，以相对 URL 引用；字体按当前视觉角色选择，采用真实字重及当前作品字符覆盖，不假定 skill 提供字体文件。图表运行时默认使用 [固定版本 CDN](chart-bridge.md#发布-runtime)，在实际浏览器中验证；离线交付时才准备带来源和版本的本地副本。不依赖 `src`、`dist` 或 examples dev server。
+- 每张图表有 `charts/[id].spec.json`、同 id 的 manifest 条目、`data-chart-id` mount 与非空 `window.__INFOGRAPHIC_CHARTS__` 条目。内嵌 spec 与文件内容一致；mount 具备明确宽高。
+- 原生 spec 深拷贝后直接创建 VChart，禁用动画。图表 owns 全部数据图形、轴与数值标签，HTML 不重画第二组相同柱条。
+- HTML 上为实际必需的标题、指标名/值/单位、里程碑与图表 mount 标注 `data-required`。一组复合数值可标外层；不要父子重复标注。图表 mount 是其内部数据/标签的检查边界，canvas 内部是否完整需要看 PNG。
+- 背景、纹理与共享载体位于内容后方，不标成与每段文字竞争的前景装饰。真正前景装饰远离必需信息。
+
+先保留默认图表行为并检查输出，发现问题才作针对性修复：轴标签截断就增加类别宽度/改为宽证据带；数值被自动挪入柱内就检查字体、padding 和标签避让；自定义字体只加载到 HTML 时，还需传给图表 theme/label/axis。避免对所有图表统一禁用避让或手动覆盖位置。
+
+## 确定性就绪
+
+将 `scripts/render_charts.js` 复制到当前 bundle 并用相对 script src 加载。它直接渲染原生 spec，检查 mount、深拷贝配置并等待 renderAsync，不转换配置。然后在当前 HTML 内实现如下次序：
+
+```js
+window.__INFOGRAPHIC_READY__ = false;
+(async () => {
+  try {
+    // @font-face 须在可见元素上使用；提前 load 图表专用字体。
+    await document.fonts.load('500 24px "PosterDisplay"');
+    await document.fonts.ready;
+    await Promise.all([...document.images].map(image => image.decode()));
+    window.__POSTER_INSTANCES__ = await renderPosterCharts(window.__INFOGRAPHIC_CHARTS__);
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    window.__INFOGRAPHIC_READY__ = true;
+  } catch (error) {
+    window.__INFOGRAPHIC_ERROR__ = String(error);
+    console.error(error);
+  }
+})();
+```
+
+将示例字体名、字重、额外字体 load 与 mount id 调整为当前作品的实际值。`window.__INFOGRAPHIC_CHARTS__` 在此前直接赋值为与 spec 文件一致的 JSON。没有图表时保持空对象并省略图表 runtime。错误时 ready 保持 false；不要用固定等待时间或成功的 HTML load 代替完成状态。
+
+## 执行检查与导出
+
+第一次预览优先执行 `scripts/review_bundle.py --bundle "$BUNDLE"`，集中取得布局、总览、DOM 局部截图和实际文字/图表数据。`review.json.technicalPassed` 只代表技术检查，事实与视觉状态仍为 pending，须实际查看证据。给具体区域加 `data-review` 即可定位，无须写临时裁图代码。下列独立命令用于针对性诊断与最终导出。
+
+先看构图草稿、容易失败的主图局部，再看完整海报。实际查看 `review/display.png`：它按默认600px或 `--display-width` 指定的阅读宽度截图，布局保持不变。2x PNG不改善字级过小。照片、主数、图表和正文的对照须共享尺度，不只放大每个局部宣称可读。用户有参考时，记录实际采用的空间关系和仍有差距；不使用无证据的总评替代观察。
+
+参考与成品各保留完整比例、按相同宽度并排展示，再看人物边缘与关键局部。记录“参考中的关系 → 当前观察 → 修改 → 复验文件”。原图本身的裁切、噪点与处理产生的误删、色边分开记录；素材 alpha 合格或局部图表通过，不能继承为完整作品的视觉结论。跨题材草稿用于检查规则是否要求套版，不作为所有题材都能稳定产出成品的证明。
+
+验证skill泛化时，观察输入改变后的合理响应：新姿态是否改变保护区与证据位置，新数据是否改变标签空间/载体，新题材是否改变图形语义。颜色或姓名变化本身不算证据；输入关系相同则允许合理的相似构图，不要求为了区别而随机排版。这是实际作品比较，不加入静态审美门禁。
+
+跨宿主验收另记录包版本/hash、实际输入、可用能力、执行日志与最终HTML/素材/PNG。没有历史上下文的新会话结果与当前会话精修分开；技术通过不能证明宿主看过图片，截图也不能证明它调用过分割。只有截图时描述可见现象，缺少实际宿主运行时保持未验证，不用本地结果代替。
+
+下面尺寸仅示范 1200×2160 的作品，替换为当前实际宽高；使用所选 Python 环境执行。
+
+```bash
+python3 "$SKILL_DIR/scripts/inspect_html_layout.py" \
+  --html "$BUNDLE/index.html" --serve \
+  --ready-expression 'window.__INFOGRAPHIC_READY__ === true' \
+  --viewport-width 1200 --viewport-height 2160 \
+  --output "$BUNDLE/layout-inspection.json"
+```
+
+修复 `errors[]` 中实际问题。数值行框不够时增加空间或调整字号/结构；外溢与遮挡不能靠 `overflow:hidden`、取消 `data-required` 或放大 manifest 隐藏。根节点和布局尺寸变化后重新测量并同步 manifest；包内 `scripts/sync_manifest_dimensions.py` 只用于其支持的尺寸同步，不代替布局修复。
+
+布局检查会逐轴检查必需元素被祖先 `overflow:hidden/clip/auto/scroll` 裁切的情况，并记录元素、祖先和轴；普通平移及轴对齐正缩放按 client box 测量。旋转、skew、clip-path、mask 等复杂情况会记录人工复核提示，不宣称能精确检测任意 CSS 遮挡。报告中的 `bottomSafePx` 是当前元素实际需要的安全距离。
+
+尺寸同步默认只扩展到“内容相对根节点的底边 + 安全距离”，已有留白不重复增加。`--trim-blank-tail` 才允许主动裁短，且必须有内容测量。没有内容项时默认保留根节点范围并提示，不推断裁短尺寸。报告坐标为 viewport 坐标，计算时扣除 root.top；缩放后的根节点需人工确定 CSS 尺寸再测量。
+
+使用 `--update-html-root-height --apply` 时，自动改写支持单一 `#infographic` 规则中的 px height/min-height 或具有单一 px 定义的 `--canvas-height`；未知写法、inline 尺寸覆盖、max-height 限制返回错误。content-box 根节点有垂直 padding/border 时需改用 border-box 或人工调整后重测，避免把外框高度误写成内容高度。工具保留 overflow 样式，不通过取消裁切修复布局。写入后按 `requiresLayoutRecheck` 重新运行布局检查，并再次同步确认 `changed:false`；尺寸改写不证明最终 DOM 已符合预期。
+
+```bash
+python3 "$SKILL_DIR/scripts/export_html_png.py" \
+  --html "$BUNDLE/index.html" --serve --selector '#infographic' \
+  --ready-expression 'window.__INFOGRAPHIC_READY__ === true' \
+  --viewport-width 1200 --viewport-height 2160 \
+  --device-scale-factor 2 --output "$BUNDLE/preview.png"
+
+python3 "$SKILL_DIR/scripts/validate_poster_bundle.py" "$BUNDLE"
+```
+
+默认 PNG 交付尚未导出时，静态检查使用 `validate_poster_bundle.py "$BUNDLE" --phase pre-export`；它仅跳过最终 PNG 是否存在，仍校验 manifest、HTML、图表与资产。默认 `complete` 按 manifest.delivery 判断 PNG 要求：缺省或 `html+png` 必须有 PNG；明确 `html` 时可省略 png 字段和最终导出，但仍执行 review、查看阅读图并运行 complete。最终交付不能用前置模式替代。
+
+图表检查覆盖原生 spec 最小结构、本地 values 数据、禁用动画和文件/内嵌映射一致性，不验证完整 VChart API，也不拒绝所有未知字段。原生 API 是否实现了预期编码需要实际浏览器、图表数据与截图验收；配置检查不证明事实正确或视觉合格。
+
+这里的 localhost 服务属于正常 HTML 产物导出流程；不能用它或其他浏览器通道绕过已有的工具拒绝或访问限制。失败时定位缺失 runtime/字体/素材/浏览器，修复可授权的原因或明确交付限制；不以脚本重画 PNG 冒充 HTML 导出。
+
+## 两层验收
+
+| 维度 | 必须查看的证据 | 典型修复 |
+| --- | --- | --- |
+| 技术完整 | bundle 校验、非零 required_count、布局 passed、ready 完成、图表非空、尺寸与 spec 对应 | 修复错误路径、font 行框、mount、尺寸和数据映射 |
+| 人物主导 | 原图与出处：身份/时期/场景匹配；最终整图：轮廓引导信息流、脸/手/器具和关键动作未被遮挡，抠图保留原貌 | 核实或更换可靠照片；调整人物尺度/位置与证据区域 |
+| 可读密度 | 最终缩略图与局部：核心信息有层级，完整类别/单位可读，无重复数据填充 | 合并系列、缩短说明、改证据带、重分配画布 |
+| 整体统一 | 标题、数字、正文、图表、图标、线条共享视觉规则 | 收束字体角色、色彩语义、图标笔触和对齐 |
+| 数据可信 | 数据文件、来源、系列与 PNG 中的数值/范围一致 | 修复时间口径、舍入、错误合计或不成立的比较 |
+
+在 `acceptance.json` 记录真实检查结果、实际 PNG 尺寸、查看的文件与仍有的限制。技术通过但人物只像角落配图、主体盖住脸、图表标签模糊或整页退化为卡片列表时，仍未满足本 skill 的设计目标。视觉结论写观察，不捏造评分或自动“通过”。
+
+将简报中的关键设计决定与实际截图对照：每个决定指向一个真实的HTML区域或图表mount及其局部截图，例如某组荣誉由符号与年份共同表达、某组成由原生图表表达。记录中只认实际可见的载体；没有实现的图形要补做或修订决定并说明取舍。不要用“准备自绘”的列表、CSS类名或背景纹理证明已实现领域图形。背景装饰在最终显示尺度退后，正文、照片边缘与图表标签优先。
+
+人物剪影路线另核对实际引用文件的背景已去除：明显的矩形底、只有边缘/底部渐隐、人物或器具被误删都不能通过素材视觉验收。脚本 alpha 格式通过不改变这个结论。先修素材，再按真实轮廓重排人物和证据；不要对失败素材靠缩小主体、大块留空继续导出并称为完成。
+
+可以按下列结构记录，状态须由实际检查填写，不直接复制为通过。视觉观察包括 `composition`、`chartReadability`、`typography`、`sourceIntegration`；只记录会改变交付判断的内容。
+
+```json
+{
+  "technical": {"status": "pending", "evidence": []},
+  "factual": {"status": "pending", "evidence": []},
+  "visual": {
+    "status": "pending",
+    "displayWidthCssPx": 600,
+    "observations": [],
+    "fixesAndRechecks": []
+  },
+  "limitations": []
+}
+```
+
+技术失败先修复并重跑；无法完成时说明是哪项检查缺失并交付已完成源文件/图片，不称为全流程通过。canvas 中类别相撞可能不会触发布局错误，视觉状态仍必须为失败/待修复；不能因 technical passed 自动填 visual passed。这些检查由执行者完成，不新增用户逐步审批。
+
+交付以最终 PNG 为主，说明是否为 AI 插画及必要统计范围；用户需要编辑时再给 HTML/数据位置。不能从两张成功样例推断所有人物都稳定高质量，后续按新题材的实际成品继续校正。

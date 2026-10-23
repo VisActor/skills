@@ -1,0 +1,310 @@
+{
+  "sourceCommit": "543a4f2373b17d06a146bd388a8ba409f68368c3",
+  "sourceSkill": "vinfo-person-poster",
+  "files": [
+    {
+      "sourcePath": "vinfo-person-poster/SKILL.md",
+      "targetPath": "skills/person-poster/SKILL.md",
+      "sourceSha256": "cea47ed4d3fb43f1467d436ab55ec037f154eda5a556475051cde26b8d363931",
+      "action": "adapt",
+      "targetSha256": "46016c44184b09e5c89a8d9d447c30d9a78cbd7339d1e6d2164b8fb09897a8f0"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/agents/openai.yaml",
+      "targetPath": "skills/person-poster/agents/openai.yaml",
+      "sourceSha256": "9837229c05fed51fb2c6b3e77bcb4deb073e7c41f8e3ec97370ac69d3334a4d5",
+      "action": "adapt",
+      "targetSha256": "ba6bc88881d2569466ca7566dda78541329a51dc3a7b0819a57f8af9966656a0"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/references/chart-bridge.md",
+      "targetPath": "skills/person-poster/references/chart-bridge.md",
+      "sourceSha256": "3c6153cf473d98c3ca6ce6f770476ea81abae6d98ee37aaabba3b85a10a32007",
+      "action": "adapt",
+      "targetSha256": "8cfa6819c401d4259c89128fc3128ff9cd202670c6f2865ddab15e719da9a417"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/references/chart-design.md",
+      "targetPath": "skills/person-poster/references/chart-design.md",
+      "sourceSha256": "d0b85e3b7fdba274ffda98afa6cf390df79577b2162f027e91131efae1e0f989",
+      "action": "adapt",
+      "targetSha256": "3bacd460d07d6bdaf2ea6f27ac0fd5b9dea72e156ae47813da229f81534b30b2"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/references/charts.md",
+      "targetPath": "skills/person-poster/references/charts.md",
+      "sourceSha256": "84ba7aebe083ec45281d40b894ac55ede855c48a49716a8124ce1eed8d7d5bed",
+      "action": "adapt",
+      "targetSha256": "5ee9b8f9f270598d733e15f5bfc4110720ae1a03826136530690d3acf2f4e348"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/references/composition-and-style.md",
+      "targetPath": "skills/person-poster/references/composition-and-style.md",
+      "sourceSha256": "e86ebf147defed5bcf7a0f00b7e2a3e5c1c5ce30c3d26b89be0586215d25f003",
+      "action": "copy",
+      "targetSha256": "e86ebf147defed5bcf7a0f00b7e2a3e5c1c5ce30c3d26b89be0586215d25f003"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/references/data-and-assets.md",
+      "targetPath": "skills/person-poster/references/data-and-assets.md",
+      "sourceSha256": "52fc199a5f81bbeb1d139c22727fcde3936514fb228c4ce921dc3ef42c6eee0a",
+      "action": "adapt",
+      "targetSha256": "c1c62c0f1ed09e37395bd28d80beb54b23b04ed40809b96e4646dcf8425bd194"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/references/domain-graphics.md",
+      "targetPath": "skills/person-poster/references/domain-graphics.md",
+      "sourceSha256": "28f94456bf1eb9f6e0b0b79b9f735a2ec70a0848814474d528962b193c80bc59",
+      "action": "adapt",
+      "targetSha256": "bbc7c6ca383de74481166c1795f40343ae1bfa0b46bb3e970ace830b7f7bd072"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/references/manifest-contract.md",
+      "targetPath": "skills/person-poster/references/manifest-contract.md",
+      "sourceSha256": "27e6f37dda13be663767dd2ba36dd44e2e8e20c1dc2cd076527d8868913a2cee",
+      "action": "adapt",
+      "targetSha256": "333c22ceee576cdfdf31a1c510917db2bf088aa1185e4cd0f2c9757a3f25bc30"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/references/practice-notes.md",
+      "targetPath": "skills/person-poster/references/practice-notes.md",
+      "sourceSha256": "06de0ee4cadba91ecab2b8e98ade62ded95961b9f743ca0fd7a4b62bbfa93d3e",
+      "action": "adapt",
+      "targetSha256": "2c5a444ca9d1e7d66acb62f61d23ea32cfc974d5763d39b41c1ba849ce4a4460"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/references/production-flow.md",
+      "targetPath": "skills/person-poster/references/production-flow.md",
+      "sourceSha256": "c2507ba5f155322551af3f913da5c815fe5fe8788c3e6b2106756edb80e6dc2b",
+      "action": "adapt",
+      "targetSha256": "f0234fd187ca374263fd0dc6362ce9fd05bb644cb8a7ca31b6bd5993a1c531ae"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/references/quality-reference.md",
+      "targetPath": "skills/person-poster/references/quality-reference.md",
+      "sourceSha256": "562e33447f571bfab1c29b58b253ba04289f342671945f8aaadb1c2038995e40",
+      "action": "copy",
+      "targetSha256": "562e33447f571bfab1c29b58b253ba04289f342671945f8aaadb1c2038995e40"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/references/render-and-acceptance.md",
+      "targetPath": "skills/person-poster/references/render-and-acceptance.md",
+      "sourceSha256": "2e6e5efc519f3f254bb36fadb41c9eaa62eca7e15f5d1c580cde15686ad893fe",
+      "action": "adapt",
+      "targetSha256": "5a1dd843968859a4ad0dbd21f837be317ddd9247695296ff4474e2be431811e9"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/references/subject-preparation.md",
+      "targetPath": "skills/person-poster/references/subject-preparation.md",
+      "sourceSha256": "7f226b7c3675418fbd5ff3bedffb71444e5f4634aeee20b048cd86c45d08d327",
+      "action": "copy",
+      "targetSha256": "7f226b7c3675418fbd5ff3bedffb71444e5f4634aeee20b048cd86c45d08d327"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/scripts/export_html_png.py",
+      "targetPath": "skills/person-poster/scripts/export_html_png.py",
+      "sourceSha256": "3435fb6bfcdf316a1185005551b6acd0d310cb2277961e67e9e6328064ecb034",
+      "action": "adapt",
+      "targetSha256": "1b6e622fef67f2490da220f6b678d4a7e1ea00080513e3443b6cc185e88869c9"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/scripts/inspect_html_layout.py",
+      "targetPath": "skills/person-poster/scripts/inspect_html_layout.py",
+      "sourceSha256": "266a0c56829de2f55cd6e0ce4c18b5384e6fcdbdc3167b0a164e70f7eace1b3a",
+      "action": "adapt",
+      "targetSha256": "10ea79227929a94bbdd545db44d5c3abe142b35f6b9ef7720c0bbf3ba5093709"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/scripts/inspect_subject.py",
+      "targetPath": "skills/person-poster/scripts/inspect_subject.py",
+      "sourceSha256": "7f538bf867a38828f35b1ba34b3a74a7490eb061f942a2672f328e313ef566d1",
+      "action": "copy",
+      "targetSha256": "7f538bf867a38828f35b1ba34b3a74a7490eb061f942a2672f328e313ef566d1"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/scripts/macos_foreground.swift",
+      "targetPath": "skills/person-poster/scripts/macos_foreground.swift",
+      "sourceSha256": "736e7187d45faa166bf65f20fab7bc691096fc0a94a0aa3848a8374bf944a26c",
+      "action": "copy",
+      "targetSha256": "736e7187d45faa166bf65f20fab7bc691096fc0a94a0aa3848a8374bf944a26c"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/scripts/preflight.py",
+      "targetPath": "skills/person-poster/scripts/preflight.py",
+      "sourceSha256": "379d193f17de06ec941e24636e080a1f3759b32d1213ca53c149d2ef6254874c",
+      "action": "adapt",
+      "targetSha256": "e13560453de80a6a22b73c27a49fd3bcbc91b3d3c6fabd16ad1797651a8b669c"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/scripts/prepare_subject.py",
+      "targetPath": "skills/person-poster/scripts/prepare_subject.py",
+      "sourceSha256": "34df484b49223bd9b3935ed450bece41debedaa2a32f8006d5a312143b8a2049",
+      "action": "adapt",
+      "targetSha256": "50c12fdd6947949b019e92ff7d6010641442f672bc5c7d7532a8e13130717ef5"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/scripts/requirements.txt",
+      "targetPath": "skills/person-poster/scripts/requirements.txt",
+      "sourceSha256": "c384eea9b72951a64334e831ab65a6b0134f7283852fe61024184b5693c2b957",
+      "action": "adapt",
+      "targetSha256": "5b36f6dbadcf734172a4763ae7eb92f1e328a42a9cf11c25e8f7a111b26bac17"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/scripts/review_bundle.py",
+      "targetPath": "skills/person-poster/scripts/review_bundle.py",
+      "sourceSha256": "6164d4808e2fce4d28315f42d30ab41f295bb9bdd7f620a66469316e5959b4bd",
+      "action": "adapt",
+      "targetSha256": "be4abc6acad02722ba7138d8f253c22fe9202a3827459fcc663db439db715b64"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/scripts/sync_manifest_dimensions.py",
+      "targetPath": "skills/person-poster/scripts/sync_manifest_dimensions.py",
+      "sourceSha256": "20fd3a8e262dcf932fffb3b33e340c4328c6336c90906bcb5a776fa35d8a9512",
+      "action": "adapt",
+      "targetSha256": "028ed8c0fe4863b1781885f567964cd1339dc8edebc84335809ed49a9a955a52"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/scripts/validate_bundle.py",
+      "targetPath": "skills/person-poster/scripts/validate_bundle.py",
+      "sourceSha256": "35ff3bb21e644863ceaf04e0828c76bf360083b5fd074230410525eaa8248ea0",
+      "action": "adapt",
+      "targetSha256": "17bf88e0a14568b2335c23d174531e554ac9792d7939afd9315ec7bc1ad30935"
+    },
+    {
+      "sourcePath": "vinfo-person-poster/scripts/validate_poster_bundle.py",
+      "targetPath": "skills/person-poster/scripts/validate_poster_bundle.py",
+      "sourceSha256": "f8643ef0d639e630e6dff915b1d3dc190a8af77003b62eb3218f163a6a0f51b9",
+      "action": "adapt",
+      "targetSha256": "d93071d6449c6bbe0b856a121e39045b9a57662b522fa39769424a6096caed73"
+    }
+  ],
+  "sourceLicenseDeclaration": {
+    "file": "package.json",
+    "license": "MIT",
+    "note": "Source package declares MIT; existing notices retained. Portrait is independently sourced public-domain media."
+  },
+  "targetSkill": "person-poster",
+  "maintenance": "Target Skill owns native VChart references and scripts; no internal generator dependency. Source Skill is intentionally unchanged.",
+  "excludedResources": [
+    "references/type-details/",
+    "references/chart-contract.schema.json",
+    "references/chart-contract-source.json",
+    "references/resource-snapshot.json",
+    "source repository generators"
+  ],
+  "nativeRuntime": {
+    "package": "@visactor/vchart",
+    "version": "2.1.7",
+    "url": "https://unpkg.com/@visactor/vchart@2.1.7/build/index.min.js"
+  },
+  "newFiles": [
+    {
+      "path": "skills/person-poster/references/chart-examples/area.spec.json",
+      "sha256": "c71a56464a5ac203d8688ddaf9cdc1eba0851136c3c40bc2df844eb7607667ba"
+    },
+    {
+      "path": "skills/person-poster/references/chart-examples/direct-column.spec.json",
+      "sha256": "137c7d65c61f529969d296c7ec0e09a83ea87550d3b943e330971b78c3787746"
+    },
+    {
+      "path": "skills/person-poster/references/chart-examples/grouped-bar.spec.json",
+      "sha256": "1153a7b02e151e334b70d455dede732d2c983536581c081b0cda6a378b661d22"
+    },
+    {
+      "path": "skills/person-poster/references/chart-examples/grouped-column.spec.json",
+      "sha256": "6dab2c683f6c6f7e5b75b249bfdbf0771d399eadf28d37ac487439e7682bee20"
+    },
+    {
+      "path": "skills/person-poster/references/chart-examples/line.spec.json",
+      "sha256": "31f1d98eb1d31772a9af8131dc25f689ed2db7679a58133f201891d5a2e26f5a"
+    },
+    {
+      "path": "skills/person-poster/references/chart-examples/long-label-bar.spec.json",
+      "sha256": "c50f29a7d807c83065eb4f50d6fdbaa34bd374b700c5cd4f6290b2f2b4609052"
+    },
+    {
+      "path": "skills/person-poster/references/chart-examples/pie.spec.json",
+      "sha256": "d403ef89b8034dfba3a56e712b60f13ce10cc1fc88be5ff8424cd0ad7a16410d"
+    },
+    {
+      "path": "skills/person-poster/references/chart-examples/reference-column.spec.json",
+      "sha256": "9128b568b6e3e3b811d41cfb13ab7567736ed86d1cad4c0f12800d34e0dc031c"
+    },
+    {
+      "path": "skills/person-poster/references/chart-examples/scatter.spec.json",
+      "sha256": "1d1a06dc06f0f2aa6067a91ef228e7dfedc22509c2472e5e782b248f794eed79"
+    },
+    {
+      "path": "skills/person-poster/references/chart-examples/stacked-bar.spec.json",
+      "sha256": "3c8d1f9f866037fd74d42af1dea48bbcc284acfbd39b07620f743b6576207e90"
+    },
+    {
+      "path": "skills/person-poster/references/chart-examples/stacked-column.spec.json",
+      "sha256": "0f58438fa1bf2986f668a8ffb3d2b7c8cdea0b377aa639ead27f5e841b4674b8"
+    },
+    {
+      "path": "skills/person-poster/references/chart-examples/treemap.spec.json",
+      "sha256": "4448815b28db9730000bccd742aada7751c5c7bf2a838e6b7ab827395a051c9c"
+    },
+    {
+      "path": "skills/person-poster/references/chart-examples/waffle.spec.json",
+      "sha256": "2b98a8f5e9358e08b2f2598ae670cde566d527a2333e82c25f89314ee636c255"
+    },
+    {
+      "path": "skills/person-poster/references/chart-examples/zero-extreme-column.spec.json",
+      "sha256": "ec87be6d13d50a7a2d85033f742b3fb708743fb091dbda6c9e1e2ed5c54d31bc"
+    },
+    {
+      "path": "skills/person-poster/references/chart-types/area.md",
+      "sha256": "0573317d5105f5c0e292828a09c00a9825bfe66215bbceb594c37052619c3c90"
+    },
+    {
+      "path": "skills/person-poster/references/chart-types/bar.md",
+      "sha256": "f49f5995b361bb8ac112cf0fdae02ca67875d7b72bbbcecac9f68038654d49ce"
+    },
+    {
+      "path": "skills/person-poster/references/chart-types/column.md",
+      "sha256": "1f01ab2ead3edf95dd99e0a5c15ff66362f96eccdf1d632817c0a89c3aaaafea"
+    },
+    {
+      "path": "skills/person-poster/references/chart-types/grouped-bar.md",
+      "sha256": "65065c9a9eac767c2a2c15fb8bba33f103d542baa45708b2a45151b807e3a6d5"
+    },
+    {
+      "path": "skills/person-poster/references/chart-types/grouped-column.md",
+      "sha256": "69d99e414c038a8477b0c9207c4709095190b18ef61358ccd88ca6a89ba9cde9"
+    },
+    {
+      "path": "skills/person-poster/references/chart-types/line.md",
+      "sha256": "1a29a2f34b13727156ee351fdf9b4cb1ebfa72b59463bbdb6e2198323faa0240"
+    },
+    {
+      "path": "skills/person-poster/references/chart-types/pie.md",
+      "sha256": "0fabf84820880988e159fe02a985fd83653913b235e71589ffc92cdbecb316f2"
+    },
+    {
+      "path": "skills/person-poster/references/chart-types/scatter.md",
+      "sha256": "6c2938e7b8ebc629b4cfe206702c799877d8779c1cd8e39db44039fe2f95cdc4"
+    },
+    {
+      "path": "skills/person-poster/references/chart-types/stacked-bar.md",
+      "sha256": "3c4996203bb299094c330a36718734b890331dd24ed8a573f2f113069c04d03c"
+    },
+    {
+      "path": "skills/person-poster/references/chart-types/stacked-column.md",
+      "sha256": "1c18c75379afb547e9d217184d41e09e0457bac30c738c419f87a92723f26d2d"
+    },
+    {
+      "path": "skills/person-poster/references/chart-types/treemap.md",
+      "sha256": "c74de74dacc58b50a5693d11e3671fc6a91f233bc32b1e4345a568c9c6c2849b"
+    },
+    {
+      "path": "skills/person-poster/references/chart-types/waffle.md",
+      "sha256": "90fa3eacc4ca4ea842b90470b3e9a864519c914d29c4aca0af18468a00ed9c10"
+    },
+    {
+      "path": "skills/person-poster/scripts/render_charts.js",
+      "sha256": "25aff78d72bf147e3a43d9666777364c48a4fa8680a69766c2a2ef9bf72e115d"
+    }
+  ]
+}

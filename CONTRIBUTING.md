@@ -30,6 +30,7 @@ VChart and VTable Skills are maintained in [VisActor/VChart](https://github.com/
 | chart-storytelling | `uv run pytest tests/chart_storytelling -q`; `node --test tests/test_story_vseed.cjs` after browser dependency installation | [Fixed tasks](cases/README.md); HTML and Web-PPT smoke |
 | editorial-magazine | `uv run pytest tests/editorial_magazine -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |
 | life-chronicle | `uv run pytest tests/life_chronicle -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |
+| person-poster | `uv run pytest tests/person_poster -q -m "not poster_browser"`; browser regressions use `-m poster_browser` after Python Chromium installation | [Fixed task](cases/person-poster/career-evidence/README.md); native-chart, HTML-only, PNG and failure smoke |
 | Packaging | `uv run pytest tests/test_portable_install.py -q` | Copied Skill execution without the source checkout |
 | Shared test tooling | Relevant root tests, or `uv run pytest tests -q` for changes across modules | [Browser smoke guide](tests/browser/cases/README.md) |
 | Release tooling | `uv run pytest tests/test_release.py tests/test_release_plan.py tests/test_release_packages.py -q`; `uv run ruff check .github/scripts tests/test_release.py tests/test_release_plan.py tests/test_release_packages.py` | Mocked GitHub API; no tags or Releases are created |
@@ -40,8 +41,8 @@ For example, lint `skills/life-chronicle tests/life_chronicle` when changing its
 
 `Skills CI` runs on pull requests and pushes to `main`/`develop`, with two jobs:
 
-- **Lint and regressions**: install locked Python dependencies, run Ruff and deterministic tests, including copied Skill execution and fixed-input integrity checks. Build and verify release ZIPs/manifest from the checked-out Git commit using the same packager as publication; the CI-only label `skills-v0.0.0` creates no tag or Release.
-- **Browser smoke (no model)**: use copied Skills to generate a fixed HTML story and Web-PPT, then check chart rendering, slide navigation and browser errors. Pinned npm packages serve CDN requests locally; unexpected external requests fail. Save JSON reports, logs, generated HTML and screenshots for seven days.
+- **Lint and regressions**: install locked Python dependencies, run Ruff and deterministic tests excluding the `poster_browser` marker, including copied Skill execution and fixed-input integrity checks. Build and verify release ZIPs/manifest from the checked-out Git commit using the same packager as publication; the CI-only label `skills-v0.0.0` creates no tag or Release.
+- **Browser smoke (no model)**: run Python `poster_browser` regressions and use copied Skills to generate fixed HTML stories, Web-PPT and person posters; check chart rendering, slide navigation, delivery modes, layout/export failures and browser errors. Pinned npm packages serve CDN requests locally; unexpected external requests fail. Save JSON reports, logs, generated HTML and screenshots for seven days.
 
 Neither job calls a model or needs model credentials. Browser smoke checks script/template integration. Execute fixed Agent tasks locally and review their results separately.
 
@@ -50,7 +51,9 @@ To run browser checks locally:
 ```bash
 npm ci --prefix tests/browser --ignore-scripts
 node tests/browser/node_modules/playwright/cli.js install chromium
-node --test tests/test_browser_assets.mjs tests/test_browser_checks.mjs tests/test_story_vseed.cjs
+uv run python -m playwright install chromium
+uv run pytest tests/person_poster -m poster_browser -q
+node --test tests/test_browser_assets.mjs tests/test_browser_checks.mjs tests/test_story_vseed.cjs tests/test_person_poster_runtime.mjs
 uv run python tests/browser/scripts/smoke.py
 # Select a Skill or a single fixed browser case
 uv run python tests/browser/scripts/smoke.py --skill chart-storytelling
