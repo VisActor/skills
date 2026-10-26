@@ -1,4 +1,5 @@
 import { test } from 'node:test'
+import { parse } from 'parse5'
 import { request } from 'node:http'
 import assert from 'node:assert/strict'
 import { createDashboardServer, loadDashboard, startDashboard } from '../server.mjs'
@@ -105,6 +106,18 @@ test('concurrent work is bounded and released after completion', async (t) => {
   assert.equal((await call('/api/context', { headers: auth })).status, 200)
 })
 
+function jsonBlock(html) {
+  const pending = [parse(html)]
+  while (pending.length) {
+    const node = pending.pop()
+    pending.push(...(node.childNodes || []))
+    if (node.tagName === 'script' && node.attrs.some(({ name, value }) => name === 'id' && value === 'data')) {
+      return node.childNodes.map((child) => child.value).join('')
+    }
+  }
+  throw new Error('JSON block not found')
+}
+
 async function dashboardFiles(t, json = true) {
   const directory = await mkdtemp(join(tmpdir(), 'vbi-runtime-'))
   t.after(() => rm(directory, { recursive: true, force: true }))
@@ -122,7 +135,7 @@ async function dashboardFiles(t, json = true) {
 test('JSON resources resolve relative to the HTML and cannot close their script element', async (t) => {
   const page = await loadDashboard(await dashboardFiles(t))
   assert.equal(page.pagePath, '/inventory.html')
-  const data = JSON.parse(page.html.match(/<script\b[^>]*>([\s\S]*?)<\/script\s*>/i)[1])
+  const data = JSON.parse(jsonBlock(page.html))
   assert.equal(data.label, '</script><script>unsafe</script>')
   assert.ok(!page.html.includes('<script>unsafe'))
   assert.ok(!page.html.includes('data-src'))
@@ -133,14 +146,32 @@ test('JSON resources resolve relative to the HTML and cannot close their script 
   assert.match(await response.text(), /Inventory/)
 })
 
-test('JSON resources support mixed-case tags and whitespace before the closing bracket', async (t) => {
+test('JSON resources support mixed-case tags and browser-compatible end tags', async (t) => {
   const file = await dashboardFiles(t)
-  await writeFile(file, '<SCRIPT id="data" TYPE="application/json" DATA-SRC="./data.json"> \n</ScRiPt \t>')
+  await writeFile(file, '<SCRIPT id="data" TYPE="application/json" DATA-SRC="./data.json"> \n</ScRiPt \t ignored>')
   const page = await loadDashboard(file)
-  const content = page.html.match(/<script\b[^>]*>([\s\S]*?)<\/script\s*>/i)[1]
+  const content = jsonBlock(page.html)
   assert.equal(JSON.parse(content).label, '</script><script>unsafe</script>')
   assert.ok(!/data-src/i.test(page.html))
   assert.ok(!content.includes('<'))
+})
+
+test('only empty JSON blocks load resources and other HTML remains intact', async (t) => {
+  const file = await dashboardFiles(t)
+  const untouched =
+    '<!-- <script type="application/json" data-src="./missing.json"></script> -->' +
+    '<script type="application/json" data-src="./missing.json">{"keep":true}</script>' +
+    '<div data-note="preserve this markup">hello</div>'
+  await writeFile(
+    file,
+    untouched +
+      "<script id='data' type='application/json' data-src='./data.json'></script>" +
+      '<script type="application/json" data-src="./missing.json">',
+  )
+  const page = await loadDashboard(file)
+  assert.ok(page.html.startsWith(untouched))
+  assert.equal(JSON.parse(jsonBlock(page.html)).label, '</script><script>unsafe</script>')
+  assert.ok(page.html.endsWith('<script type="application/json" data-src="./missing.json">'))
 })
 
 test('unrelated scripts are preserved and a missing HTML path fails explicitly', async (t) => {

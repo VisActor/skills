@@ -3,6 +3,7 @@ import { randomBytes, timingSafeEqual } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { basename, resolve } from 'node:path'
+import { parse, serializeOuter } from 'parse5'
 import { createSource } from './source.mjs'
 import { QueryError } from './errors.mjs'
 
@@ -10,14 +11,28 @@ export async function loadDashboard(htmlFile) {
   if (!htmlFile) throw new Error('Usage: node server.mjs <dashboard.html>')
   const url = pathToFileURL(resolve(htmlFile))
   let html = await readFile(url, 'utf8')
-  for (const [block, attributes] of html.matchAll(/<script\b([^>]*)>\s*<\/script\s*>/gi)) {
-    const path = attributes.match(/\bdata-src="([^"]+)"/i)?.[1]
-    if (!/\btype="application\/json"/i.test(attributes) || !path) continue
-    const data = JSON.parse(await readFile(new URL(path, url), 'utf8'))
-    html = html.replace(
-      block,
-      `<script${attributes.replace(/\s+data-src="[^"]+"/i, '')}>${JSON.stringify(data).replaceAll('<', '\\u003c')}</script>`,
+  const pending = [parse(html, { sourceCodeLocationInfo: true })]
+  const replacements = []
+  while (pending.length) {
+    const node = pending.pop()
+    pending.push(...(node.childNodes || []))
+    if (node.tagName !== 'script') continue
+    const attributes = Object.fromEntries(node.attrs.map(({ name, value }) => [name, value]))
+    const location = node.sourceCodeLocation
+    if (
+      attributes.type?.toLowerCase() !== 'application/json' ||
+      !attributes['data-src'] ||
+      !location?.endTag ||
+      node.childNodes.some((child) => child.value?.trim())
     )
+      continue
+    const data = JSON.parse(await readFile(new URL(attributes['data-src'], url), 'utf8'))
+    node.attrs = node.attrs.filter(({ name }) => name !== 'data-src')
+    node.childNodes = [{ nodeName: '#text', value: JSON.stringify(data).replaceAll('<', '\\u003c'), parentNode: node }]
+    replacements.push({ start: location.startOffset, end: location.endOffset, html: serializeOuter(node) })
+  }
+  for (const replacement of replacements.sort((a, b) => b.start - a.start)) {
+    html = html.slice(0, replacement.start) + replacement.html + html.slice(replacement.end)
   }
   return { html, pagePath: '/' + encodeURIComponent(basename(fileURLToPath(url))) }
 }
