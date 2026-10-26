@@ -1,0 +1,3 @@
+interface:
+  display_name: 'VisActor Map2D Dashboard'
+  short_description: '创建交互式地图看板，支持地理分布、地域下钻、指标联动与明细分析。'

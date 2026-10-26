@@ -1,0 +1,3 @@
+interface:
+  display_name: 'VisActor Light Dashboard'
+  short_description: '创建简约交互式看板，支持经营指标、趋势、筛选联动与深入分析。'
