@@ -10,7 +10,7 @@ export async function loadDashboard(htmlFile) {
   if (!htmlFile) throw new Error('Usage: node server.mjs <dashboard.html>')
   const url = pathToFileURL(resolve(htmlFile))
   let html = await readFile(url, 'utf8')
-  for (const [block, attributes] of html.matchAll(/<script\b([^>]*)>\s*<\/script>/gi)) {
+  for (const [block, attributes] of html.matchAll(/<script\b([^>]*)>\s*<\/script\s*>/gi)) {
     const path = attributes.match(/\bdata-src="([^"]+)"/i)?.[1]
     if (!/\btype="application\/json"/i.test(attributes) || !path) continue
     const data = JSON.parse(await readFile(new URL(path, url), 'utf8'))

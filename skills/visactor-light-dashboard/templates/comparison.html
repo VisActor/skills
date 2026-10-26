@@ -243,20 +243,22 @@
             status = link.querySelector('.image-status')
           link.dataset.state = 'loading'
           link.setAttribute('aria-busy', 'true')
-          link.href = source
+          // Catalog values are filenames, never executable or external URLs.
+          const previewURL = './' + encodeURIComponent(source)
+          link.href = previewURL
           status.hidden = false
           status.textContent = '截图加载中…'
           const pending = new Image()
           previewRequests.set(image, pending)
           pending.decoding = 'async'
-          pending.src = source
+          pending.src = previewURL
           pending.decode().then(
             () => {
               if (previewRequests.get(image) !== pending) return
               previewRequests.delete(image)
               image.width = pending.naturalWidth
               image.height = pending.naturalHeight
-              image.src = source
+              image.src = previewURL
               link.dataset.state = 'ready'
               link.setAttribute('aria-busy', 'false')
               status.hidden = true
@@ -298,7 +300,7 @@
           document.querySelector('#reason').textContent = entry.layoutReason + ' ' + entry.colorReason
           const image = entry.path.replace('.html', suffix + '.png')
           loadPreview(document.querySelector('#target'), image)
-          document.querySelector('#target-link').href = entry.path
+          document.querySelector('#target-link').href = './' + encodeURIComponent(entry.path)
           document.querySelector('#target-link').textContent = entry.title
           document.querySelectorAll('.reference').forEach((image) => {
             loadPreview(image, `${image.dataset.stem}${suffix}.png`)

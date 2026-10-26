@@ -122,7 +122,7 @@ async function dashboardFiles(t, json = true) {
 test('JSON resources resolve relative to the HTML and cannot close their script element', async (t) => {
   const page = await loadDashboard(await dashboardFiles(t))
   assert.equal(page.pagePath, '/inventory.html')
-  const data = JSON.parse(page.html.match(/<script[^>]*>([\s\S]*?)<\/script>/)[1])
+  const data = JSON.parse(page.html.match(/<script\b[^>]*>([\s\S]*?)<\/script\s*>/i)[1])
   assert.equal(data.label, '</script><script>unsafe</script>')
   assert.ok(!page.html.includes('<script>unsafe'))
   assert.ok(!page.html.includes('data-src'))
@@ -131,6 +131,16 @@ test('JSON resources resolve relative to the HTML and cannot close their script 
   t.after(() => new Promise((resolve) => server.close(resolve)))
   const response = await fetch(`http://127.0.0.1:${server.address().port}/inventory.html`)
   assert.match(await response.text(), /Inventory/)
+})
+
+test('JSON resources support mixed-case tags and whitespace before the closing bracket', async (t) => {
+  const file = await dashboardFiles(t)
+  await writeFile(file, '<SCRIPT id="data" TYPE="application/json" DATA-SRC="./data.json"> \n</ScRiPt \t>')
+  const page = await loadDashboard(file)
+  const content = page.html.match(/<script\b[^>]*>([\s\S]*?)<\/script\s*>/i)[1]
+  assert.equal(JSON.parse(content).label, '</script><script>unsafe</script>')
+  assert.ok(!/data-src/i.test(page.html))
+  assert.ok(!content.includes('<'))
 })
 
 test('unrelated scripts are preserved and a missing HTML path fails explicitly', async (t) => {
