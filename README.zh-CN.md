@@ -40,16 +40,13 @@
 npx skills add VisActor/skills --skill chart-storytelling
 npx skills add VisActor/skills --skill editorial-magazine
 npx skills add VisActor/skills --skill life-chronicle
-```
-
-`person-poster` 可从包含该 Skill 的工作副本安装：`npx skills add ./skills/person-poster`。晋级到 `main` 后可使用默认分支命令 `npx skills add VisActor/skills --skill person-poster`；默认分支安装不依赖发布标签。
-
-```bash
 npx skills add ./skills/visactor-light-dashboard
 npx skills add ./skills/visactor-map2d-dashboard
 npx skills add ./skills/visactor-chart-editor
 npx skills add ./skills/visactor-map3d-dashboard
 ```
+
+`person-poster` 可从包含该 Skill 的工作副本安装：`npx skills add ./skills/person-poster`。晋级到 `main` 后可使用默认分支命令 `npx skills add VisActor/skills --skill person-poster`；默认分支安装不依赖发布标签。
 
 如需图表和表格能力，从对应仓库安装：
 
