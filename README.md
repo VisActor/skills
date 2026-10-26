@@ -44,8 +44,6 @@ npx skills add VisActor/skills --skill life-chronicle
 
 `person-poster` is available from a checkout containing this Skill: `npx skills add ./skills/person-poster`. The default-branch command `npx skills add VisActor/skills --skill person-poster` becomes available after promotion to `main`; a release tag is not required for default-branch installation.
 
-Install the four VBI Skills independently from a checkout containing them. After promotion to `main`, use `npx skills add VisActor/skills --skill <name>`:
-
 ```bash
 npx skills add ./skills/visactor-light-dashboard
 npx skills add ./skills/visactor-map2d-dashboard
@@ -75,8 +73,6 @@ Requirements:
 | editorial-magazine | Python 3.10+, dependencies in its [requirements.txt](skills/editorial-magazine/requirements.txt), and Chromium/Chrome for PNG export; font CDN with system fallbacks |
 | life-chronicle | Python 3.10+, dependencies in its [requirements.txt](skills/life-chronicle/requirements.txt), and Chromium/Chrome for PNG export; pinned VInfo and font CDN, see [environment setup](skills/life-chronicle/references/environment.md) |
 | person-poster | Python 3.10+, Pillow, Python Playwright/Chromium; public VChart 2.1.7 CDN or a sourced local copy; see [requirements.txt](skills/person-poster/scripts/requirements.txt) and [environment setup](skills/person-poster/references/environment.md) for POSIX/PowerShell installation and capability limits |
-
-VBI Skills require a modern browser. Dashboard templates load external resources over the network; the 3D globe also requires WebGL. The default chart-editor template embeds its runtime and works offline. For server-side data access, all four Skills include server-runtime, requiring Node.js >=24.12.0 and its locked dependencies.
 
 Image search, generation and cutout capabilities come from the host; follow the selected Skill's asset requirements. Magazine templates contain placeholders to replace before delivery. See the owning repositories for VChart/VTable Skill requirements.
 
@@ -146,8 +142,6 @@ Fixed browser cases live under [tests/browser/cases/](tests/browser/cases/README
 Use Codex, Claude Code or another compatible mature agent to run a [fixed task](cases/README.md) or your own prompt and inputs. Follow [local debugging](docs/debugging.md) to prepare an ignored `.cache/skill-dev/<skill-name>/<run-name>/` workspace and retain artifacts, screenshots and available logs. This repository does not provide a model API harness or unified agent runner.
 
 Fixed tasks cover chart-storytelling and person-poster. Browser smoke covers story HTML/Web-PPT and poster chart examples, HTML-only delivery with and without charts, PNG delivery without charts, ancestor clipping rejection and failed export. Person-poster also has one same-session real-person generation check; it is not an independent blind evaluation. Editorial-magazine and life-chronicle have script regressions, but no fixed tasks or browser smoke yet. Review generated results for data accuracy, task requirements and interactions; different correct visual designs are acceptable. Agent tasks are not run in CI.
-
-The four VBI Skills are built with VBI’s `pnpm build:skills` and imported by extracting the complete `visactor-*.zip` artifacts. This import verifies the build, file identity and release packaging; this repository has no fixed tasks or browser smoke coverage for these four Skills yet.
 
 ## Versioning
 

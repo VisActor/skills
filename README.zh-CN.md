@@ -44,8 +44,6 @@ npx skills add VisActor/skills --skill life-chronicle
 
 `person-poster` 可从包含该 Skill 的工作副本安装：`npx skills add ./skills/person-poster`。晋级到 `main` 后可使用默认分支命令 `npx skills add VisActor/skills --skill person-poster`；默认分支安装不依赖发布标签。
 
-四个 VBI Skills 可从包含它们的工作副本独立安装；晋级到 `main` 后可用 `npx skills add VisActor/skills --skill <name>` 安装：
-
 ```bash
 npx skills add ./skills/visactor-light-dashboard
 npx skills add ./skills/visactor-map2d-dashboard
@@ -75,8 +73,6 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 | editorial-magazine | Python 3.10+、其 [requirements.txt](skills/editorial-magazine/requirements.txt) 中的依赖，以及用于导出 PNG 的 Chromium/Chrome；字体从 CDN 加载，支持系统回退 |
 | life-chronicle | Python 3.10+、其 [requirements.txt](skills/life-chronicle/requirements.txt) 中的依赖，以及用于导出 PNG 的 Chromium/Chrome；固定版本的 VInfo 与字体 CDN，详见[环境说明](skills/life-chronicle/references/environment.md) |
 | person-poster | Python 3.10+、Pillow、Python Playwright/Chromium；公开 VChart 2.1.7 CDN 或有来源记录的同版本本地副本，见 [requirements.txt](skills/person-poster/scripts/requirements.txt) 和含 POSIX/PowerShell 安装及能力边界的[环境说明](skills/person-poster/references/environment.md) |
-
-VBI Skills 需要现代浏览器；看板模板需要网络加载外部资源，三维地图还需要 WebGL。chart-editor 默认模板内嵌运行时，可离线打开。接入服务端数据时，四个 Skill 均使用随包提供的 server-runtime，需要 Node.js >=24.12.0 并安装其锁定依赖。
 
 图片检索、生图与抠图使用宿主能力，素材要求以所选 Skill 为准。杂志模板中的占位素材需要在交付前替换。VChart/VTable Skill 的运行要求见各自仓库。
 
@@ -146,8 +142,6 @@ uv run ruff check skills tests
 使用 Codex、Claude Code 或其他兼容的成熟 Agent 执行[固定任务](cases/README.md)，也可以提供自己的提示词和输入。按[本地调试指南](docs/debugging.md)建立已忽略的 `.cache/skill-dev/<skill-name>/<run-name>/` 工作目录，保留产物、截图及可导出的日志。仓库不提供模型 API harness 或统一 Agent 执行器。
 
 固定任务覆盖 chart-storytelling 与 person-poster；浏览器 smoke 覆盖故事 HTML/Web-PPT，以及人物海报的图表示例、带图表及无图表的 HTML-only 交付、无图表 PNG、祖先裁切拒绝与失败导出路径。person-poster 另已完成一次真实人物输入的同会话生成验证，不等同于独立盲测。editorial-magazine 和 life-chronicle 已有脚本回归，尚无固定任务或浏览器 smoke。任务完成后检查数据准确性、要求和实际交互，允许不同的正确视觉表达。Agent 任务不在 CI 中运行。
-
-四个 VBI Skills 由 VBI 的 `pnpm build:skills` 构建，解压 `visactor-*.zip` 后保留完整产物。此导入仅验证构建、文件一致性和发布打包；本仓库尚未为它们建立固定任务或浏览器 smoke 覆盖。
 
 ## 版本管理
 
