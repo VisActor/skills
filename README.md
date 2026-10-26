@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-Agent skills for the VisActor visualization ecosystem. Create data stories, editorial image series and biography posters with independently installable Skills. VChart and VTable Skills are maintained in their respective library repositories.
+Agent skills for the VisActor visualization ecosystem. Create data stories, dashboards, map experiences, chart editors and visual posters with independently installable Skills. VChart and VTable Skills are maintained in their respective library repositories.
 
 ## Skills
 
@@ -40,13 +40,12 @@ Run these commands in the project where you want to use the Skills:
 npx skills add VisActor/skills --skill chart-storytelling
 npx skills add VisActor/skills --skill editorial-magazine
 npx skills add VisActor/skills --skill life-chronicle
-npx skills add ./skills/visactor-light-dashboard
-npx skills add ./skills/visactor-map2d-dashboard
-npx skills add ./skills/visactor-chart-editor
-npx skills add ./skills/visactor-map3d-dashboard
+npx skills add VisActor/skills --skill person-poster
+npx skills add VisActor/skills --skill visactor-light-dashboard
+npx skills add VisActor/skills --skill visactor-map2d-dashboard
+npx skills add VisActor/skills --skill visactor-chart-editor
+npx skills add VisActor/skills --skill visactor-map3d-dashboard
 ```
-
-`person-poster` is available from a checkout containing this Skill: `npx skills add ./skills/person-poster`. The default-branch command `npx skills add VisActor/skills --skill person-poster` becomes available after promotion to `main`; a release tag is not required for default-branch installation.
 
 For chart and table tasks, install the related Skills from their owning repositories:
 
@@ -91,7 +90,7 @@ The [example gallery](examples/README.md) includes a CO₂ scrolling story, a La
 
 ## Development and maintenance
 
-This section is for contributors editing Skills or running local tests. The default branch, `main`, contains the user-facing stable version. Day-to-day development and contribution PRs use `develop`; reviewed updates are published through a `develop` → `main` PR. Start with [CONTRIBUTING.md](CONTRIBUTING.md).
+This section is for contributors editing Skills or running local tests. The default branch, `main`, contains the user-facing stable version. Day-to-day development and contribution PRs use `develop`; release preparation is committed on a branch from the latest `develop` and reviewed in one PR directly to `main`. Start with [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### Repository layout
 
