@@ -1,0 +1,4056 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" href="data:," />
+    <title>心衰样本观察</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      :root {
+        --ink: #25303b;
+        --muted: #5d6875;
+        --up: #12815e;
+        --down: #c64a3f;
+      }
+      body {
+        isolation: isolate;
+        margin: 0;
+        min-height: 100svh;
+        color: var(--ink);
+        font-family: var(--font-ui);
+        -webkit-font-smoothing: antialiased;
+      }
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+      }
+      h1,
+      h2,
+      p,
+      figure {
+        margin: 0;
+      }
+      .shell {
+        max-width: 1140px;
+        margin: auto;
+        padding: 32px 28px;
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 40px;
+        font-size: 13px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .brand {
+        font-weight: 650;
+      }
+      .muted,
+      .comparison,
+      .scope,
+      footer {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.65;
+      }
+      .heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+      #filters {
+        margin-left: auto;
+      }
+      h1 {
+        font-size: 27px;
+        font-weight: 650;
+        letter-spacing: -0.035em;
+      }
+      .heading p {
+        margin-top: 10px;
+      }
+      fieldset {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        border: 0;
+        margin: 0;
+        padding: 0;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+        border: 0;
+      }
+      button:disabled {
+        cursor: wait;
+        opacity: 0.6;
+      }
+      button:focus-visible,
+      summary:focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 4px;
+      }
+      .dashboard {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        grid-auto-rows: minmax(44px, auto);
+        gap: 18px;
+      }
+      .card {
+        min-width: 0;
+        padding: 24px;
+        height: 100%;
+      }
+      .card-slot {
+        min-width: 0;
+        grid-column: 1 / -1;
+      }
+      /* 初始化仅显示全局占位；场景保留尺寸，供隐藏状态下的图表测量与绘制。 */
+      body[data-initialized='false'] {
+        overflow: hidden;
+      }
+      body[data-initialized='false'] > .shell {
+        visibility: hidden;
+      }
+      .dashboard-loading {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+      .dashboard-loading[hidden] {
+        display: none;
+      }
+      .dashboard-loading-card {
+        width: min(100%, 328px);
+        padding: 32px 28px 28px;
+        text-align: center;
+        border: 1px solid var(--glass-edge, rgb(255 255 255 / 65%));
+        border-radius: 24px;
+        background: var(--glass-background, rgb(255 255 255 / 65%));
+        box-shadow: var(--glass-shadow, 0 18px 48px -20px rgb(40 51 62 / 15%));
+      }
+      .dashboard-loading-orbit {
+        width: 36px;
+        height: 36px;
+        margin: 0 auto 22px;
+        border: 2px solid color-mix(in srgb, var(--accent) 20%, transparent);
+        border-right-color: var(--accent);
+        border-radius: 50%;
+        animation: dashboard-loading-turn 1.1s linear infinite;
+      }
+      .dashboard-loading h2 {
+        margin: 0 0 10px;
+        color: var(--ink);
+        font-size: 17px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+      }
+      .dashboard-loading p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.7;
+      }
+      .dashboard-loading-track {
+        height: 2px;
+        margin-top: 24px;
+        overflow: hidden;
+        border-radius: 2px;
+        background: color-mix(in srgb, var(--accent) 18%, transparent);
+      }
+      .dashboard-loading-track::after {
+        content: '';
+        display: block;
+        width: 40%;
+        height: 100%;
+        background: var(--accent);
+        animation: dashboard-loading-sweep 1.6s ease-in-out infinite;
+      }
+      #dashboard-loading-retry {
+        margin-top: 20px;
+        padding: 8px 16px;
+        border: 1px solid var(--glass-edge, #fff);
+        border-radius: 9px;
+        color: var(--ink);
+        background: rgb(255 255 255 / 65%);
+        font: inherit;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      body[data-state='error'] .dashboard-loading-orbit {
+        animation: none;
+      }
+      body[data-state='error'] .dashboard-loading-track {
+        visibility: hidden;
+      }
+      /* 筛选取数保留原阅读面，使用轻量状态卡反馈更新。 */
+      #dashboard-content {
+        transition: opacity 160ms ease;
+      }
+      body[data-refreshing='true'] #dashboard-content {
+        opacity: 0.55;
+      }
+      .dashboard-loading[data-mode='refresh'] {
+        inset: auto 20px max(20px, env(safe-area-inset-bottom)) auto;
+        max-width: calc(100vw - 40px);
+        padding: 0;
+        pointer-events: none;
+      }
+      .dashboard-loading[data-mode='refresh'] .dashboard-loading-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: auto;
+        padding: 14px 18px;
+        border-radius: 16px;
+        backdrop-filter: blur(18px);
+        pointer-events: auto;
+      }
+      .dashboard-loading[data-mode='refresh'] .dashboard-loading-orbit {
+        flex: 0 0 auto;
+        width: 18px;
+        height: 18px;
+        margin: 0;
+      }
+      .dashboard-loading[data-mode='refresh'] h2 {
+        margin: 0;
+        font-size: 13px;
+        letter-spacing: 0;
+      }
+      .dashboard-loading[data-mode='refresh'] p,
+      .dashboard-loading[data-mode='refresh'] .dashboard-loading-track,
+      .dashboard-loading[data-mode='refresh'][data-state='error'] .dashboard-loading-orbit {
+        display: none;
+      }
+      .dashboard-loading[data-mode='refresh'] #dashboard-loading-retry {
+        flex: 0 0 auto;
+        margin: 0;
+        padding: 5px 10px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #dashboard-content {
+          transition: none;
+        }
+      }
+      @keyframes dashboard-loading-turn {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes dashboard-loading-sweep {
+        from {
+          transform: translateX(-110%);
+        }
+        to {
+          transform: translateX(360%);
+        }
+      }
+      /* 主页 VTable 使用无边框阅读面；选中与键盘焦点继续使用各自的 token。 */
+      #overview-table {
+        --table-frame: transparent;
+        --table-divider: transparent;
+      }
+      body[data-state='error'] #status {
+        color: var(--down);
+      }
+      .metric-card {
+        transform: perspective(800px) rotate3d(var(--tilt-x, 0), var(--tilt-y, 1), 0, var(--tilt-angle, 0deg));
+      }
+      body[data-entrance='pending'] [data-enter] {
+        opacity: 0;
+      }
+      .card h2 {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .insight {
+        display: grid;
+        gap: 8px;
+        padding: 20px 24px;
+      }
+      #conclusion {
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.6;
+      }
+      #evidence {
+        display: grid;
+        gap: 4px;
+        margin: 0;
+        padding-left: 20px;
+        font-size: 13px;
+        line-height: 1.65;
+      }
+      .hero {
+        display: flex;
+        flex-direction: column;
+        padding: 26px 28px;
+      }
+      .small-body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .metric {
+        display: block;
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+        letter-spacing: -0.05em;
+        line-height: 1.12;
+      }
+      .hero-value {
+        margin: 18px 0 10px;
+        overflow-wrap: anywhere;
+      }
+      .small-value {
+        margin: 18px 0 10px;
+        overflow-wrap: anywhere;
+      }
+      .change[data-direction='up'] {
+        color: var(--up);
+      }
+      .change[data-direction='down'] {
+        color: var(--down);
+      }
+      .hero-figure {
+        margin-top: 24px;
+        flex: 1;
+        position: relative;
+      }
+      #main-plot {
+        position: absolute;
+        width: 100%;
+      }
+      .dates {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 11px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+      .hero-bottom {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        border-top: 1px solid #e9eef2;
+        padding-top: 24px;
+        margin-top: 24px;
+      }
+      .hero-bottom > div + div {
+        padding-left: 24px;
+        border-left: 1px solid #e9eef2;
+      }
+      .hero-bottom strong {
+        display: block;
+        margin-top: 6px;
+        font-weight: 600;
+      }
+      .mini {
+        width: 116px;
+        height: 77px;
+        flex-shrink: 0;
+      }
+      .small-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .small-card .small-value {
+        margin: 8px 0;
+      }
+      .ring {
+        position: relative;
+        flex-shrink: 0;
+      }
+      #ring-plot {
+        width: 100%;
+        height: 100%;
+      }
+      #ring-value {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-content: center;
+        text-align: center;
+        pointer-events: none;
+        font-variant-numeric: tabular-nums;
+      }
+      #ring-value::after {
+        content: attr(data-caption);
+        font-size: 10px;
+        color: var(--muted);
+      }
+      .plot:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+        border-radius: 8px;
+      }
+      .chart-context {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border: 0;
+      }
+      details {
+        margin-top: 20px;
+        padding: 20px 24px;
+        border-radius: 24px;
+        background: #ffffff80;
+      }
+      summary {
+        cursor: pointer;
+        font-size: 13px;
+      }
+      footer {
+        margin-top: 24px;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 600px) {
+        .shell {
+          padding: 24px 16px;
+        }
+        .card {
+          padding: 20px;
+        }
+        .heading {
+          gap: 14px;
+        }
+        .hero-bottom {
+          gap: 12px;
+        }
+        .hero-bottom > div + div {
+          padding-left: 12px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .metric-card {
+          transform: none !important;
+        }
+      }
+      @media (hover: none), (pointer: coarse) {
+        .metric-card {
+          transform: none;
+        }
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        letter-spacing: 0.01em;
+      }
+      .brand-mark {
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+        background: var(--ink);
+        display: grid;
+        grid-template-columns: repeat(2, 5px);
+        grid-template-rows: repeat(2, 5px);
+        place-content: center;
+        gap: 3px;
+      }
+      .brand-mark i {
+        background: #fff;
+        border-radius: 1px;
+        opacity: 0.9;
+      }
+      .brand-mark i:last-child {
+        opacity: 0.45;
+      }
+      .insight h2 {
+        color: var(--accent-ink);
+      }
+      #filters {
+        align-self: center;
+        gap: 8px;
+      }
+      .hero-bottom strong {
+        font-size: 24px;
+      }
+      .small-card {
+        min-height: 160px;
+      }
+      .small-note {
+        margin-top: 6px;
+        min-height: 20px;
+      }
+      .small-body {
+        flex: 1;
+      }
+      .ring {
+        width: 96px;
+        height: 96px;
+      }
+      #ring-value {
+        font-size: 19px;
+        letter-spacing: -0.03em;
+      }
+      #main-plot {
+        inset: 0 0 24px;
+      }
+      .categorical #main-plot {
+        inset: 0;
+      }
+      .categorical .dates {
+        display: none;
+      }
+      .plot-empty {
+        color: var(--muted);
+        font-size: 12px;
+        text-align: center;
+        padding-top: 20px;
+      }
+      #main-empty {
+        position: absolute;
+        inset: 70px 0 auto;
+      }
+      .comparison {
+        min-height: 20px;
+      }
+      .scope {
+        max-width: 700px;
+      }
+      @media (max-width: 800px) {
+        .heading {
+          display: block;
+        }
+        #filters {
+          margin-top: 16px;
+          width: max-content;
+          max-width: 100%;
+        }
+      }
+      @media (max-width: 600px) {
+        .topbar {
+          gap: 10px;
+          margin-bottom: 28px;
+        }
+        .topbar > .muted {
+          font-size: 10px;
+        }
+        #filters {
+          gap: 6px;
+          flex-wrap: nowrap;
+        }
+        .hero-bottom strong {
+          font-size: 21px;
+        }
+        .hero-bottom {
+          margin-top: 18px;
+          padding-top: 18px;
+        }
+        .card-slot {
+          grid-column: 1/-1 !important;
+        }
+        #conclusion {
+          font-size: 14px;
+        }
+      }
+      :root {
+        --accent: #7664c3;
+        --accent-ink: #4c3c85;
+        --background-base: #f6f4fb;
+        --background-glow: #eae3f8;
+      }
+      body {
+        background: var(--background-base);
+      }
+      body::before {
+        background: radial-gradient(ellipse at 90% 15%, var(--background-glow), transparent 60%);
+      }
+      .card {
+        border-radius: 24px;
+      }
+      .hero {
+        min-height: 500px;
+      }
+      .hero-figure {
+        min-height: 220px;
+      }
+      .small-value {
+        font-size: 27px;
+      }
+      .hero-value {
+        font-size: 58px;
+      }
+    </style>
+    <style id="dashboard-material">
+      /* 与地图模板共用玻璃层次；每个阅读面只做一次背景模糊。 */
+      :root {
+        --chart-track: #e7ebf0;
+        --glass-surface: rgb(255 255 255 / 46%);
+        --glass-fallback: var(--background-base);
+        --glass-filter: blur(14px) saturate(1.08) brightness(1.02);
+        --glass-sheen: linear-gradient(145deg, rgb(255 255 255 / 32%), rgb(255 255 255 / 4%) 58%);
+        --glass-background: var(--glass-sheen), var(--glass-surface);
+        --glass-edge: rgb(255 255 255 / 64%);
+        --glass-shadow:
+          0 18px 48px -20px rgb(40 51 62 / 15%), 0 4px 16px -8px rgb(40 51 62 / 8%),
+          inset 0 1px 0 rgb(255 255 255 / 76%), inset 0 -1px 0 rgb(255 255 255 / 16%);
+        --glass-tile: linear-gradient(145deg, rgb(255 255 255 / 48%), rgb(255 255 255 / 20%));
+        --glass-tile-shadow: inset 0 1px 0 rgb(255 255 255 / 68%), 0 5px 16px -12px rgb(40 51 62 / 12%);
+        --glass-divider: rgb(104 122 143 / 12%);
+        --overlay-duration: 720ms;
+        --overlay-easing: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .card,
+      #dashboard-content > details {
+        background: var(--glass-background);
+        border: 1px solid var(--glass-edge);
+        box-shadow: var(--glass-shadow);
+        backdrop-filter: var(--glass-filter);
+        -webkit-backdrop-filter: var(--glass-filter);
+      }
+      /* 底部明细保留更轻、更透的阅读面，与上方指标卡区分。 */
+      #dashboard-content > details {
+        --glass-surface: rgb(255 255 255 / 24%);
+        --glass-background:
+          linear-gradient(145deg, rgb(255 255 255 / 14%), rgb(255 255 255 / 2%) 58%), var(--glass-surface);
+        --glass-edge: rgb(255 255 255 / 34%);
+        --glass-shadow: 0 10px 32px -24px rgb(40 51 62 / 10%), inset 0 1px 0 rgb(255 255 255 / 38%);
+      }
+      .hero-bottom,
+      .hero-bottom > div + div {
+        border-color: var(--glass-divider);
+      }
+      @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .card,
+        #dashboard-content > details,
+        dialog.ma-dialog {
+          background: var(--glass-fallback);
+        }
+      }
+      @media (prefers-reduced-transparency: reduce) {
+        .card,
+        #dashboard-content > details,
+        dialog.ma-dialog {
+          background: var(--glass-fallback);
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+        }
+      }
+    </style>
+    <style id="metric-analysis-style">
+      /* 指标入口保持轻量；分析内容仅在用户打开后呈现。 */
+      .ma-entry,
+      .ma-card {
+        cursor: pointer;
+      }
+      .ma-entry:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 5px;
+        border-radius: 3px;
+      }
+      .ma-entry[role='button'] {
+        text-decoration: none;
+      }
+      .ma-entry[role='button']::after {
+        content: '';
+        display: inline-block;
+        width: 0.78em;
+        height: 0.78em;
+        margin-left: 0.45em;
+        vertical-align: 0.03em;
+        background: currentColor;
+        opacity: 0.65;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 12 12 4M4 4h8v8' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+          center / contain no-repeat;
+      }
+      .ma-entry[role='button']:hover::after,
+      .ma-entry[role='button']:focus-visible::after {
+        opacity: 1;
+      }
+      .ma-dialog {
+        --glass-surface: rgb(255 255 255 / 78%);
+        --glass-background: var(--glass-sheen), var(--glass-surface);
+        color: var(--ink);
+        background: var(--glass-background);
+        border: 1px solid var(--glass-edge);
+        border-radius: 22px;
+        backdrop-filter: var(--glass-filter);
+        -webkit-backdrop-filter: var(--glass-filter);
+        padding: 0;
+        width: min(1120px, calc(100vw - 48px));
+        max-width: none;
+        height: min(780px, calc(100dvh - 48px));
+        max-height: calc(100dvh - 48px);
+        overflow: hidden;
+        box-shadow:
+          var(--glass-shadow),
+          0 32px 100px -24px rgb(21 32 48 / 24%);
+      }
+      .ma-dialog::backdrop {
+        background: rgb(38 51 69 / 22%);
+        backdrop-filter: blur(7px);
+        -webkit-backdrop-filter: blur(7px);
+      }
+      /* 空间展开与内容揭示分开计时：慢查询仍从内容就绪时开始播放。 */
+      .ma-dialog[open] {
+        transform-origin: var(--overlay-origin, 50% 65%);
+        animation: overlay-enter var(--overlay-duration) linear backwards;
+      }
+      .ma-dialog[open]::backdrop {
+        animation: overlay-scrim-enter 320ms ease-out backwards;
+      }
+      .ma-dialog[data-closing='true']::backdrop {
+        animation: overlay-scrim-exit 220ms ease-in forwards;
+      }
+      .ma-dialog[data-closing='true'] .ma-shell {
+        pointer-events: none;
+      }
+      .ma-dialog:not([data-content-enter='true']) .ma-content {
+        visibility: hidden;
+      }
+      .ma-dialog[open] .ma-header h2,
+      .ma-dialog[open] .ma-header .ma-scope,
+      .ma-dialog[data-content-enter='true'] .ma-summary > *,
+      .ma-dialog[data-content-enter='true'] .ma-toolbar > *,
+      .ma-dialog[data-content-enter='true'] .ma-chart-panel,
+      .ma-dialog[data-content-enter='true'] .ma-table-panel,
+      .ma-dialog[data-content-enter='true'] .ma-definition {
+        animation: overlay-content-enter 600ms var(--overlay-easing) backwards;
+      }
+      .ma-dialog[data-content-enter='true'] .ma-chart-panel {
+        animation-name: overlay-chart-enter;
+      }
+      @keyframes overlay-enter {
+        0% {
+          opacity: 0;
+          transform: translate3d(0, 52px, 0) scale(0.88);
+          animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        62% {
+          opacity: 1;
+          transform: translate3d(0, -6px, 0) scale(1.012);
+          animation-timing-function: ease-in-out;
+        }
+        82% {
+          opacity: 1;
+          transform: translate3d(0, 1px, 0) scale(0.998);
+          animation-timing-function: ease-out;
+        }
+        100% {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes overlay-content-enter {
+        from {
+          opacity: 0;
+          transform: translate3d(0, 24px, 0);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes overlay-chart-enter {
+        from {
+          opacity: 0;
+          transform: translate3d(0, 20px, 0);
+          clip-path: inset(0 0 32% 0 round 16px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+          clip-path: inset(0 0 0 0 round 16px);
+        }
+      }
+      @keyframes overlay-scrim-enter {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes overlay-scrim-exit {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+      @media (max-width: 760px) {
+        .ma-dialog[open] {
+          --overlay-origin: 50% 100% !important;
+        }
+        @keyframes overlay-enter {
+          0% {
+            opacity: 0;
+            transform: translate3d(0, 32px, 0) scale(0.96);
+            animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          62% {
+            opacity: 1;
+            transform: translate3d(0, -3px, 0) scale(1.004);
+            animation-timing-function: ease-in-out;
+          }
+          100% {
+            opacity: 1;
+            transform: none;
+          }
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .ma-dialog,
+        .ma-dialog *,
+        .ma-dialog *::before,
+        .ma-dialog *::after,
+        .ma-dialog::backdrop {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+      .ma-dialog .ma-shell {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        max-height: calc(100dvh - 50px);
+      }
+      .ma-dialog .ma-header {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 22px 28px 18px;
+        border-bottom: 1px solid var(--glass-divider);
+        flex: none;
+      }
+      .ma-dialog .ma-header > div {
+        min-width: 0;
+      }
+      .ma-dialog h2 {
+        font-size: 21px;
+        line-height: 1.4;
+        margin: 0 0 6px;
+        letter-spacing: -0.02em;
+      }
+      .ma-dialog h3 {
+        font-size: 13px;
+        margin: 0;
+        font-weight: 600;
+        line-height: 1.5;
+      }
+      .ma-dialog p {
+        margin: 0;
+      }
+      .ma-dialog button.ma-close {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 32px;
+        height: 32px;
+        font-size: 24px;
+        line-height: 1;
+        padding: 0;
+        border: 0;
+        color: var(--text-secondary);
+      }
+      .ma-dialog .ma-body {
+        position: relative;
+        flex: 1;
+        scrollbar-gutter: stable;
+        overflow-anchor: none;
+        padding: 20px 28px 22px;
+        overflow: auto;
+        min-height: 0;
+        overscroll-behavior: contain;
+      }
+      .ma-dialog .ma-eyebrow {
+        font-size: 11px;
+        color: var(--text-faint);
+        line-height: 1.6;
+      }
+      .ma-dialog .ma-scope,
+      .ma-dialog .ma-hint {
+        color: var(--text-faint);
+        font-size: 11px;
+        line-height: 1.6;
+      }
+      .ma-dialog .ma-toolbar {
+        position: relative;
+        z-index: 1;
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 220px) auto;
+        align-items: center;
+        gap: 12px;
+      }
+      .ma-dialog .ma-selection {
+        min-width: 0;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 12px;
+        color: var(--text-secondary);
+      }
+      .ma-dialog .ma-feedback {
+        position: absolute;
+        top: 1px;
+        left: 28px;
+        right: 28px;
+        font-size: 11px;
+        color: var(--text-secondary);
+        line-height: 1.7;
+      }
+      .ma-dialog .ma-feedback:empty {
+        display: none;
+      }
+      .ma-dialog .ma-feedback[data-loading='true'] {
+        display: block;
+      }
+      .ma-dialog .ma-feedback[data-loading='true']::before {
+        content: '';
+        display: block;
+        width: 18px;
+        height: 18px;
+        margin: 24px auto;
+        border: 2px solid color-mix(in srgb, var(--ink) 16%, white);
+        border-right-color: var(--ink);
+        border-radius: 50%;
+        animation: dashboard-loading-turn 1.1s linear infinite;
+      }
+      .ma-dialog .ma-selection > span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .ma-dialog .ma-content {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+        gap: 18px;
+        align-items: stretch;
+      }
+      .ma-dialog .ma-content[aria-busy='true'] .ma-chart-panel {
+        pointer-events: none;
+      }
+      .ma-dialog .ma-summary {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+        align-items: center;
+        gap: 28px;
+        height: 80px;
+      }
+      .ma-dialog .ma-value {
+        display: block;
+        font-size: 32px;
+        line-height: 1.35;
+        margin-top: 2px;
+        font-variant-numeric: tabular-nums;
+        overflow-wrap: anywhere;
+      }
+      .ma-dialog .ma-summary > div {
+        min-width: 0;
+      }
+      .ma-dialog .ma-summary .ma-eyebrow {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .ma-dialog .ma-finding {
+        font-size: 12px;
+        line-height: 1.8;
+        color: var(--text-secondary);
+        max-height: 80px;
+        overflow: auto;
+      }
+      .ma-dialog .ma-chart-panel,
+      .ma-dialog .ma-table-panel {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        padding: 16px;
+        border: 1px solid rgb(255 255 255 / 42%);
+        border-radius: 14px;
+        background: var(--glass-tile);
+        box-shadow: var(--glass-tile-shadow);
+      }
+      .ma-dialog .ma-panel-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        height: 34px;
+        flex: none;
+      }
+      .ma-dialog .ma-chart-panel > .ma-hint,
+      .ma-dialog .ma-table-panel > .ma-hint {
+        height: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .ma-dialog .ma-chart,
+      .ma-dialog .ma-table {
+        flex: none;
+        height: 300px;
+        width: 100%;
+        margin-top: 10px;
+      }
+      .ma-dialog .ma-picker {
+        position: relative;
+        margin: 0 0 0 auto;
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+        background: transparent;
+        min-width: 0;
+      }
+      .ma-dialog .ma-groups {
+        position: absolute;
+        top: calc(100% + 6px);
+        right: 0;
+        z-index: 2;
+        display: grid;
+        gap: 4px;
+        width: 280px;
+        max-width: calc(100vw - 88px);
+        max-height: 280px;
+        overflow: auto;
+        padding: 6px;
+        background: var(--glass-fallback);
+        border: 1px solid var(--glass-edge);
+        border-radius: 12px;
+        box-shadow: 0 8px 30px #1520301a;
+      }
+      .ma-dialog .ma-definition {
+        grid-column: 1 / -1;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        background: transparent;
+        font-size: 11px;
+        line-height: 1.8;
+        color: var(--text-secondary);
+      }
+      .ma-dialog .ma-definition summary {
+        cursor: pointer;
+        width: fit-content;
+      }
+      .ma-dialog .ma-definition p {
+        margin-top: 8px;
+      }
+      .ma-dialog [hidden] {
+        display: none !important;
+      }
+      /* 保留筛选标签的布局位置，加载和清除选择时不推移内容。 */
+      .ma-dialog .ma-selection[hidden] {
+        display: flex !important;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .ma-dialog .ma-chart[data-empty='true'] {
+        display: grid;
+        place-items: center;
+      }
+      .ma-dialog .ma-chart[data-empty='true']::after {
+        content: '暂无可展示数据';
+        color: var(--text-secondary);
+        font-size: 12px;
+      }
+      .ma-dialog.ma-expanded .ma-table-panel {
+        grid-column: 1 / -1;
+      }
+      .ma-dialog.ma-expanded .ma-chart-panel {
+        display: none;
+      }
+      .ma-dialog.ma-expanded .ma-table {
+        height: min(50dvh, 520px);
+      }
+      @media (max-width: 800px) {
+        .ma-dialog {
+          width: calc(100vw - 16px);
+          height: calc(100dvh - 16px);
+          max-height: calc(100dvh - 16px);
+          border-radius: 16px;
+        }
+        .ma-dialog .ma-shell {
+          max-height: calc(100dvh - 18px);
+        }
+        .ma-dialog .ma-header {
+          padding: 18px 18px 14px;
+          gap: 12px;
+        }
+        .ma-dialog .ma-body {
+          position: relative;
+          flex: 1;
+          scrollbar-gutter: stable;
+          overflow-anchor: none;
+          padding: 16px 18px 18px;
+        }
+        .ma-dialog .ma-content {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 14px;
+        }
+        .ma-dialog .ma-summary {
+          grid-template-columns: minmax(0, 1fr);
+          align-content: start;
+          height: 138px;
+          gap: 6px;
+        }
+        .ma-dialog .ma-summary > div {
+          max-width: 100%;
+        }
+        .ma-dialog .ma-finding {
+          width: 100%;
+          height: 72px;
+          max-height: 72px;
+        }
+        .ma-dialog .ma-chart-panel,
+        .ma-dialog .ma-table-panel {
+          padding: 12px;
+        }
+        .ma-dialog .ma-value {
+          font-size: 28px;
+        }
+        .ma-dialog .ma-chart {
+          height: 220px;
+        }
+        .ma-dialog .ma-table {
+          height: 260px;
+        }
+        .ma-dialog .ma-toolbar {
+          grid-template-columns: minmax(0, 1fr) auto;
+          gap: 8px;
+        }
+        .ma-dialog .ma-picker {
+          grid-column: 2;
+          grid-row: 1;
+        }
+        .ma-dialog .ma-selection {
+          grid-column: 1 / -1;
+          grid-row: 2;
+          width: 100%;
+        }
+      }
+    </style>
+    <style id="dashboard-table-tokens">
+      /* Shared semantic tokens. Theme palettes supply --ink, --muted and --accent. */
+      :root {
+        --font-ui: var(--dashboard-font-family, Inter, 'PingFang SC', 'Microsoft YaHei', sans-serif);
+        --text-primary: var(--ink);
+        --text-strong: var(--strong, var(--ink));
+        --text-secondary: var(--muted);
+        --text-faint: color-mix(in srgb, var(--muted) 88%, transparent);
+        --focus-ring: color-mix(in srgb, var(--accent) 68%, var(--ink));
+        --table-canvas: transparent;
+        --table-body: rgb(255 255 255 / 6%);
+        --table-stripe: rgb(255 255 255 / 18%);
+        --table-header: color-mix(in srgb, var(--ink) 3%, rgb(255 255 255 / 66%));
+        --table-text: var(--text-primary);
+        --table-header-text: var(--text-strong);
+        --table-divider: color-mix(in srgb, var(--ink) 8%, transparent);
+        --table-frame: color-mix(in srgb, var(--ink) 10%, transparent);
+        --table-hover: color-mix(in srgb, var(--accent) 15%, transparent);
+        --table-hover-row: color-mix(in srgb, var(--accent) 8%, transparent);
+        --table-selected: color-mix(in srgb, var(--accent) 25%, transparent);
+        --table-selected-row: color-mix(in srgb, var(--accent) 9%, transparent);
+        --table-selected-border: color-mix(in srgb, var(--accent) 70%, var(--ink));
+        --table-scroll-thumb: color-mix(in srgb, var(--muted) 38%, transparent);
+        --table-scroll-rail: transparent;
+        --table-font-size: 12px;
+        --table-header-font-size: 11px;
+        --table-row-height: 40px;
+        --table-header-height: 38px;
+        --table-selection-width: 1px;
+        --table-radius: 10px;
+        --table-overview-max-height: 398px;
+      }
+      :root[data-mode='dark'] {
+        --table-body: transparent;
+        --table-stripe: color-mix(in srgb, var(--ink) 3%, transparent);
+        --table-header: color-mix(in srgb, var(--ink) 6%, transparent);
+        --table-divider: color-mix(in srgb, var(--ink) 9%, transparent);
+        --table-frame: color-mix(in srgb, var(--ink) 12%, transparent);
+      }
+      .dashboard-table,
+      .ma-dialog .ma-table {
+        border-radius: var(--table-radius);
+        overflow: hidden;
+        outline: none;
+      }
+      .dashboard-table:focus-visible,
+      .ma-dialog .ma-table:focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 3px;
+      }
+      .dashboard-table {
+        position: relative;
+        width: 100%;
+        height: var(--table-overview-max-height);
+        margin-top: 14px;
+      }
+      .dashboard-table[data-empty='true']::after {
+        content: '当前筛选暂无数据';
+        position: absolute;
+        inset: 45% 0 auto;
+        text-align: center;
+        color: var(--text-secondary);
+        font: 12px var(--font-ui);
+        pointer-events: none;
+      }
+      .dashboard-table-caption {
+        margin: 16px 0 0;
+        color: var(--text-secondary);
+        font-size: 12px;
+        line-height: 1.85;
+      }
+      .dashboard-table-count {
+        margin-left: 10px;
+        color: var(--text-faint);
+        font-size: 11px;
+        font-weight: 400;
+      }
+    </style>
+    <script id="dashboard-table-runtime">
+      /* CSS is the palette authority; this adapter resolves its tokens for Canvas. */
+      window.DashboardTable = (() => {
+        let library
+        function load() {
+          if (window.VTable?.ListTable) return Promise.resolve(window.VTable)
+          if (!library)
+            library = new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              const fail = () => {
+                clearTimeout(timer)
+                script.remove()
+                library = undefined
+                reject(new Error('明细模块加载失败，请重试'))
+              }
+              const timer = setTimeout(fail, 30000)
+              script.src = 'https://cdn.jsdelivr.net/npm/@visactor/vtable@1.23.1/dist/vtable.min.js'
+              script.onload = () => {
+                clearTimeout(timer)
+                if (window.VTable?.ListTable) resolve(window.VTable)
+                else fail()
+              }
+              script.onerror = fail
+              document.head.append(script)
+            })
+          return library
+        }
+        function readTokens(host) {
+          const style = getComputedStyle(host)
+          const probe = document.createElement('span')
+          probe.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none'
+          host.append(probe)
+          const canvas = document.createElement('canvas')
+          canvas.width = canvas.height = 1
+          const context = canvas.getContext('2d', { willReadFrequently: true })
+          const color = (name) => {
+            // Resolve var()/color-mix() in the host, then normalize to VRender-compatible RGBA.
+            probe.style.color = `var(${name})`
+            context.clearRect(0, 0, 1, 1)
+            context.fillStyle = getComputedStyle(probe).color
+            context.fillRect(0, 0, 1, 1)
+            const [r, g, b, a] = context.getImageData(0, 0, 1, 1).data
+            return `rgba(${r}, ${g}, ${b}, ${a / 255})`
+          }
+          try {
+            return {
+              color,
+              number: (name) => parseFloat(style.getPropertyValue(name)),
+              fontFamily: style.getPropertyValue('--font-ui').trim(),
+              dispose: () => probe.remove(),
+            }
+          } catch (error) {
+            probe.remove()
+            throw error
+          }
+        }
+        const animation = () =>
+          matchMedia('(prefers-reduced-motion: reduce)').matches ? false : { type: 'all', duration: 220, delay: 0 }
+        function options(base, host) {
+          const tokens = readTokens(host)
+          try {
+            const color = tokens.color
+            const normal = color('--table-body')
+            const stripe = color('--table-stripe')
+            const divider = color('--table-divider')
+            const hover = {
+              cellBgColor: color('--table-hover'),
+              inlineRowBgColor: color('--table-hover-row'),
+              inlineColumnBgColor: color('--table-canvas'),
+            }
+            const common = {
+              fontFamily: tokens.fontFamily,
+              fontSize: tokens.number('--table-font-size'),
+              color: color('--table-text'),
+              padding: [10, 12, 10, 12],
+              borderColor: divider,
+              borderLineWidth: [0, 0, 1, 0],
+            }
+            return {
+              ...base,
+              columns: base.columns.map((column) => ({
+                ...column,
+                headerStyle: { ...column.headerStyle, textAlign: column.style?.textAlign || 'left' },
+              })),
+              autoFillWidth: true,
+              autoWrapText: false,
+              heightMode: 'standard',
+              defaultRowHeight: tokens.number('--table-row-height'),
+              defaultHeaderRowHeight: tokens.number('--table-header-height'),
+              hover: { highlightMode: 'row' },
+              select: { highlightMode: 'row', headerSelectMode: 'cell' },
+              animationAppear: animation(),
+              theme: {
+                underlayBackgroundColor: color('--table-canvas'),
+                defaultStyle: common,
+                bodyStyle: {
+                  ...common,
+                  bgColor: ({ row, table }) => ((row - table.columnHeaderLevelCount) % 2 ? stripe : normal),
+                  hover,
+                },
+                headerStyle: {
+                  ...common,
+                  fontSize: tokens.number('--table-header-font-size'),
+                  fontWeight: 600,
+                  color: color('--table-header-text'),
+                  bgColor: color('--table-header'),
+                  hover,
+                },
+                selectionStyle: {
+                  cellBorderLineWidth: tokens.number('--table-selection-width'),
+                  cellBorderColor: color('--table-selected-border'),
+                  cellBgColor: color('--table-selected'),
+                  inlineRowBgColor: color('--table-selected-row'),
+                  inlineColumnBgColor: color('--table-canvas'),
+                  selectionFillMode: 'overlay',
+                },
+                frameStyle: {
+                  borderColor: color('--table-frame'),
+                  borderLineWidth: 1,
+                  cornerRadius: tokens.number('--table-radius'),
+                },
+                scrollStyle: {
+                  visible: 'scrolling',
+                  hoverOn: true,
+                  width: 5,
+                  scrollSliderCornerRadius: 3,
+                  scrollSliderColor: color('--table-scroll-thumb'),
+                  scrollRailColor: color('--table-scroll-rail'),
+                },
+                columnResize: { lineColor: color('--table-selected-border'), lineWidth: 1 },
+              },
+            }
+          } finally {
+            tokens.dispose()
+          }
+        }
+        function overview(Builder, columns, rows, host) {
+          const records = rows.map((values) =>
+            Object.fromEntries(values.map((value, index) => [`c${index}`, value ?? '—'])),
+          )
+          const dimensions = columns.map((alias, index) => ({ id: `c${index}`, alias, encoding: 'column' }))
+          const base = records.length
+            ? Builder.from({ chartType: 'table', dataset: records, dimensions, measures: [] }).build()
+            : { records, columns: dimensions.map(({ id, alias }) => ({ field: id, title: alias })) }
+          base.columns = columns.map((title, index) => ({
+            ...base.columns.find((column) => column.field === `c${index}`),
+            field: `c${index}`,
+            title,
+            width: index === 0 ? 170 : Math.max(130, Math.min(210, title.length * 12 + 24)),
+            style: { textAlign: index === 0 ? 'left' : 'right' },
+          }))
+          base.widthMode = 'standard'
+          const resolved = options(base, host)
+          host.style.height = `${Math.min(
+            parseFloat(getComputedStyle(host).getPropertyValue('--table-overview-max-height')),
+            resolved.defaultHeaderRowHeight + Math.max(1, rows.length) * resolved.defaultRowHeight + 2,
+          )}px`
+          return resolved
+        }
+        function setRecords(table, records, { animate = true } = {}) {
+          table.clearSelected()
+          table.options.animationAppear = animate ? animation() : false
+          table.setRecords(records)
+        }
+        return { load, options, overview, setRecords }
+      })()
+    </script>
+    <style id="dashboard-controls-style">
+      /* 单层玻璃轨道与连续选中面；内容层保留稳定阅读底色。 */
+      :root {
+        --control-track: rgb(255 255 255 / 48%);
+        --control-edge: rgb(255 255 255 / 72%);
+        --control-surface: rgb(255 255 255 / 92%);
+        --control-hover: #ffffff80;
+        --control-sheen: linear-gradient(155deg, rgb(255 255 255 / 60%), rgb(255 255 255 / 6%) 65%);
+        --control-shadow: 0 2px 8px rgb(38 53 68 / 9%), inset 0 1px 0 rgb(255 255 255 / 90%);
+      }
+      #filters {
+        flex-wrap: wrap;
+        max-width: 100%;
+      }
+      :is(#filters, .ma-dialog) .segment {
+        position: relative;
+        isolation: isolate;
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 3px;
+        max-width: 100%;
+        padding: 3px;
+        border: 1px solid var(--control-edge);
+        border-radius: 20px;
+        background: var(--control-sheen), var(--control-track);
+        box-shadow:
+          inset 0 1px 0 rgb(255 255 255 / 46%),
+          0 3px 12px -8px rgb(38 53 68 / 14%);
+        backdrop-filter: blur(12px) saturate(1.12);
+        -webkit-backdrop-filter: blur(12px) saturate(1.12);
+      }
+      :is(#filters, .ma-dialog) .segment-indicator {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: inherit;
+        background: var(--control-sheen), var(--control-surface);
+        box-shadow:
+          var(--control-shadow),
+          inset 0 -1px 0 rgb(38 53 68 / 4%);
+        transform-origin: top left;
+        pointer-events: none;
+      }
+      /* 弹窗已有玻璃底面，内部轨道不重复模糊。 */
+      .ma-dialog .segment {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+      :is(#filters, .ma-dialog) .segment button:active .segment-indicator {
+        box-shadow:
+          0 1px 4px rgb(38 53 68 / 7%),
+          inset 0 1px 3px rgb(38 53 68 / 9%);
+      }
+      .ma-dialog .ma-modes {
+        justify-self: start;
+      }
+      .ma-dialog .ma-close {
+        border-radius: 50%;
+        background: var(--control-track);
+      }
+      .ma-dialog .ma-close:hover {
+        background: var(--control-surface);
+        color: var(--ink);
+      }
+      :is(#filters, .ma-dialog) .segment button,
+      .ma-dialog :is(button:not(.ma-close), .ma-picker > summary) {
+        position: relative;
+        display: inline-flex;
+        flex: none;
+        align-items: center;
+        justify-content: center;
+        padding: 7px 12px;
+        border: 0;
+        border-radius: 17px;
+        background: var(--control-surface);
+        color: var(--muted);
+        font: 12px / 1.4 var(--font-ui);
+        white-space: nowrap;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          background-color 160ms ease,
+          color 160ms ease,
+          box-shadow 160ms ease;
+      }
+      :is(#filters, .ma-dialog) .segment button {
+        background: transparent;
+        box-shadow: none;
+      }
+      :is(#filters, .ma-dialog) .segment button[aria-pressed='true'] {
+        background: var(--control-surface);
+        color: var(--ink);
+        box-shadow: var(--control-shadow);
+      }
+      :is(#filters, .ma-dialog) .segment[data-glass='true'] button[aria-pressed='true'] {
+        background: transparent;
+        box-shadow: none;
+      }
+      :is(#filters, .ma-dialog) .segment button:active,
+      .ma-dialog :is(button:not(.ma-close), .ma-picker > summary):active {
+        background-color: rgb(255 255 255 / 72%);
+        box-shadow: inset 0 1px 4px rgb(38 53 68 / 9%);
+      }
+      :is(#filters, .ma-dialog) .segment button:not([aria-pressed='true']):hover,
+      .ma-dialog :is(button:not(.ma-close):not([aria-pressed='true']), .ma-picker > summary):hover {
+        background: var(--control-hover);
+        color: var(--ink);
+      }
+      :is(#filters, .ma-dialog) :is(button, summary):focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 3px;
+      }
+      .ma-dialog .ma-picker > summary {
+        list-style: none;
+        box-shadow: var(--control-shadow);
+      }
+      .ma-dialog .ma-picker > summary::-webkit-details-marker {
+        display: none;
+      }
+      .ma-dialog .ma-picker-chevron {
+        order: 2;
+        flex: none;
+        width: 12px;
+        margin-left: 6px;
+        text-align: center;
+      }
+      .ma-dialog .ma-groups button {
+        justify-content: flex-start;
+        width: 100%;
+        border-radius: 12px;
+        background: transparent;
+        white-space: normal;
+        text-align: left;
+      }
+      .ma-dialog .ma-groups button[aria-pressed='true'] {
+        background: var(--control-surface);
+        color: var(--ink);
+        box-shadow: var(--control-shadow);
+      }
+      #filters .segment button::after,
+      .ma-dialog .ma-modes button::after,
+      .ma-dialog :is([data-ma='reset'], [data-ma='retry'], .ma-picker > summary)::after {
+        content: '';
+        display: inline-block;
+        order: 1;
+        flex: 0 0 auto;
+        box-sizing: border-box;
+        width: 0;
+        height: 12px;
+        margin-left: 0;
+        border: 0 solid color-mix(in srgb, var(--ink) 16%, white);
+        border-right-color: var(--ink);
+        border-radius: 50%;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          width 180ms ease,
+          margin-left 180ms ease,
+          border-width 180ms ease,
+          opacity 140ms ease;
+      }
+      #filters .segment button[data-loading='true']::after,
+      .ma-dialog [data-loading='true'][aria-busy='true']::after {
+        width: 12px;
+        margin-left: 6px;
+        border-width: 2px;
+        opacity: 1;
+        animation: dashboard-loading-turn 1.1s linear infinite;
+      }
+      .ma-dialog .ma-picker[open] .ma-groups {
+        transform-origin: top right;
+        animation: control-menu-enter 180ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      @keyframes control-menu-enter {
+        from {
+          opacity: 0;
+          transform: translateY(-4px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        :is(#filters, .ma-dialog) .segment {
+          background: var(--glass-fallback);
+        }
+      }
+      @media (prefers-reduced-transparency: reduce) {
+        :is(#filters, .ma-dialog) .segment {
+          background: var(--glass-fallback);
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+        }
+      }
+      @media (max-width: 600px) {
+        :is(#filters, .ma-dialog) .segment {
+          gap: 1px;
+        }
+        :is(#filters, .ma-dialog) .segment button {
+          padding: 7px 8px;
+          font-size: 10px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        :is(#filters, .ma-dialog) :is(button, summary),
+        :is(#filters, .ma-dialog) ::after {
+          transition: none !important;
+        }
+        #filters .segment button[data-loading='true']::after,
+        .ma-dialog [data-loading='true'][aria-busy='true']::after,
+        .ma-dialog .ma-picker[open] .ma-groups,
+        .dashboard-loading-orbit,
+        .dashboard-loading-track::after {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body data-state="loading" data-initialized="false" data-entrance="pending" data-template="metrics">
+    <div class="shell" inert aria-busy="true">
+      <div class="topbar">
+        <span class="brand"
+          ><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>COHORT NOTES</span
+        ><span class="muted">临床记录样本</span>
+      </div>
+      <header class="heading">
+        <div>
+          <h1>心衰样本观察</h1>
+          <p id="scope" class="scope">正在准备内嵌数据…</p>
+        </div>
+        <fieldset id="filters" disabled aria-label="全局筛选">
+          <div class="segment" role="group" aria-label="年龄范围">
+            <button type="button" data-filter="age" data-value="" aria-pressed="true">全部年龄</button
+            ><button type="button" data-filter="age" data-value="younger" aria-pressed="false">&lt;60 岁</button
+            ><button type="button" data-filter="age" data-value="older" aria-pressed="false">≥60 岁</button>
+          </div>
+          <div class="segment" role="group" aria-label="高血压记录">
+            <button type="button" data-filter="pressure" data-value="" aria-pressed="true">全部</button
+            ><button type="button" data-filter="pressure" data-value="1" aria-pressed="false">有高血压</button
+            ><button type="button" data-filter="pressure" data-value="0" aria-pressed="false">无高血压</button>
+          </div>
+        </fieldset>
+      </header>
+      <div id="dashboard-content" inert>
+        <main id="dashboard" class="dashboard" aria-busy="true">
+          <div id="insight-slot" class="card-slot" data-enter="1">
+            <section class="card insight" aria-labelledby="insight-title">
+              <h2 id="insight-title">核心发现</h2>
+              <p id="conclusion">正在分析…</p>
+              <p id="insight-scope" class="scope"></p>
+              <ul id="evidence"></ul>
+            </section>
+          </div>
+          <div id="hero-slot" class="card-slot" data-enter="2">
+            <section id="hero-card" class="card hero categorical" aria-labelledby="primary-title">
+              <h2 id="primary-title">样本人数</h2>
+              <strong id="primary" class="metric hero-value">—</strong>
+              <p id="primary-note" class="comparison"></p>
+              <figure class="hero-figure">
+                <div
+                  id="main-plot"
+                  aria-describedby="hover-scope"
+                  class="plot"
+                  tabindex="0"
+                  role="img"
+                  aria-label="样本人数图表；悬停或方向键联动指标，Esc恢复汇总"
+                ></div>
+                <p id="main-empty" class="plot-empty" hidden>当前筛选暂无图形数据</p>
+                <figcaption id="dates" class="dates"></figcaption>
+              </figure>
+              <p id="hover-scope" class="chart-context">全体汇总 · 悬停或方向键查看年龄组</p>
+              <div class="hero-bottom">
+                <div>
+                  <p class="muted">平均年龄</p>
+                  <strong id="aux-one" class="metric">—</strong>
+                </div>
+                <div>
+                  <p class="muted">平均随访时长</p>
+                  <strong id="aux-two" class="metric">—</strong>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div id="one-slot" class="card-slot" data-enter="3">
+            <section class="card metric-card small-card" aria-labelledby="title-one">
+              <h2 id="title-one">记录死亡事件占比</h2>
+              <div class="small-body">
+                <strong id="metric-one" class="metric small-value">—</strong>
+                <div class="ring">
+                  <div
+                    id="ring-plot"
+                    class="plot"
+                    tabindex="0"
+                    role="img"
+                    aria-label="记录死亡事件占比构成；方向键查看类别，Esc恢复"
+                  ></div>
+                  <span id="ring-value" data-caption="死亡事件">—</span>
+                </div>
+              </div>
+              <p id="note-1" class="comparison small-note"></p>
+              <p id="empty-one" class="plot-empty" hidden>当前筛选暂无图形数据</p>
+            </section>
+          </div>
+          <div id="two-slot" class="card-slot" data-enter="4">
+            <section class="card metric-card small-card" aria-labelledby="title-two">
+              <h2 id="title-two">平均射血分数</h2>
+              <div class="small-body">
+                <strong id="metric-two" class="metric small-value">—</strong>
+                <div
+                  id="plot-two"
+                  class="mini plot"
+                  tabindex="0"
+                  role="img"
+                  aria-label="平均射血分数分组图；悬停或方向键仅查看此卡，Esc恢复"
+                ></div>
+              </div>
+              <p id="note-2" class="comparison small-note"></p>
+              <p id="empty-two" class="plot-empty" hidden>当前筛选暂无图形数据</p>
+            </section>
+          </div>
+          <div id="three-slot" class="card-slot" data-enter="5">
+            <section class="card metric-card small-card" aria-labelledby="title-three">
+              <h2 id="title-three">平均血清肌酐</h2>
+              <div class="small-body">
+                <strong id="metric-three" class="metric small-value">—</strong>
+                <div
+                  id="plot-three"
+                  class="mini plot"
+                  tabindex="0"
+                  role="img"
+                  aria-label="平均血清肌酐分组图；悬停或方向键仅查看此卡，Esc恢复"
+                ></div>
+              </div>
+              <p id="note-3" class="comparison small-note"></p>
+              <p id="empty-three" class="plot-empty" hidden>当前筛选暂无图形数据</p>
+            </section>
+          </div>
+        </main>
+        <details open data-enter="6">
+          <summary>
+            年龄组明细与统计口径<span id="overview-count" class="dashboard-table-count" aria-live="polite"></span>
+          </summary>
+          <p class="dashboard-table-caption">
+            每行对应一份临床记录。事件占比 = DEATH_EVENT 之和 / 样本记录数；DEATH_EVENT=0
+            表示随访观察期内未记录死亡。time 为随访天数，年龄组比较是样本描述，不构成因果或个体预后判断。
+          </p>
+          <div id="overview-table" class="dashboard-table" role="region" aria-label="完整明细表" tabindex="0"></div>
+        </details>
+      </div>
+      <footer><p id="status" role="status">正在加载图表模块…</p></footer>
+    </div>
+    <div id="dashboard-loading" class="dashboard-loading" role="status" aria-live="polite">
+      <div class="dashboard-loading-card">
+        <div class="dashboard-loading-orbit" aria-hidden="true"></div>
+        <h2 id="dashboard-loading-title">正在准备看板</h2>
+        <p id="dashboard-loading-message">正在加载数据与图表，请稍候…</p>
+        <div class="dashboard-loading-track" aria-hidden="true"></div>
+        <button id="dashboard-loading-retry" type="button" hidden>重新加载</button>
+      </div>
+    </div>
+    <script id="dashboard-loading-runtime">
+      // 在外部依赖之前启动：缓存命中也至少展示 800ms，依赖失败仍有重试入口。
+      window.DashboardLoading = (() => {
+        const layer = document.querySelector('#dashboard-loading')
+        const screen = document.querySelector('body > .shell')
+        const content = document.querySelector('#dashboard-content')
+        const title = document.querySelector('#dashboard-loading-title')
+        const retryButton = document.querySelector('#dashboard-loading-retry')
+        let refreshing = false,
+          refreshStarted = 0,
+          refreshFrame,
+          refreshTimer,
+          finishRefreshPaint,
+          finishRefreshWait,
+          retryRefresh,
+          trigger,
+          refreshPaint = Promise.resolve()
+        const stopRefreshWaiting = () => {
+          cancelAnimationFrame(refreshFrame)
+          finishRefreshPaint?.()
+          clearTimeout(refreshTimer)
+          finishRefreshWait?.()
+        }
+        const setTrigger = (button) => {
+          trigger?.removeAttribute('data-loading')
+          trigger?.removeAttribute('aria-busy')
+          trigger = button
+          if (refreshing) {
+            trigger?.setAttribute('data-loading', 'true')
+            trigger?.setAttribute('aria-busy', 'true')
+          }
+        }
+        const setRefreshing = (busy) => {
+          trigger?.setAttribute('data-loading', String(busy))
+          trigger?.setAttribute('aria-busy', String(busy))
+          document.body.dataset.refreshing = String(busy)
+          document.querySelector('#filters').setAttribute('aria-busy', String(busy))
+          content.inert = busy
+          content.setAttribute('aria-busy', String(busy))
+        }
+        const refresh = (retry) => {
+          if (phase !== 'ready') return
+          retryRefresh = retry
+          if (refreshing) return
+          refreshing = true
+          refreshStarted = performance.now()
+          layer.dataset.mode = 'refresh'
+          layer.dataset.state = 'loading'
+          title.textContent = '正在更新数据…'
+          layer.removeAttribute('title')
+          retryButton.hidden = true
+          layer.hidden = false
+          layer.inert = false
+          layer.removeAttribute('aria-hidden')
+          setRefreshing(true)
+          // 先让等待反馈绘制一帧，再执行可能占用主线程的本地查询。
+          refreshPaint = new Promise((resolve) => {
+            finishRefreshPaint = resolve
+            refreshFrame = requestAnimationFrame(() => {
+              refreshFrame = requestAnimationFrame(resolve)
+            })
+          })
+        }
+        let phase = 'loading',
+          frame,
+          waitTimer,
+          finishWait,
+          finishPaint
+        const painted = new Promise((resolve) => {
+          finishPaint = resolve
+          frame = requestAnimationFrame(() => {
+            frame = requestAnimationFrame(() => resolve(performance.now()))
+          })
+        })
+        const stopWaiting = () => {
+          cancelAnimationFrame(frame)
+          finishPaint(performance.now())
+          clearTimeout(waitTimer)
+          finishWait?.()
+        }
+        const fail = (message) => {
+          if (phase === 'ready') {
+            refreshing = false
+            stopRefreshWaiting()
+            setRefreshing(false)
+            layer.dataset.state = 'error'
+            title.textContent = '更新失败，请重试'
+            layer.title = message
+            retryButton.textContent = '重试'
+            retryButton.hidden = false
+            return
+          }
+          if (phase !== 'loading') return
+          phase = 'error'
+          clearTimeout(deadline)
+          stopWaiting()
+          document.body.dataset.state = 'error'
+          title.textContent = '暂时无法打开看板'
+          document.querySelector('#dashboard-loading-message').textContent = message
+          retryButton.hidden = false
+        }
+        const onScriptError = (event) => {
+          if (event.target?.tagName === 'SCRIPT') fail('页面依赖加载失败，请检查网络后重新加载。')
+        }
+        const deadline = setTimeout(() => fail('加载时间较长，请检查网络后重新加载。'), 45000)
+        window.addEventListener('error', onScriptError, true)
+        const dispose = (event) => {
+          if (event.persisted) return
+          phase = 'disposed'
+          refreshing = false
+          stopRefreshWaiting()
+          setTrigger(undefined)
+          layer.hidden = true
+          clearTimeout(deadline)
+          stopWaiting()
+          window.removeEventListener('error', onScriptError, true)
+          window.removeEventListener('pagehide', dispose)
+        }
+        window.addEventListener('pagehide', dispose)
+        retryButton.onclick = () => (phase === 'ready' ? retryRefresh?.() : location.reload())
+        const reveal = async (isCurrent) => {
+          if (phase === 'ready') {
+            if (refreshing) {
+              await refreshPaint
+              if (phase !== 'ready' || !isCurrent()) return false
+              const remaining = 200 - (performance.now() - refreshStarted)
+              if (remaining > 0)
+                await new Promise((resolve) => {
+                  finishRefreshWait = resolve
+                  refreshTimer = setTimeout(resolve, remaining)
+                })
+              if (phase !== 'ready' || !isCurrent()) return false
+              refreshing = false
+              stopRefreshWaiting()
+              setRefreshing(false)
+              setTrigger(undefined)
+              layer.hidden = true
+              layer.inert = true
+              layer.setAttribute('aria-hidden', 'true')
+              layer.removeAttribute('title')
+            }
+            return phase === 'ready' && isCurrent()
+          }
+          if (phase !== 'loading') return false
+          const started = await painted
+          if (phase !== 'loading' || !isCurrent()) return false
+          const remaining = 800 - (performance.now() - started)
+          if (remaining > 0)
+            await new Promise((resolve) => {
+              finishWait = resolve
+              waitTimer = setTimeout(resolve, remaining)
+            })
+          if (phase !== 'loading' || !isCurrent()) return false
+          phase = 'ready'
+          clearTimeout(deadline)
+          window.removeEventListener('error', onScriptError, true)
+          screen.inert = false
+          screen.setAttribute('aria-busy', 'false')
+          layer.hidden = true
+          layer.inert = true
+          layer.setAttribute('aria-hidden', 'true')
+          document.body.dataset.initialized = 'true'
+          return true
+        }
+        return { reveal, fail, refresh, setTrigger, paint: () => refreshPaint }
+      })()
+    </script>
+    <noscript>
+      <style>
+        #dashboard-loading {
+          display: none;
+        }
+      </style>
+      请启用 JavaScript 以查询和绘制图表。
+    </noscript>
+    <!-- 完整 CSV 以列名 + 类型化行数组内嵌；不请求外部数据文件。图表依赖沿用模板的固定版本 CDN。 -->
+    <!-- prettier-ignore -->
+    <script id="source-data" type="application/json">{"filename":"heart_failure_clinical_records_dataset.csv","columns":["age","anaemia","creatinine_phosphokinase","diabetes","ejection_fraction","high_blood_pressure","platelets","serum_creatinine","serum_sodium","sex","smoking","time","DEATH_EVENT"],"rows":[[75,0,582,0,20,1,265000,1.9,130,1,0,4,1],[55,0,7861,0,38,0,263358.03,1.1,136,1,0,6,1],[65,0,146,0,20,0,162000,1.3,129,1,1,7,1],[50,1,111,0,20,0,210000,1.9,137,1,0,7,1],[65,1,160,1,20,0,327000,2.7,116,0,0,8,1],[90,1,47,0,40,1,204000,2.1,132,1,1,8,1],[75,1,246,0,15,0,127000,1.2,137,1,0,10,1],[60,1,315,1,60,0,454000,1.1,131,1,1,10,1],[65,0,157,0,65,0,263358.03,1.5,138,0,0,10,1],[80,1,123,0,35,1,388000,9.4,133,1,1,10,1],[75,1,81,0,38,1,368000,4,131,1,1,10,1],[62,0,231,0,25,1,253000,0.9,140,1,1,10,1],[45,1,981,0,30,0,136000,1.1,137,1,0,11,1],[50,1,168,0,38,1,276000,1.1,137,1,0,11,1],[49,1,80,0,30,1,427000,1,138,0,0,12,0],[82,1,379,0,50,0,47000,1.3,136,1,0,13,1],[87,1,149,0,38,0,262000,0.9,140,1,0,14,1],[45,0,582,0,14,0,166000,0.8,127,1,0,14,1],[70,1,125,0,25,1,237000,1,140,0,0,15,1],[48,1,582,1,55,0,87000,1.9,121,0,0,15,1],[65,1,52,0,25,1,276000,1.3,137,0,0,16,0],[65,1,128,1,30,1,297000,1.6,136,0,0,20,1],[68,1,220,0,35,1,289000,0.9,140,1,1,20,1],[53,0,63,1,60,0,368000,0.8,135,1,0,22,0],[75,0,582,1,30,1,263358.03,1.83,134,0,0,23,1],[80,0,148,1,38,0,149000,1.9,144,1,1,23,1],[95,1,112,0,40,1,196000,1,138,0,0,24,1],[70,0,122,1,45,1,284000,1.3,136,1,1,26,1],[58,1,60,0,38,0,153000,5.8,134,1,0,26,1],[82,0,70,1,30,0,200000,1.2,132,1,1,26,1],[94,0,582,1,38,1,263358.03,1.83,134,1,0,27,1],[85,0,23,0,45,0,360000,3,132,1,0,28,1],[50,1,249,1,35,1,319000,1,128,0,0,28,1],[50,1,159,1,30,0,302000,1.2,138,0,0,29,0],[65,0,94,1,50,1,188000,1,140,1,0,29,1],[69,0,582,1,35,0,228000,3.5,134,1,0,30,1],[90,1,60,1,50,0,226000,1,134,1,0,30,1],[82,1,855,1,50,1,321000,1,145,0,0,30,1],[60,0,2656,1,30,0,305000,2.3,137,1,0,30,0],[60,0,235,1,38,0,329000,3,142,0,0,30,1],[70,0,582,0,20,1,263358.03,1.83,134,1,1,31,1],[50,0,124,1,30,1,153000,1.2,136,0,1,32,1],[70,0,571,1,45,1,185000,1.2,139,1,1,33,1],[72,0,127,1,50,1,218000,1,134,1,0,33,0],[60,1,588,1,60,0,194000,1.1,142,0,0,33,1],[50,0,582,1,38,0,310000,1.9,135,1,1,35,1],[51,0,1380,0,25,1,271000,0.9,130,1,0,38,1],[60,0,582,1,38,1,451000,0.6,138,1,1,40,1],[80,1,553,0,20,1,140000,4.4,133,1,0,41,1],[57,1,129,0,30,0,395000,1,140,0,0,42,1],[68,1,577,0,25,1,166000,1,138,1,0,43,1],[53,1,91,0,20,1,418000,1.4,139,0,0,43,1],[60,0,3964,1,62,0,263358.03,6.8,146,0,0,43,1],[70,1,69,1,50,1,351000,1,134,0,0,44,1],[60,1,260,1,38,0,255000,2.2,132,0,1,45,1],[95,1,371,0,30,0,461000,2,132,1,0,50,1],[70,1,75,0,35,0,223000,2.7,138,1,1,54,0],[60,1,607,0,40,0,216000,0.6,138,1,1,54,0],[49,0,789,0,20,1,319000,1.1,136,1,1,55,1],[72,0,364,1,20,1,254000,1.3,136,1,1,59,1],[45,0,7702,1,25,1,390000,1,139,1,0,60,1],[50,0,318,0,40,1,216000,2.3,131,0,0,60,1],[55,0,109,0,35,0,254000,1.1,139,1,1,60,0],[45,0,582,0,35,0,385000,1,145,1,0,61,1],[45,0,582,0,80,0,263358.03,1.18,137,0,0,63,0],[60,0,68,0,20,0,119000,2.9,127,1,1,64,1],[42,1,250,1,15,0,213000,1.3,136,0,0,65,1],[72,1,110,0,25,0,274000,1,140,1,1,65,1],[70,0,161,0,25,0,244000,1.2,142,0,0,66,1],[65,0,113,1,25,0,497000,1.83,135,1,0,67,1],[41,0,148,0,40,0,374000,0.8,140,1,1,68,0],[58,0,582,1,35,0,122000,0.9,139,1,1,71,0],[85,0,5882,0,35,0,243000,1,132,1,1,72,1],[65,0,224,1,50,0,149000,1.3,137,1,1,72,0],[69,0,582,0,20,0,266000,1.2,134,1,1,73,1],[60,1,47,0,20,0,204000,0.7,139,1,1,73,1],[70,0,92,0,60,1,317000,0.8,140,0,1,74,0],[42,0,102,1,40,0,237000,1.2,140,1,0,74,0],[75,1,203,1,38,1,283000,0.6,131,1,1,74,0],[55,0,336,0,45,1,324000,0.9,140,0,0,74,0],[70,0,69,0,40,0,293000,1.7,136,0,0,75,0],[67,0,582,0,50,0,263358.03,1.18,137,1,1,76,0],[60,1,76,1,25,0,196000,2.5,132,0,0,77,1],[79,1,55,0,50,1,172000,1.8,133,1,0,78,0],[59,1,280,1,25,1,302000,1,141,0,0,78,1],[51,0,78,0,50,0,406000,0.7,140,1,0,79,0],[55,0,47,0,35,1,173000,1.1,137,1,0,79,0],[65,1,68,1,60,1,304000,0.8,140,1,0,79,0],[44,0,84,1,40,1,235000,0.7,139,1,0,79,0],[57,1,115,0,25,1,181000,1.1,144,1,0,79,0],[70,0,66,1,45,0,249000,0.8,136,1,1,80,0],[60,0,897,1,45,0,297000,1,133,1,0,80,0],[42,0,582,0,60,0,263358.03,1.18,137,0,0,82,0],[60,1,154,0,25,0,210000,1.7,135,1,0,82,1],[58,0,144,1,38,1,327000,0.7,142,0,0,83,0],[58,1,133,0,60,1,219000,1,141,1,0,83,0],[63,1,514,1,25,1,254000,1.3,134,1,0,83,0],[70,1,59,0,60,0,255000,1.1,136,0,0,85,0],[60,1,156,1,25,1,318000,1.2,137,0,0,85,0],[63,1,61,1,40,0,221000,1.1,140,0,0,86,0],[65,1,305,0,25,0,298000,1.1,141,1,0,87,0],[75,0,582,0,45,1,263358.03,1.18,137,1,0,87,0],[80,0,898,0,25,0,149000,1.1,144,1,1,87,0],[42,0,5209,0,30,0,226000,1,140,1,1,87,0],[60,0,53,0,50,1,286000,2.3,143,0,0,87,0],[72,1,328,0,30,1,621000,1.7,138,0,1,88,1],[55,0,748,0,45,0,263000,1.3,137,1,0,88,0],[45,1,1876,1,35,0,226000,0.9,138,1,0,88,0],[63,0,936,0,38,0,304000,1.1,133,1,1,88,0],[45,0,292,1,35,0,850000,1.3,142,1,1,88,0],[85,0,129,0,60,0,306000,1.2,132,1,1,90,1],[55,0,60,0,35,0,228000,1.2,135,1,1,90,0],[50,0,369,1,25,0,252000,1.6,136,1,0,90,0],[70,1,143,0,60,0,351000,1.3,137,0,0,90,1],[60,1,754,1,40,1,328000,1.2,126,1,0,91,0],[58,1,400,0,40,0,164000,1,139,0,0,91,0],[60,1,96,1,60,1,271000,0.7,136,0,0,94,0],[85,1,102,0,60,0,507000,3.2,138,0,0,94,0],[65,1,113,1,60,1,203000,0.9,140,0,0,94,0],[86,0,582,0,38,0,263358.03,1.83,134,0,0,95,1],[60,1,737,0,60,1,210000,1.5,135,1,1,95,0],[66,1,68,1,38,1,162000,1,136,0,0,95,0],[60,0,96,1,38,0,228000,0.75,140,0,0,95,0],[60,1,582,0,30,1,127000,0.9,145,0,0,95,0],[60,0,582,0,40,0,217000,3.7,134,1,0,96,1],[43,1,358,0,50,0,237000,1.3,135,0,0,97,0],[46,0,168,1,17,1,271000,2.1,124,0,0,100,1],[58,1,200,1,60,0,300000,0.8,137,0,0,104,0],[61,0,248,0,30,1,267000,0.7,136,1,1,104,0],[53,1,270,1,35,0,227000,3.4,145,1,0,105,0],[53,1,1808,0,60,1,249000,0.7,138,1,1,106,0],[60,1,1082,1,45,0,250000,6.1,131,1,0,107,0],[46,0,719,0,40,1,263358.03,1.18,137,0,0,107,0],[63,0,193,0,60,1,295000,1.3,145,1,1,107,0],[81,0,4540,0,35,0,231000,1.18,137,1,1,107,0],[75,0,582,0,40,0,263358.03,1.18,137,1,0,107,0],[65,1,59,1,60,0,172000,0.9,137,0,0,107,0],[68,1,646,0,25,0,305000,2.1,130,1,0,108,0],[62,0,281,1,35,0,221000,1,136,0,0,108,0],[50,0,1548,0,30,1,211000,0.8,138,1,0,108,0],[80,0,805,0,38,0,263358.03,1.1,134,1,0,109,1],[46,1,291,0,35,0,348000,0.9,140,0,0,109,0],[50,0,482,1,30,0,329000,0.9,132,0,0,109,0],[61,1,84,0,40,1,229000,0.9,141,0,0,110,0],[72,1,943,0,25,1,338000,1.7,139,1,1,111,1],[50,0,185,0,30,0,266000,0.7,141,1,1,112,0],[52,0,132,0,30,0,218000,0.7,136,1,1,112,0],[64,0,1610,0,60,0,242000,1,137,1,0,113,0],[75,1,582,0,30,0,225000,1.83,134,1,0,113,1],[60,0,2261,0,35,1,228000,0.9,136,1,0,115,0],[72,0,233,0,45,1,235000,2.5,135,0,0,115,1],[62,0,30,1,60,1,244000,0.9,139,1,0,117,0],[50,0,115,0,45,1,184000,0.9,134,1,1,118,0],[50,0,1846,1,35,0,263358.03,1.18,137,1,1,119,0],[65,1,335,0,35,1,235000,0.8,136,0,0,120,0],[60,1,231,1,25,0,194000,1.7,140,1,0,120,0],[52,1,58,0,35,0,277000,1.4,136,0,0,120,0],[50,0,250,0,25,0,262000,1,136,1,1,120,0],[85,1,910,0,50,0,235000,1.3,134,1,0,121,0],[59,1,129,0,45,1,362000,1.1,139,1,1,121,0],[66,1,72,0,40,1,242000,1.2,134,1,0,121,0],[45,1,130,0,35,0,174000,0.8,139,1,1,121,0],[63,1,582,0,40,0,448000,0.9,137,1,1,123,0],[50,1,2334,1,35,0,75000,0.9,142,0,0,126,1],[45,0,2442,1,30,0,334000,1.1,139,1,0,129,1],[80,0,776,1,38,1,192000,1.3,135,0,0,130,1],[53,0,196,0,60,0,220000,0.7,133,1,1,134,0],[59,0,66,1,20,0,70000,2.4,134,1,0,135,1],[65,0,582,1,40,0,270000,1,138,0,0,140,0],[70,0,835,0,35,1,305000,0.8,133,0,0,145,0],[51,1,582,1,35,0,263358.03,1.5,136,1,1,145,0],[52,0,3966,0,40,0,325000,0.9,140,1,1,146,0],[70,1,171,0,60,1,176000,1.1,145,1,1,146,0],[50,1,115,0,20,0,189000,0.8,139,1,0,146,0],[65,0,198,1,35,1,281000,0.9,137,1,1,146,0],[60,1,95,0,60,0,337000,1,138,1,1,146,0],[69,0,1419,0,40,0,105000,1,135,1,1,147,0],[49,1,69,0,50,0,132000,1,140,0,0,147,0],[63,1,122,1,60,0,267000,1.2,145,1,0,147,0],[55,0,835,0,40,0,279000,0.7,140,1,1,147,0],[40,0,478,1,30,0,303000,0.9,136,1,0,148,0],[59,1,176,1,25,0,221000,1,136,1,1,150,1],[65,0,395,1,25,0,265000,1.2,136,1,1,154,1],[75,0,99,0,38,1,224000,2.5,134,1,0,162,1],[58,1,145,0,25,0,219000,1.2,137,1,1,170,1],[60.667,1,104,1,30,0,389000,1.5,136,1,0,171,1],[50,0,582,0,50,0,153000,0.6,134,0,0,172,1],[60,0,1896,1,25,0,365000,2.1,144,0,0,172,1],[60.667,1,151,1,40,1,201000,1,136,0,0,172,0],[40,0,244,0,45,1,275000,0.9,140,0,0,174,0],[80,0,582,1,35,0,350000,2.1,134,1,0,174,0],[64,1,62,0,60,0,309000,1.5,135,0,0,174,0],[50,1,121,1,40,0,260000,0.7,130,1,0,175,0],[73,1,231,1,30,0,160000,1.18,142,1,1,180,0],[45,0,582,0,20,1,126000,1.6,135,1,0,180,1],[77,1,418,0,45,0,223000,1.8,145,1,0,180,1],[45,0,582,1,38,1,263358.03,1.18,137,0,0,185,0],[65,0,167,0,30,0,259000,0.8,138,0,0,186,0],[50,1,582,1,20,1,279000,1,134,0,0,186,0],[60,0,1211,1,35,0,263358.03,1.8,113,1,1,186,0],[63,1,1767,0,45,0,73000,0.7,137,1,0,186,0],[45,0,308,1,60,1,377000,1,136,1,0,186,0],[70,0,97,0,60,1,220000,0.9,138,1,0,186,0],[60,0,59,0,25,1,212000,3.5,136,1,1,187,0],[78,1,64,0,40,0,277000,0.7,137,1,1,187,0],[50,1,167,1,45,0,362000,1,136,0,0,187,0],[40,1,101,0,40,0,226000,0.8,141,0,0,187,0],[85,0,212,0,38,0,186000,0.9,136,1,0,187,0],[60,1,2281,1,40,0,283000,1,141,0,0,187,0],[49,0,972,1,35,1,268000,0.8,130,0,0,187,0],[70,0,212,1,17,1,389000,1,136,1,1,188,0],[50,0,582,0,62,1,147000,0.8,140,1,1,192,0],[78,0,224,0,50,0,481000,1.4,138,1,1,192,0],[48,1,131,1,30,1,244000,1.6,130,0,0,193,1],[65,1,135,0,35,1,290000,0.8,134,1,0,194,0],[73,0,582,0,35,1,203000,1.3,134,1,0,195,0],[70,0,1202,0,50,1,358000,0.9,141,0,0,196,0],[54,1,427,0,70,1,151000,9,137,0,0,196,1],[68,1,1021,1,35,0,271000,1.1,134,1,0,197,0],[55,0,582,1,35,1,371000,0.7,140,0,0,197,0],[73,0,582,0,20,0,263358.03,1.83,134,1,0,198,1],[65,0,118,0,50,0,194000,1.1,145,1,1,200,0],[42,1,86,0,35,0,365000,1.1,139,1,1,201,0],[47,0,582,0,25,0,130000,0.8,134,1,0,201,0],[58,0,582,1,25,0,504000,1,138,1,0,205,0],[75,0,675,1,60,0,265000,1.4,125,0,0,205,0],[58,1,57,0,25,0,189000,1.3,132,1,1,205,0],[55,1,2794,0,35,1,141000,1,140,1,0,206,0],[65,0,56,0,25,0,237000,5,130,0,0,207,0],[72,0,211,0,25,0,274000,1.2,134,0,0,207,0],[60,0,166,0,30,0,62000,1.7,127,0,0,207,1],[70,0,93,0,35,0,185000,1.1,134,1,1,208,0],[40,1,129,0,35,0,255000,0.9,137,1,0,209,0],[53,1,707,0,38,0,330000,1.4,137,1,1,209,0],[53,1,582,0,45,0,305000,1.1,137,1,1,209,0],[77,1,109,0,50,1,406000,1.1,137,1,0,209,0],[75,0,119,0,50,1,248000,1.1,148,1,0,209,0],[70,0,232,0,30,0,173000,1.2,132,1,0,210,0],[65,1,720,1,40,0,257000,1,136,0,0,210,0],[55,1,180,0,45,0,263358.03,1.18,137,1,1,211,0],[70,0,81,1,35,1,533000,1.3,139,0,0,212,0],[65,0,582,1,30,0,249000,1.3,136,1,1,212,0],[40,0,90,0,35,0,255000,1.1,136,1,1,212,0],[73,1,1185,0,40,1,220000,0.9,141,0,0,213,0],[54,0,582,1,38,0,264000,1.8,134,1,0,213,0],[61,1,80,1,38,0,282000,1.4,137,1,0,213,0],[55,0,2017,0,25,0,314000,1.1,138,1,0,214,1],[64,0,143,0,25,0,246000,2.4,135,1,0,214,0],[40,0,624,0,35,0,301000,1,142,1,1,214,0],[53,0,207,1,40,0,223000,1.2,130,0,0,214,0],[50,0,2522,0,30,1,404000,0.5,139,0,0,214,0],[55,0,572,1,35,0,231000,0.8,143,0,0,215,0],[50,0,245,0,45,1,274000,1,133,1,0,215,0],[70,0,88,1,35,1,236000,1.2,132,0,0,215,0],[53,1,446,0,60,1,263358.03,1,139,1,0,215,0],[52,1,191,1,30,1,334000,1,142,1,1,216,0],[65,0,326,0,38,0,294000,1.7,139,0,0,220,0],[58,0,132,1,38,1,253000,1,139,1,0,230,0],[45,1,66,1,25,0,233000,0.8,135,1,0,230,0],[53,0,56,0,50,0,308000,0.7,135,1,1,231,0],[55,0,66,0,40,0,203000,1,138,1,0,233,0],[62,1,655,0,40,0,283000,0.7,133,0,0,233,0],[65,1,258,1,25,0,198000,1.4,129,1,0,235,1],[68,1,157,1,60,0,208000,1,140,0,0,237,0],[61,0,582,1,38,0,147000,1.2,141,1,0,237,0],[50,1,298,0,35,0,362000,0.9,140,1,1,240,0],[55,0,1199,0,20,0,263358.03,1.83,134,1,1,241,1],[56,1,135,1,38,0,133000,1.7,140,1,0,244,0],[45,0,582,1,38,0,302000,0.9,140,0,0,244,0],[40,0,582,1,35,0,222000,1,132,1,0,244,0],[44,0,582,1,30,1,263358.03,1.6,130,1,1,244,0],[51,0,582,1,40,0,221000,0.9,134,0,0,244,0],[67,0,213,0,38,0,215000,1.2,133,0,0,245,0],[42,0,64,0,40,0,189000,0.7,140,1,0,245,0],[60,1,257,1,30,0,150000,1,137,1,1,245,0],[45,0,582,0,38,1,422000,0.8,137,0,0,245,0],[70,0,618,0,35,0,327000,1.1,142,0,0,245,0],[70,0,582,1,38,0,25100,1.1,140,1,0,246,0],[50,1,1051,1,30,0,232000,0.7,136,0,0,246,0],[55,0,84,1,38,0,451000,1.3,136,0,0,246,0],[70,0,2695,1,40,0,241000,1,137,1,0,247,0],[70,0,582,0,40,0,51000,2.7,136,1,1,250,0],[42,0,64,0,30,0,215000,3.8,128,1,1,250,0],[65,0,1688,0,38,0,263358.03,1.1,138,1,1,250,0],[50,1,54,0,40,0,279000,0.8,141,1,0,250,0],[55,1,170,1,40,0,336000,1.2,135,1,0,250,0],[60,0,253,0,35,0,279000,1.7,140,1,0,250,0],[45,0,582,1,55,0,543000,1,132,0,0,250,0],[65,0,892,1,35,0,263358.03,1.1,142,0,0,256,0],[90,1,337,0,38,0,390000,0.9,144,0,0,256,0],[45,0,615,1,55,0,222000,0.8,141,0,0,257,0],[60,0,320,0,35,0,133000,1.4,139,1,0,258,0],[52,0,190,1,38,0,382000,1,140,1,1,258,0],[63,1,103,1,35,0,179000,0.9,136,1,1,270,0],[62,0,61,1,38,1,155000,1.1,143,1,1,270,0],[55,0,1820,0,38,0,270000,1.2,139,0,0,271,0],[45,0,2060,1,60,0,742000,0.8,138,0,0,278,0],[45,0,2413,0,38,0,140000,1.4,140,1,1,280,0],[50,0,196,0,45,0,395000,1.6,136,1,1,285,0]]}</script>
+    <script src="https://cdn.jsdelivr.net/npm/@visactor/vchart@2.1.7/build/index.min.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "https://cdn.jsdelivr.net/npm/@visactor/vchart@2.1.7/+esm": "data:text/javascript,export default globalThis.VChart.default;export const StreamLight=globalThis.VChart.StreamLight;"
+        }
+      }
+    </script>
+    <!-- 页面行为与业务逻辑分段维护，全部实现内嵌于本 HTML。 -->
+    <script id="dashboard-motion-runtime">
+      'use strict'
+
+      // 只管理呈现状态；查询、业务口径和布局配置仍由页面负责。
+      window.DashboardMotion = function createDashboardMotion({ reducedMotion, metricUnit }) {
+        const $ = (selector) => document.querySelector(selector)
+        const finePointer = matchMedia('(hover: hover) and (pointer: fine)')
+        const metricAnimations = new Map(),
+          numberFormats = new Map()
+        let metricFrame = 0
+        const easeOut = (p) => 1 - (1 - p) ** 3
+        function formatNumber(value, digits = 1, minimum = digits) {
+          if (!Number.isFinite(value)) return '—'
+          const key = `${minimum}:${digits}`
+          if (!numberFormats.has(key))
+            numberFormats.set(
+              key,
+              new Intl.NumberFormat('zh-CN', { minimumFractionDigits: minimum, maximumFractionDigits: digits }),
+            )
+          return numberFormats.get(key).format(value)
+        }
+        // 参考 chart-editor 的 surface / chart 入场；按页面位置轻微错峰，整组约两秒。
+        const entranceTiming = {
+          total: 2000,
+          stagger: 60,
+          chartLead: 100,
+          header: 1000,
+          surface: 1100,
+          insight: 1200,
+          hero: 1500,
+          chart: 1480,
+          footer: 800,
+          easing: 'cubic-bezier(.16,1,.3,1)',
+          chartEasing: 'cubic-bezier(.22,1,.36,1)',
+        }
+        let entrances = [],
+          hasEntered = false
+        function finishEntrance() {
+          document.body.dataset.entrance = 'complete'
+          entrances.forEach((animation) => animation.cancel())
+          entrances = []
+        }
+        function revealComponents() {
+          if (hasEntered) return
+          hasEntered = true
+          if (reducedMotion.matches) return finishEntrance()
+          document.body.dataset.entrance = 'playing'
+          const compact = matchMedia('(max-width: 760px)').matches
+          // 统一测量静态布局后再写动画，避免 transform 影响后续位置排序。
+          const stages = [...document.querySelectorAll('.topbar, .heading, [data-enter], .shell > footer')]
+            .map((element) => ({ element, bounds: element.getBoundingClientRect() }))
+            .sort((a, b) => a.bounds.top - b.bounds.top || a.bounds.left - b.bounds.left)
+          const stagger = Math.min(
+            entranceTiming.stagger,
+            (entranceTiming.total - entranceTiming.chart - entranceTiming.chartLead) / Math.max(1, stages.length - 1),
+          )
+          const delays = new Map(stages.map(({ element }, index) => [element, index * stagger]))
+          const startTime = document.timeline.currentTime
+          entrances = stages.map(({ element }) => {
+            const chrome = !element.hasAttribute('data-enter')
+            const footer = element.tagName === 'FOOTER'
+            const lead = element.id === 'insight-slot'
+            const hero = element.id === 'hero-slot'
+            const duration = footer
+              ? entranceTiming.footer
+              : chrome
+                ? entranceTiming.header
+                : lead
+                  ? entranceTiming.insight
+                  : hero
+                    ? entranceTiming.hero
+                    : entranceTiming.surface
+            const distance = (footer ? 0 : chrome ? -14 : hero ? 44 : 22) * (compact ? 0.65 : 1)
+            const scale = chrome ? 1 : hero ? (compact ? 0.98 : 0.965) : 0.99
+            const animation = element.animate(
+              [
+                {
+                  opacity: 0,
+                  transform: `translate3d(0, ${distance}px, 0) scale(${scale})`,
+                  transformOrigin: 'center top',
+                },
+                { opacity: 1, transform: 'translate3d(0, 0, 0) scale(1)', transformOrigin: 'center top' },
+              ],
+              {
+                duration,
+                delay: delays.get(element),
+                easing: footer ? 'ease-out' : entranceTiming.easing,
+                fill: 'both',
+              },
+            )
+            animation.startTime = startTime
+            return animation
+          })
+          // Canvas 随外层面板进入，并从下向上展开；动画不触发图表重绘。
+          for (const plot of document.querySelectorAll('.shell .plot')) {
+            const animation = plot.animate(
+              [
+                {
+                  opacity: 0,
+                  clipPath: 'inset(100% 0 0 0 round 10px)',
+                  transform: `translateY(${compact ? 16 : 24}px)`,
+                  offset: 0,
+                },
+                { opacity: 1, offset: 0.55 },
+                { opacity: 1, clipPath: 'inset(0% 0 0 0 round 0px)', transform: 'translateY(0)', offset: 1 },
+              ],
+              {
+                duration: entranceTiming.chart,
+                delay: (delays.get(plot.closest('[data-enter]')) ?? 0) + entranceTiming.chartLead,
+                easing: entranceTiming.chartEasing,
+                fill: 'both',
+              },
+            )
+            animation.startTime = startTime
+            entrances.push(animation)
+          }
+          Promise.all(entrances.map((animation) => animation.finished.catch(() => {}))).then(finishEntrance)
+        }
+        const metricTextNodes = new WeakMap()
+        function writeMetricText(element, text, busy = false) {
+          if (metricUnit && element.getAttribute('aria-busy') !== String(busy))
+            element.setAttribute('aria-busy', String(busy))
+          const unit = metricUnit?.(element)
+          if (!unit || text === '—') {
+            if (element.textContent !== text) element.textContent = text
+            metricTextNodes.delete(element)
+            return
+          }
+          let nodes = metricTextNodes.get(element)
+          if (!nodes) {
+            nodes = [document.createElement('span'), document.createElement('span')]
+            nodes[0].className = 'metric-number'
+            nodes[1].className = 'metric-unit'
+            element.replaceChildren(...nodes)
+            metricTextNodes.set(element, nodes)
+          }
+          const value = text.slice(0, -unit.length)
+          if (nodes[0].textContent !== value) nodes[0].textContent = value
+          if (nodes[1].textContent !== unit) nodes[1].textContent = unit
+        }
+        // 同一页面的读数共用一帧，保留各自的时长、缓动和连续更新起点。
+        function tickMetrics(now) {
+          metricFrame = 0
+          let running = false
+          metricAnimations.forEach((state) => {
+            if (state.tick && !state.tick(now)) state.tick = undefined
+            running ||= !!state.tick
+          })
+          if (running) metricFrame = requestAnimationFrame(tickMetrics)
+        }
+        function animateMetric(selector, target, format = String, emptyText = '—', duration = 600, ease = easeOut) {
+          const element = typeof selector === 'string' ? $(selector) : selector
+          const previous = metricAnimations.get(element)
+          if (previous && previous.target === target) return
+          if (!Number.isFinite(target)) {
+            metricAnimations.delete(element)
+            writeMetricText(element, emptyText)
+            return
+          }
+          const from = previous?.value ?? target
+          const state = { value: from, target, format }
+          metricAnimations.set(element, state)
+          const write = (value, busy = false) => {
+            state.value = value
+            writeMetricText(element, format(value), busy)
+          }
+          if (!previous || reducedMotion.matches || from === target) return write(target)
+          const started = performance.now()
+          state.tick = (now) => {
+            const progress = Math.min(1, (now - started) / duration)
+            write(from + (target - from) * ease(progress), progress < 1)
+            return progress < 1
+          }
+          write(from, true)
+          if (!metricFrame) metricFrame = requestAnimationFrame(tickMetrics)
+        }
+        function animateReading(element, target, format) {
+          animateMetric(element, target, format, Number.isFinite(target) ? '—' : format(target), 550, (p) =>
+            p < 0.5 ? 4 * p ** 3 : 1 - (-2 * p + 2) ** 3 / 2,
+          )
+        }
+        function cancelMetric(element) {
+          metricAnimations.delete(element)
+        }
+        function finishMetricAnimations() {
+          cancelAnimationFrame(metricFrame)
+          metricFrame = 0
+          metricAnimations.forEach((state, element) => {
+            state.tick = undefined
+            state.value = state.target
+            writeMetricText(element, state.format(state.target))
+          })
+        }
+        // 固定外层命中区域，内层旋转；弹性过渡的合成角度始终限制在 2°。
+        function bindCardTilt(card) {
+          const slot = card.parentElement
+          let x = 0,
+            y = 0,
+            vx = 0,
+            vy = 0,
+            targetX = 0,
+            targetY = 0,
+            frame = 0,
+            last = 0
+          function apply() {
+            const length = Math.hypot(x, y)
+            card.style.setProperty('--tilt-x', String(length ? x / length : 0))
+            card.style.setProperty('--tilt-y', String(length ? y / length : 1))
+            card.style.setProperty('--tilt-angle', `${Math.min(2, length)}deg`)
+          }
+          function tick(now) {
+            const dt = last ? Math.min((now - last) / 16.667, 2) : 1
+            last = now
+            vx = (vx + (targetX - x) * 0.1 * dt) * Math.pow(0.78, dt)
+            vy = (vy + (targetY - y) * 0.1 * dt) * Math.pow(0.78, dt)
+            x += vx * dt
+            y += vy * dt
+            apply()
+            frame = 0
+            if (Math.abs(targetX - x) + Math.abs(targetY - y) + Math.abs(vx) + Math.abs(vy) > 0.008) start()
+            else {
+              x = targetX
+              y = targetY
+              last = 0
+              apply()
+            }
+          }
+          function start() {
+            if (!frame) frame = requestAnimationFrame(tick)
+          }
+          function reset() {
+            targetX = targetY = 0
+            if (reducedMotion.matches || !finePointer.matches) {
+              cancelAnimationFrame(frame)
+              frame = last = x = y = vx = vy = 0
+              apply()
+            } else start()
+          }
+          function move(event) {
+            if (reducedMotion.matches || !finePointer.matches || event.pointerType !== 'mouse') return reset()
+            const rect = slot.getBoundingClientRect()
+            const px = ((event.clientX - rect.left) / rect.width - 0.5) * 2
+            const py = ((event.clientY - rect.top) / rect.height - 0.5) * 2
+            if (Math.abs(px) > 1 || Math.abs(py) > 1) {
+              if (targetX || targetY) reset()
+              return
+            }
+            const length = Math.max(1, Math.hypot(px, py))
+            targetX = (-py / length) * 1.5
+            targetY = (px / length) * 1.5
+            start()
+          }
+          const events = [
+            [slot, 'pointermove', move, { capture: true, passive: true }],
+            [slot, 'pointerleave', reset],
+            [document, 'pointercancel', reset, true],
+            [window, 'blur', reset],
+            [window, 'scroll', reset, { capture: true, passive: true }],
+            [reducedMotion, 'change', reset],
+            [finePointer, 'change', reset],
+          ]
+          events.forEach(([target, type, handler, options]) => target.addEventListener(type, handler, options))
+          return () => {
+            events.forEach(([target, type, handler, options]) => target.removeEventListener(type, handler, options))
+            cancelAnimationFrame(frame)
+          }
+        }
+        // 选中面依附按钮尺寸，loading 伸缩与换行无需逐帧测量。
+        function bindControls(root) {
+          const states = (root.matches('.segment') ? [root] : [...root.querySelectorAll('.segment')]).map((group) => {
+            const indicator = document.createElement('span')
+            indicator.className = 'segment-indicator'
+            indicator.setAttribute('aria-hidden', 'true')
+            group.dataset.glass = 'true'
+            return { group, indicator, animation: undefined }
+          })
+          function update() {
+            // 先读取所有变更位置，再迁移选中面；中途切换从当前画面接续。
+            const changes = states.flatMap((state) => {
+              const next = state.group.querySelector('button[aria-pressed="true"]')
+              if (state.indicator.parentElement === next) return []
+              const moving = next && state.indicator.isConnected && !reducedMotion.matches
+              return [
+                {
+                  state,
+                  next,
+                  from: moving && state.indicator.getBoundingClientRect(),
+                  to: moving && next.getBoundingClientRect(),
+                  width: moving && next.offsetWidth,
+                  height: moving && next.offsetHeight,
+                },
+              ]
+            })
+            for (const { state, next, from, to, width, height } of changes) {
+              state.animation?.cancel()
+              if (!next) {
+                state.indicator.remove()
+                continue
+              }
+              next.prepend(state.indicator)
+              if (!from?.width || !to?.width || !to.height) continue
+              const sx = to.width / width,
+                sy = to.height / height
+              state.animation = state.indicator.animate(
+                [
+                  {
+                    transform: `translate(${(from.x - to.x) / sx}px, ${(from.y - to.y) / sy}px) scale(${from.width / to.width}, ${from.height / to.height})`,
+                  },
+                  { transform: 'none' },
+                ],
+                { duration: 320, easing: 'cubic-bezier(.22,1,.36,1)' },
+              )
+            }
+          }
+          const observer = new MutationObserver(update)
+          observer.observe(root, {
+            subtree: true,
+            childList: true,
+            attributes: true,
+            attributeFilter: ['aria-pressed'],
+          })
+          const finish = () => {
+            if (reducedMotion.matches) states.forEach((state) => state.animation?.cancel())
+          }
+          reducedMotion.addEventListener('change', finish)
+          update()
+          return () => {
+            observer.disconnect()
+            reducedMotion.removeEventListener('change', finish)
+            states.forEach(({ group, indicator, animation }) => {
+              animation?.cancel()
+              indicator.remove()
+              delete group.dataset.glass
+            })
+          }
+        }
+        function disposeMotion() {
+          entrances.forEach((animation) => animation.cancel())
+          cancelAnimationFrame(metricFrame)
+          metricAnimations.clear()
+        }
+        return {
+          revealComponents,
+          finishEntrance,
+          animateMetric,
+          animateReading,
+          cancelMetric,
+          finishMetricAnimations,
+          formatNumber,
+          bindCardTilt,
+          bindControls,
+          disposeMotion,
+        }
+      }
+    </script>
+    <script id="dashboard-analysis-runtime">
+      'use strict'
+
+      // 只消费 Builder 查询结果；统计口径、问题和可核查的下一步由页面配置。
+      window.DashboardAnalysis = function DashboardAnalysis(config, number) {
+        const count = (row) => (Number.isFinite(row?.[config.countField]) ? row[config.countField] : 0)
+        const value = (row) => {
+          const numerator = row?.[config.field]
+          if (!Number.isFinite(numerator)) return undefined
+          if (!config.denominator) return numerator
+          const denominator = row[config.denominator]
+          if (!(denominator > 0)) return undefined
+          return ((config.complement ? denominator - numerator : numerator) / denominator) * (config.factor || 1)
+        }
+        const format = (value) =>
+          Number.isFinite(value)
+            ? `${number(value / (config.scale || 1), config.digits ?? 1)}${config.unit || ''}`
+            : '—'
+        const dimensionLabel = (field, value) => config.valueLabels?.[field]?.[value] ?? String(value ?? '未记录')
+        const rows = (data, dimensions) =>
+          data
+            .map((source) => {
+              const values = dimensions.map(([field]) => source[field])
+              const labels = dimensions.map(([field], index) => dimensionLabel(field, values[index]))
+              return {
+                key: JSON.stringify(values),
+                label: labels.join(' / '),
+                x: labels[1],
+                y: labels[0],
+                values,
+                source,
+                count: count(source),
+                value: value(source),
+              }
+            })
+            .filter((row) => row.count > 0 && Number.isFinite(row.value))
+        const gap = (current, baseline) => {
+          if (!Number.isFinite(current) || !Number.isFinite(baseline)) return '暂无可比基准'
+          const delta = current - baseline
+          if (Math.abs(delta / (config.scale || 1)) < 10 ** -(config.digits ?? 1) / 2) return '与当前范围基本持平'
+          return `较当前范围${delta > 0 ? '高' : '低'} ${config.factor === 100 && config.unit === '%' ? `${number(Math.abs(delta), 1)} 个百分点` : format(Math.abs(delta))}`
+        }
+        const observation = (row, baseline) =>
+          `${row.label}：${config.label} ${format(row.value)}，${gap(row.value, baseline)}；${config.countLabel || '来源记录'} ${number(row.count, 0)}`
+        const summary = (groups, cross, total) => {
+          const baseline = value(total)
+          if (!count(total) || !Number.isFinite(baseline))
+            return {
+              conclusion: '当前筛选没有足够的有效记录支持这项分析。',
+              evidence: ['可调整筛选范围，或核对缺失字段与分母。'],
+            }
+          const segments = rows(groups, [config.dimensions[0]])
+          const cells = rows(cross, config.dimensions)
+          const weight = (row) =>
+            config.kind === 'rate'
+              ? (row.count * row.value) / (config.factor || 100)
+              : Math.abs(row.value - baseline) * row.count
+          const focus = [...segments].sort((a, b) => weight(b) - weight(a) || b.count - a.count)[0]
+          const contrast = [...cells].sort(
+            (a, b) => Math.abs(b.value - baseline) * b.count - Math.abs(a.value - baseline) * a.count,
+          )[0]
+          const ranked = [...segments].sort((a, b) => a.value - b.value)
+          const spread =
+            ranked.length > 1
+              ? `分组范围 ${format(ranked[0].value)}—${format(ranked.at(-1).value)}；分别涉及 ${number(ranked[0].count, 0)} 与 ${number(ranked.at(-1).count, 0)} 条来源记录。`
+              : '当前筛选仅有一个有效分组，不能据此比较组间差异。'
+          return {
+            conclusion:
+              config.kind === 'rate' && baseline === 0
+                ? `当前范围${config.label}为 ${format(0)}，${config.countLabel || '来源记录'} ${number(count(total), 0)}；没有已记录的事件差异支持分组排序。`
+                : focus
+                  ? `${config.kind === 'rate' ? '事件记录较集中的分组为' : '结合差异与记录量，可先核对'} ${focus.label}，${config.label} ${format(focus.value)}，${gap(focus.value, baseline)}${config.kind === 'rate' ? `；该组占当前事件记录的 ${number((weight(focus) / ((count(total) * baseline) / (config.factor || 100))) * 100, 1)}%` : `；涉及 ${number(focus.count, 0)} 条来源记录`}。`
+                  : `当前范围${config.label} ${format(baseline)}。`,
+            evidence: [
+              `当前范围${config.label} ${format(baseline)}，${config.countLabel || '来源记录'} ${number(count(total), 0)}。${spread}`,
+              contrast && cells.length > 1
+                ? `按差异与记录量联合定位，可先核对 ${observation(contrast, baseline)}。`
+                : '当前范围的交叉分组不足，可扩大筛选后继续比较。',
+              `下一步：${config.action}`,
+            ],
+          }
+        }
+        const finding = (current, total, selectedLabel) => {
+          const baseline = value(total),
+            currentValue = value(current)
+          return selectedLabel
+            ? `${config.label} ${format(currentValue)}，${gap(currentValue, baseline)}；${config.countLabel || '来源记录'} ${number(count(current), 0)}。分组差异用于核查，不表示因果。`
+            : `当前范围${config.label} ${format(baseline)}；${config.countLabel || '来源记录'} ${number(count(total), 0)}。${config.action}`
+        }
+        const chartRows = (data, selected) => {
+          const x = [...new Set(data.map((row) => row.x))].slice(0, 8)
+          const allY = [...new Set(data.map((row) => row.y))]
+          const y = config.dimensions[0][2] ? allY.slice(-12) : allY.slice(0, 12)
+          const chosen = data.find((row) => row.key === selected)
+          if (chosen) {
+            if (!x.includes(chosen.x)) x.splice(Math.max(0, x.length - 1), 1, chosen.x)
+            if (!y.includes(chosen.y)) y.splice(Math.max(0, y.length - 1), 1, chosen.y)
+          }
+          return data.filter((row) => x.includes(row.x) && y.includes(row.y))
+        }
+        return { ...config, count, value, format, dimensionLabel, rows, gap, summary, finding, chartRows }
+      }
+    </script>
+    <script id="metric-analysis-runtime">
+      'use strict'
+
+      // 指标分析的共享实现；随模板内嵌，保持单 HTML 交付。
+      window.bindMetricAnalysis = function bindMetricAnalysis({
+        vbi,
+        Builder,
+        VChart,
+        accent,
+        labelColor,
+        motion,
+        entries,
+        getContext,
+        ready,
+      }) {
+        let dialog, context, dimension, selection, chart, table, observer, controller
+        let version = 0,
+          opener,
+          previousOverflow,
+          loadingTimer,
+          loadingControl,
+          loadingFrame,
+          finishLoadingPaint,
+          chartType,
+          menuRows,
+          analysisSpec,
+          analysisKey,
+          renderQueue = Promise.resolve()
+        const listeners = []
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+        const sizes = new WeakMap()
+        const resize = (instance, node) => {
+          if (!instance) return
+          const { clientWidth: width, clientHeight: height } = node
+          const size = `${width}:${height}`
+          if (width && height && sizes.get(instance) !== size) {
+            sizes.set(instance, size)
+            if (instance === chart) instance.resize(width, height)
+            else instance.resize()
+          }
+        }
+        const number = (value, digits = 1) => motion.formatNumber(value, digits, 0)
+        const nodes = {}
+        const button = (label, action) => {
+          const node = document.createElement('button')
+          node.textContent = label
+          node.type = 'button'
+          node.addEventListener('click', action)
+          return node
+        }
+        const stopControlLoading = () => {
+          loadingControl?.removeAttribute('data-loading')
+          loadingControl?.removeAttribute('aria-busy')
+          loadingControl = undefined
+          cancelAnimationFrame(loadingFrame)
+          finishLoadingPaint?.()
+        }
+        const startControlLoading = (control) => {
+          stopControlLoading()
+          loadingControl = control
+          control?.setAttribute('data-loading', 'true')
+          control?.setAttribute('aria-busy', 'true')
+        }
+        function createDialog() {
+          if (dialog) return
+          dialog = document.createElement('dialog')
+          dialog.className = 'ma-dialog'
+          dialog.setAttribute('aria-labelledby', 'ma-title')
+          dialog.innerHTML = `<div class="ma-shell">
+      <header class="ma-header"><div><h2 id="ma-title"></h2><p class="ma-scope" data-ma="scope"></p></div><button type="button" class="ma-close" aria-label="关闭指标分析" data-ma="close">×</button></header>
+      <div class="ma-body">
+      <p class="ma-feedback" data-ma="feedback" role="status"></p><button type="button" data-ma="retry" hidden>重新加载</button>
+      <div class="ma-content" data-ma="content" hidden>
+        <section class="ma-summary"><div><p class="ma-eyebrow" data-ma="value-label"></p><strong class="ma-value" data-ma="value"></strong></div><p class="ma-finding" data-ma="finding"></p></section>
+        <div class="ma-toolbar"><nav class="ma-modes segment" aria-label="分析维度" data-ma="modes"></nav><div class="ma-selection" data-ma="selection" hidden><span data-ma="selected"></span><button type="button" data-ma="reset" aria-label="清除分组筛选">清除 ×</button></div><details class="ma-picker" data-ma="picker"><summary data-ma="picker-label"><span data-ma="picker-text">选择分组</span><span class="ma-picker-chevron" aria-hidden="true">⌄</span></summary><div class="ma-groups" data-ma="groups" role="group" aria-label="选择分组查看记录"></div></details></div>
+        <section class="ma-chart-panel"><div class="ma-panel-heading"><h3 data-ma="chart-title"></h3></div><p class="ma-hint" data-ma="chart-hint"></p><div class="ma-chart" data-ma="chart" role="img"></div></section>
+        <section class="ma-table-panel"><div class="ma-panel-heading"><h3>关联明细</h3><button type="button" data-ma="expand" aria-expanded="false">展开表格</button></div><p class="ma-hint" data-ma="table-scope" aria-live="polite"></p><div class="ma-table" data-ma="table" role="region" aria-label="分析明细表" tabindex="0"></div></section>
+        <details class="ma-definition"><summary>统计口径与依据</summary><p data-ma="definition"></p><p data-ma="evidence"></p><p data-ma="grain"></p></details>
+      </div></div></div>`
+          for (const node of dialog.querySelectorAll('[data-ma]')) nodes[node.dataset.ma] = node
+          document.body.append(dialog)
+          listeners.push(motion.bindControls(nodes.modes))
+          nodes.close.addEventListener('click', closeDialog)
+          nodes.reset.addEventListener('click', (event) => {
+            selection = undefined
+            nodes['picker-label'].focus({ preventScroll: true })
+            void refresh(false, event.currentTarget)
+          })
+          nodes.retry.addEventListener('click', (event) => void refresh(true, event.currentTarget))
+          nodes.expand.addEventListener('click', () => {
+            const expanded = dialog.classList.toggle('ma-expanded')
+            nodes.expand.setAttribute('aria-expanded', String(expanded))
+            nodes.expand.textContent = expanded ? '返回分析布局' : '展开表格'
+            resize(table, nodes.table)
+            resize(chart, nodes.chart)
+          })
+          dialog.addEventListener('cancel', (event) => {
+            event.preventDefault()
+            closeDialog()
+          })
+          dialog.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && nodes.picker.open) {
+              event.preventDefault()
+              event.stopPropagation()
+              nodes.picker.open = false
+              nodes['picker-label'].focus()
+            }
+          })
+          dialog.addEventListener('click', (event) => {
+            if (!nodes.picker.contains(event.target)) nodes.picker.open = false
+          })
+          dialog.addEventListener('close', () => {
+            if (!dialog.open && context) cleanup()
+          })
+          observer = new ResizeObserver(() => {
+            if (dialog.open) {
+              resize(chart, nodes.chart)
+              resize(table, nodes.table)
+            }
+          })
+          observer.observe(nodes.chart)
+          observer.observe(nodes.table)
+        }
+        function selectGroup(key) {
+          selection = selection === key ? undefined : key
+          if (nodes.picker.open) {
+            nodes.picker.open = false
+            nodes['picker-label'].focus({ preventScroll: true })
+          }
+          void refresh(false, nodes['picker-label'])
+        }
+        function selectDimension(event) {
+          if (!dialog?.open || nodes.groups.inert || dimension?.[0].startsWith('__')) return
+          // 与原生 crosshair 使用同一维度命中，不要求鼠标或手指落在线条上。
+          const datum = event.dimensionInfo
+            ?.flatMap((info) => info.data || [])
+            .flatMap((data) => data.datum || [])
+            .find((row) => row.key !== undefined)
+          if (datum && groupRows?.some((row) => row.key === String(datum.key))) selectGroup(String(datum.key))
+        }
+        function selectDiagnostic(event) {
+          if (!dialog?.open || nodes.groups.inert || !dimension?.[0].startsWith('__')) return
+          const key = event.datum?.key
+          if (key !== undefined && groupRows?.some((row) => row.key === key)) selectGroup(key)
+        }
+        function completeClose() {
+          if (dialog?.open) dialog.close()
+          cleanup()
+        }
+        function closeDialog() {
+          if (!dialog?.open || dialog.dataset.closing === 'true') return
+          // 退场开始就让旧查询失效，但保留当前 Canvas 直到画面退场完成。
+          cancelRefresh()
+          if (reducedMotion.matches) return completeClose()
+          const current = getComputedStyle(dialog)
+          const from = { opacity: current.opacity, transform: current.transform }
+          dialog.getAnimations().forEach((animation) => animation.cancel())
+          dialog.dataset.closing = 'true'
+          const exit = dialog.animate([from, { opacity: 0, transform: 'translate3d(0, 24px, 0) scale(0.96)' }], {
+            duration: 220,
+            easing: 'cubic-bezier(.4,0,1,1)',
+            fill: 'forwards',
+          })
+          exit.finished
+            .then(() => {
+              if (dialog.dataset.closing === 'true') completeClose()
+            })
+            .catch(() => {})
+        }
+        function cancelRefresh() {
+          version++
+          controller?.abort()
+          if (dialog) motion.cancelMetric(nodes.value)
+          stopControlLoading()
+          clearTimeout(loadingTimer)
+        }
+        function cleanup() {
+          cancelRefresh()
+          renderQueue = Promise.resolve()
+          if (dialog) {
+            delete dialog.dataset.contentEnter
+            delete dialog.dataset.closing
+          }
+          dialog?.getAnimations({ subtree: true }).forEach((animation) => animation.cancel())
+          chart?.release()
+          chart = undefined
+          table?.release()
+          table = undefined
+          chartType = undefined
+          menuRows = analysisSpec = analysisKey = undefined
+          context = undefined
+          if (previousOverflow !== undefined) {
+            document.body.style.overflow = previousOverflow
+            previousOverflow = undefined
+          }
+          opener?.focus({ preventScroll: true })
+        }
+        async function query(dimensions, conditions, measures, signal) {
+          const builder = vbi.chart.create(vbi.chart.createEmpty(context.connectorId))
+          builder.chartType.changeChartType('table')
+          builder.limit.setLimit(context.rowLimit)
+          for (const [field, label] of dimensions)
+            builder.dimensions.add(field, (node) => node.setAlias(label).setSort({ order: 'asc' }))
+          for (const [field, label, func] of measures)
+            builder.measures.add(field, (node) => node.setAlias(label).setAggregate({ func }))
+          for (const condition of conditions)
+            builder.whereFilter.add(condition.field, (node) =>
+              node.setOperator(condition.operator || 'eq').setValue(condition.value),
+            )
+          try {
+            const seed = await builder.buildVSeed({ signal })
+            const fields = [...builder.build().dimensions, ...builder.build().measures]
+            return seed.dataset.map((row) => Object.fromEntries(fields.map((field) => [field.field, row[field.id]])))
+          } finally {
+            vbi.resources.chart.unregister(builder.getUUID())
+            builder.undoManager?.destroy()
+            builder.doc.destroy()
+          }
+        }
+        function buildDiagnosticSpec(group, chartRows, selected) {
+          const analysis = context.analysis
+          const matrix = group[0] === '__cross'
+          const key = JSON.stringify([group[0], chartRows, reducedMotion.matches])
+          if (key !== analysisKey) {
+            analysisSpec = Builder.from({
+              chartType: matrix ? 'heatmap' : 'scatter',
+              dataset: chartRows.map((row) => ({
+                ...row,
+                value: row.value / (analysis.scale || 1),
+                colorValue: row.value / (analysis.scale || 1),
+              })),
+              dimensions: matrix
+                ? [
+                    { id: 'x', alias: analysis.dimensions[1][1], encoding: 'xAxis' },
+                    { id: 'y', alias: analysis.dimensions[0][1], encoding: 'yAxis' },
+                  ]
+                : [{ id: 'label', alias: analysis.dimensions[0][1], encoding: 'detail' }],
+              measures: [
+                ...(matrix
+                  ? []
+                  : [
+                      {
+                        id: 'count',
+                        alias: analysis.countLabel || '来源记录数',
+                        encoding: 'xAxis',
+                        format: { type: 'number', fractionDigits: 0 },
+                      },
+                    ]),
+                ...(matrix
+                  ? [
+                      {
+                        id: 'colorValue',
+                        alias: analysis.label,
+                        encoding: 'color',
+                        format: { type: 'number', fractionDigits: analysis.digits ?? 1, suffix: analysis.unit || '' },
+                      },
+                    ]
+                  : []),
+                {
+                  id: 'value',
+                  alias: analysis.label,
+                  encoding: matrix ? 'label' : 'yAxis',
+                  format: { type: 'number', fractionDigits: analysis.digits ?? 1, suffix: analysis.unit || '' },
+                },
+                ...(matrix
+                  ? [
+                      {
+                        id: 'count',
+                        alias: analysis.countLabel || '来源记录数',
+                        encoding: 'tooltip',
+                        format: { type: 'number', fractionDigits: 0 },
+                      },
+                    ]
+                  : []),
+              ],
+              backgroundColor: 'transparent',
+              color: { colorScheme: [accent], linearColorScheme: ['#f1f4f8', accent] },
+              legend: { enable: false },
+              label: {
+                enable: matrix,
+                showValue: false,
+                showDimension: false,
+                labelFontSize: 11,
+                labelStroke: false,
+                labelColorSmartInvert: true,
+                labelOverlap: true,
+              },
+              tooltip: { enable: true },
+              xAxis: { visible: true, zero: true },
+              yAxis: { visible: true, zero: true },
+              size: 10,
+              animation: {
+                enable: !reducedMotion.matches,
+                params: { appear: { enable: false }, update: { enable: true, duration: 550, ease: 'cubicInOut' } },
+              },
+            }).build()
+            // label 编码补进 tooltip 时会重复颜色指标，只保留一次指标值。
+            if (matrix)
+              analysisSpec.tooltip.mark.content = analysisSpec.tooltip.mark.content.filter(
+                (item) => item.key !== analysis.label,
+              )
+            analysisSpec.animation = !reducedMotion.matches
+            analysisSpec.padding = { top: 16, right: 22, bottom: 10, left: 6 }
+            for (const axis of analysisSpec.axes || []) {
+              axis.label = {
+                ...axis.label,
+                style: { ...axis.label?.style, fill: labelColor || '#64717e', fontSize: 11 },
+              }
+              if (!matrix)
+                axis.title = {
+                  visible: true,
+                  text: axis.orient === 'bottom' ? analysis.countLabel || '来源记录数' : analysis.label,
+                  style: { fill: labelColor || '#64717e', fontSize: 11 },
+                }
+            }
+            const baseline = analysis.value(totalRow)
+            if (!matrix && Number.isFinite(baseline))
+              analysisSpec.markLine = {
+                y: baseline / (analysis.scale || 1),
+                line: { style: { stroke: accent, lineDash: [4, 4], lineWidth: 1 } },
+                label: { text: '当前范围基准', style: { fill: labelColor || '#64717e', fontSize: 10 } },
+              }
+            analysisKey = key
+          }
+          const mark = matrix ? 'cell' : 'point'
+          return {
+            ...analysisSpec,
+            [mark]: {
+              ...analysisSpec[mark],
+              style: {
+                ...analysisSpec[mark]?.style,
+                fillOpacity: (datum) => (selected === undefined || datum.key === selected ? 1 : 0.24),
+              },
+            },
+          }
+        }
+        function buildAnalysisSpec(group, metric, chartRows, chartTitle, selected) {
+          if (group[0].startsWith('__') && context.analysis) return buildDiagnosticSpec(group, chartRows, selected)
+          const key = JSON.stringify([group[0], chartRows, reducedMotion.matches])
+          if (key !== analysisKey) {
+            analysisSpec = Builder.from({
+              chartType: group[2] ? 'line' : 'bar',
+              dataset: chartRows.map((row) => ({ ...row, value: row.value / (metric.scale || 1) })),
+              dimensions: [{ id: 'key', alias: group[1], encoding: group[2] ? 'xAxis' : 'yAxis' }],
+              measures: [
+                {
+                  id: 'value',
+                  alias: chartTitle,
+                  encoding: group[2] ? 'yAxis' : 'xAxis',
+                  format: { type: 'number', fractionDigits: metric.digits ?? 1, suffix: metric.unit || '' },
+                },
+              ],
+              backgroundColor: 'transparent',
+              color: { colorScheme: [accent] },
+              legend: { enable: false },
+              label: { enable: false },
+              tooltip: { enable: true },
+              xAxis: { visible: true, zero: !group[2], ...(labelColor ? { label: { labelColor } } : {}) },
+              yAxis: { visible: true, zero: !group[2], ...(labelColor ? { label: { labelColor } } : {}) },
+              pointStyle: { pointVisible: true },
+              lineStyle: { lineSmooth: false },
+              animation: {
+                enable: !reducedMotion.matches,
+                params: {
+                  appear: { enable: true, effects: ['growth'], duration: 550, ease: 'cubicInOut' },
+                  update: { enable: true, duration: 550, ease: 'cubicInOut' },
+                },
+              },
+              barStyle: { barRadius: 3, barGradient: false },
+            }).build()
+            analysisKey = key
+          }
+          const spec = { ...analysisSpec }
+          spec.padding = { top: 12, right: 20, bottom: 10, left: 4 }
+          spec.stackCornerRadius = 0
+          const mark = group[2] ? 'point' : 'bar'
+          spec[mark] = {
+            ...spec[mark],
+            style: {
+              ...spec[mark]?.style,
+              fillOpacity: (datum) => (selected === undefined || String(datum.key) === selected ? 1 : 0.24),
+              strokeOpacity: (datum) => (selected === undefined || String(datum.key) === selected ? 1 : 0.24),
+              ...(group[2]
+                ? { size: (datum) => (String(datum.key) === selected ? 10 : 6), stroke: '#fff', lineWidth: 2 }
+                : {}),
+            },
+          }
+          return spec
+        }
+        function buildTableOptions(detailDimensions, detailMeasures, records) {
+          const dimensions = detailDimensions.map(([id, alias]) => ({ id, alias, encoding: 'column' }))
+          const measures = detailMeasures.map(([id, alias]) => ({
+            id,
+            alias,
+            encoding: 'column',
+            format: { type: 'number', fractionDigits: 3 },
+          }))
+          const options = records.length
+            ? Builder.from({
+                chartType: 'table',
+                dataset: records,
+                dimensions,
+                measures,
+                theme: 'light',
+              }).build()
+            : {
+                columns: [...dimensions, ...measures].map(({ id, alias }) => ({ field: id, title: alias })),
+                records: [],
+              }
+          options.widthMode = 'standard'
+          options.columns = options.columns.map((column) => ({
+            ...column,
+            width:
+              { country: 156, year: 72, id: 96, order_id: 110, order_date: 128, date: 128 }[column.field] ||
+              Math.max(96, Math.min(160, String(column.title || '').length * 12 + 24)),
+          }))
+          options.tooltip = { ...options.tooltip, parentElement: dialog, confine: true }
+          options.defaultColWidth = 130
+          return DashboardTable.options(options, nodes.table)
+        }
+        function renderGroupPicker(group, metric, rows, selected) {
+          nodes['picker-text'].textContent =
+            group[0] === '__cross' ? '选择组合' : group[0] === '__scale' ? '选择分组' : `选择${group[1]}`
+          nodes.picker.hidden = !rows.length
+          if (rows !== menuRows) {
+            nodes.groups.replaceChildren(
+              ...rows.map((row) => {
+                const choice = button(
+                  `${row.label || row.key} · ${(metric.groupFormat || metric.format)(row.value)}${row.count === undefined ? '' : ` · ${context.analysis?.countLabel || '来源记录数'} ${number(row.count, 0)}`}`,
+                  () => selectGroup(row.key),
+                )
+                choice.dataset.key = row.key
+                return choice
+              }),
+            )
+            menuRows = rows
+          }
+          for (const choice of nodes.groups.children)
+            choice.setAttribute('aria-pressed', String(selected === choice.dataset.key))
+        }
+        let groupRows, totalRow, priorRow
+        async function refresh(reload, control) {
+          if (!dialog?.open || dialog.dataset.closing === 'true') return
+          const ticket = ++version
+          const isCurrent = () => dialog.open && ticket === version
+          startControlLoading(control)
+          const started = performance.now()
+          const hadContent = !nodes.content.hidden
+          controller?.abort()
+          controller = new AbortController()
+          const signal = controller.signal
+          dialog.dataset.state = 'loading'
+          const model = context,
+            metric = context.metric,
+            group = dimension,
+            selected = selection
+          const analysis = model.analysis
+          const diagnostic = !!analysis && group[0].startsWith('__')
+          const dimensions = diagnostic
+            ? group[0] === '__cross'
+              ? analysis.dimensions
+              : [analysis.dimensions[0]]
+            : [group]
+          const plotMetric = diagnostic
+            ? {
+                ...metric,
+                title: analysis.label,
+                format: analysis.format,
+                groupFormat: analysis.format,
+                scale: analysis.scale,
+                digits: analysis.digits,
+                unit: analysis.unit,
+              }
+            : metric
+          const measures = [
+            ...new Map(
+              [...metric.measures, ...(analysis?.measures || [])].map((measure) => [measure[0], measure]),
+            ).values(),
+          ]
+          const selectedLabel = groupRows?.find((row) => row.key === selected)?.label || selected
+          clearTimeout(loadingTimer)
+          nodes.feedback.textContent = ''
+          nodes.feedback.dataset.loading = String(!hadContent)
+          nodes.feedback.setAttribute('aria-label', hadContent ? '' : '正在加载分析')
+          nodes.retry.hidden = control !== nodes.retry
+          nodes.content.setAttribute('aria-busy', 'true')
+          nodes.groups.inert = true
+          const clearing = control === nodes.reset
+          nodes.selection.hidden = selected === undefined && !clearing
+          if (!clearing) nodes.selected.textContent = selected === undefined ? '' : `${group[1]}：${selectedLabel}`
+          const extra =
+            selected === undefined
+              ? []
+              : [{ field: group[0], value: group[3] === 'number' ? Number(selected) : selected }]
+          try {
+            if (control)
+              await new Promise((resolve) => {
+                finishLoadingPaint = resolve
+                loadingFrame = requestAnimationFrame(() => {
+                  loadingFrame = requestAnimationFrame(resolve)
+                })
+              })
+            if (!isCurrent()) return
+            const base = metric.conditions
+            let selectedConditions =
+              selected !== undefined && metric.selectionConditions
+                ? metric.selectionConditions(group, selected)
+                : [...base, ...extra]
+            let previousConditions =
+              selected !== undefined && metric.previousSelectionConditions
+                ? metric.previousSelectionConditions(group, selected)
+                : [...(metric.previous || []), ...extra]
+            if (diagnostic && selected !== undefined) {
+              const values = JSON.parse(selected)
+              const extraConditions = dimensions.map(([field], index) => ({ field, value: values[index] }))
+              selectedConditions = metric.selectionConditions
+                ? [...metric.selectionConditions(dimensions[0], values[0]), ...extraConditions.slice(1)]
+                : [...base, ...extraConditions]
+              previousConditions = metric.previousSelectionConditions
+                ? [...metric.previousSelectionConditions(dimensions[0], values[0]), ...extraConditions.slice(1)]
+                : [...(metric.previous || []), ...extraConditions]
+            }
+            const detailDimensions = [
+              ...new Map(
+                [...model.detailDimensions, ...(analysis?.dimensions || [])].map((item) => [item[0], item]),
+              ).values(),
+            ].filter(([field]) => !metric.detailExclude?.includes(field))
+            const detailMeasures = measures.filter(([field]) => !detailDimensions.some(([key]) => field === key))
+            const [library, details, groups, total, prior, selectedTotal, selectedPrior] = await Promise.all([
+              DashboardTable.load(),
+              query(detailDimensions, selectedConditions, detailMeasures, signal),
+              reload
+                ? query(
+                    dimensions,
+                    typeof metric.groupConditions === 'function'
+                      ? metric.groupConditions(dimensions[0])
+                      : metric.groupConditions || base,
+                    measures,
+                    signal,
+                  )
+                : undefined,
+              reload ? query([], base, measures, signal) : undefined,
+              reload && metric.previous ? query([], metric.previous, measures, signal) : undefined,
+              selected !== undefined ? query([], selectedConditions, measures, signal) : undefined,
+              selected !== undefined && metric.previous ? query([], previousConditions, measures, signal) : undefined,
+            ])
+            if (!isCurrent()) return
+            if (reload) {
+              totalRow = total[0] || {}
+              priorRow = prior?.[0] || {}
+              groupRows = diagnostic
+                ? analysis.rows(groups, dimensions)
+                : groups
+                    .map((row) => ({
+                      source: row,
+                      count: analysis?.count(row),
+                      key: String(row[group[0]]),
+                      value: metric.groupValue ? metric.groupValue(row, priorRow) : metric.value(row, priorRow),
+                    }))
+                    .filter((row) => Number.isFinite(row.value))
+              if (!diagnostic && !group[2])
+                groupRows.sort((a, b) => b.value - a.value || a.key.localeCompare(b.key, 'zh-CN', { numeric: true }))
+              else if (!diagnostic) groupRows.sort((a, b) => a.key.localeCompare(b.key, 'zh-CN', { numeric: true }))
+            }
+            const current = selectedTotal?.[0] || totalRow
+            const baseline = selectedPrior?.[0] || priorRow
+            const value = metric.value(current, baseline)
+            const overall = metric.value(totalRow, priorRow)
+            const plotRows = groupRows
+            // 提交串行化，切换或关闭后的旧查询与旧渲染都不能覆盖当前结果。
+            renderQueue = renderQueue
+              .catch(() => {})
+              .then(async () => {
+                if (!isCurrent()) return
+                nodes.content.hidden = false
+                nodes['value-label'].textContent =
+                  selected === undefined
+                    ? metric.previous
+                      ? '当前比较范围'
+                      : model.detailScope || '当前范围'
+                    : `${group[1]}：${selectedLabel}`
+                nodes['value-label'].title = nodes['value-label'].textContent
+                motion.animateReading(nodes.value, value, metric.format)
+                const ranked = selected === undefined ? [...plotRows].sort((a, b) => b.value - a.value) : []
+                nodes.finding.textContent =
+                  selected !== undefined
+                    ? `总体 ${metric.format(overall)}`
+                    : metric.finding
+                      ? metric.finding(current, baseline, plotRows)
+                      : ranked.length > 1 && ranked.every((row) => row.value === ranked[0].value)
+                        ? `各${group[1]}的${metric.title}均为 ${metric.format(ranked[0].value)}。`
+                        : ranked.length
+                          ? `${ranked[0].key}的${metric.title}最高（${metric.format(ranked[0].value)}）${ranked.length > 1 ? `，${ranked.at(-1).key}最低（${metric.format(ranked.at(-1).value)}）` : ''}。`
+                          : '当前范围没有可分析的有效值。可返回看板调整筛选。'
+                if (analysis && (diagnostic || !metric.finding))
+                  nodes.finding.textContent = analysis.finding(current, totalRow, selectedLabel)
+                nodes.definition.textContent = metric.definition
+                nodes.evidence.textContent = metric.evidence
+                  ? metric.evidence(current, baseline)
+                  : '汇总由当前范围内的完整记录计算；表格滚动不改变汇总值。'
+                if (analysis)
+                  nodes.evidence.textContent += ` 分析问题：${analysis.question}。交叉组合按所显示的两个字段同时筛选；首页的交叉核查候选按“差异绝对值 × 来源记录量”定位，不表示收益或统计显著性。各均值使用字段自身有效值，记录量不代表每个字段均有效。`
+                nodes.grain.textContent = `${model.grain} · ${selected === undefined ? '当前筛选范围' : `${group[1]}：${selectedLabel}`} · 表格包含当前范围的完整结果`
+                const detailScope =
+                  selected === undefined ? model.detailScope || '当前范围' : `${group[1]}：${selectedLabel}`
+                nodes['table-scope'].textContent = `${detailScope} · ${number(details.length, 0)} 条记录`
+                nodes['table-scope'].title = nodes['table-scope'].textContent
+                nodes.table.setAttribute('aria-label', `关联明细，${detailScope}，${details.length} 条记录`)
+                const chartTitle = diagnostic ? analysis.label : metric.groupTitle || metric.title
+                nodes['chart-title'].textContent = diagnostic
+                  ? `${group[0] === '__cross' ? analysis.dimensions.map((item) => item[1]).join(' × ') : '规模与表现'} · ${analysis.label}`
+                  : metric.groupTitle || (group[2] ? `${group[1]}趋势` : `${group[1]}比较`)
+                nodes['chart-hint'].textContent = !group[2] && plotRows.length > 12 ? '前 12 组' : ''
+                renderGroupPicker(group, plotMetric, plotRows, selected)
+                const chartRows = diagnostic
+                  ? group[0] === '__cross'
+                    ? analysis.chartRows(plotRows, selected)
+                    : [...plotRows]
+                  : group[2]
+                    ? plotRows
+                    : plotRows.slice(0, 12)
+                // 菜单可选择 Top N 以外的分组；选中项仍须能在图中定位。
+                if (!diagnostic && selected !== undefined && !chartRows.some((row) => row.key === selected)) {
+                  const row = plotRows.find((row) => row.key === selected)
+                  if (row) {
+                    chartRows.splice(Math.max(0, chartRows.length - 1), 1, row)
+                    nodes['chart-hint'].textContent = '前 11 组及已选项'
+                  }
+                }
+                if (diagnostic)
+                  nodes['chart-hint'].textContent =
+                    group[0] === '__cross'
+                      ? `颜色越深表示${analysis.label}越高；显示 ${chartRows.length}/${plotRows.length} 个有效组合，完整组合见菜单。`
+                      : `横轴为${analysis.countLabel || '来源记录数'}，纵轴为${analysis.label}；虚线为当前范围基准，点选核对记录。`
+                nodes.chart.dataset.empty = String(!chartRows.length)
+                if (!chartRows.length) {
+                  chart?.release()
+                  chart = undefined
+                }
+                if (chartRows.length) {
+                  const spec = buildAnalysisSpec(group, plotMetric, chartRows, chartTitle, selected)
+                  // 原生 HTML tooltip 必须挂在 dialog 顶层内，才能显示在遮罩上。
+                  spec.tooltip = { ...spec.tooltip, parentElement: dialog, confine: true }
+                  if (chart) {
+                    const changedType = chartType !== spec.type
+                    // 点、矩形与矩阵单元不做跨图元形变，避免无效路径；同图型仍平滑更新。
+                    const crossMarks =
+                      changedType && [chartType, spec.type].some((type) => type === 'scatter' || type === 'heatmap')
+                    const morph = !reducedMotion.matches && !crossMarks
+                    await chart.updateSpec(
+                      spec,
+                      false,
+                      {
+                        morph,
+                        ...(morph && changedType ? { reuse: false } : {}),
+                      },
+                      changedType ? { change: true, reMake: true } : undefined,
+                    )
+                    if (isCurrent() && crossMarks && !reducedMotion.matches)
+                      nodes.chart.animate([{ opacity: 0.75 }, { opacity: 1 }], { duration: 220, easing: 'ease-out' })
+                  } else {
+                    chart = new VChart(spec, { dom: nodes.chart })
+                    chart.renderSync()
+                  }
+                  chartType = spec.type
+                  if (!isCurrent()) return
+                  // 切换图型后重新绑定到当前坐标系；同一次点击只走维度事件，避免二次切换。
+                  chart.off('dimensionClick', selectDimension)
+                  chart.on('dimensionClick', selectDimension)
+                  chart.off('click', selectDiagnostic)
+                  chart.on('click', selectDiagnostic)
+                }
+                nodes.chart.setAttribute(
+                  'aria-label',
+                  `${chartTitle}，${selected === undefined ? '未选择分组' : `已选择${selectedLabel}`}，也可通过选择${group[1]}菜单联动明细`,
+                )
+                // 同一指标的表结构不变：筛选和翻页仅替换记录，避免重建表头及重算列宽。
+                const existingTable = !!table
+                if (!table) {
+                  const options = buildTableOptions(detailDimensions, detailMeasures, details)
+                  table = new library.ListTable(nodes.table, options)
+                  sizes.set(table, `${nodes.table.clientWidth}:${nodes.table.clientHeight}`)
+                }
+                if (!isCurrent()) return
+                if (existingTable) DashboardTable.setRecords(table, details, { animate: false })
+                resize(chart, nodes.chart)
+                nodes.feedback.textContent = details.length ? '' : '当前范围暂无明细记录。'
+                dialog.dataset.state = details.length ? 'ready' : 'empty'
+                if (dialog.dataset.contentEnter !== 'true') dialog.dataset.contentEnter = 'true'
+              })
+            await renderQueue
+            if (!isCurrent()) return
+            clearTimeout(loadingTimer)
+            const remaining = control ? 200 - (performance.now() - started) : 0
+            if (remaining > 0)
+              await new Promise((resolve) => {
+                finishLoadingPaint = resolve
+                loadingTimer = setTimeout(resolve, remaining)
+              })
+          } catch (error) {
+            if (!isCurrent()) return
+            nodes.feedback.textContent = `分析未完成：${error.message}`
+            nodes.retry.hidden = false
+            nodes.content.hidden = !hadContent
+            dialog.dataset.state = 'error'
+          } finally {
+            if (isCurrent()) {
+              clearTimeout(loadingTimer)
+              stopControlLoading()
+              delete nodes.feedback.dataset.loading
+              nodes.feedback.removeAttribute('aria-label')
+              nodes.selection.hidden = selection === undefined
+              if (dialog.dataset.state !== 'error') nodes.retry.hidden = true
+              nodes.content.setAttribute('aria-busy', 'false')
+              nodes.groups.inert = false
+            }
+          }
+        }
+        function open(index, trigger) {
+          if (!ready() || dialog?.open) return
+          createDialog()
+          delete dialog.dataset.contentEnter
+          context = getContext(index)
+          if (context.analysis)
+            context.dimensions = [...context.dimensions, ['__scale', '规模与表现'], ['__cross', '交叉定位']]
+          dimension = context.dimensions[0]
+          selection = undefined
+          groupRows = undefined
+          opener = trigger
+          dialog.classList.remove('ma-expanded')
+          nodes.expand.textContent = '展开表格'
+          nodes.expand.setAttribute('aria-expanded', 'false')
+          nodes.content.hidden = true
+          dialog.querySelector('.ma-definition').open = false
+          nodes.picker.open = false
+          dialog.querySelector('#ma-title').textContent = context.metric.title
+          nodes.scope.textContent = context.scope
+          nodes.modes.replaceChildren(
+            ...context.dimensions.map((group) => {
+              const choice = button(group[1], () => {
+                if (dimension === group) return
+                dimension = group
+                selection = undefined
+                for (const sibling of nodes.modes.children)
+                  sibling.setAttribute('aria-pressed', String(sibling === choice))
+                void refresh(true, choice)
+              })
+              choice.setAttribute('aria-pressed', String(group === dimension))
+              return choice
+            }),
+          )
+          previousOverflow = document.body.style.overflow
+          document.body.style.overflow = 'hidden'
+          // 用触发指标在屏幕上的位置确定展开支点；键盘触发沿用同一个入口。
+          const origin = trigger.getBoundingClientRect()
+          dialog.showModal()
+          const left = (innerWidth - dialog.offsetWidth) / 2
+          const top = (innerHeight - dialog.offsetHeight) / 2
+          const x = Math.max(12, Math.min(88, ((origin.left + origin.width / 2 - left) / dialog.offsetWidth) * 100))
+          const y = Math.max(12, Math.min(88, ((origin.top + origin.height / 2 - top) / dialog.offsetHeight) * 100))
+          dialog.style.setProperty('--overlay-origin', `${x}% ${y}%`)
+          dialog.querySelector('.ma-body').scrollTop = 0
+          nodes.close.focus()
+          void refresh(true)
+        }
+        const onOverlayMotionChange = () => {
+          if (!reducedMotion.matches || !dialog?.open) return
+          if (dialog.dataset.closing === 'true') completeClose()
+          else dialog.getAnimations({ subtree: true }).forEach((animation) => animation.cancel())
+        }
+        reducedMotion.addEventListener('change', onOverlayMotionChange)
+        listeners.push(() => reducedMotion.removeEventListener('change', onOverlayMotionChange))
+        const cards = new Set()
+        entries.forEach((entry, index) => {
+          const value = document.querySelector(entry.value)
+          if (!value) return
+          const heading = entry.heading ? document.querySelector(entry.heading) : value.previousElementSibling
+          for (const trigger of [heading, value].filter(Boolean)) {
+            trigger.classList.add('ma-entry')
+            trigger.dataset.maEntry = String(index)
+            trigger.title = '查看指标分析'
+            if (trigger === heading) {
+              trigger.tabIndex = 0
+              trigger.setAttribute('role', 'button')
+              trigger.setAttribute('aria-haspopup', 'dialog')
+              const key = (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault()
+                  event.stopPropagation()
+                  open(index, trigger)
+                }
+              }
+              trigger.addEventListener('keydown', key)
+              listeners.push(() => trigger.removeEventListener('keydown', key))
+            }
+            const click = (event) => {
+              event.stopPropagation()
+              open(index, heading || trigger)
+            }
+            trigger.addEventListener('click', click)
+            listeners.push(() => trigger.removeEventListener('click', click))
+          }
+          if (entry.card) {
+            const card = value.closest('section')
+            if (!card || cards.has(card)) return
+            cards.add(card)
+            card.classList.add('ma-card')
+            const click = (event) => {
+              if (
+                event.target.closest('button, a, input, [data-ma-entry], .plot, .mini, figure, fieldset, [role="img"]')
+              )
+                return
+              open(index, heading)
+            }
+            card.addEventListener('click', click)
+            listeners.push(() => card.removeEventListener('click', click))
+          }
+        })
+        return () => {
+          completeClose()
+          observer?.disconnect()
+          dialog?.remove()
+          listeners.forEach((dispose) => dispose())
+        }
+      }
+    </script>
+    <script type="module">
+      const $ = (selector) => document.querySelector(selector)
+      const grid = $('#dashboard')
+      const instances = new Map()
+      let observer,
+        disposed = false
+      const subscriptions = []
+      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
+      const motion = DashboardMotion({ reducedMotion })
+      const { revealComponents, finishEntrance, animateMetric, finishMetricAnimations, bindCardTilt, disposeMotion } =
+        motion
+      const formatNumber = motion.formatNumber
+      subscriptions.push(
+        motion.bindControls($('#filters')),
+        ...[...document.querySelectorAll('.metric-card')].map(bindCardTilt),
+      )
+
+      const PAGE = {
+        accent: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
+        track: getComputedStyle(document.documentElement).getPropertyValue('--chart-track').trim(),
+        labelColor: getComputedStyle(document.documentElement).getPropertyValue('--muted').trim(),
+        labels: ['样本人数', '记录死亡事件占比', '平均射血分数', '平均血清肌酐'],
+        formats: [
+          [0, ' 人'],
+          [1, '%'],
+          [1, '%'],
+          [2, ' mg/dL'],
+          [1, ' 岁'],
+          [1, ' 天'],
+          [0, ' 例'],
+        ],
+        initial: { age: '', pressure: '' },
+        sourceNote: 'time 为随访天数，不是日历日期',
+        restoreLabel: '全体汇总 · 悬停或方向键查看年龄组',
+        layout: [
+          { x: 0, y: 4, w: 12, h: 8 },
+          { x: 0, y: 1, w: 4, h: 3 },
+          { x: 4, y: 1, w: 4, h: 3 },
+          { x: 8, y: 1, w: 4, h: 3 },
+        ],
+        schema: {
+          id: 'string',
+          age: 'number',
+          age_band: 'string',
+          pressure: 'number',
+          death: 'number',
+          ef: 'number',
+          creatinine: 'number',
+          followup: 'number',
+        },
+        aliases: { age_band: '年龄组' },
+        queries: {
+          groups: {
+            type: 'bar',
+            dimensions: ['age_band'],
+            measures: [
+              ['id', '样本人数', 'countDistinct'],
+              ['death', '死亡事件数', 'sum'],
+              ['ef', '射血分数', 'avg'],
+              ['creatinine', '血清肌酐', 'avg'],
+              ['age', '年龄', 'avg'],
+              ['followup', '随访天数', 'avg'],
+            ],
+          },
+          totals: {
+            measures: [
+              ['id', '样本人数', 'countDistinct'],
+              ['death', '死亡事件数', 'sum'],
+              ['ef', '射血分数', 'avg'],
+              ['creatinine', '血清肌酐', 'avg'],
+              ['age', '年龄', 'avg'],
+              ['followup', '随访天数', 'avg'],
+            ],
+          },
+        },
+        connectorId: 'vbi-dashboard-template-2',
+        columns: ['年龄组（岁）', '样本人数', '记录死亡事件', '事件占比', '平均射血分数', '平均肌酐（mg/dL）'],
+      }
+
+      const analysis = DashboardAnalysis(
+        {
+          countField: 'id',
+          countLabel: '来源记录数',
+          scale: 1,
+          digits: 1,
+          measures: PAGE.queries.totals.measures,
+          field: 'death',
+          denominator: 'id',
+          factor: 100,
+          kind: 'rate',
+          unit: '%',
+          label: '记录死亡事件占比',
+          question: '事件数量与事件占比指向同一年龄组吗？',
+          dimensions: [
+            ['age_band', '年龄组'],
+            ['pressure', '高血压状态', false, 'number'],
+          ],
+          valueLabels: { pressure: { 0: '无高血压', 1: '有高血压' } },
+          action:
+            '先在相近随访时长下核对年龄组与高血压状态，结合射血分数和肌酐分布继续验证；该队列不能用于临床阈值或个体风险判断。',
+        },
+        formatNumber,
+      )
+      PAGE.aliases = {
+        ...PAGE.aliases,
+        ...Object.fromEntries(analysis.dimensions.map(([field, label]) => [field, label])),
+      }
+      PAGE.queries.analysisGroups = { dimensions: [analysis.dimensions[0][0]], measures: analysis.measures }
+      PAGE.queries.analysisCross = {
+        dimensions: analysis.dimensions.map(([field]) => field),
+        measures: analysis.measures,
+      }
+      function prepareRows(source) {
+        return source.rows.map((values, index) => {
+          const r = Object.fromEntries(source.columns.map((key, i) => [key, values[i]]))
+          return {
+            id: String(index),
+            age: r.age,
+            age_band:
+              r.age < 50 ? '40–49' : r.age < 60 ? '50–59' : r.age < 70 ? '60–69' : r.age < 80 ? '70–79' : '80–95',
+            pressure: r.high_blood_pressure,
+            death: r.DEATH_EVENT,
+            ef: r.ejection_fraction,
+            creatinine: r.serum_creatinine,
+            followup: r.time,
+          }
+        })
+      }
+      function conditionsFor(key, state) {
+        const filters = []
+        if (state.age)
+          filters.push({
+            name: 'age',
+            field: 'age',
+            operator: 'between',
+            value: state.age === 'younger' ? { min: 0, max: 59.999 } : { min: 60, max: 120 },
+          })
+        if (state.pressure) filters.push({ name: 'pressure', field: 'pressure', value: Number(state.pressure) })
+        return filters
+      }
+      function buildView(result, state) {
+        const groups = [...result.groups].sort((a, b) => a.age_band.localeCompare(b.age_band))
+        const total = result.totals[0] || {}
+        function metrics(r) {
+          const n = r.id || 0,
+            events = r.death || 0
+          return {
+            values: [n, ratio(events, n), r.ef, r.creatinine, r.age, r.followup, events],
+            note: '所选样本记录数 · 按年龄组比较',
+            notes: [`${count(events)} 例 / ${count(n)} 份记录`, '样本均值 · 非临床阈值分组', '样本均值'],
+            ringRows: [
+              { key: '记录死亡', value: events },
+              { key: '未记录死亡', value: n - events },
+            ],
+          }
+        }
+        const current = metrics(total)
+        const points = groups.map((r) => ({ key: r.age_band, label: `${r.age_band} 岁`, metrics: metrics(r) }))
+        const findings = analysis.summary(result.analysisGroups, result.analysisCross, total)
+        findings.evidence.splice(
+          1,
+          0,
+          `平均随访 ${formatNumber(total.followup)} 天；不同随访长度的事件占比不能视为统一时点死亡率。`,
+        )
+        const scope = `${count(total.id || 0)} 份记录 · ${state.age === 'younger' ? '60 岁以下' : state.age ? '60 岁及以上' : '全部年龄'} · ${state.pressure === '1' ? '有高血压' : state.pressure === '0' ? '无高血压' : '全部高血压状态'}`
+        return {
+          metrics: current,
+          scope,
+          empty: !(total.id > 0),
+          ...findings,
+          axisLabels: [],
+          table: groups.map((r) => [
+            r.age_band,
+            count(r.id),
+            count(r.death),
+            `${formatNumber(ratio(r.death, r.id))}%`,
+            `${formatNumber(r.ef)}%`,
+            formatNumber(r.creatinine, 2),
+          ]),
+          plots: [
+            {
+              id: 'main-plot',
+              emptyId: 'main-empty',
+              type: 'bar',
+              main: true,
+              categorical: true,
+              valueLabel: '样本人数',
+              dimensionLabel: '年龄组（岁）',
+              digits: 0,
+              rows: groups.map((r) => ({ key: r.age_band, value: r.id })),
+              scope: 'all',
+              points,
+            },
+            {
+              id: 'ring-plot',
+              emptyId: 'empty-one',
+              type: 'donut',
+              valueLabel: '记录数',
+              digits: 0,
+              rows: current.ringRows,
+              scope: 1,
+              points: current.ringRows.map((r) => ({
+                key: r.key,
+                label: r.key,
+                metrics: {
+                  ...current,
+                  titles: { 1: `${r.key}占比` },
+                  values: current.values.map((v, i) => (i === 1 ? ratio(r.value, total.id) : v)),
+                },
+              })),
+            },
+            {
+              id: 'plot-two',
+              emptyId: 'empty-two',
+              type: 'column',
+              valueLabel: '平均射血分数',
+              dimensionLabel: '年龄组（岁）',
+              unit: '%',
+              rows: groups.map((r) => ({ key: r.age_band, value: r.ef })),
+              scope: 2,
+              points,
+            },
+            {
+              id: 'plot-three',
+              emptyId: 'empty-three',
+              type: 'column',
+              valueLabel: '平均血清肌酐',
+              dimensionLabel: '年龄组（岁）',
+              digits: 2,
+              unit: ' mg/dL',
+              rows: groups.map((r) => ({ key: r.age_band, value: r.creatinine })),
+              scope: 3,
+              points,
+            },
+          ],
+        }
+      }
+
+      const sourceData = JSON.parse($('#source-data').textContent)
+      const count = (value) => formatNumber(value, 0)
+      const ratio = (a, b) => (Number.isFinite(a) && Number.isFinite(b) && b > 0 ? (a / b) * 100 : undefined)
+      const valueWith = (digits, unit) => (value) => `${formatNumber(value, digits)}${unit}`
+      const formats = PAGE.formats.map(([digits, unit]) => valueWith(digits, unit))
+      const metricSelectors = [
+        '#primary',
+        '#metric-one',
+        '#metric-two',
+        '#metric-three',
+        '#aux-one',
+        '#aux-two',
+        '#ring-value',
+      ]
+      const state = { ...PAGE.initial }
+      let view,
+        revision = 0,
+        completed = 0,
+        rendering = false
+      const bindings = new Map()
+      const plotSizes = new WeakMap()
+      const definitionByPlot = new Map()
+      let overviewTable, overviewObserver
+      const preparedRows = prepareRows(sourceData)
+      function setTable(rows) {
+        const host = $('#overview-table')
+        const options = DashboardTable.overview(Builder, PAGE.columns, rows, host)
+        host.dataset.empty = String(!rows.length)
+        host.dataset.recordCount = String(rows.length)
+        $('#overview-count').textContent = `${rows.length} 条记录`
+        host.setAttribute('aria-label', `完整明细表，${rows.length} 条记录`)
+        if (overviewTable) DashboardTable.setRecords(overviewTable, options.records)
+        else {
+          overviewTable = new window.VTable.ListTable(host, options)
+          overviewObserver = new ResizeObserver(() => {
+            if (host.clientWidth && host.clientHeight) overviewTable?.resize()
+          })
+          overviewObserver.observe(host)
+        }
+      }
+      function showMetrics(metrics, only = 'all', label = '') {
+        if (!metrics) return
+        for (let index = 1; index <= 3; index++)
+          if (only === 'all' || only === index)
+            $(`#title-${['one', 'two', 'three'][index - 1]}`).textContent =
+              metrics.titles?.[index] || PAGE.labels[index]
+        metricSelectors.forEach((selector, index) => {
+          if (only === 'all' || only === index) animateMetric(selector, metrics.values[index], formats[index])
+        })
+        if (only === 'all') {
+          $('#primary-note').textContent = label || metrics.note
+          $('#hover-scope').textContent = label ? `${label} · 局部查看` : PAGE.restoreLabel
+          for (let index = 1; index <= 3; index++) $(`#note-${index}`).textContent = label || metrics.notes[index - 1]
+          if (metrics.ringRows) {
+            const ring = definitionByPlot.get('ring-plot')
+            if (ring && ring.rows !== metrics.ringRows) {
+              const nextRing = { ...ring, rows: metrics.ringRows }
+              definitionByPlot.set('ring-plot', nextRing)
+              void drawPlot(nextRing)
+            }
+          }
+        } else if (only >= 1 && only <= 3) {
+          $(`#note-${only}`).textContent = label || metrics.notes[only - 1]
+        }
+      }
+      function animation() {
+        return {
+          enable: !reducedMotion.matches,
+          params: { appear: { enable: false }, update: { enable: true, duration: 600, ease: 'cubicInOut' } },
+        }
+      }
+      let Builder, VChart, vbi, queries, insight
+      function buildSpec(definition) {
+        const { type, rows, unit = '', digits = 1, main = false, categorical = false } = definition
+        const dimEncoding = type === 'donut' ? 'color' : type === 'bar' ? 'yAxis' : 'xAxis'
+        const valueEncoding = type === 'donut' ? 'angle' : type === 'bar' ? 'xAxis' : 'yAxis'
+        const spec = Builder.from({
+          chartType: type,
+          dataset: rows,
+          dimensions: [{ id: 'key', alias: definition.dimensionLabel || '分组', encoding: dimEncoding }],
+          measures: [
+            {
+              id: 'value',
+              alias: definition.valueLabel,
+              encoding: valueEncoding,
+              format: { type: 'number', fractionDigits: digits, suffix: unit },
+            },
+          ],
+          backgroundColor: 'transparent',
+          color: { colorScheme: type === 'donut' ? [PAGE.accent, PAGE.track] : [PAGE.accent] },
+          animation: animation(),
+          label: {
+            enable: main && categorical,
+            labelPosition: 'outside',
+            labelColor: PAGE.labelColor,
+            labelColorSmartInvert: false,
+            labelStroke: false,
+          },
+          legend: { enable: false },
+          xAxis: {
+            visible: main && categorical && type === 'column',
+            zero: type !== 'area',
+            label: { labelColor: PAGE.labelColor },
+          },
+          yAxis: {
+            visible: (main && categorical) || (type === 'bar' && !main),
+            zero: type !== 'area',
+            label: { labelColor: PAGE.labelColor },
+          },
+          crosshairLine: { labelVisible: false },
+          crosshairRect: { labelVisible: false },
+          tooltip: { enable: true },
+          pointStyle: { pointVisible: false },
+          lineStyle: { lineWidth: main ? 2.5 : 1.6, lineSmooth: true },
+          areaStyle: { areaColorOpacity: 0.14, areaGradient: true },
+          barStyle: { barRadius: 3, barColor: PAGE.accent, barColorOpacity: 1, barGradient: false },
+          innerRadius: 0.77,
+          outerRadius: 0.98,
+          pieStyle: { pieBorderWidth: 0, pieHoverEffect: 'opacity' },
+        }).build()
+        spec.padding =
+          type === 'donut'
+            ? 0
+            : {
+                top: 8,
+                right: main && categorical ? 65 : 8,
+                bottom: main && categorical ? 4 : 0,
+                left: main && categorical ? 0 : 3,
+              }
+        // 标签直接显示真实值；被布局放入柱体时只调整文字颜色，不添加描边。
+        if (main && categorical)
+          spec.label = {
+            ...spec.label,
+            animation: false,
+            smartInvert: true,
+            style: { ...spec.label.style, lineWidth: 0 },
+          }
+        if (['bar', 'column'].includes(type)) spec.stackCornerRadius = 0
+        return spec
+      }
+      async function drawPlot(definition) {
+        const element = $(`#${definition.id}`)
+        const empty = $(`#${definition.emptyId}`)
+        const hasData =
+          definition.rows.some((row) => Number.isFinite(row.value)) &&
+          (definition.type !== 'donut' || definition.rows.some((row) => row.value > 0))
+        element.hidden = !hasData
+        if (empty) empty.hidden = hasData
+        if (!hasData || disposed) return
+        const spec = buildSpec(definition)
+        if (instances.has(element)) {
+          const instance = instances.get(element)
+          if (reducedMotion.matches) instance.stopAnimation()
+          await instance.updateSpec(spec)
+        } else {
+          const instance = new VChart(spec, { dom: element })
+          instance.renderSync()
+          instances.set(element, instance)
+          plotSizes.set(element, { width: element.clientWidth, height: element.clientHeight })
+          if (definition.main) queries.get('groups').instance.bind(instance)
+          bindPlotInteraction(definition.id, instance)
+        }
+      }
+      function bindPlotInteraction(id, instance) {
+        const element = $(`#${id}`)
+        let timer,
+          selected = -1,
+          pending,
+          keyboard = false
+        function reset() {
+          clearTimeout(timer)
+          selected = -1
+          pending = undefined
+          keyboard = false
+        }
+        function restore() {
+          reset()
+          if (view && !rendering) showMetrics(view.metrics, definitionByPlot.get(id).scope)
+          instance.hideTooltip()
+        }
+        function display(index) {
+          const definition = definitionByPlot.get(id)
+          const points = definition?.points || []
+          if (!view || rendering || !points.length) return
+          selected = Math.max(0, Math.min(points.length - 1, index))
+          const point = points[selected]
+          showMetrics(point.metrics, definition.scope, point.label || String(point.key))
+        }
+        function onHover({ action, dimensionInfo }) {
+          if (keyboard) return
+          if (action === 'leave') return restore()
+          const key = dimensionInfo?.[0]?.value
+          if (key === undefined || pending === String(key)) return
+          clearTimeout(timer)
+          pending = String(key)
+          timer = setTimeout(() => {
+            const points = definitionByPlot.get(id)?.points || []
+            const index = points.findIndex((point) => String(point.key) === String(key))
+            if (index >= 0) display(index)
+          }, 75)
+        }
+        function step(delta) {
+          clearTimeout(timer)
+          const points = definitionByPlot.get(id)?.points || []
+          keyboard = true
+          display(selected < 0 ? (delta < 0 ? points.length - 1 : 0) : selected + delta)
+        }
+        function onKey(event) {
+          if (event.key === 'Escape') {
+            event.preventDefault()
+            restore()
+          }
+          if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+            event.preventDefault()
+            step(['ArrowLeft', 'ArrowUp'].includes(event.key) ? -1 : 1)
+          }
+        }
+        instance.on('dimensionHover', onHover)
+        element.addEventListener('keydown', onKey)
+        element.addEventListener('pointerleave', restore)
+        element.addEventListener('blur', restore)
+        bindings.set(id, { reset })
+        subscriptions.push(() => {
+          reset()
+          instance.off('dimensionHover', onHover)
+          element.removeEventListener('keydown', onKey)
+          element.removeEventListener('pointerleave', restore)
+          element.removeEventListener('blur', restore)
+        })
+      }
+      function clearHover() {
+        bindings.forEach((binding) => binding.reset())
+        instances.forEach((instance) => instance.hideTooltip())
+      }
+      function requestRender() {
+        if (disposed) return
+        DashboardLoading.refresh(requestRender)
+        revision++
+        clearHover()
+        if (rendering) return
+        rendering = true
+        queueMicrotask(() => {
+          if (!disposed) void renderLoop()
+        })
+      }
+      async function renderLoop() {
+        grid.setAttribute('aria-busy', 'true')
+        document.body.dataset.state = 'loading'
+        $('#status').textContent = '正在按筛选范围查询…'
+        while (completed !== revision && !disposed) {
+          const current = revision
+          try {
+            await DashboardLoading.paint()
+            if (disposed || current !== revision) continue
+            const entries = await Promise.all(
+              [...queries].map(async ([key, chart]) => {
+                const seed = await chart.buildVSeed()
+                const dsl = chart.build()
+                const fields = [...dsl.dimensions, ...dsl.measures]
+                const rows = seed.dataset.map((row) =>
+                  Object.fromEntries(fields.map((field) => [field.field, row[field.id]])),
+                )
+                return [key, rows]
+              }),
+            )
+            if (disposed || current !== revision) continue
+            const next = buildView(Object.fromEntries(entries), state)
+            view = next
+            $('#scope').textContent = next.scope
+            insight.setContent([next.conclusion, next.scope, ...next.evidence].join('\n'))
+            $('#dates').replaceChildren(
+              ...next.axisLabels.map((text) => {
+                const span = document.createElement('span')
+                span.textContent = text
+                return span
+              }),
+            )
+            setTable(next.table)
+            for (const definition of next.plots) definitionByPlot.set(definition.id, definition)
+            await Promise.all(next.plots.map(drawPlot))
+            if (disposed || current !== revision) continue
+            showMetrics(next.metrics)
+            layoutDashboard()
+            if (!(await DashboardLoading.reveal(() => !disposed && current === revision))) {
+              if (!disposed && current !== revision) continue
+              break
+            }
+            document.body.dataset.state = next.empty ? 'empty' : 'ready'
+            $('#dashboard-content').inert = false
+            $('#filters').disabled = false
+
+            $('#status').textContent =
+              `${sourceData.filename} · ${count(sourceData.rows.length)} 条原始记录已内嵌 · ${PAGE.sourceNote}`
+            revealComponents()
+          } catch (error) {
+            if (disposed || current !== revision) continue
+            document.body.dataset.state = 'error'
+            $('#status').textContent = `加载或更新失败：${error.message}`
+            DashboardLoading.fail(`加载失败：${error.message}`)
+            console.error(error)
+            finishEntrance()
+          }
+          completed = current
+        }
+        rendering = false
+        grid.setAttribute('aria-busy', 'false')
+      }
+      function createQuery(key, definition) {
+        const chart = vbi.chart.create(vbi.chart.createEmpty(PAGE.connectorId))
+        chart.chartType.changeChartType(definition.type || 'table')
+        chart.limit.setLimit(sourceData.rows.length)
+        for (const field of definition.dimensions || [])
+          chart.dimensions.add(field, (node) => node.setAlias(PAGE.aliases[field] || field).setSort({ order: 'asc' }))
+        for (const [field, alias, func] of definition.measures)
+          chart.measures.add(field, (node) => node.setAlias(alias).setAggregate({ func }))
+        queries.set(key, chart)
+      }
+      const filterIds = new Map()
+      function applyFilters() {
+        for (const [key, chart] of queries)
+          chart.doc.transact(() => {
+            const ids = filterIds.get(chart) || new Map()
+            filterIds.set(chart, ids)
+            const conditions = conditionsFor(key, state)
+            for (const [name, id] of [...ids])
+              if (!conditions.some((condition) => condition.name === name)) {
+                chart.whereFilter.remove(id)
+                ids.delete(name)
+              }
+            for (const condition of conditions) {
+              const update = (node) => node.setOperator(condition.operator || 'eq').setValue(condition.value)
+              if (ids.has(condition.name)) chart.whereFilter.update(ids.get(condition.name), update)
+              else
+                chart.whereFilter.add(condition.field, (node) => {
+                  update(node)
+                  ids.set(condition.name, node.getId())
+                })
+            }
+          })
+      }
+      let dashboard
+      function layoutDashboard() {
+        if (!dashboard) return
+        const dsl = dashboard.build()
+        const breakpoint = grid.clientWidth >= dsl.breakpoints.lg ? 'lg' : 'xs'
+        const ordered = [...dsl.layout[breakpoint]].sort((a, b) => a.y - b.y || a.x - b.x)
+        const focused = document.activeElement
+        for (const [index, item] of ordered.entries()) {
+          const card = grid.querySelector(`[data-widget="${item.widgetId}"]`)
+          if (grid.children[index] !== card) grid.insertBefore(card, grid.children[index] || null)
+          card.style.gridColumn = `${item.x + 1} / span ${item.w}`
+          card.style.gridRow = `${item.y + 1} / span ${item.h}`
+          card.dataset.enter = index + 1
+        }
+        if (grid.contains(focused) && focused !== document.activeElement) focused.focus({ preventScroll: true })
+        const sizes = [...instances].map(([instance, element]) => [
+          instance,
+          element,
+          element.clientWidth,
+          element.clientHeight,
+        ])
+        for (const [instance, element, width, height] of sizes) {
+          const previous = plotSizes.get(element)
+          if (!element.hidden && width && height && (previous?.width !== width || previous?.height !== height)) {
+            plotSizes.set(element, { width, height })
+            instance.resize(width, height)
+          }
+        }
+      }
+      function renderInsight() {
+        $('#insight-title').textContent = analysis.question
+        const [conclusion, scope, ...evidence] = insight.build().content.split('\n')
+        $('#conclusion').textContent = conclusion
+        $('#insight-scope').textContent = scope
+        $('#evidence').replaceChildren(
+          ...evidence.map((text) => {
+            const li = document.createElement('li')
+            li.textContent = text
+            return li
+          }),
+        )
+      }
+      try {
+        if (!window.VChart?.default) throw new Error('VChart 模块未能加载，请检查网络后刷新')
+        VChart = window.VChart.default
+        const [{ createVBI }, { VQuery }, vseed] = await Promise.all([
+          import('https://cdn.jsdelivr.net/npm/@visactor/vbi@0.6.4/+esm'),
+          import('https://cdn.jsdelivr.net/npm/@visactor/vquery@0.6.4/dist/browser/esm/browser.js/+esm'),
+          import('https://cdn.jsdelivr.net/npm/@visactor/vseed@0.6.4/+esm'),
+          DashboardTable.load(),
+        ])
+        Builder = vseed.Builder
+        vseed.registerAll()
+        vbi = createVBI()
+        queries = new Map()
+        const query = new VQuery()
+        const schema = Object.entries(PAGE.schema).map(([name, type]) => ({ name, type }))
+        const source = { type: 'json', rawDataset: preparedRows }
+        if (await query.hasDataset(PAGE.connectorId)) await query.updateDatasetSource(PAGE.connectorId, schema, source)
+        else await query.createDataset(PAGE.connectorId, schema, source)
+        vbi.connectors.register(PAGE.connectorId, {
+          discoverSchema: async () => schema,
+          query: async ({ queryDSL }) => {
+            const dataset = await query.connectDataset(PAGE.connectorId)
+            try {
+              return await dataset.query(queryDSL)
+            } finally {
+              await dataset.disconnect()
+            }
+          },
+        })
+        for (const [key, definition] of Object.entries(PAGE.queries)) createQuery(key, definition)
+        insight = vbi.insight.create(vbi.insight.createEmpty())
+        insight.dsl.observeDeep(renderInsight)
+        subscriptions.push(() => insight.dsl.unobserveDeep(renderInsight))
+        const empty = vbi.dashboard.createEmpty()
+        dashboard = vbi.dashboard.create({ ...empty, breakpoints: { ...empty.breakpoints, lg: 800 } })
+        dashboard.insight.add((widget) => {
+          widget
+            .setInsightId(insight)
+            .setTitle('核心发现')
+            .setLayouts({ lg: { x: 0, y: 0, w: 12, h: 1 }, xs: { x: 0, y: 0, w: 12, h: 1 } })
+          $('#insight-slot').dataset.widget = widget.getId()
+        })
+        let nextMobileRow = 1
+        const mobileLayouts = new Map(
+          PAGE.layout
+            .map((layout, index) => ({ layout, index }))
+            .sort((a, b) => a.layout.y - b.layout.y || a.layout.x - b.layout.x)
+            .map(({ index }) => {
+              const h = index === 0 ? 8 : 3
+              const layout = { x: 0, y: nextMobileRow, w: 12, h }
+              nextMobileRow += h
+              return [index, layout]
+            }),
+        )
+        for (const [index, id] of ['hero', 'one', 'two', 'three'].entries())
+          dashboard.chart.add((widget) => {
+            widget
+              .setChart(queries.get('groups'))
+              .setTitle(PAGE.labels[index])
+              .setLayouts({ lg: PAGE.layout[index], xs: mobileLayouts.get(index) })
+            $(`#${id}-slot`).dataset.widget = widget.getId()
+          })
+        observer = new ResizeObserver(layoutDashboard)
+        observer.observe(grid)
+        layoutDashboard()
+        for (const chart of queries.values()) {
+          chart.dsl.observeDeep(requestRender)
+          subscriptions.push(() => chart.dsl.unobserveDeep(requestRender))
+        }
+        document.querySelectorAll('[data-filter]').forEach((button) =>
+          button.addEventListener('click', () => {
+            if (button.getAttribute('aria-pressed') === 'true') return
+            DashboardLoading.setTrigger(button)
+            state[button.dataset.filter] = button.dataset.value
+            document
+              .querySelectorAll(`[data-filter="${button.dataset.filter}"]`)
+              .forEach((option) => option.setAttribute('aria-pressed', String(option === button)))
+            applyFilters()
+          }),
+        )
+        function onMotionChange() {
+          if (reducedMotion.matches) {
+            finishEntrance()
+            finishMetricAnimations()
+            instances.forEach((instance) => instance.stopAnimation())
+          }
+          if (view) {
+            clearHover()
+            showMetrics(view.metrics)
+            view.plots.forEach((definition) => void drawPlot(definition))
+          }
+        }
+        reducedMotion.addEventListener('change', onMotionChange)
+        subscriptions.push(() => reducedMotion.removeEventListener('change', onMotionChange))
+        // metric-analysis: 指标卡入口与独立详情，不修改主页状态。
+        subscriptions.push(
+          bindMetricAnalysis({
+            motion,
+            vbi,
+            Builder,
+            VChart,
+            accent: PAGE.accent,
+            labelColor: PAGE.labelColor,
+            ready: () => !rendering && !!view && ['ready', 'empty'].includes(document.body.dataset.state),
+            getContext: metricAnalysisContext,
+            entries: [
+              { value: '#primary', heading: '#primary-title', card: true },
+              { value: '#metric-one', heading: '#title-one', card: true },
+              { value: '#metric-two', heading: '#title-two', card: true },
+              { value: '#metric-three', heading: '#title-three', card: true },
+              { value: '#aux-one' },
+              { value: '#aux-two' },
+            ],
+          }),
+        )
+        applyFilters()
+        requestRender()
+      } catch (error) {
+        document.body.dataset.state = 'error'
+        $('#status').textContent = `初始化失败：${error.message}`
+        DashboardLoading.fail(`加载失败：${error.message}`)
+        console.error(error)
+        finishEntrance()
+      }
+      window.addEventListener(
+        'pagehide',
+        () => {
+          disposed = true
+          observer?.disconnect()
+          overviewObserver?.disconnect()
+          overviewTable?.release()
+          subscriptions.forEach((dispose) => dispose())
+          disposeMotion()
+          instances.forEach((instance) => instance.release())
+        },
+        { once: true },
+      )
+
+      function metricAnalysisContext(index) {
+        const snapshot = { ...state }
+        const format = (value, i) => (Number.isFinite(value) ? formats[i](value) : '—')
+        const base = conditionsFor('totals', snapshot)
+        const ratioValue =
+          (field, denominator, factor = 1) =>
+          (row) =>
+            Number.isFinite(row[field]) && Number.isFinite(row[denominator]) && row[denominator] > 0
+              ? (factor * row[field]) / row[denominator]
+              : undefined
+        const avgDefinition = (title) => `${title}按当前范围的有效原始记录计算，缺失值不补零，不平均分组均值。`
+
+        const fields = ['id', 'death', 'ef', 'creatinine', 'age', 'followup']
+        const field = fields[index],
+          title = index < 4 ? PAGE.labels[index] : index === 4 ? '平均年龄' : '平均随访时长'
+        const metric = {
+          title,
+          conditions: base,
+          measures: PAGE.queries.totals.measures.filter(([key]) => key === field || key === 'id'),
+          format: (value) => format(value, index),
+          digits: PAGE.formats[index][0],
+          unit: PAGE.formats[index][1],
+          value: index === 1 ? ratioValue('death', 'id', 100) : (row) => row[field],
+          definition:
+            index === 1
+              ? '记录死亡事件数 ÷ 所选样本数 × 100%；随访时长不同，此占比不是统一时点死亡率。'
+              : index === 0
+                ? '当前筛选范围内按记录 ID 去重的样本人数。'
+                : avgDefinition(title),
+          evidence: (row) => `当前范围 ${numberForAnalysis(row.id)} 份样本。仅描述该数据集，不作临床阈值或因果判断。`,
+        }
+        const dimensions = [
+          ['age_band', '年龄组'],
+          ['pressure', '高血压状态（0 无 / 1 有）', false, 'number'],
+        ]
+        if (index === 0 || index === 2 || index === 3) dimensions.reverse()
+        const detailDimensions = [
+          ['id', '样本 ID'],
+          ['age_band', '年龄组'],
+        ]
+
+        return {
+          connectorId: PAGE.connectorId,
+          analysis,
+          rowLimit: sourceData.rows.length,
+          dimensions,
+          detailDimensions,
+          grain: '每行一条来源记录',
+          scope: view.scope,
+          metric,
+        }
+      }
+      function numberForAnalysis(value) {
+        return Number.isFinite(value) ? formatNumber(value, 3, 0) : '—'
+      }
+    </script>
+  </body>
+</html>

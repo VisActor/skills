@@ -1,0 +1,933 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Dashboard 模板参考集</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: #26333d;
+        background: #f1f4f8;
+        font:
+          14px/1.7 Inter,
+          'PingFang SC',
+          sans-serif;
+      }
+      main {
+        max-width: 1240px;
+        margin: auto;
+        padding: 48px 32px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      h1 {
+        font-size: 32px;
+        letter-spacing: -0.04em;
+        margin: 8px 0;
+      }
+      h2 {
+        font-size: 23px;
+        margin: 0;
+      }
+      h3 {
+        font-size: 19px;
+        margin: 18px 22px 8px;
+      }
+      p {
+        margin: 8px 0;
+        color: #647383;
+      }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        font-weight: 650;
+      }
+      button,
+      a {
+        font: inherit;
+      }
+      a {
+        color: #375c86;
+        text-underline-offset: 4px;
+      }
+      .switch {
+        display: flex;
+        padding: 4px;
+        background: #e5ebf2;
+        border-radius: 24px;
+        gap: 3px;
+      }
+      button {
+        border: 0;
+        padding: 9px 18px;
+        border-radius: 20px;
+        background: transparent;
+        color: #586879;
+        cursor: pointer;
+      }
+      button[aria-pressed='true'] {
+        background: white;
+        color: #26333d;
+        box-shadow: 0 2px 8px #26333d10;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 2px solid #527eaf;
+        outline-offset: 4px;
+      }
+      .intro {
+        max-width: 800px;
+        margin: 14px 0 36px;
+      }
+      .industry {
+        margin: 36px 0 46px;
+      }
+      .industry > p {
+        font-size: 12px;
+        margin-bottom: 18px;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+      }
+      article {
+        background: white;
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 16px 40px -30px #293a4b35;
+      }
+      article img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        object-position: top;
+        display: block;
+        background: #e7edf4;
+      }
+      article > p,
+      article > nav {
+        margin: 10px 22px;
+      }
+      article > nav {
+        display: flex;
+        gap: 20px;
+        margin: 22px;
+        flex-wrap: wrap;
+      }
+      article > p {
+        font-size: 13px;
+      }
+      .theme {
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+      .meta {
+        font-size: 12px !important;
+        letter-spacing: 0.02em;
+      }
+      footer {
+        border-top: 1px solid #dce3eb;
+        padding-top: 20px;
+        color: #647383;
+        font-size: 12px;
+      }
+      body[data-mode='mobile'] article img {
+        object-fit: contain;
+        height: 440px;
+      }
+      @media (max-width: 650px) {
+        main {
+          padding: 28px 18px;
+        }
+        .cards {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 27px;
+        }
+        header {
+          gap: 12px;
+        }
+        article img {
+          height: 240px;
+        }
+        .intro {
+          margin-bottom: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body data-mode="desktop">
+    <main>
+      <header>
+        <div>
+          <span class="eyebrow">行业看板参考</span>
+          <h1>同一能力，不同阅读路径</h1>
+          <p>24 份模板 · 4 份基础 + 10 个行业 × 2 份 · 数据内嵌</p>
+        </div>
+        <div class="switch" role="group" aria-label="截图视口">
+          <button data-mode="desktop" aria-pressed="true">桌面</button
+          ><button data-mode="mobile" aria-pressed="false">手机</button>
+        </div>
+      </header>
+      <p class="intro">
+        先从数据结构与分析任务确定布局，再独立选择主题色。下面的模板用于参考与组合；每个行业的两页采用不同分析重点、布局与主题色。点击截图打开完整模板，或查看
+        PNG 与四份基准的对照。
+      </p>
+      <section class="industry">
+        <h2>基础参考</h2>
+        <p>四份基础实现；分别参考趋势主导、指标先行、分段叙事与经营主辅布局。</p>
+        <div class="cards">
+          <article>
+            <a href="template-life-expectancy.html" aria-label="打开全球寿命观察"
+              ><img
+                src="template-life-expectancy.png"
+                data-desktop="template-life-expectancy.png"
+                data-mobile="template-life-expectancy-mobile.png"
+                alt="全球寿命观察截图"
+                loading="lazy"
+            /></a>
+            <h3>全球寿命观察</h3>
+            <p class="meta"><span class="theme" style="background: #9fbfdf"></span>#9FBFDF · soft</p>
+            <p>2,938 条寿命记录；首尾国家配对、发展状态差距与覆盖变化。</p>
+            <p>左侧大趋势承载长期变化，右侧小卡补充变化幅度、覆盖和教育，保持单一视觉中心。</p>
+            <p>浅蓝与中性阅读面营造平静氛围，让长期曲线和数字优先。</p>
+            <nav>
+              <a href="template-life-expectancy.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-life-expectancy.png"
+                data-desktop="template-life-expectancy.png"
+                data-mobile="template-life-expectancy-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-life-expectancy.html">对照四份基准</a>
+            </nav>
+          </article>
+          <article>
+            <a href="template-heart-failure.html" aria-label="打开心衰样本观察"
+              ><img
+                src="template-heart-failure.png"
+                data-desktop="template-heart-failure.png"
+                data-mobile="template-heart-failure-mobile.png"
+                alt="心衰样本观察截图"
+                loading="lazy"
+            /></a>
+            <h3>心衰样本观察</h3>
+            <p class="meta"><span class="theme" style="background: #7664c3"></span>#7664C3 · 鸢尾紫 · soft</p>
+            <p>299 条临床样本；事件数与占比、年龄和高血压状态交叉核对。</p>
+            <p>顶部三项指标先概览，下方宽幅条形图再看年龄组；随访天数不伪装成日历趋势。</p>
+            <p>鸢尾紫区分数据图形与浅色阅读面；事件状态由标签表达，主题色不暗示风险。</p>
+            <nav>
+              <a href="template-heart-failure.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-heart-failure.png"
+                data-desktop="template-heart-failure.png"
+                data-mobile="template-heart-failure-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-heart-failure.html">对照四份基准</a>
+            </nav>
+          </article>
+          <article>
+            <a href="template-meal-workout.html" aria-label="打开餐食与运动画像"
+              ><img
+                src="template-meal-workout.png"
+                data-desktop="template-meal-workout.png"
+                data-mobile="template-meal-workout-mobile.png"
+                alt="餐食与运动画像截图"
+                loading="lazy"
+            /></a>
+            <h3>餐食与运动画像</h3>
+            <p class="meta"><span class="theme" style="background: #c06c32"></span>#C06C32 · 杏橙 · soft</p>
+            <p>8,000 条餐食记录；热量与蛋白质密度、活动水平分层核对。</p>
+            <p>热量主区、运动与营养双列、样本构成收尾，分段解释不同量纲，避免 KPI 挤在一排。</p>
+            <p>杏橙串联餐食与运动各段；浅杏背景承接图形，单位和正文使用中性色。</p>
+            <nav>
+              <a href="template-meal-workout.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-meal-workout.png"
+                data-desktop="template-meal-workout.png"
+                data-mobile="template-meal-workout-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-meal-workout.html">对照四份基准</a>
+            </nav>
+          </article>
+          <article>
+            <a href="template-business-overview.html" aria-label="打开经营概览"
+              ><img
+                src="template-business-overview.png"
+                data-desktop="template-business-overview.png"
+                data-mobile="template-business-overview-mobile.png"
+                alt="经营概览截图"
+                loading="lazy"
+            /></a>
+            <h3>经营概览</h3>
+            <p class="meta"><span class="theme" style="background: #a8c7e8"></span>#A8C7E8 · soft</p>
+            <p>轻量销售示例；销售增量贡献、订单与客单变化、利润质量。</p>
+            <p>左主趋势与右侧三张辅助卡突出销售规模，标题右侧合并筛选，明细承接核对。</p>
+            <p>浅蓝统一趋势与卡片，白色阅读面降低密度，正负变化另用语义色表达。</p>
+            <nav>
+              <a href="template-business-overview.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-business-overview.png"
+                data-desktop="template-business-overview.png"
+                data-mobile="template-business-overview-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-business-overview.html">对照四份基准</a>
+            </nav>
+          </article>
+        </div>
+      </section>
+      <section class="industry">
+        <h2>教育</h2>
+        <p>
+          <a href="https://www.kaggle.com/datasets/larsen0966/student-performance-data-set"
+            >Student Performance Data Set</a
+          >
+          · 649 条完整记录 · Kaggle v2
+        </p>
+        <div class="cards">
+          <article>
+            <a href="template-education-performance.html" aria-label="打开学习成果观察"
+              ><img
+                src="template-education-performance.png"
+                data-desktop="template-education-performance.png"
+                data-mobile="template-education-performance-mobile.png"
+                alt="学习成果观察截图"
+                loading="lazy"
+            /></a>
+            <h3>学习成果观察</h3>
+            <p class="meta"><span class="theme" style="background: #427fc0"></span>#427FC0 · 冰川蓝 · rounded</p>
+            <p>葡萄牙两所中学 · 葡语课程；低分记录集中在哪里？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>大幅年龄组比较居左，成绩、出勤与进步互相补充。</p>
+            <p>冰川蓝保持学习观察的清晰感；成绩图形与中性文字分层。</p>
+            <nav>
+              <a href="template-education-performance.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-education-performance.png"
+                data-desktop="template-education-performance.png"
+                data-mobile="template-education-performance-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-education-performance.html">对照四份基准</a>
+            </nav>
+          </article>
+          <article>
+            <a href="template-education-attendance.html" aria-label="打开出勤与学习节奏"
+              ><img
+                src="template-education-attendance.png"
+                data-desktop="template-education-attendance.png"
+                data-mobile="template-education-attendance-mobile.png"
+                alt="出勤与学习节奏截图"
+                loading="lazy"
+            /></a>
+            <h3>出勤与学习节奏</h3>
+            <p class="meta"><span class="theme" style="background: #c06c32"></span>#C06C32 · 杏橙 · paper</p>
+            <p>样本记录 · 学习投入与成绩；缺课规模与占比如何分布？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>先读三个概览结果，再进入全宽学习时长比较，避免用因果语言解释出勤。</p>
+            <p>杏橙带来温暖的观察氛围，浅色底面让出勤与学习数据优先。</p>
+            <nav>
+              <a href="template-education-attendance.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-education-attendance.png"
+                data-desktop="template-education-attendance.png"
+                data-mobile="template-education-attendance-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-education-attendance.html">对照四份基准</a>
+            </nav>
+          </article>
+        </div>
+      </section>
+      <section class="industry">
+        <h2>零售</h2>
+        <p>
+          <a href="https://www.kaggle.com/datasets/mohammadtalib786/retail-sales-dataset">Retail Sales Dataset</a> ·
+          1,000 条完整记录 · Kaggle v1
+        </p>
+        <div class="cards">
+          <article>
+            <a href="template-retail-sales.html" aria-label="打开零售月度脉搏"
+              ><img
+                src="template-retail-sales.png"
+                data-desktop="template-retail-sales.png"
+                data-mobile="template-retail-sales-mobile.png"
+                alt="零售月度脉搏截图"
+                loading="lazy"
+            /></a>
+            <h3>零售月度脉搏</h3>
+            <p class="meta"><span class="theme" style="background: #c06c32"></span>#C06C32 · 杏橙 · soft</p>
+            <p>合成交易样本 · 金额与购买结构；销售规模与单笔表现是否同步？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>全宽月度金额趋势先回答规模变化，随后一排结构与效率指标。</p>
+            <p>杏橙突出月度金额走势；面积填充减轻，保留清楚的趋势轮廓。</p>
+            <nav>
+              <a href="template-retail-sales.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-retail-sales.png"
+                data-desktop="template-retail-sales.png"
+                data-mobile="template-retail-sales-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-retail-sales.html">对照四份基准</a>
+            </nav>
+          </article>
+          <article>
+            <a href="template-retail-basket.html" aria-label="打开品类与客单结构"
+              ><img
+                src="template-retail-basket.png"
+                data-desktop="template-retail-basket.png"
+                data-mobile="template-retail-basket-mobile.png"
+                alt="品类与客单结构截图"
+                loading="lazy"
+            /></a>
+            <h3>品类与客单结构</h3>
+            <p class="meta"><span class="theme" style="background: #427fc0"></span>#427FC0 · 冰川蓝 · outline</p>
+            <p>
+              合成零售样本 · 单笔品类交易；交易金额差异与件数、价位如何关联？结合记录量与表现、交叉分组和关联明细核对。
+            </p>
+            <p>右侧大品类比较与左侧结构卡形成镜像阅读，先看客单再看件数。</p>
+            <p>冰川蓝组织商品结构，浅色阅读面与金额趋势页的暖色形成区分。</p>
+            <nav>
+              <a href="template-retail-basket.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-retail-basket.png"
+                data-desktop="template-retail-basket.png"
+                data-mobile="template-retail-basket-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-retail-basket.html">对照四份基准</a>
+            </nav>
+          </article>
+        </div>
+      </section>
+      <section class="industry">
+        <h2>医疗费用</h2>
+        <p>
+          <a href="https://www.kaggle.com/datasets/mirichoi0218/insurance">Medical Cost Personal Datasets</a> · 1,338
+          条完整记录 · Kaggle v1
+        </p>
+        <div class="cards">
+          <article>
+            <a href="template-healthcare-charges.html" aria-label="打开医疗费用样本"
+              ><img
+                src="template-healthcare-charges.png"
+                data-desktop="template-healthcare-charges.png"
+                data-mobile="template-healthcare-charges-mobile.png"
+                alt="医疗费用样本截图"
+                loading="lazy"
+            /></a>
+            <h3>医疗费用样本</h3>
+            <p class="meta"><span class="theme" style="background: #427fc0"></span>#427FC0 · 冰川蓝 · rounded</p>
+            <p>保险费用数据 · 描述性观察；费用差异在可比分组下是否仍存在？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>费用比较占据左侧主区，两个相关特征居右，样本结构横向收尾。</p>
+            <p>冰川蓝区分费用图形与次要文字，不以主题色暗示临床风险。</p>
+            <nav>
+              <a href="template-healthcare-charges.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-healthcare-charges.png"
+                data-desktop="template-healthcare-charges.png"
+                data-mobile="template-healthcare-charges-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-healthcare-charges.html">对照四份基准</a>
+            </nav>
+          </article>
+          <article>
+            <a href="template-healthcare-regions.html" aria-label="打开地区费用画像"
+              ><img
+                src="template-healthcare-regions.png"
+                data-desktop="template-healthcare-regions.png"
+                data-mobile="template-healthcare-regions-mobile.png"
+                alt="地区费用画像截图"
+                loading="lazy"
+            /></a>
+            <h3>地区费用画像</h3>
+            <p class="meta"><span class="theme" style="background: #be658b"></span>#BE658B · 玫瑰粉 · editorial</p>
+            <p>费用与家庭结构 · 样本概览；地区费用差异是否来自人群结构？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>顶部两张概览卡后接左侧地区费用主图与右侧结构卡，强调区域描述。</p>
+            <p>玫瑰粉用于地区与家庭结构比较，深玫文字和近白底面维持阅读层级。</p>
+            <nav>
+              <a href="template-healthcare-regions.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-healthcare-regions.png"
+                data-desktop="template-healthcare-regions.png"
+                data-mobile="template-healthcare-regions-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-healthcare-regions.html">对照四份基准</a>
+            </nav>
+          </article>
+        </div>
+      </section>
+      <section class="industry">
+        <h2>银行营销</h2>
+        <p>
+          <a href="https://www.kaggle.com/datasets/janiobachmann/bank-marketing-dataset">Bank Marketing Dataset</a> ·
+          11,162 条完整记录 · Kaggle v1
+        </p>
+        <div class="cards">
+          <article>
+            <a href="template-banking-outreach.html" aria-label="打开银行触达观察"
+              ><img
+                src="template-banking-outreach.png"
+                data-desktop="template-banking-outreach.png"
+                data-mobile="template-banking-outreach-mobile.png"
+                alt="银行触达观察截图"
+                loading="lazy"
+            /></a>
+            <h3>银行触达观察</h3>
+            <p class="meta"><span class="theme" style="background: #7664c3"></span>#7664C3 · 鸢尾紫 · outline</p>
+            <p>营销样本 · 联系渠道与账户特征；响应规模与响应占比是否一致？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>渠道主图与窄侧栏构成主辅层级，底部全宽卡补充触达强度。</p>
+            <p>鸢尾紫组织渠道与账户特征，负余额继续按真实坐标呈现。</p>
+            <nav>
+              <a href="template-banking-outreach.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-banking-outreach.png"
+                data-desktop="template-banking-outreach.png"
+                data-mobile="template-banking-outreach-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-banking-outreach.html">对照四份基准</a>
+            </nav>
+          </article>
+          <article>
+            <a href="template-banking-response.html" aria-label="打开营销响应结构"
+              ><img
+                src="template-banking-response.png"
+                data-desktop="template-banking-response.png"
+                data-mobile="template-banking-response-mobile.png"
+                alt="营销响应结构截图"
+                loading="lazy"
+            /></a>
+            <h3>营销响应结构</h3>
+            <p class="meta"><span class="theme" style="background: #a98427"></span>#A98427 · 琥珀金 · paper</p>
+            <p>教育分组 · 样本接受与联系强度；哪些联系组合值得继续验证？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>左侧两张细卡、右侧宽比较图，再以联系强度收尾，避免多组指标等权排列。</p>
+            <p>琥珀金强调响应结构，深金文字与近白底面避免浅金图形失去轮廓。</p>
+            <nav>
+              <a href="template-banking-response.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-banking-response.png"
+                data-desktop="template-banking-response.png"
+                data-mobile="template-banking-response-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-banking-response.html">对照四份基准</a>
+            </nav>
+          </article>
+        </div>
+      </section>
+      <section class="industry">
+        <h2>房地产</h2>
+        <p>
+          <a href="https://www.kaggle.com/datasets/harishkumardatalab/housing-price-prediction"
+            >Housing Price Prediction</a
+          >
+          · 545 条完整记录 · Kaggle v1
+        </p>
+        <div class="cards">
+          <article>
+            <a href="template-housing-price.html" aria-label="打开住宅价格与空间"
+              ><img
+                src="template-housing-price.png"
+                data-desktop="template-housing-price.png"
+                data-mobile="template-housing-price-mobile.png"
+                alt="住宅价格与空间截图"
+                loading="lazy"
+            /></a>
+            <h3>住宅价格与空间</h3>
+            <p class="meta"><span class="theme" style="background: #c06c32"></span>#C06C32 · 杏橙 · soft</p>
+            <p>房源样本 · 卧室与配置；价格差异是否来自房源配置？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>全宽卧室价格比较后，以宽结构卡和两张小卡说明房源配置。</p>
+            <p>杏橙与浅杏背景呼应居住空间，金额沿用来源单位。</p>
+            <nav>
+              <a href="template-housing-price.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-housing-price.png"
+                data-desktop="template-housing-price.png"
+                data-mobile="template-housing-price-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-housing-price.html">对照四份基准</a>
+            </nav>
+          </article>
+          <article>
+            <a href="template-housing-efficiency.html" aria-label="打开装修与空间效率"
+              ><img
+                src="template-housing-efficiency.png"
+                data-desktop="template-housing-efficiency.png"
+                data-mobile="template-housing-efficiency-mobile.png"
+                alt="装修与空间效率截图"
+                loading="lazy"
+            /></a>
+            <h3>装修与空间效率</h3>
+            <p class="meta"><span class="theme" style="background: #94506d"></span>#94506D · 勃艮第红 · editorial</p>
+            <p>
+              房源样本 · 总量口径的单位面积价格；单位面积价格差异集中在哪里？结合记录量与表现、交叉分组和关联明细核对。
+            </p>
+            <p>宽空调结构卡在前，随后左主图与右辅卡；突出总价与面积的不同口径。</p>
+            <p>勃艮第红强化效率比较的图形辨识，正文与表格保留中性色。</p>
+            <nav>
+              <a href="template-housing-efficiency.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-housing-efficiency.png"
+                data-desktop="template-housing-efficiency.png"
+                data-mobile="template-housing-efficiency-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-housing-efficiency.html">对照四份基准</a>
+            </nav>
+          </article>
+        </div>
+      </section>
+      <section class="industry">
+        <h2>能源</h2>
+        <p>
+          <a href="https://www.kaggle.com/datasets/alistairking/renewable-energy-consumption-in-the-u-s"
+            >U.S. Renewable Energy Consumption</a
+          >
+          · 3,065 条完整记录 · Kaggle v1
+        </p>
+        <div class="cards">
+          <article>
+            <a href="template-energy-renewables.html" aria-label="打开可再生能源长镜头"
+              ><img
+                src="template-energy-renewables.png"
+                data-desktop="template-energy-renewables.png"
+                data-mobile="template-energy-renewables-mobile.png"
+                alt="可再生能源长镜头截图"
+                loading="lazy"
+            /></a>
+            <h3>可再生能源长镜头</h3>
+            <p class="meta"><span class="theme" style="background: #a98427"></span>#A98427 · 琥珀金 · paper</p>
+            <p>美国 EIA 数据 · 1973—2024；报告消费差异与覆盖结构如何变化？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>右侧长年度曲线配左侧来源概览，底部宽卡补充风能报告值。</p>
+            <p>琥珀金强调长期能源曲线，浅填充让年度走势成为主视觉。</p>
+            <nav>
+              <a href="template-energy-renewables.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-energy-renewables.png"
+                data-desktop="template-energy-renewables.png"
+                data-mobile="template-energy-renewables-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-energy-renewables.html">对照四份基准</a>
+            </nav>
+          </article>
+          <article>
+            <a href="template-energy-wind.html" aria-label="打开风能的部门画像"
+              ><img
+                src="template-energy-wind.png"
+                data-desktop="template-energy-wind.png"
+                data-mobile="template-energy-wind-mobile.png"
+                alt="风能的部门画像截图"
+                loading="lazy"
+            /></a>
+            <h3>风能的部门画像</h3>
+            <p class="meta"><span class="theme" style="background: #427fc0"></span>#427FC0 · 冰川蓝 · rounded</p>
+            <p>
+              报告覆盖与消费结构 ·
+              美国部门样本；风能报告规模与部门结构如何变化？结合记录量与表现、交叉分组和关联明细核对。
+            </p>
+            <p>半宽部门比较和右侧上下分组卡形成紧凑双区，强调部门结构而非年度规模。</p>
+            <p>冰川蓝组织部门结构，与长期观察页的琥珀金形成冷暖区分。</p>
+            <nav>
+              <a href="template-energy-wind.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-energy-wind.png"
+                data-desktop="template-energy-wind.png"
+                data-mobile="template-energy-wind-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-energy-wind.html">对照四份基准</a>
+            </nav>
+          </article>
+        </div>
+      </section>
+      <section class="industry">
+        <h2>农业</h2>
+        <p>
+          <a href="https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset"
+            >Crop Recommendation Dataset</a
+          >
+          · 2,200 条完整记录 · Kaggle v1
+        </p>
+        <div class="cards">
+          <article>
+            <a href="template-agriculture-climate.html" aria-label="打开作物环境样本"
+              ><img
+                src="template-agriculture-climate.png"
+                data-desktop="template-agriculture-climate.png"
+                data-mobile="template-agriculture-climate-mobile.png"
+                alt="作物环境样本截图"
+                loading="lazy"
+            /></a>
+            <h3>作物环境样本</h3>
+            <p class="meta"><span class="theme" style="background: #a98427"></span>#a98427 · outline</p>
+            <p>降雨与气候 · 标签数据观察；作物与气候组合有哪些差异？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>半宽作物降雨比较置右，左侧用结构与温湿度解释样本；主图展示前12类，完整分组见明细。</p>
+            <p>琥珀金配浅暖底面承载气候与降雨观察，原始分类继续由标签表达。</p>
+            <nav>
+              <a href="template-agriculture-climate.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-agriculture-climate.png"
+                data-desktop="template-agriculture-climate.png"
+                data-mobile="template-agriculture-climate-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-agriculture-climate.html">对照四份基准</a>
+            </nav>
+          </article>
+          <article>
+            <a href="template-agriculture-nutrients.html" aria-label="打开土壤养分分组"
+              ><img
+                src="template-agriculture-nutrients.png"
+                data-desktop="template-agriculture-nutrients.png"
+                data-mobile="template-agriculture-nutrients-mobile.png"
+                alt="土壤养分分组截图"
+                loading="lazy"
+            /></a>
+            <h3>土壤养分分组</h3>
+            <p class="meta"><span class="theme" style="background: #c06c32"></span>#C06C32 · 杏橙 · paper</p>
+            <p>氮磷钾与 pH · 观察样本；作物与土壤组合有哪些差异？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>宽幅作物养分比较后接中间指标卡与两侧结构卡；完整作物分组与交叉定位承接核对。</p>
+            <p>杏橙承载土壤养分比较，与气候页的琥珀金区分。</p>
+            <nav>
+              <a href="template-agriculture-nutrients.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-agriculture-nutrients.png"
+                data-desktop="template-agriculture-nutrients.png"
+                data-mobile="template-agriculture-nutrients-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-agriculture-nutrients.html">对照四份基准</a>
+            </nav>
+          </article>
+        </div>
+      </section>
+      <section class="industry">
+        <h2>酒店旅游</h2>
+        <p>
+          <a href="https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset"
+            >Hotel Reservations Dataset</a
+          >
+          · 36,275 条完整记录 · Kaggle v1
+        </p>
+        <div class="cards">
+          <article>
+            <a href="template-hospitality-bookings.html" aria-label="打开酒店预订节奏"
+              ><img
+                src="template-hospitality-bookings.png"
+                data-desktop="template-hospitality-bookings.png"
+                data-mobile="template-hospitality-bookings-mobile.png"
+                alt="酒店预订节奏截图"
+                loading="lazy"
+            /></a>
+            <h3>酒店预订节奏</h3>
+            <p class="meta"><span class="theme" style="background: #427fc0"></span>#427FC0 · 冰川蓝 · soft</p>
+            <p>
+              2017—2018 到店月份 ·
+              预订记录；取消记录集中在哪些到店与渠道组合？结合记录量与表现、交叉分组和关联明细核对。
+            </p>
+            <p>顶部指标分成窄宽窄节奏，再用全宽月份曲线承接预订规模。</p>
+            <p>冰川蓝承接月份走势，取消状态通过明确文字表达。</p>
+            <nav>
+              <a href="template-hospitality-bookings.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-hospitality-bookings.png"
+                data-desktop="template-hospitality-bookings.png"
+                data-mobile="template-hospitality-bookings-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-hospitality-bookings.html">对照四份基准</a>
+            </nav>
+          </article>
+          <article>
+            <a href="template-hospitality-guests.html" aria-label="打开旅客与入住计划"
+              ><img
+                src="template-hospitality-guests.png"
+                data-desktop="template-hospitality-guests.png"
+                data-mobile="template-hospitality-guests-mobile.png"
+                alt="旅客与入住计划截图"
+                loading="lazy"
+            /></a>
+            <h3>旅客与入住计划</h3>
+            <p class="meta"><span class="theme" style="background: #94506d"></span>#94506D · 勃艮第红 · editorial</p>
+            <p>渠道结构 · 人次、夜数与复住记录；客流规模是否伴随取消风险？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>左主图与右侧两张较高计划卡承接不同量纲，底部以取消记录补足质量。</p>
+            <p>勃艮第红突出住宿计划比较，与月份页的冷色保持区分。</p>
+            <nav>
+              <a href="template-hospitality-guests.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-hospitality-guests.png"
+                data-desktop="template-hospitality-guests.png"
+                data-mobile="template-hospitality-guests-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-hospitality-guests.html">对照四份基准</a>
+            </nav>
+          </article>
+        </div>
+      </section>
+      <section class="industry">
+        <h2>制造业</h2>
+        <p>
+          <a href="https://www.kaggle.com/datasets/shivamb/machine-predictive-maintenance-classification"
+            >Machine Predictive Maintenance Classification</a
+          >
+          · 10,000 条完整记录 · Kaggle v1
+        </p>
+        <div class="cards">
+          <article>
+            <a href="template-manufacturing-failures.html" aria-label="打开设备运行样本"
+              ><img
+                src="template-manufacturing-failures.png"
+                data-desktop="template-manufacturing-failures.png"
+                data-mobile="template-manufacturing-failures-mobile.png"
+                alt="设备运行样本截图"
+                loading="lazy"
+            /></a>
+            <h3>设备运行样本</h3>
+            <p class="meta"><span class="theme" style="background: #427fc0"></span>#427FC0 · 冰川蓝 · outline</p>
+            <p>合成预测维护数据 · 故障标签；故障数量与故障占比指向哪里？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>右侧故障占比比较与左侧运行特征卡形成主辅，底部保留温差信息。</p>
+            <p>冰川蓝让设备特征保持清楚，故障标签继续使用真实业务含义。</p>
+            <nav>
+              <a href="template-manufacturing-failures.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-manufacturing-failures.png"
+                data-desktop="template-manufacturing-failures.png"
+                data-mobile="template-manufacturing-failures-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-manufacturing-failures.html">对照四份基准</a>
+            </nav>
+          </article>
+          <article>
+            <a href="template-manufacturing-wear.html" aria-label="打开磨损与运行工况"
+              ><img
+                src="template-manufacturing-wear.png"
+                data-desktop="template-manufacturing-wear.png"
+                data-mobile="template-manufacturing-wear-mobile.png"
+                alt="磨损与运行工况截图"
+                loading="lazy"
+            /></a>
+            <h3>磨损与运行工况</h3>
+            <p class="meta"><span class="theme" style="background: #c06c32"></span>#C06C32 · 杏橙 · rounded</p>
+            <p>
+              合成记录 · 速度、扭矩与故障标签；磨损与故障差异在哪些工况出现？结合记录量与表现、交叉分组和关联明细核对。
+            </p>
+            <p>全宽故障结构卡后接七列工况主图与五列运行特征，突出量纲差异。</p>
+            <p>杏橙强调机械工况图形，浅底色避免工业大屏的视觉重量。</p>
+            <nav>
+              <a href="template-manufacturing-wear.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-manufacturing-wear.png"
+                data-desktop="template-manufacturing-wear.png"
+                data-mobile="template-manufacturing-wear-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-manufacturing-wear.html">对照四份基准</a>
+            </nav>
+          </article>
+        </div>
+      </section>
+      <section class="industry">
+        <h2>物流</h2>
+        <p>
+          <a href="https://www.kaggle.com/datasets/prachi13/customer-analytics">E-Commerce Shipping Data</a> · 10,999
+          条完整记录 · Kaggle v1
+        </p>
+        <div class="cards">
+          <article>
+            <a href="template-logistics-fulfillment.html" aria-label="打开仓库履约观察"
+              ><img
+                src="template-logistics-fulfillment.png"
+                data-desktop="template-logistics-fulfillment.png"
+                data-mobile="template-logistics-fulfillment-mobile.png"
+                alt="仓库履约观察截图"
+                loading="lazy"
+            /></a>
+            <h3>仓库履约观察</h3>
+            <p class="meta"><span class="theme" style="background: #427fc0"></span>#427FC0 · 冰川蓝 · soft</p>
+            <p>发运样本 · 准时状态与服务；履约问题集中在哪些组合？结合记录量与表现、交叉分组和关联明细核对。</p>
+            <p>较窄主图承载五个仓库分组，右侧三张大小有别的服务指标补充解释。</p>
+            <p>冰川蓝统一仓库比较与服务图形，状态文字和记录数使用中性色。</p>
+            <nav>
+              <a href="template-logistics-fulfillment.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-logistics-fulfillment.png"
+                data-desktop="template-logistics-fulfillment.png"
+                data-mobile="template-logistics-fulfillment-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-logistics-fulfillment.html">对照四份基准</a>
+            </nav>
+          </article>
+          <article>
+            <a href="template-logistics-service.html" aria-label="打开运输与服务画像"
+              ><img
+                src="template-logistics-service.png"
+                data-desktop="template-logistics-service.png"
+                data-mobile="template-logistics-service-mobile.png"
+                alt="运输与服务画像截图"
+                loading="lazy"
+            /></a>
+            <h3>运输与服务画像</h3>
+            <p class="meta"><span class="theme" style="background: #7664c3"></span>#7664C3 · 鸢尾紫 · paper</p>
+            <p>
+              重量、折扣与商品成本 · 发运记录；服务表现是否受业务结构影响？结合记录量与表现、交叉分组和关联明细核对。
+            </p>
+            <p>三个概览卡在前，七列主图比较运输方式的未按时占比，五列服务卡补充重量与商品属性。</p>
+            <p>鸢尾紫区分运输与服务观察，浅紫背景让重量和商品属性更清楚。</p>
+            <nav>
+              <a href="template-logistics-service.html">打开模板</a
+              ><a
+                data-screenshot
+                href="template-logistics-service.png"
+                data-desktop="template-logistics-service.png"
+                data-mobile="template-logistics-service-mobile.png"
+                >完整 PNG</a
+              ><a href="comparison.html?template=template-logistics-service.html">对照四份基准</a>
+            </nav>
+          </article>
+        </div>
+      </section>
+      <footer>
+        各模板内嵌其示例数据，浏览器需要联网加载图表与数据处理组件。行业模板的来源、版本、许可与原始数据校验值保存在
+        HTML 的 source-data 中。
+      </footer>
+    </main>
+    <script>
+      document.querySelectorAll('button[data-mode]').forEach((button) =>
+        button.addEventListener('click', () => {
+          const mode = button.dataset.mode
+          document.body.dataset.mode = mode
+          document
+            .querySelectorAll('button[data-mode]')
+            .forEach((option) => option.setAttribute('aria-pressed', String(option === button)))
+          document.querySelectorAll('img[data-desktop]').forEach((image) => (image.src = image.dataset[mode]))
+          document.querySelectorAll('a[data-screenshot]').forEach((link) => (link.href = link.dataset[mode]))
+        }),
+      )
+    </script>
+  </body>
+</html>
