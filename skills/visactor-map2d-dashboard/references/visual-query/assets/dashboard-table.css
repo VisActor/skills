@@ -1,0 +1,76 @@
+/* Shared semantic tokens. Theme palettes supply --ink, --muted and --accent. */
+:root {
+  --font-ui: var(--dashboard-font-family, Inter, 'PingFang SC', 'Microsoft YaHei', sans-serif);
+  --text-primary: var(--ink);
+  --text-strong: var(--strong, var(--ink));
+  --text-secondary: var(--muted);
+  --text-faint: color-mix(in srgb, var(--muted) 88%, transparent);
+  --focus-ring: color-mix(in srgb, var(--accent) 68%, var(--ink));
+  --table-canvas: transparent;
+  --table-body: rgb(255 255 255 / 6%);
+  --table-stripe: rgb(255 255 255 / 18%);
+  --table-header: color-mix(in srgb, var(--ink) 3%, rgb(255 255 255 / 66%));
+  --table-text: var(--text-primary);
+  --table-header-text: var(--text-strong);
+  --table-divider: color-mix(in srgb, var(--ink) 8%, transparent);
+  --table-frame: color-mix(in srgb, var(--ink) 10%, transparent);
+  --table-hover: color-mix(in srgb, var(--accent) 15%, transparent);
+  --table-hover-row: color-mix(in srgb, var(--accent) 8%, transparent);
+  --table-selected: color-mix(in srgb, var(--accent) 25%, transparent);
+  --table-selected-row: color-mix(in srgb, var(--accent) 9%, transparent);
+  --table-selected-border: color-mix(in srgb, var(--accent) 70%, var(--ink));
+  --table-scroll-thumb: color-mix(in srgb, var(--muted) 38%, transparent);
+  --table-scroll-rail: transparent;
+  --table-font-size: 12px;
+  --table-header-font-size: 11px;
+  --table-row-height: 40px;
+  --table-header-height: 38px;
+  --table-selection-width: 1px;
+  --table-radius: 10px;
+  --table-overview-max-height: 398px;
+}
+:root[data-mode='dark'] {
+  --table-body: transparent;
+  --table-stripe: color-mix(in srgb, var(--ink) 3%, transparent);
+  --table-header: color-mix(in srgb, var(--ink) 6%, transparent);
+  --table-divider: color-mix(in srgb, var(--ink) 9%, transparent);
+  --table-frame: color-mix(in srgb, var(--ink) 12%, transparent);
+}
+.dashboard-table,
+.ma-dialog .ma-table {
+  border-radius: var(--table-radius);
+  overflow: hidden;
+  outline: none;
+}
+.dashboard-table:focus-visible,
+.ma-dialog .ma-table:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+.dashboard-table {
+  position: relative;
+  width: 100%;
+  height: var(--table-overview-max-height);
+  margin-top: 14px;
+}
+.dashboard-table[data-empty='true']::after {
+  content: '当前筛选暂无数据';
+  position: absolute;
+  inset: 45% 0 auto;
+  text-align: center;
+  color: var(--text-secondary);
+  font: 12px var(--font-ui);
+  pointer-events: none;
+}
+.dashboard-table-caption {
+  margin: 16px 0 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.85;
+}
+.dashboard-table-count {
+  margin-left: 10px;
+  color: var(--text-faint);
+  font-size: 11px;
+  font-weight: 400;
+}

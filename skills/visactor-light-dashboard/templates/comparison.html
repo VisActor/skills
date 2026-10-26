@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>模板视觉对照</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #eef2f7;
+        color: #293744;
+        font:
+          14px/1.7 Inter,
+          'PingFang SC',
+          sans-serif;
+      }
+      main {
+        padding: 32px;
+        max-width: 1800px;
+        margin: auto;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      h1 {
+        font-size: 27px;
+        margin: 8px 0;
+      }
+      p {
+        color: #627283;
+        margin: 6px 0;
+      }
+      a {
+        color: #345b85;
+        text-underline-offset: 4px;
+      }
+      nav {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+        background: white;
+        border: 0;
+        border-radius: 20px;
+        padding: 8px 16px;
+        color: inherit;
+      }
+      button:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+      button[aria-pressed='true'] {
+        background: #304c6b;
+        color: white;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 2px solid #527eaf;
+        outline-offset: 4px;
+      }
+      .comparison {
+        overflow: auto;
+        margin-top: 26px;
+      }
+      .columns {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(250px, 1fr));
+        gap: 14px;
+        align-items: start;
+      }
+      figure {
+        margin: 0;
+        background: white;
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      figcaption {
+        padding: 12px 14px;
+        font-weight: 600;
+        font-size: 12px;
+        border-bottom: 1px solid #e5ebf2;
+      }
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .preview {
+        display: block;
+        position: relative;
+        min-height: 240px;
+        background: #f4f7fa;
+      }
+      .preview img {
+        transition: opacity 160ms ease;
+      }
+      .preview[aria-busy='true'] img {
+        opacity: 0.25;
+      }
+      .image-status {
+        position: absolute;
+        top: 16px;
+        left: 12px;
+        right: 12px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: white;
+        color: #345b85;
+        box-shadow: 0 2px 12px #29374412;
+        font-size: 12px;
+        text-align: center;
+      }
+      .preview[aria-busy='true'] .image-status::before {
+        content: '';
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        margin-right: 8px;
+        border: 2px solid #d6e1ed;
+        border-top-color: #345b85;
+        border-radius: 50%;
+        vertical-align: -2px;
+        animation: loading 0.8s linear infinite;
+      }
+      .preview[data-state='error'] img {
+        visibility: hidden;
+      }
+      @keyframes loading {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .preview img {
+          transition: none;
+        }
+        .preview .image-status::before {
+          animation: none;
+        }
+      }
+      .reason {
+        max-width: 1080px;
+        margin: 22px 0;
+      }
+      .hint {
+        font-size: 12px;
+      }
+      body[data-mode='mobile'] .columns {
+        grid-template-columns: repeat(5, minmax(220px, 1fr));
+      }
+      @media (max-width: 650px) {
+        main {
+          padding: 24px 18px;
+        }
+        h1 {
+          font-size: 23px;
+        }
+        .columns {
+          grid-template-columns: repeat(5, 260px);
+        }
+      }
+    </style>
+  </head>
+  <body data-mode="desktop">
+    <main>
+      <header>
+        <div>
+          <a href="index.html">← 24 份模板总览</a>
+          <h1 id="title">模板视觉对照</h1>
+          <p id="count"></p>
+        </div>
+        <nav aria-label="对照操作">
+          <button id="previous">← 上一份</button><button id="next">下一份 →</button
+          ><button data-mode="desktop" aria-pressed="true">桌面</button
+          ><button data-mode="mobile" aria-pressed="false">手机</button>
+        </nav>
+      </header>
+      <p class="reason" id="reason"></p>
+      <p class="hint">
+        同视口全页截图、相同缩放比例、明细默认展开。点击任一图查看完整
+        PNG；比较主辅比例、信息密度、单位、留白与窄屏顺序。
+      </p>
+      <section class="comparison" aria-label="当前模板与四份基础参考">
+        <div class="columns">
+          <figure>
+            <figcaption><a id="target-link">当前模板</a></figcaption>
+            <a id="target-image-link"><img id="target" alt="当前行业模板截图" /></a>
+          </figure>
+          <figure>
+            <figcaption><a href="template-life-expectancy.html">life-expectancy · 趋势主导</a></figcaption>
+            <a class="reference-link"
+              ><img class="reference" data-stem="template-life-expectancy" alt="趋势主导基准截图"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption><a href="template-heart-failure.html">heart-failure · 指标先行</a></figcaption>
+            <a class="reference-link"
+              ><img class="reference" data-stem="template-heart-failure" alt="指标先行基准截图"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption><a href="template-meal-workout.html">meal-workout · 分段叙事</a></figcaption>
+            <a class="reference-link"
+              ><img class="reference" data-stem="template-meal-workout" alt="分段叙事基准截图"
+            /></a>
+          </figure>
+          <figure>
+            <figcaption><a href="template-business-overview.html">business-overview · 经营主辅</a></figcaption>
+            <a class="reference-link"
+              ><img class="reference" data-stem="template-business-overview" alt="经营主辅基准截图"
+            /></a>
+          </figure>
+        </div>
+      </section>
+      <!-- prettier-ignore -->
+      <script id="catalog" type="application/json">[{"path":"template-life-expectancy.html","title":"全球寿命观察","theme":"#9FBFDF","skin":"soft","description":"2,938 条寿命记录；首尾国家配对、发展状态差距与覆盖变化。","layoutReason":"左侧大趋势承载长期变化，右侧小卡补充变化幅度、覆盖和教育，保持单一视觉中心。","colorReason":"浅蓝与中性阅读面营造平静氛围，让长期曲线和数字优先。","kind":"baseline","industry":"baseline","variant":1},{"path":"template-heart-failure.html","title":"心衰样本观察","theme":"#7664C3","skin":"soft","description":"299 条临床样本；事件数与占比、年龄和高血压状态交叉核对。","layoutReason":"顶部三项指标先概览，下方宽幅条形图再看年龄组；随访天数不伪装成日历趋势。","colorReason":"鸢尾紫区分数据图形与浅色阅读面；事件状态由标签表达，主题色不暗示风险。","kind":"baseline","industry":"baseline","variant":2},{"path":"template-meal-workout.html","title":"餐食与运动画像","theme":"#C06C32","skin":"soft","description":"8,000 条餐食记录；热量与蛋白质密度、活动水平分层核对。","layoutReason":"热量主区、运动与营养双列、样本构成收尾，分段解释不同量纲，避免 KPI 挤在一排。","colorReason":"杏橙串联餐食与运动各段；浅杏背景承接图形，单位和正文使用中性色。","kind":"baseline","industry":"baseline","variant":3},{"path":"template-business-overview.html","title":"经营概览","theme":"#A8C7E8","skin":"soft","description":"轻量销售示例；销售增量贡献、订单与客单变化、利润质量。","layoutReason":"左主趋势与右侧三张辅助卡突出销售规模，标题右侧合并筛选，明细承接核对。","colorReason":"浅蓝统一趋势与卡片，白色阅读面降低密度，正负变化另用语义色表达。","kind":"baseline","industry":"baseline","variant":4},{"kind":"industry","industry":"education","variant":1,"description":"葡萄牙两所中学 · 葡语课程；低分记录集中在哪里？结合记录量与表现、交叉分组和关联明细核对。","title":"学习成果观察","path":"template-education-performance.html","source":"https://www.kaggle.com/datasets/larsen0966/student-performance-data-set","rows":649,"theme":"#427FC0","skin":"rounded","layout":[{"x":0,"y":1,"w":8,"h":9},{"x":8,"y":1,"w":4,"h":3},{"x":8,"y":4,"w":4,"h":3},{"x":8,"y":7,"w":4,"h":3}],"layoutReason":"大幅年龄组比较居左，成绩、出勤与进步互相补充。","colorReason":"冰川蓝保持学习观察的清晰感；成绩图形与中性文字分层。"},{"kind":"industry","industry":"education","variant":2,"description":"样本记录 · 学习投入与成绩；缺课规模与占比如何分布？结合记录量与表现、交叉分组和关联明细核对。","title":"出勤与学习节奏","path":"template-education-attendance.html","source":"https://www.kaggle.com/datasets/larsen0966/student-performance-data-set","rows":649,"theme":"#C06C32","skin":"paper","layout":[{"x":0,"y":4,"w":12,"h":8},{"x":0,"y":1,"w":4,"h":3},{"x":4,"y":1,"w":4,"h":3},{"x":8,"y":1,"w":4,"h":3}],"layoutReason":"先读三个概览结果，再进入全宽学习时长比较，避免用因果语言解释出勤。","colorReason":"杏橙带来温暖的观察氛围，浅色底面让出勤与学习数据优先。"},{"kind":"industry","industry":"retail","variant":1,"description":"合成交易样本 · 金额与购买结构；销售规模与单笔表现是否同步？结合记录量与表现、交叉分组和关联明细核对。","title":"零售月度脉搏","path":"template-retail-sales.html","source":"https://www.kaggle.com/datasets/mohammadtalib786/retail-sales-dataset","rows":1000,"theme":"#C06C32","skin":"soft","layout":[{"x":0,"y":1,"w":12,"h":7},{"x":0,"y":8,"w":4,"h":4},{"x":4,"y":8,"w":4,"h":4},{"x":8,"y":8,"w":4,"h":4}],"layoutReason":"全宽月度金额趋势先回答规模变化，随后一排结构与效率指标。","colorReason":"杏橙突出月度金额走势；面积填充减轻，保留清楚的趋势轮廓。"},{"kind":"industry","industry":"retail","variant":2,"description":"合成零售样本 · 单笔品类交易；交易金额差异与件数、价位如何关联？结合记录量与表现、交叉分组和关联明细核对。","title":"品类与客单结构","path":"template-retail-basket.html","source":"https://www.kaggle.com/datasets/mohammadtalib786/retail-sales-dataset","rows":1000,"theme":"#427FC0","skin":"outline","layout":[{"x":4,"y":1,"w":8,"h":9},{"x":0,"y":1,"w":4,"h":3},{"x":0,"y":4,"w":4,"h":3},{"x":0,"y":7,"w":4,"h":3}],"layoutReason":"右侧大品类比较与左侧结构卡形成镜像阅读，先看客单再看件数。","colorReason":"冰川蓝组织商品结构，浅色阅读面与金额趋势页的暖色形成区分。"},{"kind":"industry","industry":"healthcare","variant":1,"description":"保险费用数据 · 描述性观察；费用差异在可比分组下是否仍存在？结合记录量与表现、交叉分组和关联明细核对。","title":"医疗费用样本","path":"template-healthcare-charges.html","source":"https://www.kaggle.com/datasets/mirichoi0218/insurance","rows":1338,"theme":"#427FC0","skin":"rounded","layout":[{"x":0,"y":1,"w":7,"h":8},{"x":7,"y":1,"w":5,"h":4},{"x":7,"y":5,"w":5,"h":4},{"x":0,"y":9,"w":12,"h":3}],"layoutReason":"费用比较占据左侧主区，两个相关特征居右，样本结构横向收尾。","colorReason":"冰川蓝区分费用图形与次要文字，不以主题色暗示临床风险。"},{"kind":"industry","industry":"healthcare","variant":2,"description":"费用与家庭结构 · 样本概览；地区费用差异是否来自人群结构？结合记录量与表现、交叉分组和关联明细核对。","title":"地区费用画像","path":"template-healthcare-regions.html","source":"https://www.kaggle.com/datasets/mirichoi0218/insurance","rows":1338,"theme":"#BE658B","skin":"editorial","layout":[{"x":0,"y":4,"w":8,"h":8},{"x":0,"y":1,"w":6,"h":3},{"x":6,"y":1,"w":6,"h":3},{"x":8,"y":4,"w":4,"h":8}],"layoutReason":"顶部两张概览卡后接左侧地区费用主图与右侧结构卡，强调区域描述。","colorReason":"玫瑰粉用于地区与家庭结构比较，深玫文字和近白底面维持阅读层级。"},{"kind":"industry","industry":"banking","variant":1,"description":"营销样本 · 联系渠道与账户特征；响应规模与响应占比是否一致？结合记录量与表现、交叉分组和关联明细核对。","title":"银行触达观察","path":"template-banking-outreach.html","source":"https://www.kaggle.com/datasets/janiobachmann/bank-marketing-dataset","rows":11162,"theme":"#7664C3","skin":"outline","layout":[{"x":0,"y":1,"w":9,"h":8},{"x":9,"y":1,"w":3,"h":4},{"x":9,"y":5,"w":3,"h":4},{"x":0,"y":9,"w":12,"h":3}],"layoutReason":"渠道主图与窄侧栏构成主辅层级，底部全宽卡补充触达强度。","colorReason":"鸢尾紫组织渠道与账户特征，负余额继续按真实坐标呈现。"},{"kind":"industry","industry":"banking","variant":2,"description":"教育分组 · 样本接受与联系强度；哪些联系组合值得继续验证？结合记录量与表现、交叉分组和关联明细核对。","title":"营销响应结构","path":"template-banking-response.html","source":"https://www.kaggle.com/datasets/janiobachmann/bank-marketing-dataset","rows":11162,"theme":"#A98427","skin":"paper","layout":[{"x":3,"y":1,"w":9,"h":8},{"x":0,"y":1,"w":3,"h":4},{"x":0,"y":5,"w":3,"h":4},{"x":0,"y":9,"w":12,"h":3}],"layoutReason":"左侧两张细卡、右侧宽比较图，再以联系强度收尾，避免多组指标等权排列。","colorReason":"琥珀金强调响应结构，深金文字与近白底面避免浅金图形失去轮廓。"},{"kind":"industry","industry":"housing","variant":1,"description":"房源样本 · 卧室与配置；价格差异是否来自房源配置？结合记录量与表现、交叉分组和关联明细核对。","title":"住宅价格与空间","path":"template-housing-price.html","source":"https://www.kaggle.com/datasets/harishkumardatalab/housing-price-prediction","rows":545,"theme":"#C06C32","skin":"soft","layout":[{"x":0,"y":1,"w":12,"h":8},{"x":0,"y":9,"w":6,"h":4},{"x":6,"y":9,"w":3,"h":4},{"x":9,"y":9,"w":3,"h":4}],"layoutReason":"全宽卧室价格比较后，以宽结构卡和两张小卡说明房源配置。","colorReason":"杏橙与浅杏背景呼应居住空间，金额沿用来源单位。"},{"kind":"industry","industry":"housing","variant":2,"description":"房源样本 · 总量口径的单位面积价格；单位面积价格差异集中在哪里？结合记录量与表现、交叉分组和关联明细核对。","title":"装修与空间效率","path":"template-housing-efficiency.html","source":"https://www.kaggle.com/datasets/harishkumardatalab/housing-price-prediction","rows":545,"theme":"#94506D","skin":"editorial","layout":[{"x":0,"y":5,"w":8,"h":8},{"x":0,"y":1,"w":12,"h":4},{"x":8,"y":5,"w":4,"h":4},{"x":8,"y":9,"w":4,"h":4}],"layoutReason":"宽空调结构卡在前，随后左主图与右辅卡；突出总价与面积的不同口径。","colorReason":"勃艮第红强化效率比较的图形辨识，正文与表格保留中性色。"},{"kind":"industry","industry":"energy","variant":1,"description":"美国 EIA 数据 · 1973—2024；报告消费差异与覆盖结构如何变化？结合记录量与表现、交叉分组和关联明细核对。","title":"可再生能源长镜头","path":"template-energy-renewables.html","source":"https://www.kaggle.com/datasets/alistairking/renewable-energy-consumption-in-the-u-s","rows":3065,"theme":"#A98427","skin":"paper","layout":[{"x":4,"y":1,"w":8,"h":8},{"x":0,"y":1,"w":4,"h":4},{"x":0,"y":5,"w":4,"h":4},{"x":0,"y":9,"w":12,"h":4}],"layoutReason":"右侧长年度曲线配左侧来源概览，底部宽卡补充风能报告值。","colorReason":"琥珀金强调长期能源曲线，浅填充让年度走势成为主视觉。"},{"kind":"industry","industry":"energy","variant":2,"description":"报告覆盖与消费结构 · 美国部门样本；风能报告规模与部门结构如何变化？结合记录量与表现、交叉分组和关联明细核对。","title":"风能的部门画像","path":"template-energy-wind.html","source":"https://www.kaggle.com/datasets/alistairking/renewable-energy-consumption-in-the-u-s","rows":3065,"theme":"#427FC0","skin":"rounded","layout":[{"x":0,"y":1,"w":6,"h":10},{"x":6,"y":1,"w":6,"h":4},{"x":6,"y":5,"w":3,"h":6},{"x":9,"y":5,"w":3,"h":6}],"layoutReason":"半宽部门比较和右侧上下分组卡形成紧凑双区，强调部门结构而非年度规模。","colorReason":"冰川蓝组织部门结构，与长期观察页的琥珀金形成冷暖区分。"},{"kind":"industry","industry":"agriculture","variant":1,"description":"降雨与气候 · 标签数据观察；作物与气候组合有哪些差异？结合记录量与表现、交叉分组和关联明细核对。","title":"作物环境样本","path":"template-agriculture-climate.html","source":"https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset","rows":2200,"theme":"#A98427","skin":"outline","layout":[{"x":6,"y":1,"w":6,"h":10},{"x":0,"y":1,"w":6,"h":4},{"x":0,"y":5,"w":3,"h":6},{"x":3,"y":5,"w":3,"h":6}],"layoutReason":"半宽作物降雨比较置右，左侧用结构与温湿度解释样本；主图展示前12类，完整分组见明细。","colorReason":"琥珀金配浅暖底面承载气候与降雨观察，原始分类继续由标签表达。"},{"kind":"industry","industry":"agriculture","variant":2,"description":"氮磷钾与 pH · 观察样本；作物与土壤组合有哪些差异？结合记录量与表现、交叉分组和关联明细核对。","title":"土壤养分分组","path":"template-agriculture-nutrients.html","source":"https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset","rows":2200,"theme":"#C06C32","skin":"paper","layout":[{"x":0,"y":1,"w":12,"h":9},{"x":0,"y":10,"w":3,"h":4},{"x":3,"y":10,"w":6,"h":4},{"x":9,"y":10,"w":3,"h":4}],"layoutReason":"宽幅作物养分比较后接中间指标卡与两侧结构卡；完整作物分组与交叉定位承接核对。","colorReason":"杏橙承载土壤养分比较，与气候页的琥珀金区分。"},{"kind":"industry","industry":"hospitality","variant":1,"description":"2017—2018 到店月份 · 预订记录；取消记录集中在哪些到店与渠道组合？结合记录量与表现、交叉分组和关联明细核对。","title":"酒店预订节奏","path":"template-hospitality-bookings.html","source":"https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset","rows":36275,"theme":"#427FC0","skin":"soft","layout":[{"x":0,"y":5,"w":12,"h":9},{"x":0,"y":1,"w":3,"h":4},{"x":3,"y":1,"w":6,"h":4},{"x":9,"y":1,"w":3,"h":4}],"layoutReason":"顶部指标分成窄宽窄节奏，再用全宽月份曲线承接预订规模。","colorReason":"冰川蓝承接月份走势，取消状态通过明确文字表达。"},{"kind":"industry","industry":"hospitality","variant":2,"description":"渠道结构 · 人次、夜数与复住记录；客流规模是否伴随取消风险？结合记录量与表现、交叉分组和关联明细核对。","title":"旅客与入住计划","path":"template-hospitality-guests.html","source":"https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset","rows":36275,"theme":"#94506D","skin":"editorial","layout":[{"x":0,"y":1,"w":8,"h":10},{"x":8,"y":1,"w":4,"h":5},{"x":8,"y":6,"w":4,"h":5},{"x":0,"y":11,"w":12,"h":3}],"layoutReason":"左主图与右侧两张较高计划卡承接不同量纲，底部以取消记录补足质量。","colorReason":"勃艮第红突出住宿计划比较，与月份页的冷色保持区分。"},{"kind":"industry","industry":"manufacturing","variant":1,"description":"合成预测维护数据 · 故障标签；故障数量与故障占比指向哪里？结合记录量与表现、交叉分组和关联明细核对。","title":"设备运行样本","path":"template-manufacturing-failures.html","source":"https://www.kaggle.com/datasets/shivamb/machine-predictive-maintenance-classification","rows":10000,"theme":"#427FC0","skin":"outline","layout":[{"x":4,"y":1,"w":8,"h":10},{"x":0,"y":1,"w":4,"h":5},{"x":0,"y":6,"w":4,"h":5},{"x":0,"y":11,"w":12,"h":3}],"layoutReason":"右侧故障占比比较与左侧运行特征卡形成主辅，底部保留温差信息。","colorReason":"冰川蓝让设备特征保持清楚，故障标签继续使用真实业务含义。"},{"kind":"industry","industry":"manufacturing","variant":2,"description":"合成记录 · 速度、扭矩与故障标签；磨损与故障差异在哪些工况出现？结合记录量与表现、交叉分组和关联明细核对。","title":"磨损与运行工况","path":"template-manufacturing-wear.html","source":"https://www.kaggle.com/datasets/shivamb/machine-predictive-maintenance-classification","rows":10000,"theme":"#C06C32","skin":"rounded","layout":[{"x":0,"y":4,"w":7,"h":9},{"x":0,"y":1,"w":12,"h":3},{"x":7,"y":4,"w":5,"h":4},{"x":7,"y":8,"w":5,"h":5}],"layoutReason":"全宽故障结构卡后接七列工况主图与五列运行特征，突出量纲差异。","colorReason":"杏橙强调机械工况图形，浅底色避免工业大屏的视觉重量。"},{"kind":"industry","industry":"logistics","variant":1,"description":"发运样本 · 准时状态与服务；履约问题集中在哪些组合？结合记录量与表现、交叉分组和关联明细核对。","title":"仓库履约观察","path":"template-logistics-fulfillment.html","source":"https://www.kaggle.com/datasets/prachi13/customer-analytics","rows":10999,"theme":"#427FC0","skin":"soft","layout":[{"x":0,"y":1,"w":7,"h":10},{"x":7,"y":1,"w":5,"h":4},{"x":7,"y":5,"w":5,"h":6},{"x":0,"y":11,"w":12,"h":3}],"layoutReason":"较窄主图承载五个仓库分组，右侧三张大小有别的服务指标补充解释。","colorReason":"冰川蓝统一仓库比较与服务图形，状态文字和记录数使用中性色。"},{"kind":"industry","industry":"logistics","variant":2,"description":"重量、折扣与商品成本 · 发运记录；服务表现是否受业务结构影响？结合记录量与表现、交叉分组和关联明细核对。","title":"运输与服务画像","path":"template-logistics-service.html","source":"https://www.kaggle.com/datasets/prachi13/customer-analytics","rows":10999,"theme":"#7664C3","skin":"paper","layout":[{"x":0,"y":4,"w":7,"h":9},{"x":0,"y":1,"w":12,"h":3},{"x":7,"y":4,"w":5,"h":5},{"x":7,"y":9,"w":5,"h":4}],"layoutReason":"三个概览卡在前，七列主图比较运输方式的未按时占比，五列服务卡补充重量与商品属性。","colorReason":"鸢尾紫区分运输与服务观察，浅紫背景让重量和商品属性更清楚。"}]</script>
+      <script>
+        const catalog = JSON.parse(document.querySelector('#catalog').textContent)
+        let index = Math.max(
+            0,
+            catalog.findIndex((entry) => entry.path === new URLSearchParams(location.search).get('template')),
+          ),
+          mode = 'desktop'
+        const previewRequests = new WeakMap()
+        function loadPreview(image, source) {
+          if (image.dataset.requested === source) return
+          const previous = previewRequests.get(image)
+          if (previous) previous.src = ''
+          image.dataset.requested = source
+          const link = image.parentElement,
+            status = link.querySelector('.image-status')
+          link.dataset.state = 'loading'
+          link.setAttribute('aria-busy', 'true')
+          // Catalog values are filenames, never executable or external URLs.
+          const previewURL = './' + encodeURIComponent(source)
+          link.href = previewURL
+          status.hidden = false
+          status.textContent = '截图加载中…'
+          const pending = new Image()
+          previewRequests.set(image, pending)
+          pending.decoding = 'async'
+          pending.src = previewURL
+          pending.decode().then(
+            () => {
+              if (previewRequests.get(image) !== pending) return
+              previewRequests.delete(image)
+              image.width = pending.naturalWidth
+              image.height = pending.naturalHeight
+              image.src = previewURL
+              link.dataset.state = 'ready'
+              link.setAttribute('aria-busy', 'false')
+              status.hidden = true
+            },
+            () => {
+              if (previewRequests.get(image) !== pending) return
+              previewRequests.delete(image)
+              link.dataset.state = 'error'
+              link.setAttribute('aria-busy', 'false')
+              status.textContent = '截图加载失败，点击重试'
+            },
+          )
+        }
+        document.querySelectorAll('.comparison img').forEach((image) => {
+          const link = image.parentElement,
+            status = document.createElement('span')
+          link.classList.add('preview')
+          status.className = 'image-status'
+          status.setAttribute('role', 'status')
+          link.append(status)
+          image.decoding = 'async'
+          link.addEventListener('click', (event) => {
+            if (link.dataset.state === 'ready') return
+            event.preventDefault()
+            if (link.dataset.state === 'error') {
+              const source = image.dataset.requested
+              delete image.dataset.requested
+              loadPreview(image, source)
+            }
+          })
+        })
+        function render() {
+          const entry = catalog[index],
+            suffix = mode === 'mobile' ? '-mobile' : ''
+          document.body.dataset.mode = mode
+          document.querySelector('#title').textContent = entry.title + ' · 视觉对照'
+          document.querySelector('#count').textContent =
+            `${index + 1} / ${catalog.length} · ${mode === 'mobile' ? '390 × 844' : '1440 × 1000'}`
+          document.querySelector('#reason').textContent = entry.layoutReason + ' ' + entry.colorReason
+          const image = entry.path.replace('.html', suffix + '.png')
+          loadPreview(document.querySelector('#target'), image)
+          document.querySelector('#target-link').href = './' + encodeURIComponent(entry.path)
+          document.querySelector('#target-link').textContent = entry.title
+          document.querySelectorAll('.reference').forEach((image) => {
+            loadPreview(image, `${image.dataset.stem}${suffix}.png`)
+          })
+          document.querySelector('#previous').disabled = index === 0
+          document.querySelector('#next').disabled = index === catalog.length - 1
+          document.querySelectorAll('[data-mode]').forEach((button) => {
+            if (button.tagName === 'BUTTON') button.setAttribute('aria-pressed', String(button.dataset.mode === mode))
+          })
+          history.replaceState(null, '', '?template=' + encodeURIComponent(entry.path))
+        }
+        document.querySelector('#previous').addEventListener('click', () => {
+          index--
+          render()
+        })
+        document.querySelector('#next').addEventListener('click', () => {
+          index++
+          render()
+        })
+        document.querySelectorAll('button[data-mode]').forEach((button) =>
+          button.addEventListener('click', () => {
+            mode = button.dataset.mode
+            render()
+          }),
+        )
+        render()
+      </script>
+    </main>
+  </body>
+</html>

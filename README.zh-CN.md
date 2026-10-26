@@ -14,6 +14,10 @@
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | 杂志图文：新闻、生平、穿搭、旅行、时序故事与科普，导出 HTML / PNG |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | 人物生平海报：照片墙、中心网格、照片环与可编辑时间线 |
 | [person-poster](skills/person-poster/SKILL.md) | 人物主导的数据信息图，原生 VChart 图表、可编辑 HTML 与高清 PNG |
+| [visactor-light-dashboard](skills/visactor-light-dashboard/SKILL.md) | 经营概览、指标监测与专题分析，支持筛选联动和进一步探索 |
+| [visactor-map2d-dashboard](skills/visactor-map2d-dashboard/SKILL.md) | 二维地图看板，联动地域、指标、事件与明细 |
+| [visactor-chart-editor](skills/visactor-chart-editor/SKILL.md) | 自助图表编辑器，支持字段拖拽、图型切换与实时数据探索 |
+| [visactor-map3d-dashboard](skills/visactor-map3d-dashboard/SKILL.md) | 三维地球看板，分析地域差异并联动证据与记录 |
 
 ### VisActor 相关 Skills
 
@@ -36,6 +40,10 @@
 npx skills add VisActor/skills --skill chart-storytelling
 npx skills add VisActor/skills --skill editorial-magazine
 npx skills add VisActor/skills --skill life-chronicle
+npx skills add ./skills/visactor-light-dashboard
+npx skills add ./skills/visactor-map2d-dashboard
+npx skills add ./skills/visactor-chart-editor
+npx skills add ./skills/visactor-map3d-dashboard
 ```
 
 `person-poster` 可从包含该 Skill 的工作副本安装：`npx skills add ./skills/person-poster`。晋级到 `main` 后可使用默认分支命令 `npx skills add VisActor/skills --skill person-poster`；默认分支安装不依赖发布标签。

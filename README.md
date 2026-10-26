@@ -14,6 +14,10 @@ Agent skills for the VisActor visualization ecosystem. Create data stories, edit
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | Editorial HTML / PNG series for news, biographies, outfits, travel, chronological stories and explainers |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | Biography posters with photo walls, center grids, photo rings and editable timelines |
 | [person-poster](skills/person-poster/SKILL.md) | Person-led data posters with native VChart, editable HTML and high-resolution PNG |
+| [visactor-light-dashboard](skills/visactor-light-dashboard/SKILL.md) | Compact business dashboards with metrics, filters and further analysis |
+| [visactor-map2d-dashboard](skills/visactor-map2d-dashboard/SKILL.md) | Interactive 2D map dashboards linking regions, metrics and records |
+| [visactor-chart-editor](skills/visactor-chart-editor/SKILL.md) | Self-service chart editing with field drag-and-drop and live data exploration |
+| [visactor-map3d-dashboard](skills/visactor-map3d-dashboard/SKILL.md) | 3D globe dashboards for regional analysis and linked evidence |
 
 ### Related VisActor Skills
 
@@ -36,6 +40,10 @@ Run these commands in the project where you want to use the Skills:
 npx skills add VisActor/skills --skill chart-storytelling
 npx skills add VisActor/skills --skill editorial-magazine
 npx skills add VisActor/skills --skill life-chronicle
+npx skills add ./skills/visactor-light-dashboard
+npx skills add ./skills/visactor-map2d-dashboard
+npx skills add ./skills/visactor-chart-editor
+npx skills add ./skills/visactor-map3d-dashboard
 ```
 
 `person-poster` is available from a checkout containing this Skill: `npx skills add ./skills/person-poster`. The default-branch command `npx skills add VisActor/skills --skill person-poster` becomes available after promotion to `main`; a release tag is not required for default-branch installation.

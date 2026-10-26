@@ -1,0 +1,3 @@
+interface:
+  display_name: 'VisActor Chart Editor'
+  short_description: '基于完整 HTML 模板创建图表编辑器，支持字段配置、筛选聚合、实时预览与 DSL 保存。'
