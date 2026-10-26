@@ -29,6 +29,17 @@
 | [大 S：横版照片墙人物志](life-chronicle/barbie-hsu/README.md) | 人物抠图与事件图文编排 | 历史生成结果；提示词与复现限制见案例 |
 | [刘欢：竖版环形人物志](life-chronicle/liu-huan/README.md) | 人物抠图与事件图文编排 | 历史生成结果；提示词与复现限制见案例 |
 
+## VBI 交互示例
+
+每个 Skill 提供一个单文件 HTML；地震示例联网读取 USGS，其余示例内嵌数据。
+
+| Skill / HTML | 示例 | 说明 |
+| --- | --- | --- |
+| [visactor-light-dashboard](visactor-light-dashboard/retail-sales/result/index.html) | 零售月度脉搏 | [使用说明](visactor-light-dashboard/retail-sales/README.md) |
+| [visactor-map2d-dashboard](visactor-map2d-dashboard/global-earthquakes/result/index.html) | 全球地震观测 | [使用说明](visactor-map2d-dashboard/global-earthquakes/README.md) |
+| [visactor-chart-editor](visactor-chart-editor/self-service-analysis/result/index.html) | 自助式分析 | [使用说明](visactor-chart-editor/self-service-analysis/README.md) |
+| [visactor-map3d-dashboard](visactor-map3d-dashboard/global-air-quality/result/index.html) | 全球空气质量 | [使用说明](visactor-map3d-dashboard/global-air-quality/README.md) |
+
 ## 案例结构
 
 新增案例按 `examples/<skill-name>/<case-name>/` 组织，Skill 名与运行目录一致。
