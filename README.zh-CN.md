@@ -13,6 +13,7 @@
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | 分析报告、业务简报与数据专题，结合图表滚动叙事与标注，输出 HTML 数据故事或 Web-PPT |
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | 杂志图文：新闻、生平、穿搭、旅行、时序故事与科普，导出 HTML / PNG |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | 人物生平海报：照片墙、中心网格、照片环与可编辑时间线 |
+| [person-poster](skills/person-poster/SKILL.md) | 人物主导的数据信息图，原生 VChart 图表、可编辑 HTML 与高清 PNG |
 
 ### VisActor 相关 Skills
 
@@ -35,6 +36,7 @@
 npx skills add VisActor/skills --skill chart-storytelling
 npx skills add VisActor/skills --skill editorial-magazine
 npx skills add VisActor/skills --skill life-chronicle
+npx skills add VisActor/skills --skill person-poster
 ```
 
 如需图表和表格能力，从对应仓库安装：
@@ -58,6 +60,7 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 | chart-storytelling | Python 3.10+（标准库）和 Node.js（校验 JavaScript）；从 unpkg 加载固定版本的 VSeed、VChart、VTable 与 GSAP |
 | editorial-magazine | Python 3.10+、其 [requirements.txt](skills/editorial-magazine/requirements.txt) 中的依赖，以及用于导出 PNG 的 Chromium/Chrome；字体从 CDN 加载，支持系统回退 |
 | life-chronicle | Python 3.10+、其 [requirements.txt](skills/life-chronicle/requirements.txt) 中的依赖，以及用于导出 PNG 的 Chromium/Chrome；固定版本的 VInfo 与字体 CDN，详见[环境说明](skills/life-chronicle/references/environment.md) |
+| person-poster | Python 3.10+、Pillow、Python Playwright/Chromium；公开 VChart 2.1.7 CDN 或有来源记录的同版本本地副本，见 [requirements.txt](skills/person-poster/scripts/requirements.txt) 和含 POSIX/PowerShell 安装及能力边界的[环境说明](skills/person-poster/references/environment.md) |
 
 图片检索、生图与抠图使用宿主能力，素材要求以所选 Skill 为准。杂志模板中的占位素材需要在交付前替换。VChart/VTable Skill 的运行要求见各自仓库。
 
@@ -79,7 +82,7 @@ chart-storytelling 由当前 Agent 生成 VSeed 配置，再用本地脚本组�
 
 ## 开发与维护
 
-本节面向需要修改 Skills 或运行本地测试的贡献者。默认分支 `main` 提供面向用户的稳定版本；日常开发和贡献 PR 使用 `develop`，经过验证后通过 `develop` → `main` 的 PR 发布。请先阅读 [贡献指南](CONTRIBUTING.md)。
+本节面向需要修改 Skills 或运行本地测试的贡献者。默认分支 `main` 提供面向用户的稳定版本；日常开发和贡献 PR 使用 `develop`，发版时从最新 `develop` 拉发布分支，补充发布单和说明后，直接通过一个 PR 合入 `main`。请先阅读 [贡献指南](CONTRIBUTING.md)。
 
 ### 仓库结构
 
@@ -105,6 +108,7 @@ chart-storytelling 由当前 Agent 生成 VSeed 配置，再用本地脚本组�
 npx skills add ./skills/chart-storytelling
 npx skills add ./skills/editorial-magazine
 npx skills add ./skills/life-chronicle
+npx skills add ./skills/person-poster
 ```
 
 也可以将 Skill 的完整目录复制到 Agent 的技能目录中，包括参考资料、模板和脚本，不要只复制 `SKILL.md`。Codex 和 Claude Code 的调试工作区准备方式见 [本地调试指南](docs/debugging.md)。修改 Skill 后，请先更新安装副本，再重新测试。
@@ -125,7 +129,7 @@ uv run ruff check skills tests
 
 使用 Codex、Claude Code 或其他兼容的成熟 Agent 执行[固定任务](cases/README.md)，也可以提供自己的提示词和输入。按[本地调试指南](docs/debugging.md)建立已忽略的 `.cache/skill-dev/<skill-name>/<run-name>/` 工作目录，保留产物、截图及可导出的日志。仓库不提供模型 API harness 或统一 Agent 执行器。
 
-固定任务目前覆盖 chart-storytelling，浏览器 smoke 覆盖其 HTML 故事和 Web-PPT。editorial-magazine 和 life-chronicle 已有脚本回归，尚无固定任务或浏览器 smoke。任务完成后检查数据准确性、要求和实际交互，允许不同的正确视觉表达。Agent 任务不在 CI 中运行。
+固定任务覆盖 chart-storytelling 与 person-poster；浏览器 smoke 覆盖故事 HTML/Web-PPT，以及人物海报的图表示例、带图表及无图表的 HTML-only 交付、无图表 PNG、祖先裁切拒绝与失败导出路径。person-poster 另已完成一次真实人物输入的同会话生成验证，不等同于独立盲测。editorial-magazine 和 life-chronicle 已有脚本回归，尚无固定任务或浏览器 smoke。任务完成后检查数据准确性、要求和实际交互，允许不同的正确视觉表达。Agent 任务不在 CI 中运行。
 
 ## 版本管理
 

@@ -1,0 +1,49 @@
+{
+  "type": "area",
+  "animation": false,
+  "background": "transparent",
+  "data": [
+    {
+      "id": "trend",
+      "values": [
+        {
+          "year": "2020",
+          "value": 12
+        },
+        {
+          "year": "2021",
+          "value": 18
+        },
+        {
+          "year": "2022",
+          "value": 15
+        }
+      ]
+    }
+  ],
+  "xField": "year",
+  "yField": "value",
+  "color": [
+    "#376e64"
+  ],
+  "axes": [
+    {
+      "orient": "bottom",
+      "type": "band",
+      "label": {
+        "autoHide": false
+      }
+    },
+    {
+      "orient": "left",
+      "type": "linear",
+      "min": 0
+    }
+  ],
+  "label": {
+    "visible": true,
+    "style": {
+      "fontSize": 20
+    }
+  }
+}

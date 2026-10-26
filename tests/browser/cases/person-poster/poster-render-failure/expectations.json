@@ -1,0 +1,14 @@
+{
+  "engine": "poster",
+  "html": "index.html",
+  "renderFailure": true,
+  "chartCount": 1,
+  "requiredChecks": [
+    "nativeSpecsUnchanged",
+    "noPrivateRequests",
+    "renderFailure",
+    "pageErrors",
+    "localAssets"
+  ],
+  "pngExpected": false
+}

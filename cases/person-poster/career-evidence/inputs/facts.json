@@ -1,0 +1,70 @@
+{
+  "person": "Marie Curie",
+  "nameZh": "玛丽·居里",
+  "scope": "1903 与 1911 年诺贝尔奖；奖项份额不代表科研贡献比例",
+  "asOf": "2026-10-23",
+  "facts": [
+    {
+      "id": "nobel-count",
+      "value": 2,
+      "unit": "次诺贝尔奖",
+      "source": [
+        "https://www.nobelprize.org/prizes/physics/1903/summary/",
+        "https://www.nobelprize.org/prizes/chemistry/1911/summary/"
+      ]
+    },
+    {
+      "id": "disciplines",
+      "value": 2,
+      "unit": "获奖学科",
+      "labels": [
+        "物理学",
+        "化学"
+      ],
+      "source": [
+        "https://www.nobelprize.org/prizes/physics/1903/summary/",
+        "https://www.nobelprize.org/prizes/chemistry/1911/summary/"
+      ]
+    }
+  ],
+  "series": [
+    {
+      "id": "physics-1903",
+      "unit": "当年物理学奖份额（%）",
+      "data": [
+        {
+          "name": "亨利·贝克勒尔",
+          "value": 50
+        },
+        {
+          "name": "皮埃尔·居里",
+          "value": 25
+        },
+        {
+          "name": "玛丽·居里",
+          "value": 25
+        }
+      ],
+      "source": "https://www.nobelprize.org/prizes/physics/1903/summary/"
+    },
+    {
+      "id": "chemistry-1911",
+      "unit": "当年化学奖份额（%）",
+      "data": [
+        {
+          "name": "玛丽·居里",
+          "value": 100
+        }
+      ],
+      "source": "https://www.nobelprize.org/prizes/chemistry/1911/summary/"
+    }
+  ],
+  "portrait": {
+    "file": "marie-curie.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Marie_Curie_c1920.jpg",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Marie_Curie_c1920.jpg",
+    "author": "Henri Manuel",
+    "date": "circa 1920",
+    "license": "Public domain; author died 1947; PD-old-75-expired, as recorded on Commons"
+  }
+}

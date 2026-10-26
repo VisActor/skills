@@ -29,7 +29,7 @@ jobs:
           enable-cache: true
       - run: uv sync --locked
       - run: uv run --locked ruff check skills tests .github/scripts
-      - run: uv run --locked pytest tests -q
+      - run: uv run --locked pytest tests -q -m "not poster_browser"
       - name: Validate Skill release packages from this commit
         run: uv run --locked python .github/scripts/package_skills.py --commit HEAD --tag skills-v0.0.0 --output .cache/ci-release-artifacts
       - name: Preview release plan for main
@@ -68,7 +68,9 @@ jobs:
       - run: uv sync --locked
       - run: npm ci --prefix tests/browser --ignore-scripts --no-audit --no-fund
       - run: node tests/browser/node_modules/playwright/cli.js install --with-deps chromium
-      - run: node --test tests/test_browser_assets.mjs tests/test_browser_checks.mjs tests/test_story_vseed.cjs
+      - run: uv run --locked python -m playwright install --with-deps chromium
+      - run: uv run --locked pytest tests/person_poster -q -m poster_browser
+      - run: node --test tests/test_browser_assets.mjs tests/test_browser_checks.mjs tests/test_story_vseed.cjs tests/test_person_poster_runtime.mjs
       - run: uv run --locked python tests/browser/scripts/smoke.py --output-dir .cache/ci-browser-smoke
       - name: Save browser evidence
         if: ${{ always() }}

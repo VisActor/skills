@@ -1,0 +1,38 @@
+{
+  "type": "pie",
+  "animation": false,
+  "background": "transparent",
+  "data": [
+    {
+      "id": "share",
+      "values": [
+        {
+          "category": "A",
+          "value": 60
+        },
+        {
+          "category": "B",
+          "value": 40
+        }
+      ]
+    }
+  ],
+  "categoryField": "category",
+  "valueField": "value",
+  "outerRadius": 0.75,
+  "color": [
+    "#ac6632",
+    "#376e64"
+  ],
+  "label": {
+    "visible": true,
+    "position": "outside",
+    "style": {
+      "fontSize": 20
+    }
+  },
+  "legends": {
+    "visible": true,
+    "orient": "bottom"
+  }
+}

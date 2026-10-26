@@ -1,0 +1,105 @@
+{
+  "type": "scatter",
+  "animation": false,
+  "background": "transparent",
+  "padding": 24,
+  "data": [
+    {
+      "id": "cells",
+      "values": [
+        {
+          "column": 0,
+          "row": 0,
+          "category": "已完成",
+          "cellValue": 10
+        },
+        {
+          "column": 1,
+          "row": 0,
+          "category": "已完成",
+          "cellValue": 10
+        },
+        {
+          "column": 2,
+          "row": 0,
+          "category": "已完成",
+          "cellValue": 10
+        },
+        {
+          "column": 3,
+          "row": 0,
+          "category": "已完成",
+          "cellValue": 10
+        },
+        {
+          "column": 4,
+          "row": 0,
+          "category": "已完成",
+          "cellValue": 10
+        },
+        {
+          "column": 0,
+          "row": 1,
+          "category": "已完成",
+          "cellValue": 10
+        },
+        {
+          "column": 1,
+          "row": 1,
+          "category": "已完成",
+          "cellValue": 10
+        },
+        {
+          "column": 2,
+          "row": 1,
+          "category": "其余",
+          "cellValue": 10
+        },
+        {
+          "column": 3,
+          "row": 1,
+          "category": "其余",
+          "cellValue": 10
+        },
+        {
+          "column": 4,
+          "row": 1,
+          "category": "其余",
+          "cellValue": 10
+        }
+      ]
+    }
+  ],
+  "xField": "column",
+  "yField": "row",
+  "seriesField": "category",
+  "size": 28,
+  "shape": "square",
+  "color": [
+    "#ac6632",
+    "#e5e4dc"
+  ],
+  "axes": [
+    {
+      "orient": "bottom",
+      "type": "linear",
+      "min": -0.5,
+      "max": 4.5,
+      "nice": false,
+      "visible": false
+    },
+    {
+      "orient": "left",
+      "type": "linear",
+      "min": -0.5,
+      "max": 1.5,
+      "nice": false,
+      "inverse": true,
+      "visible": false
+    }
+  ],
+  "legends": {
+    "visible": true,
+    "orient": "bottom"
+  }
+}

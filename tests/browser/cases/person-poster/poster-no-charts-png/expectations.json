@@ -1,0 +1,16 @@
+{
+  "engine": "poster",
+  "html": "index.html",
+  "renderFailure": false,
+  "chartCount": 0,
+  "requiredChecks": [
+    "nativeSpecsUnchanged",
+    "noPrivateRequests",
+    "ready",
+    "pageErrors",
+    "localAssets",
+    "chartDataMatches",
+    "noChartRuntime"
+  ],
+  "pngExpected": true
+}

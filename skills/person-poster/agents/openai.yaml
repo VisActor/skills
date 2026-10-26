@@ -1,0 +1,4 @@
+interface:
+  display_name: "人物数据信息图"
+  short_description: "以人物轮廓统领密集数据，制作视觉统一、可编辑并经过实际渲染验收的人物海报"
+  default_prompt: "请使用 $person-poster 为指定人物制作人物主导、数据密集、整体统一的数据信息图，优先搜索并使用真实人物图片，导出高清 PNG。"

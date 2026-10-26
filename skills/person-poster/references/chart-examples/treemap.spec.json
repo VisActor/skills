@@ -1,0 +1,51 @@
+{
+  "type": "treemap",
+  "animation": false,
+  "background": "transparent",
+  "data": [
+    {
+      "id": "tree",
+      "values": [
+        {
+          "name": "组一",
+          "children": [
+            {
+              "name": "A",
+              "value": 30
+            },
+            {
+              "name": "B",
+              "value": 20
+            }
+          ]
+        },
+        {
+          "name": "组二",
+          "children": [
+            {
+              "name": "C",
+              "value": 50
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "categoryField": "name",
+  "valueField": "value",
+  "nodePadding": 3,
+  "color": [
+    "#ac6632",
+    "#376e64",
+    "#cfb785"
+  ],
+  "label": {
+    "visible": true,
+    "style": {
+      "fontSize": 20
+    }
+  },
+  "nonLeaf": {
+    "visible": false
+  }
+}

@@ -34,3 +34,23 @@ Linux 缺少浏览器系统依赖时，使用 `install --with-deps chromium`。
 ## 用例文件
 
 每个 `<skill>/<case>/` 目录包含 `config.json`（构建配置）、`inputs/`（固定输入）和 `expectations.json`（必须执行的检查）。新增用例放在对应 Skill 目录下，runner 自动发现。
+
+## person-poster
+
+- `poster-chart-matrix`：12 类关系的原生示例、真实数据传入、画布非空和 PNG 导出。
+- `poster-html-only`：没有图表时不加载 VChart，review 和 complete 校验通过，不生成最终 PNG。
+- `poster-charts-html-only`：包含原生图表的 HTML-only 交付，渲染与 complete 校验通过，不生成最终 PNG。
+- `poster-no-charts-png`：没有图表时不加载 VChart，仍完成图片/字体就绪及 PNG 导出。
+- `poster-ancestor-clipping`：ready 成功，但 review 拒绝被父容器裁切的必需内容，不生成最终 PNG。
+- `poster-render-failure`：空挂载区域触发错误，ready 保持 false，导出返回失败且不产生 PNG。
+
+成功海报用例从独立 Skill 副本执行 preflight、review 和 complete 校验，仅 PNG 交付执行 export。预期 PNG 存在性独立于 manifest.delivery 检查；预期布局失败必须有实际测量错误，不能把任意脚本崩溃视为通过。使用公开 npm 包的本地固定版本副本，不证明任意网络可访问 CDN。图表截图经人工检查，自动测试不判断视觉质量。
+
+Python 生产链还需要与其版本匹配的 Chromium：
+
+```bash
+uv run python -m playwright install chromium
+uv run python tests/browser/scripts/smoke.py --skill person-poster
+```
+
+Python 浏览器回归使用 `poster_browser` pytest 标记。CI 在安装 Python Chromium 后由现有 browser 任务执行；普通回归任务使用 `-m "not poster_browser"`。本地安装浏览器后可运行 `uv run pytest tests/person_poster -m poster_browser -q`。
