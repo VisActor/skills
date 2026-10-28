@@ -16,6 +16,8 @@ from importlib.metadata import version
 from pathlib import Path
 from time import perf_counter
 
+from browser_runtime import PageDiagnostics, browser_launch_options
+
 
 def probe_driver() -> dict:
     """Capture a failing driver's public CLI diagnostic without installing anything."""
@@ -92,11 +94,13 @@ def main() -> int:
             with sync_playwright() as playwright:
                 phase = "browser-launch"
                 mark = perf_counter()
-                browser = playwright.chromium.launch(headless=True)
+                browser = playwright.chromium.launch(**browser_launch_options())
                 report["timings"]["launchSeconds"] = round(perf_counter() - mark, 3)
                 try:
                     phase = "font-probe"
                     page = browser.new_page(viewport={"width": 1200, "height": 800})
+                    diagnostics = PageDiagnostics(page)
+                    report["browserLaunchOptions"] = browser_launch_options()
                     page.set_content('<main id="probe" style="background:#faf6f0;color:#352b25;padding:24px;width:max-content;min-width:900px"></main>')
                     report["fontMetrics"] = page.evaluate("""async ({fonts, text}) => {
                       const root = document.querySelector('#probe');
@@ -124,6 +128,8 @@ def main() -> int:
                     page.set_viewport_size({"width": max(1200, int(box["width"] + 8)),
                                             "height": max(800, int(box["height"] + 8))})
                     page.locator("#probe").screenshot(path=str(sample))
+                    diagnostics.check()
+                    report["pageDiagnostics"] = diagnostics.report()
                     report["fontSample"] = sample.name
                     report["browserVersion"] = browser.version
                     report["passed"] = True

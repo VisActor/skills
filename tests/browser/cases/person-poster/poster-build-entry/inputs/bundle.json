@@ -1,0 +1,9 @@
+{
+  "examples": [],
+  "height": 400,
+  "delivery": "html",
+  "buildEntry": true,
+  "sourceFiles": [
+    "source.json"
+  ]
+}

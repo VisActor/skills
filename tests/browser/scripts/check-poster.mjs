@@ -46,8 +46,27 @@ try {
       chart.getChart().getAllSeries().filter(series => series.type === 'bar').flatMap(series =>
         series.getSeriesMark().getGraphics().map(graphic => ({
           datum: graphic.context.data[0],
+          fill: graphic.attribute.fill,
+          bounds: graphic.globalAABBBounds,
           ...Object.fromEntries(['x', 'x1', 'y', 'y1', 'width', 'height'].map(key => [key, graphic.attribute[key]])),
         })))),
+    textGraphics: (window.__POSTER_INSTANCES__ || []).map(chart => {
+      const texts = [];
+      function walk(graphic, visible = true) {
+        if (!graphic) return;
+        const a = graphic.attribute || {};
+        visible = visible && a.visible !== false && a.opacity !== 0;
+        if (graphic.type === 'text' && visible) {
+          texts.push({text:String(a.text), bounds:graphic.globalAABBBounds});
+        }
+        graphic.forEachChildren?.(child => { walk(child, visible); });
+      }
+      chart.getComponents().filter(c => ['label', 'cartesianAxis-band', 'discreteLegend'].includes(c.type))
+        .forEach(c => c.getVRenderComponents().forEach(g => walk(g)));
+      return texts;
+    }),
+    mounts: [...document.querySelectorAll('[data-chart-id]')].map(el =>
+      ({id:el.dataset.chartId, width:el.clientWidth, height:el.clientHeight})),
     runtime: typeof window.VChart !== 'undefined',
   }));
   checks.push({name:'nativeSpecsUnchanged', passed:JSON.stringify(state.specs) === JSON.stringify(specs)});
@@ -81,6 +100,40 @@ try {
         positions.every((pos, i) => Number.isFinite(pos) && (i === 0 || pos > positions[i - 1])),
         spans, positions}];
     });
+    // Only fixed, unrotated bar fixtures opt in. This is not a general readability detector.
+    if (expected.labelTexts) {
+      const labels = expected.labelTexts.map(item => {
+        const index = manifest.charts.findIndex(chart => chart.id === item.chartId);
+        const texts = state.textGraphics[index] || [];
+        const mount = state.mounts.find(m => m.id === item.chartId);
+        const clipped = texts.filter(({bounds:b}) => !mount ||
+          ![b.x1,b.y1,b.x2,b.y2].every(Number.isFinite) ||
+          b.x1 < -1 || b.y1 < -1 || b.x2 > mount.width + 1 || b.y2 > mount.height + 1);
+        const overlaps = texts.flatMap((a,i) => texts.slice(i+1).filter(b =>
+          Math.min(a.bounds.x2,b.bounds.x2) - Math.max(a.bounds.x1,b.bounds.x1) > 1 &&
+          Math.min(a.bounds.y2,b.bounds.y2) - Math.max(a.bounds.y1,b.bounds.y1) > 1
+        ).map(b => [a.text,b.text]));
+        const actual = texts.map(t => t.text).sort();
+        return {chartId:item.chartId, actual, clipped, overlaps, passed:
+          JSON.stringify(actual) === JSON.stringify([...item.expected].sort()) &&
+          clipped.length === 0 && overlaps.length === 0};
+      });
+      checks.push({name:'barLabelGeometry', passed:labels.length > 0 && labels.every(l => l.passed), labels});
+    }
+    if (expected.colorMappings) {
+      const mappings = expected.colorMappings.map(mapping => {
+        const index = manifest.charts.findIndex(chart => chart.id === mapping.chartId);
+        const graphics = state.geometry[index] || [];
+        const actual = graphics.map(g => ({category:g.datum[mapping.field], fill:g.fill}));
+        const categories = new Set(actual.map(g => String(g.category)));
+        return {...mapping, actual, passed:actual.length > 0 &&
+          categories.size === Object.keys(mapping.expected).length &&
+          Object.keys(mapping.expected).every(key => categories.has(key)) &&
+          actual.every(g => typeof g.fill === 'string' &&
+            g.fill.toLowerCase() === mapping.expected[g.category]?.toLowerCase())};
+      });
+      checks.push({name:'barColorMapping', passed:mappings.length > 0 && mappings.every(m => m.passed), mappings});
+    }
     if (bars.length) checks.push({name:'barGeometry', passed:bars.every(bar => bar.passed), bars});
     if (!expected.chartCount) {
       checks.push({name:'noChartRuntime', passed:!state.runtime && !requests.some(url => url.endsWith('/runtime.js'))});

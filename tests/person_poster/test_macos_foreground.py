@@ -19,7 +19,11 @@ def foreground_binary(tmp_path_factory):
     return binary
 
 
-@pytest.mark.parametrize('prefix', [[], ['--'], ['-frontend', '-interpret', 'script.swift', '--']])
+@pytest.mark.parametrize('prefix', [
+    [], ['--'], ['--', '--'],
+    ['-frontend', '-interpret', 'script.swift', '--'],
+    ['-frontend', '-interpret', 'script.swift', '--', '--'],
+])
 def test_argument_routes_reach_image_validation(foreground_binary, tmp_path, prefix):
     output = tmp_path / 'new output'
     result = subprocess.run([str(foreground_binary), *prefix, str(tmp_path / 'missing photo.jpg'), str(output)],
@@ -40,7 +44,11 @@ def test_adapter_preserves_nonempty_output(foreground_binary, tmp_path):
     assert marker.read_text() == 'keep this evidence'
 
 
-def test_adapter_rejects_extra_arguments(foreground_binary):
-    result = subprocess.run([str(foreground_binary), '--', 'one', 'two', 'three'],
+@pytest.mark.parametrize('arguments', [
+    ['--', 'one', 'two', 'three'],
+    ['--', 'unexpected', '--', 'one', 'two'],
+])
+def test_adapter_rejects_extra_arguments(foreground_binary, arguments):
+    result = subprocess.run([str(foreground_binary), *arguments],
                             capture_output=True, text=True, timeout=10)
     assert result.returncode == 1 and 'Usage:' in result.stderr

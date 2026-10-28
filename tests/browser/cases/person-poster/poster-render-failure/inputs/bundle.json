@@ -3,5 +3,6 @@
     "direct-column"
   ],
   "height": 600,
-  "emptyMount": true
+  "emptyMount": true,
+  "reviewDisplayWidth": 1200
 }

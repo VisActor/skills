@@ -116,6 +116,8 @@ After importing, try: “Use chart-storytelling. Read its SKILL.md, confirm that
 
 Image search, generation and cutout capabilities come from the host; follow the selected Skill's asset requirements. Magazine templates contain placeholders to replace before delivery. See the owning repositories for VChart/VTable Skill requirements.
 
+Person Poster uses `poster_workflow.py` for init, source replay, build, layout review and verified delivery. Formal delivery requires display bindings, saved source comparisons and per-bitmap usage evidence. Reading and contrast checks use the rendered page; failed output stays a labeled diagnostic in `draft/`. Legacy bundles need migration and re-review: see the [display contract](skills/person-poster/references/display-bindings.md), [evidence guide](skills/person-poster/references/evidence-checks.md) and [rendering guide](skills/person-poster/references/render-and-acceptance.md). These checks do not certify source truth, image rights, visual quality or the host’s final reply.
+
 ## Use
 
 After installation, ask your agent to use the selected Skill with your data. For example:
@@ -181,7 +183,7 @@ Fixed browser cases live under [tests/browser/cases/](tests/browser/cases/README
 
 Use Codex, Claude Code or another compatible mature agent to run a [fixed task](cases/README.md) or your own prompt and inputs. Follow [local debugging](docs/debugging.md) to prepare an ignored `.cache/skill-dev/<skill-name>/<run-name>/` workspace and retain artifacts, screenshots and available logs. This repository does not provide a model API harness or unified agent runner.
 
-Fixed tasks cover chart-storytelling and person-poster. Browser smoke covers story HTML/Web-PPT and poster chart examples, HTML-only delivery with and without charts, PNG delivery without charts, ancestor clipping rejection and failed export. Person-poster also has one same-session real-person generation check; it is not an independent blind evaluation. Editorial-magazine and life-chronicle have script regressions, but no fixed tasks or browser smoke yet. Review generated results for data accuracy, task requirements and interactions; different correct visual designs are acceptable. Agent tasks are not run in CI.
+Fixed tasks cover chart-storytelling and person-poster. Browser smoke covers story HTML/Web-PPT and poster chart examples (including category colors, label bounds and missing values versus real zero), HTML-only delivery with and without charts, PNG delivery without charts, ancestor clipping rejection and failed export. Dense poster chart fixtures explicitly expect a failed 600px reading baseline while testing API/export behavior; separate Python browser regressions cover DOM/chart text at 600px reading width. Smoke also covers managed chart startup, display bindings, unbound text, occlusion and full-draft reading failures. The locked-layout Agent task checks failure handling; actual host results are recorded separately and do not certify listing readiness. Editorial-magazine and life-chronicle have script regressions, but no fixed tasks or browser smoke yet. Review generated results for data accuracy, task requirements and interactions; different correct visual designs are acceptable. Agent tasks are not run in CI.
 
 ## Versioning
 

@@ -12,7 +12,9 @@ from dataclasses import dataclass, field
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
+
+from runtime_contract import VCHART_URL, VCHART_VERSION, managed_runtime_errors
 
 ALLOWED_FACT_ROLES = {"primary", "derived", "source"}
 VCHART_USAGE_PATTERN = re.compile(r"\b(?:new\s+VChart|VChart\.default)\b")
@@ -78,10 +80,6 @@ def html_uses_vchart(html: str) -> bool:
     return bool(VCHART_USAGE_PATTERN.search(html))
 
 
-VCHART_VERSION = "2.1.7"
-VCHART_URL = f"https://unpkg.com/@visactor/vchart@{VCHART_VERSION}/build/index.min.js"
-
-
 class ScriptParser(HTMLParser):
     def __init__(self):
         super().__init__()
@@ -106,12 +104,23 @@ class ScriptParser(HTMLParser):
             self.current = None
 
 
-def chart_payload(html: str) -> dict:
+def chart_payload(html: str, *, root: Path | None = None, html_path: Path | None = None) -> dict:
     """Read a direct JSON assignment without splitting strings on semicolons."""
     parser = ScriptParser()
     parser.feed(html)
+    bodies = list(parser.bodies)
+    if root is not None and html_path is not None:
+        for source in parser.sources:
+            url = urlsplit(source)
+            if url.scheme or source.startswith('//'):
+                continue
+            candidate = (html_path.parent / unquote(url.path)).resolve()
+            if candidate == (root / 'charts.generated.js').absolute():
+                if not candidate.is_file():
+                    raise ValueError('Missing charts.generated.js; run build')
+                bodies.append(candidate.read_text(encoding='utf-8'))
     assignments = []
-    for body in parser.bodies:
+    for body in bodies:
         offset = 0
         pattern = re.compile(r"window\.__INFOGRAPHIC_CHARTS__\s*=\s*")
         while match := pattern.search(body, offset):
@@ -314,14 +323,17 @@ def validate_bundle(root: Path, *, require_png: bool = True) -> ValidationResult
             if local:
                 path_exists(root, local, "dependency", result)
     runtime = html_has_chart_runtime_scripts(html_text, {"dependencies": dependencies})
+    managed_errors = managed_runtime_errors(root, manifest, html_text)
+    result.errors.extend(managed_errors)
+    managed = manifest.get('managedRuntime') is True and not managed_errors
     if charts and html_text:
         try:
-            payload = chart_payload(html_text)
+            payload = chart_payload(html_text, root=root, html_path=root / html_rel)
             if set(payload) != ids:
                 result.errors.append("Inline chart ids must match manifest charts")
         except (ValueError, TypeError) as error:
             result.errors.append(f"Invalid inline chart specs: {error}")
-        if not runtime:
+        if not runtime and not managed:
             result.errors.append("Chart bundles require the pinned VChart script or a manifest-declared local copy")
     if not charts and html_text and (runtime or html_uses_vchart(html_text)):
         result.errors.append("HTML-only bundles must not include unused VChart runtime")
@@ -338,6 +350,12 @@ def validate_bundle(root: Path, *, require_png: bool = True) -> ValidationResult
         if asset_rel:
             path_exists(root, asset_rel, "asset", result)
         kind = asset.get("kind")
+        from material_policy import USAGE_STATES, bitmap_assets
+        if bitmap_assets({'assets': [asset]}):
+            if 'usageStatus' not in asset:
+                result.warnings.append(f'Material usageStatus missing: {asset.get("file")}; review may diagnose, formal export requires verification')
+            elif not isinstance(asset['usageStatus'], str) or asset['usageStatus'] not in USAGE_STATES:
+                result.errors.append('assets[].usageStatus must be verified, unknown or restricted')
         if kind is not None and kind not in {"bitmap", "svg"}:
             result.errors.append("assets[].kind must be bitmap or svg")
         raster_source = asset.get("rasterSource")
@@ -353,6 +371,18 @@ def validate_bundle(root: Path, *, require_png: bool = True) -> ValidationResult
                 f"or fallback-svg; got {raster_source!r}"
             )
         prompt = asset.get("prompt")
+        if raster_source == "web-sourced":
+            source_page = asset.get("sourcePage")
+            try:
+                parsed = urlsplit(source_page) if isinstance(source_page, str) else None
+                valid_page = parsed and parsed.scheme in {"http", "https"} and parsed.hostname
+            except ValueError:
+                valid_page = False
+            if not valid_page:
+                result.errors.append("web-sourced assets require an HTTP(S) sourcePage")
+            usage = asset.get("usageTerms")
+            if not isinstance(usage, str) or not usage.strip():
+                result.errors.append('web-sourced assets require usageTerms; use "unknown" when unverified')
         if prompt is not None:
             prompt_rel = as_relative_path(prompt, "assets[].prompt", result)
             if prompt_rel:
@@ -372,6 +402,10 @@ def validate_bundle(root: Path, *, require_png: bool = True) -> ValidationResult
             result.errors.append("assets[].imageGenerationStatus must be a string")
         elif image_generation_status is not None and image_generation_status != "generation-unavailable":
             result.errors.append('assets[].imageGenerationStatus must be "generation-unavailable"')
+        if bitmap_status == "generation-unavailable" or image_generation_status == "generation-unavailable":
+            failure = asset.get("imageGenerationFailure")
+            if not prompt or not isinstance(failure, str) or not failure.strip():
+                result.errors.append("Image generation failure requires the attempted prompt and imageGenerationFailure evidence; omit these statuses for ordinary photos")
 
     return result
 

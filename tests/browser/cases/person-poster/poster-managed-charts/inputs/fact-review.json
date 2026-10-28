@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "comparisons": [
+    {
+      "dataPointer": "",
+      "evidence": {
+        "file": "source.json",
+        "pointer": "",
+        "source": "synthetic original"
+      }
+    }
+  ]
+}

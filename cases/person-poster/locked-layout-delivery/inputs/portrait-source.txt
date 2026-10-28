@@ -1,0 +1,8 @@
+{
+  "file": "marie-curie.jpg",
+  "sourcePage": "https://commons.wikimedia.org/wiki/File:Marie_Curie_c1920.jpg",
+  "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Marie_Curie_c1920.jpg",
+  "author": "Henri Manuel",
+  "date": "circa 1920",
+  "license": "Public domain; author died 1947; PD-old-75-expired, as recorded on Commons"
+}

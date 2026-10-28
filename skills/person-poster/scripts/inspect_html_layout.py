@@ -17,6 +17,9 @@ from export_html_png import (
     start_static_server,
 )
 
+VISIBILITY_POLICY = {'version': 1, 'coverage': 'all-visible-dom-text', 'minOverlapArea': 24, 'overflowTolerance': 3}
+VISIBILITY_SCRIPT = Path(__file__).with_name('text_visibility_probe.js').read_text(encoding='utf-8')
+
 
 def write_json(path: Path, data: object) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -162,18 +165,9 @@ def inspect_layout(args) -> dict[str, object]:
                 device_scale_factor=args.device_scale_factor,
             )
             page = context.new_page()
-            page.goto(url, wait_until=args.wait_until, timeout=args.timeout)
-            if args.ready_expression:
-                try:
-                    page.wait_for_function(args.ready_expression, timeout=args.timeout)
-                except PlaywrightTimeoutError:
-                    error_message = page.evaluate("window.__INFOGRAPHIC_ERROR__ || ''")
-                    detail = f": {error_message}" if error_message else ""
-                    return {
-                        "passed": False,
-                        "errors": [f"timed out waiting for readiness marker{detail}"],
-                        "warnings": [],
-                    }
+            from browser_runtime import load_page
+            diagnostics = load_page(page, url, ready_expression=args.ready_expression,
+                                    timeout_ms=args.timeout, wait_until=args.wait_until)
             if args.settle_ms > 0:
                 page.wait_for_timeout(args.settle_ms)
             report = page.evaluate(
@@ -451,6 +445,16 @@ def inspect_layout(args) -> dict[str, object]:
                     "overflowTolerance": args.overflow_tolerance,
                 },
             )
+            visibility = page.evaluate(VISIBILITY_SCRIPT, {'selector': args.selector,
+                'minOverlapArea': args.min_overlap_area, 'overflowTolerance': args.overflow_tolerance})
+            report['visibility'] = visibility
+            report['visibilityPolicy'] = {**VISIBILITY_POLICY, 'minOverlapArea': args.min_overlap_area,
+                                          'overflowTolerance': args.overflow_tolerance}
+            report['errors'].extend(f"Text visibility {item['reason']}: {item['element']} / {item['cover']}"
+                                    for item in visibility['occluded'])
+            report['errors'].extend('Text visibility unmeasured: ' + item for item in visibility['unmeasured'])
+            diagnostics.check()
+            report["pageDiagnostics"] = diagnostics.report()
             context.close()
             browser.close()
             return apply_manifest_canvas_checks(
@@ -459,6 +463,8 @@ def inspect_layout(args) -> dict[str, object]:
                 overflow_tolerance=args.overflow_tolerance,
                 root_selector=args.selector,
             )
+    except Exception as error:
+        return {"passed": False, "errors": [str(error)], "warnings": [], "required_count": 0}
     finally:
         if server:
             server.shutdown()

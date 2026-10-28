@@ -31,13 +31,21 @@
       "orient": "bottom",
       "type": "band",
       "label": {
-        "autoHide": false
+        "autoHide": false,
+        "style": {
+          "fill": "#352b25"
+        }
       }
     },
     {
       "orient": "left",
       "type": "linear",
-      "min": 0
+      "min": 0,
+      "label": {
+        "style": {
+          "fill": "#352b25"
+        }
+      }
     }
   ],
   "label": {

@@ -1,0 +1,10 @@
+{
+  "specsFile": "specs.json",
+  "height": 1700,
+  "delivery": "html",
+  "buildEntry": true,
+  "runtimeMode": "managed",
+  "sourceFiles": [
+    "source.json"
+  ]
+}

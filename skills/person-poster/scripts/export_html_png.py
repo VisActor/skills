@@ -6,8 +6,8 @@ The script opens the HTML, waits for the infographic readiness marker, and
 screenshots a target element such as #infographic.
 
 Examples:
-  python3 export_html_png.py --html index.html --selector "#infographic" --output preview.png
-  python3 export_html_png.py --html index.html --selector "#infographic" --serve --output preview.png
+  python3 export_html_png.py --html index.html --selector "#infographic" --draft --output draft/preview.png
+  python3 export_html_png.py --html index.html --selector "#infographic" --serve --draft --output draft/preview.png
 """
 
 import argparse
@@ -20,6 +20,8 @@ import threading
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qsl, quote, urlencode, urlsplit, urlunsplit
+
+from browser_runtime import browser_launch_options, load_page
 
 DEFAULT_READY_EXPRESSION = "window.__INFOGRAPHIC_READY__ === true"
 DEFAULT_PLAYWRIGHT_PACKAGE = "playwright>=1.59,<2"
@@ -124,7 +126,7 @@ def load_playwright(args):
 
 def launch_chromium(playwright, PlaywrightError, args):
     try:
-        return playwright.chromium.launch(headless=True)
+        return playwright.chromium.launch(**browser_launch_options())
     except PlaywrightError as error:
         message = str(error)
         should_install = args.install_browser or args.install_playwright
@@ -134,7 +136,7 @@ def launch_chromium(playwright, PlaywrightError, args):
             or "playwright install" in message
         ):
             install_chromium_browser()
-            return playwright.chromium.launch(headless=True)
+            return playwright.chromium.launch(**browser_launch_options())
 
         print(
             "Error: failed to launch Playwright Chromium.\n"
@@ -146,7 +148,11 @@ def launch_chromium(playwright, PlaywrightError, args):
 
 
 def export_png(args):
+    # Imported lazily: review uses this module's HTTP helpers without export gates.
+    from delivery_policy import check_export_target
     html_path = Path(args.html)
+    root = Path(args.bundle).resolve() if getattr(args, 'bundle', None) else html_path.resolve().parent
+    check_export_target(root, html_path, Path(args.output), draft=getattr(args, 'draft', False))
     if not html_path.exists():
         print(f"Error: HTML file not found: {html_path}", file=sys.stderr)
         sys.exit(1)
@@ -172,19 +178,8 @@ def export_png(args):
                 device_scale_factor=args.device_scale_factor,
             )
             page = context.new_page()
-            page.goto(url, wait_until=args.wait_until, timeout=args.timeout)
-
-            if args.ready_expression:
-                try:
-                    page.wait_for_function(args.ready_expression, timeout=args.timeout)
-                except PlaywrightTimeoutError:
-                    error_message = page.evaluate("window.__INFOGRAPHIC_ERROR__ || ''")
-                    detail = f": {error_message}" if error_message else ""
-                    print(
-                        f"Error: timed out waiting for readiness marker{detail}",
-                        file=sys.stderr,
-                    )
-                    sys.exit(1)
+            diagnostics = load_page(page, url, ready_expression=args.ready_expression,
+                                    timeout_ms=args.timeout, wait_until=args.wait_until)
 
             if args.full_page:
                 if args.settle_ms > 0:
@@ -223,6 +218,7 @@ def export_png(args):
 
                 locator.screenshot(path=str(output_path))
 
+            diagnostics.check()
             context.close()
             browser.close()
     finally:
@@ -238,10 +234,12 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python3 export_html_png.py --html index.html --selector "#infographic" --output preview.png
-  python3 export_html_png.py --html index.html --selector "#infographic" --serve --output preview.png
+  python3 export_html_png.py --html index.html --selector "#infographic" --draft --output draft/preview.png
+  python3 export_html_png.py --html index.html --selector "#infographic" --serve --draft --output draft/preview.png
         """,
     )
+    parser.add_argument("--bundle", help="Bundle root (defaults to HTML parent)")
+    parser.add_argument("--draft", action="store_true", help="Diagnostic screenshot only, output under draft/; never certifies delivery")
     parser.add_argument("--html", required=True, help="Generated HTML file path")
     parser.add_argument("--output", "-o", required=True, help="Output PNG file path")
     parser.add_argument("--selector", default="#infographic", help="Element selector to screenshot")
@@ -330,7 +328,11 @@ Examples:
         help="Add --user to pip install when --install-playwright is used",
     )
 
-    export_png(parser.parse_args())
+    try:
+        export_png(parser.parse_args())
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        print(f'Export blocked: {error}', file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

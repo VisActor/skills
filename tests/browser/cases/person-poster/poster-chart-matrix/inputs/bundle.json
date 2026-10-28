@@ -16,5 +16,6 @@
     "zero-extreme-column"
   ],
   "height": 3300,
-  "emptyMount": false
+  "emptyMount": false,
+  "reviewDisplayWidth": 1200
 }

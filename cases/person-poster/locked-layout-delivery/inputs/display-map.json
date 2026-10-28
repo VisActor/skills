@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "dom": [
+    {
+      "id": "name",
+      "kind": "claim",
+      "dataPointer": "/name",
+      "factIds": [
+        "name"
+      ]
+    },
+    {
+      "id": "scope",
+      "kind": "claim",
+      "dataPointer": "/scope",
+      "factIds": [
+        "scope"
+      ]
+    },
+    {
+      "id": "note",
+      "kind": "claim",
+      "dataPointer": "/note",
+      "factIds": [
+        "note"
+      ]
+    },
+    {
+      "id": "count",
+      "kind": "value",
+      "dataPointer": "/count",
+      "format": {
+        "style": "decimal",
+        "places": 0
+      }
+    },
+    {
+      "id": "unit",
+      "kind": "label",
+      "text": "次诺贝尔奖"
+    }
+  ],
+  "charts": []
+}

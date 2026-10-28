@@ -16,28 +16,25 @@
 
 1. 当前图表写入 charts/[id].spec.json，内容直接是原生 VChart spec，animation: false。
 2. manifest.charts 使用 id、spec、mount 三个字段。HTML 图表 mount 使用 id="chart-[id]" 与 data-chart-id="[id]"；外层负责页面定位，内层明确宽高。
-3. 将 `scripts/render_charts.js` 复制到 bundle，用相对 script src 加载；在图片和字体就绪后调用 `renderPosterCharts(window.__INFOGRAPHIC_CHARTS__)`。从文件生成 window.__INFOGRAPHIC_CHARTS__ 的直接 JSON 赋值，不分别编辑两份。保留原始映射，对 structuredClone(sourceSpec) 创建 new VChart.default(spec, {dom: mount})，等待 renderAsync()。
-4. 字体和图片加载、图表渲染全部成功后才设置 ready，完整代码见 [渲染与验收](render-and-acceptance.md)。
+3. 新建作品使用workflow init的标准入口，build生成charts.generated.js并刷新render_charts.js与poster_bootstrap.js。启动脚本等待实际图片、字体，有图表才加载固定VChart；桥接登记实例，全部成功后设置ready，失败时保存具体错误并清理实例。
+4. 不另写第二个启动事件或手动创建同一图表。bootstrapPoster及renderPosterCharts同页启动幂等；数据修改后重新build并重新加载页面，不用旧实例代表新结果。旧bundle仍能调用renderPosterCharts并取得实例，但正式迁移须明确完成根和启动接入，受限原稿不自动迁移。
 
-生成内嵌数据：
-
-```bash
-"$POSTER_PYTHON" - "$BUNDLE" <<'PYTHON'
-import json, sys
-from pathlib import Path
-root = Path(sys.argv[1]).resolve()
-manifest = json.loads((root / 'manifest.json').read_text(encoding='utf-8'))
-charts = {}
-for item in manifest.get('charts', []):
-    path = (root / item['spec']).resolve()
-    if not path.is_relative_to(root):
-        raise ValueError('Chart spec must stay inside the bundle')
-    if item['id'] in charts:
-        raise ValueError('Duplicate chart id')
-    charts[item['id']] = json.loads(path.read_text(encoding='utf-8'))
-payload = json.dumps(charts, ensure_ascii=True).replace('<', '\\u003c')
-print('window.__INFOGRAPHIC_CHARTS__ = ' + payload + ';')
-PYTHON
+```html
+<script src="charts.generated.js"></script>
+<script src="render_charts.js"></script>
+<script src="poster_bootstrap.js"></script>
 ```
 
-无图表时赋值空对象、manifest.charts 为 []，省略 VChart 脚本。收到旧 schema 产物时先转换为原生 spec 并重新渲染，不能只改文件扩展名。
+```bash
+python3 "$SKILL_DIR/scripts/poster_workflow.py" build --bundle "$BUNDLE"
+```
+
+charts.mount是实际CSS选择器，如`#chart-trend`，不能写裸id。新接入配置由build生成，桥接要求每个选择器恰好对应一个非空mount。新建构图只修改HTML/CSS、映射和spec，不改受管理运行脚本。
+
+每个spec的原生data.values通过display-map的specPointer/dataPointer与data.json的最终图表数组对应。build先核查事实，再将整组values同步到spec、生成charts.generated.js、同步DOM并运行layout。标签/顺序/null都来自该数组；需要改字段名时先准备有来源比较的最终数组，不在页面另算一份。renderPosterCharts在载荷及桥接脚本加载、图片和字体就绪后调用。
+
+无图表时charts.generated.js生成空对象、manifest.charts为[]，省略VChart脚本。收到旧 schema 产物时先转换为原生 spec 并重新渲染，不能只改文件扩展名。
+
+## 原生配色核对
+
+类别强调可从 [分类强调横条](chart-examples/category-highlight-bar.spec.json) 开始；使用 `seriesField` 与显式颜色 domain/range 保持身份映射。配置字段为 `color`，不是 `colors`。包校验只对已验证的 bar 顶层 `colors` 误用提供 warning，不替换字段、不阻止合法扩展，也不会自动证明修复成功。最终颜色和标签仍按 [逐图验收](render-and-acceptance.md#逐图记录预期与观察) 查看实际输出。

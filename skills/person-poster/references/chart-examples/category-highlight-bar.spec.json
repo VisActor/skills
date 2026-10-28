@@ -1,0 +1,97 @@
+{
+  "type": "bar",
+  "animation": false,
+  "background": "transparent",
+  "padding": {
+    "top": 30,
+    "bottom": 10,
+    "left": 12,
+    "right": 12
+  },
+  "data": [
+    {
+      "id": "d",
+      "values": [
+        {
+          "category": "第一组研究贡献者",
+          "value": 50
+        },
+        {
+          "category": "第二组研究贡献者",
+          "value": 25
+        },
+        {
+          "category": "第三组研究贡献者",
+          "value": 25
+        }
+      ]
+    }
+  ],
+  "xField": "value",
+  "yField": "category",
+  "color": {
+    "type": "ordinal",
+    "domain": [
+      "第一组研究贡献者",
+      "第二组研究贡献者",
+      "第三组研究贡献者"
+    ],
+    "range": [
+      "#6b7683",
+      "#6b7683",
+      "#d4af6a"
+    ]
+  },
+  "bar": {
+    "style": {
+      "cornerRadius": 0
+    }
+  },
+  "label": {
+    "visible": true,
+    "position": "right",
+    "style": {
+      "fontSize": 24,
+      "fill": "#233a30",
+      "fontFamily": "sans-serif"
+    },
+    "formatter": "{value}%"
+  },
+  "axes": [
+    {
+      "label": {
+        "style": {
+          "fontSize": 20,
+          "fill": "#31433c",
+          "fontFamily": "sans-serif"
+        },
+        "autoHide": false,
+        "autoLimit": false,
+        "autoRotate": false
+      },
+      "tick": {
+        "visible": false
+      },
+      "grid": {
+        "visible": false
+      },
+      "orient": "left",
+      "type": "band",
+      "inverse": false,
+      "autoIndent": true
+    },
+    {
+      "orient": "bottom",
+      "type": "linear",
+      "min": 0,
+      "max": 110,
+      "nice": false,
+      "visible": false
+    }
+  ],
+  "legends": {
+    "visible": false
+  },
+  "direction": "horizontal",
+  "seriesField": "category"
+}

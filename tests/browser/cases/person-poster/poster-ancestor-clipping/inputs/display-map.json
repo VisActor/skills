@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "dom": [
+    {
+      "id": "title",
+      "kind": "label",
+      "text": "原生 VChart · 合成数据验证"
+    },
+    {
+      "id": "award",
+      "kind": "claim",
+      "dataPointer": "/award",
+      "factIds": [
+        "award"
+      ]
+    }
+  ],
+  "charts": []
+}

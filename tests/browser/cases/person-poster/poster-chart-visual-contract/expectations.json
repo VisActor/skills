@@ -1,0 +1,142 @@
+{
+  "engine": "poster",
+  "html": "index.html",
+  "renderFailure": false,
+  "chartCount": 6,
+  "pngExpected": true,
+  "requiredChecks": [
+    "nativeSpecsUnchanged",
+    "noPrivateRequests",
+    "ready",
+    "pageErrors",
+    "localAssets",
+    "chartDataMatches",
+    "nonBlankCharts",
+    "barGeometry",
+    "barColorMapping",
+    "barLabelGeometry"
+  ],
+  "colorMappings": [
+    {
+      "chartId": "category-highlight",
+      "field": "category",
+      "expected": {
+        "第一组研究贡献者": "#6b7683",
+        "第二组研究贡献者": "#6b7683",
+        "第三组研究贡献者": "#d4af6a"
+      }
+    },
+    {
+      "chartId": "category-reversed",
+      "field": "category",
+      "expected": {
+        "第三组研究贡献者": "#d4af6a",
+        "第二组研究贡献者": "#6b7683",
+        "第一组研究贡献者": "#6b7683"
+      }
+    },
+    {
+      "chartId": "category-filtered",
+      "field": "category",
+      "expected": {
+        "第二组研究贡献者": "#6b7683",
+        "第三组研究贡献者": "#d4af6a"
+      }
+    },
+    {
+      "chartId": "single-color",
+      "field": "category",
+      "expected": {
+        "第一组研究贡献者": "#6b7683",
+        "第二组研究贡献者": "#6b7683",
+        "第三组研究贡献者": "#6b7683"
+      }
+    },
+    {
+      "chartId": "stacked-values",
+      "field": "category",
+      "expected": {
+        "第一组研究贡献者": "#376e64",
+        "第二组研究贡献者": "#476b87",
+        "第三组研究贡献者": "#896125"
+      }
+    },
+    {
+      "chartId": "small-share-bars",
+      "field": "category",
+      "expected": {
+        "第一组研究贡献者 · 同组": "#6b7683",
+        "第二组研究贡献者 · 同组": "#6b7683",
+        "第三组研究贡献者 · 同组": "#d4af6a"
+      }
+    }
+  ],
+  "labelTexts": [
+    {
+      "chartId": "category-highlight",
+      "expected": [
+        "第一组研究贡献者",
+        "第二组研究贡献者",
+        "第三组研究贡献者",
+        "50%",
+        "25%",
+        "25%"
+      ]
+    },
+    {
+      "chartId": "category-reversed",
+      "expected": [
+        "第三组研究贡献者",
+        "第二组研究贡献者",
+        "第一组研究贡献者",
+        "25%",
+        "25%",
+        "50%"
+      ]
+    },
+    {
+      "chartId": "category-filtered",
+      "expected": [
+        "第二组研究贡献者",
+        "第三组研究贡献者",
+        "25%",
+        "25%"
+      ]
+    },
+    {
+      "chartId": "single-color",
+      "expected": [
+        "第一组研究贡献者",
+        "第二组研究贡献者",
+        "第三组研究贡献者",
+        "50",
+        "25",
+        "25"
+      ]
+    },
+    {
+      "chartId": "stacked-values",
+      "expected": [
+        "第一组研究贡献者",
+        "第二组研究贡献者",
+        "第三组研究贡献者",
+        "50%",
+        "25%",
+        "25%",
+        "同组组成"
+      ]
+    },
+    {
+      "chartId": "small-share-bars",
+      "expected": [
+        "第一组研究贡献者 · 同组",
+        "第二组研究贡献者 · 同组",
+        "第三组研究贡献者 · 同组",
+        "95%",
+        "4%",
+        "1%"
+      ]
+    }
+  ],
+  "readingBaselinePassed": false
+}
