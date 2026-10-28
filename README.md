@@ -185,6 +185,8 @@ Use Codex, Claude Code or another compatible mature agent to run a [fixed task](
 
 Fixed tasks cover chart-storytelling and person-poster. Browser smoke covers story HTML/Web-PPT and poster chart examples (including category colors, label bounds and missing values versus real zero), HTML-only delivery with and without charts, PNG delivery without charts, ancestor clipping rejection and failed export. Dense poster chart fixtures explicitly expect a failed 600px reading baseline while testing API/export behavior; separate Python browser regressions cover DOM/chart text at 600px reading width. Smoke also covers managed chart startup, display bindings, unbound text, occlusion and full-draft reading failures. The locked-layout Agent task checks failure handling; actual host results are recorded separately and do not certify listing readiness. Editorial-magazine and life-chronicle have script regressions, but no fixed tasks or browser smoke yet. Review generated results for data accuracy, task requirements and interactions; different correct visual designs are acceptable. Agent tasks are not run in CI.
 
+Current Mac host results and open limitations: [Person Poster validation record](docs/validation/person-poster-2026-10-28.md).
+
 ## Versioning
 
 Skills maintained here are versioned together at repository level. Each formal Skills release is identified by a Git tag covering the Skill instructions, references, templates and scripts. VChart and VTable Skill versions are managed by their respective repositories.

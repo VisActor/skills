@@ -184,6 +184,8 @@ uv run ruff check skills tests
 
 固定任务覆盖 chart-storytelling 与 person-poster；浏览器 smoke 覆盖故事 HTML/Web-PPT，以及人物海报的图表示例（含类别配色、标签边界及缺失值与真实零值区分）、带图表及无图表的 HTML-only 交付、无图表 PNG、祖先裁切拒绝与失败导出路径。密集海报图表用例明确预期600px阅读基线失败，仅验证API/导出行为，另有 Python 浏览器回归覆盖600px下的 DOM/图表文本。smoke 另覆盖受管理图表启动、展示绑定、未绑定文字、遮挡与粗排阅读失败。受限排版固定 Agent 任务检查失败处理；真实宿主结果单独记录，不代表已满足上架条件。editorial-magazine 和 life-chronicle 已有脚本回归，尚无固定任务或浏览器 smoke。任务完成后检查数据准确性、要求和实际交互，允许不同的正确视觉表达。Agent 任务不在 CI 中运行。
 
+当前 Mac 宿主结果及未关闭限制见[人物海报验证记录](docs/validation/person-poster-2026-10-28.md)。
+
 ## 版本管理
 
 本仓库维护的 Skills 按整个仓库统一管理版本，每次正式发布使用 Git tag 标识包含 Skill 指令、参考资料、模板和脚本的版本快照。VChart 和 VTable Skill 的版本由各自仓库管理。
