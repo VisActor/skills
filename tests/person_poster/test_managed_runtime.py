@@ -11,6 +11,9 @@ from build_display import build_display  # noqa: E402
 from init_bundle import initialize_bundle  # noqa: E402
 from validate_bundle import validate_bundle  # noqa: E402
 
+# This module needs the locked npm VChart runtime installed by the browser job.
+pytestmark = pytest.mark.poster_browser
+
 
 def managed_bundle(root, *, local=True):
     initialize_bundle(root, width=1200, height=1600)
@@ -48,7 +51,6 @@ def test_managed_loader_is_a_valid_static_runtime(tmp_path):
     assert result.ok, result.errors
 
 
-@pytest.mark.poster_browser
 def test_real_charts_use_init_build_review_and_sync_without_handwritten_boot(tmp_path):
     import poster_workflow as workflow
     managed_bundle(tmp_path)
@@ -102,7 +104,6 @@ def test_managed_flag_does_not_waive_actual_contract(tmp_path, change):
     assert not validate_bundle(tmp_path, require_png=False).ok
 
 
-@pytest.mark.poster_browser
 @pytest.mark.parametrize('mode', ['cdn-blocked', 'missing-mount', 'second-fails'])
 def test_managed_failure_clears_ready_and_instances(tmp_path, mode):
     from browser_runtime import browser_launch_options

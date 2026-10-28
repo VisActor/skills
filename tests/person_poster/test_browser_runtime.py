@@ -7,6 +7,8 @@ from playwright.sync_api import sync_playwright
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'skills/person-poster/scripts'))
 from browser_runtime import browser_launch_options, load_page  # noqa: E402
 
+pytestmark = pytest.mark.poster_browser
+
 
 @pytest.mark.parametrize(('body', 'error'), [
     ('<script>window.__INFOGRAPHIC_READY__=true;</script>', None),
