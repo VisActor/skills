@@ -3,7 +3,7 @@ name: editorial-magazine
 description: 用 HTML/CSS 制作小红书、抖音的杂志图文，支持新闻资讯、人物生平、穿搭解析、旅行攻略、时序故事、观点解读与概念科普。按场景模板生成可编辑 HTML 与 PNG；穿搭优先使用用户照片，制作统一中性背景的多套组合与单套拆解组图。
 ---
 
-# 图文编辑室
+# 杂志风图文
 
 将内容写入按场景选择的杂志版式，交付可编辑的 HTML 和独立 PNG。正文是 HTML 文本，布局用 CSS Grid/Flex，装饰可用内联 SVG。无需 VInfo/VStory/VChart/VSeed、页面 schema、布局 DSL 或前端构建工程。
 
