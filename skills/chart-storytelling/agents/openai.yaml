@@ -1,0 +1,4 @@
+interface:
+  display_name: "图表叙事"
+  short_description: "将数据转化为 HTML 数据故事或 Web-PPT，结合图表滚动叙事与标注讲清趋势、差异和关键结论。"
+  default_prompt: "使用 $chart-storytelling 根据我的数据制作分析报告、业务简报或数据专题，生成 HTML 数据故事或 Web-PPT；适合分步解读时使用图表滚动叙事，并通过标注突出关键数据与结论。"
