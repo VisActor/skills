@@ -30,7 +30,7 @@ Chart and table Skills are maintained in their library repositories. Install the
 
 Each skill includes its instructions, local references, templates and scripts. No separate VisActor CLI, MCP server, model key or hosted VisActor API is required. The host agent supplies the model.
 
-We recommend sending the Skill's GitHub URL to your agent and asking it to install the Skill. WorkBuddy and Doubao Work support installation through conversation as well as manual package imports. Codex and Claude Code also have the command-line option below.
+**Recommended: use the Skills directly in Codex or Claude Code.** Your agent provides model access and tool execution. WorkBuddy and Doubao Work can also use these Skills; see the instructions below for installation through conversation, manual imports and command-line installation.
 
 ## Install
 

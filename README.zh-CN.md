@@ -30,7 +30,7 @@
 
 每个 Skill 都包含完整指令、本地参考资料、模板和脚本。无需额外安装 VisActor CLI、MCP 服务，也无需为 Skill 单独配置模型 Key 或访问 VisActor 托管 API。模型能力由宿主 Agent 提供。
 
-推荐直接把 Skill 的 GitHub 地址发给 Agent，让它协助安装。WorkBuddy、豆包工作可以通过对话安装，也可以手动导入技能包；Codex、Claude Code 还可以使用下方的命令行方式。
+**推荐直接在 Codex 或 Claude Code 中使用 Skills。** 模型访问与工具执行由你使用的 Agent 提供。WorkBuddy、豆包工作也可以使用这些 Skills，下方提供对话安装、手动导入与命令行安装说明。
 
 ## 安装
 
