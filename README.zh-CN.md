@@ -30,9 +30,28 @@
 
 每个 Skill 都包含完整指令、本地参考资料、模板和脚本。无需额外安装 VisActor CLI、MCP 服务，也无需为 Skill 单独配置模型 Key 或访问 VisActor 托管 API。模型能力由宿主 Agent 提供。
 
-**推荐直接在 Codex 或 Claude Code 中使用 Skills。** 模型访问与工具执行由你使用的 Agent 提供。其他兼容的 Agent 也可以尝试使用，目前不提供专门的接入说明。
+**VisActor Skills 可在 Claude Code、Codex、WorkBuddy、豆包工作等支持 Agent Skills 的工具中使用。** 模型与工具执行能力由宿主 Agent 提供，你可以通过对话让 Agent 协助安装，也可以使用命令行或手动导入。
 
 ## 安装
+
+### 推荐：让 Agent 协助安装
+
+在你使用的 Agent 工具中新建对话，复制下面的提示词即可：
+
+```text
+请帮我安装 chart-storytelling Skill：
+https://github.com/VisActor/skills/tree/main/skills/chart-storytelling
+
+请获取完整 Skill 目录，包括 SKILL.md、参考资料、模板和脚本，
+按当前客户端支持的方式安装，并检查安装后能否发现和调用。
+如果有需要我完成的确认或导入步骤，请告诉我。
+```
+
+安装本仓库的其他 Skill 时，将提示词中的名称和 GitHub 地址末尾的 `chart-storytelling` 替换为上方“本仓库维护”列表中的 Skill 名称。例如，业务看板使用 [visactor-light-dashboard](https://github.com/VisActor/skills/tree/main/skills/visactor-light-dashboard)。安装完成后，新建任务并指定该 Skill 即可使用。
+
+如果 Agent 无法访问 GitHub 或完成安装，可使用下面的手动导入方式。
+
+### 命令行安装：Codex / Claude Code
 
 在你准备使用 Skills 的项目目录中执行：
 
@@ -40,13 +59,12 @@
 npx skills add VisActor/skills --skill chart-storytelling
 npx skills add VisActor/skills --skill editorial-magazine
 npx skills add VisActor/skills --skill life-chronicle
-npx skills add ./skills/visactor-light-dashboard
-npx skills add ./skills/visactor-map2d-dashboard
-npx skills add ./skills/visactor-chart-editor
-npx skills add ./skills/visactor-map3d-dashboard
+npx skills add VisActor/skills --skill person-poster
+npx skills add VisActor/skills --skill visactor-light-dashboard
+npx skills add VisActor/skills --skill visactor-map2d-dashboard
+npx skills add VisActor/skills --skill visactor-chart-editor
+npx skills add VisActor/skills --skill visactor-map3d-dashboard
 ```
-
-`person-poster` 可从包含该 Skill 的工作副本安装：`npx skills add ./skills/person-poster`。晋级到 `main` 后可使用默认分支命令 `npx skills add VisActor/skills --skill person-poster`；默认分支安装不依赖发布标签。
 
 如需图表和表格能力，从对应仓库安装：
 
@@ -59,9 +77,33 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 
 按照安装器提示选择 Codex 或 Claude Code。每个 Skill 都可以按需单独安装。更多安装选项见 [Skills CLI 说明](https://github.com/vercel-labs/skills#usage)。
 
-运行要求：
+### 手动导入：WorkBuddy / 豆包工作
 
-- Node.js 和 npm，用于安装；具备文件读写、命令执行及自身模型访问权限的宿主 Agent。
+在 [GitHub Releases](https://github.com/VisActor/skills/releases) 中选择最新的 `skills-v*` 正式版本，在 **Assets** 中下载所需 Skill 的 ZIP，例如 `chart-storytelling.zip` 或 `visactor-light-dashboard.zip`。每个 ZIP 对应一个完整 Skill；不要选整个仓库的 **Source code (zip)**，也不要只上传 `SKILL.md`。
+
+这条安装路径不需要运行 `npx`。如果客户端要求选择文件夹，先将 ZIP 解压到同名文件夹，再选择直接包含 `SKILL.md` 的那一层，保留包内所有参考资料、模板和脚本。
+
+#### WorkBuddy
+
+1. 打开左侧 **专家·技能·连接器 → 技能**。
+2. 点击 **添加技能 → 上传技能**，选择下载的单 Skill 包，按界面提示完成导入。
+3. 在 **已安装** 中确认该 Skill 已启用，然后新建任务，指定 Skill 名称并提供数据。
+
+入口说明见 [WorkBuddy 官方技能指南](https://www.codebuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)。
+
+#### 豆包工作
+
+1. 打开豆包工作的 **技能·连接器·伙伴**，进入技能管理页。
+2. 使用本地技能导入入口（**上传技能**），按文件选择器要求选择 ZIP 或解压后的完整 Skill 文件夹，完成导入。
+3. 新建工作任务，从技能选择入口选中该 Skill，或在需求中明确写出 Skill 名称，并提供任务数据。
+
+豆包工作支持导入本地技能文件和在对话中指定技能，见[飞书官方功能介绍](https://www.feishu.cn/content/article/7677519271848610746)。不同客户端版本的入口名称可能有所变化，以当前界面为准。
+
+导入后可以先发送：“请使用 chart-storytelling，读取它的 SKILL.md，确认配套脚本和模板可访问，并检查当前环境是否满足运行要求。”确认可用后再提交实际任务。需要更新时，从新的正式 Release 下载对应 Skill 包，通过客户端的技能管理入口更新安装副本。
+
+### 运行要求
+
+- 具备文件读写、命令执行及自身模型访问权限的宿主 Agent；命令行安装还需要 Node.js 和 npm。
 - 浏览器和网络连接，用于预览生成的 HTML 并加载外部资源。
 
 | Skill | 运行依赖 |
