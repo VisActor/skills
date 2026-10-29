@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "id": "disclaimer",
+      "claim": "虚构人物 · AI插画 · 模拟数据",
+      "status": "passed",
+      "source": "Explicitly synthetic case input. All totals computed from15 supplied counts; fictional person, not observed career data.",
+      "observed": "虚构人物 · AI插画 · 模拟数据",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "period",
+      "claim": "统计区间 2021—2025",
+      "status": "passed",
+      "source": "Explicitly synthetic case input. All totals computed from15 supplied counts; fictional person, not observed career data.",
+      "observed": "统计区间 2021—2025",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "scope",
+      "claim": "本页仅演示作品统计方法，不对应真实人物或真实业绩。",
+      "status": "passed",
+      "source": "Explicitly synthetic case input. All totals computed from15 supplied counts; fictional person, not observed career data.",
+      "observed": "本页仅演示作品统计方法，不对应真实人物或真实业绩。",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "credit",
+      "claim": "人物插画：OpenAI imagegen · 数据：案例作者构造",
+      "status": "passed",
+      "source": "Explicitly synthetic case input. All totals computed from15 supplied counts; fictional person, not observed career data.",
+      "observed": "人物插画：OpenAI imagegen · 数据：案例作者构造",
+      "evidence": "evidence/sources.json"
+    }
+  ],
+  "comparisons": [
+    {
+      "dataPointer": "",
+      "evidence": {
+        "file": "evidence/input-facts.json",
+        "pointer": "",
+        "source": "Declared synthetic task input; aggregate counts computed from15 records, not real-world observations."
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "acceptance.json": {
+    "sha256": "9fddb0ad3517076775f06dd8fd498521b60b681fd731d74959e7b69aaabe74e5",
+    "provenance": "Repository-authored fixed layout; facts and public-domain Henri Manuel portrait reused from career-evidence."
+  },
+  "data.json": {
+    "sha256": "fc1676f8a35f2d67d774575107881ad6af5312a9ef1abd7b5795696509515892",
+    "provenance": "Repository-authored fixed layout; facts and public-domain Henri Manuel portrait reused from career-evidence."
+  },
+  "display-map.json": {
+    "sha256": "6f5854469953bed6fd29d235ce313a5b084cc5078a02ecf85d9523d7e1f4b78e",
+    "provenance": "Repository-authored fixed layout; facts and public-domain Henri Manuel portrait reused from career-evidence."
+  },
+  "fact-review.json": {
+    "sha256": "80ab8d440d4362cdbf090be952f73abf009cf1c6886a61a6749dc6edd0fd3ded",
+    "provenance": "Repository-authored fixed layout; facts and public-domain Henri Manuel portrait reused from career-evidence."
+  },
+  "index.html": {
+    "sha256": "ecf9f9e5716d42c160d53036d385f90034a30ee8e07db42769767d200fedba17",
+    "provenance": "Repository-authored fixed layout; facts and public-domain Henri Manuel portrait reused from career-evidence."
+  },
+  "manifest.json": {
+    "sha256": "921f60f0525710cafd09139d21ea227bbc58e543bce848e1ff95fd952e072a7f",
+    "provenance": "Repository-authored fixed layout; facts and public-domain Henri Manuel portrait reused from career-evidence."
+  },
+  "portrait-source.txt": {
+    "sha256": "12441a197cc970579c89a201c7299fe10251767e35b1c184252c0293d2291c0d",
+    "provenance": "Repository-authored fixed layout; facts and public-domain Henri Manuel portrait reused from career-evidence."
+  },
+  "portrait.jpg": {
+    "sha256": "2751b961d2a1bbc4c1708452b7d750df08f9b447937c2fc8b72ea7e38bea0092",
+    "provenance": "Repository-authored fixed layout; facts and public-domain Henri Manuel portrait reused from career-evidence."
+  },
+  "source-facts.json": {
+    "sha256": "daac8ae60dd7b1e55f0d453cfd8caaccf275276df0e3026e300397bb10df198d",
+    "provenance": "Repository-authored fixed layout; facts and public-domain Henri Manuel portrait reused from career-evidence."
+  },
+  "source.txt": {
+    "sha256": "cd22d5ec1689d7f208eb8861a7ed237e65b40bb23324160c3d131a5a2b6b15ff",
+    "provenance": "Repository-authored fixed layout; facts and public-domain Henri Manuel portrait reused from career-evidence."
+  }
+}

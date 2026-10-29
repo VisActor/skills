@@ -1,0 +1,22 @@
+{
+  "technical": {
+    "status": "pending"
+  },
+  "factual": {
+    "status": "passed"
+  },
+  "visual": {
+    "status": "pending"
+  },
+  "usage": {
+    "status": "passed",
+    "assets": [
+      {
+        "file": "portrait.jpg",
+        "status": "passed",
+        "basis": "Public domain; author died 1947; PD-old-75-expired, as recorded on Commons",
+        "evidence": "portrait-source.txt"
+      }
+    ]
+  }
+}

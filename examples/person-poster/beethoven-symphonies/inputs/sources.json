@@ -1,0 +1,97 @@
+{
+  "compiled": true,
+  "retrieved": "2026-10-28",
+  "dateDefinition": "First performance including private performances; not composition or publication",
+  "works": [
+    {
+      "number": 1,
+      "url": "https://www.esm.rochester.edu/beethoven/symphony-no-1/",
+      "fields": [
+        "work title/key/opus",
+        "First performance",
+        "count of Movements list"
+      ]
+    },
+    {
+      "number": 2,
+      "url": "https://www.esm.rochester.edu/beethoven/symphony-no-2/",
+      "fields": [
+        "work title/key/opus",
+        "First performance",
+        "count of Movements list"
+      ]
+    },
+    {
+      "number": 3,
+      "url": "https://www.esm.rochester.edu/beethoven/symphony-no-3/",
+      "fields": [
+        "work title/key/opus",
+        "First performance",
+        "count of Movements list"
+      ]
+    },
+    {
+      "number": 4,
+      "url": "https://www.esm.rochester.edu/beethoven/symphony-no-4/",
+      "fields": [
+        "work title/key/opus",
+        "First performance",
+        "count of Movements list"
+      ]
+    },
+    {
+      "number": 5,
+      "url": "https://www.esm.rochester.edu/beethoven/symphony-no-5/",
+      "fields": [
+        "work title/key/opus",
+        "First performance",
+        "count of Movements list"
+      ]
+    },
+    {
+      "number": 6,
+      "url": "https://www.esm.rochester.edu/beethoven/symphony-no-6/",
+      "fields": [
+        "work title/key/opus",
+        "First performance",
+        "count of Movements list"
+      ]
+    },
+    {
+      "number": 7,
+      "url": "https://www.esm.rochester.edu/beethoven/symphony-no-7/",
+      "fields": [
+        "work title/key/opus",
+        "First performance",
+        "count of Movements list"
+      ]
+    },
+    {
+      "number": 8,
+      "url": "https://www.esm.rochester.edu/beethoven/symphony-no-8/",
+      "fields": [
+        "work title/key/opus",
+        "First performance",
+        "count of Movements list"
+      ]
+    },
+    {
+      "number": 9,
+      "url": "https://www.esm.rochester.edu/beethoven/symphony-no-9/",
+      "fields": [
+        "work title/key/opus",
+        "First performance",
+        "count of Movements list"
+      ]
+    }
+  ],
+  "portrait": {
+    "file": "assets/portrait.jpg",
+    "kind": "bitmap",
+    "sourceFile": "assets/portrait.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Joseph_Karl_Stieler's_Beethoven_mit_dem_Manuskript_der_Missa_solemnis.jpg",
+    "credit": "Joseph Karl Stieler",
+    "usageStatus": "verified",
+    "usageTerms": "Public domain / PDM1.0 / PD-Art as identified on file page; faithful reproduction of1820 painting; source1920px JPEG unchanged."
+  }
+}

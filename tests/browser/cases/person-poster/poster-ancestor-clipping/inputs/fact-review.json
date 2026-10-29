@@ -1,0 +1,12 @@
+{
+  "checks": [
+    {
+      "id": "award",
+      "claim": "Award count: 123456789",
+      "source": "Synthetic fixed smoke input",
+      "observed": "Award count: 123456789",
+      "status": "passed",
+      "evidence": "source.txt"
+    }
+  ]
+}

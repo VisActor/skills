@@ -1,0 +1,19 @@
+{
+  "html": "index.html",
+  "png": "preview.png",
+  "displayBindings": "display-map.json",
+  "canvas": {
+    "width": 1200,
+    "height": 900
+  },
+  "charts": [],
+  "assets": [
+    {
+      "file": "portrait.jpg",
+      "kind": "bitmap",
+      "sourceFile": "portrait.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Marie_Curie_c1920.jpg",
+      "usageTerms": "Public domain; author died 1947; PD-old-75-expired, as recorded on Commons"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "checks": [
+    {
+      "id": "title",
+      "claim": "缺失与真实零值 · 单位：次；2022 未观测",
+      "source": "Synthetic fixed smoke input",
+      "observed": "缺失与真实零值 · 单位：次；2022 未观测",
+      "status": "passed",
+      "evidence": "source.txt"
+    }
+  ]
+}

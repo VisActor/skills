@@ -4,6 +4,8 @@
 
 Use fixed inputs to check Skill scripts, templates and generated pages. These tests run locally and in CI without calling a model.
 
+Dense person-poster chart fixtures explicitly declare `readingBaselinePassed: false`: API/export assertions can pass while the real review report remains failed at 600px. `reviewDisplayWidth: 1200` requests supplemental diagnostics only; it cannot replace the baseline. `tests/person_poster/test_readability.py` separately checks 600px DOM/chart text measurement and small-text rejection. Runtime acceptance always requires the 600px / 12px baseline and includes text marked decorative.
+
 ## What is tested
 
 | Skill | Case | Checks |
@@ -37,14 +39,18 @@ Each `<skill>/<case>/` directory contains `config.json` (build settings), `input
 
 ## person-poster
 
+- `poster-build-entry`: zero-chart public init/preflight/build flow, generated DOM values and runtime readiness.
+- `poster-managed-charts`: two real charts through init/build/review with a dynamically loaded same-version local runtime, no preloaded VChart tag or handwritten readiness. Python browser tests additionally cover data refresh and runtime/mount failures; this does not prove CDN availability.
+- `poster-text-occlusion`: a later opaque sibling with pointer events disabled covers bound text without a decorative marker; layout must reject it. Python browser regressions also cover unbound text, nested content, clipping and supported paint-order cases.
+
 - `poster-chart-matrix`: native examples for 12 relationships, rendered input data, nonblank charts and PNG export.
-- `poster-html-only`: no VChart runtime; review and complete validation succeed without a final PNG.
+- `poster-html-only`: no VChart runtime; review and pre-export validation succeed without a PNG.
 - `poster-charts-html-only`: a native chart renders and passes complete validation without a final PNG.
-- `poster-no-charts-png`: no VChart runtime; fonts/images and PNG export still complete.
+- `poster-no-charts-png`: no VChart runtime; fonts/images and diagnostic PNG export are checked.
 - `poster-ancestor-clipping`: ready succeeds, but review rejects required content clipped by a parent; no final PNG is produced.
 - `poster-render-failure`: an empty mount fails readiness and export without producing a PNG.
 
-Successful poster cases run preflight, review and complete validation from a copied Skill; export runs only for PNG delivery. Expectations check final PNG existence independently of manifest.delivery. Expected layout failure requires a measured review error, not an arbitrary script crash. Pinned public npm assets are served locally; this does not prove CDN availability on every network. Automated checks do not certify visual quality. Install the Python production pipeline browser too:
+Poster API cases run preflight, review and pre-export structural validation from a copied Skill. PNG cases use explicit draft export into `draft/preview.png`; `pngExpected` checks that diagnostic image, not a certified delivery. End-to-end production export/verify/status are covered by `tests/person_poster/test_workflow.py`. Expected layout failure requires a measured review error, not an arbitrary script crash. Pinned public npm assets are served locally; this does not prove CDN availability on every network. Automated checks do not certify visual quality. Install the Python production pipeline browser too:
 
 ```bash
 uv run python -m playwright install chromium
@@ -52,3 +58,9 @@ uv run python tests/browser/scripts/smoke.py --skill person-poster
 ```
 
 Python browser regressions use the `poster_browser` pytest marker. CI runs these in the browser job after installing Python Chromium; the lint/regression job uses `-m "not poster_browser"`. Locally run `uv run pytest tests/person_poster -m poster_browser -q` after browser installation.
+
+- `poster-chart-visual-contract`: fixed bar fixtures check rendered category-to-fill mappings under reorder/filter, and visible text completeness, bounds and pairwise intersections for unrotated labels/axes/legends. Covers long names, 50/25/25 stacks, 95/4/1 direct bars and valid single-color charts. Reading-size screenshots still require visual review; this is not a general Canvas readability checker.
+
+- `poster-missing-values`: the full category-axis domain preserves a missing observation slot; rendered labels contain exactly one real zero and no fabricated value for the missing category. Checks native specs, data, bar geometry and visible labels.
+
+Person Poster display cases cover matching mapped values, unbound visible text rejection, and a full-draft reading failure using the same fixed baseline. The fixtures provide input mappings; these deterministic checks do not establish source truth or real-host compliance.

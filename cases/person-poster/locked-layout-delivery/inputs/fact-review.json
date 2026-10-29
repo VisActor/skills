@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "id": "name",
+      "claim": "玛丽·居里",
+      "source": "https://www.nobelprize.org/prizes/physics/1903/summary/；https://www.nobelprize.org/prizes/chemistry/1911/summary/",
+      "observed": "玛丽·居里",
+      "status": "passed",
+      "evidence": "source.txt"
+    },
+    {
+      "id": "scope",
+      "claim": "1903 年物理学奖；1911 年化学奖",
+      "source": "https://www.nobelprize.org/prizes/physics/1903/summary/；https://www.nobelprize.org/prizes/chemistry/1911/summary/",
+      "observed": "1903 年物理学奖；1911 年化学奖",
+      "status": "passed",
+      "evidence": "source.txt"
+    },
+    {
+      "id": "note",
+      "claim": "奖项份额不代表科研贡献比例。",
+      "source": "https://www.nobelprize.org/prizes/physics/1903/summary/；https://www.nobelprize.org/prizes/chemistry/1911/summary/",
+      "observed": "奖项份额不代表科研贡献比例。",
+      "status": "passed",
+      "evidence": "source.txt"
+    }
+  ],
+  "comparisons": [
+    {
+      "dataPointer": "/count",
+      "evidence": {
+        "file": "source-facts.json",
+        "pointer": "/facts/0/value",
+        "source": "固定用户附件，来源链接见source-facts.json"
+      }
+    }
+  ]
+}

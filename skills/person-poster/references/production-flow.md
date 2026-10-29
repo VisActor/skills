@@ -25,7 +25,7 @@ python3 "$SKILL_DIR/scripts/preflight.py" \
 | 事实与叙事 | `data-and-assets.md`；事实清单及关键 `fact-review.json` | 同一个事实在标题/KPI/图表中各自重新检索 |
 | 人物与构图草稿 | `composition-and-style.md`；真实图片与出处；参考转为五项设计决定；实际占位草稿 | 跳过身份核实，固定等权卡片后塞入人物；普通局部编辑也重做草稿 |
 | 关键图表 | `chart-design.md`、实际类型 spec、`chart-bridge.md`；主图局部 | 完整海报做完才发现长类别/最高标签放不下；所有图机械做两版 |
-| 完整 HTML | `manifest-contract.md`；按 spec 文件生成内嵌赋值，复用已验证视觉规则 | 分别手写 spec 与内嵌版本，一次载入全部资料 |
+| 完整 HTML | `manifest-contract.md`；由build同步spec并生成图表载荷，复用已验证视觉规则 | 分别手写 spec 与内嵌版本，一次载入全部资料 |
 | 预览与修复 | `render-and-acceptance.md`；集中 review 产物 | 临时写裁图脚本、为正确 DOM 数字重复 OCR |
 
 人物身份、时期与大致视觉方向明确后，剩余数据核查可与人物图片搜索重叠推进；有依赖的布局坐标仍需等待实际素材。用户明确要求 AI 插画时才将素材生成安排在这里。不要为了并行先采用未经确认的纪念主题或年龄。
@@ -36,13 +36,25 @@ python3 "$SKILL_DIR/scripts/preflight.py" \
 
 `validate_poster_bundle.py` 检查 bundle 连接、原生 spec 最小结构与文件/内嵌数据一致；review 使用同一入口。完整 API 与视觉效果需要实际图表检查，不能把静态通过当作数据正确或图表可读。
 
+## 全内容粗排先检查
+
+细排前按 [展示事实绑定](display-bindings.md) 连接全部文案和数据。以同名id占位，运行build统一完成来源检查、DOM与图表载荷同步，再检查。草稿包含实际全文、单位、脚注、图表标签与照片；只检查代表字号不能证明可读。运行：
+
+```bash
+python3 "$SKILL_DIR/scripts/poster_workflow.py" build --bundle "$BUNDLE"
+```
+
+实际查看 `layout-review/display.png`。这个动作复用review的固定600px/12px、对比、展示绑定、布局和图表检查，独立保存结果，不覆盖最终review或创建正式PNG。细排改变文字、宽度、字体、标签或背景后重查受影响部分，最终完整review始终必需。早期通过不证明晚期修改仍正确。
+
 ## 一次命令收集预览证据
+
+正式生产使用 `poster_workflow.py review --bundle "$BUNDLE"` 自动复用成功的preflight解释器；下方独立review命令保留作诊断。完整顺序为preflight→新建init/已有原稿直接诊断→实际取证/来源及素材核查→data→facts→全内容粗排及展示绑定→build→查看修复→细排→review→查看修复→export→查看最终PNG→finish，不在环境失败后改用手绘系列或系统截图替代整套验收。
 
 ```bash
 python3 "$SKILL_DIR/scripts/review_bundle.py" --bundle "$BUNDLE"
 ```
 
-默认产出原宽 `review/overview.png`、600px阅读宽度的 `review/display.png`、局部PNG、文字/图表数据、布局报告与 `review.json`。用 `--display-width` 调整实际交付场景的阅读宽度。`display.png` 在原布局上临时缩放进行浏览器截图，不触发窄屏重排，也不改最终HTML/PNG；必须实际查看它，而非仅声明按小尺度验收。这是一次命令的编排，内部复用布局检查并另开截图会话，不承诺只加载一次浏览器。
+默认产出原宽 `review/overview.png`、600px阅读宽度的 `review/display.png`、局部PNG、文字/图表数据、布局报告与 `review.json`。`--display-width` 只生成补充阅读图，固定600px/12px基线与正式display.png不变。`display.png` 在原布局上临时缩放进行浏览器截图，不触发窄屏重排，也不改最终HTML/PNG；必须实际查看它，而非仅声明按小尺度验收。这是一次命令的编排，内部复用布局检查并另开截图会话，不承诺只加载一次浏览器。
 
 给需要查看的标题/KPI/人物/证据区添加 `data-review="hero"` 等稳定标签；这些只是验收定位，不规定布局。脚本按 DOM 实际位置截图，免去手算2x像素坐标。没有标签时自动查看图表 mount 和有 id 的人物图片，也可用重复的 `--detail-selector` 指定当前实际区域。
 
@@ -61,8 +73,60 @@ python3 "$SKILL_DIR/scripts/review_bundle.py" --bundle "$BUNDLE"
 
 这里的事实/视觉验收由执行者实际读来源和查看 PNG 完成，不新增用户逐步确认节点；需要用户补充的信息仍按原任务范围处理。
 
+诊断记录结构时可使用 `validate_poster_bundle.py "$BUNDLE" --require-records`，同时检查 `fact-review.json`、`acceptance.json`、`workflow-timings.json` 存在且为非空 JSON 对象。默认预览仅提示缺失记录，已存在的坏 JSON 始终报错。此检查证明记录可读取且已提供时间符合一致性规则，不证明内容真实、视觉已通过或耗时完整。
+
+该独立校验是结构检查。正式就绪交付还要执行 `poster_workflow.py verify --bundle "$BUNDLE"`：重比对来源数值、检查素材证据和各维度状态、拒绝与当前HTML/spec/素材不匹配的旧review。`tool-timings.json`由统一入口围绕实际子命令记录；不要再为这些命令手工补一段更短的“阶段时间”。
+
+## 失败时保持状态并提供诊断草稿
+
+正式export失败先修复；用户限制使修复不可执行时，保持原HTML/字号/画布，使用workflow draft生成内部draft/preview.png和带可见未完成外框的draft/诊断草稿-未完成.png，再运行finish读取delivery-package.json及delivery-reply.md。它会明确草稿/未完成、真实失败和文件身份；不要另写截图脚本或用存在的PNG推导完成。finish重跑verify，不代替实际看图和事实判断。用户同意接收原样图片不代表固定阅读标准已通过；改变限制后重新review/export/verify。
+
+```bash
+python3 "$SKILL_DIR/scripts/poster_workflow.py" draft --bundle "$BUNDLE"
+python3 "$SKILL_DIR/scripts/poster_workflow.py" finish --bundle "$BUNDLE"
+```
+
 ## 用实际计时判断瓶颈
 
 `preflight.json` 和 `review.json` 记录工具的实际阶段耗时。另在 `workflow-timings.json` 记录资料、素材、HTML/布局、修复与交付阶段的真实开始/结束时间和重试次数；读取这些产物填写工具阶段，不猜测其余时间。并行阶段会重叠，累计阶段耗时不等于总墙钟时间。
 
 对比冷环境与复用环境的耗时，再决定是否缓存按版本/来源校验的 runtime 与完整字体；中文子集仍需覆盖当前文案。仅凭调用日志长度不承诺“30分钟缩到某个时长”。
+
+从任务开始就保留可观察阶段的时间，不在结束时倒推。可使用以下 JSON 结构：
+
+```json
+{
+  "status": "partial",
+  "stages": [],
+  "limitations": ["开始阶段未记录时间，不能恢复历史耗时"]
+}
+```
+
+每个有真实记录的阶段使用 `name`、带时区的 `startedAt`/`endedAt`、本次 `attempt` 和 `evidence`（日志或工具报告路径）。资料、素材、HTML/布局、修复与交付缺哪段就写明；尚未结束的 `endedAt` 为 null。工具自身 duration 不冒充整个工作流墙钟时间；宿主等待/中断单列。恢复旧任务可以新增本次复核阶段，不能用本次时间覆盖旧任务。完整时间不可取得时 `status` 保持 `partial`，有记录不等于满足性能验收。
+
+### 现场记录阶段时间
+
+每个阶段开始和结束时执行，命令使用系统时钟，不接受手填时间：
+
+```bash
+python3 "$SKILL_DIR/scripts/workflow_timing.py" --bundle "$BUNDLE" start research
+# 完成阶段的实际工作后再运行 end；其他阶段使用各自名称。
+python3 "$SKILL_DIR/scripts/workflow_timing.py" --bundle "$BUNDLE" end research
+```
+
+重试同名阶段会保留前一轮记录并新增 attempt；未结束的阶段不能再次 start。工具仅记录观察到的区间，status 保持 partial，不证明整个工作流已计时。漏记阶段保持未知，不填估计的起止时间；估计只能单独说明，不能冒充观测时间。完整校验检查已提供时间的时区、先后顺序、是否超过 recordedAt 或当前时间（5秒时钟容差）。
+
+`status: "complete"` 至少要求非空阶段列表且每段都有已观测的开始/结束时间；未知区间保持 partial。通过该一致性检查仍不证明全工作流阶段都已覆盖。
+
+正式交付以`poster_workflow.py verify`及当前`status`为准，不能以本节的结构诊断代替。底层导出不再提供绕开review的正式路径，诊断图只写`draft/`。
+
+## 失败与交付说明
+
+调用 `poster_workflow.py finish --bundle "$BUNDLE"` 重跑verify并生成当前交付清单与完整回复。ready才有formalArtifacts；blocked/draft的正式文件列表为空，只提供草稿及诊断记录，意外出现的正式文件名PNG单列为未验证，不供作成品。最终回复使用delivery-reply.md的状态和文件身份。ready说明当前记录检查通过；draft/blocked必须对用户明确“草稿/未完成”。没有有效导出回执的PNG标为“未验证图片”，图片存在不等于交付通过。
+
+失败清单的`allowedActions`仅为share-diagnostic、request-constraint-change、repair-and-recheck、stop；ready才允许deliver-formal。先向用户呈现已有带身份诊断图与具体失败，再请求允许调整；不要只弹选择问题而省略诊断，也不提供“知情豁免后正式交付”。接收原样草稿不改变blocked，改变约束后仍须完整重验。动作清单是工具协议，不能强制宿主遵守，实际聊天另行核查。
+
+保留每条生产命令的真实退出码；不要通过shell管道或忽略错误把失败显示成成功。依赖故障按环境指南恢复，事实、素材、文字问题则修内容。不得降低阈值、排除必要文字或自写截图程序绕过失败。针对同一原因完成两轮修正仍失败时，记录已尝试的方法和剩余限制，停止该任务的盲目重试；继续修复需要新的事实或可执行方案。工具不能禁止宿主任意执行代码，是否遵守仍以会话和产物核查为准。
+
+
+诊断报告图是新增报告，原海报嵌在外框下方，原文/字号/HTML画布保持不变。向用户推荐finish列出的报告图，不把内部原截图复制为普通成品名。报告图尺寸含外框，不能声称它是原样导出的指定尺寸PNG；如明确禁止带框派生图，只提供文字诊断。原图或报告图变动后重新生成并核对身份。脚本不能阻止宿主自行裁框、复制或截图，最终会话须独立核查。

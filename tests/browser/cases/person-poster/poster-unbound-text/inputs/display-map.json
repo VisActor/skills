@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "dom": [
+    {
+      "id": "label",
+      "kind": "label",
+      "text": "Count:"
+    },
+    {
+      "id": "count",
+      "kind": "value",
+      "dataPointer": "/count",
+      "format": {
+        "style": "decimal",
+        "places": 0
+      }
+    }
+  ],
+  "charts": []
+}

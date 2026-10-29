@@ -1,0 +1,13 @@
+{
+  "fictional": true,
+  "synthetic": true,
+  "dataOrigin": "15 declared synthetic counts; annual/media totals computed from records",
+  "portrait": {
+    "tool": "OpenAI built-in imagegen",
+    "date": "2026-10-28",
+    "transparentBackground": true,
+    "prompt": "portrait-prompt.txt",
+    "terms": "https://openai.com/policies/row-terms-of-use/",
+    "usage": "Generated fictional adult illustration, openly AI-labelled; output ownership subject to applicable terms, no uniqueness guarantee."
+  }
+}

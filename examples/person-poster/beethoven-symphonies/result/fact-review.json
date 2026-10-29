@@ -1,0 +1,207 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "id": "sub",
+      "claim": "九部作品，一份结构档案",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "九部作品，一份结构档案",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "portrait-note",
+      "claim": "肖像手稿为《庄严弥撒》，并非交响曲。",
+      "status": "passed",
+      "source": "Wikimedia file page identifies Missa solemnis manuscript",
+      "observed": "肖像手稿为《庄严弥撒》，并非交响曲。",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "work-0",
+      "claim": "第一交响曲 · C大调",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "第一交响曲 · C大调",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "meta-0",
+      "claim": "Op. 21 / 1800",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "Op. 21 / 1800",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "work-1",
+      "claim": "第二交响曲 · D大调",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "第二交响曲 · D大调",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "meta-1",
+      "claim": "Op. 36 / 1803",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "Op. 36 / 1803",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "work-2",
+      "claim": "第三交响曲 · 降E大调",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "第三交响曲 · 降E大调",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "meta-2",
+      "claim": "Op. 55 / 1804",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "Op. 55 / 1804",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "work-3",
+      "claim": "第四交响曲 · 降B大调",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "第四交响曲 · 降B大调",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "meta-3",
+      "claim": "Op. 60 / 1807",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "Op. 60 / 1807",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "work-4",
+      "claim": "第五交响曲 · C小调",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "第五交响曲 · C小调",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "meta-4",
+      "claim": "Op. 67 / 1808",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "Op. 67 / 1808",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "work-5",
+      "claim": "第六交响曲 · F大调",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "第六交响曲 · F大调",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "meta-5",
+      "claim": "Op. 68 / 1808",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "Op. 68 / 1808",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "work-6",
+      "claim": "第七交响曲 · A大调",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "第七交响曲 · A大调",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "meta-6",
+      "claim": "Op. 92 / 1813",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "Op. 92 / 1813",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "work-7",
+      "claim": "第八交响曲 · F大调",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "第八交响曲 · F大调",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "meta-7",
+      "claim": "Op. 93 / 1814",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "Op. 93 / 1814",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "work-8",
+      "claim": "第九交响曲 · D小调",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "第九交响曲 · D小调",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "meta-8",
+      "claim": "Op. 125 / 1824",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "Op. 125 / 1824",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "scope",
+      "claim": "年份含私人演出；第三部以1804年私人演出计。",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "年份含私人演出；第三部以1804年私人演出计。",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "chart-note",
+      "claim": "单位：个 · 数量描述结构，不代表艺术价值。",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "单位：个 · 数量描述结构，不代表艺术价值。",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "insight",
+      "claim": "第六《田园》分为五个乐章，其余八部各四个。",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed",
+      "observed": "第六《田园》分为五个乐章，其余八部各四个。",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "credit",
+      "claim": "目录：Eastman School of Music · 肖像：Joseph Karl Stieler，1820",
+      "status": "passed",
+      "source": "Eastman School of Music, Beethoven Symphony Basics, individual pages 1–9, retrieved2026-10-28; each First performance and Movements section reviewed; Wikimedia Commons file page",
+      "observed": "目录：Eastman School of Music · 肖像：Joseph Karl Stieler，1820",
+      "evidence": "evidence/sources.json"
+    }
+  ],
+  "comparisons": [
+    {
+      "dataPointer": "",
+      "evidence": {
+        "file": "evidence/input-facts.json",
+        "pointer": "",
+        "source": "Curator-compiled public task input; source attribution and field definitions in evidence/sources.json. Not an official JSON export."
+      }
+    }
+  ]
+}

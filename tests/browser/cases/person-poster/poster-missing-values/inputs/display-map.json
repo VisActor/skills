@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "dom": [
+    {
+      "id": "title",
+      "kind": "claim",
+      "dataPointer": "/title",
+      "factIds": [
+        "title"
+      ]
+    }
+  ],
+  "charts": []
+}

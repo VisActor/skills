@@ -28,6 +28,7 @@ cases/<skill-name>/<case-name>/
 
 | 用例 | 任务 |
 | --- | --- |
+| [locked-layout-delivery](person-poster/locked-layout-delivery/README.md) | 锁定文字/字号/画布的已有海报，验证阅读失败时的交付说明 |
 | [career-evidence](person-poster/career-evidence/README.md) | 玛丽·居里真实肖像与诺贝尔奖份额，原生图表、HTML 和 PNG |
 
 editorial-magazine 和 life-chronicle 暂无固定任务；可提供自己的提示词和素材调试。

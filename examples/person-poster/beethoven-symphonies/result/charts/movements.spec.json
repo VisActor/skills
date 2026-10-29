@@ -1,0 +1,161 @@
+{
+  "type": "bar",
+  "animation": false,
+  "background": "transparent",
+  "padding": {
+    "left": 12,
+    "right": 16,
+    "top": 30,
+    "bottom": 10
+  },
+  "data": [
+    {
+      "id": "input",
+      "values": [
+        {
+          "name": "第一",
+          "value": 4,
+          "opus": 21,
+          "firstPerformanceYear": 1800,
+          "key": "C大调"
+        },
+        {
+          "name": "第二",
+          "value": 4,
+          "opus": 36,
+          "firstPerformanceYear": 1803,
+          "key": "D大调"
+        },
+        {
+          "name": "第三",
+          "value": 4,
+          "opus": 55,
+          "firstPerformanceYear": 1804,
+          "key": "降E大调"
+        },
+        {
+          "name": "第四",
+          "value": 4,
+          "opus": 60,
+          "firstPerformanceYear": 1807,
+          "key": "降B大调"
+        },
+        {
+          "name": "第五",
+          "value": 4,
+          "opus": 67,
+          "firstPerformanceYear": 1808,
+          "key": "C小调"
+        },
+        {
+          "name": "第六",
+          "value": 5,
+          "opus": 68,
+          "firstPerformanceYear": 1808,
+          "key": "F大调"
+        },
+        {
+          "name": "第七",
+          "value": 4,
+          "opus": 92,
+          "firstPerformanceYear": 1813,
+          "key": "A大调"
+        },
+        {
+          "name": "第八",
+          "value": 4,
+          "opus": 93,
+          "firstPerformanceYear": 1814,
+          "key": "F大调"
+        },
+        {
+          "name": "第九",
+          "value": 4,
+          "opus": 125,
+          "firstPerformanceYear": 1824,
+          "key": "D小调"
+        }
+      ]
+    }
+  ],
+  "xField": "name",
+  "yField": "value",
+  "seriesField": "name",
+  "color": [
+    "#956f45",
+    "#956f45",
+    "#956f45",
+    "#956f45",
+    "#956f45",
+    "#b03d31",
+    "#956f45",
+    "#956f45",
+    "#956f45"
+  ],
+  "stack": false,
+  "axes": [
+    {
+      "orient": "bottom",
+      "type": "band",
+      "label": {
+        "autoHide": false,
+        "autoLimit": false,
+        "style": {
+          "fontSize": 28,
+          "fill": "#302c29"
+        }
+      },
+      "grid": {
+        "visible": false
+      },
+      "tick": {
+        "visible": false
+      },
+      "domainLine": {
+        "visible": false
+      }
+    },
+    {
+      "orient": "left",
+      "type": "linear",
+      "min": 0,
+      "max": 6,
+      "nice": false,
+      "tickCount": 4,
+      "label": {
+        "style": {
+          "fontSize": 28,
+          "fill": "#302c29"
+        }
+      },
+      "grid": {
+        "visible": true,
+        "style": {
+          "stroke": "#d6cbbb"
+        }
+      },
+      "tick": {
+        "visible": false
+      },
+      "domainLine": {
+        "visible": false
+      }
+    }
+  ],
+  "label": {
+    "visible": true,
+    "position": "top",
+    "smartInvert": false,
+    "style": {
+      "fontSize": 28,
+      "fill": "#302c29",
+      "stroke": false
+    }
+  },
+  "legends": {
+    "visible": false
+  },
+  "tooltip": {
+    "visible": false
+  }
+}

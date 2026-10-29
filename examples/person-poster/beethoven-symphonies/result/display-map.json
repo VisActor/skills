@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "dom": [
+    {
+      "id": "eyebrow",
+      "kind": "label",
+      "text": "MUSIC / LUDWIG VAN BEETHOVEN"
+    },
+    {
+      "id": "title",
+      "kind": "label",
+      "text": "贝多芬的交响世界"
+    },
+    {
+      "id": "sub",
+      "kind": "claim",
+      "dataPointer": "/text/sub",
+      "factIds": [
+        "sub"
+      ]
+    },
+    {
+      "id": "portrait-note",
+      "kind": "claim",
+      "dataPointer": "/text/portrait-note",
+      "factIds": [
+        "portrait-note"
+      ]
+    },
+    {
+      "id": "catalogue-label",
+      "kind": "label",
+      "text": "作品 / 首次演出年份"
+    },
+    {
+      "id": "work-0",
+      "kind": "claim",
+      "dataPointer": "/text/work-0",
+      "factIds": [
+        "work-0"
+      ]
+    },
+    {
+      "id": "meta-0",
+      "kind": "claim",
+      "dataPointer": "/text/meta-0",
+      "factIds": [
+        "meta-0"
+      ]
+    },
+    {
+      "id": "work-1",
+      "kind": "claim",
+      "dataPointer": "/text/work-1",
+      "factIds": [
+        "work-1"
+      ]
+    },
+    {
+      "id": "meta-1",
+      "kind": "claim",
+      "dataPointer": "/text/meta-1",
+      "factIds": [
+        "meta-1"
+      ]
+    },
+    {
+      "id": "work-2",
+      "kind": "claim",
+      "dataPointer": "/text/work-2",
+      "factIds": [
+        "work-2"
+      ]
+    },
+    {
+      "id": "meta-2",
+      "kind": "claim",
+      "dataPointer": "/text/meta-2",
+      "factIds": [
+        "meta-2"
+      ]
+    },
+    {
+      "id": "work-3",
+      "kind": "claim",
+      "dataPointer": "/text/work-3",
+      "factIds": [
+        "work-3"
+      ]
+    },
+    {
+      "id": "meta-3",
+      "kind": "claim",
+      "dataPointer": "/text/meta-3",
+      "factIds": [
+        "meta-3"
+      ]
+    },
+    {
+      "id": "work-4",
+      "kind": "claim",
+      "dataPointer": "/text/work-4",
+      "factIds": [
+        "work-4"
+      ]
+    },
+    {
+      "id": "meta-4",
+      "kind": "claim",
+      "dataPointer": "/text/meta-4",
+      "factIds": [
+        "meta-4"
+      ]
+    },
+    {
+      "id": "work-5",
+      "kind": "claim",
+      "dataPointer": "/text/work-5",
+      "factIds": [
+        "work-5"
+      ]
+    },
+    {
+      "id": "meta-5",
+      "kind": "claim",
+      "dataPointer": "/text/meta-5",
+      "factIds": [
+        "meta-5"
+      ]
+    },
+    {
+      "id": "work-6",
+      "kind": "claim",
+      "dataPointer": "/text/work-6",
+      "factIds": [
+        "work-6"
+      ]
+    },
+    {
+      "id": "meta-6",
+      "kind": "claim",
+      "dataPointer": "/text/meta-6",
+      "factIds": [
+        "meta-6"
+      ]
+    },
+    {
+      "id": "work-7",
+      "kind": "claim",
+      "dataPointer": "/text/work-7",
+      "factIds": [
+        "work-7"
+      ]
+    },
+    {
+      "id": "meta-7",
+      "kind": "claim",
+      "dataPointer": "/text/meta-7",
+      "factIds": [
+        "meta-7"
+      ]
+    },
+    {
+      "id": "work-8",
+      "kind": "claim",
+      "dataPointer": "/text/work-8",
+      "factIds": [
+        "work-8"
+      ]
+    },
+    {
+      "id": "meta-8",
+      "kind": "claim",
+      "dataPointer": "/text/meta-8",
+      "factIds": [
+        "meta-8"
+      ]
+    },
+    {
+      "id": "scope",
+      "kind": "claim",
+      "dataPointer": "/text/scope",
+      "factIds": [
+        "scope"
+      ]
+    },
+    {
+      "id": "chart-title",
+      "kind": "label",
+      "text": "每部交响曲的乐章数"
+    },
+    {
+      "id": "chart-note",
+      "kind": "claim",
+      "dataPointer": "/text/chart-note",
+      "factIds": [
+        "chart-note"
+      ]
+    },
+    {
+      "id": "insight",
+      "kind": "claim",
+      "dataPointer": "/text/insight",
+      "factIds": [
+        "insight"
+      ]
+    },
+    {
+      "id": "credit",
+      "kind": "claim",
+      "dataPointer": "/text/credit",
+      "factIds": [
+        "credit"
+      ]
+    }
+  ],
+  "charts": [
+    {
+      "id": "movements",
+      "data": [
+        {
+          "specPointer": "/data/0/values",
+          "dataPointer": "/works"
+        }
+      ]
+    }
+  ]
+}

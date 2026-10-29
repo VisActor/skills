@@ -4,5 +4,6 @@
   ],
   "height": 650,
   "emptyMount": false,
-  "delivery": "html"
+  "delivery": "html",
+  "reviewDisplayWidth": 1200
 }

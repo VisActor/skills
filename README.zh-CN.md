@@ -11,7 +11,7 @@
 | Skill | 能力 |
 | --- | --- |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | 分析报告、业务简报与数据专题，结合图表滚动叙事与标注，输出 HTML 数据故事或 Web-PPT |
-| [editorial-magazine](skills/editorial-magazine/SKILL.md) | 杂志图文：新闻、生平、穿搭、旅行、时序故事与科普，导出 HTML / PNG |
+| [editorial-magazine](skills/editorial-magazine/SKILL.md) | 杂志风图文：新闻、生平、穿搭、旅行、时序故事与科普，导出 HTML / PNG |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | 人物生平海报：照片墙、中心网格、照片环与可编辑时间线 |
 | [person-poster](skills/person-poster/SKILL.md) | 人物主导的数据信息图，原生 VChart 图表、可编辑 HTML 与高清 PNG |
 | [visactor-light-dashboard](skills/visactor-light-dashboard/SKILL.md) | 经营概览、指标监测与专题分析，支持筛选联动和进一步探索 |
@@ -30,9 +30,28 @@
 
 每个 Skill 都包含完整指令、本地参考资料、模板和脚本。无需额外安装 VisActor CLI、MCP 服务，也无需为 Skill 单独配置模型 Key 或访问 VisActor 托管 API。模型能力由宿主 Agent 提供。
 
-**推荐直接在 Codex 或 Claude Code 中使用 Skills。** 模型访问与工具执行由你使用的 Agent 提供。其他兼容的 Agent 也可以尝试使用，目前不提供专门的接入说明。
+**VisActor Skills 可在 Claude Code、Codex、WorkBuddy、豆包工作等支持 Agent Skills 的工具中使用。** 模型与工具执行能力由宿主 Agent 提供，你可以通过对话让 Agent 协助安装，也可以使用命令行或手动导入。
 
 ## 安装
+
+### 推荐：让 Agent 协助安装
+
+在你使用的 Agent 工具中新建对话，复制下面的提示词即可：
+
+```text
+请帮我安装 chart-storytelling Skill：
+https://github.com/VisActor/skills/tree/main/skills/chart-storytelling
+
+请获取完整 Skill 目录，包括 SKILL.md、参考资料、模板和脚本，
+按当前客户端支持的方式安装，并检查安装后能否发现和调用。
+如果有需要我完成的确认或导入步骤，请告诉我。
+```
+
+安装本仓库的其他 Skill 时，将提示词中的名称和 GitHub 地址末尾的 `chart-storytelling` 替换为上方“本仓库维护”列表中的 Skill 名称。例如，业务看板使用 [visactor-light-dashboard](https://github.com/VisActor/skills/tree/main/skills/visactor-light-dashboard)。安装完成后，新建任务并指定该 Skill 即可使用。
+
+如果 Agent 无法访问 GitHub 或完成安装，可使用下面的手动导入方式。
+
+### 命令行安装：Codex / Claude Code
 
 在你准备使用 Skills 的项目目录中执行：
 
@@ -58,9 +77,33 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 
 按照安装器提示选择 Codex 或 Claude Code。每个 Skill 都可以按需单独安装。更多安装选项见 [Skills CLI 说明](https://github.com/vercel-labs/skills#usage)。
 
-运行要求：
+### 手动导入：WorkBuddy / 豆包工作
 
-- Node.js 和 npm，用于安装；具备文件读写、命令执行及自身模型访问权限的宿主 Agent。
+在 [GitHub Releases](https://github.com/VisActor/skills/releases) 中选择最新的 `skills-v*` 正式版本，在 **Assets** 中下载所需 Skill 的 ZIP，例如 `chart-storytelling.zip` 或 `visactor-light-dashboard.zip`。每个 ZIP 对应一个完整 Skill；不要选整个仓库的 **Source code (zip)**，也不要只上传 `SKILL.md`。
+
+这条安装路径不需要运行 `npx`。如果客户端要求选择文件夹，先将 ZIP 解压到同名文件夹，再选择直接包含 `SKILL.md` 的那一层，保留包内所有参考资料、模板和脚本。
+
+#### WorkBuddy
+
+1. 打开左侧 **专家·技能·连接器 → 技能**。
+2. 点击 **添加技能 → 上传技能**，选择下载的单 Skill 包，按界面提示完成导入。
+3. 在 **已安装** 中确认该 Skill 已启用，然后新建任务，指定 Skill 名称并提供数据。
+
+入口说明见 [WorkBuddy 官方技能指南](https://www.codebuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)。
+
+#### 豆包工作
+
+1. 打开豆包工作的 **技能·连接器·伙伴**，进入技能管理页。
+2. 使用本地技能导入入口（**上传技能**），按文件选择器要求选择 ZIP 或解压后的完整 Skill 文件夹，完成导入。
+3. 新建工作任务，从技能选择入口选中该 Skill，或在需求中明确写出 Skill 名称，并提供任务数据。
+
+豆包工作支持导入本地技能文件和在对话中指定技能，见[飞书官方功能介绍](https://www.feishu.cn/content/article/7677519271848610746)。不同客户端版本的入口名称可能有所变化，以当前界面为准。
+
+导入后可以先发送：“请使用 chart-storytelling，读取它的 SKILL.md，确认配套脚本和模板可访问，并检查当前环境是否满足运行要求。”确认可用后再提交实际任务。需要更新时，从新的正式 Release 下载对应 Skill 包，通过客户端的技能管理入口更新安装副本。
+
+### 运行要求
+
+- 具备文件读写、命令执行及自身模型访问权限的宿主 Agent；命令行安装还需要 Node.js 和 npm。
 - 浏览器和网络连接，用于预览生成的 HTML 并加载外部资源。
 
 | Skill | 运行依赖 |
@@ -71,6 +114,8 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 | person-poster | Python 3.10+、Pillow、Python Playwright/Chromium；公开 VChart 2.1.7 CDN 或有来源记录的同版本本地副本，见 [requirements.txt](skills/person-poster/scripts/requirements.txt) 和含 POSIX/PowerShell 安装及能力边界的[环境说明](skills/person-poster/references/environment.md) |
 
 图片检索、生图与抠图使用宿主能力，素材要求以所选 Skill 为准。杂志模板中的占位素材需要在交付前替换。VChart/VTable Skill 的运行要求见各自仓库。
+
+Person Poster 通过 `poster_workflow.py` 完成空画布初始化、来源重放、构建、布局检查和交付核验。正式交付需要展示绑定、来源数值比对及逐位图使用依据；阅读与对比检查基于实际页面，失败产物仅作为 `draft/` 中带标识的诊断图。旧 bundle 须迁移并重新验收，见[展示契约](skills/person-poster/references/display-bindings.md)、[证据说明](skills/person-poster/references/evidence-checks.md)和[渲染说明](skills/person-poster/references/render-and-acceptance.md)。工具检查不认证来源真伪、图片权利、视觉质量或宿主最终回复。
 
 ## 使用
 
@@ -86,7 +131,7 @@ chart-storytelling 由当前 Agent 生成 VSeed 配置，再用本地脚本组�
 
 ## 案例展示
 
-[案例目录](examples/README.md) 已收录 CO₂ 滚动故事、Las Vegas Web-PPT、6组杂志图文案例和4组人物志案例，包含提示词、图片或页面结果，以及输入与复现限制。
+[案例目录](examples/README.md) 已收录 CO₂ 滚动故事、Las Vegas Web-PPT、6组杂志图文案例、4组人物志案例和5条人物数据海报案例（含真实剪影、HTML-only与明确虚构的AI插画案例），包含提示词、图片或页面结果，以及输入与复现限制。
 
 ## 开发与维护
 
@@ -137,7 +182,9 @@ uv run ruff check skills tests
 
 使用 Codex、Claude Code 或其他兼容的成熟 Agent 执行[固定任务](cases/README.md)，也可以提供自己的提示词和输入。按[本地调试指南](docs/debugging.md)建立已忽略的 `.cache/skill-dev/<skill-name>/<run-name>/` 工作目录，保留产物、截图及可导出的日志。仓库不提供模型 API harness 或统一 Agent 执行器。
 
-固定任务覆盖 chart-storytelling 与 person-poster；浏览器 smoke 覆盖故事 HTML/Web-PPT，以及人物海报的图表示例、带图表及无图表的 HTML-only 交付、无图表 PNG、祖先裁切拒绝与失败导出路径。person-poster 另已完成一次真实人物输入的同会话生成验证，不等同于独立盲测。editorial-magazine 和 life-chronicle 已有脚本回归，尚无固定任务或浏览器 smoke。任务完成后检查数据准确性、要求和实际交互，允许不同的正确视觉表达。Agent 任务不在 CI 中运行。
+固定任务覆盖 chart-storytelling 与 person-poster；浏览器 smoke 覆盖故事 HTML/Web-PPT，以及人物海报的图表示例（含类别配色、标签边界及缺失值与真实零值区分）、带图表及无图表的 HTML-only 交付、无图表 PNG、祖先裁切拒绝与失败导出路径。密集海报图表用例明确预期600px阅读基线失败，仅验证API/导出行为，另有 Python 浏览器回归覆盖600px下的 DOM/图表文本。smoke 另覆盖受管理图表启动、展示绑定、未绑定文字、遮挡与粗排阅读失败。受限排版固定 Agent 任务检查失败处理；真实宿主结果单独记录，不代表已满足上架条件。editorial-magazine 和 life-chronicle 已有脚本回归，尚无固定任务或浏览器 smoke。任务完成后检查数据准确性、要求和实际交互，允许不同的正确视觉表达。Agent 任务不在 CI 中运行。
+
+当前 Mac 宿主结果及未关闭限制见[人物海报验证记录](docs/validation/person-poster-2026-10-28.md)。
 
 ## 版本管理
 

@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "dom": [
+    {
+      "id": "eyebrow",
+      "kind": "label",
+      "text": "HISTORY OF COMPUTING / ADA LOVELACE"
+    },
+    {
+      "id": "title",
+      "kind": "label",
+      "text": "在数字之外\n看见可能"
+    },
+    {
+      "id": "name",
+      "kind": "label",
+      "text": "艾达·洛夫莱斯"
+    },
+    {
+      "id": "latin",
+      "kind": "label",
+      "text": "ADA LOVELACE"
+    },
+    {
+      "id": "year-0",
+      "kind": "claim",
+      "dataPointer": "/text/year-0",
+      "factIds": [
+        "year-0"
+      ]
+    },
+    {
+      "id": "event-0",
+      "kind": "claim",
+      "dataPointer": "/text/event-0",
+      "factIds": [
+        "event-0"
+      ]
+    },
+    {
+      "id": "year-1",
+      "kind": "claim",
+      "dataPointer": "/text/year-1",
+      "factIds": [
+        "year-1"
+      ]
+    },
+    {
+      "id": "event-1",
+      "kind": "claim",
+      "dataPointer": "/text/event-1",
+      "factIds": [
+        "event-1"
+      ]
+    },
+    {
+      "id": "year-2",
+      "kind": "claim",
+      "dataPointer": "/text/year-2",
+      "factIds": [
+        "year-2"
+      ]
+    },
+    {
+      "id": "event-2",
+      "kind": "claim",
+      "dataPointer": "/text/event-2",
+      "factIds": [
+        "event-2"
+      ]
+    },
+    {
+      "id": "year-3",
+      "kind": "claim",
+      "dataPointer": "/text/year-3",
+      "factIds": [
+        "year-3"
+      ]
+    },
+    {
+      "id": "event-3",
+      "kind": "claim",
+      "dataPointer": "/text/event-3",
+      "factIds": [
+        "event-3"
+      ]
+    },
+    {
+      "id": "idea",
+      "kind": "label",
+      "text": "笔记所讨论的潜力"
+    },
+    {
+      "id": "thought",
+      "kind": "claim",
+      "dataPointer": "/text/thought",
+      "factIds": [
+        "thought"
+      ]
+    },
+    {
+      "id": "scope",
+      "kind": "claim",
+      "dataPointer": "/text/scope",
+      "factIds": [
+        "scope"
+      ]
+    },
+    {
+      "id": "credit",
+      "kind": "claim",
+      "dataPointer": "/text/credit",
+      "factIds": [
+        "credit"
+      ]
+    }
+  ],
+  "charts": []
+}

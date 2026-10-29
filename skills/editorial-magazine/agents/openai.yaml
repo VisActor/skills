@@ -1,4 +1,4 @@
 interface:
-  display_name: "图文编辑室"
+  display_name: "杂志风图文"
   short_description: "将新闻、人物生平、穿搭、科普、旅行与时序故事排成杂志图文，生成可编辑 HTML 与 PNG"
   default_prompt: "使用 $editorial-magazine 按新闻、人物生平、穿搭解析、观点解读、概念科普、旅行攻略或时序故事选择杂志版式，用我的素材制作 HTML 和 PNG。"
