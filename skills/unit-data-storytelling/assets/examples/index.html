@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>单元实现 · 组合接线</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f3ec; color: #243c3e; font-family: system-ui, sans-serif; }
+    main { max-width: 1240px; margin: auto; padding: 24px 44px; }
+    header { display: flex; gap: 40px; justify-content: space-between; align-items: end; }
+    .eyebrow { color: #60777a; font-size: 11px; letter-spacing: .16em; }
+    h1 { margin: 12px 0; font-size: 30px; font-weight: 550; }
+    header p { font-size: 13px; line-height: 1.8; max-width: 450px; margin: 0 0 12px; color: #60777a; }
+    .controls { display: flex; align-items: end; gap: 14px; border-top: 1px solid #cdd4cb; padding: 16px 0; margin-top: 12px; }
+    label { display: grid; gap: 7px; font-size: 11px; color: #60777a; }
+    select, button { font: inherit; font-size: 13px; padding: 10px 14px; border: 1px solid #b5c3bb; border-radius: 5px; background: transparent; color: #243c3e; }
+    select { min-width: 140px; }
+    select:disabled { color: #7d8886; border-color: #d5dbd5; }
+    button { cursor: pointer; background: #243c3e; color: #fff; border-color: #243c3e; }
+    #replace { margin-left: auto; }
+    :focus-visible { outline: 2px solid #b55e40; outline-offset: 3px; }
+    .reading { display: flex; justify-content: space-between; gap: 30px; min-height: 30px; align-items: start; }
+    #copy { min-height: 76px; }
+    #copy h2 { margin: 0 0 8px; font-size: 22px; font-weight: 550; }
+    #copy p { margin: 0; font-size: 14px; line-height: 1.65; }
+    #status { font-size: 13px; margin: 0; line-height: 1.65; }
+    .key { display: flex; gap: 18px; white-space: nowrap; color: #60777a; font-size: 12px; }
+    .key i { width: 7px; height: 7px; display: inline-block; border-radius: 100%; margin-right: 6px; }
+    #stage { display: block; width: 100%; height: min(60vh, 560px); min-height: 400px; overflow: hidden; }
+    svg text { font-family: inherit; fill: #60777a; font-size: 16px; }
+    svg .category { font-size: 19px; fill: #243c3e; }
+    svg .count { font-size: 15px; font-variant-numeric: tabular-nums; }
+    #units [data-unit-id] { cursor: pointer; }
+    svg[aria-busy="true"] #units { pointer-events: none; }
+    footer { display: flex; gap: 30px; justify-content: space-between; border-top: 1px solid #cdd4cb; padding-top: 16px; font-size: 12px; color: #60777a; line-height: 1.8; }
+    footer p { margin: 0; max-width: 57%; }
+    #details { color: #243c3e; }
+    #design-note { margin: 0 0 20px; padding: 12px 0; border-top: 1px solid #cdd4cb; color: #516967; font-size: 13px; line-height: 1.8; }
+    #error { color: #a33b28; }
+    a { color: inherit; text-underline-offset: 3px; }
+    .material { margin-top: 38px; padding-top: 18px; border-top: 1px solid #cdd4cb; }
+    .material h2 { font-size: 18px; font-weight: 550; }
+    .material p { font-size: 13px; line-height: 1.8; }
+    .material-row { display: flex; gap: 30px; align-items: center; }
+    .material-row img, #mask-preview { width: 160px; height: 160px; object-fit: contain; flex: 0 0 160px; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div><span class="eyebrow">IMPLEMENTATION STUDY / 合成数据</span><h1>让关系在同一幅画面里展开。</h1></div>
+    <p>同一份记录，构图与连接怎样影响阅读？查看群组移位、组内重排、局部提取与独立样本更替。问题、布局和路径属于本例。</p>
+  </header>
+  <div class="controls">
+    <label>目标画面<select id="layout"><option value="local">局部 · 四条记录</option><option value="whole">展开 · 全部记录</option><option value="groups">重排 · 类别数量</option><option value="compare">并置 · 群组靠近</option><option value="duration">比较 · 使用月数</option><option value="focus">提取 · 满一年后缩放</option><option value="shape">素材 · 轮廓槽位</option></select></label>
+    <label>单元的外观<select id="glyph"><option value="image">静态 SVG 素材</option><option value="dot">圆点</option></select></label>
+    <label>局部的空间安排<select id="space" disabled><option value="expand">展开局部区间</option><option value="context">保留原有全域</option></select></label>
+    <button id="replace" type="button">换成另一批记录</button>
+    <button id="previous" type="button" aria-label="前一个画面">←</button>
+    <button id="next" type="button" aria-label="后一个画面">→</button>
+  </div>
+  <section id="copy" aria-live="polite"><h2></h2><p></p></section>
+  <div class="reading">
+    <p id="status" aria-live="polite"></p>
+    <div class="key"><span><i style="background:#286d70"></i>手机</span><span><i style="background:#b75e3e"></i>台灯</span></div>
+  </div>
+  <svg id="stage" viewBox="0 0 1000 520" role="group" aria-label="设备记录的排列与重组" aria-busy="false">
+    <g id="guides"></g><g id="units"></g><g id="annotations"></g>
+  </svg>
+  <p id="error" role="alert" hidden></p>
+  <p id="design-note"></p>
+  <footer>
+    <p id="details">一点 / 一个图标 = 一条记录。图标表示类别，大小不表示权重。点选查看记录。</p>
+    <p>两批记录的 ID 完全独立，数量也不同。连接路径没有数据含义。<br>可在动画途中切换排列或再次换批。<a href="./composition.mjs">查看接线代码</a> · <a href="./reading.html">滚动与阅读接线</a></p>
+  </footer>
+  <section class="material">
+    <h2>保留素材特征，再决定怎样使用。</h2>
+    <div class="material-row">
+      <img src="./images/phone.svg" alt="本例原创的静态手机 SVG">
+      <span aria-hidden="true">→</span>
+      <svg id="mask-preview" viewBox="0 0 160 160" role="img" aria-label="保留原图颜色的手机点阵，点为素材采样位置，不代表设备记录"></svg>
+      <div><p id="mask-count"></p><p>点阵保留原图颜色，以辨认屏幕、边框和按键。<br>进入数据排列后，颜色由数据含义决定。</p>
+        <button id="use-mask" type="button">把当前记录分配到这些位置</button>
+      </div>
+    </div>
+  </section>
+</main>
+<script type="module" src="./composition.mjs"></script>
+</body>
+</html>

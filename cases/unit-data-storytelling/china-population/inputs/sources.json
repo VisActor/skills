@@ -1,0 +1,335 @@
+[
+  {
+    "id": "nbs_2025_C02-01",
+    "title": "中国统计年鉴 2025：2-1 人口数及构成",
+    "provider": "国家统计局",
+    "role": "data",
+    "url": "https://www.stats.gov.cn/sj/ndsj/2025/html/C02-01.jpg",
+    "final_url": "https://www.stats.gov.cn/sj/ndsj/2025/html/C02-01.jpg",
+    "retrieved_at": "2026-10-19T10:54:11.545191+00:00",
+    "sha256": "0d7ae29899838bf09d38f0679933d72ab4a8af7e921d2254c1aedd85a6f1424b",
+    "bytes": 444793,
+    "content_type": "image/jpeg",
+    "used_in": [
+      "nbs-national-year.csv"
+    ],
+    "processing": "人工转录 1978–2024 的人口合计、男女、城乡列；保留原单位万人；按行核对男女及城乡合计。"
+  },
+  {
+    "id": "nbs_2025_C02-02",
+    "title": "中国统计年鉴 2025：2-2 人口出生率、死亡率和自然增长率",
+    "provider": "国家统计局",
+    "role": "data",
+    "url": "https://www.stats.gov.cn/sj/ndsj/2025/html/C02-02.jpg",
+    "final_url": "https://www.stats.gov.cn/sj/ndsj/2025/html/C02-02.jpg",
+    "retrieved_at": "2026-10-19T10:54:09.987479+00:00",
+    "sha256": "982daf7a3be3207b11e3747740874a8919a51ed6c48f9eb6769052ad821c714f",
+    "bytes": 138477,
+    "content_type": "image/jpeg",
+    "used_in": [
+      "nbs-national-year.csv"
+    ],
+    "processing": "逐行转录 1978–2024，保留原千分率及源表舍入差。"
+  },
+  {
+    "id": "nbs_report2021",
+    "title": "2021 年全国人口发布（统计公报或年度发布）",
+    "provider": "国家统计局",
+    "role": "data",
+    "url": "https://www.stats.gov.cn/sj/zxfb/202302/t20230203_1901393.html",
+    "final_url": "https://www.stats.gov.cn/sj/zxfb/202302/t20230203_1901393.html",
+    "retrieved_at": "2026-10-19T11:10:58.169763+00:00",
+    "sha256": "817da8c6b12759ab1e1fe7305a7dd52ba4038654e2dba097784020dc735e2c0b",
+    "bytes": 1544425,
+    "content_type": "text/html",
+    "used_in": [
+      "nbs-births-deaths-year.csv"
+    ],
+    "processing": "从官方正文提取当年出生/死亡人数。2025 公报另补当年人口构成与千分率。"
+  },
+  {
+    "id": "nbs_report2022",
+    "title": "2022 年全国人口发布（统计公报或年度发布）",
+    "provider": "国家统计局",
+    "role": "data",
+    "url": "https://www.stats.gov.cn/sj/zxfb/202302/t20230228_1919011.html",
+    "final_url": "https://www.stats.gov.cn/sj/zxfb/202302/t20230228_1919011.html",
+    "retrieved_at": "2026-10-19T11:10:57.590997+00:00",
+    "sha256": "b67b49c18acceda271c2ebb04d2fd46d151288a75225e566220f8597457ad61f",
+    "bytes": 1541617,
+    "content_type": "text/html",
+    "used_in": [
+      "nbs-births-deaths-year.csv"
+    ],
+    "processing": "从官方正文提取当年出生/死亡人数。2025 公报另补当年人口构成与千分率。"
+  },
+  {
+    "id": "nbs_report2023",
+    "title": "2023 年全国人口发布（统计公报或年度发布）",
+    "provider": "国家统计局",
+    "role": "data",
+    "url": "https://www.stats.gov.cn/sj/zxfb/202401/t20240117_1946624.html",
+    "final_url": "https://www.stats.gov.cn/sj/zxfb/202401/t20240117_1946624.html",
+    "retrieved_at": "2026-10-19T11:11:22.659370+00:00",
+    "sha256": "9ca2a1a7edc683e0011444db2249bd8487ae9ecf590153d4a6c4abd4854bfbbe",
+    "bytes": 1432635,
+    "content_type": "text/html",
+    "used_in": [
+      "nbs-births-deaths-year.csv"
+    ],
+    "processing": "从官方正文提取当年出生/死亡人数。2025 公报另补当年人口构成与千分率。"
+  },
+  {
+    "id": "nbs_report2024",
+    "title": "2024 年全国人口发布（统计公报或年度发布）",
+    "provider": "国家统计局",
+    "role": "data",
+    "url": "https://www.stats.gov.cn/sj/zxfb/202502/t20250228_1958817.html",
+    "final_url": "https://www.stats.gov.cn/sj/zxfb/202502/t20250228_1958817.html",
+    "retrieved_at": "2026-10-19T11:10:52.523996+00:00",
+    "sha256": "3e732426d3cbdb84b13168a3fa2daa7aa30663e05d7247e090abd4506aa03e39",
+    "bytes": 1131874,
+    "content_type": "text/html",
+    "used_in": [
+      "nbs-births-deaths-year.csv"
+    ],
+    "processing": "从官方正文提取当年出生/死亡人数。2025 公报另补当年人口构成与千分率。"
+  },
+  {
+    "id": "nbs_report2025",
+    "title": "2025 年全国人口发布（统计公报或年度发布）",
+    "provider": "国家统计局",
+    "role": "data",
+    "url": "https://www.stats.gov.cn/zwfwck/sjfb/202602/t20260228_1962662.html",
+    "final_url": "https://www.stats.gov.cn/zwfwck/sjfb/202602/t20260228_1962662.html",
+    "retrieved_at": "2026-10-19T11:11:23.884048+00:00",
+    "sha256": "f506d4632a3275247c28bcd311a876cf1c03e0663c4898da75dff7210a3df3e5",
+    "bytes": 534740,
+    "content_type": "text/html",
+    "used_in": [
+      "nbs-births-deaths-year.csv",
+      "nbs-national-year.csv"
+    ],
+    "processing": "从官方正文提取当年出生/死亡人数。2025 公报另补当年人口构成与千分率。"
+  },
+  {
+    "id": "wb_age_0",
+    "title": "Population estimates and projections：CHN，1960–2023",
+    "provider": "World Bank",
+    "role": "data",
+    "url": "https://api.worldbank.org/v2/country/CHN/indicator/SP.POP.0004.FE;SP.POP.0004.MA;SP.POP.0509.FE;SP.POP.0509.MA;SP.POP.1014.FE;SP.POP.1014.MA;SP.POP.1519.FE;SP.POP.1519.MA;SP.POP.2024.FE;SP.POP.2024.MA?source=40&date=1960:2023&format=json&per_page=10000",
+    "final_url": "https://api.worldbank.org/v2/country/CHN/indicator/SP.POP.0004.FE;SP.POP.0004.MA;SP.POP.0509.FE;SP.POP.0509.MA;SP.POP.1014.FE;SP.POP.1014.MA;SP.POP.1519.FE;SP.POP.1519.MA;SP.POP.2024.FE;SP.POP.2024.MA?source=40&date=1960:2023&format=json&per_page=10000",
+    "retrieved_at": "2026-10-19T10:57:26.331184+00:00",
+    "sha256": "8dd94aef756e9ce05bda0a93fd2297938d82bc51aaf5a2baff75307b866474aa",
+    "bytes": 133216,
+    "content_type": "application/json;charset=utf-8",
+    "used_in": [
+      "wb-age-sex-year.csv"
+    ],
+    "database_source_id": "40",
+    "provider_last_updated": "2026-07-01",
+    "processing": "按指标 ID、年份、性别、年龄重排；保留 API 值，未与 NBS 数据接续。年龄分布为 World Bank staff estimates，使用 World Bank 总人口和 UN WPP 年龄/性别分布；不将该接口笼统标为某一版 WPP 原始数据。"
+  },
+  {
+    "id": "wb_age_10",
+    "title": "Population estimates and projections：CHN，1960–2023",
+    "provider": "World Bank",
+    "role": "data",
+    "url": "https://api.worldbank.org/v2/country/CHN/indicator/SP.POP.2529.FE;SP.POP.2529.MA;SP.POP.3034.FE;SP.POP.3034.MA;SP.POP.3539.FE;SP.POP.3539.MA;SP.POP.4044.FE;SP.POP.4044.MA;SP.POP.4549.FE;SP.POP.4549.MA?source=40&date=1960:2023&format=json&per_page=10000",
+    "final_url": "https://api.worldbank.org/v2/country/CHN/indicator/SP.POP.2529.FE;SP.POP.2529.MA;SP.POP.3034.FE;SP.POP.3034.MA;SP.POP.3539.FE;SP.POP.3539.MA;SP.POP.4044.FE;SP.POP.4044.MA;SP.POP.4549.FE;SP.POP.4549.MA?source=40&date=1960:2023&format=json&per_page=10000",
+    "retrieved_at": "2026-10-19T10:57:26.313223+00:00",
+    "sha256": "9ff53e80fe0482a3ac9a905b875b470cc13656f7b3616cd981320d55feff7620",
+    "bytes": 133216,
+    "content_type": "application/json;charset=utf-8",
+    "used_in": [
+      "wb-age-sex-year.csv"
+    ],
+    "database_source_id": "40",
+    "provider_last_updated": "2026-07-01",
+    "processing": "按指标 ID、年份、性别、年龄重排；保留 API 值，未与 NBS 数据接续。年龄分布为 World Bank staff estimates，使用 World Bank 总人口和 UN WPP 年龄/性别分布；不将该接口笼统标为某一版 WPP 原始数据。"
+  },
+  {
+    "id": "wb_age_20",
+    "title": "Population estimates and projections：CHN，1960–2023",
+    "provider": "World Bank",
+    "role": "data",
+    "url": "https://api.worldbank.org/v2/country/CHN/indicator/SP.POP.5054.FE;SP.POP.5054.MA;SP.POP.5559.FE;SP.POP.5559.MA;SP.POP.6064.FE;SP.POP.6064.MA;SP.POP.6569.FE;SP.POP.6569.MA;SP.POP.7074.FE;SP.POP.7074.MA?source=40&date=1960:2023&format=json&per_page=10000",
+    "final_url": "https://api.worldbank.org/v2/country/CHN/indicator/SP.POP.5054.FE;SP.POP.5054.MA;SP.POP.5559.FE;SP.POP.5559.MA;SP.POP.6064.FE;SP.POP.6064.MA;SP.POP.6569.FE;SP.POP.6569.MA;SP.POP.7074.FE;SP.POP.7074.MA?source=40&date=1960:2023&format=json&per_page=10000",
+    "retrieved_at": "2026-10-19T10:57:26.293789+00:00",
+    "sha256": "42e9275ed13e17ec999e16fbba97e919343bffa7cd905f327e343880cebb84be",
+    "bytes": 133082,
+    "content_type": "application/json;charset=utf-8",
+    "used_in": [
+      "wb-age-sex-year.csv"
+    ],
+    "database_source_id": "40",
+    "provider_last_updated": "2026-07-01",
+    "processing": "按指标 ID、年份、性别、年龄重排；保留 API 值，未与 NBS 数据接续。年龄分布为 World Bank staff estimates，使用 World Bank 总人口和 UN WPP 年龄/性别分布；不将该接口笼统标为某一版 WPP 原始数据。"
+  },
+  {
+    "id": "wb_age_30",
+    "title": "Population estimates and projections：CHN，1960–2023",
+    "provider": "World Bank",
+    "role": "data",
+    "url": "https://api.worldbank.org/v2/country/CHN/indicator/SP.POP.7579.FE;SP.POP.7579.MA;SP.POP.80UP.FE;SP.POP.80UP.MA?source=40&date=1960:2023&format=json&per_page=10000",
+    "final_url": "https://api.worldbank.org/v2/country/CHN/indicator/SP.POP.7579.FE;SP.POP.7579.MA;SP.POP.80UP.FE;SP.POP.80UP.MA?source=40&date=1960:2023&format=json&per_page=10000",
+    "retrieved_at": "2026-10-19T10:57:26.174177+00:00",
+    "sha256": "72cf1c1285a5087a939cb7f1d22e603dbf95e4292dc6165dbd5bb397695a69ed",
+    "bytes": 54034,
+    "content_type": "application/json;charset=utf-8",
+    "used_in": [
+      "wb-age-sex-year.csv"
+    ],
+    "database_source_id": "40",
+    "provider_last_updated": "2026-07-01",
+    "processing": "按指标 ID、年份、性别、年龄重排；保留 API 值，未与 NBS 数据接续。年龄分布为 World Bank staff estimates，使用 World Bank 总人口和 UN WPP 年龄/性别分布；不将该接口笼统标为某一版 WPP 原始数据。"
+  },
+  {
+    "id": "wb_demography",
+    "title": "Population estimates and projections：CHN，1960–2023",
+    "provider": "World Bank",
+    "role": "data",
+    "url": "https://api.worldbank.org/v2/country/CHN/indicator/SP.POP.TOTL;SP.POP.TOTL.FE.IN;SP.POP.TOTL.MA.IN;SP.DYN.TFRT.IN;SP.DYN.CBRT.IN;SP.DYN.CDRT.IN;SP.DYN.LE00.IN;SP.URB.TOTL.IN.ZS?source=40&date=1960:2023&format=json&per_page=10000",
+    "retrieved_at": "2026-10-19T11:00:13.463157+00:00",
+    "sha256": "9670a594654983289343d429a03b197e55ed233cdb23c947be083301a765ee18",
+    "bytes": 108078,
+    "content_type": "application/json;charset=utf-8",
+    "used_in": [
+      "wb-demography-year.csv"
+    ],
+    "database_source_id": "40",
+    "provider_last_updated": "2026-07-01",
+    "processing": "按指标 ID、年份、性别、年龄重排；保留 API 值，未与 NBS 数据接续。年龄分布为 World Bank staff estimates，使用 World Bank 总人口和 UN WPP 年龄/性别分布；不将该接口笼统标为某一版 WPP 原始数据。"
+  },
+  {
+    "id": "wb_source40",
+    "title": "World Bank source 40 指标定义",
+    "provider": "World Bank",
+    "role": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator?source=40&format=json&per_page=1000",
+    "final_url": "https://api.worldbank.org/v2/indicator?source=40&format=json&per_page=1000",
+    "retrieved_at": "2026-10-19T10:54:17.727142+00:00",
+    "sha256": "f878f55695c36419fb85ca63528dda81486e922f9daf55dc7962b917ccd3ba93",
+    "bytes": 98766,
+    "content_type": "application/json;charset=utf-8",
+    "used_in": [
+      "indicator-metadata.json"
+    ],
+    "processing": "保留本包实际使用的 42 个指标定义、来源机构和来源注释。"
+  },
+  {
+    "id": "census_A0301",
+    "title": "第七次人口普查：全国分年龄、性别的人口",
+    "provider": "国家统计局",
+    "role": "data",
+    "url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/A0301.jpg",
+    "final_url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/A0301.jpg",
+    "retrieved_at": "2026-10-19T10:54:15.648184+00:00",
+    "sha256": "a2bd08f2f5e53e25b18fdd5cadf54ab588b8780b0b0b62d58ea33a577e34d0fb",
+    "bytes": 740646,
+    "content_type": "image/jpeg",
+    "used_in": [
+      "census2020-age-sex.csv"
+    ],
+    "data_kind": "census_direct_counts",
+    "processing": "OCR 辅助提取五岁年龄组与合计的男女人数；保留 100+；单岁行不放入本包。"
+  },
+  {
+    "id": "census_B0503",
+    "title": "第七次人口普查：全国分年龄、性别、受教育程度、婚姻状况的人口",
+    "provider": "国家统计局",
+    "role": "data",
+    "url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/B0503.jpg",
+    "final_url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/B0503.jpg",
+    "retrieved_at": "2026-10-19T10:54:25.767803+00:00",
+    "sha256": "4582b0c79bf028eb07163b532b6e8e6513ee2b88e0287648ab64d95311df6175",
+    "bytes": 5644228,
+    "content_type": "image/jpeg",
+    "used_in": [
+      "census2020-marital-age-sex.csv"
+    ],
+    "data_kind": "long_form_sample_direct_counts",
+    "processing": "OCR 辅助提取第一个“总计”（全部教育程度）区块的五岁组、65+ 和 15+ 合计。分教育程度的后续重复区块不放入本包。"
+  },
+  {
+    "id": "census_B0501",
+    "title": "第七次人口普查：各地区分性别、婚姻状况的 15 岁及以上人口",
+    "provider": "国家统计局",
+    "role": "data",
+    "url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/B0501.jpg",
+    "final_url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/B0501.jpg",
+    "retrieved_at": "2026-10-19T10:54:14.731629+00:00",
+    "sha256": "4717cd56a40dcc6d0289d7c4c15eb17e7c78b8362a2d630a6f861a8b8c4ea0f4",
+    "bytes": 499254,
+    "content_type": "image/jpeg",
+    "used_in": [
+      "census2020-marital-region-sex.csv"
+    ],
+    "data_kind": "long_form_sample_direct_counts",
+    "processing": "OCR 辅助提取全国与 31 个省级地区，按地区×性别展开；保留原样本计数。"
+  },
+  {
+    "id": "census_B0603",
+    "title": "第七次人口普查：全国育龄妇女分年龄、孩次的生育状况",
+    "provider": "国家统计局",
+    "role": "data",
+    "url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/B0603.jpg",
+    "final_url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/B0603.jpg",
+    "retrieved_at": "2026-10-19T10:57:29.490472+00:00",
+    "sha256": "b367594126617afaf15f3f58280a3ac0d2e42d5e95a65b3c73c0fd2626db885a",
+    "bytes": 332204,
+    "content_type": "image/jpeg",
+    "used_in": [
+      "census2020-fertility-age.csv"
+    ],
+    "data_kind": "long_form_sample_direct_counts",
+    "processing": "转录五岁年龄组及 15–49 合计；人数和千分率原值保留；出生期间 2019-11-01 至 2020-10-31。"
+  },
+  {
+    "id": "census_B0604",
+    "title": "第七次人口普查：各地区育龄妇女年龄别生育率",
+    "provider": "国家统计局",
+    "role": "data",
+    "url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/B0604.jpg",
+    "final_url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/B0604.jpg",
+    "retrieved_at": "2026-10-19T10:57:29.127940+00:00",
+    "sha256": "a3fe0f4b22623c85b5a77de23b619e8f60bfa1ad33655bf61894de929f576219",
+    "bytes": 230683,
+    "content_type": "image/jpeg",
+    "used_in": [
+      "census2020-fertility-region.csv"
+    ],
+    "data_kind": "long_form_sample_direct_counts",
+    "processing": "OCR 辅助提取地区年龄别生育千分率；总和生育率由原表千分单位除以 1000，转换为每名女性的子女数；没有以已舍入的五岁组率重算。"
+  },
+  {
+    "id": "census_A0501",
+    "title": "第七次人口普查：全国不同规模的家庭户类别",
+    "provider": "国家统计局",
+    "role": "data",
+    "url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/A0501.jpg",
+    "final_url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/A0501.jpg",
+    "retrieved_at": "2026-10-19T10:54:16.802443+00:00",
+    "sha256": "a22ea9f0626b658e82da5468e8bada704f5d6215b4a00480e2e0dac260418b61",
+    "bytes": 86674,
+    "content_type": "image/jpeg",
+    "used_in": [
+      "census2020-household-size.csv"
+    ],
+    "data_kind": "census_direct_counts",
+    "processing": "转录家庭户规模×代际类别；源表空项保留空值。"
+  },
+  {
+    "id": "census_notes",
+    "title": "中国人口普查年鉴 2020 编辑说明",
+    "provider": "国家统计局",
+    "role": "metadata",
+    "url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/note.htm",
+    "final_url": "https://www.stats.gov.cn/sj/pcsj/rkpc/7rp/zk/html/note.htm",
+    "retrieved_at": "2026-10-19T11:10:47.841742+00:00",
+    "sha256": "158d15da9e224daafc213e319b630cf2bcd73a6a5695947f458f8cabd2e3f702",
+    "bytes": 5087,
+    "content_type": "text/html",
+    "note": "标准时点为 2020-11-01 零时；直接登记汇总，未做误差校正；不包括 200 万现役军人。长表抽取 10% 住户，不等于每类人口都恰好抽到 10%；空项表示无数字或数字很小。"
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "INPUT.md": {
+    "sha256": "570e55293edca87184383d9627d1317be5ec27515d6c2089c90c199fad6d0070",
+    "provenance": "Research input snapshot; provider URLs and processing are in sources.json. Usage and attribution are described in README.md."
+  },
+  "data-context.json": {
+    "sha256": "7a3bdb2645d3482322b0b8576d76c84c017c3da3b263674a2b6d1377a8ffb896",
+    "provenance": "Research input snapshot; provider URLs and processing are in sources.json. Usage and attribution are described in README.md."
+  },
+  "honors.csv": {
+    "sha256": "7ebe59dd724bdf592a133abb7a27db8b82c474343d6ceb2b2031dd7da36cd078",
+    "provenance": "Research input snapshot; provider URLs and processing are in sources.json. Usage and attribution are described in README.md."
+  },
+  "manifest.json": {
+    "sha256": "a530d011b6562a8cdfafe11865b1d01bfe38b2a40f46e8a711a59a55dceaa4ea",
+    "provenance": "Research input snapshot; provider URLs and processing are in sources.json. Usage and attribution are described in README.md."
+  },
+  "player-seasons.csv": {
+    "sha256": "ea7407710ff6c27a82c5392d19db6c4c5b539307e7a8d0602a0de6d2e4d48d53",
+    "provenance": "Research input snapshot; provider URLs and processing are in sources.json. Usage and attribution are described in README.md."
+  },
+  "players.csv": {
+    "sha256": "9840712877818081d5e74afaafe157c9fe5745b91d8acafac383e81f0711abba",
+    "provenance": "Research input snapshot; provider URLs and processing are in sources.json. Usage and attribution are described in README.md."
+  },
+  "sources.json": {
+    "sha256": "5d8e1f6fff93bc925cc116342b078854a17a979651e036387ee3922847634804",
+    "provenance": "Research input snapshot; provider URLs and processing are in sources.json. Usage and attribution are described in README.md."
+  }
+}

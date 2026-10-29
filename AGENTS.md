@@ -16,6 +16,7 @@
 
 ## Local development workspaces
 
+- When maintaining `unit-data-storytelling`, start with [its context map](docs/unit-data-storytelling/context-map.md) for current decisions and evidence boundaries. It is maintenance context, not a runtime dependency or a required read for story creation.
 - Use one ignored `.cache/skill-dev/<skill-name>/<run-name>/` directory per experiment. Follow [local debugging](docs/debugging.md); `.cache/` is already ignored.
 - Keep copied inputs in `inputs/`, generated files in `outputs/`, screenshots in `screenshots/` and available session/tool logs in `logs/`. Record the Skill revision or local diff, host/model, checks and outcome in `notes.md`; note logs the host cannot export. Never put credentials in shared evidence.
 - Edit source Skills under `skills/`, then refresh the installed copy before retesting. Copy fixed inputs into the run workspace; do not modify originals during a run. Keep acceptance guidance outside the generation workspace.

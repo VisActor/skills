@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#14222b">
+  <title>小球时代，谁变小了？ · NBA 开篇试作</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <section class="sequence" id="top">
+      <div class="stage" id="stage" data-state="0" data-phase="loading">
+        <canvas id="units" aria-label="NBA 点阵标志，展开后按位置和身高排列球员"></canvas>
+        <svg id="guides" aria-hidden="true"></svg>
+        <header class="masthead">
+          <a href="#top" class="brand">球场上的尺度<span>COURT / MEASURES</span></a>
+          <span class="edition">NBA <b>1960 — 2026</b></span>
+          <a href="#notes">数据与素材 <span>↗</span></a>
+        </header>
+        <div class="cover-copy" id="cover-copy">
+          <p class="eyebrow">66 个赛季 · 看球场上的人</p>
+          <h1>小球时代，<br>谁变<span>小</span>了？</h1>
+          <p class="cover-intro">人数、上场机会与明星名单，<br>会讲出同一个故事吗？</p>
+          <button class="begin" id="begin">走进五个位置 <span>↓</span></button>
+        </div>
+        <div class="story-copy" id="story-copy" aria-live="polite"></div>
+        <div class="diagram-heading" id="diagram-heading"></div>
+        <p class="cover-caption" id="cover-caption">一个熟悉的剪影，许多真实的身影。</p>
+        <div class="legend" id="legend"></div>
+        <div class="stage-bottom">
+          <span id="bottom-note">1960–61 — 2025–26 · 球员档案</span>
+          <button id="next">向下阅读 <span>↓</span></button>
+        </div>
+        <div class="tooltip" id="tooltip" hidden></div>
+        <p id="error" hidden role="alert"></p>
+      </div>
+      <div class="flow" aria-hidden="true">
+        <div class="cue" data-state="0"></div>
+        <div class="cue" data-state="1"></div>
+        <div class="cue" data-state="2"></div>
+      </div>
+    </section>
+    <section class="notes" id="notes">
+      <p class="eyebrow">开篇局部试作 · 到这里停留</p>
+      <h2>先认识人群，再进入变化。</h2>
+      <p>本页展示开篇与第一组年代比较。关于上场时间和明星球员的分析，不在这段试作的范围内。</p>
+      <nav class="study-links"><a href="#top">重看开篇 ↑</a></nav>
+      <details>
+        <summary>数据口径与素材来源</summary>
+        <p>沿用本轮冻结的 NBA 数据：身高来自同一份生涯档案，按英寸 × 2.54 转换为厘米。年代按赛季开始年分组，1960 和 2000 年代各包含十季；年代内按人去重，多位置在相应行各显示一次。每行人数不可相加作为联盟人数，点图不表示实际打某个位置的分钟。</p>
+        <p>开篇白色人物的 437 个点对应 1960 年代球员—位置实例。进入数据后保留身份；红蓝背景点只负责主题构图。2000 年代单元属于另一观察窗口，新出现的点不表示前一批人变成了后一批人。图内同身高档位的少量横移只用于避免重叠。</p>
+        <p>数据：<a href="data/sources.json">冻结来源记录</a>。母形：<a href="assets/nba-logo.svg">NBA 官方矢量标志</a>，沿用此前已取得的本地素材与采样；<a href="assets.json">出处与加工记录</a>。本地编辑试作，与 NBA 无隶属关系。</p>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="app.mjs"></script>
+</body>
+</html>

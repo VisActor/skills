@@ -19,6 +19,12 @@ Agent skills for the VisActor visualization ecosystem. Create data stories, edit
 | [visactor-chart-editor](skills/visactor-chart-editor/SKILL.md) | Self-service chart editing with field drag-and-drop and live data exploration |
 | [visactor-map3d-dashboard](skills/visactor-map3d-dashboard/SKILL.md) | 3D globe dashboards for regional analysis and linked evidence |
 
+### Development candidate
+
+[unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) creates interactive stories with records or quantities represented by dots, symbols, images or text units. It combines narrative design, continuous visual changes and optional exploration. The implementation modules are composable references, not page templates.
+
+This candidate is available in this checkout and is not yet included in the published release. [Install from the local checkout](#install-from-a-local-checkout) while it is under review; do not use the `main` installation URL for it yet.
+
 ### Related VisActor Skills
 
 Chart and table Skills are maintained in their library repositories. Install them directly from the source:
@@ -110,6 +116,7 @@ After importing, try: “Use chart-storytelling. Read its SKILL.md, confirm that
 | Skill | Runtime requirements |
 | --- | --- |
 | chart-storytelling | Python 3.10+ (standard library) and Node.js for JavaScript checks; pinned VSeed, VChart, VTable and GSAP load from unpkg |
+| unit-data-storytelling (candidate) | Modern browser with ES modules; Node.js for module checks; optional Python 3.9+ (standard library) for the bundled preview/audit tool. Bundled examples use local assets without a required CDN or chart library |
 | editorial-magazine | Python 3.10+, dependencies in its [requirements.txt](skills/editorial-magazine/requirements.txt), and Chromium/Chrome for PNG export; font CDN with system fallbacks |
 | life-chronicle | Python 3.10+, dependencies in its [requirements.txt](skills/life-chronicle/requirements.txt), and Chromium/Chrome for PNG export; pinned VInfo and font CDN, see [environment setup](skills/life-chronicle/references/environment.md) |
 | person-poster | Python 3.10+, Pillow, Python Playwright/Chromium; public VChart 2.1.7 CDN or a sourced local copy; see [requirements.txt](skills/person-poster/scripts/requirements.txt) and [environment setup](skills/person-poster/references/environment.md) for POSIX/PowerShell installation and capability limits |
@@ -143,7 +150,7 @@ This section is for contributors editing Skills or running local tests. The defa
 | Path | Contents |
 | --- | --- |
 | `skills/<skill-name>/` | Independently installable runtime: `SKILL.md`, references, templates/assets and scripts |
-| `tests/<skill_name>/` | Skill-specific deterministic Python regressions; hyphens become underscores for Python imports |
+| `tests/<skill_name>/` | Skill-specific deterministic regressions; hyphens become underscores for Python imports |
 | `tests/test_*` | Shared tooling/installation checks and Node.js browser/Story integration tests |
 | `examples/<skill-name>/<case-name>/` | Curated examples with prompts, inputs, results and previews |
 | `cases/<skill-name>/<case-name>/` | Fixed Agent prompts, inputs and acceptance guidance |
@@ -160,6 +167,7 @@ From the root of your local repository, install the working copy of a Skill:
 
 ```bash
 npx skills add ./skills/chart-storytelling
+npx skills add ./skills/unit-data-storytelling
 npx skills add ./skills/editorial-magazine
 npx skills add ./skills/life-chronicle
 npx skills add ./skills/person-poster
@@ -168,6 +176,8 @@ npx skills add ./skills/person-poster
 Alternatively, copy the complete Skill directory into your agent's skill directory, including its references, templates and scripts. Do not copy only `SKILL.md`. See the [local debugging guide](docs/debugging.md) for Codex and Claude Code workspace setup. Refresh the installed copy after changing a Skill before retesting.
 
 ### Regression tests
+
+Unit data-storytelling has deterministic module, preview, snapshot-integrity and independent-installation checks. [Fixed tasks](cases/README.md#unit-data-storytelling) include NBA, Hong Kong summer and flight delays; population inputs are retained with testing paused. [Showcases](examples/README.md#unit-data-storytelling) include two complete stories and two focused studies, separate from independent-test inputs. No fixed browser smoke is registered yet. See the [scoped checks](CONTRIBUTING.md#select-checks-by-scope) and [maintenance context](docs/unit-data-storytelling/context-map.md).
 
 The Python maintenance environment requires Python 3.12+ and [uv](https://docs.astral.sh/uv/):
 

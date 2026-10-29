@@ -1,0 +1,42 @@
+{
+  "case": "nba",
+  "prepared_on": "2026-10-19",
+  "provenance": "Copied verbatim from the previously frozen research input; source verification dates remain in sources.json.",
+  "missing_positions_rows": 63,
+  "missing_height_profiles": 1,
+  "files": [
+    {
+      "path": "INPUT.md",
+      "bytes": 1388,
+      "sha256": "570e55293edca87184383d9627d1317be5ec27515d6c2089c90c199fad6d0070"
+    },
+    {
+      "path": "data-context.json",
+      "bytes": 950,
+      "sha256": "7a3bdb2645d3482322b0b8576d76c84c017c3da3b263674a2b6d1377a8ffb896"
+    },
+    {
+      "path": "honors.csv",
+      "bytes": 57897,
+      "sha256": "7ebe59dd724bdf592a133abb7a27db8b82c474343d6ceb2b2031dd7da36cd078",
+      "rows": 1708
+    },
+    {
+      "path": "player-seasons.csv",
+      "bytes": 908934,
+      "sha256": "ea7407710ff6c27a82c5392d19db6c4c5b539307e7a8d0602a0de6d2e4d48d53",
+      "rows": 24025
+    },
+    {
+      "path": "players.csv",
+      "bytes": 150226,
+      "sha256": "9840712877818081d5e74afaafe157c9fe5745b91d8acafac383e81f0711abba",
+      "rows": 4484
+    },
+    {
+      "path": "sources.json",
+      "bytes": 5102,
+      "sha256": "5d8e1f6fff93bc925cc116342b078854a17a979651e036387ee3922847634804"
+    }
+  ]
+}

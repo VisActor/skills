@@ -1,0 +1,26 @@
+{
+  "INPUT.md": {
+    "sha256": "adf71c36b6f592981b0579cfc5710a143a18594231767e6c4460cf1019da1d32",
+    "provenance": "Research input snapshot; provider URLs and processing are in sources.json. Usage and attribution are described in README.md."
+  },
+  "daily-temperature.csv": {
+    "sha256": "226939804c746ec6f1c057aab0b1dad50357ed545c8621cf122bff81f20680a0",
+    "provenance": "Research input snapshot; provider URLs and processing are in sources.json. Usage and attribution are described in README.md."
+  },
+  "enso-oni.csv": {
+    "sha256": "ee6280729613acc9fa6176421b8ffdee9e37c48f1962f059b4f347e1f7103886",
+    "provenance": "Research input snapshot; provider URLs and processing are in sources.json. Usage and attribution are described in README.md."
+  },
+  "manifest.json": {
+    "sha256": "2f4685df8054163b6f8b76a154a2e1e85cdaeadaa1965bdeb3af5835ffef3969",
+    "provenance": "Research input snapshot; provider URLs and processing are in sources.json. Usage and attribution are described in README.md."
+  },
+  "sources.json": {
+    "sha256": "1278eccab145a2615e5362e6105cdf5680751b0c819c49133fe72c3dd3992bf9",
+    "provenance": "Research input snapshot; provider URLs and processing are in sources.json. Usage and attribution are described in README.md."
+  },
+  "station.json": {
+    "sha256": "87ef9916251b4c9478840ab0921bc5ff9b242c5c28a3e509272fcead7462c981",
+    "provenance": "Research input snapshot; provider URLs and processing are in sources.json. Usage and attribution are described in README.md."
+  }
+}

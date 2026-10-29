@@ -19,6 +19,12 @@
 | [visactor-chart-editor](skills/visactor-chart-editor/SKILL.md) | 自助图表编辑器，支持字段拖拽、图型切换与实时数据探索 |
 | [visactor-map3d-dashboard](skills/visactor-map3d-dashboard/SKILL.md) | 三维地球看板，分析地域差异并联动证据与记录 |
 
+### 开发候选
+
+[unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) 用有明确记录或数量含义的点、符号、图片或文本单元制作交互式数据故事，结合叙事编排、连续的可视化变化和按需提供的探索。实现模块是可组合的参考，不是页面模板。
+
+该候选版本位于当前检出目录，尚未包含在已发布版本中。评审期间请[从本地仓库安装](#从本地仓库安装)，暂不使用它的 `main` 安装地址。
+
 ### VisActor 相关 Skills
 
 图表与表格 Skill 在各自的库仓库中维护，可直接从源仓库安装：
@@ -109,6 +115,7 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 | Skill | 运行依赖 |
 | --- | --- |
 | chart-storytelling | Python 3.10+（标准库）和 Node.js（校验 JavaScript）；从 unpkg 加载固定版本的 VSeed、VChart、VTable 与 GSAP |
+| unit-data-storytelling（候选） | 支持 ES modules 的现代浏览器；Node.js 用于模块检查；可选 Python 3.9+（标准库）用于自带的预览与资源检查工具。内置示例使用本地素材，不依赖指定 CDN 或图表库 |
 | editorial-magazine | Python 3.10+、其 [requirements.txt](skills/editorial-magazine/requirements.txt) 中的依赖，以及用于导出 PNG 的 Chromium/Chrome；字体从 CDN 加载，支持系统回退 |
 | life-chronicle | Python 3.10+、其 [requirements.txt](skills/life-chronicle/requirements.txt) 中的依赖，以及用于导出 PNG 的 Chromium/Chrome；固定版本的 VInfo 与字体 CDN，详见[环境说明](skills/life-chronicle/references/environment.md) |
 | person-poster | Python 3.10+、Pillow、Python Playwright/Chromium；公开 VChart 2.1.7 CDN 或有来源记录的同版本本地副本，见 [requirements.txt](skills/person-poster/scripts/requirements.txt) 和含 POSIX/PowerShell 安装及能力边界的[环境说明](skills/person-poster/references/environment.md) |
@@ -142,7 +149,7 @@ chart-storytelling 由当前 Agent 生成 VSeed 配置，再用本地脚本组�
 | 路径 | 内容 |
 | --- | --- |
 | `skills/<skill-name>/` | 可独立安装的运行内容：`SKILL.md`、参考资料、模板／资源与脚本 |
-| `tests/<skill_name>/` | 按 Skill 组织的确定性 Python 回归测试；为兼容 Python 导入，连字符改为下划线 |
+| `tests/<skill_name>/` | 按 Skill 组织的确定性回归测试；为兼容 Python 导入，连字符改为下划线 |
 | `tests/test_*` | 共用工具与安装检查，以及 Node.js 浏览器／Story 集成测试 |
 | `examples/<skill-name>/<case-name>/` | 面向用户的精选案例：提示词、输入、结果与预览 |
 | `cases/<skill-name>/<case-name>/` | 固定 Agent 任务的提示词、输入与验收要点 |
@@ -159,6 +166,7 @@ chart-storytelling 由当前 Agent 生成 VSeed 配置，再用本地脚本组�
 
 ```bash
 npx skills add ./skills/chart-storytelling
+npx skills add ./skills/unit-data-storytelling
 npx skills add ./skills/editorial-magazine
 npx skills add ./skills/life-chronicle
 npx skills add ./skills/person-poster
@@ -167,6 +175,8 @@ npx skills add ./skills/person-poster
 也可以将 Skill 的完整目录复制到 Agent 的技能目录中，包括参考资料、模板和脚本，不要只复制 `SKILL.md`。Codex 和 Claude Code 的调试工作区准备方式见 [本地调试指南](docs/debugging.md)。修改 Skill 后，请先更新安装副本，再重新测试。
 
 ### 回归测试
+
+unit-data-storytelling 已有模块、预览工具、冻结输入完整性与独立安装的确定性检查。[固定任务](cases/README.md#unit-data-storytelling)包含 NBA、香港夏天、航班延误，人口输入保留并暂停复测；[展示案例](examples/README.md#unit-data-storytelling)包含两篇完整作品和两段局部试作，与独立测试输入分开保存。尚未注册固定浏览器 smoke。维护时参阅[按范围检查](CONTRIBUTING.md#select-checks-by-scope)和[维护上下文](docs/unit-data-storytelling/context-map.md)。
 
 Python 维护环境要求 Python 3.12+ 和 [uv](https://docs.astral.sh/uv/)：
 

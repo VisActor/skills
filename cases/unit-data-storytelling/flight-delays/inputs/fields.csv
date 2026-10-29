@@ -1,0 +1,32 @@
+field,source_field,type,unit,description
+flight_id,derived,string,,日期、承运人、航班号、起讫机场、计划出发时刻组成的唯一运行标识
+FlightDate,FlightDate,date,YYYY-MM-DD,源表航班日期
+Reporting_Airline,Reporting_Airline,string,code,报告承运人代码
+Flight_Number_Reporting_Airline,Flight_Number_Reporting_Airline,string,,报告承运人航班号；跨日期重复
+Tail_Number,Tail_Number,string,,飞机尾号；空值保留
+Origin,Origin,string,code,出发机场代码
+Dest,Dest,string,code,计划目的地机场代码
+CRSDepTime,CRSDepTime,local_time,HHMM,计划离开登机口的当地时刻
+DepTime,DepTime,local_time,HHMM,实际离开登机口的当地时刻
+DepDelay,DepDelay,integer,minute,实际减计划出发时刻；提前为负
+CRSArrTime,CRSArrTime,local_time,HHMM,计划到达登机口的当地时刻
+ArrTime,ArrTime,local_time,HHMM,实际到达登机口的当地时刻
+ArrDelay,ArrDelay,integer,minute,实际减计划到达时刻；提前为负
+CRSElapsedTime,CRSElapsedTime,integer,minute,计划登机口间耗时
+ActualElapsedTime,ActualElapsedTime,integer,minute,实际登机口间耗时
+TaxiOut,TaxiOut,integer,minute,实际滑出耗时
+TaxiIn,TaxiIn,integer,minute,实际滑入耗时
+AirTime,AirTime,integer,minute,实际空中耗时
+Distance,Distance,integer,mile,起讫机场间航程；不是本次实际飞行轨迹长度
+Cancelled,Cancelled,integer,0/1,取消标记
+Diverted,Diverted,integer,0/1,备降标记
+CancellationCode,CancellationCode,string,A/B/C/D,A 承运人、B 天气、C 国家航空系统、D 安保
+CarrierDelay,CarrierDelay,integer,minute,报告的承运人原因延误分钟；注意填报范围
+WeatherDelay,WeatherDelay,integer,minute,报告的天气原因延误分钟；不涵盖所有天气影响
+NASDelay,NASDelay,integer,minute,报告的国家航空系统原因延误分钟
+SecurityDelay,SecurityDelay,integer,minute,报告的安保原因延误分钟
+LateAircraftDelay,LateAircraftDelay,integer,minute,报告的前序飞机晚到原因延误分钟
+FirstDepTime,FirstDepTime,local_time,HHMM,返回登机口相关的首次离开时刻；空值保留
+TotalAddGTime,TotalAddGTime,integer,minute,返回登机口相关的附加地面时间合计
+LongestAddGTime,LongestAddGTime,integer,minute,返回登机口相关的最长一次附加地面时间
+elapsed_consistency,derived,enum,,consistent / inconsistent / unavailable；见 INPUT.md 的检查等式

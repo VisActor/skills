@@ -1,0 +1,563 @@
+[
+  {
+    "id": "SP.DYN.CBRT.IN",
+    "name": "Birth rate, crude (per 1,000 people)",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Crude birth rate indicates the number of live births occurring during the year, per 1,000 population estimated at midyear. Subtracting the crude death rate from the crude birth rate provides the rate of natural increase, which is equal to the rate of population change in the absence of migration.",
+    "sourceOrganization": "World Population Prospects, United Nations (UN), publisher: UN Population Division;\nStatistical databases and publications from national statistical offices, National Statistical Offices (NSOs);\nDemographic Statistics, Eurostat (ESTAT);\nPopulation and Vital Statistics Report (various years), United Nations (UN), publisher: UN Statistical Division",
+    "topics": [
+      {
+        "id": "8",
+        "value": "Health "
+      }
+    ]
+  },
+  {
+    "id": "SP.DYN.CDRT.IN",
+    "name": "Death rate, crude (per 1,000 people)",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Crude death rate indicates the number of deaths occurring during the year, per 1,000 population estimated at midyear. Subtracting the crude death rate from the crude birth rate provides the rate of natural increase, which is equal to the rate of population change in the absence of migration.",
+    "sourceOrganization": "World Population Prospects, United Nations (UN), publisher: UN Population Division;\nStatistical databases and publications from national statistical offices, National Statistical Offices (NSOs);\nDemographic Statistics, Eurostat (ESTAT);\nPopulation and Vital Statistics Report (various years), United Nations (UN), publisher: UN Statistical Division",
+    "topics": [
+      {
+        "id": "8",
+        "value": "Health "
+      }
+    ]
+  },
+  {
+    "id": "SP.DYN.LE00.IN",
+    "name": "Life expectancy at birth, total (years)",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Life expectancy at birth indicates the number of years a newborn infant would live if prevailing patterns of mortality at the time of its birth were to stay the same throughout its life.",
+    "sourceOrganization": "World Population Prospects, United Nations (UN), uri: UN Population Division;\nStatistical databases and publications from national statistical offices, National Statistical Offices (NSOs), note: Derived from male and female life expectancy at birth from sources such as statistical databases and publications from national statistical offices.;\nDemographic Statistics, Eurostat (ESTAT), note: Derived from male and female life expectancy at birth from sources such as Eurostat: Demographic Statistics.",
+    "topics": [
+      {
+        "id": "8",
+        "value": "Health "
+      }
+    ]
+  },
+  {
+    "id": "SP.DYN.TFRT.IN",
+    "name": "Fertility rate, total (births per woman)",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Total fertility rate represents the number of children that would be born to a woman if she were to live to the end of her childbearing years and bear children in accordance with age-specific fertility rates of the specified year.",
+    "sourceOrganization": "World Population Prospects, United Nations (UN), publisher: UN Population Division;\nStatistical databases and publications from national statistical offices, National Statistical Offices (NSOs);\nDemographic Statistics, Eurostat (ESTAT)",
+    "topics": [
+      {
+        "id": "8",
+        "value": "Health "
+      },
+      {
+        "id": "17",
+        "value": "Gender"
+      }
+    ]
+  },
+  {
+    "id": "SP.POP.0004.FE",
+    "name": "Population ages 00-04, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 0 to 4.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.0004.MA",
+    "name": "Population ages 00-04, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 0 to 4.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.0509.FE",
+    "name": "Population ages 05-09, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 5 to 9.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.0509.MA",
+    "name": "Population ages 05-09, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 5 to 9.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.1014.FE",
+    "name": "Population ages 10-14, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 10 to 14.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.1014.MA",
+    "name": "Population ages 10-14, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 10 to 14.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.1519.FE",
+    "name": "Population ages 15-19, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 15 to 19.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.1519.MA",
+    "name": "Population ages 15-19, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 15 to 19.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.2024.FE",
+    "name": "Population ages 20-24, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 20 to 24.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.2024.MA",
+    "name": "Population ages 20-24, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 20 to 24.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.2529.FE",
+    "name": "Population ages 25-29, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 25 to 29.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.2529.MA",
+    "name": "Population ages 25-29, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 25 to 29.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.3034.FE",
+    "name": "Population ages 30-34, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 30 to 34.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.3034.MA",
+    "name": "Population ages 30-34, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 30 to 34.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.3539.FE",
+    "name": "Population ages 35-39, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 35 to 39.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.3539.MA",
+    "name": "Population ages 35-39, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 35 to 39.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.4044.FE",
+    "name": "Population ages 40-44, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 40 to 44.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.4044.MA",
+    "name": "Population ages 40-44, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 40 to 44.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.4549.FE",
+    "name": "Population ages 45-49, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 45 to 49.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.4549.MA",
+    "name": "Population ages 45-49, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 45 to 49.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.5054.FE",
+    "name": "Population ages 50-54, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 50 to 54.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.5054.MA",
+    "name": "Population ages 50-54, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 50 to 54.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.5559.FE",
+    "name": "Population ages 55-59, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 55 to 59.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.5559.MA",
+    "name": "Population ages 55-59, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 55 to 59.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.6064.FE",
+    "name": "Population ages 60-64, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 60 to 64.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.6064.MA",
+    "name": "Population ages 60-64, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 60 to 64.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.6569.FE",
+    "name": "Population ages 65-69, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 65 to 69.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.6569.MA",
+    "name": "Population ages 65-69, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 65 to 69.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.7074.FE",
+    "name": "Population ages 70-74, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 70 to 74.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.7074.MA",
+    "name": "Population ages 70-74, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 70 to 74.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.7579.FE",
+    "name": "Population ages 75-79, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 75 to 79.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.7579.MA",
+    "name": "Population ages 75-79, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 75 to 79.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.80UP.FE",
+    "name": "Population ages 80 and above, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population between the ages 80 and above.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": [
+      {
+        "id": "8",
+        "value": "Health "
+      }
+    ]
+  },
+  {
+    "id": "SP.POP.80UP.MA",
+    "name": "Population ages 80 and above, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population between the ages 80 and above.",
+    "sourceOrganization": "World Bank staff estimates using the World Bank's total population and age/sex distributions of the United Nations Population Division's World Population Prospects.",
+    "topics": []
+  },
+  {
+    "id": "SP.POP.TOTL",
+    "name": "Population, total",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.",
+    "sourceOrganization": "World Population Prospects, United Nations (UN), uri: https://population.un.org/wpp/, publisher: UN Population Division;\nStatistical databases and publications from national statistical offices, National Statistical Offices (NSOs), uri: https://unstats.un.org/home/nso_sites/, publisher: National Statistical Offices;\nEurostat: Demographic Statistics, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/data/database?node_code=earn_ses_monthly, publisher: Eurostat;\nPopulation and Vital Statistics Report (various years), United Nations (UN), uri: https://unstats.un.org, publisher: UN Statistics Division",
+    "topics": [
+      {
+        "id": "19",
+        "value": "Climate Change"
+      },
+      {
+        "id": "8",
+        "value": "Health "
+      }
+    ]
+  },
+  {
+    "id": "SP.POP.TOTL.FE.IN",
+    "name": "Population, female",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Female population is based on the de facto definition of population, which counts all female residents regardless of legal status or citizenship.",
+    "sourceOrganization": "World Population Prospects, United Nations (UN), publisher: UN Population Division;\nStaff estimates, World Bank (WB)",
+    "topics": [
+      {
+        "id": "8",
+        "value": "Health "
+      }
+    ]
+  },
+  {
+    "id": "SP.POP.TOTL.MA.IN",
+    "name": "Population, male",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Male population is based on the de facto definition of population, which counts all male residents regardless of legal status or citizenship.",
+    "sourceOrganization": "World Population Prospects, United Nations (UN), publisher: UN Population Division;\nStaff estimates, World Bank (WB)",
+    "topics": [
+      {
+        "id": "8",
+        "value": "Health "
+      }
+    ]
+  },
+  {
+    "id": "SP.URB.TOTL.IN.ZS",
+    "name": "Urban population (% of total population)",
+    "unit": "",
+    "source": {
+      "id": "40",
+      "value": "Population estimates and projections"
+    },
+    "sourceNote": "Urban population refers to people living in urban areas as defined by national statistical offices. The data are collected and smoothed by United Nations Population Division.",
+    "sourceOrganization": "World Urbanization Prospects, United Nations (UN), uri: https://population.un.org/wup/, note: United Nations Population Division's World Urbanization Prospects, National definitions, publisher: UN Population Division",
+    "topics": [
+      {
+        "id": "19",
+        "value": "Climate Change"
+      },
+      {
+        "id": "16",
+        "value": "Urban Development "
+      }
+    ]
+  }
+]

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#122023">
+  <meta name="description" content="从 1960 年代到 2025–26 赛季，沿着同一条身高尺，看 NBA 球员、出场时间与明星的不同分布。">
+  <title>身高的分量 — NBA 1960–2026</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="story">
+    <section id="stage" aria-label="NBA 身高可视化叙事">
+      <div class="court" aria-hidden="true"></div>
+      <header class="masthead">
+        <a href="#" class="brand" aria-label="回到开头"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M3 16h26M16 3v26M7 6c12 8 12 12 0 20M25 6c-12 8-12 12 0 20"/></svg><span>身高的分量<small>THE SHAPE OF THE GAME</small></span></a>
+        <span class="edition">NBA <b>1960 — 2026</b> <i>一部关于身材的球场档案</i></span>
+        <div class="header-actions"><button id="explore-open" type="button">探索数据 <span>↗</span></button><button id="motion" type="button" aria-pressed="false">减弱动态</button><button id="sources-open" type="button">数据与说明 <span>↗</span></button></div>
+      </header>
+
+      <div class="cover-copy" id="cover-copy" hidden>
+        <p class="eyebrow">NBA / 1960 — 2026</p>
+        <h1>身高的<br><em>分量。</em></h1>
+        <p class="cover-question">NBA，真的越来越矮了吗？</p>
+        <p class="cover-intro">从巨人的年代，到小球的记忆。<br>走进 66 个赛季，看看球场上的人。</p>
+        <button id="begin" type="button">走进球场 <span>↓</span></button>
+      </div>
+      <div class="cover-caption" id="cover-caption" hidden>一个熟悉的剪影，许多真实的身影。</div>
+
+      <div class="editorial" id="editorial">
+        <div class="headline"><div class="eyebrow" id="eyebrow"></div><h1 id="title">每一个点，<br>都是一个人。</h1></div>
+        <div class="intro-copy"><p id="body-copy"></p><button id="featured" class="featured" hidden type="button"></button><div id="era-memory" class="era-memory" hidden><span>时代记忆</span><a id="memory-link" target="_blank" rel="noreferrer"></a></div></div>
+        <div class="metric"><div><strong id="metric">392</strong><span id="metric-unit">位球员</span></div><p id="metric-caption"></p></div>
+        <div class="reading-notes"><div id="chart-key"></div><p id="sample-note"></p></div>
+      </div>
+
+      <div id="chart-description" class="sr-only"></div>
+      <svg id="axes" aria-hidden="true"></svg>
+      <canvas id="units" role="img" aria-label="按身高和位置排列的球员，每个单元代表一名球员" aria-describedby="chart-description"></canvas>
+      <div id="lane-labels" aria-hidden="true"></div>
+      <div class="period"><span id="window-kind">NBA · 十年群像</span><div><strong id="window-label">1960 年代</strong><span id="window-range"></span></div></div>
+      <div id="explore-inline" class="explore-inline" hidden>
+        <div class="explore-heading">自由探索 <span>7 个年代 · 66 个赛季</span></div>
+        <div class="explore-time"><button type="button" data-grain="decade">年代</button><button type="button" data-grain="season">赛季</button><label class="sr-only" for="window-select">选择年代或赛季</label><select id="window-select"></select><button id="previous-window" type="button" aria-label="上一个时间窗口">←</button><button id="following-window" type="button" aria-label="下一个时间窗口">→</button></div>
+        <div class="explore-modes"><button type="button" data-mode="people">人数</button><button type="button" data-mode="minutes">出场时间</button><button type="button" id="inline-honors" aria-pressed="false">✦ 明星</button><button type="button" id="inline-search">查找球员 ↗</button></div>
+      </div>
+      <div class="chart-topline"><span id="encoding"></span><span id="reference-label"></span></div>
+      <footer class="footer"><button id="next" type="button">继续阅读 <span>↓</span></button></footer>
+      <div id="tooltip" class="tooltip" hidden></div>
+      <aside id="player-card" class="player-card" aria-label="球员记录" hidden><button id="card-close" class="close" type="button" aria-label="关闭球员详情">×</button><div id="card-content"></div></aside>
+      <div id="loading" class="loading">正在整理球员档案…</div>
+    </section>
+    <div id="scroll-space" aria-hidden="true"></div>
+  </main>
+
+  <dialog id="explore" class="dialog explore-dialog">
+    <button class="close" data-close="explore" type="button" aria-label="关闭数据探索">×</button>
+    <p class="eyebrow">EXPLORE / 自由查看</p><h2>换一个时间，看同一群人。</h2>
+    <div class="time-kinds"><button id="decade-kind" class="selected" type="button">年代</button><button id="season-kind" type="button">赛季</button></div>
+    <div id="timeline" class="timeline" aria-label="查看不同年代或赛季"></div>
+    <div class="view-controls" id="view-controls"><button id="people-mode" type="button">人数</button><button id="minutes-mode" type="button">时间</button><button id="honors-mode" type="button" aria-pressed="false">✦ 全明星 / MVP</button></div>
+    <button id="search-open" class="search-button" type="button">⌕ 查找球员</button>
+  </dialog>
+  <dialog id="sources" class="dialog sources">
+    <button class="close" data-close="sources" type="button" aria-label="关闭资料说明">×</button>
+    <p class="eyebrow">THE RECORD / 资料与边界</p><h2>这些点，从哪里来。</h2>
+    <p>资料覆盖 1960–61 至 2025–26 的 66 个赛季、4,484 位球员。球队转会记录归并为同人同季一条，历史年代用满十季，2020s 暂含六季。</p>
+    <h3>一个人，几种观察方式</h3>
+    <dl><dt>人数</dt><dd>年代中每人计一次；年度中每人计一次。多位置在对应行重复展示，各行不能相加为联盟人数。同身高列内的位置只用于分开单元。</dd><dt>时间</dt><dd>仅用于年度。单元面积正比于该球员在该季联盟总出场分钟中的份额。加权平均使用这些球员的全部分钟，不是他们实际打某个位置的分钟。图中不包含五人阵容组合。</dd><dt>荣誉</dt><dd>年度只标当季全明星和常规赛 MVP；年代标这一年代曾获得的荣誉。包括全明星伤退与递补，不把新秀挑战赛当作全明星入选。</dd><dt>身高与位置</dt><dd>身高统一采用固定来源的生涯档案值，不模拟球员逐年长高。位置来自各赛季列示记录，不冒充完整官方注册清单。未知身高不进入身高分布。</dd></dl>
+    <h3>可以读出的变化，尚不能读出的原因</h3>
+    <p>身高分布、出场时间和荣誉之间的关联可以观察；敏捷、运动能力、对抗和战术成因不能由身高单独证明。2015 是叙事锚点，2014–15 常规赛发生在勇士夺冠之前。</p>
+    <p>格林按统一源的 PF 标签参与统计；2015 总决赛第六场的中锋角色另有比赛记录，不把整季分钟挪入 C 组。约基奇用于识别人物，不是联盟身高回升的因果证明。</p>
+    <h3>从标志到人群</h3>
+    <p>封面依据 <a href="https://cdn.nba.com/logos/leagues/logo-nba.svg" target="_blank" rel="noreferrer">NBA 官网的矢量标志 ↗</a> 构成点阵。人物部分的 437 个白色单元，沿用 1960s 中身高与位置已知的球员记录，多位置分别列示；展开后保持各自身份。红蓝点只组成标志背景，不参与统计。封面的排列与颜色不表示身高或位置，进入正文后才建立这些编码。</p>
+    <h3>年代线索与人物资料</h3><ul id="history-sources"></ul>
+    <h3>来源</h3>
+    <ul><li><a href="https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats" target="_blank" rel="noreferrer">Sumitro Datta · NBA Stats v56 ↗</a>：2026-04-13 固定版本，球员档案、赛季记录、总分钟及全明星。</li><li><a href="https://www.nba.com/news/history-mvp-award-winners" target="_blank" rel="noreferrer">NBA 历年 MVP ↗</a>：补入 2025–26 MVP。</li><li><a href="https://www.nba.com/news/2026-all-star-teams-announcement" target="_blank" rel="noreferrer">2026 全明星名单 ↗</a> · <a href="https://www.nba.com/allstar/2025/roster" target="_blank" rel="noreferrer">2025 名单 ↗</a>：近期官方名单集合核验。</li><li><a href="https://www.nba.com/news/golden-state-warriors-nba-championships" target="_blank" rel="noreferrer">NBA · 勇士夺冠回顾 ↗</a>。</li><li>四位人物头像来自 NBA 官方球员页面，仅用于识别；是当前头像，不代表历史赛季影像。<a href="assets.json" target="_blank">素材来源记录 ↗</a></li></ul>
+    <p class="method-note">早期部分球员缺五位置记录；2025–26 一人缺身高，共 25 分钟。未知值保留，未补零。球队总分钟可对账的 62 季中，最大相对差约 0.00421%，原样保留。</p>
+    <a class="data-link" href="data.json" download="nba-height-story-data.json">下载本版可视化数据 ↓</a>
+  </dialog>
+  <dialog id="search" class="dialog search-dialog"><button class="close" data-close="search" type="button" aria-label="关闭查找">×</button><p class="eyebrow">FIND A PLAYER</p><h2>找到人群中的他。</h2><label for="search-input" class="sr-only">球员姓名</label><input type="search" id="search-input" placeholder="英文姓名，或库里、格林、约基奇、亚历山大" autocomplete="off"><p class="search-context" id="search-context"></p><div id="search-results"></div></dialog>
+  <noscript><p class="noscript">本作品需要启用 JavaScript。原始数据可在 <a href="data.json">这里下载</a>。</p></noscript>
+  <script type="module" src="app.mjs"></script>
+</body>
+</html>

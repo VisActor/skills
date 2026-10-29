@@ -17,7 +17,7 @@ VChart and VTable Skills are maintained in [VisActor/VChart](https://github.com/
 
 - Use `skills/<skill-name>/SKILL.md` with a lowercase hyphenated directory matching the frontmatter `name`. Keep required references, assets, templates, scripts and optional dependency declarations in that directory.
 - Skills must work when copied independently. Do not import maintenance files or resources from a sibling Skill. Keep tests, task cases and generated artifacts outside the installed Skill.
-- Put Skill-specific Python regressions in `tests/<skill_name>/`, replacing hyphens with underscores. Shared installation/tooling tests and Node.js integrations live at the test root.
+- Put Skill-specific regressions in `tests/<skill_name>/`, replacing hyphens with underscores. Shared installation/tooling tests and existing Node.js integrations live at the test root.
 - Fixed Agent tasks belong in `cases/<skill-name>/<case-name>/`, with prompt, inputs and acceptance guidance together. Follow the [case guide](cases/README.md). Keep reviewer criteria outside the generation workspace; allow different correct outputs.
 - Fixed browser cases belong in `tests/browser/cases/<skill-name>/<case-id>/`. Configuration, inputs and expectations stay together; scripts and locked browser dependencies live under `tests/browser/`.
 - Curated user-facing examples belong in `examples/<skill-name>/<case-name>/`; follow the [example guide](examples/README.md). Review outputs before showcasing them; keep raw execution logs local.
@@ -28,6 +28,7 @@ VChart and VTable Skills are maintained in [VisActor/VChart](https://github.com/
 | Scope | Deterministic regressions | Task/browser coverage |
 | --- | --- | --- |
 | chart-storytelling | `uv run pytest tests/chart_storytelling -q`; `node --test tests/test_story_vseed.cjs` after browser dependency installation | [Fixed tasks](cases/README.md); HTML and Web-PPT smoke |
+| unit-data-storytelling | `uv run pytest tests/unit_data_storytelling -q`; `node --test tests/unit_data_storytelling/*.test.mjs`; `uv run pytest tests/test_portable_install.py -q -k unit_story`; fixed-input edits use `uv run pytest tests/test_case_inputs.py -q -k unit-data-storytelling` | [NBA, Hong Kong summer, flight delays; population paused](cases/README.md#unit-data-storytelling); no fixed browser smoke; [maintenance context](docs/unit-data-storytelling/context-map.md) |
 | editorial-magazine | `uv run pytest tests/editorial_magazine -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |
 | life-chronicle | `uv run pytest tests/life_chronicle -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |
 | person-poster | `uv run pytest tests/person_poster -q -m "not poster_browser"`; browser regressions use `-m poster_browser` after Python Chromium installation | [Fixed task](cases/person-poster/career-evidence/README.md); native-chart, HTML-only, PNG and failure smoke |

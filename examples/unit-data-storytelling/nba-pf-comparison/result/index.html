@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PF 的身高，重心往哪边移？</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<main id="story">
+<div class="stage" id="stage">
+<header><a class="brand" href="#">COURTSIDE <span>／ 数据看台</span></a><span class="edition">NBA · 身高观察 01</span></header>
+<div class="copy-viewport"><div class="copy"><div><div class="eyebrow" id="eyebrow"></div><h1 id="title"></h1></div><p id="prose"></p></div></div>
+<div class="legend" id="legend"></div>
+<div class="figure"><svg id="chart" role="img" aria-labelledby="chart-title chart-desc"><title id="chart-title"></title><desc id="chart-desc"></desc><g id="back"></g><g id="units"></g><g id="labels"></g></svg></div>
+<div class="note" id="note"></div>
+<footer><span id="status">向下滚动，接着看 ↓</span><nav aria-label="阅读段落"><button data-go="0">01 分布</button><button data-go="1">02 人数</button><button data-go="2">03 分钟</button><button data-go="3">04 增幅</button></nav><a href="#method">口径与来源 ↗</a></footer>
+</div>
+<div class="flow" aria-hidden="true"><section data-step="0"></section><section data-step="1"></section><section data-step="2"></section><section data-step="3"></section></div>
+</main>
+<section class="method" id="method"><div class="eyebrow">观察止于这里，解释仍需证据</div><h2>身高变了，不能据此断言原因。</h2><p class="ending">两种权重给出同一方向：PF 标签人群的身高分布向较低一侧移动。分钟权重下，6′7″及以下的增幅还更大。但这些记录不能单独证明战术、选材或位置职责为什么改变。</p><div class="method-grid"><div><h3>比较的是谁？</h3><p>2000–01 至 2009–10，共10季；2020–21 至 2025–26，共6季。按赛季开始年归年代，使用冻结包中的全部可用赛季。某人在该窗口至少一个赛季 positions 包含 PF，就进入人数统计；多位置球员保留。</p><p>各期内部按球员ID去重。人数分母分别为322人与261人，身高缺失均为0。两期各自归一为100%，比较构成，不能从去重总人数直接判断某个赛季的PF名额变化。</p></div><div><h3>分钟究竟是什么？</h3><p>只加总该期 positions 包含 PF 的球员—赛季全季常规赛分钟。每人每季一行，已有整季合计，不再重复累加转队分段。两期分母分别为1,211,960和683,868分钟（947与660条球员—赛季记录）。</p><p><strong>这不是球员实际打 PF 的分钟。</strong> 同一个人没有PF标签的赛季不纳入分钟。按各期分钟总额归一为100%；赛季数、赛程与球员留队时长等会影响权重，不能把分钟份额当成平均球员的表现。</p></div><div><h3>身高与来源</h3><p>身高统一使用同一来源的生涯档案快照，不是当年逐季测量。原值为英寸，厘米＝英寸×2.54；6′7″是79英寸，合200.66厘米，展示为200.7厘米，分组依据未舍入英寸。</p><p>数据：<a href="https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats" target="_blank" rel="noreferrer">Sumitro Datta · NBA Stats，固定版本56</a>，原研究取得于2026-10-13。本稿使用所附冻结记录，未重新下载或核读全量原始网页；未使用荣誉数据，无外部配图。</p></div></div><div class="downloads"><a href="data/analysis.json">查看派生数据 ↗</a><a href="data/player-seasons.csv">球员—赛季记录 ↗</a><a href="data/players.csv">档案身高 ↗</a><a href="#">回到开头 ↑</a></div><p class="colophon">A 首稿局部修订 · 冻结样本比较 · 2026.10.27</p></section>
+<script type="module" src="app.mjs"></script></body></html>

@@ -1,0 +1,4838 @@
+[
+  {
+    "start": 2000,
+    "end": 2009,
+    "n": 322,
+    "known": 322,
+    "missing": 0,
+    "rows": 947,
+    "minutes": 1211960.0,
+    "all_minutes": 1211960.0,
+    "mean": 81.27950310559007,
+    "weighted_mean": 81.40889220766361,
+    "bins": [
+      {
+        "height": 78.0,
+        "n": 8,
+        "people_pct": 2.484472049689441,
+        "minutes": 12263.0,
+        "minute_pct": 1.0118320736657975
+      },
+      {
+        "height": 79.0,
+        "n": 26,
+        "people_pct": 8.074534161490684,
+        "minutes": 96713.0,
+        "minute_pct": 7.979883824548666
+      },
+      {
+        "height": 80.0,
+        "n": 52,
+        "people_pct": 16.149068322981368,
+        "minutes": 139914.0,
+        "minute_pct": 11.544440410574607
+      },
+      {
+        "height": 81.0,
+        "n": 104,
+        "people_pct": 32.298136645962735,
+        "minutes": 450279.0,
+        "minute_pct": 37.15295884352619
+      },
+      {
+        "height": 82.0,
+        "n": 70,
+        "people_pct": 21.73913043478261,
+        "minutes": 240312.0,
+        "minute_pct": 19.828377174164164
+      },
+      {
+        "height": 83.0,
+        "n": 40,
+        "people_pct": 12.422360248447205,
+        "minutes": 192423.0,
+        "minute_pct": 15.877009142215915
+      },
+      {
+        "height": 84.0,
+        "n": 21,
+        "people_pct": 6.521739130434782,
+        "minutes": 79874.0,
+        "minute_pct": 6.590481534044028
+      },
+      {
+        "height": 86.0,
+        "n": 1,
+        "people_pct": 0.3105590062111801,
+        "minutes": 182.0,
+        "minute_pct": 0.015016997260635663
+      }
+    ],
+    "people": [
+      {
+        "id": "abdursh01",
+        "name": "Shareef Abdur-Rahim",
+        "height": 81.0,
+        "minutes": 12630.0,
+        "seasons": 6,
+        "career_source_row": "2966"
+      },
+      {
+        "id": "ajincal01",
+        "name": "Alexis Ajinça",
+        "height": 86.0,
+        "minutes": 182.0,
+        "seasons": 1,
+        "career_source_row": "3823"
+      },
+      {
+        "id": "aldrila01",
+        "name": "LaMarcus Aldridge",
+        "height": 83.0,
+        "minutes": 8575.0,
+        "seasons": 3,
+        "career_source_row": "3698"
+      },
+      {
+        "id": "allenma01",
+        "name": "Malik Allen",
+        "height": 82.0,
+        "minutes": 7084.0,
+        "seasons": 9,
+        "career_source_row": "3349"
+      },
+      {
+        "id": "amaecjo01",
+        "name": "John Amaechi",
+        "height": 82.0,
+        "minutes": 586.0,
+        "seasons": 1,
+        "career_source_row": "2893"
+      },
+      {
+        "id": "amundlo01",
+        "name": "Lou Amundson",
+        "height": 81.0,
+        "minutes": 2365.0,
+        "seasons": 4,
+        "career_source_row": "3726"
+      },
+      {
+        "id": "anderch01",
+        "name": "Chris Andersen",
+        "height": 82.0,
+        "minutes": 2724.0,
+        "seasons": 2,
+        "career_source_row": "3346"
+      },
+      {
+        "id": "anderry01",
+        "name": "Ryan Anderson",
+        "height": 81.0,
+        "minutes": 2223.0,
+        "seasons": 2,
+        "career_source_row": "3801"
+      },
+      {
+        "id": "anthojo01",
+        "name": "Joel Anthony",
+        "height": 81.0,
+        "minutes": 498.0,
+        "seasons": 1,
+        "career_source_row": "3779"
+      },
+      {
+        "id": "archiro01",
+        "name": "Robert Archibald",
+        "height": 83.0,
+        "minutes": 328.0,
+        "seasons": 2,
+        "career_source_row": "3411"
+      },
+      {
+        "id": "armsthi01",
+        "name": "Hilton Armstrong",
+        "height": 83.0,
+        "minutes": 335.0,
+        "seasons": 1,
+        "career_source_row": "3657"
+      },
+      {
+        "id": "arthuda01",
+        "name": "Darrell Arthur",
+        "height": 81.0,
+        "minutes": 1921.0,
+        "seasons": 2,
+        "career_source_row": "3802"
+      },
+      {
+        "id": "augusja01",
+        "name": "James Augustine",
+        "height": 82.0,
+        "minutes": 156.0,
+        "seasons": 2,
+        "career_source_row": "3725"
+      },
+      {
+        "id": "bakervi01",
+        "name": "Vin Baker",
+        "height": 83.0,
+        "minutes": 3646.0,
+        "seasons": 3,
+        "career_source_row": "2761"
+      },
+      {
+        "id": "balkmre01",
+        "name": "Renaldo Balkman",
+        "height": 80.0,
+        "minutes": 780.0,
+        "seasons": 1,
+        "career_source_row": "3658"
+      },
+      {
+        "id": "bargnan01",
+        "name": "Andrea Bargnani",
+        "height": 84.0,
+        "minutes": 8742.0,
+        "seasons": 4,
+        "career_source_row": "3659"
+      },
+      {
+        "id": "barnema02",
+        "name": "Matt Barnes",
+        "height": 79.0,
+        "minutes": 5940.0,
+        "seasons": 4,
+        "career_source_row": "3488"
+      },
+      {
+        "id": "bassbr01",
+        "name": "Brandon Bass",
+        "height": 80.0,
+        "minutes": 1078.0,
+        "seasons": 3,
+        "career_source_row": "3566"
+      },
+      {
+        "id": "bastoma01",
+        "name": "Maceo Baston",
+        "height": 81.0,
+        "minutes": 831.0,
+        "seasons": 4,
+        "career_source_row": "3426"
+      },
+      {
+        "id": "batises01",
+        "name": "Esteban Batista",
+        "height": 82.0,
+        "minutes": 576.0,
+        "seasons": 2,
+        "career_source_row": "3574"
+      },
+      {
+        "id": "batismi01",
+        "name": "Mike Batiste",
+        "height": 80.0,
+        "minutes": 1248.0,
+        "seasons": 1,
+        "career_source_row": "3400"
+      },
+      {
+        "id": "battito01",
+        "name": "Tony Battie",
+        "height": 83.0,
+        "minutes": 2777.0,
+        "seasons": 2,
+        "career_source_row": "3036"
+      },
+      {
+        "id": "baxtelo01",
+        "name": "Lonny Baxter",
+        "height": 80.0,
+        "minutes": 1202.0,
+        "seasons": 3,
+        "career_source_row": "3401"
+      },
+      {
+        "id": "beaslje01",
+        "name": "Jerome Beasley",
+        "height": 82.0,
+        "minutes": 5.0,
+        "seasons": 1,
+        "career_source_row": "3439"
+      },
+      {
+        "id": "beaslmi01",
+        "name": "Michael Beasley",
+        "height": 81.0,
+        "minutes": 4337.0,
+        "seasons": 2,
+        "career_source_row": "3803"
+      },
+      {
+        "id": "blairde01",
+        "name": "DeJuan Blair",
+        "height": 79.0,
+        "minutes": 1494.0,
+        "seasons": 1,
+        "career_source_row": "3859"
+      },
+      {
+        "id": "blatcan01",
+        "name": "Andray Blatche",
+        "height": 83.0,
+        "minutes": 4788.0,
+        "seasons": 4,
+        "career_source_row": "3616"
+      },
+      {
+        "id": "blounco01",
+        "name": "Corie Blount",
+        "height": 81.0,
+        "minutes": 3781.0,
+        "seasons": 3,
+        "career_source_row": "2762"
+      },
+      {
+        "id": "bogutan01",
+        "name": "Andrew Bogut",
+        "height": 84.0,
+        "minutes": 2348.0,
+        "seasons": 1,
+        "career_source_row": "3567"
+      },
+      {
+        "id": "bohanet01",
+        "name": "Etdrick Bohannon",
+        "height": 81.0,
+        "minutes": 19.0,
+        "seasons": 1,
+        "career_source_row": "3093"
+      },
+      {
+        "id": "bonnema01",
+        "name": "Matt Bonner",
+        "height": 82.0,
+        "minutes": 6305.0,
+        "seasons": 5,
+        "career_source_row": "3502"
+      },
+      {
+        "id": "boonejo01",
+        "name": "Josh Boone",
+        "height": 82.0,
+        "minutes": 3487.0,
+        "seasons": 3,
+        "career_source_row": "3712"
+      },
+      {
+        "id": "boozeca01",
+        "name": "Carlos Boozer",
+        "height": 81.0,
+        "minutes": 16692.0,
+        "seasons": 8,
+        "career_source_row": "3365"
+      },
+      {
+        "id": "boshch01",
+        "name": "Chris Bosh",
+        "height": 83.0,
+        "minutes": 3017.0,
+        "seasons": 1,
+        "career_source_row": "3441"
+      },
+      {
+        "id": "bowdlca01",
+        "name": "Cal Bowdler",
+        "height": 82.0,
+        "minutes": 585.0,
+        "seasons": 1,
+        "career_source_row": "3169"
+      },
+      {
+        "id": "bowenry01",
+        "name": "Ryan Bowen",
+        "height": 79.0,
+        "minutes": 392.0,
+        "seasons": 1,
+        "career_source_row": "3170"
+      },
+      {
+        "id": "bradlmi01",
+        "name": "Michael Bradley",
+        "height": 82.0,
+        "minutes": 2016.0,
+        "seasons": 5,
+        "career_source_row": "3299"
+      },
+      {
+        "id": "braggto01",
+        "name": "Torraye Braggs",
+        "height": 80.0,
+        "minutes": 178.0,
+        "seasons": 2,
+        "career_source_row": "3456"
+      },
+      {
+        "id": "brandel01",
+        "name": "Elton Brand",
+        "height": 81.0,
+        "minutes": 23718.0,
+        "seasons": 10,
+        "career_source_row": "3199"
+      },
+      {
+        "id": "brockjo01",
+        "name": "Jon Brockman",
+        "height": 79.0,
+        "minutes": 654.0,
+        "seasons": 1,
+        "career_source_row": "3860"
+      },
+      {
+        "id": "brownan01",
+        "name": "Andre Brown",
+        "height": 81.0,
+        "minutes": 598.0,
+        "seasons": 3,
+        "career_source_row": "3718"
+      },
+      {
+        "id": "brownda02",
+        "name": "Damone Brown",
+        "height": 81.0,
+        "minutes": 132.0,
+        "seasons": 2,
+        "career_source_row": "3300"
+      },
+      {
+        "id": "brownkw01",
+        "name": "Kwame Brown",
+        "height": 83.0,
+        "minutes": 3964.0,
+        "seasons": 3,
+        "career_source_row": "3302"
+      },
+      {
+        "id": "brownpj01",
+        "name": "P.J. Brown",
+        "height": 83.0,
+        "minutes": 9844.0,
+        "seasons": 5,
+        "career_source_row": "2764"
+      },
+      {
+        "id": "bryanma01",
+        "name": "Mark Bryant",
+        "height": 81.0,
+        "minutes": 407.0,
+        "seasons": 3,
+        "career_source_row": "2403"
+      },
+      {
+        "id": "bullama01",
+        "name": "Matt Bullard",
+        "height": 82.0,
+        "minutes": 1350.0,
+        "seasons": 2,
+        "career_source_row": "2628"
+      },
+      {
+        "id": "cabarza01",
+        "name": "Žarko Čabarkapa",
+        "height": 83.0,
+        "minutes": 1550.0,
+        "seasons": 3,
+        "career_source_row": "3429"
+      },
+      {
+        "id": "caffeja01",
+        "name": "Jason Caffey",
+        "height": 80.0,
+        "minutes": 2637.0,
+        "seasons": 3,
+        "career_source_row": "2898"
+      },
+      {
+        "id": "cambyma01",
+        "name": "Marcus Camby",
+        "height": 83.0,
+        "minutes": 2314.0,
+        "seasons": 1,
+        "career_source_row": "2969"
+      },
+      {
+        "id": "campbel01",
+        "name": "Elden Campbell",
+        "height": 83.0,
+        "minutes": 4493.0,
+        "seasons": 2,
+        "career_source_row": "2602"
+      },
+      {
+        "id": "cardibr01",
+        "name": "Brian Cardinal",
+        "height": 80.0,
+        "minutes": 5582.0,
+        "seasons": 10,
+        "career_source_row": "3280"
+      },
+      {
+        "id": "catoke01",
+        "name": "Kelvin Cato",
+        "height": 83.0,
+        "minutes": 1743.0,
+        "seasons": 1,
+        "career_source_row": "3038"
+      },
+      {
+        "id": "chandty01",
+        "name": "Tyson Chandler",
+        "height": 84.0,
+        "minutes": 782.0,
+        "seasons": 1,
+        "career_source_row": "3321"
+      },
+      {
+        "id": "clarkea01",
+        "name": "Earl Clark",
+        "height": 82.0,
+        "minutes": 383.0,
+        "seasons": 1,
+        "career_source_row": "3864"
+      },
+      {
+        "id": "clarkke01",
+        "name": "Keon Clark",
+        "height": 83.0,
+        "minutes": 1747.0,
+        "seasons": 2,
+        "career_source_row": "3106"
+      },
+      {
+        "id": "colemde01",
+        "name": "Derrick Coleman",
+        "height": 82.0,
+        "minutes": 2763.0,
+        "seasons": 2,
+        "career_source_row": "2568"
+      },
+      {
+        "id": "collija04",
+        "name": "Jason Collins",
+        "height": 84.0,
+        "minutes": 1844.0,
+        "seasons": 1,
+        "career_source_row": "3322"
+      },
+      {
+        "id": "collini01",
+        "name": "Nick Collison",
+        "height": 82.0,
+        "minutes": 3671.0,
+        "seasons": 2,
+        "career_source_row": "3505"
+      },
+      {
+        "id": "cookbr01",
+        "name": "Brian Cook",
+        "height": 81.0,
+        "minutes": 3397.0,
+        "seasons": 5,
+        "career_source_row": "3482"
+      },
+      {
+        "id": "crawfch01",
+        "name": "Chris Crawford",
+        "height": 81.0,
+        "minutes": 2277.0,
+        "seasons": 4,
+        "career_source_row": "3079"
+      },
+      {
+        "id": "croshau01",
+        "name": "Austin Croshere",
+        "height": 81.0,
+        "minutes": 9103.0,
+        "seasons": 9,
+        "career_source_row": "3082"
+      },
+      {
+        "id": "cunnida01",
+        "name": "Dante Cunningham",
+        "height": 80.0,
+        "minutes": 707.0,
+        "seasons": 1,
+        "career_source_row": "3900"
+      },
+      {
+        "id": "curlebi01",
+        "name": "Bill Curley",
+        "height": 81.0,
+        "minutes": 192.0,
+        "seasons": 1,
+        "career_source_row": "2859"
+      },
+      {
+        "id": "curryed01",
+        "name": "Eddy Curry",
+        "height": 84.0,
+        "minutes": 2154.0,
+        "seasons": 1,
+        "career_source_row": "3323"
+      },
+      {
+        "id": "davisan01",
+        "name": "Antonio Davis",
+        "height": 81.0,
+        "minutes": 5761.0,
+        "seasons": 3,
+        "career_source_row": "2769"
+      },
+      {
+        "id": "davisgl01",
+        "name": "Glen Davis",
+        "height": 81.0,
+        "minutes": 933.0,
+        "seasons": 1,
+        "career_source_row": "3749"
+      },
+      {
+        "id": "davisjo02",
+        "name": "Josh Davis",
+        "height": 80.0,
+        "minutes": 368.0,
+        "seasons": 3,
+        "career_source_row": "3494"
+      },
+      {
+        "id": "davispa01",
+        "name": "Paul Davis",
+        "height": 83.0,
+        "minutes": 522.0,
+        "seasons": 3,
+        "career_source_row": "3685"
+      },
+      {
+        "id": "daviste01",
+        "name": "Terry Davis",
+        "height": 81.0,
+        "minutes": 228.0,
+        "seasons": 1,
+        "career_source_row": "2487"
+      },
+      {
+        "id": "diawbo01",
+        "name": "Boris Diaw",
+        "height": 80.0,
+        "minutes": 13110.0,
+        "seasons": 5,
+        "career_source_row": "3442"
+      },
+      {
+        "id": "dickeka01",
+        "name": "Kaniel Dickens",
+        "height": 80.0,
+        "minutes": 24.0,
+        "seasons": 2,
+        "career_source_row": "3480"
+      },
+      {
+        "id": "dioguik01",
+        "name": "Ike Diogu",
+        "height": 80.0,
+        "minutes": 2311.0,
+        "seasons": 4,
+        "career_source_row": "3627"
+      },
+      {
+        "id": "diopde01",
+        "name": "DeSagana Diop",
+        "height": 84.0,
+        "minutes": 943.0,
+        "seasons": 1,
+        "career_source_row": "3304"
+      },
+      {
+        "id": "dorsejo01",
+        "name": "Joey Dorsey",
+        "height": 80.0,
+        "minutes": 112.0,
+        "seasons": 2,
+        "career_source_row": "3839"
+      },
+      {
+        "id": "dudleja01",
+        "name": "Jared Dudley",
+        "height": 78.0,
+        "minutes": 1384.0,
+        "seasons": 1,
+        "career_source_row": "3750"
+      },
+      {
+        "id": "duncati01",
+        "name": "Tim Duncan",
+        "height": 83.0,
+        "minutes": 17198.0,
+        "seasons": 6,
+        "career_source_row": "3040"
+      },
+      {
+        "id": "dunlemi02",
+        "name": "Mike Dunleavy",
+        "height": 81.0,
+        "minutes": 2580.0,
+        "seasons": 1,
+        "career_source_row": "3376"
+      },
+      {
+        "id": "ekeziob01",
+        "name": "Obinna Ekezie",
+        "height": 81.0,
+        "minutes": 433.0,
+        "seasons": 2,
+        "career_source_row": "3175"
+      },
+      {
+        "id": "ellisla01",
+        "name": "LaPhonso Ellis",
+        "height": 80.0,
+        "minutes": 2732.0,
+        "seasons": 2,
+        "career_source_row": "2721"
+      },
+      {
+        "id": "elyme01",
+        "name": "Melvin Ely",
+        "height": 82.0,
+        "minutes": 3816.0,
+        "seasons": 4,
+        "career_source_row": "3417"
+      },
+      {
+        "id": "evansre01",
+        "name": "Reggie Evans",
+        "height": 80.0,
+        "minutes": 10373.0,
+        "seasons": 8,
+        "career_source_row": "3377"
+      },
+      {
+        "id": "fazekni01",
+        "name": "Nick Fazekas",
+        "height": 83.0,
+        "minutes": 269.0,
+        "seasons": 1,
+        "career_source_row": "3760"
+      },
+      {
+        "id": "fizerma01",
+        "name": "Marcus Fizer",
+        "height": 81.0,
+        "minutes": 5294.0,
+        "seasons": 5,
+        "career_source_row": "3233"
+      },
+      {
+        "id": "fordal02",
+        "name": "Alton Ford",
+        "height": 81.0,
+        "minutes": 524.0,
+        "seasons": 3,
+        "career_source_row": "3305"
+      },
+      {
+        "id": "fordsh02",
+        "name": "Sharrod Ford",
+        "height": 81.0,
+        "minutes": 13.0,
+        "seasons": 1,
+        "career_source_row": "3632"
+      },
+      {
+        "id": "fortsda01",
+        "name": "Danny Fortson",
+        "height": 79.0,
+        "minutes": 2642.0,
+        "seasons": 3,
+        "career_source_row": "3042"
+      },
+      {
+        "id": "fostegr01",
+        "name": "Greg Foster",
+        "height": 83.0,
+        "minutes": 24.0,
+        "seasons": 1,
+        "career_source_row": "2573"
+      },
+      {
+        "id": "fotsian01",
+        "name": "Antonis Fotsis",
+        "height": 82.0,
+        "minutes": 320.0,
+        "seasons": 1,
+        "career_source_row": "3340"
+      },
+      {
+        "id": "freijma01",
+        "name": "Matt Freije",
+        "height": 82.0,
+        "minutes": 588.0,
+        "seasons": 2,
+        "career_source_row": "3544"
+      },
+      {
+        "id": "fryech01",
+        "name": "Channing Frye",
+        "height": 84.0,
+        "minutes": 2642.0,
+        "seasons": 2,
+        "career_source_row": "3604"
+      },
+      {
+        "id": "fullehi01",
+        "name": "Hiram Fuller",
+        "height": 81.0,
+        "minutes": 43.0,
+        "seasons": 1,
+        "career_source_row": "3493"
+      },
+      {
+        "id": "fundela01",
+        "name": "Lawrence Funderburke",
+        "height": 81.0,
+        "minutes": 1670.0,
+        "seasons": 4,
+        "career_source_row": "3070"
+      },
+      {
+        "id": "garbajo01",
+        "name": "Jorge Garbajosa",
+        "height": 81.0,
+        "minutes": 1983.0,
+        "seasons": 2,
+        "career_source_row": "3665"
+      },
+      {
+        "id": "garceru01",
+        "name": "Rubén Garcés",
+        "height": 81.0,
+        "minutes": 73.0,
+        "seasons": 1,
+        "career_source_row": "3234"
+      },
+      {
+        "id": "garneke01",
+        "name": "Kevin Garnett",
+        "height": 83.0,
+        "minutes": 28162.0,
+        "seasons": 10,
+        "career_source_row": "2906"
+      },
+      {
+        "id": "garripa01",
+        "name": "Pat Garrity",
+        "height": 81.0,
+        "minutes": 7466.0,
+        "seasons": 7,
+        "career_source_row": "3113"
+      },
+      {
+        "id": "gasolpa01",
+        "name": "Pau Gasol",
+        "height": 84.0,
+        "minutes": 13338.0,
+        "seasons": 5,
+        "career_source_row": "3328"
+      },
+      {
+        "id": "gatlich01",
+        "name": "Chris Gatling",
+        "height": 82.0,
+        "minutes": 2479.0,
+        "seasons": 2,
+        "career_source_row": "2642"
+      },
+      {
+        "id": "gibsota01",
+        "name": "Taj Gibson",
+        "height": 81.0,
+        "minutes": 2204.0,
+        "seasons": 1,
+        "career_source_row": "3885"
+      },
+      {
+        "id": "gomesry01",
+        "name": "Ryan Gomes",
+        "height": 79.0,
+        "minutes": 6085.0,
+        "seasons": 3,
+        "career_source_row": "3580"
+      },
+      {
+        "id": "goodedr01",
+        "name": "Drew Gooden",
+        "height": 82.0,
+        "minutes": 16083.0,
+        "seasons": 8,
+        "career_source_row": "3380"
+      },
+      {
+        "id": "goodrst01",
+        "name": "Steve Goodrich",
+        "height": 82.0,
+        "minutes": 133.0,
+        "seasons": 1,
+        "career_source_row": "3290"
+      },
+      {
+        "id": "gortama01",
+        "name": "Marcin Gortat",
+        "height": 83.0,
+        "minutes": 794.0,
+        "seasons": 1,
+        "career_source_row": "3789"
+      },
+      {
+        "id": "grantbr01",
+        "name": "Brian Grant",
+        "height": 81.0,
+        "minutes": 2256.0,
+        "seasons": 1,
+        "career_source_row": "2835"
+      },
+      {
+        "id": "grantho01",
+        "name": "Horace Grant",
+        "height": 82.0,
+        "minutes": 3581.0,
+        "seasons": 3,
+        "career_source_row": "2378"
+      },
+      {
+        "id": "greenac01",
+        "name": "A.C. Green",
+        "height": 81.0,
+        "minutes": 1411.0,
+        "seasons": 1,
+        "career_source_row": "2243"
+      },
+      {
+        "id": "greenje02",
+        "name": "Jeff Green",
+        "height": 80.0,
+        "minutes": 5916.0,
+        "seasons": 2,
+        "career_source_row": "3737"
+      },
+      {
+        "id": "griffed01",
+        "name": "Eddie Griffin",
+        "height": 82.0,
+        "minutes": 5370.0,
+        "seasons": 4,
+        "career_source_row": "3307"
+      },
+      {
+        "id": "guglito01",
+        "name": "Tom Gugliotta",
+        "height": 82.0,
+        "minutes": 4520.0,
+        "seasons": 5,
+        "career_source_row": "2700"
+      },
+      {
+        "id": "haislma01",
+        "name": "Marcus Haislip",
+        "height": 82.0,
+        "minutes": 810.0,
+        "seasons": 3,
+        "career_source_row": "3406"
+      },
+      {
+        "id": "hamilze01",
+        "name": "Zendon Hamilton",
+        "height": 83.0,
+        "minutes": 848.0,
+        "seasons": 1,
+        "career_source_row": "3274"
+      },
+      {
+        "id": "hammoto01",
+        "name": "Tom Hammonds",
+        "height": 81.0,
+        "minutes": 30.0,
+        "seasons": 1,
+        "career_source_row": "2494"
+      },
+      {
+        "id": "hansbty01",
+        "name": "Tyler Hansbrough",
+        "height": 81.0,
+        "minutes": 511.0,
+        "seasons": 1,
+        "career_source_row": "3898"
+      },
+      {
+        "id": "harrial01",
+        "name": "Al Harrington",
+        "height": 81.0,
+        "minutes": 15732.0,
+        "seasons": 7,
+        "career_source_row": "3116"
+      },
+      {
+        "id": "harrimi01",
+        "name": "Mike Harris",
+        "height": 78.0,
+        "minutes": 255.0,
+        "seasons": 2,
+        "career_source_row": "3791"
+      },
+      {
+        "id": "harriot01",
+        "name": "Othella Harrington",
+        "height": 81.0,
+        "minutes": 5776.0,
+        "seasons": 5,
+        "career_source_row": "2974"
+      },
+      {
+        "id": "harvean01",
+        "name": "Antonio Harvey",
+        "height": 83.0,
+        "minutes": 151.0,
+        "seasons": 3,
+        "career_source_row": "2776"
+      },
+      {
+        "id": "harvedo01",
+        "name": "Donnell Harvey",
+        "height": 80.0,
+        "minutes": 1705.0,
+        "seasons": 4,
+        "career_source_row": "3279"
+      },
+      {
+        "id": "hasleud01",
+        "name": "Udonis Haslem",
+        "height": 80.0,
+        "minutes": 15986.0,
+        "seasons": 7,
+        "career_source_row": "3432"
+      },
+      {
+        "id": "hastoki01",
+        "name": "Kirk Haston",
+        "height": 81.0,
+        "minutes": 77.0,
+        "seasons": 1,
+        "career_source_row": "3352"
+      },
+      {
+        "id": "hayesch01",
+        "name": "Chuck Hayes",
+        "height": 78.0,
+        "minutes": 3824.0,
+        "seasons": 3,
+        "career_source_row": "3639"
+      },
+      {
+        "id": "hendeal01",
+        "name": "Alan Henderson",
+        "height": 81.0,
+        "minutes": 3921.0,
+        "seasons": 5,
+        "career_source_row": "2908"
+      },
+      {
+        "id": "herrmwa01",
+        "name": "Walter Herrmann",
+        "height": 81.0,
+        "minutes": 1309.0,
+        "seasons": 2,
+        "career_source_row": "3697"
+      },
+      {
+        "id": "hicksjj01",
+        "name": "J.J. Hickson",
+        "height": 81.0,
+        "minutes": 1691.0,
+        "seasons": 1,
+        "career_source_row": "3825"
+      },
+      {
+        "id": "hilarne01",
+        "name": "Nenê",
+        "height": 83.0,
+        "minutes": 2773.0,
+        "seasons": 3,
+        "career_source_row": "3383"
+      },
+      {
+        "id": "hilljo01",
+        "name": "Jordan Hill",
+        "height": 82.0,
+        "minutes": 624.0,
+        "seasons": 1,
+        "career_source_row": "3875"
+      },
+      {
+        "id": "hillst01",
+        "name": "Steven Hill",
+        "height": 84.0,
+        "minutes": 2.0,
+        "seasons": 1,
+        "career_source_row": "3843"
+      },
+      {
+        "id": "hillty01",
+        "name": "Tyrone Hill",
+        "height": 81.0,
+        "minutes": 4562.0,
+        "seasons": 4,
+        "career_source_row": "2578"
+      },
+      {
+        "id": "holliry01",
+        "name": "Ryan Hollins",
+        "height": 84.0,
+        "minutes": 532.0,
+        "seasons": 1,
+        "career_source_row": "3721"
+      },
+      {
+        "id": "horryro01",
+        "name": "Robert Horry",
+        "height": 82.0,
+        "minutes": 11645.0,
+        "seasons": 8,
+        "career_source_row": "2701"
+      },
+      {
+        "id": "howardw01",
+        "name": "Dwight Howard",
+        "height": 82.0,
+        "minutes": 5691.0,
+        "seasons": 2,
+        "career_source_row": "3507"
+      },
+      {
+        "id": "howarju01",
+        "name": "Juwan Howard",
+        "height": 81.0,
+        "minutes": 18325.0,
+        "seasons": 9,
+        "career_source_row": "2879"
+      },
+      {
+        "id": "humphkr01",
+        "name": "Kris Humphries",
+        "height": 81.0,
+        "minutes": 4308.0,
+        "seasons": 5,
+        "career_source_row": "3508"
+      },
+      {
+        "id": "humphry01",
+        "name": "Ryan Humphrey",
+        "height": 80.0,
+        "minutes": 455.0,
+        "seasons": 2,
+        "career_source_row": "3368"
+      },
+      {
+        "id": "huntebr01",
+        "name": "Brandon Hunter",
+        "height": 79.0,
+        "minutes": 630.0,
+        "seasons": 2,
+        "career_source_row": "3486"
+      },
+      {
+        "id": "hunteot01",
+        "name": "Othello Hunter",
+        "height": 80.0,
+        "minutes": 92.0,
+        "seasons": 1,
+        "career_source_row": "3842"
+      },
+      {
+        "id": "huntest01",
+        "name": "Steven Hunter",
+        "height": 84.0,
+        "minutes": 1605.0,
+        "seasons": 1,
+        "career_source_row": "3308"
+      },
+      {
+        "id": "ibakase01",
+        "name": "Serge Ibaka",
+        "height": 83.0,
+        "minutes": 1323.0,
+        "seasons": 1,
+        "career_source_row": "3889"
+      },
+      {
+        "id": "ilyaser01",
+        "name": "Ersan İlyasova",
+        "height": 81.0,
+        "minutes": 2871.0,
+        "seasons": 2,
+        "career_source_row": "3669"
+      },
+      {
+        "id": "jacksda01",
+        "name": "Darnell Jackson",
+        "height": 81.0,
+        "minutes": 553.0,
+        "seasons": 2,
+        "career_source_row": "3844"
+      },
+      {
+        "id": "jacksma02",
+        "name": "Marc Jackson",
+        "height": 82.0,
+        "minutes": 1623.0,
+        "seasons": 2,
+        "career_source_row": "3263"
+      },
+      {
+        "id": "jacksst02",
+        "name": "Stephen Jackson",
+        "height": 80.0,
+        "minutes": 3129.0,
+        "seasons": 1,
+        "career_source_row": "3236"
+      },
+      {
+        "id": "jamisan01",
+        "name": "Antawn Jamison",
+        "height": 81.0,
+        "minutes": 13830.0,
+        "seasons": 5,
+        "career_source_row": "3137"
+      },
+      {
+        "id": "jamisha01",
+        "name": "Harold Jamison",
+        "height": 80.0,
+        "minutes": 176.0,
+        "seasons": 1,
+        "career_source_row": "3216"
+      },
+      {
+        "id": "jawaina01",
+        "name": "Nathan Jawai",
+        "height": 82.0,
+        "minutes": 19.0,
+        "seasons": 1,
+        "career_source_row": "3849"
+      },
+      {
+        "id": "jeffeal01",
+        "name": "Al Jefferson",
+        "height": 82.0,
+        "minutes": 2113.0,
+        "seasons": 2,
+        "career_source_row": "3511"
+      },
+      {
+        "id": "jeffrja01",
+        "name": "Jared Jeffries",
+        "height": 83.0,
+        "minutes": 5658.0,
+        "seasons": 3,
+        "career_source_row": "3386"
+      },
+      {
+        "id": "jerebjo01",
+        "name": "Jonas Jerebko",
+        "height": 82.0,
+        "minutes": 2232.0,
+        "seasons": 1,
+        "career_source_row": "3893"
+      },
+      {
+        "id": "jianlyi01",
+        "name": "Yi Jianlian",
+        "height": 84.0,
+        "minutes": 4723.0,
+        "seasons": 3,
+        "career_source_row": "3738"
+      },
+      {
+        "id": "johnsal01",
+        "name": "Alexander Johnson",
+        "height": 81.0,
+        "minutes": 1302.0,
+        "seasons": 2,
+        "career_source_row": "3670"
+      },
+      {
+        "id": "johnsam01",
+        "name": "Amir Johnson",
+        "height": 81.0,
+        "minutes": 3252.0,
+        "seasons": 4,
+        "career_source_row": "3640"
+      },
+      {
+        "id": "johnsja01",
+        "name": "James Johnson",
+        "height": 79.0,
+        "minutes": 757.0,
+        "seasons": 1,
+        "career_source_row": "3891"
+      },
+      {
+        "id": "johnsla02",
+        "name": "Larry Johnson",
+        "height": 79.0,
+        "minutes": 2105.0,
+        "seasons": 1,
+        "career_source_row": "2645"
+      },
+      {
+        "id": "johnsli01",
+        "name": "Linton Johnson",
+        "height": 80.0,
+        "minutes": 838.0,
+        "seasons": 3,
+        "career_source_row": "3472"
+      },
+      {
+        "id": "jonesdw02",
+        "name": "Dwayne Jones",
+        "height": 83.0,
+        "minutes": 636.0,
+        "seasons": 5,
+        "career_source_row": "3644"
+      },
+      {
+        "id": "jonesju01",
+        "name": "Jumaine Jones",
+        "height": 80.0,
+        "minutes": 4231.0,
+        "seasons": 2,
+        "career_source_row": "3181"
+      },
+      {
+        "id": "jonespo01",
+        "name": "Popeye Jones",
+        "height": 80.0,
+        "minutes": 2790.0,
+        "seasons": 4,
+        "career_source_row": "2780"
+      },
+      {
+        "id": "jonesso01",
+        "name": "Solomon Jones",
+        "height": 82.0,
+        "minutes": 811.0,
+        "seasons": 2,
+        "career_source_row": "3671"
+      },
+      {
+        "id": "keefead01",
+        "name": "Adam Keefe",
+        "height": 81.0,
+        "minutes": 836.0,
+        "seasons": 1,
+        "career_source_row": "2705"
+      },
+      {
+        "id": "kempsh01",
+        "name": "Shawn Kemp",
+        "height": 82.0,
+        "minutes": 2315.0,
+        "seasons": 2,
+        "career_source_row": "2498"
+      },
+      {
+        "id": "ketnela01",
+        "name": "Lari Ketner",
+        "height": 81.0,
+        "minutes": 7.0,
+        "seasons": 1,
+        "career_source_row": "3213"
+      },
+      {
+        "id": "khryavi01",
+        "name": "Viktor Khryapa",
+        "height": 81.0,
+        "minutes": 336.0,
+        "seasons": 2,
+        "career_source_row": "3560"
+      },
+      {
+        "id": "kirilan01",
+        "name": "Andrei Kirilenko",
+        "height": 81.0,
+        "minutes": 6075.0,
+        "seasons": 3,
+        "career_source_row": "3311"
+      },
+      {
+        "id": "kleizli01",
+        "name": "Linas Kleiza",
+        "height": 80.0,
+        "minutes": 2007.0,
+        "seasons": 2,
+        "career_source_row": "3605"
+      },
+      {
+        "id": "korveky01",
+        "name": "Kyle Korver",
+        "height": 79.0,
+        "minutes": 1732.0,
+        "seasons": 1,
+        "career_source_row": "3434"
+      },
+      {
+        "id": "krstine01",
+        "name": "Nenad Krstić",
+        "height": 84.0,
+        "minutes": 4434.0,
+        "seasons": 2,
+        "career_source_row": "3512"
+      },
+      {
+        "id": "kukocto01",
+        "name": "Toni Kukoč",
+        "height": 82.0,
+        "minutes": 4244.0,
+        "seasons": 3,
+        "career_source_row": "2782"
+      },
+      {
+        "id": "kurzro01",
+        "name": "Rob Kurz",
+        "height": 81.0,
+        "minutes": 442.0,
+        "seasons": 1,
+        "career_source_row": "3840"
+      },
+      {
+        "id": "laettch01",
+        "name": "Christian Laettner",
+        "height": 83.0,
+        "minutes": 7042.0,
+        "seasons": 5,
+        "career_source_row": "2706"
+      },
+      {
+        "id": "lafrera01",
+        "name": "Raef LaFrentz",
+        "height": 83.0,
+        "minutes": 4581.0,
+        "seasons": 3,
+        "career_source_row": "3121"
+      },
+      {
+        "id": "landrca01",
+        "name": "Carl Landry",
+        "height": 81.0,
+        "minutes": 4647.0,
+        "seasons": 3,
+        "career_source_row": "3778"
+      },
+      {
+        "id": "lasmest01",
+        "name": "Stéphane Lasme",
+        "height": 80.0,
+        "minutes": 303.0,
+        "seasons": 1,
+        "career_source_row": "3770"
+      },
+      {
+        "id": "leeda02",
+        "name": "David Lee",
+        "height": 81.0,
+        "minutes": 4087.0,
+        "seasons": 2,
+        "career_source_row": "3611"
+      },
+      {
+        "id": "lewisra02",
+        "name": "Rashard Lewis",
+        "height": 82.0,
+        "minutes": 11024.0,
+        "seasons": 4,
+        "career_source_row": "3148"
+      },
+      {
+        "id": "longar01",
+        "name": "Art Long",
+        "height": 81.0,
+        "minutes": 1220.0,
+        "seasons": 3,
+        "career_source_row": "3287"
+      },
+      {
+        "id": "longgr01",
+        "name": "Grant Long",
+        "height": 80.0,
+        "minutes": 3863.0,
+        "seasons": 3,
+        "career_source_row": "2443"
+      },
+      {
+        "id": "loveke01",
+        "name": "Kevin Love",
+        "height": 82.0,
+        "minutes": 1714.0,
+        "seasons": 1,
+        "career_source_row": "3813"
+      },
+      {
+        "id": "madsema01",
+        "name": "Mark Madsen",
+        "height": 81.0,
+        "minutes": 2223.0,
+        "seasons": 4,
+        "career_source_row": "3238"
+      },
+      {
+        "id": "maggeco01",
+        "name": "Corey Maggette",
+        "height": 78.0,
+        "minutes": 3669.0,
+        "seasons": 2,
+        "career_source_row": "3185"
+      },
+      {
+        "id": "majorre01",
+        "name": "Renaldo Major",
+        "height": 79.0,
+        "minutes": 27.0,
+        "seasons": 1,
+        "career_source_row": "3722"
+      },
+      {
+        "id": "malonka01",
+        "name": "Karl Malone",
+        "height": 81.0,
+        "minutes": 10244.0,
+        "seasons": 4,
+        "career_source_row": "2229"
+      },
+      {
+        "id": "mannida01",
+        "name": "Danny Manning",
+        "height": 82.0,
+        "minutes": 1946.0,
+        "seasons": 3,
+        "career_source_row": "2462"
+      },
+      {
+        "id": "mariosh01",
+        "name": "Shawn Marion",
+        "height": 79.0,
+        "minutes": 8724.0,
+        "seasons": 3,
+        "career_source_row": "3186"
+      },
+      {
+        "id": "markoda01",
+        "name": "Damir Markota",
+        "height": 82.0,
+        "minutes": 170.0,
+        "seasons": 1,
+        "career_source_row": "3687"
+      },
+      {
+        "id": "marksse01",
+        "name": "Sean Marks",
+        "height": 82.0,
+        "minutes": 665.0,
+        "seasons": 4,
+        "career_source_row": "3161"
+      },
+      {
+        "id": "marshdo01",
+        "name": "Donyell Marshall",
+        "height": 81.0,
+        "minutes": 10977.0,
+        "seasons": 7,
+        "career_source_row": "2841"
+      },
+      {
+        "id": "martike01",
+        "name": "Kenyon Martin",
+        "height": 81.0,
+        "minutes": 19793.0,
+        "seasons": 10,
+        "career_source_row": "3240"
+      },
+      {
+        "id": "masonan01",
+        "name": "Anthony Mason",
+        "height": 80.0,
+        "minutes": 6397.0,
+        "seasons": 2,
+        "career_source_row": "2554"
+      },
+      {
+        "id": "masseto01",
+        "name": "Tony Massenburg",
+        "height": 81.0,
+        "minutes": 3558.0,
+        "seasons": 4,
+        "career_source_row": "2604"
+      },
+      {
+        "id": "maxieja01",
+        "name": "Jason Maxiell",
+        "height": 79.0,
+        "minutes": 159.0,
+        "seasons": 1,
+        "career_source_row": "3586"
+      },
+      {
+        "id": "mayse01",
+        "name": "Sean May",
+        "height": 81.0,
+        "minutes": 1537.0,
+        "seasons": 3,
+        "career_source_row": "3587"
+      },
+      {
+        "id": "mbahalu01",
+        "name": "Luc Mbah a Moute",
+        "height": 80.0,
+        "minutes": 3980.0,
+        "seasons": 2,
+        "career_source_row": "3798"
+      },
+      {
+        "id": "mccarwa01",
+        "name": "Walter McCarty",
+        "height": 82.0,
+        "minutes": 4002.0,
+        "seasons": 4,
+        "career_source_row": "3000"
+      },
+      {
+        "id": "mcdyean01",
+        "name": "Antonio McDyess",
+        "height": 81.0,
+        "minutes": 14745.0,
+        "seasons": 9,
+        "career_source_row": "2911"
+      },
+      {
+        "id": "mcfariv01",
+        "name": "Ivan McFarlin",
+        "height": 80.0,
+        "minutes": 41.0,
+        "seasons": 1,
+        "career_source_row": "3695"
+      },
+      {
+        "id": "mcrobjo01",
+        "name": "Josh McRoberts",
+        "height": 82.0,
+        "minutes": 307.0,
+        "seasons": 2,
+        "career_source_row": "3777"
+      },
+      {
+        "id": "medvest01",
+        "name": "Stanislav Medvedenko",
+        "height": 82.0,
+        "minutes": 2530.0,
+        "seasons": 5,
+        "career_source_row": "3282"
+      },
+      {
+        "id": "mensapo01",
+        "name": "Pops Mensah-Bonsu",
+        "height": 81.0,
+        "minutes": 474.0,
+        "seasons": 3,
+        "career_source_row": "3707"
+      },
+      {
+        "id": "mihmch01",
+        "name": "Chris Mihm",
+        "height": 84.0,
+        "minutes": 1330.0,
+        "seasons": 1,
+        "career_source_row": "3243"
+      },
+      {
+        "id": "milicda01",
+        "name": "Darko Miličić",
+        "height": 84.0,
+        "minutes": 1913.0,
+        "seasons": 1,
+        "career_source_row": "3462"
+      },
+      {
+        "id": "millean01",
+        "name": "Anthony Miller",
+        "height": 81.0,
+        "minutes": 20.0,
+        "seasons": 2,
+        "career_source_row": "2843"
+      },
+      {
+        "id": "millebr01",
+        "name": "Brad Miller",
+        "height": 83.0,
+        "minutes": 2621.0,
+        "seasons": 1,
+        "career_source_row": "3122"
+      },
+      {
+        "id": "millsch01",
+        "name": "Chris Mills",
+        "height": 78.0,
+        "minutes": 262.0,
+        "seasons": 1,
+        "career_source_row": "2785"
+      },
+      {
+        "id": "millspa01",
+        "name": "Paul Millsap",
+        "height": 79.0,
+        "minutes": 7741.0,
+        "seasons": 4,
+        "career_source_row": "3673"
+      },
+      {
+        "id": "millste01",
+        "name": "Terry Mills",
+        "height": 82.0,
+        "minutes": 113.0,
+        "seasons": 1,
+        "career_source_row": "2620"
+      },
+      {
+        "id": "moisoje01",
+        "name": "Jérôme Moïso",
+        "height": 82.0,
+        "minutes": 537.0,
+        "seasons": 2,
+        "career_source_row": "3259"
+      },
+      {
+        "id": "mooremi01",
+        "name": "Mikki Moore",
+        "height": 84.0,
+        "minutes": 5160.0,
+        "seasons": 4,
+        "career_source_row": "3156"
+      },
+      {
+        "id": "morriad01",
+        "name": "Adam Morrison",
+        "height": 80.0,
+        "minutes": 2326.0,
+        "seasons": 1,
+        "career_source_row": "3674"
+      },
+      {
+        "id": "morrira01",
+        "name": "Randolph Morris",
+        "height": 82.0,
+        "minutes": 124.0,
+        "seasons": 1,
+        "career_source_row": "3728"
+      },
+      {
+        "id": "mournal01",
+        "name": "Alonzo Mourning",
+        "height": 82.0,
+        "minutes": 702.0,
+        "seasons": 1,
+        "career_source_row": "2738"
+      },
+      {
+        "id": "mulleby01",
+        "name": "Byron Mullens",
+        "height": 84.0,
+        "minutes": 54.0,
+        "seasons": 1,
+        "career_source_row": "3904"
+      },
+      {
+        "id": "murphtr01",
+        "name": "Troy Murphy",
+        "height": 83.0,
+        "minutes": 18243.0,
+        "seasons": 9,
+        "career_source_row": "3325"
+      },
+      {
+        "id": "nachbbo01",
+        "name": "Boštjan Nachbar",
+        "height": 81.0,
+        "minutes": 3503.0,
+        "seasons": 3,
+        "career_source_row": "3389"
+      },
+      {
+        "id": "nailole01",
+        "name": "Lee Nailon",
+        "height": 81.0,
+        "minutes": 1017.0,
+        "seasons": 2,
+        "career_source_row": "3275"
+      },
+      {
+        "id": "najered01",
+        "name": "Eduardo Nájera",
+        "height": 80.0,
+        "minutes": 8748.0,
+        "seasons": 8,
+        "career_source_row": "3247"
+      },
+      {
+        "id": "nocioan01",
+        "name": "Andrés Nocioni",
+        "height": 79.0,
+        "minutes": 5636.0,
+        "seasons": 3,
+        "career_source_row": "3532"
+      },
+      {
+        "id": "noelda01",
+        "name": "David Noel",
+        "height": 78.0,
+        "minutes": 792.0,
+        "seasons": 1,
+        "career_source_row": "3688"
+      },
+      {
+        "id": "novakst01",
+        "name": "Steve Novak",
+        "height": 82.0,
+        "minutes": 1161.0,
+        "seasons": 1,
+        "career_source_row": "3675"
+      },
+      {
+        "id": "nowitdi01",
+        "name": "Dirk Nowitzki",
+        "height": 84.0,
+        "minutes": 24029.0,
+        "seasons": 8,
+        "career_source_row": "3125"
+      },
+      {
+        "id": "oaklech01",
+        "name": "Charles Oakley",
+        "height": 81.0,
+        "minutes": 4175.0,
+        "seasons": 3,
+        "career_source_row": "2232"
+      },
+      {
+        "id": "odomla01",
+        "name": "Lamar Odom",
+        "height": 82.0,
+        "minutes": 21404.0,
+        "seasons": 8,
+        "career_source_row": "3189"
+      },
+      {
+        "id": "okafoem01",
+        "name": "Emeka Okafor",
+        "height": 82.0,
+        "minutes": 3474.0,
+        "seasons": 2,
+        "career_source_row": "3525"
+      },
+      {
+        "id": "okurme01",
+        "name": "Mehmet Okur",
+        "height": 83.0,
+        "minutes": 5891.0,
+        "seasons": 3,
+        "career_source_row": "3403"
+      },
+      {
+        "id": "onealje01",
+        "name": "Jermaine O'Neal",
+        "height": 83.0,
+        "minutes": 11691.0,
+        "seasons": 5,
+        "career_source_row": "3013"
+      },
+      {
+        "id": "outlabo01",
+        "name": "Bo Outlaw",
+        "height": 80.0,
+        "minutes": 7104.0,
+        "seasons": 7,
+        "career_source_row": "2824"
+      },
+      {
+        "id": "outlatr01",
+        "name": "Travis Outlaw",
+        "height": 81.0,
+        "minutes": 4890.0,
+        "seasons": 4,
+        "career_source_row": "3476"
+      },
+      {
+        "id": "owensbi01",
+        "name": "Billy Owens",
+        "height": 81.0,
+        "minutes": 793.0,
+        "seasons": 1,
+        "career_source_row": "2668"
+      },
+      {
+        "id": "padgesc01",
+        "name": "Scott Padgett",
+        "height": 81.0,
+        "minutes": 5181.0,
+        "seasons": 7,
+        "career_source_row": "3203"
+      },
+      {
+        "id": "parksch02",
+        "name": "Cherokee Parks",
+        "height": 83.0,
+        "minutes": 648.0,
+        "seasons": 1,
+        "career_source_row": "2916"
+      },
+      {
+        "id": "penigde01",
+        "name": "Desmond Penigar",
+        "height": 79.0,
+        "minutes": 89.0,
+        "seasons": 1,
+        "career_source_row": "3492"
+      },
+      {
+        "id": "perkisa01",
+        "name": "Sam Perkins",
+        "height": 81.0,
+        "minutes": 999.0,
+        "seasons": 1,
+        "career_source_row": "2194"
+      },
+      {
+        "id": "pinknke01",
+        "name": "Kevinn Pinkney",
+        "height": 82.0,
+        "minutes": 100.0,
+        "seasons": 1,
+        "career_source_row": "3730"
+      },
+      {
+        "id": "popema01",
+        "name": "Mark Pope",
+        "height": 82.0,
+        "minutes": 1415.0,
+        "seasons": 4,
+        "career_source_row": "3075"
+      },
+      {
+        "id": "poseyja01",
+        "name": "James Posey",
+        "height": 80.0,
+        "minutes": 1821.0,
+        "seasons": 1,
+        "career_source_row": "3191"
+      },
+      {
+        "id": "powele01",
+        "name": "Leon Powe",
+        "height": 80.0,
+        "minutes": 1227.0,
+        "seasons": 1,
+        "career_source_row": "3700"
+      },
+      {
+        "id": "poweljo01",
+        "name": "Josh Powell",
+        "height": 81.0,
+        "minutes": 2066.0,
+        "seasons": 4,
+        "career_source_row": "3623"
+      },
+      {
+        "id": "radmavl01",
+        "name": "Vladimir Radmanović",
+        "height": 82.0,
+        "minutes": 11168.0,
+        "seasons": 7,
+        "career_source_row": "3313"
+      },
+      {
+        "id": "randoan01",
+        "name": "Anthony Randolph",
+        "height": 82.0,
+        "minutes": 1129.0,
+        "seasons": 1,
+        "career_source_row": "3833"
+      },
+      {
+        "id": "randosh01",
+        "name": "Shavlik Randolph",
+        "height": 82.0,
+        "minutes": 783.0,
+        "seasons": 5,
+        "career_source_row": "3624"
+      },
+      {
+        "id": "randoza01",
+        "name": "Zach Randolph",
+        "height": 81.0,
+        "minutes": 15987.0,
+        "seasons": 8,
+        "career_source_row": "3314"
+      },
+      {
+        "id": "ratlith01",
+        "name": "Theo Ratliff",
+        "height": 82.0,
+        "minutes": 437.0,
+        "seasons": 1,
+        "career_source_row": "2917"
+      },
+      {
+        "id": "reedju01",
+        "name": "Justin Reed",
+        "height": 80.0,
+        "minutes": 318.0,
+        "seasons": 1,
+        "career_source_row": "3546"
+      },
+      {
+        "id": "reiddo01",
+        "name": "Don Reid",
+        "height": 80.0,
+        "minutes": 1488.0,
+        "seasons": 3,
+        "career_source_row": "2937"
+      },
+      {
+        "id": "reidjr01",
+        "name": "J.R. Reid",
+        "height": 81.0,
+        "minutes": 39.0,
+        "seasons": 1,
+        "career_source_row": "2508"
+      },
+      {
+        "id": "richach01",
+        "name": "Chris Richard",
+        "height": 81.0,
+        "minutes": 224.0,
+        "seasons": 1,
+        "career_source_row": "3764"
+      },
+      {
+        "id": "roberla01",
+        "name": "Lawrence Roberts",
+        "height": 81.0,
+        "minutes": 969.0,
+        "seasons": 1,
+        "career_source_row": "3591"
+      },
+      {
+        "id": "robincl02",
+        "name": "Clifford Robinson",
+        "height": 82.0,
+        "minutes": 14829.0,
+        "seasons": 6,
+        "career_source_row": "2511"
+      },
+      {
+        "id": "rogerro01",
+        "name": "Rodney Rogers",
+        "height": 79.0,
+        "minutes": 4079.0,
+        "seasons": 3,
+        "career_source_row": "2792"
+      },
+      {
+        "id": "rosema01",
+        "name": "Malik Rose",
+        "height": 79.0,
+        "minutes": 10501.0,
+        "seasons": 9,
+        "career_source_row": "2993"
+      },
+      {
+        "id": "ruckegu01",
+        "name": "Guy Rucker",
+        "height": 83.0,
+        "minutes": 4.0,
+        "seasons": 1,
+        "career_source_row": "3408"
+      },
+      {
+        "id": "ruffimi01",
+        "name": "Michael Ruffin",
+        "height": 81.0,
+        "minutes": 2087.0,
+        "seasons": 5,
+        "career_source_row": "3200"
+      },
+      {
+        "id": "sampsja01",
+        "name": "Jamal Sampson",
+        "height": 83.0,
+        "minutes": 376.0,
+        "seasons": 3,
+        "career_source_row": "3425"
+      },
+      {
+        "id": "scalabr01",
+        "name": "Brian Scalabrine",
+        "height": 81.0,
+        "minutes": 6058.0,
+        "seasons": 8,
+        "career_source_row": "3358"
+      },
+      {
+        "id": "scolalu01",
+        "name": "Luis Scola",
+        "height": 81.0,
+        "minutes": 7183.0,
+        "seasons": 3,
+        "career_source_row": "3734"
+      },
+      {
+        "id": "sharpwa01",
+        "name": "Walter Sharpe",
+        "height": 81.0,
+        "minutes": 20.0,
+        "seasons": 1,
+        "career_source_row": "3834"
+      },
+      {
+        "id": "shirlpa01",
+        "name": "Paul Shirley",
+        "height": 82.0,
+        "minutes": 121.0,
+        "seasons": 3,
+        "career_source_row": "3423"
+      },
+      {
+        "id": "simiewa01",
+        "name": "Wayne Simien",
+        "height": 81.0,
+        "minutes": 507.0,
+        "seasons": 2,
+        "career_source_row": "3593"
+      },
+      {
+        "id": "simmobo01",
+        "name": "Bobby Simmons",
+        "height": 79.0,
+        "minutes": 395.0,
+        "seasons": 1,
+        "career_source_row": "3330"
+      },
+      {
+        "id": "simmoce01",
+        "name": "Cedric Simmons",
+        "height": 81.0,
+        "minutes": 705.0,
+        "seasons": 3,
+        "career_source_row": "3680"
+      },
+      {
+        "id": "simpkdi01",
+        "name": "Dickey Simpkins",
+        "height": 81.0,
+        "minutes": 3.0,
+        "seasons": 1,
+        "career_source_row": "2851"
+      },
+      {
+        "id": "singlja01",
+        "name": "James Singleton",
+        "height": 80.0,
+        "minutes": 2237.0,
+        "seasons": 3,
+        "career_source_row": "3594"
+      },
+      {
+        "id": "skinnbr01",
+        "name": "Brian Skinner",
+        "height": 81.0,
+        "minutes": 7446.0,
+        "seasons": 8,
+        "career_source_row": "3158"
+      },
+      {
+        "id": "slatere01",
+        "name": "Reggie Slater",
+        "height": 79.0,
+        "minutes": 874.0,
+        "seasons": 3,
+        "career_source_row": "2852"
+      },
+      {
+        "id": "smithcr01",
+        "name": "Craig Smith",
+        "height": 79.0,
+        "minutes": 5776.0,
+        "seasons": 4,
+        "career_source_row": "3681"
+      },
+      {
+        "id": "smithja01",
+        "name": "Jabari Smith",
+        "height": 83.0,
+        "minutes": 648.0,
+        "seasons": 1,
+        "career_source_row": "3284"
+      },
+      {
+        "id": "smithja02",
+        "name": "Jason Smith",
+        "height": 84.0,
+        "minutes": 1765.0,
+        "seasons": 2,
+        "career_source_row": "3742"
+      },
+      {
+        "id": "smithjo02",
+        "name": "Joe Smith",
+        "height": 82.0,
+        "minutes": 11168.0,
+        "seasons": 7,
+        "career_source_row": "2921"
+      },
+      {
+        "id": "smithjo03",
+        "name": "Josh Smith",
+        "height": 81.0,
+        "minutes": 8165.0,
+        "seasons": 3,
+        "career_source_row": "3516"
+      },
+      {
+        "id": "smithmi02",
+        "name": "Michael Smith",
+        "height": 80.0,
+        "minutes": 1610.0,
+        "seasons": 1,
+        "career_source_row": "2853"
+      },
+      {
+        "id": "smithst03",
+        "name": "Steven Smith",
+        "height": 80.0,
+        "minutes": 28.0,
+        "seasons": 1,
+        "career_source_row": "3708"
+      },
+      {
+        "id": "snydeki01",
+        "name": "Kirk Snyder",
+        "height": 78.0,
+        "minutes": 761.0,
+        "seasons": 1,
+        "career_source_row": "3518"
+      },
+      {
+        "id": "songada01",
+        "name": "Darius Songaila",
+        "height": 81.0,
+        "minutes": 4673.0,
+        "seasons": 4,
+        "career_source_row": "3453"
+      },
+      {
+        "id": "stewami01",
+        "name": "Michael Stewart",
+        "height": 82.0,
+        "minutes": 543.0,
+        "seasons": 3,
+        "career_source_row": "3067"
+      },
+      {
+        "id": "stoudam01",
+        "name": "Amar'e Stoudemire",
+        "height": 82.0,
+        "minutes": 9381.0,
+        "seasons": 4,
+        "career_source_row": "3392"
+      },
+      {
+        "id": "stronde01",
+        "name": "Derek Strong",
+        "height": 80.0,
+        "minutes": 491.0,
+        "seasons": 1,
+        "career_source_row": "2693"
+      },
+      {
+        "id": "sweetmi01",
+        "name": "Mike Sweetney",
+        "height": 80.0,
+        "minutes": 494.0,
+        "seasons": 1,
+        "career_source_row": "3454"
+      },
+      {
+        "id": "swiftst01",
+        "name": "Stromile Swift",
+        "height": 81.0,
+        "minutes": 8431.0,
+        "seasons": 7,
+        "career_source_row": "3255"
+      },
+      {
+        "id": "tayloma01",
+        "name": "Maurice Taylor",
+        "height": 81.0,
+        "minutes": 6107.0,
+        "seasons": 5,
+        "career_source_row": "3059"
+      },
+      {
+        "id": "thomaet01",
+        "name": "Etan Thomas",
+        "height": 81.0,
+        "minutes": 513.0,
+        "seasons": 1,
+        "career_source_row": "3331"
+      },
+      {
+        "id": "thomaja02",
+        "name": "James Thomas",
+        "height": 80.0,
+        "minutes": 267.0,
+        "seasons": 2,
+        "career_source_row": "3555"
+      },
+      {
+        "id": "thomake01",
+        "name": "Kenny Thomas",
+        "height": 79.0,
+        "minutes": 15509.0,
+        "seasons": 10,
+        "career_source_row": "3196"
+      },
+      {
+        "id": "thomaku01",
+        "name": "Kurt Thomas",
+        "height": 81.0,
+        "minutes": 10516.0,
+        "seasons": 5,
+        "career_source_row": "2940"
+      },
+      {
+        "id": "thomati01",
+        "name": "Tim Thomas",
+        "height": 82.0,
+        "minutes": 7993.0,
+        "seasons": 5,
+        "career_source_row": "3061"
+      },
+      {
+        "id": "thomaty01",
+        "name": "Tyrus Thomas",
+        "height": 81.0,
+        "minutes": 5691.0,
+        "seasons": 4,
+        "career_source_row": "3655"
+      },
+      {
+        "id": "thompja02",
+        "name": "Jason Thompson",
+        "height": 83.0,
+        "minutes": 2303.0,
+        "seasons": 1,
+        "career_source_row": "3819"
+      },
+      {
+        "id": "thornal01",
+        "name": "Al Thornton",
+        "height": 80.0,
+        "minutes": 2158.0,
+        "seasons": 1,
+        "career_source_row": "3756"
+      },
+      {
+        "id": "thorpot01",
+        "name": "Otis Thorpe",
+        "height": 82.0,
+        "minutes": 647.0,
+        "seasons": 1,
+        "career_source_row": "2198"
+      },
+      {
+        "id": "tollian01",
+        "name": "Anthony Tolliver",
+        "height": 80.0,
+        "minutes": 1635.0,
+        "seasons": 2,
+        "career_source_row": "3837"
+      },
+      {
+        "id": "traylro01",
+        "name": "Robert Traylor",
+        "height": 80.0,
+        "minutes": 678.0,
+        "seasons": 1,
+        "career_source_row": "3139"
+      },
+      {
+        "id": "trentga01",
+        "name": "Gary Trent",
+        "height": 80.0,
+        "minutes": 1459.0,
+        "seasons": 2,
+        "career_source_row": "2926"
+      },
+      {
+        "id": "tskitni01",
+        "name": "Nikoloz Tskitishvili",
+        "height": 84.0,
+        "minutes": 626.0,
+        "seasons": 3,
+        "career_source_row": "3393"
+      },
+      {
+        "id": "udokaim01",
+        "name": "Ime Udoka",
+        "height": 78.0,
+        "minutes": 1316.0,
+        "seasons": 1,
+        "career_source_row": "3487"
+      },
+      {
+        "id": "vanhoke01",
+        "name": "Keith Van Horn",
+        "height": 82.0,
+        "minutes": 3839.0,
+        "seasons": 2,
+        "career_source_row": "3089"
+      },
+      {
+        "id": "varejan01",
+        "name": "Anderson Varejão",
+        "height": 83.0,
+        "minutes": 5335.0,
+        "seasons": 3,
+        "career_source_row": "3527"
+      },
+      {
+        "id": "vaughlo01",
+        "name": "Loy Vaught",
+        "height": 81.0,
+        "minutes": 549.0,
+        "seasons": 1,
+        "career_source_row": "2597"
+      },
+      {
+        "id": "villach01",
+        "name": "Charlie Villanueva",
+        "height": 83.0,
+        "minutes": 9117.0,
+        "seasons": 5,
+        "career_source_row": "3597"
+      },
+      {
+        "id": "vromaja01",
+        "name": "Jackson Vroman",
+        "height": 82.0,
+        "minutes": 1111.0,
+        "seasons": 2,
+        "career_source_row": "3522"
+      },
+      {
+        "id": "walkean02",
+        "name": "Antoine Walker",
+        "height": 81.0,
+        "minutes": 20741.0,
+        "seasons": 8,
+        "career_source_row": "2988"
+      },
+      {
+        "id": "walkesa01",
+        "name": "Samaki Walker",
+        "height": 81.0,
+        "minutes": 3192.0,
+        "seasons": 5,
+        "career_source_row": "3007"
+      },
+      {
+        "id": "wallabe01",
+        "name": "Ben Wallace",
+        "height": 81.0,
+        "minutes": 3519.0,
+        "seasons": 2,
+        "career_source_row": "2989"
+      },
+      {
+        "id": "wallage01",
+        "name": "Gerald Wallace",
+        "height": 79.0,
+        "minutes": 2376.0,
+        "seasons": 1,
+        "career_source_row": "3318"
+      },
+      {
+        "id": "wallara01",
+        "name": "Rasheed Wallace",
+        "height": 83.0,
+        "minutes": 16444.0,
+        "seasons": 6,
+        "career_source_row": "2927"
+      },
+      {
+        "id": "waltolu01",
+        "name": "Luke Walton",
+        "height": 80.0,
+        "minutes": 730.0,
+        "seasons": 1,
+        "career_source_row": "3436"
+      },
+      {
+        "id": "warriha01",
+        "name": "Hakim Warrick",
+        "height": 81.0,
+        "minutes": 8216.0,
+        "seasons": 5,
+        "career_source_row": "3599"
+      },
+      {
+        "id": "weathcl01",
+        "name": "Clarence Weatherspoon",
+        "height": 79.0,
+        "minutes": 7919.0,
+        "seasons": 5,
+        "career_source_row": "2716"
+      },
+      {
+        "id": "webbech01",
+        "name": "Chris Webber",
+        "height": 82.0,
+        "minutes": 15570.0,
+        "seasons": 8,
+        "career_source_row": "2807"
+      },
+      {
+        "id": "westda01",
+        "name": "David West",
+        "height": 81.0,
+        "minutes": 14157.0,
+        "seasons": 6,
+        "career_source_row": "3455"
+      },
+      {
+        "id": "whitedj01",
+        "name": "D.J. White",
+        "height": 81.0,
+        "minutes": 232.0,
+        "seasons": 2,
+        "career_source_row": "3855"
+      },
+      {
+        "id": "wilcoch01",
+        "name": "Chris Wilcox",
+        "height": 82.0,
+        "minutes": 6774.0,
+        "seasons": 5,
+        "career_source_row": "3395"
+      },
+      {
+        "id": "williaa01",
+        "name": "Aaron Williams",
+        "height": 81.0,
+        "minutes": 4256.0,
+        "seasons": 3,
+        "career_source_row": "2815"
+      },
+      {
+        "id": "willico02",
+        "name": "Corliss Williamson",
+        "height": 79.0,
+        "minutes": 4438.0,
+        "seasons": 3,
+        "career_source_row": "2947"
+      },
+      {
+        "id": "willije01",
+        "name": "Jerome Williams",
+        "height": 81.0,
+        "minutes": 6806.0,
+        "seasons": 4,
+        "career_source_row": "2995"
+      },
+      {
+        "id": "willike02",
+        "name": "Kevin Willis",
+        "height": 84.0,
+        "minutes": 908.0,
+        "seasons": 2,
+        "career_source_row": "2177"
+      },
+      {
+        "id": "willima02",
+        "name": "Marvin Williams",
+        "height": 80.0,
+        "minutes": 4131.0,
+        "seasons": 2,
+        "career_source_row": "3602"
+      },
+      {
+        "id": "willima04",
+        "name": "Marcus Williams",
+        "height": 79.0,
+        "minutes": 39.0,
+        "seasons": 2,
+        "career_source_row": "3783"
+      },
+      {
+        "id": "willisc01",
+        "name": "Scott Williams",
+        "height": 82.0,
+        "minutes": 737.0,
+        "seasons": 1,
+        "career_source_row": "2600"
+      },
+      {
+        "id": "willise01",
+        "name": "Sean Williams",
+        "height": 82.0,
+        "minutes": 593.0,
+        "seasons": 2,
+        "career_source_row": "3758"
+      },
+      {
+        "id": "willish02",
+        "name": "Shelden Williams",
+        "height": 81.0,
+        "minutes": 3399.0,
+        "seasons": 4,
+        "career_source_row": "3684"
+      },
+      {
+        "id": "wolkoru01",
+        "name": "Rubén Wolkowyski",
+        "height": 82.0,
+        "minutes": 329.0,
+        "seasons": 2,
+        "career_source_row": "3256"
+      },
+      {
+        "id": "woodsqy01",
+        "name": "Qyntel Woods",
+        "height": 80.0,
+        "minutes": 334.0,
+        "seasons": 1,
+        "career_source_row": "3397"
+      },
+      {
+        "id": "wrighbr03",
+        "name": "Brandan Wright",
+        "height": 82.0,
+        "minutes": 1064.0,
+        "seasons": 2,
+        "career_source_row": "3766"
+      },
+      {
+        "id": "youngth01",
+        "name": "Thaddeus Young",
+        "height": 80.0,
+        "minutes": 6279.0,
+        "seasons": 3,
+        "career_source_row": "3769"
+      }
+    ]
+  },
+  {
+    "start": 2020,
+    "end": 2025,
+    "n": 261,
+    "known": 261,
+    "missing": 0,
+    "rows": 660,
+    "minutes": 683868.0,
+    "all_minutes": 683868.0,
+    "mean": 80.20689655172414,
+    "weighted_mean": 80.20029157673703,
+    "bins": [
+      {
+        "height": 76.0,
+        "n": 2,
+        "people_pct": 0.7662835249042145,
+        "minutes": 2062.0,
+        "minute_pct": 0.3015201764083127
+      },
+      {
+        "height": 77.0,
+        "n": 13,
+        "people_pct": 4.980842911877394,
+        "minutes": 17618.0,
+        "minute_pct": 2.5762281609901327
+      },
+      {
+        "height": 78.0,
+        "n": 31,
+        "people_pct": 11.877394636015326,
+        "minutes": 89368.0,
+        "minute_pct": 13.068018974421964
+      },
+      {
+        "height": 79.0,
+        "n": 45,
+        "people_pct": 17.24137931034483,
+        "minutes": 152086.0,
+        "minute_pct": 22.239087075283535
+      },
+      {
+        "height": 80.0,
+        "n": 59,
+        "people_pct": 22.60536398467433,
+        "minutes": 171143.0,
+        "minute_pct": 25.025735960740963
+      },
+      {
+        "height": 81.0,
+        "n": 55,
+        "people_pct": 21.0727969348659,
+        "minutes": 107290.0,
+        "minute_pct": 15.688700158510121
+      },
+      {
+        "height": 82.0,
+        "n": 32,
+        "people_pct": 12.260536398467432,
+        "minutes": 63850.0,
+        "minute_pct": 9.336597121081846
+      },
+      {
+        "height": 83.0,
+        "n": 14,
+        "people_pct": 5.363984674329502,
+        "minutes": 49174.0,
+        "minute_pct": 7.190568940204835
+      },
+      {
+        "height": 84.0,
+        "n": 6,
+        "people_pct": 2.2988505747126435,
+        "minutes": 16807.0,
+        "minute_pct": 2.457638023712178
+      },
+      {
+        "height": 85.0,
+        "n": 2,
+        "people_pct": 0.7662835249042145,
+        "minutes": 10326.0,
+        "minute_pct": 1.5099405148361964
+      },
+      {
+        "height": 86.0,
+        "n": 1,
+        "people_pct": 0.38314176245210724,
+        "minutes": 1481.0,
+        "minute_pct": 0.21656226055320618
+      },
+      {
+        "height": 87.0,
+        "n": 1,
+        "people_pct": 0.38314176245210724,
+        "minutes": 2663.0,
+        "minute_pct": 0.3894026332567104
+      }
+    ],
+    "people": [
+      {
+        "id": "achiupr01",
+        "name": "Precious Achiuwa",
+        "height": 80.0,
+        "minutes": 2361.0,
+        "seasons": 2,
+        "career_source_row": "4807"
+      },
+      {
+        "id": "aldamsa01",
+        "name": "Santi Aldama",
+        "height": 84.0,
+        "minutes": 6518.0,
+        "seasons": 5,
+        "career_source_row": "4955"
+      },
+      {
+        "id": "aminual01",
+        "name": "Al-Farouq Aminu",
+        "height": 81.0,
+        "minutes": 434.0,
+        "seasons": 1,
+        "career_source_row": "3919"
+      },
+      {
+        "id": "anderky01",
+        "name": "Kyle Anderson",
+        "height": 80.0,
+        "minutes": 8112.0,
+        "seasons": 5,
+        "career_source_row": "4258"
+      },
+      {
+        "id": "antetgi01",
+        "name": "Giannis Antetokounmpo",
+        "height": 83.0,
+        "minutes": 12136.0,
+        "seasons": 6,
+        "career_source_row": "4146"
+      },
+      {
+        "id": "antetko01",
+        "name": "Kostas Antetokounmpo",
+        "height": 82.0,
+        "minutes": 56.0,
+        "seasons": 1,
+        "career_source_row": "4679"
+      },
+      {
+        "id": "antetth01",
+        "name": "Thanasis Antetokounmpo",
+        "height": 79.0,
+        "minutes": 361.0,
+        "seasons": 2,
+        "career_source_row": "4362"
+      },
+      {
+        "id": "anthoca01",
+        "name": "Carmelo Anthony",
+        "height": 79.0,
+        "minutes": 3483.0,
+        "seasons": 2,
+        "career_source_row": "3437"
+      },
+      {
+        "id": "anunoog01",
+        "name": "OG Anunoby",
+        "height": 79.0,
+        "minutes": 4930.0,
+        "seasons": 2,
+        "career_source_row": "4488"
+      },
+      {
+        "id": "baglema01",
+        "name": "Marvin Bagley III",
+        "height": 82.0,
+        "minutes": 3724.0,
+        "seasons": 4,
+        "career_source_row": "4588"
+      },
+      {
+        "id": "banchpa01",
+        "name": "Paolo Banchero",
+        "height": 82.0,
+        "minutes": 9313.0,
+        "seasons": 4,
+        "career_source_row": "5030"
+      },
+      {
+        "id": "barlodo01",
+        "name": "Dominick Barlow",
+        "height": 81.0,
+        "minutes": 2517.0,
+        "seasons": 3,
+        "career_source_row": "5082"
+      },
+      {
+        "id": "barneha02",
+        "name": "Harrison Barnes",
+        "height": 79.0,
+        "minutes": 13948.0,
+        "seasons": 6,
+        "career_source_row": "4068"
+      },
+      {
+        "id": "barnesc01",
+        "name": "Scottie Barnes",
+        "height": 80.0,
+        "minutes": 7432.0,
+        "seasons": 3,
+        "career_source_row": "4904"
+      },
+      {
+        "id": "bateske01",
+        "name": "Keita Bates-Diop",
+        "height": 80.0,
+        "minutes": 1452.0,
+        "seasons": 1,
+        "career_source_row": "4637"
+      },
+      {
+        "id": "batumni01",
+        "name": "Nicolas Batum",
+        "height": 79.0,
+        "minutes": 7362.0,
+        "seasons": 5,
+        "career_source_row": "3795"
+      },
+      {
+        "id": "bazleda01",
+        "name": "Darius Bazley",
+        "height": 81.0,
+        "minutes": 3790.0,
+        "seasons": 3,
+        "career_source_row": "4691"
+      },
+      {
+        "id": "berinjo01",
+        "name": "Joan Beringer",
+        "height": 83.0,
+        "minutes": 314.0,
+        "seasons": 1,
+        "career_source_row": "5349"
+      },
+      {
+        "id": "bertada01",
+        "name": "Dāvis Bertāns",
+        "height": 82.0,
+        "minutes": 3437.0,
+        "seasons": 4,
+        "career_source_row": "4375"
+      },
+      {
+        "id": "bjeline01",
+        "name": "Nemanja Bjelica",
+        "height": 82.0,
+        "minutes": 595.0,
+        "seasons": 1,
+        "career_source_row": "4304"
+      },
+      {
+        "id": "bogdabo02",
+        "name": "Bojan Bogdanović",
+        "height": 79.0,
+        "minutes": 5502.0,
+        "seasons": 3,
+        "career_source_row": "4227"
+      },
+      {
+        "id": "bolbo01",
+        "name": "Bol Bol",
+        "height": 87.0,
+        "minutes": 2663.0,
+        "seasons": 5,
+        "career_source_row": "4802"
+      },
+      {
+        "id": "bouchch01",
+        "name": "Chris Boucher",
+        "height": 80.0,
+        "minutes": 3184.0,
+        "seasons": 4,
+        "career_source_row": "4575"
+      },
+      {
+        "id": "brantja01",
+        "name": "Jarrell Brantley",
+        "height": 77.0,
+        "minutes": 177.0,
+        "seasons": 2,
+        "career_source_row": "4721"
+      },
+      {
+        "id": "bridgmi02",
+        "name": "Miles Bridges",
+        "height": 79.0,
+        "minutes": 9185.0,
+        "seasons": 4,
+        "career_source_row": "4591"
+      },
+      {
+        "id": "brissos01",
+        "name": "Oshae Brissett",
+        "height": 79.0,
+        "minutes": 1083.0,
+        "seasons": 1,
+        "career_source_row": "4758"
+      },
+      {
+        "id": "browngr01",
+        "name": "Greg Brown III",
+        "height": 79.0,
+        "minutes": 133.0,
+        "seasons": 2,
+        "career_source_row": "4945"
+      },
+      {
+        "id": "brownko01",
+        "name": "Kobe Brown",
+        "height": 79.0,
+        "minutes": 1629.0,
+        "seasons": 3,
+        "career_source_row": "5114"
+      },
+      {
+        "id": "bryanca01",
+        "name": "Carter Bryant",
+        "height": 78.0,
+        "minutes": 818.0,
+        "seasons": 1,
+        "career_source_row": "5319"
+      },
+      {
+        "id": "burtode02",
+        "name": "Deonte Burton",
+        "height": 76.0,
+        "minutes": 6.0,
+        "seasons": 1,
+        "career_source_row": "4620"
+      },
+      {
+        "id": "butleji01",
+        "name": "Jimmy Butler",
+        "height": 78.0,
+        "minutes": 5926.0,
+        "seasons": 3,
+        "career_source_row": "4033"
+      },
+      {
+        "id": "buzelma01",
+        "name": "Matas Buzelis",
+        "height": 80.0,
+        "minutes": 2248.0,
+        "seasons": 1,
+        "career_source_row": "5218"
+      },
+      {
+        "id": "cabocbr01",
+        "name": "Bruno Caboclo",
+        "height": 81.0,
+        "minutes": 36.0,
+        "seasons": 1,
+        "career_source_row": "4272"
+      },
+      {
+        "id": "cacokde01",
+        "name": "Devontae Cacok",
+        "height": 79.0,
+        "minutes": 219.0,
+        "seasons": 2,
+        "career_source_row": "4804"
+      },
+      {
+        "id": "cainja01",
+        "name": "Jamal Cain",
+        "height": 79.0,
+        "minutes": 499.0,
+        "seasons": 2,
+        "career_source_row": "5086"
+      },
+      {
+        "id": "camarto01",
+        "name": "Toumani Camara",
+        "height": 79.0,
+        "minutes": 7018.0,
+        "seasons": 3,
+        "career_source_row": "5115"
+      },
+      {
+        "id": "cancavl01",
+        "name": "Vlatko Čančar",
+        "height": 80.0,
+        "minutes": 1482.0,
+        "seasons": 4,
+        "career_source_row": "4741"
+      },
+      {
+        "id": "cartewe01",
+        "name": "Wendell Carter Jr.",
+        "height": 82.0,
+        "minutes": 1852.0,
+        "seasons": 1,
+        "career_source_row": "4617"
+      },
+      {
+        "id": "chomcul01",
+        "name": "Ulrich Chomche",
+        "height": 83.0,
+        "minutes": 32.0,
+        "seasons": 1,
+        "career_source_row": "5219"
+      },
+      {
+        "id": "chrisma01",
+        "name": "Marquese Chriss",
+        "height": 81.0,
+        "minutes": 373.0,
+        "seasons": 2,
+        "career_source_row": "4387"
+      },
+      {
+        "id": "clarkbr01",
+        "name": "Brandon Clarke",
+        "height": 80.0,
+        "minutes": 5112.0,
+        "seasons": 6,
+        "career_source_row": "4692"
+      },
+      {
+        "id": "clarkga01",
+        "name": "Gary Clark",
+        "height": 78.0,
+        "minutes": 1032.0,
+        "seasons": 2,
+        "career_source_row": "4595"
+      },
+      {
+        "id": "clownno01",
+        "name": "Noah Clowney",
+        "height": 82.0,
+        "minutes": 3192.0,
+        "seasons": 3,
+        "career_source_row": "5176"
+      },
+      {
+        "id": "collijo01",
+        "name": "John Collins",
+        "height": 81.0,
+        "minutes": 10634.0,
+        "seasons": 6,
+        "career_source_row": "4469"
+      },
+      {
+        "id": "colliza01",
+        "name": "Zach Collins",
+        "height": 81.0,
+        "minutes": 977.0,
+        "seasons": 1,
+        "career_source_row": "4507"
+      },
+      {
+        "id": "cooksxa01",
+        "name": "Xavier Cooks",
+        "height": 80.0,
+        "minutes": 126.0,
+        "seasons": 1,
+        "career_source_row": "5102"
+      },
+      {
+        "id": "cookty01",
+        "name": "Tyler Cook",
+        "height": 80.0,
+        "minutes": 638.0,
+        "seasons": 2,
+        "career_source_row": "4733"
+      },
+      {
+        "id": "cornepe01",
+        "name": "Petr Cornelie",
+        "height": 83.0,
+        "minutes": 38.0,
+        "seasons": 1,
+        "career_source_row": "4952"
+      },
+      {
+        "id": "covinro01",
+        "name": "Robert Covington",
+        "height": 79.0,
+        "minutes": 5450.0,
+        "seasons": 4,
+        "career_source_row": "4205"
+      },
+      {
+        "id": "craigto01",
+        "name": "Torrey Craig",
+        "height": 77.0,
+        "minutes": 1948.0,
+        "seasons": 1,
+        "career_source_row": "4540"
+      },
+      {
+        "id": "crowdja01",
+        "name": "Jae Crowder",
+        "height": 78.0,
+        "minutes": 5133.0,
+        "seasons": 5,
+        "career_source_row": "4064"
+      },
+      {
+        "id": "davisan02",
+        "name": "Anthony Davis",
+        "height": 82.0,
+        "minutes": 3494.0,
+        "seasons": 3,
+        "career_source_row": "4070"
+      },
+      {
+        "id": "deckga01",
+        "name": "Gabriel Deck",
+        "height": 78.0,
+        "minutes": 268.0,
+        "seasons": 2,
+        "career_source_row": "4894"
+      },
+      {
+        "id": "dekkesa01",
+        "name": "Sam Dekker",
+        "height": 81.0,
+        "minutes": 1.0,
+        "seasons": 1,
+        "career_source_row": "4307"
+      },
+      {
+        "id": "derozde01",
+        "name": "DeMar DeRozan",
+        "height": 78.0,
+        "minutes": 7205.0,
+        "seasons": 3,
+        "career_source_row": "3867"
+      },
+      {
+        "id": "diakima01",
+        "name": "Mamadi Diakite",
+        "height": 81.0,
+        "minutes": 353.0,
+        "seasons": 3,
+        "career_source_row": "4882"
+      },
+      {
+        "id": "diengou01",
+        "name": "Ousmane Dieng",
+        "height": 81.0,
+        "minutes": 934.0,
+        "seasons": 2,
+        "career_source_row": "5033"
+      },
+      {
+        "id": "doumbse01",
+        "name": "Sekou Doumbouya",
+        "height": 80.0,
+        "minutes": 885.0,
+        "seasons": 2,
+        "career_source_row": "4763"
+      },
+      {
+        "id": "dudleja01",
+        "name": "Jared Dudley",
+        "height": 78.0,
+        "minutes": 81.0,
+        "seasons": 1,
+        "career_source_row": "3750"
+      },
+      {
+        "id": "duranke01",
+        "name": "Kevin Durant",
+        "height": 83.0,
+        "minutes": 9932.0,
+        "seasons": 5,
+        "career_source_row": "3736"
+      },
+      {
+        "id": "easonta01",
+        "name": "Tari Eason",
+        "height": 80.0,
+        "minutes": 5216.0,
+        "seasons": 4,
+        "career_source_row": "5035"
+      },
+      {
+        "id": "ellenhe01",
+        "name": "Henry Ellenson",
+        "height": 82.0,
+        "minutes": 38.0,
+        "seasons": 1,
+        "career_source_row": "4391"
+      },
+      {
+        "id": "essenno01",
+        "name": "Noa Essengue",
+        "height": 80.0,
+        "minutes": 6.0,
+        "seasons": 1,
+        "career_source_row": "5377"
+      },
+      {
+        "id": "finnedo01",
+        "name": "Dorian Finney-Smith",
+        "height": 79.0,
+        "minutes": 10946.0,
+        "seasons": 6,
+        "career_source_row": "4393"
+      },
+      {
+        "id": "fittsma01",
+        "name": "Malik Fitts",
+        "height": 77.0,
+        "minutes": 74.0,
+        "seasons": 2,
+        "career_source_row": "4890"
+      },
+      {
+        "id": "flemira01",
+        "name": "Rasheer Fleming",
+        "height": 81.0,
+        "minutes": 673.0,
+        "seasons": 1,
+        "career_source_row": "5350"
+      },
+      {
+        "id": "fostemi02",
+        "name": "Michael Foster Jr.",
+        "height": 80.0,
+        "minutes": 1.0,
+        "seasons": 1,
+        "career_source_row": "5092"
+      },
+      {
+        "id": "frankro01",
+        "name": "Robert Franks",
+        "height": 79.0,
+        "minutes": 101.0,
+        "seasons": 1,
+        "career_source_row": "4892"
+      },
+      {
+        "id": "freemen01",
+        "name": "Enrique Freeman",
+        "height": 81.0,
+        "minutes": 218.0,
+        "seasons": 2,
+        "career_source_row": "5224"
+      },
+      {
+        "id": "gabriwe01",
+        "name": "Wenyen Gabriel",
+        "height": 81.0,
+        "minutes": 680.0,
+        "seasons": 3,
+        "career_source_row": "4695"
+      },
+      {
+        "id": "gaffoda01",
+        "name": "Daniel Gafford",
+        "height": 82.0,
+        "minutes": 1815.0,
+        "seasons": 1,
+        "career_source_row": "4735"
+      },
+      {
+        "id": "gallida01",
+        "name": "Danilo Gallinari",
+        "height": 82.0,
+        "minutes": 3524.0,
+        "seasons": 3,
+        "career_source_row": "3807"
+      },
+      {
+        "id": "garubus01",
+        "name": "Usman Garuba",
+        "height": 80.0,
+        "minutes": 257.0,
+        "seasons": 2,
+        "career_source_row": "4911"
+      },
+      {
+        "id": "gayru01",
+        "name": "Rudy Gay",
+        "height": 80.0,
+        "minutes": 3212.0,
+        "seasons": 3,
+        "career_source_row": "3666"
+      },
+      {
+        "id": "georgpa01",
+        "name": "Paul George",
+        "height": 80.0,
+        "minutes": 6048.0,
+        "seasons": 4,
+        "career_source_row": "3929"
+      },
+      {
+        "id": "gibsota01",
+        "name": "Taj Gibson",
+        "height": 81.0,
+        "minutes": 204.0,
+        "seasons": 1,
+        "career_source_row": "3885"
+      },
+      {
+        "id": "giddejo01",
+        "name": "Josh Giddey",
+        "height": 79.0,
+        "minutes": 2367.0,
+        "seasons": 1,
+        "career_source_row": "4912"
+      },
+      {
+        "id": "gillan01",
+        "name": "Anthony Gill",
+        "height": 79.0,
+        "minutes": 3119.0,
+        "seasons": 6,
+        "career_source_row": "4856"
+      },
+      {
+        "id": "gillefr01",
+        "name": "Freddie Gillespie",
+        "height": 81.0,
+        "minutes": 511.0,
+        "seasons": 2,
+        "career_source_row": "4891"
+      },
+      {
+        "id": "gordoaa01",
+        "name": "Aaron Gordon",
+        "height": 80.0,
+        "minutes": 10564.0,
+        "seasons": 6,
+        "career_source_row": "4221"
+      },
+      {
+        "id": "grantje01",
+        "name": "Jerami Grant",
+        "height": 79.0,
+        "minutes": 8795.0,
+        "seasons": 5,
+        "career_source_row": "4277"
+      },
+      {
+        "id": "grayra01",
+        "name": "RaiQuan Gray",
+        "height": 79.0,
+        "minutes": 74.0,
+        "seasons": 2,
+        "career_source_row": "5109"
+      },
+      {
+        "id": "greendr01",
+        "name": "Draymond Green",
+        "height": 78.0,
+        "minutes": 10950.0,
+        "seasons": 6,
+        "career_source_row": "4075"
+      },
+      {
+        "id": "greenja01",
+        "name": "JaMychal Green",
+        "height": 81.0,
+        "minutes": 3002.0,
+        "seasons": 3,
+        "career_source_row": "4288"
+      },
+      {
+        "id": "greenje02",
+        "name": "Jeff Green",
+        "height": 80.0,
+        "minutes": 6653.0,
+        "seasons": 6,
+        "career_source_row": "3737"
+      },
+      {
+        "id": "griffbl01",
+        "name": "Blake Griffin",
+        "height": 81.0,
+        "minutes": 1186.0,
+        "seasons": 1,
+        "career_source_row": "3930"
+      },
+      {
+        "id": "gueyemo01",
+        "name": "Mouhamadou Gueye",
+        "height": 81.0,
+        "minutes": 165.0,
+        "seasons": 2,
+        "career_source_row": "5199"
+      },
+      {
+        "id": "gueyemo02",
+        "name": "Mouhamed Gueye",
+        "height": 83.0,
+        "minutes": 1785.0,
+        "seasons": 3,
+        "career_source_row": "5153"
+      },
+      {
+        "id": "hachiru01",
+        "name": "Rui Hachimura",
+        "height": 80.0,
+        "minutes": 9828.0,
+        "seasons": 6,
+        "career_source_row": "4698"
+      },
+      {
+        "id": "halldo01",
+        "name": "Donta Hall",
+        "height": 82.0,
+        "minutes": 179.0,
+        "seasons": 1,
+        "career_source_row": "4799"
+      },
+      {
+        "id": "harklma01",
+        "name": "Maurice Harkless",
+        "height": 79.0,
+        "minutes": 772.0,
+        "seasons": 1,
+        "career_source_row": "4116"
+      },
+      {
+        "id": "harpero02",
+        "name": "Ron Harper Jr.",
+        "height": 77.0,
+        "minutes": 52.0,
+        "seasons": 2,
+        "career_source_row": "5081"
+      },
+      {
+        "id": "harrito02",
+        "name": "Tobias Harris",
+        "height": 80.0,
+        "minutes": 10976.0,
+        "seasons": 5,
+        "career_source_row": "4038"
+      },
+      {
+        "id": "hausesa01",
+        "name": "Sam Hauser",
+        "height": 79.0,
+        "minutes": 3475.0,
+        "seasons": 2,
+        "career_source_row": "4973"
+      },
+      {
+        "id": "hendrta01",
+        "name": "Taylor Hendricks",
+        "height": 81.0,
+        "minutes": 2049.0,
+        "seasons": 3,
+        "career_source_row": "5122"
+      },
+      {
+        "id": "hernaju01",
+        "name": "Juancho Hernangómez",
+        "height": 81.0,
+        "minutes": 1959.0,
+        "seasons": 3,
+        "career_source_row": "4396"
+      },
+      {
+        "id": "highsha01",
+        "name": "Haywood Highsmith",
+        "height": 77.0,
+        "minutes": 2335.0,
+        "seasons": 2,
+        "career_source_row": "4662"
+      },
+      {
+        "id": "hillso01",
+        "name": "Solomon Hill",
+        "height": 78.0,
+        "minutes": 1513.0,
+        "seasons": 1,
+        "career_source_row": "4142"
+      },
+      {
+        "id": "holliro01",
+        "name": "Rondae Hollis-Jefferson",
+        "height": 78.0,
+        "minutes": 107.0,
+        "seasons": 1,
+        "career_source_row": "4311"
+      },
+      {
+        "id": "holmeda01",
+        "name": "DaRon Holmes",
+        "height": 81.0,
+        "minutes": 210.0,
+        "seasons": 1,
+        "career_source_row": "5356"
+      },
+      {
+        "id": "holmeri01",
+        "name": "Richaun Holmes",
+        "height": 81.0,
+        "minutes": 1089.0,
+        "seasons": 2,
+        "career_source_row": "4312"
+      },
+      {
+        "id": "holmgch01",
+        "name": "Chet Holmgren",
+        "height": 85.0,
+        "minutes": 1997.0,
+        "seasons": 1,
+        "career_source_row": "5123"
+      },
+      {
+        "id": "hoodro01",
+        "name": "Rodney Hood",
+        "height": 80.0,
+        "minutes": 709.0,
+        "seasons": 1,
+        "career_source_row": "4233"
+      },
+      {
+        "id": "hurtma01",
+        "name": "Matthew Hurt",
+        "height": 81.0,
+        "minutes": 113.0,
+        "seasons": 1,
+        "career_source_row": "5197"
+      },
+      {
+        "id": "ighodos01",
+        "name": "Oso Ighodaro",
+        "height": 83.0,
+        "minutes": 2853.0,
+        "seasons": 2,
+        "career_source_row": "5226"
+      },
+      {
+        "id": "iguodan01",
+        "name": "Andre Iguodala",
+        "height": 78.0,
+        "minutes": 113.0,
+        "seasons": 1,
+        "career_source_row": "3509"
+      },
+      {
+        "id": "ilyaser01",
+        "name": "Ersan İlyasova",
+        "height": 81.0,
+        "minutes": 148.0,
+        "seasons": 1,
+        "career_source_row": "3669"
+      },
+      {
+        "id": "isaacjo01",
+        "name": "Jonathan Isaac",
+        "height": 82.0,
+        "minutes": 2649.0,
+        "seasons": 4,
+        "career_source_row": "4472"
+      },
+      {
+        "id": "jacksgg01",
+        "name": "GG Jackson II",
+        "height": 81.0,
+        "minutes": 2870.0,
+        "seasons": 3,
+        "career_source_row": "5159"
+      },
+      {
+        "id": "jacksja02",
+        "name": "Jaren Jackson Jr.",
+        "height": 82.0,
+        "minutes": 2126.0,
+        "seasons": 1,
+        "career_source_row": "4604"
+      },
+      {
+        "id": "jackstr02",
+        "name": "Trayce Jackson-Davis",
+        "height": 81.0,
+        "minutes": 1130.0,
+        "seasons": 1,
+        "career_source_row": "5145"
+      },
+      {
+        "id": "jamesle01",
+        "name": "LeBron James",
+        "height": 81.0,
+        "minutes": 4458.0,
+        "seasons": 2,
+        "career_source_row": "3447"
+      },
+      {
+        "id": "johnsal02",
+        "name": "Alize Johnson",
+        "height": 81.0,
+        "minutes": 386.0,
+        "seasons": 3,
+        "career_source_row": "4621"
+      },
+      {
+        "id": "johnsca02",
+        "name": "Cameron Johnson",
+        "height": 80.0,
+        "minutes": 7765.0,
+        "seasons": 5,
+        "career_source_row": "4736"
+      },
+      {
+        "id": "johnsja01",
+        "name": "James Johnson",
+        "height": 79.0,
+        "minutes": 2480.0,
+        "seasons": 5,
+        "career_source_row": "3891"
+      },
+      {
+        "id": "johnsja05",
+        "name": "Jalen Johnson",
+        "height": 80.0,
+        "minutes": 120.0,
+        "seasons": 1,
+        "career_source_row": "4934"
+      },
+      {
+        "id": "johnsst04",
+        "name": "Stanley Johnson",
+        "height": 78.0,
+        "minutes": 2100.0,
+        "seasons": 2,
+        "career_source_row": "4301"
+      },
+      {
+        "id": "jonesde02",
+        "name": "Derrick Jones Jr.",
+        "height": 78.0,
+        "minutes": 1792.0,
+        "seasons": 2,
+        "career_source_row": "4441"
+      },
+      {
+        "id": "joneshe01",
+        "name": "Herbert Jones",
+        "height": 79.0,
+        "minutes": 4286.0,
+        "seasons": 2,
+        "career_source_row": "4916"
+      },
+      {
+        "id": "jonesis01",
+        "name": "Isaac Jones",
+        "height": 80.0,
+        "minutes": 340.0,
+        "seasons": 2,
+        "career_source_row": "5261"
+      },
+      {
+        "id": "jovicni01",
+        "name": "Nikola Jović",
+        "height": 82.0,
+        "minutes": 3064.0,
+        "seasons": 4,
+        "career_source_row": "5072"
+      },
+      {
+        "id": "kabenmf01",
+        "name": "Mfiondu Kabengele",
+        "height": 82.0,
+        "minutes": 316.0,
+        "seasons": 2,
+        "career_source_row": "4716"
+      },
+      {
+        "id": "kinglo02",
+        "name": "Louis King",
+        "height": 79.0,
+        "minutes": 29.0,
+        "seasons": 1,
+        "career_source_row": "4774"
+      },
+      {
+        "id": "klebima01",
+        "name": "Maxi Kleber",
+        "height": 82.0,
+        "minutes": 4819.0,
+        "seasons": 5,
+        "career_source_row": "4516"
+      },
+      {
+        "id": "knighna01",
+        "name": "Nathan Knight",
+        "height": 80.0,
+        "minutes": 546.0,
+        "seasons": 2,
+        "career_source_row": "4822"
+      },
+      {
+        "id": "knoxke01",
+        "name": "Kevin Knox",
+        "height": 80.0,
+        "minutes": 952.0,
+        "seasons": 1,
+        "career_source_row": "4605"
+      },
+      {
+        "id": "kuminjo01",
+        "name": "Jonathan Kuminga",
+        "height": 79.0,
+        "minutes": 5317.0,
+        "seasons": 4,
+        "career_source_row": "4961"
+      },
+      {
+        "id": "kurucro01",
+        "name": "Rodions Kurucs",
+        "height": 81.0,
+        "minutes": 125.0,
+        "seasons": 1,
+        "career_source_row": "4606"
+      },
+      {
+        "id": "kuzmaky01",
+        "name": "Kyle Kuzma",
+        "height": 80.0,
+        "minutes": 10466.0,
+        "seasons": 5,
+        "career_source_row": "4496"
+      },
+      {
+        "id": "labissk01",
+        "name": "Skal Labissière",
+        "height": 82.0,
+        "minutes": 50.0,
+        "seasons": 2,
+        "career_source_row": "4433"
+      },
+      {
+        "id": "laravja01",
+        "name": "Jake LaRavia",
+        "height": 79.0,
+        "minutes": 4630.0,
+        "seasons": 4,
+        "career_source_row": "5041"
+      },
+      {
+        "id": "leaftj01",
+        "name": "T.J. Leaf",
+        "height": 82.0,
+        "minutes": 35.0,
+        "seasons": 1,
+        "career_source_row": "4476"
+      },
+      {
+        "id": "liddeej01",
+        "name": "E.J. Liddell",
+        "height": 78.0,
+        "minutes": 425.0,
+        "seasons": 3,
+        "career_source_row": "5149"
+      },
+      {
+        "id": "littlna01",
+        "name": "Nassir Little",
+        "height": 78.0,
+        "minutes": 640.0,
+        "seasons": 1,
+        "career_source_row": "4725"
+      },
+      {
+        "id": "liveris01",
+        "name": "Isaiah Livers",
+        "height": 78.0,
+        "minutes": 2015.0,
+        "seasons": 3,
+        "career_source_row": "4980"
+      },
+      {
+        "id": "loftoke01",
+        "name": "Kenneth Lofton Jr.",
+        "height": 78.0,
+        "minutes": 375.0,
+        "seasons": 2,
+        "career_source_row": "5060"
+      },
+      {
+        "id": "loveke01",
+        "name": "Kevin Love",
+        "height": 82.0,
+        "minutes": 3650.0,
+        "seasons": 5,
+        "career_source_row": "3813"
+      },
+      {
+        "id": "lylestr01",
+        "name": "Trey Lyles",
+        "height": 81.0,
+        "minutes": 5649.0,
+        "seasons": 5,
+        "career_source_row": "4318"
+      },
+      {
+        "id": "mamuksa01",
+        "name": "Sandro Mamukelashvili",
+        "height": 81.0,
+        "minutes": 1088.0,
+        "seasons": 2,
+        "career_source_row": "4900"
+      },
+      {
+        "id": "markkla01",
+        "name": "Lauri Markkanen",
+        "height": 85.0,
+        "minutes": 8329.0,
+        "seasons": 5,
+        "career_source_row": "4497"
+      },
+      {
+        "id": "martike04",
+        "name": "KJ Martin",
+        "height": 78.0,
+        "minutes": 912.0,
+        "seasons": 1,
+        "career_source_row": "4874"
+      },
+      {
+        "id": "matkoka01",
+        "name": "Karlo Matković",
+        "height": 82.0,
+        "minutes": 1703.0,
+        "seasons": 2,
+        "career_source_row": "5229"
+      },
+      {
+        "id": "mcdanja02",
+        "name": "Jaden McDaniels",
+        "height": 81.0,
+        "minutes": 8244.0,
+        "seasons": 4,
+        "career_source_row": "4849"
+      },
+      {
+        "id": "mcderdo01",
+        "name": "Doug McDermott",
+        "height": 79.0,
+        "minutes": 2842.0,
+        "seasons": 2,
+        "career_source_row": "4237"
+      },
+      {
+        "id": "mcveija01",
+        "name": "Jack McVeigh",
+        "height": 80.0,
+        "minutes": 43.0,
+        "seasons": 1,
+        "career_source_row": "5272"
+      },
+      {
+        "id": "mellini01",
+        "name": "Nicolò Melli",
+        "height": 81.0,
+        "minutes": 566.0,
+        "seasons": 1,
+        "career_source_row": "4689"
+      },
+      {
+        "id": "metuch01",
+        "name": "Chimezie Metu",
+        "height": 82.0,
+        "minutes": 689.0,
+        "seasons": 1,
+        "career_source_row": "4623"
+      },
+      {
+        "id": "milleem01",
+        "name": "Emanuel Miller",
+        "height": 77.0,
+        "minutes": 58.0,
+        "seasons": 2,
+        "career_source_row": "5303"
+      },
+      {
+        "id": "millspa01",
+        "name": "Paul Millsap",
+        "height": 79.0,
+        "minutes": 1162.0,
+        "seasons": 1,
+        "career_source_row": "3673"
+      },
+      {
+        "id": "minotjo01",
+        "name": "Josh Minott",
+        "height": 80.0,
+        "minutes": 834.0,
+        "seasons": 1,
+        "career_source_row": "5094"
+      },
+      {
+        "id": "mobleev01",
+        "name": "Evan Mobley",
+        "height": 83.0,
+        "minutes": 10819.0,
+        "seasons": 5,
+        "career_source_row": "4921"
+      },
+      {
+        "id": "mobleis01",
+        "name": "Isaiah Mobley",
+        "height": 80.0,
+        "minutes": 173.0,
+        "seasons": 3,
+        "career_source_row": "5061"
+      },
+      {
+        "id": "mogbojo01",
+        "name": "Jonathan Mogbo",
+        "height": 81.0,
+        "minutes": 1535.0,
+        "seasons": 2,
+        "career_source_row": "5232"
+      },
+      {
+        "id": "morgaju01",
+        "name": "Juwan Morgan",
+        "height": 79.0,
+        "minutes": 178.0,
+        "seasons": 2,
+        "career_source_row": "4765"
+      },
+      {
+        "id": "morrima02",
+        "name": "Markieff Morris",
+        "height": 81.0,
+        "minutes": 2234.0,
+        "seasons": 5,
+        "career_source_row": "4003"
+      },
+      {
+        "id": "morrima03",
+        "name": "Marcus Morris",
+        "height": 80.0,
+        "minutes": 5708.0,
+        "seasons": 4,
+        "career_source_row": "4004"
+      },
+      {
+        "id": "murraco01",
+        "name": "Collin Murray-Boyles",
+        "height": 79.0,
+        "minutes": 1246.0,
+        "seasons": 1,
+        "career_source_row": "5361"
+      },
+      {
+        "id": "murrake02",
+        "name": "Keegan Murray",
+        "height": 80.0,
+        "minutes": 3403.0,
+        "seasons": 2,
+        "career_source_row": "5062"
+      },
+      {
+        "id": "nancela02",
+        "name": "Larry Nance Jr.",
+        "height": 78.0,
+        "minutes": 3043.0,
+        "seasons": 4,
+        "career_source_row": "4347"
+      },
+      {
+        "id": "nancepe01",
+        "name": "Pete Nance",
+        "height": 81.0,
+        "minutes": 902.0,
+        "seasons": 3,
+        "career_source_row": "5194"
+      },
+      {
+        "id": "nelsogr02",
+        "name": "Grant Nelson",
+        "height": 84.0,
+        "minutes": 35.0,
+        "seasons": 1,
+        "career_source_row": "5397"
+      },
+      {
+        "id": "newelas01",
+        "name": "Asa Newell",
+        "height": 82.0,
+        "minutes": 500.0,
+        "seasons": 1,
+        "career_source_row": "5354"
+      },
+      {
+        "id": "niangge01",
+        "name": "Georges Niang",
+        "height": 78.0,
+        "minutes": 7930.0,
+        "seasons": 5,
+        "career_source_row": "4415"
+      },
+      {
+        "id": "nnajize01",
+        "name": "Zeke Nnaji",
+        "height": 82.0,
+        "minutes": 3633.0,
+        "seasons": 6,
+        "career_source_row": "4854"
+      },
+      {
+        "id": "norrimi01",
+        "name": "Miles Norris",
+        "height": 79.0,
+        "minutes": 35.0,
+        "seasons": 1,
+        "career_source_row": "5305"
+      },
+      {
+        "id": "odurojo01",
+        "name": "Josh Oduro",
+        "height": 81.0,
+        "minutes": 82.0,
+        "seasons": 1,
+        "career_source_row": "5416"
+      },
+      {
+        "id": "ojelese01",
+        "name": "Semi Ojeleye",
+        "height": 78.0,
+        "minutes": 1356.0,
+        "seasons": 2,
+        "career_source_row": "4464"
+      },
+      {
+        "id": "okekech01",
+        "name": "Chuma Okeke",
+        "height": 79.0,
+        "minutes": 3078.0,
+        "seasons": 3,
+        "career_source_row": "4826"
+      },
+      {
+        "id": "okpalkz01",
+        "name": "KZ Okpala",
+        "height": 80.0,
+        "minutes": 939.0,
+        "seasons": 3,
+        "career_source_row": "4704"
+      },
+      {
+        "id": "olynyke01",
+        "name": "Kelly Olynyk",
+        "height": 84.0,
+        "minutes": 1997.0,
+        "seasons": 1,
+        "career_source_row": "4164"
+      },
+      {
+        "id": "omierno01",
+        "name": "Norchad Omier",
+        "height": 77.0,
+        "minutes": 24.0,
+        "seasons": 1,
+        "career_source_row": "5398"
+      },
+      {
+        "id": "parkeja01",
+        "name": "Jabari Parker",
+        "height": 79.0,
+        "minutes": 277.0,
+        "seasons": 2,
+        "career_source_row": "4242"
+      },
+      {
+        "id": "pascher01",
+        "name": "Eric Paschall",
+        "height": 78.0,
+        "minutes": 1431.0,
+        "seasons": 2,
+        "career_source_row": "4718"
+      },
+      {
+        "id": "pattepa01",
+        "name": "Patrick Patterson",
+        "height": 80.0,
+        "minutes": 582.0,
+        "seasons": 1,
+        "career_source_row": "3970"
+      },
+      {
+        "id": "perryre01",
+        "name": "Reggie Perry",
+        "height": 80.0,
+        "minutes": 398.0,
+        "seasons": 2,
+        "career_source_row": "4805"
+      },
+      {
+        "id": "peterdr01",
+        "name": "Drew Peterson",
+        "height": 80.0,
+        "minutes": 273.0,
+        "seasons": 3,
+        "career_source_row": "5186"
+      },
+      {
+        "id": "pickeja01",
+        "name": "Jamorko Pickett",
+        "height": 81.0,
+        "minutes": 176.0,
+        "seasons": 1,
+        "career_source_row": "4948"
+      },
+      {
+        "id": "pokusal01",
+        "name": "Aleksej Pokusevski",
+        "height": 84.0,
+        "minutes": 3429.0,
+        "seasons": 4,
+        "career_source_row": "4842"
+      },
+      {
+        "id": "portejo01",
+        "name": "Jontay Porter",
+        "height": 83.0,
+        "minutes": 414.0,
+        "seasons": 2,
+        "career_source_row": "4885"
+      },
+      {
+        "id": "porteot01",
+        "name": "Otto Porter Jr.",
+        "height": 80.0,
+        "minutes": 2002.0,
+        "seasons": 2,
+        "career_source_row": "4199"
+      },
+      {
+        "id": "portibo01",
+        "name": "Bobby Portis",
+        "height": 81.0,
+        "minutes": 6689.0,
+        "seasons": 4,
+        "career_source_row": "4344"
+      },
+      {
+        "id": "porzikr01",
+        "name": "Kristaps Porziņģis",
+        "height": 86.0,
+        "minutes": 1481.0,
+        "seasons": 1,
+        "career_source_row": "4325"
+      },
+      {
+        "id": "postqu01",
+        "name": "Quinten Post",
+        "height": 84.0,
+        "minutes": 1845.0,
+        "seasons": 2,
+        "career_source_row": "5287"
+      },
+      {
+        "id": "pottemi01",
+        "name": "Micah Potter",
+        "height": 81.0,
+        "minutes": 238.0,
+        "seasons": 2,
+        "career_source_row": "5012"
+      },
+      {
+        "id": "princta02",
+        "name": "Taurean Prince",
+        "height": 78.0,
+        "minutes": 5382.0,
+        "seasons": 4,
+        "career_source_row": "4412"
+      },
+      {
+        "id": "prospol01",
+        "name": "Olivier-Maxence Prosper",
+        "height": 79.0,
+        "minutes": 1904.0,
+        "seasons": 3,
+        "career_source_row": "5163"
+      },
+      {
+        "id": "randlju01",
+        "name": "Julius Randle",
+        "height": 81.0,
+        "minutes": 14414.0,
+        "seasons": 6,
+        "career_source_row": "4225"
+      },
+      {
+        "id": "reedpa01",
+        "name": "Paul Reed",
+        "height": 81.0,
+        "minutes": 177.0,
+        "seasons": 1,
+        "career_source_row": "4868"
+      },
+      {
+        "id": "reeseal01",
+        "name": "Alex Reese",
+        "height": 81.0,
+        "minutes": 216.0,
+        "seasons": 1,
+        "career_source_row": "5259"
+      },
+      {
+        "id": "reeseju01",
+        "name": "Julian Reese",
+        "height": 81.0,
+        "minutes": 402.0,
+        "seasons": 1,
+        "career_source_row": "5399"
+      },
+      {
+        "id": "reidna01",
+        "name": "Naz Reid",
+        "height": 81.0,
+        "minutes": 1964.0,
+        "seasons": 1,
+        "career_source_row": "4771"
+      },
+      {
+        "id": "richani01",
+        "name": "Nick Richards",
+        "height": 83.0,
+        "minutes": 63.0,
+        "seasons": 1,
+        "career_source_row": "4862"
+      },
+      {
+        "id": "robinje02",
+        "name": "Jeremiah Robinson-Earl",
+        "height": 81.0,
+        "minutes": 2748.0,
+        "seasons": 4,
+        "career_source_row": "4924"
+      },
+      {
+        "id": "robyis01",
+        "name": "Isaiah Roby",
+        "height": 78.0,
+        "minutes": 2847.0,
+        "seasons": 3,
+        "career_source_row": "4788"
+      },
+      {
+        "id": "roddyda01",
+        "name": "David Roddy",
+        "height": 77.0,
+        "minutes": 2918.0,
+        "seasons": 4,
+        "career_source_row": "5044"
+      },
+      {
+        "id": "roweja01",
+        "name": "Jackson Rowe",
+        "height": 78.0,
+        "minutes": 52.0,
+        "seasons": 1,
+        "career_source_row": "5297"
+      },
+      {
+        "id": "sabondo01",
+        "name": "Domantas Sabonis",
+        "height": 82.0,
+        "minutes": 4367.0,
+        "seasons": 2,
+        "career_source_row": "4403"
+      },
+      {
+        "id": "salauti01",
+        "name": "Tidjane Salaün",
+        "height": 82.0,
+        "minutes": 1819.0,
+        "seasons": 2,
+        "career_source_row": "5256"
+      },
+      {
+        "id": "samanlu01",
+        "name": "Luka Šamanić",
+        "height": 82.0,
+        "minutes": 873.0,
+        "seasons": 3,
+        "career_source_row": "4801"
+      },
+      {
+        "id": "sampsja02",
+        "name": "JaKarr Sampson",
+        "height": 79.0,
+        "minutes": 316.0,
+        "seasons": 1,
+        "career_source_row": "4244"
+      },
+      {
+        "id": "sanogad01",
+        "name": "Adama Sanogo",
+        "height": 81.0,
+        "minutes": 66.0,
+        "seasons": 1,
+        "career_source_row": "5189"
+      },
+      {
+        "id": "santogu01",
+        "name": "Gui Santos",
+        "height": 79.0,
+        "minutes": 2349.0,
+        "seasons": 3,
+        "career_source_row": "5174"
+      },
+      {
+        "id": "saricda01",
+        "name": "Dario Šarić",
+        "height": 82.0,
+        "minutes": 806.0,
+        "seasons": 1,
+        "career_source_row": "4404"
+      },
+      {
+        "id": "schofad01",
+        "name": "Admiral Schofield",
+        "height": 77.0,
+        "minutes": 535.0,
+        "seasons": 2,
+        "career_source_row": "4707"
+      },
+      {
+        "id": "scottmi01",
+        "name": "Mike Scott",
+        "height": 79.0,
+        "minutes": 852.0,
+        "seasons": 1,
+        "career_source_row": "4126"
+      },
+      {
+        "id": "scotttr01",
+        "name": "Tre Scott",
+        "height": 80.0,
+        "minutes": 182.0,
+        "seasons": 1,
+        "career_source_row": "4988"
+      },
+      {
+        "id": "sharpda01",
+        "name": "Day'Ron Sharpe",
+        "height": 82.0,
+        "minutes": 391.0,
+        "seasons": 1,
+        "career_source_row": "4949"
+      },
+      {
+        "id": "siakapa01",
+        "name": "Pascal Siakam",
+        "height": 80.0,
+        "minutes": 14498.0,
+        "seasons": 6,
+        "career_source_row": "4405"
+      },
+      {
+        "id": "silvach01",
+        "name": "Chris Silva",
+        "height": 80.0,
+        "minutes": 186.0,
+        "seasons": 3,
+        "career_source_row": "4708"
+      },
+      {
+        "id": "simsje01",
+        "name": "Jericho Sims",
+        "height": 82.0,
+        "minutes": 555.0,
+        "seasons": 1,
+        "career_source_row": "4926"
+      },
+      {
+        "id": "smailal01",
+        "name": "Alen Smailagić",
+        "height": 82.0,
+        "minutes": 84.0,
+        "seasons": 1,
+        "career_source_row": "4775"
+      },
+      {
+        "id": "smithja04",
+        "name": "Jalen Smith",
+        "height": 80.0,
+        "minutes": 1081.0,
+        "seasons": 2,
+        "career_source_row": "4830"
+      },
+      {
+        "id": "smithja05",
+        "name": "Jabari Smith Jr.",
+        "height": 83.0,
+        "minutes": 9296.0,
+        "seasons": 4,
+        "career_source_row": "5046"
+      },
+      {
+        "id": "smithto05",
+        "name": "Tolu Smith",
+        "height": 83.0,
+        "minutes": 159.0,
+        "seasons": 2,
+        "career_source_row": "5314"
+      },
+      {
+        "id": "smithty02",
+        "name": "Tyler Smith",
+        "height": 81.0,
+        "minutes": 288.0,
+        "seasons": 2,
+        "career_source_row": "5237"
+      },
+      {
+        "id": "sochaje01",
+        "name": "Jeremy Sochan",
+        "height": 80.0,
+        "minutes": 5484.0,
+        "seasons": 4,
+        "career_source_row": "5047"
+      },
+      {
+        "id": "stevela01",
+        "name": "Lamar Stevens",
+        "height": 79.0,
+        "minutes": 2228.0,
+        "seasons": 4,
+        "career_source_row": "4851"
+      },
+      {
+        "id": "stewais01",
+        "name": "Isaiah Stewart",
+        "height": 80.0,
+        "minutes": 1423.0,
+        "seasons": 1,
+        "career_source_row": "4855"
+      },
+      {
+        "id": "tateja01",
+        "name": "Jae'Sean Tate",
+        "height": 76.0,
+        "minutes": 2056.0,
+        "seasons": 1,
+        "career_source_row": "4844"
+      },
+      {
+        "id": "tatumja01",
+        "name": "Jayson Tatum",
+        "height": 80.0,
+        "minutes": 5791.0,
+        "seasons": 3,
+        "career_source_row": "4465"
+      },
+      {
+        "id": "taylote01",
+        "name": "Terry Taylor",
+        "height": 77.0,
+        "minutes": 1172.0,
+        "seasons": 4,
+        "career_source_row": "5016"
+      },
+      {
+        "id": "telfoja01",
+        "name": "Jahmyl Telfort",
+        "height": 79.0,
+        "minutes": 32.0,
+        "seasons": 1,
+        "career_source_row": "5369"
+      },
+      {
+        "id": "terryem01",
+        "name": "Emanuel Terry",
+        "height": 81.0,
+        "minutes": 18.0,
+        "seasons": 1,
+        "career_source_row": "4667"
+      },
+      {
+        "id": "thorjt01",
+        "name": "JT Thor",
+        "height": 81.0,
+        "minutes": 2261.0,
+        "seasons": 4,
+        "career_source_row": "4944"
+      },
+      {
+        "id": "tillmxa01",
+        "name": "Xavier Tillman Sr.",
+        "height": 80.0,
+        "minutes": 2760.0,
+        "seasons": 3,
+        "career_source_row": "4866"
+      },
+      {
+        "id": "timmedr01",
+        "name": "Drew Timme",
+        "height": 81.0,
+        "minutes": 489.0,
+        "seasons": 2,
+        "career_source_row": "5311"
+      },
+      {
+        "id": "toddis01",
+        "name": "Isaiah Todd",
+        "height": 81.0,
+        "minutes": 135.0,
+        "seasons": 2,
+        "career_source_row": "4954"
+      },
+      {
+        "id": "tollian01",
+        "name": "Anthony Tolliver",
+        "height": 80.0,
+        "minutes": 99.0,
+        "seasons": 1,
+        "career_source_row": "3837"
+      },
+      {
+        "id": "tomlina01",
+        "name": "Nae'Qwan Tomlin",
+        "height": 80.0,
+        "minutes": 1067.0,
+        "seasons": 2,
+        "career_source_row": "5299"
+      },
+      {
+        "id": "toppiob01",
+        "name": "Obi Toppin",
+        "height": 81.0,
+        "minutes": 6662.0,
+        "seasons": 6,
+        "career_source_row": "4831"
+      },
+      {
+        "id": "townska01",
+        "name": "Karl-Anthony Towns",
+        "height": 84.0,
+        "minutes": 2983.0,
+        "seasons": 2,
+        "career_source_row": "4328"
+      },
+      {
+        "id": "tshieos01",
+        "name": "Oscar Tshiebwe",
+        "height": 80.0,
+        "minutes": 42.0,
+        "seasons": 1,
+        "career_source_row": "5182"
+      },
+      {
+        "id": "tuckepj01",
+        "name": "P.J. Tucker",
+        "height": 77.0,
+        "minutes": 5743.0,
+        "seasons": 4,
+        "career_source_row": "3682"
+      },
+      {
+        "id": "tysonhu01",
+        "name": "Hunter Tyson",
+        "height": 80.0,
+        "minutes": 610.0,
+        "seasons": 3,
+        "career_source_row": "5157"
+      },
+      {
+        "id": "vandeja01",
+        "name": "Jarred Vanderbilt",
+        "height": 80.0,
+        "minutes": 7188.0,
+        "seasons": 6,
+        "career_source_row": "4666"
+      },
+      {
+        "id": "vezenal01",
+        "name": "Sasha Vezenkov",
+        "height": 80.0,
+        "minutes": 511.0,
+        "seasons": 1,
+        "career_source_row": "5140"
+      },
+      {
+        "id": "wadede01",
+        "name": "Dean Wade",
+        "height": 81.0,
+        "minutes": 6761.0,
+        "seasons": 6,
+        "career_source_row": "4760"
+      },
+      {
+        "id": "wainris01",
+        "name": "Ish Wainright",
+        "height": 77.0,
+        "minutes": 359.0,
+        "seasons": 1,
+        "career_source_row": "4972"
+      },
+      {
+        "id": "walkeja01",
+        "name": "Jabari Walker",
+        "height": 79.0,
+        "minutes": 762.0,
+        "seasons": 1,
+        "career_source_row": "5070"
+      },
+      {
+        "id": "walkeja02",
+        "name": "Jarace Walker",
+        "height": 79.0,
+        "minutes": 3480.0,
+        "seasons": 3,
+        "career_source_row": "5141"
+      },
+      {
+        "id": "walshjo01",
+        "name": "Jordan Walsh",
+        "height": 78.0,
+        "minutes": 1615.0,
+        "seasons": 2,
+        "career_source_row": "5192"
+      },
+      {
+        "id": "warretj01",
+        "name": "T.J. Warren",
+        "height": 80.0,
+        "minutes": 687.0,
+        "seasons": 1,
+        "career_source_row": "4263"
+      },
+      {
+        "id": "washipj01",
+        "name": "P.J. Washington",
+        "height": 79.0,
+        "minutes": 10126.0,
+        "seasons": 5,
+        "career_source_row": "4710"
+      },
+      {
+        "id": "watfotr01",
+        "name": "Trendon Watford",
+        "height": 80.0,
+        "minutes": 3815.0,
+        "seasons": 4,
+        "career_source_row": "4969"
+      },
+      {
+        "id": "wheelph02",
+        "name": "Phillip Wheeler",
+        "height": 80.0,
+        "minutes": 44.0,
+        "seasons": 1,
+        "career_source_row": "5309"
+      },
+      {
+        "id": "whittgr01",
+        "name": "Greg Whittington",
+        "height": 80.0,
+        "minutes": 12.0,
+        "seasons": 1,
+        "career_source_row": "4880"
+      },
+      {
+        "id": "wiggian01",
+        "name": "Andrew Wiggins",
+        "height": 78.0,
+        "minutes": 2364.0,
+        "seasons": 1,
+        "career_source_row": "4248"
+      },
+      {
+        "id": "william01",
+        "name": "Amari Williams",
+        "height": 83.0,
+        "minutes": 146.0,
+        "seasons": 1,
+        "career_source_row": "5355"
+      },
+      {
+        "id": "willigr01",
+        "name": "Grant Williams",
+        "height": 79.0,
+        "minutes": 8378.0,
+        "seasons": 6,
+        "career_source_row": "4712"
+      },
+      {
+        "id": "willija06",
+        "name": "Jalen Williams",
+        "height": 77.0,
+        "minutes": 2223.0,
+        "seasons": 1,
+        "career_source_row": "5049"
+      },
+      {
+        "id": "willija07",
+        "name": "Jaylin Williams",
+        "height": 81.0,
+        "minutes": 2061.0,
+        "seasons": 2,
+        "career_source_row": "5069"
+      },
+      {
+        "id": "willike04",
+        "name": "Kenrich Williams",
+        "height": 79.0,
+        "minutes": 5648.0,
+        "seasons": 5,
+        "career_source_row": "4615"
+      },
+      {
+        "id": "willipa01",
+        "name": "Patrick Williams",
+        "height": 78.0,
+        "minutes": 8952.0,
+        "seasons": 6,
+        "career_source_row": "4833"
+      },
+      {
+        "id": "willizi01",
+        "name": "Zion Williamson",
+        "height": 78.0,
+        "minutes": 7887.0,
+        "seasons": 5,
+        "career_source_row": "4785"
+      },
+      {
+        "id": "wilsodj01",
+        "name": "D.J. Wilson",
+        "height": 82.0,
+        "minutes": 502.0,
+        "seasons": 3,
+        "career_source_row": "4512"
+      },
+      {
+        "id": "wilsoja03",
+        "name": "Jalen Wilson",
+        "height": 78.0,
+        "minutes": 3554.0,
+        "seasons": 3,
+        "career_source_row": "5162"
+      },
+      {
+        "id": "winslju01",
+        "name": "Justise Winslow",
+        "height": 78.0,
+        "minutes": 1550.0,
+        "seasons": 2,
+        "career_source_row": "4330"
+      },
+      {
+        "id": "wolfda01",
+        "name": "Danny Wolf",
+        "height": 83.0,
+        "minutes": 1187.0,
+        "seasons": 1,
+        "career_source_row": "5373"
+      },
+      {
+        "id": "woodch01",
+        "name": "Christian Wood",
+        "height": 80.0,
+        "minutes": 872.0,
+        "seasons": 1,
+        "career_source_row": "4331"
+      },
+      {
+        "id": "wrighmo01",
+        "name": "Moses Wright",
+        "height": 80.0,
+        "minutes": 14.0,
+        "seasons": 1,
+        "career_source_row": "4989"
+      },
+      {
+        "id": "youngth01",
+        "name": "Thaddeus Young",
+        "height": 80.0,
+        "minutes": 3731.0,
+        "seasons": 4,
+        "career_source_row": "3769"
+      }
+    ]
+  }
+]
