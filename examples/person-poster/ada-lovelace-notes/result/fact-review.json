@@ -1,0 +1,103 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "id": "year-0",
+      "claim": "1815",
+      "status": "passed",
+      "source": "Science Museum Group Ada Lovelace person entry and Sketch of the Analytical Engine1843 object entry; checked2026-10-28",
+      "observed": "1815",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "event-0",
+      "claim": "出生于伦敦",
+      "status": "passed",
+      "source": "Science Museum Group Ada Lovelace person entry and Sketch of the Analytical Engine1843 object entry; checked2026-10-28",
+      "observed": "出生于伦敦",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "year-1",
+      "claim": "1833",
+      "status": "passed",
+      "source": "Science Museum Group Ada Lovelace person entry and Sketch of the Analytical Engine1843 object entry; checked2026-10-28",
+      "observed": "1833",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "event-1",
+      "claim": "经玛丽·萨默维尔介绍，\n结识查尔斯·巴贝奇",
+      "status": "passed",
+      "source": "Science Museum Group Ada Lovelace person entry and Sketch of the Analytical Engine1843 object entry; checked2026-10-28",
+      "observed": "经玛丽·萨默维尔介绍，\n结识查尔斯·巴贝奇",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "year-2",
+      "claim": "1843",
+      "status": "passed",
+      "source": "Science Museum Group Ada Lovelace person entry and Sketch of the Analytical Engine1843 object entry; checked2026-10-28",
+      "observed": "1843",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "event-2",
+      "claim": "翻译梅纳布雷亚的分析机论文，\n并附加自己的笔记",
+      "status": "passed",
+      "source": "Science Museum Group Ada Lovelace person entry and Sketch of the Analytical Engine1843 object entry; checked2026-10-28",
+      "observed": "翻译梅纳布雷亚的分析机论文，\n并附加自己的笔记",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "year-3",
+      "claim": "1852",
+      "status": "passed",
+      "source": "Science Museum Group Ada Lovelace person entry and Sketch of the Analytical Engine1843 object entry; checked2026-10-28",
+      "observed": "1852",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "event-3",
+      "claim": "去世；留下对通用计算的思考",
+      "status": "passed",
+      "source": "Science Museum Group Ada Lovelace person entry and Sketch of the Analytical Engine1843 object entry; checked2026-10-28",
+      "observed": "去世；留下对通用计算的思考",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "thought",
+      "claim": "计算装置不仅能处理数值，\n也可能处理符号、字母与音乐。",
+      "status": "passed",
+      "source": "Science Museum Group Ada Lovelace person entry and Sketch of the Analytical Engine1843 object entry; checked2026-10-28",
+      "observed": "计算装置不仅能处理数值，\n也可能处理符号、字母与音乐。",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "scope",
+      "claim": "四个事件为主题选取；排列间距不表示时间长度。",
+      "status": "passed",
+      "source": "Science Museum Group Ada Lovelace person entry and Sketch of the Analytical Engine1843 object entry; checked2026-10-28",
+      "observed": "四个事件为主题选取；排列间距不表示时间长度。",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "credit",
+      "claim": "资料：Science Museum Group · 肖像：Alfred Edward Chalon",
+      "status": "passed",
+      "source": "Science Museum Group Ada Lovelace person entry and Sketch of the Analytical Engine1843 object entry; checked2026-10-28; Wikimedia Commons file page",
+      "observed": "资料：Science Museum Group · 肖像：Alfred Edward Chalon",
+      "evidence": "evidence/sources.json"
+    }
+  ],
+  "comparisons": [
+    {
+      "dataPointer": "",
+      "evidence": {
+        "file": "evidence/input-facts.json",
+        "pointer": "",
+        "source": "Curator-compiled public task input; source attribution and field definitions in evidence/sources.json. Not an official JSON export."
+      }
+    }
+  ]
+}

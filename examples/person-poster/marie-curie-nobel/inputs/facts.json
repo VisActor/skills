@@ -1,0 +1,28 @@
+{
+  "text": {
+    "headline": "两次诺奖\n两门科学",
+    "sole": "独享",
+    "bottom-claim": "从物理学到化学\n两份获奖记录",
+    "scope": "图中比例为诺贝尔奖的奖项份额，\n并非科研贡献的占比。",
+    "credit": "摄影 Henri Manuel，约1920年 · 奖项数据 NobelPrize.org"
+  },
+  "years": {
+    "physics": 1903,
+    "chemistry": 1911
+  },
+  "chemistryShare": 1,
+  "physics": [
+    {
+      "name": "亨利·贝克勒尔",
+      "value": 50
+    },
+    {
+      "name": "皮埃尔·居里",
+      "value": 25
+    },
+    {
+      "name": "玛丽·居里",
+      "value": 25
+    }
+  ]
+}

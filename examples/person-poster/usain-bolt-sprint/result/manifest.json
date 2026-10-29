@@ -1,0 +1,58 @@
+{
+  "html": "index.html",
+  "png": "preview.png",
+  "delivery": "html+png",
+  "canvas": {
+    "width": 1200,
+    "height": 2000
+  },
+  "charts": [
+    {
+      "id": "olympic-finals",
+      "spec": "charts/olympic-finals.spec.json",
+      "mount": "#chart-olympic-finals"
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/subject.png",
+      "kind": "bitmap",
+      "sourceFile": "assets/original.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Usain_Bolt_Rio_100m_final_2016g-cr.jpg",
+      "credit": "Fernando Frazão/Agência Brasil",
+      "usageStatus": "verified",
+      "usageTerms": "CC BY3.0BR, photograph14Aug2016. Credit photographer/agency, link licence and indicate background removal. No endorsement implied.",
+      "source": "web-search",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/",
+      "processing": [
+        {
+          "operation": "background-removal",
+          "engine": "Apple Vision VNGenerateForegroundInstanceMaskRequest",
+          "mask": "assets/mask.png",
+          "preparation": "prepare_subject.py --mask --crop keep",
+          "rgbVerification": "assets/rgb-preservation.json"
+        }
+      ]
+    }
+  ],
+  "displayBindings": "display-map.json",
+  "managedRuntime": true,
+  "export": {
+    "selector": "#infographic",
+    "width": 1200,
+    "height": 2000,
+    "deviceScaleFactor": 2,
+    "viewport": {
+      "width": 1200,
+      "height": 2000
+    }
+  },
+  "dependencies": [
+    {
+      "name": "@visactor/vchart",
+      "version": "2.1.7",
+      "file": "assets/vchart.js",
+      "source": "https://unpkg.com/@visactor/vchart@2.1.7/build/index.min.js"
+    }
+  ]
+}

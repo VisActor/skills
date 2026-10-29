@@ -29,6 +29,16 @@
 | [大 S：横版照片墙人物志](life-chronicle/barbie-hsu/README.md) | 人物抠图与事件图文编排 | 历史生成结果；提示词与复现限制见案例 |
 | [刘欢：竖版环形人物志](life-chronicle/liu-huan/README.md) | 人物抠图与事件图文编排 | 历史生成结果；提示词与复现限制见案例 |
 
+## person-poster
+
+| 案例 | 展示能力 | 输入说明 |
+| --- | --- | --- |
+| [玛丽·居里：两次诺奖，两门科学](person-poster/marie-curie-nobel/README.md) | 摄影主视觉、奖项份额、可编辑HTML与2x PNG | 诺奖事实整理输入、公开肖像与来源 |
+| [博尔特：短跑成绩档案](person-poster/usain-bolt-sprint/README.md) | 真实照片剪影、项目区分、同项目决赛图表、HTML与2x PNG | 原图、原生蒙版、原始RGB保留与CC BY3.0BR署名 |
+| [贝多芬：交响曲作品编年](person-poster/beethoven-symphonies/README.md) | 九部作品的首次演出编年、乐章数量图表、HTML与2x PNG | 音乐学院逐作品资料；年份含私人演出 |
+| [Ada Lovelace：分析机笔记](person-poster/ada-lovelace-notes/README.md) | 人物与事件编排、无图表、HTML-only | 博物馆事实与公开肖像；预览仅为网页截图 |
+| [虚构创作者：作品与媒介](person-poster/fictional-creator-studio/README.md) | AI插画、年度产出与媒介组成、HTML与2x PNG | 明确虚构人物与15条模拟计数；附生图提示词 |
+
 ## VBI 交互示例
 
 每个 Skill 提供一个单文件 HTML；地震示例联网读取 USGS，其余示例内嵌数据。
@@ -68,6 +78,6 @@ examples/<skill-name>/<case-name>/
 
 ## 与测试的关系
 
-`examples/` 面向用户展示效果。确定性回归放在 `tests/`，固定模型任务与验收标准放在 `evals/cases/`，浏览器 smoke 放在 `evals/smoke/`。
+`examples/` 面向用户展示效果。确定性回归放在 `tests/`，固定模型任务与验收标准放在 `cases/`，浏览器 smoke 放在 `tests/browser/cases/`。
 
 展示案例可以来自测试，但需要看过实际内容与视觉结果后再收录。模板占位内容和合成 smoke 产物不会自动成为优秀案例。CI 不调用模型重新生成案例，也不对展示截图做像素比对。如果案例揭示了稳定的回归问题，应在对应测试目录补充有针对性的测试。

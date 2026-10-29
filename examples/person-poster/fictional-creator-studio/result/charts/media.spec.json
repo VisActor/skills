@@ -1,0 +1,93 @@
+{
+  "type": "bar",
+  "direction": "horizontal",
+  "animation": false,
+  "background": "transparent",
+  "padding": {
+    "left": 24,
+    "right": 55,
+    "top": 20,
+    "bottom": 12
+  },
+  "data": [
+    {
+      "id": "input",
+      "values": [
+        {
+          "name": "插画",
+          "value": 60
+        },
+        {
+          "name": "动画",
+          "value": 20
+        },
+        {
+          "name": "交互作品",
+          "value": 20
+        }
+      ]
+    }
+  ],
+  "xField": "value",
+  "yField": "name",
+  "seriesField": "name",
+  "stack": false,
+  "color": [
+    "#6e52a0",
+    "#397b70",
+    "#a65b37"
+  ],
+  "axes": [
+    {
+      "orient": "left",
+      "type": "band",
+      "inverse": false,
+      "label": {
+        "autoHide": false,
+        "autoLimit": false,
+        "style": {
+          "fontSize": 28,
+          "fill": "#1c2e2a"
+        }
+      },
+      "grid": {
+        "visible": false
+      },
+      "tick": {
+        "visible": false
+      },
+      "domainLine": {
+        "visible": false
+      }
+    },
+    {
+      "orient": "bottom",
+      "type": "linear",
+      "min": 0,
+      "max": 75,
+      "nice": false,
+      "visible": false
+    }
+  ],
+  "label": {
+    "visible": true,
+    "position": "right",
+    "smartInvert": false,
+    "style": {
+      "fontSize": 28,
+      "fill": "#1c2e2a",
+      "stroke": false
+    }
+  },
+  "bar": {
+    "style": {
+      "cornerRadius": 0
+    }
+  },
+  "legends": {
+    "visible": false
+  },
+  "tooltip": {
+    "visible": false
+  }
+}

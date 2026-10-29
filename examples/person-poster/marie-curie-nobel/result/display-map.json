@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "dom": [
+    {
+      "id": "eyebrow",
+      "kind": "label",
+      "text": "SCIENCE / MARIE CURIE"
+    },
+    {
+      "id": "headline",
+      "kind": "claim",
+      "dataPointer": "/text/headline",
+      "factIds": [
+        "headline"
+      ]
+    },
+    {
+      "id": "name",
+      "kind": "label",
+      "text": "玛丽·居里"
+    },
+    {
+      "id": "latin",
+      "kind": "label",
+      "text": "MARIE SKŁODOWSKA CURIE"
+    },
+    {
+      "id": "physics-year",
+      "kind": "value",
+      "dataPointer": "/years/physics",
+      "format": {
+        "style": "decimal",
+        "places": 0
+      }
+    },
+    {
+      "id": "physics-name",
+      "kind": "label",
+      "text": "诺贝尔物理学奖"
+    },
+    {
+      "id": "unit",
+      "kind": "label",
+      "text": "当年奖项份额 / %"
+    },
+    {
+      "id": "chemistry-year",
+      "kind": "value",
+      "dataPointer": "/years/chemistry",
+      "format": {
+        "style": "decimal",
+        "places": 0
+      }
+    },
+    {
+      "id": "chemistry-name",
+      "kind": "label",
+      "text": "诺贝尔化学奖"
+    },
+    {
+      "id": "chemistry-share",
+      "kind": "value",
+      "dataPointer": "/chemistryShare",
+      "format": {
+        "style": "percent",
+        "places": 0
+      }
+    },
+    {
+      "id": "sole",
+      "kind": "claim",
+      "dataPointer": "/text/sole",
+      "factIds": [
+        "sole"
+      ]
+    },
+    {
+      "id": "bottom-claim",
+      "kind": "claim",
+      "dataPointer": "/text/bottom-claim",
+      "factIds": [
+        "bottom-claim"
+      ]
+    },
+    {
+      "id": "scope",
+      "kind": "claim",
+      "dataPointer": "/text/scope",
+      "factIds": [
+        "scope"
+      ]
+    },
+    {
+      "id": "credit",
+      "kind": "claim",
+      "dataPointer": "/text/credit",
+      "factIds": [
+        "credit"
+      ]
+    }
+  ],
+  "charts": [
+    {
+      "id": "physics",
+      "data": [
+        {
+          "specPointer": "/data/0/values",
+          "dataPointer": "/physics"
+        }
+      ]
+    }
+  ]
+}

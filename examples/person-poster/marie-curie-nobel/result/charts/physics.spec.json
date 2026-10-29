@@ -1,0 +1,93 @@
+{
+  "type": "bar",
+  "direction": "horizontal",
+  "animation": false,
+  "background": "transparent",
+  "padding": {
+    "left": 64,
+    "right": 55,
+    "top": 20,
+    "bottom": 12
+  },
+  "data": [
+    {
+      "id": "input",
+      "values": [
+        {
+          "name": "亨利·贝克勒尔",
+          "value": 50
+        },
+        {
+          "name": "皮埃尔·居里",
+          "value": 25
+        },
+        {
+          "name": "玛丽·居里",
+          "value": 25
+        }
+      ]
+    }
+  ],
+  "xField": "value",
+  "yField": "name",
+  "seriesField": "name",
+  "stack": false,
+  "color": [
+    "#969c91",
+    "#5f7766",
+    "#b65b2a"
+  ],
+  "axes": [
+    {
+      "orient": "left",
+      "type": "band",
+      "inverse": false,
+      "label": {
+        "autoHide": false,
+        "autoLimit": false,
+        "style": {
+          "fontSize": 28,
+          "fill": "#1c2e2a"
+        }
+      },
+      "grid": {
+        "visible": false
+      },
+      "tick": {
+        "visible": false
+      },
+      "domainLine": {
+        "visible": false
+      }
+    },
+    {
+      "orient": "bottom",
+      "type": "linear",
+      "min": 0,
+      "max": 65,
+      "nice": false,
+      "visible": false
+    }
+  ],
+  "label": {
+    "visible": true,
+    "position": "right",
+    "smartInvert": false,
+    "style": {
+      "fontSize": 28,
+      "fill": "#1c2e2a",
+      "stroke": false
+    }
+  },
+  "bar": {
+    "style": {
+      "cornerRadius": 0
+    }
+  },
+  "legends": {
+    "visible": false
+  },
+  "tooltip": {
+    "visible": false
+  }
+}

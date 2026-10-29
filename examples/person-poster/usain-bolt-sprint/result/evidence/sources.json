@@ -1,0 +1,48 @@
+{
+  "compiled": true,
+  "checked": "2026-10-29",
+  "scope": "Two separate outdoor personal bests and selected2008/2012/2016 Olympic100m finals; shorter elapsed time is faster, not full career data.",
+  "facts": [
+    {
+      "url": "https://worldathletics.org/athletes/_/14201847",
+      "fields": [
+        "personal bests, dates, nationality"
+      ]
+    },
+    {
+      "url": "https://worldathletics.org/records/toplists/sprints/100-metres/all/men/senior/2009",
+      "fields": [
+        "9.58,+0.9m/s,Berlin,16Aug2009"
+      ]
+    },
+    {
+      "url": "https://worldathletics.org/records/toplists/sprints/200-metres/all/men/senior/2009",
+      "fields": [
+        "19.19,-0.3m/s,Berlin,20Aug2009"
+      ]
+    },
+    {
+      "url": "https://worldathletics.org/download/competition?filename=AT-100-M-f----.SL2.pdf&path=%5Cpdf%5C7132391%5C&updatedOn=08%2F01%2F2021+10%3A44%3A26&urlslug=Official+Startlist",
+      "fields": [
+        "historical Best Olympic Performances9.63/9.69/9.81, dates and cities"
+      ]
+    },
+    {
+      "url": "https://worldathletics.org/download/download?filename=c177c17b-bd27-4a1f-aac5-ee07e53a4137.pdf&urlSlug=tokyo-2020-olympic-games-statistics-handbook1",
+      "fields": [
+        "indexed Olympic100m winner table2008/2012/2016:9.69/9.63/9.81"
+      ]
+    }
+  ],
+  "portrait": {
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Usain_Bolt_Rio_100m_final_2016g-cr.jpg",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/72/Usain_Bolt_Rio_100m_final_2016g-cr.jpg",
+    "author": "Fernando Frazão/Agência Brasil",
+    "date": "2016-08-14",
+    "license": "CC BY3.0BR",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/",
+    "changes": "Apple Vision native mask applied as alpha only, full1024x2160 frame; original decoded RGB unchanged for all2211840 pixels. Original JPEG and mask supplied.",
+    "limitations": "Soft native mask boundaries and very thin shoelaces can differ from manual masking; no identity/body/clothing redraw.",
+    "endorsement": false
+  }
+}

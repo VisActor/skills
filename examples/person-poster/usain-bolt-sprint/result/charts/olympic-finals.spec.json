@@ -1,0 +1,112 @@
+{
+  "type": "bar",
+  "direction": "horizontal",
+  "animation": false,
+  "background": "transparent",
+  "padding": {
+    "left": 30,
+    "right": 70,
+    "top": 8,
+    "bottom": 10
+  },
+  "data": [
+    {
+      "id": "input",
+      "values": [
+        {
+          "name": "北京 / 2008",
+          "value": 9.69
+        },
+        {
+          "name": "伦敦 / 2012",
+          "value": 9.63
+        },
+        {
+          "name": "里约 / 2016",
+          "value": 9.81
+        }
+      ]
+    }
+  ],
+  "xField": "value",
+  "yField": "name",
+  "seriesField": "name",
+  "stack": false,
+  "color": [
+    "#d6e56d",
+    "#d6e56d",
+    "#d6e56d"
+  ],
+  "axes": [
+    {
+      "orient": "left",
+      "type": "band",
+      "inverse": false,
+      "label": {
+        "autoHide": false,
+        "autoLimit": false,
+        "style": {
+          "fontSize": 28,
+          "fill": "#f6f2df"
+        }
+      },
+      "grid": {
+        "visible": false
+      },
+      "tick": {
+        "visible": false
+      },
+      "domainLine": {
+        "visible": false
+      }
+    },
+    {
+      "orient": "bottom",
+      "type": "linear",
+      "min": 0,
+      "max": 11,
+      "nice": false,
+      "visible": true,
+      "tickCount": 3,
+      "label": {
+        "style": {
+          "fontSize": 28,
+          "fill": "#f6f2df"
+        }
+      },
+      "grid": {
+        "visible": true,
+        "style": {
+          "stroke": "#415357"
+        }
+      },
+      "domainLine": {
+        "visible": false
+      },
+      "tick": {
+        "visible": false
+      }
+    }
+  ],
+  "label": {
+    "visible": true,
+    "position": "right",
+    "smartInvert": false,
+    "style": {
+      "fontSize": 28,
+      "fill": "#f6f2df",
+      "stroke": false
+    }
+  },
+  "bar": {
+    "style": {
+      "cornerRadius": 0
+    }
+  },
+  "legends": {
+    "visible": false
+  },
+  "tooltip": {
+    "visible": false
+  }
+}

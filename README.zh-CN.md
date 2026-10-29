@@ -131,7 +131,7 @@ chart-storytelling 由当前 Agent 生成 VSeed 配置，再用本地脚本组�
 
 ## 案例展示
 
-[案例目录](examples/README.md) 已收录 CO₂ 滚动故事、Las Vegas Web-PPT、6组杂志图文案例和4组人物志案例，包含提示词、图片或页面结果，以及输入与复现限制。
+[案例目录](examples/README.md) 已收录 CO₂ 滚动故事、Las Vegas Web-PPT、6组杂志图文案例、4组人物志案例和5条人物数据海报案例（含真实剪影、HTML-only与明确虚构的AI插画案例），包含提示词、图片或页面结果，以及输入与复现限制。
 
 ## 开发与维护
 

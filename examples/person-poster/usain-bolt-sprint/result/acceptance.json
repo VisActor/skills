@@ -1,0 +1,25 @@
+{
+  "technical": {
+    "status": "pending"
+  },
+  "factual": {
+    "status": "passed",
+    "evidence": [
+      "evidence/sources.json"
+    ]
+  },
+  "visual": {
+    "status": "pending"
+  },
+  "usage": {
+    "status": "passed",
+    "assets": [
+      {
+        "file": "assets/subject.png",
+        "status": "passed",
+        "basis": "CC BY3.0BR, photograph14Aug2016. Credit photographer/agency, link licence and indicate background removal. No endorsement implied.",
+        "evidence": "evidence/sources.json"
+      }
+    ]
+  }
+}

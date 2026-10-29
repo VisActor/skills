@@ -1,0 +1,47 @@
+{
+  "html": "index.html",
+  "png": "preview.png",
+  "delivery": "html+png",
+  "canvas": {
+    "width": 1200,
+    "height": 1500
+  },
+  "charts": [
+    {
+      "id": "physics",
+      "spec": "charts/physics.spec.json",
+      "mount": "#chart-physics"
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/portrait.jpg",
+      "kind": "bitmap",
+      "sourceFile": "assets/portrait.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Marie_Curie_c1920.jpg",
+      "credit": "Henri Manuel",
+      "usageStatus": "verified",
+      "usageTerms": "Public domain, PDM1.0 as identified on the file page; Henri Manuel circa1920; unretouched photographic source retained."
+    }
+  ],
+  "displayBindings": "display-map.json",
+  "managedRuntime": true,
+  "export": {
+    "selector": "#infographic",
+    "width": 1200,
+    "height": 1500,
+    "deviceScaleFactor": 2,
+    "viewport": {
+      "width": 1200,
+      "height": 1500
+    }
+  },
+  "dependencies": [
+    {
+      "name": "@visactor/vchart",
+      "version": "2.1.7",
+      "file": "assets/vchart.js",
+      "source": "https://unpkg.com/@visactor/vchart@2.1.7/build/index.min.js"
+    }
+  ]
+}

@@ -132,7 +132,7 @@ Generated JavaScript/HTML is executable code. Preview your own or reviewed artif
 
 ## Examples
 
-The [example gallery](examples/README.md) includes a CO₂ scrolling story, a Las Vegas Web-PPT, six editorial-magazine collections and four life-chronicle collections. Each case links its prompts and results and explains the available inputs and reproduction limits.
+The [example gallery](examples/README.md) includes a CO₂ scrolling story, a Las Vegas Web-PPT, six editorial-magazine collections, four life-chronicle collections and five person-poster cases (including a real-photo cutout, HTML-only delivery and explicitly fictional AI artwork). Each case links its prompts and results and explains the available inputs and reproduction limits.
 
 ## Development and maintenance
 

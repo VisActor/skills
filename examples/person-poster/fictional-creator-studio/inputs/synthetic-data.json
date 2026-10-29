@@ -1,0 +1,179 @@
+{
+  "text": {
+    "disclaimer": "虚构人物 · AI插画 · 模拟数据",
+    "period": "统计区间 2021—2025",
+    "scope": "本页仅演示作品统计方法，不对应真实人物或真实业绩。",
+    "credit": "人物插画：OpenAI imagegen · 数据：案例作者构造"
+  },
+  "fictional": true,
+  "synthetic": true,
+  "records": [
+    {
+      "year": "2021",
+      "category": "插画",
+      "value": 8
+    },
+    {
+      "year": "2021",
+      "category": "动画",
+      "value": 2
+    },
+    {
+      "year": "2021",
+      "category": "交互作品",
+      "value": 1
+    },
+    {
+      "year": "2022",
+      "category": "插画",
+      "value": 10
+    },
+    {
+      "year": "2022",
+      "category": "动画",
+      "value": 3
+    },
+    {
+      "year": "2022",
+      "category": "交互作品",
+      "value": 2
+    },
+    {
+      "year": "2023",
+      "category": "插画",
+      "value": 12
+    },
+    {
+      "year": "2023",
+      "category": "动画",
+      "value": 4
+    },
+    {
+      "year": "2023",
+      "category": "交互作品",
+      "value": 4
+    },
+    {
+      "year": "2024",
+      "category": "插画",
+      "value": 14
+    },
+    {
+      "year": "2024",
+      "category": "动画",
+      "value": 5
+    },
+    {
+      "year": "2024",
+      "category": "交互作品",
+      "value": 6
+    },
+    {
+      "year": "2025",
+      "category": "插画",
+      "value": 16
+    },
+    {
+      "year": "2025",
+      "category": "动画",
+      "value": 6
+    },
+    {
+      "year": "2025",
+      "category": "交互作品",
+      "value": 7
+    }
+  ],
+  "annual": [
+    {
+      "year": "2021",
+      "category": "插画",
+      "value": 8
+    },
+    {
+      "year": "2021",
+      "category": "动画",
+      "value": 2
+    },
+    {
+      "year": "2021",
+      "category": "交互作品",
+      "value": 1
+    },
+    {
+      "year": "2022",
+      "category": "插画",
+      "value": 10
+    },
+    {
+      "year": "2022",
+      "category": "动画",
+      "value": 3
+    },
+    {
+      "year": "2022",
+      "category": "交互作品",
+      "value": 2
+    },
+    {
+      "year": "2023",
+      "category": "插画",
+      "value": 12
+    },
+    {
+      "year": "2023",
+      "category": "动画",
+      "value": 4
+    },
+    {
+      "year": "2023",
+      "category": "交互作品",
+      "value": 4
+    },
+    {
+      "year": "2024",
+      "category": "插画",
+      "value": 14
+    },
+    {
+      "year": "2024",
+      "category": "动画",
+      "value": 5
+    },
+    {
+      "year": "2024",
+      "category": "交互作品",
+      "value": 6
+    },
+    {
+      "year": "2025",
+      "category": "插画",
+      "value": 16
+    },
+    {
+      "year": "2025",
+      "category": "动画",
+      "value": 6
+    },
+    {
+      "year": "2025",
+      "category": "交互作品",
+      "value": 7
+    }
+  ],
+  "media": [
+    {
+      "name": "插画",
+      "value": 60
+    },
+    {
+      "name": "动画",
+      "value": 20
+    },
+    {
+      "name": "交互作品",
+      "value": 20
+    }
+  ],
+  "total": 100
+}

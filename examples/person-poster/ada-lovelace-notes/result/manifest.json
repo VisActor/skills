@@ -1,0 +1,32 @@
+{
+  "html": "index.html",
+  "delivery": "html",
+  "canvas": {
+    "width": 1200,
+    "height": 1500
+  },
+  "charts": [],
+  "assets": [
+    {
+      "file": "assets/portrait.jpg",
+      "kind": "bitmap",
+      "sourceFile": "assets/portrait.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Ada_Lovelace_Chalon_portrait.jpg",
+      "credit": "Alfred Edward Chalon",
+      "usageStatus": "verified",
+      "usageTerms": "Public domain / PD-Art / PDM1.0 as identified on file page, artist died1860; original Wikimedia1118px square JPEG unchanged."
+    }
+  ],
+  "displayBindings": "display-map.json",
+  "managedRuntime": true,
+  "export": {
+    "selector": "#infographic",
+    "width": 1200,
+    "height": 1500,
+    "deviceScaleFactor": 2,
+    "viewport": {
+      "width": 1200,
+      "height": 1500
+    }
+  }
+}

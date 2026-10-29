@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "dom": [
+    {
+      "id": "eyebrow",
+      "kind": "label",
+      "text": "ATHLETICS / USAIN BOLT"
+    },
+    {
+      "id": "title",
+      "kind": "label",
+      "text": "把时间留在身后"
+    },
+    {
+      "id": "name",
+      "kind": "claim",
+      "dataPointer": "/text/name",
+      "factIds": [
+        "name"
+      ]
+    },
+    {
+      "id": "m100-label",
+      "kind": "claim",
+      "dataPointer": "/text/m100-label",
+      "factIds": [
+        "m100-label"
+      ]
+    },
+    {
+      "id": "m100",
+      "kind": "value",
+      "dataPointer": "/personalBests/m100",
+      "format": {
+        "style": "decimal",
+        "places": 2
+      }
+    },
+    {
+      "id": "m100-unit",
+      "kind": "label",
+      "text": "秒"
+    },
+    {
+      "id": "m100-date",
+      "kind": "claim",
+      "dataPointer": "/text/m100-date",
+      "factIds": [
+        "m100-date"
+      ]
+    },
+    {
+      "id": "m100-wind",
+      "kind": "claim",
+      "dataPointer": "/text/m100-wind",
+      "factIds": [
+        "m100-wind"
+      ]
+    },
+    {
+      "id": "m200-label",
+      "kind": "claim",
+      "dataPointer": "/text/m200-label",
+      "factIds": [
+        "m200-label"
+      ]
+    },
+    {
+      "id": "m200",
+      "kind": "value",
+      "dataPointer": "/personalBests/m200",
+      "format": {
+        "style": "decimal",
+        "places": 2
+      }
+    },
+    {
+      "id": "m200-unit",
+      "kind": "label",
+      "text": "秒"
+    },
+    {
+      "id": "m200-date",
+      "kind": "claim",
+      "dataPointer": "/text/m200-date",
+      "factIds": [
+        "m200-date"
+      ]
+    },
+    {
+      "id": "m200-wind",
+      "kind": "claim",
+      "dataPointer": "/text/m200-wind",
+      "factIds": [
+        "m200-wind"
+      ]
+    },
+    {
+      "id": "image-caption",
+      "kind": "claim",
+      "dataPointer": "/text/image-caption",
+      "factIds": [
+        "image-caption"
+      ]
+    },
+    {
+      "id": "data-source",
+      "kind": "label",
+      "text": "成绩资料 / World Athletics"
+    },
+    {
+      "id": "chart-title",
+      "kind": "claim",
+      "dataPointer": "/text/chart-title",
+      "factIds": [
+        "chart-title"
+      ]
+    },
+    {
+      "id": "scope",
+      "kind": "claim",
+      "dataPointer": "/text/scope",
+      "factIds": [
+        "scope"
+      ]
+    },
+    {
+      "id": "credit",
+      "kind": "claim",
+      "dataPointer": "/text/credit",
+      "factIds": [
+        "credit"
+      ]
+    }
+  ],
+  "charts": [
+    {
+      "id": "olympic-finals",
+      "data": [
+        {
+          "specPointer": "/data/0/values",
+          "dataPointer": "/finals"
+        }
+      ]
+    }
+  ]
+}
