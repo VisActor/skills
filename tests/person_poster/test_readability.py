@@ -103,6 +103,8 @@ def test_custom_diagnostic_cannot_replace_baseline(tmp_path):
     assert report['readability']['smallTextCount'] == 1
     assert report['readability']['displayWidthCssPx'] == 600
     assert report['readability']['minFontSizeCssPx'] == 12
+    assert report['contrast']['sampling']['scaleX'] == 2
+    assert report['contrast']['sampling']['scaleY'] == 2
     extra = json.loads((tmp_path / 'review/supplemental-readability.json').read_text())
     assert extra['passed'] and extra['displayWidthCssPx'] == 1200
     with Image.open(tmp_path / 'review/display.png') as image:

@@ -41,7 +41,7 @@
     }
     const scale=el.getBoundingClientRect().width / (el.offsetWidth || el.getBoundingClientRect().width);
     texts.push({source:'dom',text,rects:boxes,color:color.slice(0,3),
-      fontSizePx:parseFloat(s.fontSize)*scale,bold:Number(s.fontWeight)>=700});
+      fontSizePx:parseFloat(s.fontSize)*scale,fontFamily:s.fontFamily,bold:Number(s.fontWeight)>=700});
     if(!dom.some(d=>d.el===el))dom.push({el,style:el.getAttribute('style')});
   }
   const mounts=[...root.querySelectorAll('[data-chart-id]')];
@@ -49,6 +49,12 @@
     const container=chart.getContainer?.(),mount=mounts.find(el=>el===container||el.contains(container));
     if(!mount||!visible(mount))continue;
     const stage=chart.getStage?.(); if(!stage){unknown.push('Missing chart stage');continue;}
+    for(const canvas of mount.querySelectorAll('canvas')) {
+      const b=canvas.getBoundingClientRect();
+      if(b.width>0&&b.height>0&&
+         (canvas.width+1<b.width*devicePixelRatio||canvas.height+1<b.height*devicePixelRatio))
+        unknown.push('Chart canvas below native capture resolution: '+mount.dataset.chartId);
+    }
     stages.push(stage);
     const mb=mount.getBoundingClientRect(), sx=mb.width/mount.clientWidth,sy=mb.height/mount.clientHeight;
     const seen=new Set();
@@ -70,6 +76,7 @@
             rects:[{x:mb.left-bounds.left+b.x1*sx,y:mb.top-bounds.top+b.y1*sy,
                     width:(b.x2-b.x1)*sx,height:(b.y2-b.y1)*sy}],
             fontSizePx:Number(a.fontSize??theme.fontSize)*Math.abs(m.d)*sy,
+            fontFamily:String(a.fontFamily??theme.fontFamily??''),
             bold:Number(a.fontWeight??theme.fontWeight)>=700});
           graphics.push({g,fill:a.fill,fillOpacity:a.fillOpacity,stroke:a.stroke});
         }
@@ -92,5 +99,6 @@
       for(const stage of stages)stage.render();
     }
   };
-  return {rootWidth:bounds.width,texts,unmeasured:unknown};
+  return {rootWidth:bounds.width,rootHeight:bounds.height,
+    rootDocumentX:bounds.left+scrollX,rootDocumentY:bounds.top+scrollY,texts,unmeasured:unknown};
 }

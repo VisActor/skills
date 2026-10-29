@@ -221,9 +221,9 @@ def test_unknown_photo_usage_is_valid_but_not_authorized(poster_validator, tmp_p
 
 
 def successful_reading_review():
+    from inspect_contrast import CONTRAST_POLICY
     return {'technicalPassed': True, 'errors': [],
-            'contrastPolicy': {'version': 'rendered-glyph-background-v1', 'displayWidthCssPx': 600,
-                               'normalMinimum': 4.5, 'largeMinimum': 3.0},
+            'contrastPolicy': dict(CONTRAST_POLICY),
             'contrast': {'passed': True, 'lowContrastCount': 0, 'unmeasured': []},
             'readingPolicy': {'displayWidthCssPx': 600, 'minFontSizeCssPx': 12,
                               'textCoverage': 'all-visible-dom-and-chart-text-v1'},
@@ -357,6 +357,19 @@ def test_final_contrast_cannot_be_overruled(poster_validator, tmp_path, change):
     (tmp_path / 'review').mkdir()
     report = successful_reading_review()
     report['contrast'].update(change)
+    (tmp_path / 'review/review.json').write_text(json.dumps(report))
+    result = poster_validator.validate_bundle(tmp_path, require_png=False, require_records=True)
+    assert any('actual-background' in e for e in result.errors)
+
+
+def test_old_sampling_policy_cannot_authorize_technical_success(poster_validator, tmp_path):
+    write_bundle(tmp_path, charts=False)
+    for name in RECORDS:
+        (tmp_path / name).write_text(json.dumps({'technicalPassed': True} if name == 'acceptance.json' else {'status': 'partial'}))
+    (tmp_path / 'review').mkdir()
+    report = successful_reading_review()
+    report['contrastPolicy'] = {'version': 'rendered-glyph-background-v1', 'displayWidthCssPx': 600,
+                                'normalMinimum': 4.5, 'largeMinimum': 3.0}
     (tmp_path / 'review/review.json').write_text(json.dumps(report))
     result = poster_validator.validate_bundle(tmp_path, require_png=False, require_records=True)
     assert any('actual-background' in e for e in result.errors)

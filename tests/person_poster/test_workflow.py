@@ -11,6 +11,7 @@ from delivery_policy import delivery_status  # noqa: E402
 from inspect_contrast import CONTRAST_POLICY  # noqa: E402
 from inspect_html_layout import VISIBILITY_POLICY  # noqa: E402
 from inspect_readability import READING_POLICY  # noqa: E402
+from review_bundle import compare_layout  # noqa: E402
 from review_fingerprint import fingerprint  # noqa: E402
 
 
@@ -58,6 +59,48 @@ def test_edit_invalidates_review(tmp_path):
     (tmp_path / 'bridge.js').write_text('/* changed */')
     with pytest.raises(ValueError, match='Inputs changed'):
         workflow.checked_review(tmp_path)
+
+
+@pytest.mark.parametrize('action', ['export', 'verify'])
+def test_old_contrast_policy_blocks_delivery(tmp_path, monkeypatch, action):
+    workflow.save(tmp_path / 'preflight.json', {'passed': True, 'python': {'executable': sys.executable}})
+    workflow.save(tmp_path / 'manifest.json', {'html': 'index.html', 'displayBindings': 'display-map.json'})
+    workflow.save(tmp_path / 'display-map.json', {'version': 1, 'dom': [], 'charts': []})
+    (tmp_path / 'index.html').write_text('<main>Scope</main>')
+    (tmp_path / 'review').mkdir()
+    report = {'technicalPassed': True, 'errors': [], 'displayVersion': 1,
+              'display': {'passed': True, 'version': 1}, 'readingPolicy': READING_POLICY,
+              'contrastPolicy': CONTRAST_POLICY, 'visibilityPolicy': VISIBILITY_POLICY,
+              'visibility': {'passed': True}, 'sourceFingerprint': fingerprint(tmp_path)}
+    workflow.save(tmp_path / 'review/review.json', report)
+    workflow.save(tmp_path / 'review/display-check.json', {'passed': True, 'errors': [], 'version': 1})
+    workflow.checked_review(tmp_path)
+    report['contrastPolicy'] = {'version': 'rendered-glyph-background-v1', 'displayWidthCssPx': 600,
+                                'normalMinimum': 4.5, 'largeMinimum': 3.0}
+    workflow.save(tmp_path / 'review/review.json', report)
+    monkeypatch.setattr(workflow, 'run_tool', lambda *a, **k: pytest.fail('must not export'))
+    with pytest.raises(ValueError, match='Review policy differs'):
+        workflow.execute(tmp_path, action)
+    assert not (tmp_path / 'preview.png').exists()
+
+
+@pytest.mark.parametrize('change', ['position', 'text', 'coverage', 'root'])
+def test_independent_review_load_must_match_inspected_scene(change):
+    old = {'root': {'x': 0, 'y': 0, 'width': 600, 'height': 400}, 'items': [
+        {'kind': 'required', 'label': 'scope', 'text': 'Scope',
+         'rect': {'x': 20, 'y': 30, 'width': 100, 'height': 30}}]}
+    new = {'root': dict(old['root']), 'required': [
+        {'text': 'Scope', 'rect': dict(old['items'][0]['rect'])}]}
+    assert compare_layout(old, new) == []
+    if change == 'position':
+        new['required'][0]['rect']['x'] += 5
+    elif change == 'text':
+        new['required'][0]['text'] = 'Changed'
+    elif change == 'coverage':
+        new['required'] = []
+    else:
+        new['root']['width'] += 20
+    assert compare_layout(old, new)
 
 
 def test_material_needs_specific_local_source_evidence(tmp_path):

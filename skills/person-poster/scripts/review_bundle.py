@@ -31,6 +31,25 @@ def save(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def compare_layout(layout: dict, snapshot: dict) -> list[str]:
+    """Do not let independent browser loads certify different CSS scenes."""
+    errors = []
+    before, after = layout['root'], snapshot['root']
+    if any(abs(before[key] - after[key]) > 1 for key in ('width', 'height')):
+        errors.append('Review CSS root differs from inspected layout')
+    inspected = [item for item in layout.get('items', []) if item['kind'] == 'required']
+    current = snapshot['required']
+    if len(inspected) != len(current):
+        return errors + ['Review required-element coverage differs from inspected layout']
+    for old, new in zip(inspected, current):
+        moved = any(abs((old['rect'][axis] - before[axis]) -
+                        (new['rect'][axis] - after[axis])) > 1 for axis in ('x', 'y'))
+        resized = any(abs(old['rect'][key] - new['rect'][key]) > 1 for key in ('width', 'height'))
+        if moved or resized or old['text'] != ' '.join(new['text'].split())[:120]:
+            errors.append('Review element differs from inspected layout: ' + old['label'])
+    return errors
+
+
 def capture_display_preview(root, path: Path, width: int) -> dict:
     """Capture the existing layout at its intended reading size, then restore it.
 
@@ -118,7 +137,7 @@ def review(args: argparse.Namespace) -> dict:
     inspection_args = SimpleNamespace(html=str(html), manifest=str(bundle / "manifest.json"),
         selector=selector, serve=True, screenshot_mode=True, install_playwright=False,
         install_browser=False, viewport_width=math.ceil(width), viewport_height=math.ceil(height),
-        device_scale_factor=1, wait_until="load", timeout=args.timeout_ms, settle_ms=0,
+        device_scale_factor=args.device_scale_factor, wait_until="load", timeout=args.timeout_ms, settle_ms=0,
         ready_expression="window.__INFOGRAPHIC_READY__ === true", required_selector="[data-required]",
         decorative_selector="[data-decorative]", bottom_safe_px=64, footer_safe_px=96,
         min_overlap_area=24, overflow_tolerance=3)
@@ -162,8 +181,13 @@ def review(args: argparse.Namespace) -> dict:
                 snapshot = page.evaluate("""(selector) => {
                   const root = document.querySelector(selector);
                   const ctx = document.createElement('canvas').getContext('2d');
-                  return {specs: window.__INFOGRAPHIC_CHARTS__ || {},
-                    required: [...root.querySelectorAll('[data-required]')].map(el => {
+                  const rb=root.getBoundingClientRect();
+                  return {root:{x:rb.x,y:rb.y,width:rb.width,height:rb.height},
+                    specs: window.__INFOGRAPHIC_CHARTS__ || {},
+                    required: [...root.querySelectorAll('[data-required]')].filter(el=>{
+                      const b=el.getBoundingClientRect(),s=getComputedStyle(el);
+                      return b.width>0&&b.height>0&&s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)!==0;
+                    }).map(el => {
                       const s = getComputedStyle(el), b = el.getBoundingClientRect();
                       const text = (el.innerText || el.textContent || '').trim();
                       ctx.font = s.fontStyle + ' ' + s.fontWeight + ' ' + s.fontSize + ' ' + s.fontFamily;
@@ -179,6 +203,7 @@ def review(args: argparse.Namespace) -> dict:
                     })};
                 }""", selector)
                 save(out / "text-and-chart-data.json", snapshot)
+                report['errors'].extend(compare_layout(layout, snapshot))
                 display_snapshot = page.evaluate(DISPLAY_SCRIPT, selector)
                 display = check_display(bundle, display_snapshot)
                 save(out / 'display-snapshot.json', display_snapshot)
@@ -198,11 +223,11 @@ def review(args: argparse.Namespace) -> dict:
                                             f"{len(reading['smallText'])} items; see readability.json")
                 if reading['unmeasured']:
                     report['errors'].append('Reading text measurement incomplete; see readability.json')
-                contrast = inspect_contrast(page, selector)
+                contrast = inspect_contrast(page, selector, debug_dir=out / 'contrast-debug')
                 save(out / 'contrast.json', contrast)
                 report['contrast'] = {'passed': contrast['passed'],
                                       'lowContrastCount': len(contrast['lowContrast']),
-                                      'unmeasured': contrast['unmeasured']}
+                                      'unmeasured': contrast['unmeasured'], 'sampling': contrast['sampling']}
                 if contrast['lowContrast']:
                     report['errors'].append(f"Low text contrast against actual background: {len(contrast['lowContrast'])} items; see contrast.json")
                 if contrast['unmeasured']:
@@ -269,7 +294,8 @@ def main() -> int:
     parser.add_argument("--bundle", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path)
     parser.add_argument("--detail-selector", action="append", help="Root-relative CSS selector; repeatable")
-    parser.add_argument("--device-scale-factor", type=float, default=1, help="Draft DPR, default 1")
+    parser.add_argument("--device-scale-factor", type=float, default=2,
+                        help="Native capture DPR, default 2; reading baseline stays 600 CSS px")
     parser.add_argument("--display-width", type=int, default=600, help="Supplemental reading-width PNG; baseline remains 600 CSS pixels")
     parser.add_argument("--min-reading-font-size", type=float, default=12,
                         help="Supplemental font-size diagnostic; acceptance baseline remains 12 CSS px")
