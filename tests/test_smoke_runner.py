@@ -44,6 +44,9 @@ def test_poster_cases_cover_native_html_only_and_failure(smoke):
     assert {case["id"] for case in cases} == {
         "poster-chart-matrix", "poster-html-only", "poster-render-failure",
         "poster-no-charts-png", "poster-charts-html-only", "poster-ancestor-clipping",
+        "poster-chart-visual-contract", "poster-missing-values",
+        "poster-display-binding", "poster-unbound-text", "poster-reading-draft", "poster-build-entry",
+        "poster-managed-charts", "poster-text-occlusion",
     }
     assert all(case["expectations"]["engine"] == "poster" for case in cases)
 
@@ -181,3 +184,15 @@ def test_list_needs_no_browser_or_credentials_and_creates_no_evidence(tmp_path):
     )
     assert {line.split()[0] for line in result.stdout.splitlines()} == {"story-html", "story-ppt"}
     assert not output.exists()
+
+
+@pytest.mark.parametrize('config', [
+    {'specsFile': '../outside.json'},
+    {'specsFile': 'specs.json', 'examples': []},
+])
+def test_poster_specs_cannot_escape_or_mix_sources(smoke, tmp_path, config):
+    workspace = tmp_path / 'workspace'
+    (workspace / 'inputs').mkdir(parents=True)
+    (workspace / 'inputs/bundle.json').write_text(json.dumps(config))
+    with pytest.raises(ValueError, match='inside inputs|exactly one'):
+        smoke.build_poster({}, workspace)

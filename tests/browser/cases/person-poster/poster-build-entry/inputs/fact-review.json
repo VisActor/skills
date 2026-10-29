@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checks": [],
+  "comparisons": [
+    {
+      "dataPointer": "/count",
+      "evidence": {
+        "file": "source.json",
+        "pointer": "/count",
+        "source": "synthetic original fixture"
+      }
+    }
+  ]
+}

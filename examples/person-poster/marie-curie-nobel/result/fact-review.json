@@ -1,0 +1,55 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "id": "headline",
+      "claim": "两次诺奖\n两门科学",
+      "status": "passed",
+      "source": "NobelPrize.org 1903 Physics and 1911 Chemistry prize summaries; official indexed pages checked 2026-10-28; direct HTTP and API returned403",
+      "observed": "两次诺奖\n两门科学",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "sole",
+      "claim": "独享",
+      "status": "passed",
+      "source": "NobelPrize.org 1903 Physics and 1911 Chemistry prize summaries; official indexed pages checked 2026-10-28; direct HTTP and API returned403",
+      "observed": "独享",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "bottom-claim",
+      "claim": "从物理学到化学\n两份获奖记录",
+      "status": "passed",
+      "source": "NobelPrize.org 1903 Physics and 1911 Chemistry prize summaries; official indexed pages checked 2026-10-28; direct HTTP and API returned403",
+      "observed": "从物理学到化学\n两份获奖记录",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "scope",
+      "claim": "图中比例为诺贝尔奖的奖项份额，\n并非科研贡献的占比。",
+      "status": "passed",
+      "source": "NobelPrize.org 1903 Physics and 1911 Chemistry prize summaries; official indexed pages checked 2026-10-28; direct HTTP and API returned403",
+      "observed": "图中比例为诺贝尔奖的奖项份额，\n并非科研贡献的占比。",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "credit",
+      "claim": "摄影 Henri Manuel，约1920年 · 奖项数据 NobelPrize.org",
+      "status": "passed",
+      "source": "Wikimedia Commons file page and NobelPrize.org; see source-review.md",
+      "observed": "摄影 Henri Manuel，约1920年 · 奖项数据 NobelPrize.org",
+      "evidence": "evidence/sources.json"
+    }
+  ],
+  "comparisons": [
+    {
+      "dataPointer": "",
+      "evidence": {
+        "file": "evidence/input-facts.json",
+        "pointer": "",
+        "source": "Curator-compiled public task input; source attribution and field definitions in evidence/sources.json. Not an official JSON export."
+      }
+    }
+  ]
+}

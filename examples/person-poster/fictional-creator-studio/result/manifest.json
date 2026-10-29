@@ -1,0 +1,52 @@
+{
+  "html": "index.html",
+  "png": "preview.png",
+  "delivery": "html+png",
+  "canvas": {
+    "width": 1200,
+    "height": 1800
+  },
+  "charts": [
+    {
+      "id": "media",
+      "spec": "charts/media.spec.json",
+      "mount": "#chart-media"
+    },
+    {
+      "id": "annual",
+      "spec": "charts/annual.spec.json",
+      "mount": "#chart-annual"
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/portrait.png",
+      "kind": "bitmap",
+      "sourceFile": "assets/portrait.png",
+      "sourcePage": "https://openai.com/policies/row-terms-of-use/",
+      "credit": "AI illustration generated with OpenAI imagegen",
+      "usageStatus": "verified",
+      "usageTerms": "New fictional adult illustration generated from original text prompt; use under OpenAI output ownership terms. Explicitly AI-labelled; not claimed unique or exclusive. No third-party input image."
+    }
+  ],
+  "displayBindings": "display-map.json",
+  "managedRuntime": true,
+  "export": {
+    "selector": "#infographic",
+    "width": 1200,
+    "height": 1800,
+    "deviceScaleFactor": 2,
+    "viewport": {
+      "width": 1200,
+      "height": 1800
+    }
+  },
+  "dependencies": [
+    {
+      "name": "@visactor/vchart",
+      "version": "2.1.7",
+      "file": "assets/vchart.js",
+      "source": "https://unpkg.com/@visactor/vchart@2.1.7/build/index.min.js"
+    }
+  ]
+}

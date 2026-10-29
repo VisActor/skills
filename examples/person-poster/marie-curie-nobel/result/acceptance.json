@@ -1,0 +1,25 @@
+{
+  "technical": {
+    "status": "pending"
+  },
+  "factual": {
+    "status": "passed",
+    "evidence": [
+      "evidence/sources.json"
+    ]
+  },
+  "visual": {
+    "status": "pending"
+  },
+  "usage": {
+    "status": "passed",
+    "assets": [
+      {
+        "file": "assets/portrait.jpg",
+        "status": "passed",
+        "basis": "Public domain, PDM1.0 as identified on the file page; Henri Manuel circa1920; unretouched photographic source retained.",
+        "evidence": "evidence/sources.json"
+      }
+    ]
+  }
+}

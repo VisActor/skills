@@ -13,5 +13,6 @@
     "nonBlankCharts",
     "barGeometry"
   ],
-  "pngExpected": false
+  "pngExpected": false,
+  "readingBaselinePassed": false
 }

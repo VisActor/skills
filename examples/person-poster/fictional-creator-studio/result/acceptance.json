@@ -1,0 +1,25 @@
+{
+  "technical": {
+    "status": "pending"
+  },
+  "factual": {
+    "status": "passed",
+    "evidence": [
+      "evidence/sources.json"
+    ]
+  },
+  "visual": {
+    "status": "pending"
+  },
+  "usage": {
+    "status": "passed",
+    "assets": [
+      {
+        "file": "assets/portrait.png",
+        "status": "passed",
+        "basis": "New fictional adult illustration generated from original text prompt; use under OpenAI output ownership terms. Explicitly AI-labelled; not claimed unique or exclusive. No third-party input image.",
+        "evidence": "evidence/sources.json"
+      }
+    ]
+  }
+}

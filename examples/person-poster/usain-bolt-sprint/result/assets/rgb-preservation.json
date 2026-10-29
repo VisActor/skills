@@ -1,0 +1,9 @@
+{
+  "sameSize": true,
+  "rgbDifferenceBounds": null,
+  "pixelCount": 2211840,
+  "zeroAlphaPixels": 1580039,
+  "method": "Apple Vision mask, prepare_subject.py --crop keep; full-frame RGB comparison includes transparent pixels",
+  "originalSha256": "99c095d3ee58838c314a8703181aaac6f6f03d5f3af9a62330fdd1c9e547a0c4",
+  "subjectSha256": "b27b13016c4add9d465128988c369b993b646b788100bfc6708b4276fbdc1ed2"
+}

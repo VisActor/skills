@@ -28,8 +28,10 @@
     "visible": true,
     "position": "outside",
     "style": {
-      "fontSize": 20
-    }
+      "fontSize": 20,
+      "fill": "#352b25"
+    },
+    "smartInvert": false
   },
   "legends": {
     "visible": true,

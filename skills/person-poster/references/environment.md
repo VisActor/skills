@@ -1,5 +1,9 @@
 # 运行环境与安装
 
+推荐首先运行 `python3 "$SKILL_DIR/scripts/poster_workflow.py" preflight --bundle "$BUNDLE" --prepare-env`。初次探针失败且属于缺依赖、驱动启动或浏览器文件缺失时，入口在bundle的父目录创建独立venv，安装包内requirements和配套Chromium后复验一次；不修改宿主缓存、不需要激活环境。失败安装不会继续后续命令，原始错误保存在preflight.initial.json及工具日志中。准备失败时根据具体错误处理，不能绕开生产检查宣称成品。
+
+后续review/export自动采用preflight记录的成功解释器；原有环境消失时重跑preflight。没有允许安装依赖的环境可省略`--prepare-env`，按下面步骤使用已有兼容环境；可用`--python`指定实际解释器。venv保留在作品目录外，不打入交付ZIP。
+
 ## 依赖与能力边界
 
 | 项目 | 要求与检查 |
@@ -72,3 +76,11 @@ $POSTER_PYTHON = Join-Path $BUNDLE '.venv\Scripts\python.exe'
 ## 记录真实结果
 
 preflight 只证明当前解释器和浏览器可执行。记录 OS/CPU、Python/包/浏览器版本及字体样本；搜索、抠图、图表 CDN、完整海报和文件下载需要另外实测。没有实际执行的 Windows、云端或宿主能力统一记为未验证。正式验收仍按 [渲染与验收](render-and-acceptance.md) 执行。
+
+## 截图挂起与页面异常
+
+Mac生产工具统一使用配套完整Chromium的headless模式（channel=chromium），不使用系统Chrome或自写CDP截图。运行 `-m playwright install chromium` 安装完整浏览器，不使用仅shell安装。preflight记录实际启动选项；暂时成功只证明本次可执行，不能推断历史超时根因。
+
+workflow普通工具总时限180秒、依赖/浏览器安装600秒；超时以124退出，保留tool-logs/原始输出和tool-timings.json。POSIX上终止本工具进程组，避免遗留截图子进程。查本次日志修复后再运行一次；仍失败就handoff明确未完成，不无限延长或改用无验收截图。
+
+layout/review/export在导航前收集页面脚本异常（文件、行列、错误消息）、请求失败、HTTP错误与console.error。ready超时应先读pageDiagnostics定位脚本或资源问题，再决定是否修依赖；console消息单独作为诊断，真实脚本/资源错误仍阻止通过。脚本修复后重新完整检查，不能把诊断信息当作已通过。

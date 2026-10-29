@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "dom": [
+    {
+      "id": "title",
+      "kind": "label",
+      "text": "图表编码与阅读验证 · 数值单位 %"
+    }
+  ],
+  "charts": []
+}

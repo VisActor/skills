@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "dom": [
+    {
+      "id": "eyebrow",
+      "kind": "label",
+      "text": "STUDIO / FICTIONAL CREATOR"
+    },
+    {
+      "id": "title",
+      "kind": "label",
+      "text": "创作，自成一格"
+    },
+    {
+      "id": "name",
+      "kind": "label",
+      "text": "示例创作者"
+    },
+    {
+      "id": "disclaimer",
+      "kind": "claim",
+      "dataPointer": "/text/disclaimer",
+      "factIds": [
+        "disclaimer"
+      ]
+    },
+    {
+      "id": "total-label",
+      "kind": "label",
+      "text": "作品总数 / 件"
+    },
+    {
+      "id": "total",
+      "kind": "value",
+      "dataPointer": "/total",
+      "format": {
+        "style": "decimal",
+        "places": 0
+      }
+    },
+    {
+      "id": "period",
+      "kind": "claim",
+      "dataPointer": "/text/period",
+      "factIds": [
+        "period"
+      ]
+    },
+    {
+      "id": "media-title",
+      "kind": "label",
+      "text": "媒介组成"
+    },
+    {
+      "id": "media-unit",
+      "kind": "label",
+      "text": "单位：件"
+    },
+    {
+      "id": "annual-title",
+      "kind": "label",
+      "text": "年度产出"
+    },
+    {
+      "id": "annual-unit",
+      "kind": "label",
+      "text": "单位：件 · 按媒介堆叠"
+    },
+    {
+      "id": "scope",
+      "kind": "claim",
+      "dataPointer": "/text/scope",
+      "factIds": [
+        "scope"
+      ]
+    },
+    {
+      "id": "credit",
+      "kind": "claim",
+      "dataPointer": "/text/credit",
+      "factIds": [
+        "credit"
+      ]
+    }
+  ],
+  "charts": [
+    {
+      "id": "media",
+      "data": [
+        {
+          "specPointer": "/data/0/values",
+          "dataPointer": "/media"
+        }
+      ]
+    },
+    {
+      "id": "annual",
+      "data": [
+        {
+          "specPointer": "/data/0/values",
+          "dataPointer": "/annual"
+        }
+      ]
+    }
+  ]
+}

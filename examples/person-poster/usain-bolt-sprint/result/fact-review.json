@@ -1,0 +1,103 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "id": "name",
+      "claim": "尤塞恩·博尔特 / 牙买加",
+      "status": "passed",
+      "source": "World Athletics athlete profile,2009 event toplists and Olympic statistics handbook; official PDF and indexed primary pages checked2026-10-29",
+      "observed": "尤塞恩·博尔特 / 牙买加",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "m100-label",
+      "claim": "男子100米 / 个人最佳",
+      "status": "passed",
+      "source": "World Athletics athlete profile,2009 event toplists and Olympic statistics handbook; official PDF and indexed primary pages checked2026-10-29",
+      "observed": "男子100米 / 个人最佳",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "m100-date",
+      "claim": "2009-08-16 · 柏林",
+      "status": "passed",
+      "source": "World Athletics athlete profile,2009 event toplists and Olympic statistics handbook; official PDF and indexed primary pages checked2026-10-29",
+      "observed": "2009-08-16 · 柏林",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "m100-wind",
+      "claim": "风速 +0.9 m/s",
+      "status": "passed",
+      "source": "World Athletics athlete profile,2009 event toplists and Olympic statistics handbook; official PDF and indexed primary pages checked2026-10-29",
+      "observed": "风速 +0.9 m/s",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "m200-label",
+      "claim": "男子200米 / 个人最佳",
+      "status": "passed",
+      "source": "World Athletics athlete profile,2009 event toplists and Olympic statistics handbook; official PDF and indexed primary pages checked2026-10-29",
+      "observed": "男子200米 / 个人最佳",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "m200-date",
+      "claim": "2009-08-20 · 柏林",
+      "status": "passed",
+      "source": "World Athletics athlete profile,2009 event toplists and Olympic statistics handbook; official PDF and indexed primary pages checked2026-10-29",
+      "observed": "2009-08-20 · 柏林",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "m200-wind",
+      "claim": "风速 −0.3 m/s",
+      "status": "passed",
+      "source": "World Athletics athlete profile,2009 event toplists and Olympic statistics handbook; official PDF and indexed primary pages checked2026-10-29",
+      "observed": "风速 −0.3 m/s",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "image-caption",
+      "claim": "里约奥运庆祝瞬间\n真实照片 · 原生分割",
+      "status": "passed",
+      "source": "Wikimedia Commons photo caption/date and actual Apple Vision processing",
+      "observed": "里约奥运庆祝瞬间\n真实照片 · 原生分割",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "chart-title",
+      "claim": "三届奥运会 · 男子100米决赛",
+      "status": "passed",
+      "source": "World Athletics athlete profile,2009 event toplists and Olympic statistics handbook; official PDF and indexed primary pages checked2026-10-29",
+      "observed": "三届奥运会 · 男子100米决赛",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "scope",
+      "claim": "单位：秒 · 用时越短越快；零基线条长表示用时。",
+      "status": "passed",
+      "source": "World Athletics athlete profile,2009 event toplists and Olympic statistics handbook; official PDF and indexed primary pages checked2026-10-29",
+      "observed": "单位：秒 · 用时越短越快；零基线条长表示用时。",
+      "evidence": "evidence/sources.json"
+    },
+    {
+      "id": "credit",
+      "claim": "摄影 Fernando Frazão/Agência Brasil · CC BY 3.0 BR · 已去背景",
+      "status": "passed",
+      "source": "Wikimedia Commons image licence and actual alpha-only segmentation",
+      "observed": "摄影 Fernando Frazão/Agência Brasil · CC BY 3.0 BR · 已去背景",
+      "evidence": "evidence/sources.json"
+    }
+  ],
+  "comparisons": [
+    {
+      "dataPointer": "",
+      "evidence": {
+        "file": "evidence/input-facts.json",
+        "pointer": "",
+        "source": "Curator-compiled public task input; field definitions and attribution in evidence/sources.json. Not an official JSON export."
+      }
+    }
+  ]
+}

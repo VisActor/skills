@@ -1,0 +1,88 @@
+{
+  "alpha": {
+    "type": "bar",
+    "animation": false,
+    "padding": {
+      "top": 64
+    },
+    "color": [
+      "#e0e0e0"
+    ],
+    "data": [
+      {
+        "id": "alpha",
+        "values": [
+          {
+            "category": "A",
+            "value": 9
+          }
+        ]
+      }
+    ],
+    "xField": "category",
+    "yField": "value",
+    "axes": [
+      {
+        "orient": "bottom",
+        "visible": false
+      },
+      {
+        "orient": "left",
+        "visible": false
+      }
+    ],
+    "label": {
+      "visible": true,
+      "position": "top",
+      "smartInvert": false,
+      "style": {
+        "fontSize": 32,
+        "fill": "#000",
+        "stroke": false
+      }
+    }
+  },
+  "beta": {
+    "type": "bar",
+    "animation": false,
+    "padding": {
+      "top": 64
+    },
+    "color": [
+      "#e0e0e0"
+    ],
+    "data": [
+      {
+        "id": "beta",
+        "values": [
+          {
+            "category": "B",
+            "value": 6
+          }
+        ]
+      }
+    ],
+    "xField": "category",
+    "yField": "value",
+    "axes": [
+      {
+        "orient": "bottom",
+        "visible": false
+      },
+      {
+        "orient": "left",
+        "visible": false
+      }
+    ],
+    "label": {
+      "visible": true,
+      "position": "top",
+      "smartInvert": false,
+      "style": {
+        "fontSize": 32,
+        "fill": "#000",
+        "stroke": false
+      }
+    }
+  }
+}

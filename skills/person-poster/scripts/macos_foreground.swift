@@ -6,13 +6,13 @@ import CoreImage
 import ImageIO
 
 func run() throws {
-    // Some launchers forward frontend flags before `--`; only the two script
-    // arguments after that separator are inputs. Normal `swift script ...`
-    // and compiled-binary invocation keep their existing behavior.
+    // Some launchers forward frontend flags before `--`. Nested launchers can
+    // preserve multiple consecutive separators before the two script inputs.
+    // Do not discard unexpected positional arguments between separators.
     let arguments = Array(CommandLine.arguments.dropFirst())
     let inputs: [String]
     if let separator = arguments.firstIndex(of: "--") {
-        inputs = Array(arguments.dropFirst(separator + 1))
+        inputs = Array(arguments.dropFirst(separator + 1).drop(while: { $0 == "--" }))
     } else {
         inputs = arguments
     }

@@ -1,0 +1,27 @@
+{
+  "compiled": true,
+  "retrieved": "2026-10-28",
+  "facts": [
+    {
+      "url": "https://collection.sciencemuseumgroup.org.uk/people/cp38764/ada-lovelace",
+      "fields": "1815 birth,1852 death,1833 introduction; general programmability notes",
+      "attribution": "Science Museum Group",
+      "terms": "facts paraphrased; source descriptive content CC BY4.0"
+    },
+    {
+      "url": "https://collection.sciencemuseumgroup.org.uk/objects/co8652385/book-sketch-of-the-analytical-engine-invented-by-charles-babbage-esq",
+      "fields": "1843 London publication and authors",
+      "attribution": "Science Museum Group",
+      "terms": "catalogue title/made/maker/details CC0"
+    }
+  ],
+  "portrait": {
+    "file": "assets/portrait.jpg",
+    "kind": "bitmap",
+    "sourceFile": "assets/portrait.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Ada_Lovelace_Chalon_portrait.jpg",
+    "credit": "Alfred Edward Chalon",
+    "usageStatus": "verified",
+    "usageTerms": "Public domain / PD-Art / PDM1.0 as identified on file page, artist died1860; original Wikimedia1118px square JPEG unchanged."
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "type": "bar",
+  "animation": false,
+  "background": "transparent",
+  "padding": {
+    "left": 12,
+    "right": 12,
+    "top": 20,
+    "bottom": 8
+  },
+  "data": [
+    {
+      "id": "input",
+      "values": [
+        {
+          "year": "2021",
+          "category": "插画",
+          "value": 8
+        },
+        {
+          "year": "2021",
+          "category": "动画",
+          "value": 2
+        },
+        {
+          "year": "2021",
+          "category": "交互作品",
+          "value": 1
+        },
+        {
+          "year": "2022",
+          "category": "插画",
+          "value": 10
+        },
+        {
+          "year": "2022",
+          "category": "动画",
+          "value": 3
+        },
+        {
+          "year": "2022",
+          "category": "交互作品",
+          "value": 2
+        },
+        {
+          "year": "2023",
+          "category": "插画",
+          "value": 12
+        },
+        {
+          "year": "2023",
+          "category": "动画",
+          "value": 4
+        },
+        {
+          "year": "2023",
+          "category": "交互作品",
+          "value": 4
+        },
+        {
+          "year": "2024",
+          "category": "插画",
+          "value": 14
+        },
+        {
+          "year": "2024",
+          "category": "动画",
+          "value": 5
+        },
+        {
+          "year": "2024",
+          "category": "交互作品",
+          "value": 6
+        },
+        {
+          "year": "2025",
+          "category": "插画",
+          "value": 16
+        },
+        {
+          "year": "2025",
+          "category": "动画",
+          "value": 6
+        },
+        {
+          "year": "2025",
+          "category": "交互作品",
+          "value": 7
+        }
+      ]
+    }
+  ],
+  "xField": "year",
+  "yField": "value",
+  "seriesField": "category",
+  "stack": true,
+  "color": [
+    "#6e52a0",
+    "#397b70",
+    "#a65b37"
+  ],
+  "axes": [
+    {
+      "orient": "bottom",
+      "type": "band",
+      "label": {
+        "autoHide": false,
+        "autoLimit": false,
+        "style": {
+          "fontSize": 28,
+          "fill": "#302c40"
+        }
+      },
+      "tick": {
+        "visible": false
+      },
+      "grid": {
+        "visible": false
+      },
+      "domainLine": {
+        "visible": false
+      }
+    },
+    {
+      "orient": "left",
+      "type": "linear",
+      "min": 0,
+      "max": 35,
+      "nice": false,
+      "tickCount": 4,
+      "label": {
+        "style": {
+          "fontSize": 28,
+          "fill": "#302c40"
+        }
+      },
+      "tick": {
+        "visible": false
+      },
+      "grid": {
+        "style": {
+          "stroke": "#d8d4ca"
+        }
+      },
+      "domainLine": {
+        "visible": false
+      }
+    }
+  ],
+  "legends": {
+    "visible": true,
+    "orient": "top",
+    "position": "start",
+    "item": {
+      "label": {
+        "style": {
+          "fontSize": 28,
+          "fill": "#302c40"
+        }
+      }
+    }
+  },
+  "tooltip": {
+    "visible": false
+  }
+}

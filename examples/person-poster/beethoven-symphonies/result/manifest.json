@@ -1,0 +1,47 @@
+{
+  "html": "index.html",
+  "png": "preview.png",
+  "delivery": "html+png",
+  "canvas": {
+    "width": 1200,
+    "height": 1800
+  },
+  "charts": [
+    {
+      "id": "movements",
+      "spec": "charts/movements.spec.json",
+      "mount": "#chart-movements"
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/portrait.jpg",
+      "kind": "bitmap",
+      "sourceFile": "assets/portrait.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Joseph_Karl_Stieler's_Beethoven_mit_dem_Manuskript_der_Missa_solemnis.jpg",
+      "credit": "Joseph Karl Stieler",
+      "usageStatus": "verified",
+      "usageTerms": "Public domain / PDM1.0 / PD-Art as identified on file page; faithful reproduction of1820 painting; source1920px JPEG unchanged."
+    }
+  ],
+  "displayBindings": "display-map.json",
+  "managedRuntime": true,
+  "export": {
+    "selector": "#infographic",
+    "width": 1200,
+    "height": 1800,
+    "deviceScaleFactor": 2,
+    "viewport": {
+      "width": 1200,
+      "height": 1800
+    }
+  },
+  "dependencies": [
+    {
+      "name": "@visactor/vchart",
+      "version": "2.1.7",
+      "file": "assets/vchart.js",
+      "source": "https://unpkg.com/@visactor/vchart@2.1.7/build/index.min.js"
+    }
+  ]
+}

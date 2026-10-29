@@ -115,6 +115,8 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 
 图片检索、生图与抠图使用宿主能力，素材要求以所选 Skill 为准。杂志模板中的占位素材需要在交付前替换。VChart/VTable Skill 的运行要求见各自仓库。
 
+Person Poster 通过 `poster_workflow.py` 完成空画布初始化、来源重放、构建、布局检查和交付核验。正式交付需要展示绑定、来源数值比对及逐位图使用依据；阅读与对比检查基于实际页面，失败产物仅作为 `draft/` 中带标识的诊断图。旧 bundle 须迁移并重新验收，见[展示契约](skills/person-poster/references/display-bindings.md)、[证据说明](skills/person-poster/references/evidence-checks.md)和[渲染说明](skills/person-poster/references/render-and-acceptance.md)。工具检查不认证来源真伪、图片权利、视觉质量或宿主最终回复。
+
 ## 使用
 
 安装后，在 Agent 中指定所需 Skill，并提供你的数据。例如：
@@ -129,7 +131,7 @@ chart-storytelling 由当前 Agent 生成 VSeed 配置，再用本地脚本组�
 
 ## 案例展示
 
-[案例目录](examples/README.md) 已收录 CO₂ 滚动故事、Las Vegas Web-PPT、6组杂志图文案例和4组人物志案例，包含提示词、图片或页面结果，以及输入与复现限制。
+[案例目录](examples/README.md) 已收录 CO₂ 滚动故事、Las Vegas Web-PPT、6组杂志图文案例、4组人物志案例和5条人物数据海报案例（含真实剪影、HTML-only与明确虚构的AI插画案例），包含提示词、图片或页面结果，以及输入与复现限制。
 
 ## 开发与维护
 
@@ -180,7 +182,9 @@ uv run ruff check skills tests
 
 使用 Codex、Claude Code 或其他兼容的成熟 Agent 执行[固定任务](cases/README.md)，也可以提供自己的提示词和输入。按[本地调试指南](docs/debugging.md)建立已忽略的 `.cache/skill-dev/<skill-name>/<run-name>/` 工作目录，保留产物、截图及可导出的日志。仓库不提供模型 API harness 或统一 Agent 执行器。
 
-固定任务覆盖 chart-storytelling 与 person-poster；浏览器 smoke 覆盖故事 HTML/Web-PPT，以及人物海报的图表示例、带图表及无图表的 HTML-only 交付、无图表 PNG、祖先裁切拒绝与失败导出路径。person-poster 另已完成一次真实人物输入的同会话生成验证，不等同于独立盲测。editorial-magazine 和 life-chronicle 已有脚本回归，尚无固定任务或浏览器 smoke。任务完成后检查数据准确性、要求和实际交互，允许不同的正确视觉表达。Agent 任务不在 CI 中运行。
+固定任务覆盖 chart-storytelling 与 person-poster；浏览器 smoke 覆盖故事 HTML/Web-PPT，以及人物海报的图表示例（含类别配色、标签边界及缺失值与真实零值区分）、带图表及无图表的 HTML-only 交付、无图表 PNG、祖先裁切拒绝与失败导出路径。密集海报图表用例明确预期600px阅读基线失败，仅验证API/导出行为，另有 Python 浏览器回归覆盖600px下的 DOM/图表文本。smoke 另覆盖受管理图表启动、展示绑定、未绑定文字、遮挡与粗排阅读失败。受限排版固定 Agent 任务检查失败处理；真实宿主结果单独记录，不代表已满足上架条件。editorial-magazine 和 life-chronicle 已有脚本回归，尚无固定任务或浏览器 smoke。任务完成后检查数据准确性、要求和实际交互，允许不同的正确视觉表达。Agent 任务不在 CI 中运行。
+
+当前 Mac 宿主结果及未关闭限制见[人物海报验证记录](docs/validation/person-poster-2026-10-28.md)。
 
 ## 版本管理
 

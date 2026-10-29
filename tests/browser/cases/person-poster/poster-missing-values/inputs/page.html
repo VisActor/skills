@@ -1,0 +1,14 @@
+<!doctype html><html lang="zh"><meta charset="utf-8"><style>
+*{box-sizing:border-box}body{margin:0;background:#eee;font-family:Arial,sans-serif}#infographic{width:1200px;height:__HEIGHT__px;padding:40px;background:#f6f3eb;color:#233a30}h1{font-size:32px;margin:0 0 24px}h2{font-size:20px;margin:0 0 12px}.grid{display:block}.chart{width:1120px;height:400px}p{font-size:24px}
+</style><main id="infographic"><h1 data-required="title" data-display-id="title">缺失与真实零值 · 单位：次；2022 未观测</h1><div class="grid">__CHART_MOUNTS__</div></main>
+__RUNTIME__<script src="render_charts.js"></script><script>
+window.__INFOGRAPHIC_CHARTS__ = __CHART_DATA__;
+window.__INFOGRAPHIC_READY__ = false;
+(async () => {try {
+ await document.fonts.ready;
+ await Promise.all([...document.images].map(image => image.decode()));
+ window.__POSTER_INSTANCES__ = await renderPosterCharts(window.__INFOGRAPHIC_CHARTS__);
+ await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+ window.__INFOGRAPHIC_READY__ = true;
+} catch(error) {window.__INFOGRAPHIC_ERROR__ = String(error);}})();
+</script></html>

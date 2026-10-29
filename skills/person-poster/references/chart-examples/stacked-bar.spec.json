@@ -10,37 +10,41 @@
   },
   "data": [
     {
-      "id": "career",
+      "id": "d",
       "values": [
         {
-          "period": "阶段一",
-          "series": "A",
-          "value": 12
+          "category": "第一组研究贡献者",
+          "value": 50,
+          "period": "同组组成"
         },
         {
-          "period": "阶段一",
-          "series": "B",
-          "value": 8
+          "category": "第二组研究贡献者",
+          "value": 25,
+          "period": "同组组成"
         },
         {
-          "period": "阶段二",
-          "series": "A",
-          "value": 18
-        },
-        {
-          "period": "阶段二",
-          "series": "B",
-          "value": 9
+          "category": "第三组研究贡献者",
+          "value": 25,
+          "period": "同组组成"
         }
       ]
     }
   ],
   "xField": "value",
   "yField": "period",
-  "color": [
-    "#ac6632",
-    "#376e64"
-  ],
+  "color": {
+    "type": "ordinal",
+    "domain": [
+      "第一组研究贡献者",
+      "第二组研究贡献者",
+      "第三组研究贡献者"
+    ],
+    "range": [
+      "#376e64",
+      "#476b87",
+      "#896125"
+    ]
+  },
   "bar": {
     "style": {
       "cornerRadius": 0
@@ -52,10 +56,9 @@
     "style": {
       "fontSize": 24,
       "fill": "#ffffff",
-      "fontFamily": "sans-serif",
-      "stroke": null,
-      "lineWidth": 0
-    }
+      "fontFamily": "sans-serif"
+    },
+    "formatter": "{value}%"
   },
   "axes": [
     {
@@ -84,23 +87,24 @@
       "orient": "bottom",
       "type": "linear",
       "min": 0,
+      "max": 110,
       "nice": false,
-      "visible": false,
-      "max": 35
+      "visible": false
     }
   ],
   "legends": {
     "visible": true,
     "orient": "bottom",
+    "layout": "vertical",
     "item": {
       "label": {
         "style": {
-          "fontSize": 18
+          "fontSize": 22
         }
       }
     }
   },
   "direction": "horizontal",
-  "seriesField": "series",
+  "seriesField": "category",
   "stack": true
 }

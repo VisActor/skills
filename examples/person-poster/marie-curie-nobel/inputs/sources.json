@@ -1,0 +1,19 @@
+{
+  "facts": {
+    "method": "Curator-selected public facts, independently checked against official indexed NobelPrize summaries; direct pages andAPI403",
+    "urls": [
+      "https://www.nobelprize.org/prizes/physics/1903/summary/",
+      "https://www.nobelprize.org/prizes/chemistry/1911/summary/"
+    ],
+    "checked": "2026-10-28",
+    "scope": "The two specified Nobel awards; prize allocations are not scientific contribution."
+  },
+  "portrait": {
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:Marie_Curie_c1920.jpg",
+    "author": "Henri Manuel",
+    "date": "circa1920",
+    "license": "PDM1.0; file page identifies public-domain status",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "changes": "None; original photographic border retained"
+  }
+}

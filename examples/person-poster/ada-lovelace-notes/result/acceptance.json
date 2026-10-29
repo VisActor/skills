@@ -1,0 +1,25 @@
+{
+  "technical": {
+    "status": "pending"
+  },
+  "factual": {
+    "status": "passed",
+    "evidence": [
+      "evidence/sources.json"
+    ]
+  },
+  "visual": {
+    "status": "pending"
+  },
+  "usage": {
+    "status": "passed",
+    "assets": [
+      {
+        "file": "assets/portrait.jpg",
+        "status": "passed",
+        "basis": "Public domain / PD-Art / PDM1.0 as identified on file page, artist died1860; original Wikimedia1118px square JPEG unchanged.",
+        "evidence": "evidence/sources.json"
+      }
+    ]
+  }
+}

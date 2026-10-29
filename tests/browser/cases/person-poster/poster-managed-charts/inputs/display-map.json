@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "dom": [
+    {
+      "id": "count",
+      "kind": "value",
+      "dataPointer": "/count",
+      "format": {
+        "style": "decimal",
+        "places": 0
+      }
+    }
+  ],
+  "charts": []
+}
