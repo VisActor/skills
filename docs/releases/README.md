@@ -3,8 +3,9 @@
 For each planned Skills release, copy [TEMPLATE.md](TEMPLATE.md) to
 `docs/releases/skills-vMAJOR.MINOR.PATCH.md`. Replace the guidance with actual
 changes, migration steps and known limitations. Write “None” where a section
-does not apply. Commit the file together with `.github/release-plan.json` in
-develop, then review both in the `develop` → `main` release PR. Merging a changed
+does not apply. Commit the file together with `.github/release-plan.json` on a release branch
+created from the latest `origin/develop`, then review both in one PR directly
+to `main`. A separate release-preparation PR into develop is not required. Merging a changed
 non-null plan authorizes publication after main CI passes. The plan is retained
 after publication; subsequent merges with unchanged intent do not republish.
 Tooling-only PRs need no version record; the template is not a release.
