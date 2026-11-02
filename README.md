@@ -198,7 +198,7 @@ Fixed tasks cover chart-storytelling and person-poster. Browser smoke covers sto
 Current Mac host results and open limitations: [Person Poster validation record](docs/validation/person-poster-2026-10-28.md).
 
 
-The initial Chart Assistant snapshot reuses 102 files previously exercised in Doubao Work. This repository adds offline copied-install, example-validation and image-delivery contract regressions; it adds no fixed Agent task or real Feishu browser smoke. A migration PR alone does not establish a published Release or market sync.
+The initial Chart Assistant snapshot reuses 102 files previously exercised in Doubao Work. This repository adds offline copied-install, example-validation and image-delivery contract regressions; it adds no fixed Agent task or real Feishu browser smoke. GitHub is one parallel distribution channel; AgentBuddy and Aily remain independently updated by the upstream release process. A migration PR alone does not establish a published Release or independent market delivery.
 
 ## Versioning
 
