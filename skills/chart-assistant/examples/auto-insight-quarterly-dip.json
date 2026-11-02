@@ -1,0 +1,235 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "auto-insight-quarterly-dip",
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        },
+        "options": {
+          "chartType": "bar",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "季度",
+                "销售额"
+              ],
+              "rows": [
+                "Q1",
+                "Q2",
+                "Q3",
+                "Q4"
+              ],
+              "data": [
+                {
+                  "季度": "Q1",
+                  "销售额": 120
+                },
+                {
+                  "季度": "Q2",
+                  "销售额": 80
+                },
+                {
+                  "季度": "Q3",
+                  "销售额": 125
+                },
+                {
+                  "季度": "Q4",
+                  "销售额": 130
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "季度",
+              "y": [
+                "销售额"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "textType": "rich",
+                  "text": [
+                    {
+                      "text": "季度销售额先回落后恢复",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "fill": "#0F172A",
+                      "lineHeight": 28
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  }
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "orient": "left",
+                  "visible": true,
+                  "type": "linear",
+                  "zero": true,
+                  "title": {
+                    "visible": true,
+                    "text": "销售额（万元）"
+                  },
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": "value",
+                      "unit": "none",
+                      "fixed": 0,
+                      "separator": true
+                    }
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#E2E8F0",
+                      "lineWidth": 1
+                    }
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "orient": "bottom",
+                  "type": "band",
+                  "title": {
+                    "visible": false
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "label": {}
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "series-0",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": "value",
+                      "unit": "none",
+                      "fixed": 0,
+                      "separator": true
+                    }
+                  },
+                  "totalLabel": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                }
+              }
+            ],
+            "marker": {
+              "markLine": [
+                {
+                  "id": "q1-q2-sales-decline",
+                  "name": "total-diff-line",
+                  "target": {
+                    "from": {
+                      "match": {
+                        "季度": "Q1"
+                      },
+                      "metric": "销售额"
+                    },
+                    "to": {
+                      "match": {
+                        "季度": "Q2"
+                      },
+                      "metric": "销售额"
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": [
+                        "value",
+                        "percentage"
+                      ],
+                      "fixed": 1
+                    }
+                  },
+                  "line": {
+                    "style": {
+                      "stroke": "#0A345E"
+                    }
+                  }
+                }
+              ]
+            },
+            "color": [
+              "#E1E2E4"
+            ],
+            "markStyle": [
+              {
+                "id": "q2-decline-focus",
+                "seriesType": "bar",
+                "seriesIndex": 0,
+                "markName": "bar",
+                "itemKeys": [
+                  "_editor_dimension_field",
+                  "_editor_type_field"
+                ],
+                "itemKeyMap": {
+                  "_editor_dimension_field": "Q2",
+                  "_editor_type_field": "销售额"
+                },
+                "style": {
+                  "fill": "#0A345E"
+                }
+              }
+            ]
+          },
+          "enableEditorTheme": true,
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "zIndex": 0
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

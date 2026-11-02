@@ -1,0 +1,183 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "chart-1",
+        "options": {
+          "chartType": "areaPercent",
+          "config": {
+            "mappingSpec": {
+              "x": "年份",
+              "y": [
+                "Service",
+                "Production",
+                "Development"
+              ]
+            },
+            "marker": {
+              "markLine": [
+                {
+                  "id": "development-layer-2008-2012-share-pp",
+                  "label": {
+                    "formatConfig": {
+                      "content": [
+                        "layerShareDiff"
+                      ],
+                      "fixed": 2
+                    },
+                    "visible": true
+                  },
+                  "name": "hierarchy-diff-line",
+                  "target": {
+                    "from": {
+                      "boundary": "end",
+                      "match": {
+                        "年份": "2008"
+                      },
+                      "metric": "Development"
+                    },
+                    "to": {
+                      "boundary": "end",
+                      "match": {
+                        "年份": "2012"
+                      },
+                      "metric": "Development"
+                    }
+                  }
+                }
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "spec": {
+                  "_initialize_": false,
+                  "text": "堆叠层变化对比",
+                  "visible": true
+                },
+                "specIndex": 0,
+                "specKey": "title"
+              },
+              {
+                "id": "axis-left",
+                "spec": {
+                  "label": {
+                    "formatConfig": {
+                      "separator": true
+                    }
+                  },
+                  "orient": "left",
+                  "type": "linear"
+                },
+                "specIndex": 0,
+                "specKey": "axes"
+              }
+            ]
+          },
+          "data": {
+            "type": "standard",
+            "value": {
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataFormat": {
+                    "separator": true
+                  },
+                  "dataType": "number"
+                },
+                {
+                  "dataFormat": {
+                    "separator": true
+                  },
+                  "dataType": "number"
+                },
+                {
+                  "dataFormat": {
+                    "separator": true
+                  },
+                  "dataType": "number"
+                }
+              ],
+              "columns": [
+                "年份",
+                "Service",
+                "Production",
+                "Development"
+              ],
+              "data": [
+                {
+                  "Development": 0,
+                  "Production": 1,
+                  "Service": 20,
+                  "年份": "2007"
+                },
+                {
+                  "Development": 1.3,
+                  "Production": 8,
+                  "Service": 40,
+                  "年份": "2008"
+                },
+                {
+                  "Development": 8.5,
+                  "Production": 33,
+                  "Service": 69,
+                  "年份": "2009"
+                },
+                {
+                  "Development": 39,
+                  "Production": 99,
+                  "Service": 64,
+                  "年份": "2010"
+                },
+                {
+                  "Development": 80,
+                  "Production": 180,
+                  "Service": 39,
+                  "年份": "2011"
+                },
+                {
+                  "Development": 103,
+                  "Production": 185,
+                  "Service": 15,
+                  "年份": "2012"
+                },
+                {
+                  "Development": 44,
+                  "Production": 56,
+                  "Service": 2,
+                  "年份": "2013"
+                }
+              ],
+              "rows": [
+                "2007",
+                "2008",
+                "2009",
+                "2010",
+                "2011",
+                "2012",
+                "2013"
+              ]
+            }
+          },
+          "enableDataEdit": true,
+          "enableEditorTheme": true,
+          "enableTypeChange": true
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 720,
+          "height": 420
+        },
+        "type": "chart"
+      }
+    ],
+    "component": {
+      "size": {
+        "height": 464
+      }
+    }
+  }
+}

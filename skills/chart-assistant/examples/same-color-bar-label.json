@@ -1,0 +1,241 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "same-color-region-sales",
+        "options": {
+          "chartType": "horizontalBar",
+          "config": {
+            "color": [
+              "#A6A7AD"
+            ],
+            "mappingSpec": {
+              "x": "区域",
+              "y": [
+                "销售额"
+              ]
+            },
+            "markStyle": [
+              {
+                "id": "s03-south-china-bar-focus",
+                "itemKeyMap": {
+                  "_editor_dimension_field": "华南",
+                  "_editor_type_field": "销售额"
+                },
+                "itemKeys": [
+                  "_editor_dimension_field",
+                  "_editor_type_field"
+                ],
+                "markName": "bar",
+                "seriesIndex": 0,
+                "seriesType": "bar",
+                "style": {
+                  "fill": "#D97706"
+                }
+              },
+              {
+                "id": "s03-south-china-label-focus",
+                "itemKeyMap": {
+                  "_editor_dimension_field": "华南",
+                  "_editor_type_field": "销售额"
+                },
+                "itemKeys": [
+                  "_editor_dimension_field",
+                  "_editor_type_field"
+                ],
+                "markName": "text",
+                "seriesIndex": 0,
+                "seriesType": "bar",
+                "style": {
+                  "fill": "#D97706",
+                  "fontWeight": "600"
+                }
+              }
+            ],
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "spec": {
+                  "text": [
+                    {
+                      "fill": "#0F172A",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "lineHeight": 28,
+                      "text": "华南销售额 180 万元居首，领先华东 30 万元"
+                    },
+                    {
+                      "fill": "#64748B",
+                      "fontSize": 12,
+                      "lineHeight": 18,
+                      "text": "\n各区域销售额｜单位：万元｜按销售额降序"
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  },
+                  "textType": "rich",
+                  "visible": true
+                },
+                "specIndex": 0,
+                "specKey": "title"
+              },
+              {
+                "id": "axis-left",
+                "spec": {
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "label": {
+                    "visible": true
+                  },
+                  "orient": "left",
+                  "tick": {
+                    "visible": false
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "type": "band",
+                  "visible": true
+                },
+                "specIndex": 0,
+                "specKey": "axes"
+              },
+              {
+                "id": "axis-bottom",
+                "spec": {
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "style": {
+                      "lineWidth": 1,
+                      "stroke": "#E2E8F0"
+                    },
+                    "visible": true
+                  },
+                  "label": {
+                    "formatConfig": {
+                      "content": "value",
+                      "fixed": 0,
+                      "unit": "none"
+                    },
+                    "visible": true
+                  },
+                  "orient": "bottom",
+                  "tick": {
+                    "visible": false
+                  },
+                  "title": {
+                    "text": "销售额（万元）",
+                    "visible": true
+                  },
+                  "type": "linear",
+                  "visible": true,
+                  "zero": true
+                },
+                "specIndex": 1,
+                "specKey": "axes"
+              },
+              {
+                "id": "legend-discrete",
+                "spec": {
+                  "visible": false
+                },
+                "specIndex": 0,
+                "specKey": "legends"
+              },
+              {
+                "id": "series-0",
+                "spec": {
+                  "label": {
+                    "formatConfig": {
+                      "content": "value",
+                      "fixed": 0,
+                      "unit": "none"
+                    },
+                    "visible": true,
+                    "position": "outside"
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  },
+                  "totalLabel": {
+                    "visible": false
+                  }
+                },
+                "specIndex": 0,
+                "specKey": "series"
+              }
+            ],
+            "dataGroupSpec": {
+              "EDITOR_ALL_DATA_GROUP": {
+                "label": {
+                  "style": {
+                    "fill": "#A6A7AD"
+                  }
+                }
+              }
+            }
+          },
+          "data": {
+            "type": "standard",
+            "value": {
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataFormat": {
+                    "separator": true
+                  },
+                  "dataType": "number"
+                }
+              ],
+              "columns": [
+                "区域",
+                "销售额"
+              ],
+              "data": [
+                {
+                  "区域": "华南",
+                  "销售额": 180
+                },
+                {
+                  "区域": "华东",
+                  "销售额": 150
+                },
+                {
+                  "区域": "华北",
+                  "销售额": 120
+                },
+                {
+                  "区域": "西部",
+                  "销售额": 90
+                }
+              ],
+              "rows": [
+                "华南",
+                "华东",
+                "华北",
+                "西部"
+              ]
+            }
+          },
+          "enableDataEdit": true,
+          "enableEditorTheme": true,
+          "enableTypeChange": true,
+          "zIndex": 0
+        },
+        "position": {
+          "height": 480,
+          "width": 960,
+          "x": 0,
+          "y": 0
+        },
+        "type": "chart"
+      }
+    ]
+  }
+}

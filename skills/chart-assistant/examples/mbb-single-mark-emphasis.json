@@ -1,0 +1,21 @@
+{
+  "kind": "materialized-mbb-single-mark-patch",
+  "precondition": "seriesIndex、itemKeys 和 itemKeyMap 已由当前 standard bar 的 runtime picker/readback 返回",
+  "rationale": "标题结论明确指向 Q4，因此使用当前咨询主题的 brandFocus 强调该柱；颜色只是重点编码的一种实现",
+  "patch": {
+    "markStyle": [
+      {
+        "id": "e34df984-c3af-4bf9-a94a-e3a1d3b62a5e",
+        "seriesType": "bar",
+        "seriesIndex": 0,
+        "markName": "bar",
+        "itemKeys": ["_editor_dimension_field", "_editor_type_field"],
+        "itemKeyMap": {
+          "_editor_dimension_field": "Q4",
+          "_editor_type_field": "销售额"
+        },
+        "style": { "fill": "#2563EB" }
+      }
+    ]
+  }
+}

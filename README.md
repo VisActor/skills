@@ -21,6 +21,12 @@ Agent skills for the VisActor visualization ecosystem. Create data stories, dash
 | [visactor-chart-editor](skills/visactor-chart-editor/SKILL.md) | Self-service chart editing with field drag-and-drop and live data exploration |
 | [visactor-map3d-dashboard](skills/visactor-map3d-dashboard/SKILL.md) | 3D globe dashboards for regional analysis and linked evidence |
 
+### Controlled upstream distributions
+
+| Skill | Tasks | Authoritative source |
+| --- | --- | --- |
+| [chart-assistant](skills/chart-assistant/SKILL.md) | Business charts, MBB annotations, editable Feishu cards, transparent PNGs and positioned document images | `vchart-editor/packages/chart-assistant`; this repository distributes committed snapshots, see [source and updates](docs/upstreams/chart-assistant.md) |
+
 ### Related VisActor Skills
 
 Chart and table Skills are maintained in their library repositories. Install them directly from the source:
@@ -30,7 +36,7 @@ Chart and table Skills are maintained in their library repositories. Install the
 | [VChart Skill](https://github.com/VisActor/VChart/blob/develop/skills/vchart-development-assistant/SKILL.md) | Chart generation, diagnosis, image replication and React integration | [VisActor/VChart](https://github.com/VisActor/VChart) |
 | [VTable Skill](https://github.com/VisActor/VTable/blob/develop/skills/vtable-development-assistant/SKILL.md) | List tables, pivot tables/charts, interactions and diagnosis | [VisActor/VTable](https://github.com/VisActor/VTable) |
 
-Each skill includes its instructions, local references, templates and scripts. No separate VisActor CLI, MCP server, model key or hosted VisActor API is required. The host agent supplies the model.
+Each Skill includes its required instructions, references, templates or scripts. The host agent supplies the model. Chart Assistant PNG delivery calls its product HTTPS rendering service; Feishu cards and document insertion also require authorized host tools. See the runtime requirements for each Skill.
 
 **VisActor Skills work in Claude Code, Codex, WorkBuddy, Doubao Work and other tools that support Agent Skills.** The host agent provides model access and tool execution. Ask your agent to help install a Skill through conversation, use the command line, or import a package manually.
 
@@ -59,6 +65,7 @@ If your agent cannot access GitHub or complete installation, use the manual impo
 Run these commands in the project where you want to use the Skills:
 
 ```bash
+npx skills add VisActor/skills --skill chart-assistant
 npx skills add VisActor/skills --skill chart-storytelling
 npx skills add VisActor/skills --skill editorial-magazine
 npx skills add VisActor/skills --skill life-chronicle
@@ -111,6 +118,7 @@ After importing, try: “Use chart-storytelling. Read its SKILL.md, confirm that
 
 | Skill | Runtime requirements |
 | --- | --- |
+| chart-assistant | Node.js 18+; HTTPS access for PNGs; authorized host tools or lark-cli for document insertion; Chart Assistant ISV app for editable cards. DSL generation/validation needs no Feishu authorization or local renderer |
 | chart-storytelling | Python 3.10+ (standard library) and Node.js for JavaScript checks; pinned VSeed, VChart, VTable and GSAP load from unpkg |
 | editorial-magazine | Python 3.10+, dependencies in its [requirements.txt](skills/editorial-magazine/requirements.txt), and Chromium/Chrome for PNG export; font CDN with system fallbacks |
 | life-chronicle | Python 3.10+, dependencies in its [requirements.txt](skills/life-chronicle/requirements.txt), and Chromium/Chrome for PNG export; pinned VInfo and font CDN, see [environment setup](skills/life-chronicle/references/environment.md) |
@@ -188,6 +196,9 @@ Use Codex, Claude Code or another compatible mature agent to run a [fixed task](
 Fixed tasks cover chart-storytelling and person-poster. Browser smoke covers story HTML/Web-PPT and poster chart examples (including category colors, label bounds and missing values versus real zero), HTML-only delivery with and without charts, PNG delivery without charts, ancestor clipping rejection and failed export. Dense poster chart fixtures explicitly expect a failed 600px reading baseline while testing API/export behavior; separate Python browser regressions cover DOM/chart text at 600px reading width. Smoke also covers managed chart startup, display bindings, unbound text, occlusion and full-draft reading failures. The locked-layout Agent task checks failure handling; actual host results are recorded separately and do not certify listing readiness. Editorial-magazine and life-chronicle have script regressions, but no fixed tasks or browser smoke yet. Review generated results for data accuracy, task requirements and interactions; different correct visual designs are acceptable. Agent tasks are not run in CI.
 
 Current Mac host results and open limitations: [Person Poster validation record](docs/validation/person-poster-2026-10-28.md).
+
+
+The initial Chart Assistant snapshot reuses 102 files previously exercised in Doubao Work. This repository adds offline copied-install, example-validation and image-delivery contract regressions; it adds no fixed Agent task or real Feishu browser smoke. A migration PR alone does not establish a published Release or market sync.
 
 ## Versioning
 

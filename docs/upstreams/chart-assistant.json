@@ -1,0 +1,629 @@
+{
+  "schema_version": 1,
+  "source": {
+    "repository": "dp/vchart-editor",
+    "path": "packages/chart-assistant",
+    "commit": "6411d31b5cf93aad48d50923331a17f08dddae5d",
+    "delivery_sha256": "865a69e245d24287173aa877832071c9e554761d6f32125a4ba9d2dc4fceb2f5"
+  },
+  "distribution": {
+    "repository": "VisActor/skills",
+    "path": "skills/chart-assistant"
+  },
+  "fingerprint_algorithm": "visactor-skill-content-v1",
+  "content_sha256": "9ff63ea3d5420015aedd74e41e53bfe90a542606d85a2a7f24fd597cf0548aac",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "mode": "100644",
+      "size": 35457,
+      "sha256": "c5df5111ce0a36b20e735d9d6f5dd8a8b3214e59502860c9f83dcca0c7efbf39"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "mode": "100644",
+      "size": 505,
+      "sha256": "e43aca3ce06c79a7064ea2d3a04b265f0e8da3d0b443aec6282f3adf45f8c486"
+    },
+    {
+      "path": "examples/aeolus-url-card-record.json",
+      "mode": "100644",
+      "size": 348,
+      "sha256": "52481a67ced02ded71591b448e48cb267371d23b68dd24380d46669a974597bc"
+    },
+    {
+      "path": "examples/auto-insight-quarterly-dip.json",
+      "mode": "100644",
+      "size": 6502,
+      "sha256": "54f0e06ab8feaf71e95333da3d5e6bc939a267991a4b8537e755d89227e50901"
+    },
+    {
+      "path": "examples/bar-link-style-map.json",
+      "mode": "100644",
+      "size": 993,
+      "sha256": "04907ba2b96017dcd1100bc2db16416722ab03b120e98c65b636c2392b6e89b3"
+    },
+    {
+      "path": "examples/bar-series-label-and-link-two-phase.json",
+      "mode": "100644",
+      "size": 2013,
+      "sha256": "375f0cdecf6603e2a4fe96794fe15e425fb936d878c1e6b5f653291394ee1c29"
+    },
+    {
+      "path": "examples/bar-series-label-and-link.json",
+      "mode": "100644",
+      "size": 2233,
+      "sha256": "08b2287617a552c7833af98dd72b6d7fc4d6ab30cbea9c37f520b0a34c561b3c"
+    },
+    {
+      "path": "examples/bottom-center-legend-spacing.json",
+      "mode": "100644",
+      "size": 772,
+      "sha256": "4df7812fa181d7fcb4f3c9a1ee1982fc8f5377d91315dee467955dfec9f8e426"
+    },
+    {
+      "path": "examples/bottom-left-legend-spacing.json",
+      "mode": "100644",
+      "size": 714,
+      "sha256": "1159f37c7dda95e3aa47830ea601edb7b52eeaba7c0c86616f354617d91ef607"
+    },
+    {
+      "path": "examples/bubble-quadrant-corner-labels.json",
+      "mode": "100644",
+      "size": 10063,
+      "sha256": "977a82b8ba74fecc4c731093222d0c2624bf32c292bb936822b71bd84f3c94db"
+    },
+    {
+      "path": "examples/business/actual-forecast/common-option.json",
+      "mode": "100644",
+      "size": 7495,
+      "sha256": "2f98b850ecb612fe72b49e1fc6f271efe71bdde200da614093279e04dc0660be"
+    },
+    {
+      "path": "examples/business/baseline-comparison/common-option.json",
+      "mode": "100644",
+      "size": 4013,
+      "sha256": "5b1b3b04aba99d16ae54f7718462751701101554d5d33e419bb2e6b77a8f97ab"
+    },
+    {
+      "path": "examples/business/continuous-evaluation/high.json",
+      "mode": "100644",
+      "size": 7031,
+      "sha256": "3f1434c1d91ddbaa28e8a9543ffd48eaa7300018ee9fb70080b6151b77c02abb"
+    },
+    {
+      "path": "examples/business/continuous-evaluation/low.json",
+      "mode": "100644",
+      "size": 7030,
+      "sha256": "f6944ede08f299c5787957362f777c798e778dc7114c669e5bdcb634badf98f2"
+    },
+    {
+      "path": "examples/business/continuous-evaluation/unknown.json",
+      "mode": "100644",
+      "size": 7034,
+      "sha256": "2cd4642f97df48795d9008a10e31fa78bdc984327b9d057ea5bb37b47a0ba844"
+    },
+    {
+      "path": "examples/business/known-driver-bridge/common-option.json",
+      "mode": "100644",
+      "size": 6721,
+      "sha256": "5785057a81f3adf4467e63e2f448ba70a9567e05446d887ff612fe4d6c3dc867"
+    },
+    {
+      "path": "examples/business/size-and-mix/common-option.json",
+      "mode": "100644",
+      "size": 5652,
+      "sha256": "c9c3dee17fe193db9705969d06d6f527df1d784c658b1b5db49ecbeee706e054"
+    },
+    {
+      "path": "examples/business/statistical-protocol/box-five-number.json",
+      "mode": "100644",
+      "size": 3832,
+      "sha256": "772252678bf220009fe807724742f6cc3f89a83f96a5d159ffd6e71cf02d2d38"
+    },
+    {
+      "path": "examples/business/statistical-protocol/box-samples.json",
+      "mode": "100644",
+      "size": 3858,
+      "sha256": "3556ff532a6f6e4537eeb80e746d4dd3b63a24e21b340ecba0998e61e545b375"
+    },
+    {
+      "path": "examples/business/statistical-protocol/histogram-bins.json",
+      "mode": "100644",
+      "size": 3322,
+      "sha256": "9cb7dcb4c4a420f494568d51aa05e63d7226c782aff885b6eaec9f19b76554d7"
+    },
+    {
+      "path": "examples/business/statistical-protocol/histogram-samples.json",
+      "mode": "100644",
+      "size": 3631,
+      "sha256": "d7d35282c4db658da50e67475ce1d85f7f2e7c4b64745453cf222ab5a78c24ec"
+    },
+    {
+      "path": "examples/butterfly-population-pyramid.json",
+      "mode": "100644",
+      "size": 3435,
+      "sha256": "b1eb39b4b1ba7e636966aa34d04fcc8421113cc659c48341f6e9b3e88f3d186d"
+    },
+    {
+      "path": "examples/common-option-bar.json",
+      "mode": "100644",
+      "size": 785,
+      "sha256": "514157ff6bf4169d533219ad1a8f87d3b0b61f61cd82309f9c3ae0619e25dd33"
+    },
+    {
+      "path": "examples/common-option-config-precedence.json",
+      "mode": "100644",
+      "size": 779,
+      "sha256": "83c5f8eb1bfaaf5771ced5c729ff7058c3aca3acde76fc5f3cefc07ea8b40430"
+    },
+    {
+      "path": "examples/create-doc-and-card-two-phase.json",
+      "mode": "100644",
+      "size": 2768,
+      "sha256": "97f9ef067971f4c71788ebe39955daba6e736533e3f1a42ae29ec8df30358773"
+    },
+    {
+      "path": "examples/diff-marker-coordinate-generation.json",
+      "mode": "100644",
+      "size": 1541,
+      "sha256": "61a2c9a22bee7fb4a5110f02a66b76f93ae17be5a4df47ed4fb26865001ac81f"
+    },
+    {
+      "path": "examples/green-presentation.json",
+      "mode": "100644",
+      "size": 5953,
+      "sha256": "2ef3b41a2ac77e42003217f133fa2da667418d986a9ecde3c40a325010ae6c5d"
+    },
+    {
+      "path": "examples/group-label-and-mark.json",
+      "mode": "100644",
+      "size": 548,
+      "sha256": "04f2f24c53b88840dd31bac41dbfb05a0b932ce25b01726b7fed4b47f15ca230"
+    },
+    {
+      "path": "examples/ida-common-option-with-text.json",
+      "mode": "100644",
+      "size": 1418,
+      "sha256": "193c873f87650565d4cfbd580a5e0bb995187a50315457d63cbe33c53550a6a4"
+    },
+    {
+      "path": "examples/ida-mbb-single-series-bar.json",
+      "mode": "100644",
+      "size": 4419,
+      "sha256": "d1a044605a752eaae0ad9c23df916ba5b63444d945b97c880bc0a99efd298dd8"
+    },
+    {
+      "path": "examples/image-grouped-stacked-callout.json",
+      "mode": "100644",
+      "size": 2186,
+      "sha256": "b537fc08a15e74cf75489c9b2c6b3890514c34d9ab6dc616aa62541dfe67049a"
+    },
+    {
+      "path": "examples/label-variants.json",
+      "mode": "100644",
+      "size": 2091,
+      "sha256": "54fd08e99a6aa4e381049dc98f984baeb9ab80cab7f853718b41d431b222c311"
+    },
+    {
+      "path": "examples/marker-intents.json",
+      "mode": "100644",
+      "size": 4350,
+      "sha256": "d311b7913660bda9ff33025c6e1dd6124727dc05aabd53650afd11615493fb92"
+    },
+    {
+      "path": "examples/mbb-single-mark-emphasis.json",
+      "mode": "100644",
+      "size": 746,
+      "sha256": "bc0bd951e013b260c289a461ce6bfe358eace3b3e07d5daf68455b8ab8c9984c"
+    },
+    {
+      "path": "examples/mixed-canvas-components.json",
+      "mode": "100644",
+      "size": 2310,
+      "sha256": "a95fee27c1915eb36be47ab6dd86919fe5e2a97fd02fc5b18589ff4887fa9bca"
+    },
+    {
+      "path": "examples/model-spec-multi-component.json",
+      "mode": "100644",
+      "size": 1578,
+      "sha256": "2629fc3d53ea04934fbb21371038e7fe4fa7bf53e9e1c5ba13f5bac24e9cbc63"
+    },
+    {
+      "path": "examples/native-default-multi-series.json",
+      "mode": "100644",
+      "size": 4706,
+      "sha256": "a67f285a1382a9a83466d52cbbf1ffa80613c0b246e1c8f1d2a24535538ee94f"
+    },
+    {
+      "path": "examples/native-default-presentation.json",
+      "mode": "100644",
+      "size": 5840,
+      "sha256": "bb1162fd353df88ddca7b6b206cb9f03e610646f2610f1455583ab5a46636463"
+    },
+    {
+      "path": "examples/same-color-bar-label.json",
+      "mode": "100644",
+      "size": 6868,
+      "sha256": "7c2fba52dc8ec22686c4eff2a7498ba80a2c34ddf4f6a1b0b92c622fa64399d5"
+    },
+    {
+      "path": "examples/scatter-quadrant-two-phase.json",
+      "mode": "100644",
+      "size": 6332,
+      "sha256": "e13ec9d9221c88d2aaffbeb622ac0d4ac8ea2d6248aa7244de9610972ef974d1"
+    },
+    {
+      "path": "examples/semantic-annual-growth.json",
+      "mode": "100644",
+      "size": 2061,
+      "sha256": "13539634f0229fb7aaaf20fb5f872a8d6ebec33f9a4f84bc6320891967a4a73c"
+    },
+    {
+      "path": "examples/semantic-basic-annotations.json",
+      "mode": "100644",
+      "size": 3811,
+      "sha256": "7c9501fecb59c0a9fef1c253fee56b5d09ce0c56f0d6023293ec92a8572394b2"
+    },
+    {
+      "path": "examples/semantic-bottom-layer-share.json",
+      "mode": "100644",
+      "size": 4883,
+      "sha256": "b6b711e642d5aaafc800576ee3c53eeb2776cd1a23f4c44a6516200ce4e54938"
+    },
+    {
+      "path": "examples/semantic-business-quadrant.json",
+      "mode": "100644",
+      "size": 3646,
+      "sha256": "da1f991325ec6b7def4cba4146a11acc53ccd7cb94c2a8f3e1a0827569400f3c"
+    },
+    {
+      "path": "examples/semantic-connector-orange-breakdown.json",
+      "mode": "100644",
+      "size": 3852,
+      "sha256": "c01094580aa948ec519b422a9d49204c8fcdf39584f0cbc1fb31d178476361a4"
+    },
+    {
+      "path": "examples/semantic-connector-pc-breakdown.json",
+      "mode": "100644",
+      "size": 3778,
+      "sha256": "8614308750ec137db569cc04686ac7bcf8be660d2e17977d75c73b99b9c158eb"
+    },
+    {
+      "path": "examples/semantic-element-targets.json",
+      "mode": "100644",
+      "size": 14165,
+      "sha256": "3b3ad73fd46606bfbeb447271bbbaf67e5b03df813cb7543ffea277f54c8f86d"
+    },
+    {
+      "path": "examples/semantic-layer-label-content.json",
+      "mode": "100644",
+      "size": 1466,
+      "sha256": "0c26573e91d61356772ef80c4d610e7e646400efcae4ce2d58c48a46cbb91130"
+    },
+    {
+      "path": "examples/semantic-mekko-layer-share.json",
+      "mode": "100644",
+      "size": 3470,
+      "sha256": "bbdc4773971d9019cdd4b09ef873c95b75bf4b0c881e9de0339fb8ebfe0f465e"
+    },
+    {
+      "path": "examples/semantic-partition-threshold.json",
+      "mode": "100644",
+      "size": 3510,
+      "sha256": "c305381b76d18de24d56d61ceafc595e57a10022d7075482887766f9197cd22a"
+    },
+    {
+      "path": "examples/semantic-point-callout-layout.json",
+      "mode": "100644",
+      "size": 3333,
+      "sha256": "083a7f74f521319c9bfe267d57df5cc7dd6dc918c975d0118c7a54a73b6892a8"
+    },
+    {
+      "path": "examples/semantic-total-versus-hierarchy.json",
+      "mode": "100644",
+      "size": 2695,
+      "sha256": "78a12848dd0a287548b674e1eca093d3bd8b1331d49e26517d6c231dd6987575"
+    },
+    {
+      "path": "examples/sheet-live-card-record.json",
+      "mode": "100644",
+      "size": 1344,
+      "sha256": "e1815088cf6f12a74c5df842c3e28c654f548c07196aaf2a96017c76dd18fd06"
+    },
+    {
+      "path": "examples/single-axis-legend-elements.json",
+      "mode": "100644",
+      "size": 931,
+      "sha256": "153d84f5f51b2174e4a243500cecf5844c99297dad112a1978cf145a0c27713f"
+    },
+    {
+      "path": "examples/single-label-and-mark.json",
+      "mode": "100644",
+      "size": 1204,
+      "sha256": "099f853dd6accea684cd35a107524fde8319121ef509ce30e982aa19b80dc12b"
+    },
+    {
+      "path": "examples/solid-dashed-line-multi-object.json",
+      "mode": "100644",
+      "size": 9305,
+      "sha256": "75dcff526d6c578a42f2febe8291fe630b668199ad5f839b2d65689c5abe6a64"
+    },
+    {
+      "path": "examples/solid-dashed-line.json",
+      "mode": "100644",
+      "size": 7178,
+      "sha256": "525dd413d293a20bfe5b0e5afc9bed11a9b7e1a88fd037a8f93c61bebb035a15"
+    },
+    {
+      "path": "examples/waterfall-decrease-semantic-colors.json",
+      "mode": "100644",
+      "size": 5886,
+      "sha256": "f7af887da310311988678755ceca0f5a97bae3f9b672a576ced4593809c9c30b"
+    },
+    {
+      "path": "examples/waterfall-semantic-colors.json",
+      "mode": "100644",
+      "size": 6595,
+      "sha256": "5cc6ee538d19c66b1a50b6035aee0140709d5137884056f81a55807206b55168"
+    },
+    {
+      "path": "references/aeolus.md",
+      "mode": "100644",
+      "size": 4240,
+      "sha256": "e52cd4b6430c940d2f434ece860305558cbd4dc81e8bfb9990ee693180da3742"
+    },
+    {
+      "path": "references/auto-insights.md",
+      "mode": "100644",
+      "size": 9337,
+      "sha256": "753c6269fab97ca0e1dfb616b9905fc7f4e858fb9d2704b19abb56b6b65cb7ee"
+    },
+    {
+      "path": "references/bar-link.md",
+      "mode": "100644",
+      "size": 4915,
+      "sha256": "8f882775cc073600a01f2ccc57f121c1253f2995a77685a186fea60114168f8c"
+    },
+    {
+      "path": "references/business/index.md",
+      "mode": "100644",
+      "size": 2247,
+      "sha256": "d80754b5032eaee375ba3030c291ea30eb45eb6e57cd917e518484a5af94de9a"
+    },
+    {
+      "path": "references/business/recipes/actual-forecast.md",
+      "mode": "100644",
+      "size": 6423,
+      "sha256": "547a0eac79bdd07b15aa474b7d4bf51a29477b9b51936fe22c14fd29a6d26d56"
+    },
+    {
+      "path": "references/business/recipes/baseline-comparison.md",
+      "mode": "100644",
+      "size": 8714,
+      "sha256": "4f490794aeb01a947f10372ff26899406a023c468123a9fde6505b976f46f603"
+    },
+    {
+      "path": "references/business/recipes/known-driver-bridge.md",
+      "mode": "100644",
+      "size": 5582,
+      "sha256": "7549d8ee883c8698dcde548bd83af55b168b158a24d2adfbbb017514c29a6930"
+    },
+    {
+      "path": "references/business/recipes/linked-charts.md",
+      "mode": "100644",
+      "size": 2747,
+      "sha256": "68dff428b074b97819efa6958413ca18d0ae795b0527f7f40c921d6c829005ac"
+    },
+    {
+      "path": "references/business/recipes/size-and-mix.md",
+      "mode": "100644",
+      "size": 6057,
+      "sha256": "65ddd631367be5310196039832cc87ecb09bfefa222e0c17f862c0a9673807f0"
+    },
+    {
+      "path": "references/business/recipes/statistical-and-evaluation.md",
+      "mode": "100644",
+      "size": 8345,
+      "sha256": "1407f70c419a1f20c1a426d90f075174a09489c300bf85976c4bea39169123d3"
+    },
+    {
+      "path": "references/components.md",
+      "mode": "100644",
+      "size": 15530,
+      "sha256": "9708425ce875e404bed4cb615dbce295b55fd165999b1f44abca728f0e69c8c6"
+    },
+    {
+      "path": "references/data-and-formatting.md",
+      "mode": "100644",
+      "size": 19093,
+      "sha256": "c6335c5554e52d79808a1a6937f28d12791d5ff469b446324f68fdb5e0ca4bc6"
+    },
+    {
+      "path": "references/dsl.md",
+      "mode": "100644",
+      "size": 19491,
+      "sha256": "7870cefc7022a290a9b62cdacd011442364e6e701d4c8f22e4392db4e6f360d0"
+    },
+    {
+      "path": "references/editing.md",
+      "mode": "100644",
+      "size": 7437,
+      "sha256": "37b975774a7f1d7fe81ec7840f513a61729cca5d7d399f56a981688886b5110b"
+    },
+    {
+      "path": "references/element-editing.md",
+      "mode": "100644",
+      "size": 26455,
+      "sha256": "9bd0bf1d887c200c0bd601f168e285bd54af6e0befd1275e7f51985da6fa1123"
+    },
+    {
+      "path": "references/examples.md",
+      "mode": "100644",
+      "size": 15782,
+      "sha256": "4c024e9a8b8cc7524da99042b9ac1ad7f4cc636f1a39dedd52a2e13c0bfd3c6c"
+    },
+    {
+      "path": "references/existing-card-replacement.md",
+      "mode": "100644",
+      "size": 9242,
+      "sha256": "883dd904565be446d4c9421ade0b8e65502ced7089cea3950138414faa5c0828"
+    },
+    {
+      "path": "references/feishu-doc-card.md",
+      "mode": "100644",
+      "size": 19420,
+      "sha256": "4b759dd8b9677b71c3e41d4d9fc0fa5ea7b2b62e0d1fc77e41d3749e211f025c"
+    },
+    {
+      "path": "references/feishu-image-delivery.md",
+      "mode": "100644",
+      "size": 6208,
+      "sha256": "ef87eb66856a6b23607c46053d3be90a387ef55ec7d2a70e413985f96a323e9f"
+    },
+    {
+      "path": "references/image-delivery.md",
+      "mode": "100644",
+      "size": 5663,
+      "sha256": "9a3742965c99acc6799067610e1776e488c631c7c5eaab84651d82f67753fee5"
+    },
+    {
+      "path": "references/image-reproduction.md",
+      "mode": "100644",
+      "size": 10758,
+      "sha256": "0484ce9997951259b165a1488325e16d644f7f4857c210e523aae4e4e62718e2"
+    },
+    {
+      "path": "references/labels.md",
+      "mode": "100644",
+      "size": 9216,
+      "sha256": "850b9fa37c99d95f9bb839f5f2f19eb7c6e14269edd37b699b711cc1fb335904"
+    },
+    {
+      "path": "references/legacy-marker-coordinates.md",
+      "mode": "100644",
+      "size": 4824,
+      "sha256": "096455d5397d7756031d46aeecb99ba2a23d9c2c48ff47a5bf4d1a85ba3b72dc"
+    },
+    {
+      "path": "references/markers.md",
+      "mode": "100644",
+      "size": 18279,
+      "sha256": "3c993fdae213ea162908a704df495abf2baf1aedf60e0a9562cb37dec0ec1c6b"
+    },
+    {
+      "path": "references/mbb.md",
+      "mode": "100644",
+      "size": 29150,
+      "sha256": "fb032d8db4eacee6dffff123dc8ea717b1932aa9e7c29ba9241c624c1eeb1768"
+    },
+    {
+      "path": "references/model-spec.md",
+      "mode": "100644",
+      "size": 27866,
+      "sha256": "d1dc4a0cb0b3997ae88d6dde7a5dd1d8a24d9e72aeab2509b55faa5a5e9f391e"
+    },
+    {
+      "path": "references/point-marker-layout.md",
+      "mode": "100644",
+      "size": 3983,
+      "sha256": "b6896db286848703ab586f123ba3a9a4bf1d09662d53c8a030954d784e3df471"
+    },
+    {
+      "path": "references/semantic-chart-connectors.md",
+      "mode": "100644",
+      "size": 5022,
+      "sha256": "237423889ba0d680a2cb980d809c2bf28c2ac09f6314616d0c5530f042dfb5ae"
+    },
+    {
+      "path": "references/semantic-marker-anchors.md",
+      "mode": "100644",
+      "size": 47692,
+      "sha256": "f495501a8df227827ae03046ca2d33e699006e3b286e77a83dbf31f649890800"
+    },
+    {
+      "path": "references/solid-dashed-line.md",
+      "mode": "100644",
+      "size": 6928,
+      "sha256": "869b94e8cf19569176fc701f36b61687107a5e846bb256e8561f2a9ed06a1046"
+    },
+    {
+      "path": "references/sources-and-sync.md",
+      "mode": "100644",
+      "size": 10722,
+      "sha256": "f571dfe578a3e99eb499225f96c55caf9a4dfdc5db3649561878892d0bcaea73"
+    },
+    {
+      "path": "references/special-logic.md",
+      "mode": "100644",
+      "size": 11469,
+      "sha256": "d316b5c11e3a93b4b0fbe212dcb447ee7e6d18dff94414a5616bbba692c2780e"
+    },
+    {
+      "path": "references/template-catalog-cartesian.md",
+      "mode": "100644",
+      "size": 19404,
+      "sha256": "84c9e086546cc68a5b5cbad3ba0b7401e951eeeb334feca5afc7171884138a3a"
+    },
+    {
+      "path": "references/template-catalog-hierarchy.md",
+      "mode": "100644",
+      "size": 3972,
+      "sha256": "a7b965e98815072baf5483b7007971d543ace86670360835d945c8930b8e66e4"
+    },
+    {
+      "path": "references/template-catalog-specialized.md",
+      "mode": "100644",
+      "size": 12082,
+      "sha256": "d0383e71f915b071656ed7a8e8d9ea3673e6024bc017ef02fdee5492f61f5061"
+    },
+    {
+      "path": "references/templates.md",
+      "mode": "100644",
+      "size": 10749,
+      "sha256": "62a78c2b825d87049055b562b3853bd837fca4b5aa015bfed908d182d3edba06"
+    },
+    {
+      "path": "references/waterfall-colors.md",
+      "mode": "100644",
+      "size": 3947,
+      "sha256": "0228d3fd78e4f95aaa2b3dc1dbc784c0243b00790092394a323f16c1756b41fc"
+    },
+    {
+      "path": "references/workflow.md",
+      "mode": "100644",
+      "size": 22176,
+      "sha256": "e3f5a9f260c8243f572634da87cbf90f00f0b63243c4e1526b7a221169faf961"
+    },
+    {
+      "path": "scripts/business-protocol-validation.mjs",
+      "mode": "100644",
+      "size": 11977,
+      "sha256": "4f89451e4c88f81253a26a8e0b1e7eaec44e43ac9d2fa1284243ebe579eb1932"
+    },
+    {
+      "path": "scripts/common-option-validation.mjs",
+      "mode": "100644",
+      "size": 18337,
+      "sha256": "c1b340b4db43f943fef5893e0c870db27de60a7aa418e9ae9369f229ef91df74"
+    },
+    {
+      "path": "scripts/deliver-image.mjs",
+      "mode": "100644",
+      "size": 2520,
+      "sha256": "bcae4e7284ed0c3bb2735d563ac5050b7e3f83bcb1e9dbaceb44748a57e058f6"
+    },
+    {
+      "path": "scripts/export-image.mjs",
+      "mode": "100644",
+      "size": 10105,
+      "sha256": "85f22ce58f070fd74448bc0eea16d8244ae4609ef4d312a595fbbcfdb08ec409"
+    },
+    {
+      "path": "scripts/insert-image.mjs",
+      "mode": "100644",
+      "size": 14823,
+      "sha256": "c8e27719d19e3d14d77d3fbb730a5d32bf19c37fcda4bd8cc4437cd2db4e4afd"
+    }
+  ]
+}

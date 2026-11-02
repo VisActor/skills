@@ -1,0 +1,329 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 720,
+          "height": 420
+        },
+        "options": {
+          "chartType": "scatter",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["name", "x", "y", "size"],
+              "rows": [],
+              "data": [
+                {
+                  "name": "A",
+                  "x": 0.25,
+                  "y": -4,
+                  "size": 10
+                },
+                {
+                  "name": "B",
+                  "x": 0.75,
+                  "y": -4,
+                  "size": 20
+                },
+                {
+                  "name": "C",
+                  "x": 0.25,
+                  "y": -12,
+                  "size": 15
+                },
+                {
+                  "name": "D",
+                  "x": 0.75,
+                  "y": -12,
+                  "size": 25
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "label": "name",
+              "x": "x",
+              "y": "y",
+              "size": "size"
+            },
+            "modelSpec": [
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "min": -16,
+                  "max": 0,
+                  "inverse": false,
+                  "title": {
+                    "visible": true,
+                    "text": "y"
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "visible": true,
+                  "min": 0,
+                  "max": 1,
+                  "inverse": false,
+                  "title": {
+                    "visible": true,
+                    "text": "x"
+                  }
+                }
+              }
+            ],
+            "marker": {
+              "quadrant": {
+                "id": "bubble-quadrant",
+                "target": {
+                  "x": {
+                    "field": "x",
+                    "value": 0.5
+                  },
+                  "y": {
+                    "field": "y",
+                    "value": -8
+                  }
+                }
+              },
+              "markPoint": [
+                {
+                  "id": "quadrant-name-lowHigh",
+                  "name": "mark-point",
+                  "position": {
+                    "x": "0%",
+                    "y": "0%"
+                  },
+                  "regionRelative": true,
+                  "itemContent": {
+                    "type": "text",
+                    "position": "middle",
+                    "refX": 0,
+                    "refY": 0,
+                    "offsetX": 12,
+                    "offsetY": 12,
+                    "autoRotate": false,
+                    "confine": true,
+                    "text": {
+                      "type": "rich",
+                      "text": [
+                        {
+                          "text": "低x高y",
+                          "fontSize": 14,
+                          "fill": "#1F2329"
+                        }
+                      ],
+                      "padding": 6,
+                      "dx": 0,
+                      "dy": 0,
+                      "style": {
+                        "textAlign": "left",
+                        "textBaseline": "top"
+                      },
+                      "labelBackground": {
+                        "visible": true,
+                        "style": {
+                          "fill": "#E8EDFF",
+                          "stroke": false
+                        }
+                      }
+                    }
+                  },
+                  "itemLine": {
+                    "visible": false,
+                    "startSymbol": { "visible": false },
+                    "endSymbol": { "visible": false }
+                  },
+                  "targetSymbol": {
+                    "visible": false
+                  }
+                },
+                {
+                  "id": "quadrant-name-highHigh",
+                  "name": "mark-point",
+                  "position": {
+                    "x": "100%",
+                    "y": "0%"
+                  },
+                  "regionRelative": true,
+                  "itemContent": {
+                    "type": "text",
+                    "position": "middle",
+                    "refX": 0,
+                    "refY": 0,
+                    "offsetX": -12,
+                    "offsetY": 12,
+                    "autoRotate": false,
+                    "confine": true,
+                    "text": {
+                      "type": "rich",
+                      "text": [
+                        {
+                          "text": "高x高y",
+                          "fontSize": 14,
+                          "fill": "#1F2329"
+                        }
+                      ],
+                      "padding": 6,
+                      "dx": 0,
+                      "dy": 0,
+                      "style": {
+                        "textAlign": "right",
+                        "textBaseline": "top"
+                      },
+                      "labelBackground": {
+                        "visible": true,
+                        "style": {
+                          "fill": "#E8EDFF",
+                          "stroke": false
+                        }
+                      }
+                    }
+                  },
+                  "itemLine": {
+                    "visible": false,
+                    "startSymbol": { "visible": false },
+                    "endSymbol": { "visible": false }
+                  },
+                  "targetSymbol": {
+                    "visible": false
+                  }
+                },
+                {
+                  "id": "quadrant-name-lowLow",
+                  "name": "mark-point",
+                  "position": {
+                    "x": "0%",
+                    "y": "100%"
+                  },
+                  "regionRelative": true,
+                  "itemContent": {
+                    "type": "text",
+                    "position": "middle",
+                    "refX": 0,
+                    "refY": 0,
+                    "offsetX": 12,
+                    "offsetY": -12,
+                    "autoRotate": false,
+                    "confine": true,
+                    "text": {
+                      "type": "rich",
+                      "text": [
+                        {
+                          "text": "双低",
+                          "fontSize": 14,
+                          "fill": "#1F2329"
+                        }
+                      ],
+                      "padding": 6,
+                      "dx": 0,
+                      "dy": 0,
+                      "style": {
+                        "textAlign": "left",
+                        "textBaseline": "bottom"
+                      },
+                      "labelBackground": {
+                        "visible": true,
+                        "style": {
+                          "fill": "#E8EDFF",
+                          "stroke": false
+                        }
+                      }
+                    }
+                  },
+                  "itemLine": {
+                    "visible": false,
+                    "startSymbol": { "visible": false },
+                    "endSymbol": { "visible": false }
+                  },
+                  "targetSymbol": {
+                    "visible": false
+                  }
+                },
+                {
+                  "id": "quadrant-name-highLow",
+                  "name": "mark-point",
+                  "position": {
+                    "x": "100%",
+                    "y": "100%"
+                  },
+                  "regionRelative": true,
+                  "itemContent": {
+                    "type": "text",
+                    "position": "middle",
+                    "refX": 0,
+                    "refY": 0,
+                    "offsetX": -12,
+                    "offsetY": -12,
+                    "autoRotate": false,
+                    "confine": true,
+                    "text": {
+                      "type": "rich",
+                      "text": [
+                        {
+                          "text": "高x低y",
+                          "fontSize": 14,
+                          "fill": "#1F2329"
+                        }
+                      ],
+                      "padding": 6,
+                      "dx": 0,
+                      "dy": 0,
+                      "style": {
+                        "textAlign": "right",
+                        "textBaseline": "bottom"
+                      },
+                      "labelBackground": {
+                        "visible": true,
+                        "style": {
+                          "fill": "#E8EDFF",
+                          "stroke": false
+                        }
+                      }
+                    }
+                  },
+                  "itemLine": {
+                    "visible": false,
+                    "startSymbol": { "visible": false },
+                    "endSymbol": { "visible": false }
+                  },
+                  "targetSymbol": {
+                    "visible": false
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

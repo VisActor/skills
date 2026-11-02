@@ -13,6 +13,8 @@ VChart and VTable Skills are maintained in [VisActor/VChart](https://github.com/
 3. Run `uv sync --locked`, then the relevant regressions below. These checks need no model account.
 4. For Python changes, run Ruff on the affected paths. Broaden verification when shared tooling or multiple Skills are affected.
 
+For the controlled Chart Assistant distribution, implement changes in its authoritative `vchart-editor` source and refresh the snapshot using [its upstream workflow](docs/upstreams/chart-assistant.md). Do not fix this copy independently.
+
 ### Adding or updating a Skill
 
 - Use `skills/<skill-name>/SKILL.md` with a lowercase hyphenated directory matching the frontmatter `name`. Keep required references, assets, templates, scripts and optional dependency declarations in that directory.
@@ -31,6 +33,7 @@ VChart and VTable Skills are maintained in [VisActor/VChart](https://github.com/
 | editorial-magazine | `uv run pytest tests/editorial_magazine -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |
 | life-chronicle | `uv run pytest tests/life_chronicle -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |
 | person-poster | `uv run pytest tests/person_poster -q -m "not poster_browser"`; browser regressions use `-m poster_browser` after Python Chromium installation | [Fixed task](cases/person-poster/career-evidence/README.md); native-chart, HTML-only, PNG and failure smoke |
+| chart-assistant distribution | `node --test tests/test_chart_assistant.mjs` (Node 24) | Copied runtime, references, fixture validation and offline delivery contracts; real host acceptance remains separate |
 | Packaging | `uv run pytest tests/test_portable_install.py -q` | Copied Skill execution without the source checkout |
 | Shared test tooling | Relevant root tests, or `uv run pytest tests -q` for changes across modules | [Browser smoke guide](tests/browser/cases/README.md) |
 | Release tooling | `uv run pytest tests/test_release.py tests/test_release_plan.py tests/test_release_packages.py -q`; `uv run ruff check .github/scripts tests/test_release.py tests/test_release_plan.py tests/test_release_packages.py` | Mocked GitHub API; no tags or Releases are created |

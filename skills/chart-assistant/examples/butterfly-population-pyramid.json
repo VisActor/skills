@@ -1,0 +1,100 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "type": "chart",
+        "position": { "x": 0, "y": 0, "width": 760, "height": 460 },
+        "options": {
+          "chartType": "butterfly",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["年龄段", "女性", "男性"],
+              "rows": ["年龄段", "0-9", "10-19", "20-29", "30-39", "40-49", "50-59", "60+"],
+              "data": [
+                { "年龄段": "0-9", "女性": 300, "男性": 320 },
+                { "年龄段": "10-19", "女性": 390, "男性": 410 },
+                { "年龄段": "20-29", "女性": 560, "男性": 580 },
+                { "年龄段": "30-39", "女性": 610, "男性": 620 },
+                { "年龄段": "40-49", "女性": 560, "男性": 540 },
+                { "年龄段": "50-59", "女性": 460, "男性": 430 },
+                { "年龄段": "60+", "女性": 360, "男性": 300 }
+              ],
+              "dataFormat": {
+                "女性": { "dataType": "digit", "separator": true },
+                "男性": { "dataType": "digit", "separator": true }
+              }
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "年龄段",
+              "leftY": ["女性"],
+              "rightY": ["男性"]
+            },
+            "butterflyAxisPosition": "center",
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "text": "30-39 岁是人口规模的高峰，60 岁以上女性显著多于男性"
+                }
+              },
+              {
+                "id": "axis-left-value",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "title": { "visible": true, "text": "女性人口（万人）" }
+                }
+              },
+              {
+                "id": "axis-right-value",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "visible": true,
+                  "title": { "visible": true, "text": "男性人口（万人）" }
+                }
+              },
+              {
+                "id": "series-left",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "barBackground": { "visible": true, "style": { "visible": true, "fill": "#f0f0f0" } }
+                }
+              },
+              {
+                "id": "series-right",
+                "specKey": "series",
+                "specIndex": 1,
+                "spec": {
+                  "barBackground": { "visible": true, "style": { "visible": true, "fill": "#f0f0f0" } }
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "orient": "bottom",
+                  "position": "middle",
+                  "padding": [16, 0, 0, 0]
+                }
+              }
+            ]
+          },
+          "enableDataEdit": true,
+          "enableTypeChange": true
+        }
+      }
+    ]
+  },
+  "option": { "loadContribute": "view" }
+}

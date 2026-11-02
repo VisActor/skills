@@ -1,0 +1,17 @@
+{
+  "kind": "materialized-data-group-patch",
+  "precondition": "产品A/产品B 来自当前 dataGroupMap 的真实 groupKey",
+  "dataGroupSpec": {
+    "EDITOR_ALL_DATA_GROUP": {
+      "label": { "visible": true, "formatConfig": { "content": ["value"], "fixed": 0 } }
+    },
+    "产品A": {
+      "bar": { "style": { "fill": "#2251FF" } },
+      "label": { "visible": true, "style": { "fill": "#2251FF", "fontWeight": 600 } }
+    },
+    "产品B": {
+      "bar": { "style": { "fill": "#CBD5E1" } },
+      "label": { "visible": false }
+    }
+  }
+}

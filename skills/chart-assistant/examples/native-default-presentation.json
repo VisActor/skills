@@ -1,0 +1,213 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "native-quarterly-sales",
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        },
+        "options": {
+          "chartType": "bar",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "季度",
+                "销售额"
+              ],
+              "rows": [
+                "Q1",
+                "Q2",
+                "Q3",
+                "Q4"
+              ],
+              "data": [
+                {
+                  "季度": "Q1",
+                  "销售额": 983
+                },
+                {
+                  "季度": "Q2",
+                  "销售额": 1302
+                },
+                {
+                  "季度": "Q3",
+                  "销售额": 1962
+                },
+                {
+                  "季度": "Q4",
+                  "销售额": 2905
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "季度",
+              "y": [
+                "销售额"
+              ]
+            },
+            "color": [
+              "#E1E2E4"
+            ],
+            "markStyle": [
+              {
+                "id": "quarterly-sales-q4-focus",
+                "seriesType": "bar",
+                "seriesIndex": 0,
+                "markName": "bar",
+                "itemKeys": [
+                  "_editor_dimension_field",
+                  "_editor_type_field"
+                ],
+                "itemKeyMap": {
+                  "_editor_dimension_field": "Q4",
+                  "_editor_type_field": "销售额"
+                },
+                "style": {
+                  "fill": "#0A345E"
+                }
+              }
+            ],
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "textType": "rich",
+                  "text": [
+                    {
+                      "text": "Q4 销售额达 2,905，较 Q1 增长 196%",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "fill": "#0F172A",
+                      "lineHeight": 28
+                    },
+                    {
+                      "text": "\n销售额｜季度口径",
+                      "fontSize": 12,
+                      "fill": "#64748B",
+                      "lineHeight": 18
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  }
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "orient": "left",
+                  "visible": true,
+                  "type": "linear",
+                  "zero": true,
+                  "title": {
+                    "visible": true,
+                    "text": "销售额"
+                  },
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": "value",
+                      "unit": "none",
+                      "fixed": 0
+                    }
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#E2E8F0",
+                      "lineWidth": 1
+                    }
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "orient": "bottom",
+                  "type": "band",
+                  "title": {
+                    "visible": false
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "label": {}
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "series-0",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": "value",
+                      "unit": "none",
+                      "fixed": 0
+                    }
+                  },
+                  "totalLabel": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                }
+              }
+            ]
+          },
+          "enableEditorTheme": true,
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "zIndex": 0
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}
