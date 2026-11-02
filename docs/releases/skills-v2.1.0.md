@@ -62,7 +62,8 @@ and verification process.
   coverage, not a new model trial or a new real Feishu browser acceptance run.
   Automated checks do not certify every generated chart's semantic or visual
   correctness; inspect actual outputs before delivery.
-- GitHub Release publication and downstream market delivery are separate
-  outcomes. A published ZIP does not prove that an installed client or market
-  entry has updated; verify the corresponding delivery result. Aily follows its
-  own listing and review process.
+- This migration changes Chart Assistant's GitHub distribution only. AgentBuddy
+  and Aily retain their existing listings and are independently updated by the
+  upstream release process; a GitHub Release does not trigger their updates.
+  A published ZIP does not prove that an installed client or market entry has
+  updated; verify each channel's delivery and listing result separately.
