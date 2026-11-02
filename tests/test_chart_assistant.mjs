@@ -38,7 +38,7 @@ function childNode(cwd, args) {
 
 test('distribution matches the upstream file inventory and release fingerprint', () => {
   assert.equal(provenance.schema_version, 1);
-  assert.equal(provenance.source.repository, 'dp/vchart-editor');
+  assert.equal(provenance.source.repository, 'vchart-editor');
   assert.equal(provenance.source.path, 'packages/chart-assistant');
   assert.match(provenance.source.commit, /^[a-f0-9]{40}$/);
   assert.equal(provenance.distribution.repository, 'VisActor/skills');

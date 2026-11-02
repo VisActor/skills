@@ -17,7 +17,7 @@ After the contribution merges, follow [Publishing Skills](../../CONTRIBUTING.md#
 
 Publication generates `chart-assistant.zip` and its entry in `skills-manifest.json` from all tracked regular files under this Skill, using the existing release packager. The `visactor-skill-content-v1` fingerprint in the provenance must match the release manifest. GitHub installs use `npx skills add VisActor/skills --skill chart-assistant` once the contribution reaches main; ZIP users wait for a formal Release containing that asset.
 
-AgentBuddy is updated by the existing internal release-sync pipeline, scheduled daily at 09:00 Asia/Shanghai. An explicit mapping must retain the existing `code.byted.org/dp/vchart-editor/chart-assistant` entry and history, with `require_existing` and controlled adoption; do not create a same-named entry in the default space or publish manually in parallel. The worker mapping and service-account item permission must be in place before the first source Release; the actual sync receipt confirms success. Namespace changes and permissions are not performed by this repository.
+Market synchronization is managed by a separate release consumer. Coordinate that rollout before the first formal Release containing Chart Assistant and verify its delivery result; this repository does not configure market accounts, credentials or listing administration. A migration PR or GitHub Release alone does not prove successful market delivery.
 
 Aily is a separate distribution channel using the same verified source content and its platform review process; it is not covered by the AgentBuddy automation. A Release, an AgentBuddy receipt and Aily listing approval are separate outcomes.
 

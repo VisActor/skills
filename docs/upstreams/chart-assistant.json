@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": {
-    "repository": "dp/vchart-editor",
+    "repository": "vchart-editor",
     "path": "packages/chart-assistant",
     "commit": "6411d31b5cf93aad48d50923331a17f08dddae5d",
     "delivery_sha256": "865a69e245d24287173aa877832071c9e554761d6f32125a4ba9d2dc4fceb2f5"
