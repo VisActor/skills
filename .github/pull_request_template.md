@@ -8,7 +8,7 @@
 
 ## Release plan
 
-<!-- Required for develop → main PRs. For ordinary contribution PRs, write N/A. The committed .github/release-plan.json is authoritative. Merging a changed non-null plan into main authorizes automatic publication after CI. Null or unchanged plans skip. -->
+<!-- Required for release-branch → main PRs. For ordinary contribution PRs, write N/A. The committed .github/release-plan.json is authoritative. Merging a changed non-null plan into main authorizes automatic publication after CI. Null or unchanged plans skip. -->
 
 - Publish a Skills release: Yes / No / N/A
 - Planned version: `skills-vX.Y.Z` / N/A

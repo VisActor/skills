@@ -1,0 +1,141 @@
+{
+  "kind": "scatter-quadrant-two-phase",
+  "decision": {
+    "analysisGoal": "按增长率和利润率阈值对产品进行行动分群",
+    "whyQuadrant": "用户提供了增长率 10% 和利润率 20% 两个业务阈值；问题是策略分类而不是只测量相关性",
+    "thresholds": {
+      "x": { "field": "增长率", "value": 10, "unit": "%", "source": "年度经营目标" },
+      "y": { "field": "利润率", "value": 20, "unit": "%", "source": "最低盈利要求" }
+    },
+    "sizeRole": "年收入只决定气泡大小，不参与象限归属",
+    "quadrantMeanings": {
+      "highXHighY": "高增长、高利润：优先投入",
+      "lowXHighY": "低增长、高利润：稳健经营",
+      "lowXLowY": "低增长、低利润：审慎调整",
+      "highXLowY": "高增长、低利润：改善盈利"
+    }
+  },
+  "phase1": {
+    "purpose": "首次建图并让运行时物化最终 axis scale/domain、region 和 chart identity",
+    "recordObject": {
+      "commonOption": {
+        "elements": [
+          {
+            "id": "product-portfolio-scatter",
+            "type": "chart",
+            "position": { "x": 0, "y": 0, "width": 960, "height": 540 },
+            "options": {
+              "chartType": "scatter",
+              "data": {
+                "type": "standard",
+                "value": {
+                  "columns": ["产品", "增长率", "利润率", "年收入"],
+                  "rows": ["产品A", "产品B", "产品C", "产品D", "产品E", "产品F", "产品G", "产品H"],
+                  "data": [
+                    { "产品": "产品A", "增长率": 18, "利润率": 28, "年收入": 5200 },
+                    { "产品": "产品B", "增长率": 14, "利润率": 12, "年收入": 3100 },
+                    { "产品": "产品C", "增长率": 6, "利润率": 25, "年收入": 4600 },
+                    { "产品": "产品D", "增长率": 4, "利润率": 11, "年收入": 2200 },
+                    { "产品": "产品E", "增长率": 22, "利润率": 23, "年收入": 3900 },
+                    { "产品": "产品F", "增长率": 8, "利润率": 17, "年收入": 2800 },
+                    { "产品": "产品G", "增长率": 12, "利润率": 19, "年收入": 3400 },
+                    { "产品": "产品H", "增长率": 7, "利润率": 31, "年收入": 2600 }
+                  ]
+                }
+              },
+              "config": {
+                "mappingSpec": {
+                  "label": "产品",
+                  "x": "增长率",
+                  "y": "利润率",
+                  "size": "年收入"
+                }
+              },
+              "enableDataEdit": true,
+              "enableTypeChange": true,
+              "enableEditorTheme": true
+            }
+          }
+        ]
+      },
+      "option": { "loadContribute": "view" }
+    }
+  },
+  "phase2": {
+    "precondition": "以下百分比和 polygon key/positions 必须由 phase1 的同一个 runtime 物化结果产生；示例 token 不是可直接写入的最终值",
+    "runtimeCalculation": {
+      "xThresholdToRegionPercent": "{{xThresholdPercentFromFinalScale}}",
+      "yThresholdToRegionPercent": "{{yThresholdPercentFromFinalScale}}",
+      "note": "region y 百分比从上向下增长；不要把业务阈值 10/20 直接写成 10%/20%"
+    },
+    "attributePatchTemplate": {
+      "marker": {
+        "markLine": [
+          {
+            "id": "quadrant-x-threshold",
+            "name": "partition-line",
+            "interactive": true,
+            "x": "{{xThresholdPercentFromFinalScale}}",
+            "x1": "{{xThresholdPercentFromFinalScale}}",
+            "y": "0%",
+            "y1": "100%",
+            "startSymbol": { "visible": false },
+            "endSymbol": { "visible": false },
+            "line": { "style": { "lineDash": [4, 4] } }
+          },
+          {
+            "id": "quadrant-y-threshold",
+            "name": "partition-line",
+            "interactive": true,
+            "x": "0%",
+            "x1": "100%",
+            "y": "{{yThresholdPercentFromFinalScale}}",
+            "y1": "{{yThresholdPercentFromFinalScale}}",
+            "startSymbol": { "visible": false },
+            "endSymbol": { "visible": false },
+            "line": { "style": { "lineDash": [4, 4] } }
+          }
+        ]
+      },
+      "partitionArea": {
+        "{{runtimePolygonKeyHighXHighY}}": {
+          "positions": [
+            { "x": "{{xThresholdPercentFromFinalScale}}", "y": "0%" },
+            { "x": "100%", "y": "0%" },
+            { "x": "100%", "y": "{{yThresholdPercentFromFinalScale}}" },
+            { "x": "{{xThresholdPercentFromFinalScale}}", "y": "{{yThresholdPercentFromFinalScale}}" }
+          ],
+          "style": { "fill": true, "fillOpacity": 0.08 }
+        },
+        "{{runtimePolygonKeyLowXHighY}}": {
+          "positions": [
+            { "x": "0%", "y": "0%" },
+            { "x": "{{xThresholdPercentFromFinalScale}}", "y": "0%" },
+            { "x": "{{xThresholdPercentFromFinalScale}}", "y": "{{yThresholdPercentFromFinalScale}}" },
+            { "x": "0%", "y": "{{yThresholdPercentFromFinalScale}}" }
+          ],
+          "style": { "fill": true, "fillOpacity": 0.04 }
+        },
+        "{{runtimePolygonKeyLowXLowY}}": {
+          "positions": [
+            { "x": "0%", "y": "{{yThresholdPercentFromFinalScale}}" },
+            { "x": "{{xThresholdPercentFromFinalScale}}", "y": "{{yThresholdPercentFromFinalScale}}" },
+            { "x": "{{xThresholdPercentFromFinalScale}}", "y": "100%" },
+            { "x": "0%", "y": "100%" }
+          ],
+          "style": { "fill": true, "fillOpacity": 0.03 }
+        },
+        "{{runtimePolygonKeyHighXLowY}}": {
+          "positions": [
+            { "x": "{{xThresholdPercentFromFinalScale}}", "y": "{{yThresholdPercentFromFinalScale}}" },
+            { "x": "100%", "y": "{{yThresholdPercentFromFinalScale}}" },
+            { "x": "100%", "y": "100%" },
+            { "x": "{{xThresholdPercentFromFinalScale}}", "y": "100%" }
+          ],
+          "style": { "fill": true, "fillOpacity": 0.06 }
+        }
+      }
+    }
+  },
+  "deliveryBoundary": "phase2 token 全部替换为当前 runtime readback 值后，才可写回 ILayerData attribute；partitionArea 没有 label/name 字段，象限含义应放在 rich title 次级说明或旁注。"
+}

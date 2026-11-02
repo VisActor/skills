@@ -1,0 +1,163 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "device-donut",
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 440,
+          "height": 420
+        },
+        "options": {
+          "chartType": "pie",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "",
+                "value"
+              ],
+              "rows": [
+                "",
+                "PC",
+                "Tablet",
+                "Mobile"
+              ],
+              "data": [
+                {
+                  "": "PC",
+                  "value": 81.06
+                },
+                {
+                  "": "Tablet",
+                  "value": 60.05
+                },
+                {
+                  "": "Mobile",
+                  "value": 109.09
+                }
+              ],
+              "columnFormats": [
+                {},
+                {}
+              ]
+            }
+          },
+          "config": {
+            "modelSpec": [
+              {
+                "id": "series-0",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "startAngle": -61,
+                  "endAngle": 299,
+                  "innerRadius": 0.6,
+                  "outerRadius": 1
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "pc-types",
+        "type": "chart",
+        "position": {
+          "x": 600,
+          "y": 0,
+          "width": 440,
+          "height": 420
+        },
+        "options": {
+          "chartType": "horizontalBar",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "date",
+                "value"
+              ],
+              "rows": [
+                "date",
+                "Desktop",
+                "Laptop"
+              ],
+              "data": [
+                {
+                  "date": "Desktop",
+                  "value": 27.2
+                },
+                {
+                  "date": "Laptop",
+                  "value": 72.8
+                }
+              ],
+              "columnFormats": [
+                {},
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "postfix": "%"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "device-donut-connector-1",
+        "type": "chartConnectorLine",
+        "options": {
+          "target": {
+            "from": {
+              "chartId": "device-donut",
+              "selector": {
+                "": "PC"
+              },
+              "measure": "value",
+              "position": "outer-start"
+            },
+            "to": {
+              "chartId": "pc-types",
+              "selector": {
+                "date": "Desktop"
+              },
+              "measure": "value",
+              "position": "bottom-left"
+            }
+          },
+          "lineType": "hv"
+        }
+      },
+      {
+        "id": "device-donut-connector-2",
+        "type": "chartConnectorLine",
+        "options": {
+          "target": {
+            "from": {
+              "chartId": "device-donut",
+              "selector": {
+                "": "PC"
+              },
+              "measure": "value",
+              "position": "outer-end"
+            },
+            "to": {
+              "chartId": "pc-types",
+              "selector": {
+                "date": "Laptop"
+              },
+              "measure": "value",
+              "position": "bottom-right"
+            }
+          },
+          "lineType": "hv"
+        }
+      }
+    ]
+  }
+}

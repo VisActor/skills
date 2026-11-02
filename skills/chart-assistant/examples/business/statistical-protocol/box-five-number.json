@@ -1,0 +1,148 @@
+{
+  "commonOption": {
+    "theme": "clarity-light",
+    "elements": [
+      {
+        "id": "box-five-number",
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        },
+        "options": {
+          "chartType": "boxPlot",
+          "enableDataEdit": true,
+          "enableTypeChange": false,
+          "enableEditorTheme": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "渠道",
+                "下须",
+                "Q1",
+                "中位数",
+                "Q3",
+                "上须"
+              ],
+              "rows": [
+                "A",
+                "B"
+              ],
+              "data": [
+                {
+                  "渠道": "A",
+                  "下须": 0,
+                  "Q1": 1,
+                  "中位数": 2,
+                  "Q3": 3,
+                  "上须": 4
+                },
+                {
+                  "渠道": "B",
+                  "下须": 2,
+                  "Q1": 3,
+                  "中位数": 4,
+                  "Q3": 5,
+                  "上须": 7
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "category": "渠道",
+              "min": "下须",
+              "q1": "Q1",
+              "median": "中位数",
+              "q3": "Q3",
+              "max": "上须"
+            },
+            "statistics": {
+              "kind": "boxPlot",
+              "input": "fiveNumber"
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "textType": "rich",
+                  "text": [
+                    {
+                      "text": "渠道等待时长分布",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "fill": "#0F172A",
+                      "lineHeight": 28
+                    },
+                    {
+                      "text": "\n单位：分钟",
+                      "fontSize": 12,
+                      "fill": "#64748B",
+                      "lineHeight": 18
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "title": {
+                    "visible": true,
+                    "text": "渠道"
+                  }
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "visible": true,
+                  "title": {
+                    "visible": true,
+                    "text": "等待时长（分钟）"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

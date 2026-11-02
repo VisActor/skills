@@ -1,0 +1,98 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "quarterly-budget-comparison",
+        "type": "chart",
+        "position": { "x": 0, "y": 0, "width": 960, "height": 540 },
+        "options": {
+          "chartType": "barGroup",
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["季度", "预算", "实际"],
+              "rows": ["Q1", "Q2", "Q3"],
+              "columnFormats": [
+                { "dataType": "text" },
+                { "dataType": "number", "dataFormat": { "separator": true } },
+                { "dataType": "number", "dataFormat": { "separator": true } }
+              ],
+              "data": [
+                { "季度": "Q1", "预算": 100, "实际": 120 },
+                { "季度": "Q2", "预算": 150, "实际": 140 },
+                { "季度": "Q3", "预算": 150, "实际": 160 }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": { "x": "季度", "y": ["预算", "实际"] },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "textType": "rich",
+                  "text": [
+                    { "text": "2026 年前三季度收入预算与实际", "fontSize": 22, "fontWeight": "600", "fill": "#0F172A", "lineHeight": 28 }
+                  ],
+                  "textStyle": { "align": "left" }
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "orient": "left", "type": "linear", "visible": true, "zero": true,
+                  "title": { "visible": true, "text": "收入（万元）" },
+                  "label": { "visible": true, "formatConfig": { "content": "value", "unit": "none" } },
+                  "grid": { "visible": true, "style": { "stroke": "#E2E8F0", "lineWidth": 1 } },
+                  "domainLine": { "visible": false }, "tick": { "visible": false }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "orient": "bottom", "type": "band", "showAllGroupLayers": false,
+                  "title": { "visible": false },
+                  "domainLine": { "visible": false }, "tick": { "visible": false }
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": { "visible": true, "orient": "bottom", "position": "middle", "padding": [16, 0, 0, 0] }
+              }
+            ],
+            "dataGroupSpec": [
+              { "target": { "measure": "预算" }, "value": { "bar": { "style": { "fill": "#E1E2E4" } }, "label": { "visible": true } } },
+              { "target": { "measure": "实际" }, "value": { "bar": { "style": { "fill": "#0A345E" } }, "label": { "visible": true } } }
+            ],
+            "marker": {
+              "markLine": [
+                {
+                  "id": "q1-budget-difference",
+                  "name": "hierarchy-diff-line",
+                  "target": {
+                    "from": { "match": { "季度": "Q1" }, "metric": "预算", "boundary": "end" },
+                    "to": { "match": { "季度": "Q1" }, "metric": "实际", "boundary": "end" }
+                  },
+                  "label": { "visible": true, "formatConfig": { "content": ["layerValueDiff", "layerGrowthRate"], "nonPositiveBaseline": "differenceOnly", "fixed": 1, "separator": true } }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "option": { "loadContribute": "view" }
+}

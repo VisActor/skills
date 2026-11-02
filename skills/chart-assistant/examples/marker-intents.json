@@ -1,0 +1,173 @@
+{
+  "kind": "semantic-marker-intents",
+  "note": "意图推理示例，非穷举，不是 browserData 字段。新建标注先确认真实业务字段、指标、单位与尺度，再构造 target，由运行时解析身份和几何，不要求用户提供 series ID。指标有歧义时先询问。旧 coordinates 仅用于已有配置编辑或显式自由几何，不与同一标注的 target 混写。",
+  "intents": [
+    {
+      "type": "reference-line",
+      "target": {
+        "field": "销售额",
+        "value": 100
+      },
+      "meaning": "预算目标"
+    },
+    {
+      "type": "reference-line",
+      "target": {
+        "field": "月份",
+        "value": "2026-07"
+      },
+      "meaning": "新政策生效"
+    },
+    {
+      "type": "total-diff-line",
+      "target": {
+        "from": {
+          "match": {
+            "月份": "1月"
+          },
+          "metric": "销售额"
+        },
+        "to": {
+          "match": {
+            "月份": "2月"
+          },
+          "metric": "销售额"
+        }
+      },
+      "content": "percentage"
+    },
+    {
+      "type": "hierarchy-diff-line",
+      "target": {
+        "from": {
+          "match": {
+            "月份": "1月"
+          },
+          "metric": "产品A",
+          "boundary": "end"
+        },
+        "to": {
+          "match": {
+            "月份": "2月"
+          },
+          "metric": "产品A",
+          "boundary": "end"
+        }
+      },
+      "content": "layerValueDiff",
+      "precondition": "产品A 是堆叠映射中的真实指标字段；比较本层原值，不是累计结束边界差"
+    },
+    {
+      "type": "growth-line",
+      "target": {
+        "from": {
+          "match": {
+            "年份": 2020
+          },
+          "metric": "收入"
+        },
+        "to": {
+          "match": {
+            "年份": 2024
+          },
+          "metric": "收入"
+        }
+      },
+      "content": "CAGR",
+      "precondition": "年份声明 dataType=date、timeUnit=year；间隔来自年份而非行数"
+    },
+    {
+      "type": "mark-point",
+      "target": {
+        "match": {
+          "月份": "2月",
+          "产品": "产品A"
+        },
+        "metric": "销售额"
+      },
+      "text": "峰值"
+    },
+    {
+      "type": "mark-area",
+      "target": {
+        "ranges": [
+          {
+            "field": "月份",
+            "from": "7月",
+            "to": "9月"
+          }
+        ]
+      },
+      "meaning": "促销期"
+    },
+    {
+      "type": "mark-area",
+      "target": {
+        "ranges": [
+          {
+            "field": "销售额",
+            "from": 80,
+            "to": 100
+          }
+        ]
+      },
+      "meaning": "目标带"
+    },
+    {
+      "type": "trendLine",
+      "calculateMethod": "linear",
+      "precondition": "连续数值关系分析；trendLine 是 config 字段，不是 marker 项"
+    },
+    {
+      "type": "partition-line",
+      "target": {
+        "field": "增长率",
+        "value": 0.1
+      },
+      "precondition": "原始增长率为 0–1 尺度，业务阈值为 10%；只需一条分区线"
+    },
+    {
+      "type": "quadrant",
+      "target": {
+        "x": {
+          "field": "增长率",
+          "value": 0.1
+        },
+        "y": {
+          "field": "利润率",
+          "value": 0.2
+        }
+      },
+      "regions": {
+        "highHigh": {
+          "style": {
+            "fill": "#DCFCE7",
+            "fillOpacity": 0.5
+          }
+        }
+      },
+      "precondition": "两指标均为 0–1 尺度，阈值来自业务目标 10% 与盈利底线 20%；生成单个 marker.quadrant 对象，不生成 polygon key"
+    },
+    {
+      "type": "hierarchy-diff-line",
+      "target": {
+        "from": {
+          "match": {
+            "季度": "Q1",
+            "产品": "产品A"
+          },
+          "metric": "实际"
+        },
+        "to": {
+          "match": {
+            "季度": "Q2",
+            "产品": "产品A"
+          },
+          "metric": "实际"
+        }
+      },
+      "content": "layerGrowthRate",
+      "precondition": "分组柱图同系列两季度比较：match 写完整业务键（维度+分组值）并指定 metric；不使用 series ID、显示文本或数组序号，任一端不存在时澄清，不省略分组值把分组柱扩大成整组总量"
+    }
+  ]
+}

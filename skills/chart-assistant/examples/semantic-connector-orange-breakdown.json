@@ -1,0 +1,168 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "orange-pie",
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 440,
+          "height": 420
+        },
+        "options": {
+          "chartType": "pie",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "date",
+                "a"
+              ],
+              "rows": [
+                "date",
+                "Oranges",
+                "Limes/Lemons",
+                "Other"
+              ],
+              "data": [
+                {
+                  "date": "Oranges",
+                  "a": 61
+                },
+                {
+                  "date": "Limes/Lemons",
+                  "a": 32
+                },
+                {
+                  "date": "Other",
+                  "a": 172
+                }
+              ],
+              "columnFormats": [
+                {},
+                {}
+              ]
+            }
+          },
+          "config": {
+            "modelSpec": [
+              {
+                "id": "series-0",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "endAngle": 316,
+                  "startAngle": -44
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "orange-varieties",
+        "type": "chart",
+        "position": {
+          "x": 600,
+          "y": 0,
+          "width": 440,
+          "height": 420
+        },
+        "options": {
+          "chartType": "bar",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "date",
+                "Other",
+                "Valencia",
+                "Navel"
+              ],
+              "rows": [
+                "date",
+                "x1"
+              ],
+              "data": [
+                {
+                  "date": "x1",
+                  "Other": 34,
+                  "Valencia": 20,
+                  "Navel": 13
+                }
+              ],
+              "columnFormats": [
+                {},
+                {},
+                {},
+                {}
+              ]
+            }
+          },
+          "config": {
+            "modelSpec": [
+              {
+                "id": "region-0",
+                "specKey": "region",
+                "spec": {
+                  "stackInverse": false
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "orange-pie-connector-1",
+        "type": "chartConnectorLine",
+        "options": {
+          "target": {
+            "from": {
+              "chartId": "orange-pie",
+              "selector": {
+                "date": "Oranges"
+              },
+              "measure": "a",
+              "position": "outer-start"
+            },
+            "to": {
+              "chartId": "orange-varieties",
+              "selector": {
+                "date": "x1"
+              },
+              "measure": "Navel",
+              "position": "top-left"
+            }
+          },
+          "lineType": "vh"
+        }
+      },
+      {
+        "id": "orange-pie-connector-2",
+        "type": "chartConnectorLine",
+        "options": {
+          "target": {
+            "from": {
+              "chartId": "orange-pie",
+              "selector": {
+                "date": "Oranges"
+              },
+              "measure": "a",
+              "position": "outer-end"
+            },
+            "to": {
+              "chartId": "orange-varieties",
+              "selector": {
+                "date": "x1"
+              },
+              "measure": "Other",
+              "position": "bottom-left"
+            }
+          },
+          "lineType": "vh"
+        }
+      }
+    ]
+  }
+}

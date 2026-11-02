@@ -27,9 +27,13 @@ jobs:
         with:
           python-version: '3.12'
           enable-cache: true
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
       - run: uv sync --locked
       - run: uv run --locked ruff check skills tests .github/scripts
       - run: uv run --locked pytest tests -q -m "not poster_browser"
+      - run: node --test tests/test_chart_assistant.mjs
       - name: Validate Skill release packages from this commit
         run: uv run --locked python .github/scripts/package_skills.py --commit HEAD --tag skills-v0.0.0 --output .cache/ci-release-artifacts
       - name: Preview release plan for main

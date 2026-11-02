@@ -1,0 +1,126 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 760,
+          "height": 440
+        },
+        "options": {
+          "chartType": "scatter",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "Country",
+                "Life expectancy",
+                "GDP per capita"
+              ],
+              "rows": [
+                "China",
+                "United States",
+                "Germany",
+                "Namibia"
+              ],
+              "data": [
+                {
+                  "Country": "China",
+                  "Life expectancy": 78.211,
+                  "GDP per capita": 17657.49
+                },
+                {
+                  "Country": "United States",
+                  "Life expectancy": 76.329,
+                  "GDP per capita": 63635.82
+                },
+                {
+                  "Country": "Germany",
+                  "Life expectancy": 80.9,
+                  "GDP per capita": 53179.65
+                },
+                {
+                  "Country": "Namibia",
+                  "Life expectancy": 59.27,
+                  "GDP per capita": 9208.58
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true
+                  }
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "label": "Country",
+              "x": "GDP per capita",
+              "y": "Life expectancy"
+            },
+            "marker": {
+              "markPoint": [
+                {
+                  "id": "a08-scatter-china",
+                  "name": "mark-point",
+                  "target": {
+                    "match": {
+                      "Country": "China"
+                    }
+                  },
+                  "itemContent": {
+                    "type": "text",
+                    "offsetX": -58,
+                    "offsetY": 28,
+                    "text": {
+                      "type": "rich",
+                      "text": [
+                        {
+                          "text": "China观察点"
+                        }
+                      ]
+                    }
+                  },
+                  "itemLine": {
+                    "type": "type-do"
+                  }
+                }
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "text": "重点数据观察"
+                }
+              }
+            ]
+          },
+          "enableDataEdit": true,
+          "enableEditorTheme": true,
+          "enableTypeChange": true
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

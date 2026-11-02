@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-面向 VisActor 可视化生态的 Agent Skills。通过可独立安装的 Skills 制作数据故事、杂志图文和人物志海报。VChart 和 VTable Skill 在各自的库仓库中维护。
+面向 VisActor 可视化生态的 Agent Skills。通过可独立安装的 Skills 制作数据故事、业务看板、地图、图表编辑器和可视化海报。VChart 和 VTable Skill 在各自的库仓库中维护。
 
 **先看看能做出什么：** 访问 [VisActor Skills 官网](https://visactor.com/skills)，查看各个 Skill 的介绍与案例预览。
 
@@ -21,6 +21,12 @@
 | [visactor-chart-editor](skills/visactor-chart-editor/SKILL.md) | 自助图表编辑器，支持字段拖拽、图型切换与实时数据探索 |
 | [visactor-map3d-dashboard](skills/visactor-map3d-dashboard/SKILL.md) | 三维地球看板，分析地域差异并联动证据与记录 |
 
+### 上游受控分发
+
+| Skill | 能力 | 唯一源码 |
+| --- | --- | --- |
+| [chart-assistant](skills/chart-assistant/SKILL.md) | 商务图表、MBB 分析标注、可编辑飞书卡片、透明 PNG 和飞书文档定位插图 | `vchart-editor/packages/chart-assistant`；本仓库仅分发，见[来源与更新](docs/upstreams/chart-assistant.md) |
+
 ### VisActor 相关 Skills
 
 图表与表格 Skill 在各自的库仓库中维护，可直接从源仓库安装：
@@ -30,7 +36,7 @@
 | [VChart Skill](https://github.com/VisActor/VChart/blob/develop/skills/vchart-development-assistant/SKILL.md) | 图表生成、问题诊断、图片还原和 React 集成 | [VisActor/VChart](https://github.com/VisActor/VChart) |
 | [VTable Skill](https://github.com/VisActor/VTable/blob/develop/skills/vtable-development-assistant/SKILL.md) | 明细表、透视表与透视图、交互和问题诊断 | [VisActor/VTable](https://github.com/VisActor/VTable) |
 
-每个 Skill 都包含完整指令、本地参考资料、模板和脚本。无需额外安装 VisActor CLI、MCP 服务，也无需为 Skill 单独配置模型 Key 或访问 VisActor 托管 API。模型能力由宿主 Agent 提供。
+每个 Skill 都包含所需指令、本地参考资料、模板或脚本，模型能力由宿主 Agent 提供。图表助手的 PNG 交付需要访问产品的 HTTPS 渲染服务；飞书卡片和文档插图另外需要宿主提供已授权的飞书工具。其他 Skill 的具体依赖见运行要求。
 
 **VisActor Skills 可在 Claude Code、Codex、WorkBuddy、豆包工作等支持 Agent Skills 的工具中使用。** 模型与工具执行能力由宿主 Agent 提供，你可以通过对话让 Agent 协助安装，也可以使用命令行或手动导入。
 
@@ -58,6 +64,7 @@ https://github.com/VisActor/skills/tree/main/skills/chart-storytelling
 在你准备使用 Skills 的项目目录中执行：
 
 ```bash
+npx skills add VisActor/skills --skill chart-assistant
 npx skills add VisActor/skills --skill chart-storytelling
 npx skills add VisActor/skills --skill editorial-magazine
 npx skills add VisActor/skills --skill life-chronicle
@@ -110,6 +117,7 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 
 | Skill | 运行依赖 |
 | --- | --- |
+| chart-assistant | Node.js 18+；PNG 需 HTTPS 网络；飞书插图需已授权的宿主工具或 lark-cli；可编辑卡片另需图表助手 ISV 应用。仅生成/校验 DSL 不要求飞书授权，无需本地图表渲染依赖 |
 | chart-storytelling | Python 3.10+（标准库）和 Node.js（校验 JavaScript）；从 unpkg 加载固定版本的 VSeed、VChart、VTable 与 GSAP |
 | editorial-magazine | Python 3.10+、其 [requirements.txt](skills/editorial-magazine/requirements.txt) 中的依赖，以及用于导出 PNG 的 Chromium/Chrome；字体从 CDN 加载，支持系统回退 |
 | life-chronicle | Python 3.10+、其 [requirements.txt](skills/life-chronicle/requirements.txt) 中的依赖，以及用于导出 PNG 的 Chromium/Chrome；固定版本的 VInfo 与字体 CDN，详见[环境说明](skills/life-chronicle/references/environment.md) |
@@ -137,7 +145,7 @@ chart-storytelling 由当前 Agent 生成 VSeed 配置，再用本地脚本组�
 
 ## 开发与维护
 
-本节面向需要修改 Skills 或运行本地测试的贡献者。默认分支 `main` 提供面向用户的稳定版本；日常开发和贡献 PR 使用 `develop`，经过验证后通过 `develop` → `main` 的 PR 发布。请先阅读 [贡献指南](CONTRIBUTING.md)。
+本节面向需要修改 Skills 或运行本地测试的贡献者。默认分支 `main` 提供面向用户的稳定版本；日常开发和贡献 PR 使用 `develop`，发版时从最新 `develop` 拉发布分支，补充发布单和说明后，直接通过一个 PR 合入 `main`。请先阅读 [贡献指南](CONTRIBUTING.md)。
 
 ### 仓库结构
 
@@ -187,6 +195,9 @@ uv run ruff check skills tests
 固定任务覆盖 chart-storytelling 与 person-poster；浏览器 smoke 覆盖故事 HTML/Web-PPT，以及人物海报的图表示例（含类别配色、标签边界及缺失值与真实零值区分）、带图表及无图表的 HTML-only 交付、无图表 PNG、祖先裁切拒绝与失败导出路径。密集海报图表用例明确预期600px阅读基线失败，仅验证API/导出行为，另有 Python 浏览器回归覆盖600px下的 DOM/图表文本。smoke 另覆盖受管理图表启动、展示绑定、未绑定文字、遮挡与粗排阅读失败。受限排版固定 Agent 任务检查失败处理；真实宿主结果单独记录，不代表已满足上架条件。editorial-magazine 和 life-chronicle 已有脚本回归，尚无固定任务或浏览器 smoke。任务完成后检查数据准确性、要求和实际交互，允许不同的正确视觉表达。Agent 任务不在 CI 中运行。
 
 当前 Mac 宿主结果及未关闭限制见[人物海报验证记录](docs/validation/person-poster-2026-10-28.md)。
+
+
+图表助手的首次迁移复用了已在豆包工作验收的 102 文件；本仓库新增离线的独立安装、样例校验和图片交付契约回归，未新增固定 Agent 任务或真实飞书浏览器 smoke。迁移 PR 不等于已发布或已完成市场自动同步。
 
 ## 版本管理
 

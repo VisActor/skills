@@ -1,0 +1,32 @@
+{
+  "kind": "materialized-single-element-patch",
+  "precondition": "styleMap keys 来自当前 runtime pick；排序、轴域或图例变化后重新读取",
+  "modelSpec": [
+    {
+      "id": "axis-bottom",
+      "specKey": "axes",
+      "specIndex": 1,
+      "spec": {
+        "type": "band",
+        "label": { "styleMap": { "2": { "text": "三月（重点）", "style": { "fill": "#2251FF", "fontWeight": 600 } } } },
+        "grid": { "styleMap": { "2": { "visible": true, "style": { "stroke": "#CBD5E1", "lineWidth": 1 } } } }
+      }
+    },
+    {
+      "id": "legend-discrete",
+      "specKey": "legends",
+      "specIndex": 0,
+      "spec": {
+        "type": "discrete",
+        "item": {
+          "styleMap": {
+            "1": {
+              "label": { "text": "预算", "style": { "fill": "#64748B" } },
+              "shape": { "style": { "fill": "#CBD5E1" } }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

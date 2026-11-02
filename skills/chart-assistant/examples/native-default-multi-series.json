@@ -1,0 +1,178 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "native-multi-series",
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        },
+        "options": {
+          "chartType": "barGroup",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "季度",
+                "实际",
+                "预算"
+              ],
+              "rows": [
+                "Q1",
+                "Q2"
+              ],
+              "data": [
+                {
+                  "季度": "Q1",
+                  "实际": 1200,
+                  "预算": 1250
+                },
+                {
+                  "季度": "Q2",
+                  "实际": 1350,
+                  "预算": 1400
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true
+                  }
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "季度",
+              "y": [
+                "实际",
+                "预算"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "textType": "rich",
+                  "text": [
+                    {
+                      "text": "季度实际与预算对比",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "fill": "#0F172A",
+                      "lineHeight": 28
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  }
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "orient": "left",
+                  "visible": true,
+                  "type": "linear",
+                  "zero": true,
+                  "title": {
+                    "visible": true,
+                    "text": "数值"
+                  },
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": "value",
+                      "unit": "none"
+                    }
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#E2E8F0",
+                      "lineWidth": 1
+                    }
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "orient": "bottom",
+                  "type": "band",
+                  "title": {
+                    "visible": false
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "label": {}
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "orient": "bottom",
+                  "position": "middle",
+                  "padding": [
+                    16,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "dataGroupSpec": {
+              "EDITOR_ALL_DATA_GROUP": {
+                "label": {
+                  "visible": true
+                }
+              }
+            }
+          },
+          "enableEditorTheme": true,
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "zIndex": 0
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

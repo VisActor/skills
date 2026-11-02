@@ -1,0 +1,95 @@
+{
+  "kind": "create-doc-and-chart-card-two-phase",
+  "precondition": "用户明确要求创建新飞书 Docx，ISV 图表助手应用已安装、启用且当前用户可用，宿主具有创建 Docx、编辑文档和目标数据源权限。",
+  "note": "phase2 的 document_id 和根 block_id 都取自 phase1 响应；record 必须由宿主对 recordObject 执行 JSON.stringify，不能把占位字符串原样发送。",
+  "phase1": {
+    "method": "POST",
+    "path": "/open-apis/docx/v1/documents",
+    "body": {
+      "title": "2026 销售分析"
+    },
+    "optionalBodyFields": {
+      "folder_token": "<folder-token>"
+    },
+    "requiredResult": [
+      "document.document_id",
+      "document.revision_id",
+      "document.title"
+    ]
+  },
+  "recordObject": {
+    "commonOption": {
+      "elements": [
+        {
+          "id": "chart-sales",
+          "type": "chart",
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 640,
+            "height": 360
+          },
+          "options": {
+            "chartType": "bar",
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "月份",
+                  "销售额"
+                ],
+                "data": [
+                  {
+                    "月份": "1月",
+                    "销售额": 120
+                  },
+                  {
+                    "月份": "2月",
+                    "销售额": 160
+                  }
+                ]
+              }
+            },
+            "enableDataEdit": true,
+            "enableTypeChange": true
+          }
+        }
+      ]
+    },
+    "option": {
+      "loadContribute": "view"
+    }
+  },
+  "phase2": {
+    "method": "POST",
+    "pathTemplate": "/open-apis/docx/v1/documents/{document_id}/blocks/{document_id}/children",
+    "query": {
+      "document_revision_id": -1,
+      "client_token": "<stable-uuid-for-this-logical-create>"
+    },
+    "body": {
+      "children": [
+        {
+          "block_type": 40,
+          "add_ons": {
+            "component_type_id": "blk_67add0469786801c34ce1a4e",
+            "record": "<JSON.stringify(recordObject)>"
+          }
+        }
+      ]
+    },
+    "requiredResult": [
+      "children[0].block_id",
+      "client_token",
+      "document_revision_id"
+    ]
+  },
+  "readback": [
+    "document_id 可用同一身份读取",
+    "新 block 的 block_type 为 40",
+    "component_type_id 为正式 ISV ID blk_67add0469786801c34ce1a4e",
+    "record 可解析且等价于 recordObject",
+    "真实文档表面可渲染和编辑"
+  ],
+  "partialFailure": "phase1 成功而 phase2 失败时保留并返回文档，复用同一 document_id/client_token 重试；不得盲目再建文档。"
+}

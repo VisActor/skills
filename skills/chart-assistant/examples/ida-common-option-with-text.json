@@ -1,0 +1,47 @@
+{
+  "commonOption": {
+    "theme": "ida-light",
+    "elements": [
+      {
+        "id": "7a9d5cd3-168e-4cca-8459-fc844adcf6d9",
+        "type": "chart",
+        "position": { "x": 0, "y": 0, "width": 720, "height": 420 },
+        "options": {
+          "chartType": "barGroup",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["店铺", "Q1销售额", "Q2销售额"],
+              "rows": ["A", "B"],
+              "data": [
+                { "店铺": "A", "Q1销售额": 178, "Q2销售额": 269 },
+                { "店铺": "B", "Q1销售额": 153, "Q2销售额": 231 }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": { "x": "店铺", "y": ["Q1销售额", "Q2销售额"] },
+            "color": ["#2563EB", "#64748B"]
+          },
+          "enableEditorTheme": true,
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "zIndex": 0
+        }
+      },
+      {
+        "id": "8d0df8f7-a882-4b0c-acaf-cf0620b277ec",
+        "type": "text",
+        "position": { "x": 0, "y": 432, "width": 720, "height": 48 },
+        "options": {
+          "text": "注：Q1、Q2 均为各店铺销售额的同口径汇总。",
+          "fontSize": 11,
+          "fill": "#64748B",
+          "textAlign": "left",
+          "zIndex": 1
+        }
+      }
+    ]
+  },
+  "option": { "loadContribute": "view" }
+}

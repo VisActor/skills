@@ -1,0 +1,28 @@
+{
+  "kind": "materialized-bar-link-patch",
+  "precondition": "line-2、area-2、label-2 来自当前图表同一条 barLink datum 的运行时 node id",
+  "barLink": {
+    "enable": true,
+    "spec": {
+      "linkType": "total",
+      "doFill": true,
+      "linkStyle": {
+        "lineStyle": { "stroke": "#667085", "lineWidth": 1 },
+        "startSymbol": { "visible": false },
+        "endSymbol": { "visible": false }
+      },
+      "areaStyle": { "fill": "#2251FF", "fillOpacity": 0.08 },
+      "label": {
+        "visible": true,
+        "style": { "fill": "#344054", "fontSize": 12 },
+        "formatConfig": { "content": ["percentage"], "fixed": 0 }
+      },
+      "styleMap": {
+        "line-2": { "stroke": "#D92D20", "lineWidth": 2 },
+        "area-2": { "fill": "#D92D20", "fillOpacity": 0.12 },
+        "label-2": { "fill": "#D92D20", "fontWeight": 600 }
+      }
+    }
+  },
+  "note": "不得把 2 当成类别索引协议；筛选、排序或同步后必须重新读取 node id"
+}

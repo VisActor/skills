@@ -4,7 +4,7 @@ Changes to Skills should protect a concrete user task or failure mode. Keep runt
 
 ## Start here
 
-Use `main` as the default, user-facing stable branch and `develop` for day-to-day maintenance. Publish reviewed updates through a `develop` → `main` pull request. Create contribution branches from the latest `origin/develop` and target pull requests to `develop`.
+Use `main` as the default, user-facing stable branch and `develop` for day-to-day maintenance. Prepare releases on a branch from the latest `origin/develop` and open one release PR directly to `main`. Create contribution branches from the latest `origin/develop` and target pull requests to `develop`.
 
 VChart and VTable Skills are maintained in [VisActor/VChart](https://github.com/VisActor/VChart/tree/develop/skills/vchart-development-assistant) and [VisActor/VTable](https://github.com/VisActor/VTable/tree/develop/skills/vtable-development-assistant). Make changes to those Skills in their owning repositories.
 
@@ -12,6 +12,8 @@ VChart and VTable Skills are maintained in [VisActor/VChart](https://github.com/
 2. Edit the Skill source, refresh the installed copy and retest. Inspect generated files and required interactions. Keep the prompt, inputs, host/model, available logs and screenshots locally; automated success does not replace semantic or visual review.
 3. Run `uv sync --locked`, then the relevant regressions below. These checks need no model account.
 4. For Python changes, run Ruff on the affected paths. Broaden verification when shared tooling or multiple Skills are affected.
+
+For the controlled Chart Assistant distribution, implement changes in its authoritative `vchart-editor` source and refresh the snapshot using [its upstream workflow](docs/upstreams/chart-assistant.md). Do not fix this copy independently.
 
 ### Adding or updating a Skill
 
@@ -31,6 +33,7 @@ VChart and VTable Skills are maintained in [VisActor/VChart](https://github.com/
 | editorial-magazine | `uv run pytest tests/editorial_magazine -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |
 | life-chronicle | `uv run pytest tests/life_chronicle -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |
 | person-poster | `uv run pytest tests/person_poster -q -m "not poster_browser"`; browser regressions use `-m poster_browser` after Python Chromium installation | [Fixed task](cases/person-poster/career-evidence/README.md); native-chart, HTML-only, PNG and failure smoke |
+| chart-assistant distribution | `node --test tests/test_chart_assistant.mjs` (Node 24) | Copied runtime, references, fixture validation and offline delivery contracts; real host acceptance remains separate |
 | Packaging | `uv run pytest tests/test_portable_install.py -q` | Copied Skill execution without the source checkout |
 | Shared test tooling | Relevant root tests, or `uv run pytest tests -q` for changes across modules | [Browser smoke guide](tests/browser/cases/README.md) |
 | Release tooling | `uv run pytest tests/test_release.py tests/test_release_plan.py tests/test_release_packages.py -q`; `uv run ruff check .github/scripts tests/test_release.py tests/test_release_plan.py tests/test_release_packages.py` | Mocked GitHub API; no tags or Releases are created |
@@ -64,7 +67,7 @@ On Linux, use `install --with-deps chromium` when system libraries are missing. 
 
 ## Publishing Skills
 
-Maintainers approve releases by merging reviewed `develop` → `main` PRs. PR preflight and post-merge publication are automatic; no Actions button or separate version input is needed. Default-branch installations can receive changes as soon as they reach `main`, before a Release is published.
+Maintainers approve releases by merging reviewed release-branch → `main` PRs. PR preflight and post-merge publication are automatic; no Actions button or separate version input is needed. Default-branch installations can receive changes as soon as they reach `main`, before a Release is published.
 
 The committed [`.github/release-plan.json`](.github/release-plan.json) is the machine-readable source of release intent. The PR description summarizes it for reviewers; automation does not parse PR prose.
 
@@ -89,15 +92,17 @@ When no stable-format Skills tag or Release exists, both preflight and publicati
 
 ### Release procedure
 
-1. During development, update `.github/release-plan.json` with the intended version and commit `docs/releases/<tag>.md` using [the release notes template](docs/releases/TEMPLATE.md). Include changes, migration steps and known limitations. Get those changes reviewed and merged into `develop` with the implementation.
-2. Open the `develop` → `main` PR. Fill in its release plan to match the committed JSON. Review the full cumulative diff and relevant real Agent results; CI does not evaluate model output quality.
+1. Keep ordinary implementation PRs targeting `develop`. When ready to release, fetch the latest branches and create `codex/release-<version>` from `origin/develop`. Update `.github/release-plan.json` and commit `docs/releases/<tag>.md` on that release branch using [the release notes template](docs/releases/TEMPLATE.md). Include changes, migration steps and known limitations; the release preparation does not need a separate PR into `develop`.
+2. Open one release-branch → `main` PR. Fill in its release plan to match the committed JSON. Review the full cumulative diff and relevant real Agent results; CI does not evaluate model output quality.
 3. **Skills CI automatically previews main PRs** using the candidate merge commit and the PR's base SHA. A changed non-null plan checks version availability, reads reviewed notes from Git and builds/verifies all ZIPs and the manifest. Inspect the full Release body in the Actions summary and download `skills-release-preview`. Missing/empty notes or an invalid/reserved version fail the check. Null or unchanged plans explicitly report a skip.
 4. Merge only after reviewing the preview and CI. **This merge authorizes publication** for a changed non-null plan. `Publish Skills` starts after successful push-triggered Skills CI on `main`; it fixes the source to that CI run's SHA, checks that it is still current main, and rechecks the required jobs and version before any release writes.
 5. Automation creates the exact tag and a draft Release, uploads/verifies all attachments, then publishes it. Inspect the Release and its source SHA. No manual workflow dispatch is needed.
 
 The release workflow must exist on the default branch (`main`). It accepts only successful push CI from this repository's main, verifies the triggering run through GitHub, and never downloads executable artifacts or restores caches from PR runs. The PR preview has read-only repository permissions. Publication uses the built-in `GITHUB_TOKEN` with `contents: write` and `actions: read`; no personal token is needed.
 
-For the normal merge-commit flow, the merge's first parent is the preceding main snapshot used for plan comparison. Use merge commits for `develop` → `main` promotions, preserving original commits; do not batch-push/rebase a release plan into main. Plans and notes are read from Git objects, not the local worktree. The PR preview uses a candidate SHA/CI link; publication rebuilds from the final main SHA and supplies its CI link. The reviewed notes and body-generation logic stay the same. See [release notes maintenance](docs/releases/README.md) and [the artifact contract](docs/release-artifacts.md).
+For the normal merge-commit flow, the merge's first parent is the preceding main snapshot used for plan comparison. Use merge commits for release-branch → `main` promotions, preserving original commits; do not batch-push/rebase a release plan into main. Plans and notes are read from Git objects, not the local worktree. The PR preview uses a candidate SHA/CI link; publication rebuilds from the final main SHA and supplies its CI link. The reviewed notes and body-generation logic stay the same. See [release notes maintenance](docs/releases/README.md) and [the artifact contract](docs/release-artifacts.md).
+
+After publication, bring the released main history back into develop through the normal branch-protection process, preferably with the next development integration. This keeps release documentation and maintenance fixes from drifting; it is not a prerequisite for the completed release. Never rewrite published commits.
 
 ### Failure and retry
 

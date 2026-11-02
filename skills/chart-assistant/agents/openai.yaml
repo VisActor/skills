@@ -1,0 +1,4 @@
+interface:
+  display_name: "图表助手"
+  short_description: "图表助手：可编辑图表、透明 PNG 与飞书文档插图，支持商务图表、分析标注和数据源同步"
+  default_prompt: "使用 $chart-assistant 制作图表并按用户选择交付：内置与商务图表、差异标注、MBB 制图规范、URL 数据源同步，以及新建飞书文档或向已有文档插入/替换图表助手卡片；按用户选择导出透明背景 PNG 或插入飞书文档中的静态图片。"

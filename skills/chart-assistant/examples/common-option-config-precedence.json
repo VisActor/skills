@@ -1,0 +1,23 @@
+{
+  "input": {
+    "type": "chart",
+    "options": {
+      "chartType": "bar",
+      "data": { "type": "standard", "value": { "columns": ["月份", "收入"], "rows": ["1月"], "data": [{ "月份": "1月", "收入": 100 }] } },
+      "mappingSpec": { "x": "旧月份", "y": ["旧收入"] },
+      "barLink": { "enable": true },
+      "enableDataEdit": true,
+      "config": {
+        "mappingSpec": { "x": "月份", "y": ["收入"] },
+        "barLink": null,
+        "color": ["#2251FF"]
+      }
+    }
+  },
+  "expectedEditableConfig": {
+    "mappingSpec": { "x": "月份", "y": ["收入"] },
+    "barLink": null,
+    "color": ["#2251FF"]
+  },
+  "note": "config 中已提供的值优先于旧顶层字段；null 是显式清空。enableDataEdit 仍从 options 顶层透传。"
+}

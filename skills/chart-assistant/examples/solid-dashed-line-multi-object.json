@@ -1,0 +1,324 @@
+{
+  "kind": "two-phase-example",
+  "phase1Create": {
+    "commonOption": {
+      "elements": [
+        {
+          "id": "product-line",
+          "type": "chart",
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 960,
+            "height": 540
+          },
+          "options": {
+            "chartType": "line",
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "月份",
+                  "A实际",
+                  "A预测",
+                  "B实际",
+                  "B预测"
+                ],
+                "rows": [
+                  "4月",
+                  "5月",
+                  "6月",
+                  "7月"
+                ],
+                "data": [
+                  {
+                    "月份": "4月",
+                    "A实际": 25,
+                    "A预测": null,
+                    "B实际": 18,
+                    "B预测": null
+                  },
+                  {
+                    "月份": "5月",
+                    "A实际": 30,
+                    "A预测": 30,
+                    "B实际": 20,
+                    "B预测": 20
+                  },
+                  {
+                    "月份": "6月",
+                    "A实际": null,
+                    "A预测": 27,
+                    "B实际": null,
+                    "B预测": 22
+                  },
+                  {
+                    "月份": "7月",
+                    "A实际": null,
+                    "A预测": 32,
+                    "B实际": null,
+                    "B预测": 25
+                  }
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true
+                    }
+                  }
+                ]
+              }
+            },
+            "config": {
+              "mappingSpec": {
+                "x": "月份",
+                "y": [
+                  "A实际",
+                  "A预测",
+                  "B实际",
+                  "B预测"
+                ]
+              },
+              "modelSpec": [
+                {
+                  "id": "chart_title",
+                  "specKey": "title",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": true,
+                    "textType": "rich",
+                    "textStyle": {
+                      "align": "left"
+                    },
+                    "text": [
+                      {
+                        "text": "A、B产品销量走势",
+                        "fontSize": 22,
+                        "fontWeight": "600",
+                        "lineHeight": 28
+                      },
+                      {
+                        "text": "\n实线：实际；虚线：预测",
+                        "fontSize": 12,
+                        "lineHeight": 18
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "axis-left",
+                  "specKey": "axes",
+                  "specIndex": 0,
+                  "spec": {
+                    "type": "linear",
+                    "visible": true,
+                    "title": {
+                      "visible": true,
+                      "text": "销量"
+                    },
+                    "label": {
+                      "visible": true
+                    }
+                  }
+                },
+                {
+                  "id": "legend-discrete",
+                  "specKey": "legends",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": true,
+                    "orient": "bottom",
+                    "position": "middle",
+                    "padding": [
+                      16,
+                      0,
+                      0,
+                      0
+                    ]
+                  }
+                }
+              ],
+              "dataGroupSpec": {
+                "EDITOR_ALL_DATA_GROUP": {
+                  "label": {
+                    "visible": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "phase2AfterMaterialization": {
+    "precondition": "读取本次物化的实际series models与dataGroupMap；下面groupField只是业务选择器，不是可写入config的字段。按返回的实际groupKey合并groupStyle；对全部实际series合并seriesSpecPatch。 同时读取离散图例的真实model identity与当前过滤后可视项顺序；legendLabel仅为业务选择器，按实际零基索引合并legendItemStyle，不直接写入config。",
+    "seriesSpecPatch": {
+      "seriesLabel": {
+        "visible": false
+      }
+    },
+    "groups": [
+      {
+        "groupField": "A实际",
+        "groupStyle": {
+          "line": {
+            "visible": true,
+            "style": {
+              "stroke": "#3370FF",
+              "lineWidth": 3,
+              "lineDash": [
+                0
+              ]
+            }
+          },
+          "point": {
+            "visible": true,
+            "style": {
+              "fill": "#3370FF"
+            }
+          }
+        }
+      },
+      {
+        "groupField": "A预测",
+        "groupStyle": {
+          "line": {
+            "visible": true,
+            "style": {
+              "stroke": "#3370FF",
+              "lineWidth": 3,
+              "lineDash": [
+                8,
+                6
+              ]
+            }
+          },
+          "point": {
+            "visible": true,
+            "style": {
+              "fill": "#3370FF"
+            }
+          }
+        }
+      },
+      {
+        "groupField": "B实际",
+        "groupStyle": {
+          "line": {
+            "visible": true,
+            "style": {
+              "stroke": "#F59E0B",
+              "lineWidth": 3,
+              "lineDash": [
+                0
+              ]
+            }
+          },
+          "point": {
+            "visible": true,
+            "style": {
+              "fill": "#F59E0B"
+            }
+          }
+        }
+      },
+      {
+        "groupField": "B预测",
+        "groupStyle": {
+          "line": {
+            "visible": true,
+            "style": {
+              "stroke": "#F59E0B",
+              "lineWidth": 3,
+              "lineDash": [
+                8,
+                6
+              ]
+            }
+          },
+          "point": {
+            "visible": true,
+            "style": {
+              "fill": "#F59E0B"
+            }
+          }
+        }
+      }
+    ],
+    "mergeRule": "只按真实身份深合并modelSpec与dataGroupSpec；legendItems按实际图例可视索引合并到legend model的spec.item.styleMap[index]，保留图例文字、布局和选择状态。phase1不是最终虚实线样式；默认roundLine即使继承lineDash也不能代替实际/预测的不同符号。",
+    "legendItems": [
+      {
+        "legendLabel": "A实际",
+        "legendItemStyle": {
+          "shape": {
+            "style": {
+              "symbolType": "M -0.5 -0.05 H 0.5 V 0.05 H -0.5 Z",
+              "size": 24,
+              "fill": "#3370FF"
+            }
+          }
+        }
+      },
+      {
+        "legendLabel": "A预测",
+        "legendItemStyle": {
+          "shape": {
+            "style": {
+              "symbolType": "M -0.5 -0.05 H -0.25 V 0.05 H -0.5 Z M -0.125 -0.05 H 0.125 V 0.05 H -0.125 Z M 0.25 -0.05 H 0.5 V 0.05 H 0.25 Z",
+              "size": 24,
+              "fill": "#3370FF"
+            }
+          }
+        }
+      },
+      {
+        "legendLabel": "B实际",
+        "legendItemStyle": {
+          "shape": {
+            "style": {
+              "symbolType": "M -0.5 -0.05 H 0.5 V 0.05 H -0.5 Z",
+              "size": 24,
+              "fill": "#F59E0B"
+            }
+          }
+        }
+      },
+      {
+        "legendLabel": "B预测",
+        "legendItemStyle": {
+          "shape": {
+            "style": {
+              "symbolType": "M -0.5 -0.05 H -0.25 V 0.05 H -0.5 Z M -0.125 -0.05 H 0.125 V 0.05 H -0.125 Z M 0.25 -0.05 H 0.5 V 0.05 H 0.25 Z",
+              "size": 24,
+              "fill": "#F59E0B"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "note": "只适用于本地数据或允许拆列的快照；本例按实际身份完成phase2后，Node渲染及保存态重载已验证图例实际/预测符号不同。模型生成评测与飞书浏览器编辑/保存/同步仍未验收。颜色是示例选择，用户/宿主已定义对象颜色优先。"
+}

@@ -1,0 +1,46 @@
+{
+  "kind": "materialized-model-spec-patch",
+  "precondition": "identity 来自当前 browserData/runtime；不可复制到另一张图",
+  "note": "specKey 归属正例：普通数值标签 label 与 seriesLabel 都写在 specKey:series 条目的 spec 中；crosshair 是独立组件条目，不写进 axes 条目；每个条目都显式携带 specKey，不存在 specKey:bar/label 等猜测键。",
+  "modelSpec": [
+    {
+      "id": "axis-left",
+      "specKey": "axes",
+      "specIndex": 0,
+      "spec": { "type": "linear", "zero": true, "title": { "visible": true, "text": "销售额（万元）" } }
+    },
+    {
+      "id": "axis-bottom",
+      "specKey": "axes",
+      "specIndex": 1,
+      "spec": { "type": "band", "label": { "autoHide": true } }
+    },
+    {
+      "id": "legend-discrete",
+      "specKey": "legends",
+      "specIndex": 0,
+      "spec": { "type": "discrete", "visible": true, "orient": "bottom", "position": "start" }
+    },
+    {
+      "id": "chart_title",
+      "specKey": "title",
+      "specIndex": 0,
+      "spec": { "visible": true, "text": "产品 A 增速领先产品 B", "textStyle": { "fontSize": 20, "fontWeight": 600 } }
+    },
+    {
+      "id": "series-sales",
+      "specKey": "series",
+      "specIndex": 0,
+      "spec": {
+        "label": { "visible": true, "formatConfig": { "fixed": 1 } },
+        "seriesLabel": { "visible": true, "position": "end" }
+      }
+    },
+    {
+      "id": "crosshair-0",
+      "specKey": "crosshair",
+      "specIndex": 0,
+      "spec": { "visible": true, "xField": { "visible": true } }
+    }
+  ]
+}

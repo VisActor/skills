@@ -1,0 +1,141 @@
+{
+  "commonOption": {
+    "theme": "clarity-light",
+    "elements": [
+      {
+        "id": "histogram-samples",
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        },
+        "options": {
+          "chartType": "histogram",
+          "enableDataEdit": true,
+          "enableTypeChange": false,
+          "enableEditorTheme": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "样本",
+                "等待时长"
+              ],
+              "rows": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "data": [
+                {
+                  "样本": 1,
+                  "等待时长": 0
+                },
+                {
+                  "样本": 2,
+                  "等待时长": 0.5
+                },
+                {
+                  "样本": 3,
+                  "等待时长": 1
+                },
+                {
+                  "样本": 4,
+                  "等待时长": 2
+                },
+                {
+                  "样本": 5,
+                  "等待时长": 3
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "value": "等待时长"
+            },
+            "statistics": {
+              "kind": "histogram",
+              "input": "samples",
+              "measure": "count",
+              "boundaries": [
+                0,
+                1,
+                3
+              ],
+              "closure": "left-closed-last-inclusive"
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "textType": "rich",
+                  "text": [
+                    {
+                      "text": "等待时长样本分布",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "fill": "#0F172A",
+                      "lineHeight": 28
+                    },
+                    {
+                      "text": "\n单位：分钟",
+                      "fontSize": 12,
+                      "fill": "#64748B",
+                      "lineHeight": 18
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "title": {
+                    "visible": true,
+                    "text": "等待时长（分钟）"
+                  }
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "visible": true,
+                  "title": {
+                    "visible": true,
+                    "text": "频数"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}
