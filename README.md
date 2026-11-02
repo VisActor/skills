@@ -8,10 +8,11 @@ Agent skills for the VisActor visualization ecosystem. Create data stories, dash
 
 ## Skills
 
-### Maintained in this repository
+### Available here
 
 | Skill | Tasks |
 | --- | --- |
+| [chart-assistant](skills/chart-assistant/SKILL.md) | Business charts, MBB analysis annotations, editable Feishu cards, transparent PNGs and document image insertion |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | Analysis reports, business briefings and data features, with chart scrollytelling and annotations, delivered as HTML stories or Web-PPT |
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | Magazine-style visual posts (杂志风图文): HTML / PNG series for news, biographies, outfits, travel, chronological stories and explainers |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | Biography posters with photo walls, center grids, photo rings and editable timelines |
@@ -20,12 +21,6 @@ Agent skills for the VisActor visualization ecosystem. Create data stories, dash
 | [visactor-map2d-dashboard](skills/visactor-map2d-dashboard/SKILL.md) | Interactive 2D map dashboards linking regions, metrics and records |
 | [visactor-chart-editor](skills/visactor-chart-editor/SKILL.md) | Self-service chart editing with field drag-and-drop and live data exploration |
 | [visactor-map3d-dashboard](skills/visactor-map3d-dashboard/SKILL.md) | 3D globe dashboards for regional analysis and linked evidence |
-
-### Controlled upstream distributions
-
-| Skill | Tasks | Authoritative source |
-| --- | --- | --- |
-| [chart-assistant](skills/chart-assistant/SKILL.md) | Business charts, MBB annotations, editable Feishu cards, transparent PNGs and positioned document images | `vchart-editor/packages/chart-assistant`; this repository distributes committed snapshots, see [source and updates](docs/upstreams/chart-assistant.md) |
 
 ### Related VisActor Skills
 
@@ -197,8 +192,7 @@ Fixed tasks cover chart-storytelling and person-poster. Browser smoke covers sto
 
 Current Mac host results and open limitations: [Person Poster validation record](docs/validation/person-poster-2026-10-28.md).
 
-
-The initial Chart Assistant snapshot reuses 102 files previously exercised in Doubao Work. This repository adds offline copied-install, example-validation and image-delivery contract regressions; it adds no fixed Agent task or real Feishu browser smoke. GitHub is one parallel distribution channel; AgentBuddy and Aily remain independently updated by the upstream release process. A migration PR alone does not establish a published Release or independent market delivery.
+Chart Assistant has offline regressions for standalone installation, bundled examples and image-delivery contracts. It does not yet have fixed Agent tasks or real Feishu browser smoke tests in this repository. Review generated charts and document results in your agent environment.
 
 ## Versioning
 

@@ -13,7 +13,7 @@ VChart and VTable Skills are maintained in [VisActor/VChart](https://github.com/
 3. Run `uv sync --locked`, then the relevant regressions below. These checks need no model account.
 4. For Python changes, run Ruff on the affected paths. Broaden verification when shared tooling or multiple Skills are affected.
 
-For the controlled Chart Assistant distribution, implement changes in its authoritative `vchart-editor` source and refresh the snapshot using [its upstream workflow](docs/upstreams/chart-assistant.md). Do not fix this copy independently.
+Chart Assistant updates are coordinated by its maintainers. Open an issue with reproduction steps and the installed release tag or commit before changing its runtime.
 
 ### Adding or updating a Skill
 

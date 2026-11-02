@@ -8,10 +8,11 @@
 
 ## Skills
 
-### 本仓库维护
+### 本仓库提供
 
 | Skill | 能力 |
 | --- | --- |
+| [chart-assistant](skills/chart-assistant/SKILL.md) | 商务图表、MBB 分析标注、可编辑飞书卡片、透明 PNG 和文档插图 |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | 分析报告、业务简报与数据专题，结合图表滚动叙事与标注，输出 HTML 数据故事或 Web-PPT |
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | 杂志风图文：新闻、生平、穿搭、旅行、时序故事与科普，导出 HTML / PNG |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | 人物生平海报：照片墙、中心网格、照片环与可编辑时间线 |
@@ -20,12 +21,6 @@
 | [visactor-map2d-dashboard](skills/visactor-map2d-dashboard/SKILL.md) | 二维地图看板，联动地域、指标、事件与明细 |
 | [visactor-chart-editor](skills/visactor-chart-editor/SKILL.md) | 自助图表编辑器，支持字段拖拽、图型切换与实时数据探索 |
 | [visactor-map3d-dashboard](skills/visactor-map3d-dashboard/SKILL.md) | 三维地球看板，分析地域差异并联动证据与记录 |
-
-### 上游受控分发
-
-| Skill | 能力 | 唯一源码 |
-| --- | --- | --- |
-| [chart-assistant](skills/chart-assistant/SKILL.md) | 商务图表、MBB 分析标注、可编辑飞书卡片、透明 PNG 和飞书文档定位插图 | `vchart-editor/packages/chart-assistant`；本仓库仅分发，见[来源与更新](docs/upstreams/chart-assistant.md) |
 
 ### VisActor 相关 Skills
 
@@ -196,8 +191,7 @@ uv run ruff check skills tests
 
 当前 Mac 宿主结果及未关闭限制见[人物海报验证记录](docs/validation/person-poster-2026-10-28.md)。
 
-
-图表助手的首次迁移复用了已在豆包工作验收的 102 文件；本仓库新增离线的独立安装、样例校验和图片交付契约回归，未新增固定 Agent 任务或真实飞书浏览器 smoke。GitHub 是平行分发渠道之一，AgentBuddy 和 Aily 仍由上游发布流程分别更新。迁移 PR 不等于已发布，也不证明独立市场渠道已更新。
+图表助手已有独立安装、内置样例和图片交付契约的离线回归测试；本仓库尚未提供固定 Agent 任务或真实飞书浏览器 smoke。使用时仍需在实际 Agent 环境中检查图表和文档交付结果。
 
 ## 版本管理
 
