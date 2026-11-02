@@ -31,8 +31,9 @@
     svg text { font-family: inherit; fill: #60777a; font-size: 16px; }
     svg .category { font-size: 19px; fill: #243c3e; }
     svg .count { font-size: 15px; font-variant-numeric: tabular-nums; }
-    #units [data-unit-id] { cursor: pointer; }
-    svg[aria-busy="true"] #units { pointer-events: none; }
+    svg .total { font-size: 25px; font-variant-numeric: lining-nums tabular-nums; fill: #243c3e; }
+    #units [data-unit-id], #aggregates [data-unit-id] { cursor: pointer; }
+    svg[aria-busy="true"] #units, svg[aria-busy="true"] #aggregates { pointer-events: none; }
     footer { display: flex; gap: 30px; justify-content: space-between; border-top: 1px solid #cdd4cb; padding-top: 16px; font-size: 12px; color: #60777a; line-height: 1.8; }
     footer p { margin: 0; max-width: 57%; }
     #details { color: #243c3e; }
@@ -50,10 +51,10 @@
 <main>
   <header>
     <div><span class="eyebrow">IMPLEMENTATION STUDY / 合成数据</span><h1>让关系在同一幅画面里展开。</h1></div>
-    <p>同一份记录，构图与连接怎样影响阅读？查看群组移位、组内重排、局部提取与独立样本更替。问题、布局和路径属于本例。</p>
+    <p>同一份记录，构图与连接怎样影响阅读？查看群组移位、局部提取、汇总与份额，以及独立样本更替。问题、布局和路径属于本例。</p>
   </header>
   <div class="controls">
-    <label>目标画面<select id="layout"><option value="local">局部 · 四条记录</option><option value="whole">展开 · 全部记录</option><option value="groups">重排 · 类别数量</option><option value="compare">并置 · 群组靠近</option><option value="duration">比较 · 使用月数</option><option value="focus">提取 · 满一年后缩放</option><option value="shape">素材 · 轮廓槽位</option></select></label>
+    <label>目标画面<select id="layout"><option value="local">局部 · 四条记录</option><option value="whole">展开 · 全部记录</option><option value="groups">重排 · 类别数量</option><option value="compare">并置 · 群组靠近</option><option value="duration">比较 · 使用月数</option><option value="totals">汇总 · 累计使用量</option><option value="share">份额 · 使用量占比</option><option value="focus">提取 · 满一年后缩放</option><option value="shape">素材 · 轮廓槽位</option></select></label>
     <label>单元的外观<select id="glyph"><option value="image">静态 SVG 素材</option><option value="dot">圆点</option></select></label>
     <label>局部的空间安排<select id="space" disabled><option value="expand">展开局部区间</option><option value="context">保留原有全域</option></select></label>
     <button id="replace" type="button">换成另一批记录</button>
@@ -66,7 +67,7 @@
     <div class="key"><span><i style="background:#286d70"></i>手机</span><span><i style="background:#b75e3e"></i>台灯</span></div>
   </div>
   <svg id="stage" viewBox="0 0 1000 520" role="group" aria-label="设备记录的排列与重组" aria-busy="false">
-    <g id="guides"></g><g id="units"></g><g id="annotations"></g>
+    <g id="guides"></g><g id="units"></g><g id="aggregates"></g><g id="annotations"></g>
   </svg>
   <p id="error" role="alert" hidden></p>
   <p id="design-note"></p>

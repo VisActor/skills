@@ -1,9 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createTransition } from "../../skills/unit-data-storytelling/assets/mechanics/motion.mjs";
-import { at } from "../../skills/unit-data-storytelling/assets/mechanics/geometry.mjs";
+import { at, linearScale } from "../../skills/unit-data-storytelling/assets/mechanics/geometry.mjs";
 import { maskSlots } from "../../skills/unit-data-storytelling/assets/mechanics/units.mjs";
-import { samples, makePose, blendStudy, makeView, blendView }
+import { samples, makePose, blendStudy, makeView, blendView, makeAggregateView,
+  blendExtraction, blendGroupMove, blendReorder }
   from "../../skills/unit-data-storytelling/assets/examples/composition-model.mjs";
 
 test("both organizations preserve the sample, including the larger independent batch", () => {
@@ -195,4 +196,132 @@ test("a group move can be interrupted into another arrangement without snapping 
     assert.ok(b && Math.hypot(a.x - b.x, a.y - b.y) < .001 && Math.abs(a.opacity - b.opacity) < .001);
   }
   assert.equal(transition.sample(1420).pose, next);
+});
+
+test("aggregate targets retain every source group, exact totals and fractional remainders", () => {
+  for (const sample of Object.keys(samples)) {
+    const denominator = samples[sample].reduce((sum, row) => sum + row.months, 0);
+    const total = makeAggregateView(sample, "totals"), share = makeAggregateView(sample, "share");
+    for (const [pose, quantum] of [[total, 10], [share, 5]]) {
+      assert.equal(pose.nodes.size, 0);
+      assert.equal(pose.meta.denominator, denominator);
+      for (const kind of ["phone", "lamp"]) {
+        const members = samples[sample].filter((row) => row.kind === kind);
+        const sum = members.reduce((value, row) => value + row.months, 0);
+        const expected = pose === total ? sum : sum / denominator * 100;
+        const units = [...pose.aggregates.values()].filter((unit) => unit.group === kind);
+        assert.ok(Math.abs(units.reduce((value, unit) => value + unit.amount, 0) - expected) < 1e-10);
+        assert.ok(units.every((unit) => Math.abs(unit.fraction * quantum - unit.amount) < 1e-10));
+        assert.deepEqual(units[0].members, members.map((row) => row.id));
+      }
+    }
+    assert.ok([...total.aggregates.keys()].every((id) => !share.aggregates.has(id)
+      && !samples[sample].some((row) => row.id === id)));
+  }
+});
+
+test("source records gather and new measure units unfold from their group instead of only fading", () => {
+  const from = makeView("A", "groups"), to = makeView("A", "totals");
+  const middle = blendView(from, to, .45);
+  for (const kind of ["phone", "lamp"]) {
+    const old = [...from.nodes.values()].filter((node) => samples.A.find((r) => r.id === node.id).kind === kind);
+    assert.ok(old.every((node) => middle.nodes.get(node.id).opacity > 0));
+    const distance = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+    assert.ok(distance(middle.nodes.get(old[0].id), middle.nodes.get(old.at(-1).id)) < distance(old[0], old.at(-1)));
+    const unit = [...to.aggregates.values()].filter((node) => node.group === kind).at(-1);
+    const visible = middle.aggregates.get(unit.id);
+    assert.ok(visible.opacity > 0 && distance(visible, unit) > 10);
+    assert.equal(middle.guides.get(kind).opacity, 1);
+  }
+});
+
+test("changing to shares keeps true source totals and complete group counts visible", () => {
+  const from = makeView("B", "totals"), to = makeView("B", "share");
+  const facts = [...from.guides].filter(([, guide]) => ["category", "count", "total"].includes(guide.role) && guide.opacity === 1);
+  for (const t of [.01, .4, .8, .99]) {
+    const pose = blendView(from, to, t);
+    assert.ok(facts.every(([id, guide]) => pose.guides.get(id).text === guide.text && pose.guides.get(id).opacity === 1));
+  }
+});
+
+test("a direct subset to total brings omitted source records into the aggregate handoff", () => {
+  const from = makeView("A", "local"), to = makeView("A", "totals");
+  const middle = blendView(from, to, .4);
+  assert.ok(samples.A.every((row) => middle.nodes.get(row.id)?.opacity > 0));
+  assert.equal(blendView(middle, to, 1), to);
+});
+
+test("summary routes and rapid retargeting preserve both visible layers without pose jumps", () => {
+  const targets = ["A", "B"].flatMap((sample) => [...views, "totals", "share"]
+    .map((view) => makeView(sample, view, { slots })));
+  for (const from of targets) for (const to of targets) {
+    if (!from.aggregates.size && !to.aggregates.size) continue;
+    const transition = createTransition(from, { blend: blendView, duration: 1000 });
+    transition.target(to, 0);
+    const current = transition.sample(430).pose;
+    transition.target(from, 430);
+    assert.deepEqual(transition.sample(430).pose, current);
+    const next = transition.sample(430.01).pose;
+    for (const layer of ["nodes", "aggregates", "guides"]) {
+      for (const [id, a] of current[layer]) {
+        const b = next[layer].get(id);
+        assert.ok(b && Math.hypot(b.x - a.x, b.y - a.y) < .002 && Math.abs(b.opacity - a.opacity) < .002);
+      }
+      assert.ok([...next[layer].values()].every((n) => [n.x, n.y, n.opacity].every(Number.isFinite)
+        && n.opacity >= 0 && n.opacity <= 1));
+    }
+    assert.equal(transition.sample(1430).pose, from);
+  }
+});
+
+// Operation inputs can belong to another work: no demo sample IDs or field names.
+function externalFrame() {
+  return {
+    nodes: new Map(["first-record", "second-record"].map((id, index) => [id,
+      { id, x: 20 + index * 60, y: 60, area: 25, opacity: 1, imageScale: 1 }])),
+    guides: new Map([["caption", { id: "caption", group: "objects", role: "category",
+      text: "Collection", x: 20, y: 30, opacity: 1 }]]),
+    scale: linearScale([0, 10], [0, 100]), numeric: 1, axisOpacity: 1,
+    groupOrigins: new Map([["objects", { x: 20, y: 60 }]]), meta: {},
+  };
+}
+
+test("extraction is usable with an external record frame and survives reverse retargeting", () => {
+  const from = externalFrame(), to = externalFrame();
+  to.nodes.delete("first-record");
+  to.scale = linearScale([5, 10], [0, 100]);
+  to.nodes.get("second-record").x = at(to.scale, 8);
+  const transition = createTransition(from, { blend: blendExtraction, duration: 1000 });
+  transition.target(to, 0);
+  const current = transition.sample(400).pose;
+  transition.target(from, 400);
+  const returned = transition.sample(400.001).pose;
+  assert.ok(Math.abs(current.nodes.get("second-record").x - at(current.scale, 8)) < 1e-10
+    && Math.abs(returned.nodes.get("second-record").x - current.nodes.get("second-record").x) < .001
+    && returned.guides.get("caption").opacity === 1 && transition.sample(1400).pose === from);
+});
+
+test("group motion consumes the caller's grouping and moves labels with those records", () => {
+  const from = externalFrame(), to = externalFrame();
+  to.groupOrigins.set("objects", { x: 120, y: 90 });
+  for (const layer of [to.nodes, to.guides]) for (const node of layer.values()) {
+    node.x += 100; node.y += 30;
+  }
+  const pose = blendGroupMove(from, to, .4, () => "objects");
+  const dx = pose.nodes.get("first-record").x - from.nodes.get("first-record").x;
+  assert.ok(Math.abs(pose.nodes.get("second-record").x - from.nodes.get("second-record").x - dx) < 1e-10
+    && Math.abs(pose.guides.get("caption").x - from.guides.get("caption").x - dx) < 1e-10
+    && pose.guides.get("caption").text === "Collection");
+});
+
+test("a work can change reordering paths without replacing identities or endpoint geometry", () => {
+  const from = externalFrame(), to = externalFrame();
+  to.numeric = 0; to.axisOpacity = 0;
+  to.nodes.get("first-record").x = 80;
+  to.nodes.get("second-record").x = 20;
+  const route = (a, b) => ({ control1: { x: a.x, y: 0 }, control2: { x: b.x, y: 0 } });
+  const current = blendReorder(from, to, .5, route);
+  assert.ok(current.nodes.size === from.nodes.size
+    && [...current.nodes.values()].every((node) => from.nodes.has(node.id) && node.y < 60)
+    && blendReorder(from, to, 0, route) === from && blendReorder(from, to, 1, route) === to);
 });

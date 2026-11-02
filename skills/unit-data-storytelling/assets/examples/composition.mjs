@@ -9,7 +9,7 @@ const status = document.querySelector("#status"), details = document.querySelect
 const colors = { phone: "#286d70", lamp: "#b75e3e" }, names = { phone: "手机", lamp: "台灯" };
 const images = Object.fromEntries(Object.keys(names).map((kind) => [kind,
   new URL(`./images/${kind}.svg`, import.meta.url).href]));
-const order = ["local", "whole", "groups", "compare", "duration", "focus"];
+const order = ["local", "whole", "groups", "compare", "duration", "totals", "share", "focus"];
 // Local editorial choices. The mechanisms do not know these questions or order.
 const copy = {
   local: ["先认出几条记录。", "四个单元，分别对应四件设备。先认清对象，再展开这批样本。"],
@@ -18,6 +18,8 @@ const copy = {
   compare: ["把已排好的两组，放近一些。", "保留每组内部的间距与顺序，连同名称和数量一起移动。随后可以按使用月数展开组内记录。"],
   duration: ["数量之外，还能比较用了多久。", "把同一批记录放到使用月数轴上。类别继续保留，纵向堆叠只为避让。"],
   focus: ["把用满一年的设备，展开来看。", "同一批筛选结果，可以保留完整月数范围，也可以展开局部，让每个月之间的差异占据更多空间。"],
+  totals: ["每件设备的使用月数，合成两类的累计使用量。", "汇总完整样本：同类记录收拢，累计使用量从对应类别展开。每格代表 10 设备·月，尾格保留余量；一格不再是一件设备。"],
+  share: ["同一份使用量，换成总量中的份额。", "保留两类的实际总量，把分母统一为全部设备的累计使用量。每格是总量的 5%，比较的是使用量占比，不是设备数量占比。"],
   shape: ["轮廓是造型，记录仍是记录。", "素材提供候选位置，每条记录占一个位置。可直接切回任意数据排列；位置本身没有量值含义。"],
 };
 let sample = "A", player, lastFrame, moving = false, slots, textAnimation;
@@ -49,7 +51,43 @@ const captionLayer = createSvgLayer(guides, {
   mount(group) { group.appendChild(label("", {})); },
   update(group, node) {
     group.firstElementChild.textContent = node.text;
-    setSvgAttributes(group.firstElementChild, { class: node.role === "count" ? "count" : "category" });
+    setSvgAttributes(group.firstElementChild, { class: node.role === "category" ? "category"
+      : node.role === "total" ? "total" : "count" });
+  },
+});
+const shareFrame = svgElement("g", { "pointer-events": "none" });
+for (const [, bounds] of regions) {
+  for (let index = 0; index < 20; index++) shareFrame.append(svgElement("rect", {
+    x: 120 + index * 24, y: bounds.y + 68, width: 20, height: 24,
+    fill: "none", stroke: "#bcc7c0", "stroke-width": 1,
+  }));
+  shareFrame.append(label("0", { x: 120, y: bounds.y + 120, "font-size": 13 }),
+    label("100% · 全部使用量", { x: 596, y: bounds.y + 120, "font-size": 13, "text-anchor": "end" }));
+}
+guides.prepend(shareFrame);
+const aggregateLayer = createSvgLayer(document.querySelector("#aggregates"), {
+  mount(group, node) {
+    group.append(svgElement("rect"), svgElement("title"));
+    const show = () => {
+      if (moving) return;
+      const unit = lastFrame.pose.aggregates.get(node.id);
+      details.textContent = `${names[unit.group]}：${unit.members.length} 件设备，累计 ${unit.total} 设备·月。`
+        + (unit.measure === "share" ? `本格占全体 ${unit.denominator} 设备·月的 ${unit.amount.toFixed(2)}%。`
+          : `本格承载 ${unit.amount} 设备·月。`) + "这是群组的汇总份额，不对应某一件设备。";
+    };
+    group.addEventListener("click", show);
+    group.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") { event.preventDefault(); show(); }
+    });
+  },
+  update(group, node, frame) {
+    // Fraction changes width once, not opacity or both width and area.
+    setSvgAttributes(group.firstElementChild, { x: 0, y: -node.height / 2,
+      width: node.width * node.fraction, height: node.height, fill: colors[node.group] });
+    const description = `${names[node.group]}，${node.measure === "share"
+      ? node.amount.toFixed(2) + "% 的总使用量" : node.amount + " 设备·月"}`;
+    group.lastElementChild.textContent = description;
+    setSvgAttributes(group, { role: "button", tabindex: frame.moving ? -1 : 0, "aria-label": description });
   },
 });
 const annotation = svgElement("g", { "pointer-events": "none" });
@@ -88,11 +126,12 @@ const layer = createSvgLayer(document.querySelector("#units"), {
   },
 });
 
-function render(pose, frame) {
-  lastFrame = { pose, frame };
-  moving = frame.moving;
-  stage.setAttribute("aria-busy", String(moving));
+// Minimal rendering handoff for every operation. Layers are mounted once;
+// all data, labels, ticks and the threshold consume this same sampled pose.
+function drawEvidence(pose, frame) {
   layer.draw(pose.nodes, frame);
+  aggregateLayer.draw(pose.aggregates, frame);
+  shareFrame.setAttribute("opacity", pose.shareFrame);
   captionLayer.draw(pose.guides);
   axes.setAttribute("opacity", pose.axisOpacity);
   for (const { month, group } of ticks) {
@@ -103,7 +142,13 @@ function render(pose, frame) {
   const thresholdX = at(pose.scale, 12);
   setSvgAttributes(threshold, { d: `M${thresholdX} 75V480`, opacity: pose.axisOpacity * .7 });
   setSvgAttributes(thresholdLabel, { x: thresholdX + 7, y: 16, opacity: pose.axisOpacity });
+}
 
+function render(pose, frame) {
+  lastFrame = { pose, frame };
+  moving = frame.moving;
+  stage.setAttribute("aria-busy", String(moving));
+  drawEvidence(pose, frame);
   // This source value stays true during movement. Its leader is attached to
   // the visible unit, not its future target or an interpolated fact.
   const record = samples[sample].find((row) => row.months >= 16 && row.months <= 20);
@@ -124,9 +169,9 @@ function render(pose, frame) {
     annotationText.textContent = `${record.id} · ${record.months} 个月`;
   }
   if (!moving) {
-    const selected = [...pose.nodes.keys()].map((id) => source.get(id));
+    const selected = pose.aggregates.size ? samples[sample] : [...pose.nodes.keys()].map((id) => source.get(id));
     const counts = Object.keys(names).map((kind) => `${names[kind]} ${selected.filter((r) => r.kind === kind).length}`).join(" / ");
-    status.textContent = `样本 ${sample} · 当前 ${selected.length} / 全部 ${samples[sample].length} 条 · ${counts}${pose.meta.view === "focus" ? " · 筛选：至少 12 个月" : ""}`;
+    status.textContent = `样本 ${sample} · 当前 ${selected.length} / 全部 ${samples[sample].length} 条 · ${counts}${pose.meta.view === "focus" ? " · 筛选：至少 12 个月" : ""}${pose.aggregates.size ? ` · 总使用量 ${pose.meta.denominator} 设备·月` : ""}`;
   }
 }
 
@@ -144,6 +189,8 @@ function showCopy(view) {
     ? controls.space.value === "expand"
       ? "局部展开：比较范围仍是满一年的同一批设备。两类同时使用 12—24 月尺度，月份之间的距离加倍，符号也留出辨识空间；12 月参照和记录标注一起移动。"
       : "保留全域：同一批满一年的设备继续放在 0—24 月轴上，便于记住它们在原样本中的位置，但左半段已空出。切换空间安排可比较这一取舍。"
+    : view === "totals" || view === "share"
+      ? "记录、累计使用量与百分比各有身份，通过来源类别衔接；群组收拢与新份额展开交叠进行，类别和有效总量继续可读。可直接跳转、逆向或换批；汇总始终覆盖完整样本，局部中未出现的记录会补入。此排布和节奏仅是示范。"
     : view === "compare"
       ? "群组靠近：只改变两组的位置，组内相对位置保持。名称、数量和记录标注随当前图形移动，不等动画结束再出现。切到使用月数，才按每条记录重新排列。"
       : view === "groups"
@@ -159,9 +206,11 @@ function update(replacement = false) {
   status.textContent = replacement
     ? `正在更替为样本 ${sample} · 两批记录没有个体对应。`
     : `样本 ${sample} · 全部 ${samples[sample].length} 条记录${view === "focus"
-      ? ` · 其中 ${target.nodes.size} 条已使用至少 12 个月` : " · 一枚单元始终对应一件设备"}`;
-  details.textContent = "连接自动完成；可以中途反向或改目标。点选到位的单元查看原记录。";
-  player.goTo(target, { duration: replacement ? 1500 : 1100 });
+      ? ` · 其中 ${target.nodes.size} 条已使用至少 12 个月`
+      : target.aggregates.size ? ` · 汇总完整样本的 ${target.meta.denominator} 设备·月` : " · 一枚单元对应一件设备"}`;
+  details.textContent = "连接自动完成；可以中途反向或改目标。"
+    + (target.aggregates.size ? "点选到位的份额查看来源群组和计量。" : "点选到位的单元查看原记录。");
+  player.goTo(target, { duration: replacement || target.aggregates.size || lastFrame.pose.aggregates.size ? 1600 : 1100 });
 }
 
 async function start() {
@@ -195,7 +244,7 @@ async function start() {
   // A shared viewBox scales all layers together. Pixel layouts must recompute
   // targets and repaint on resize; refreshing a step observer is insufficient.
   window.addEventListener("pagehide", (event) => {
-    if (!event.persisted) { player.dispose(); layer.dispose(); captionLayer.dispose(); textAnimation?.cancel(); }
+    if (!event.persisted) { player.dispose(); layer.dispose(); aggregateLayer.dispose(); captionLayer.dispose(); textAnimation?.cancel(); }
   });
 }
 
