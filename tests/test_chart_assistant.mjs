@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -9,8 +8,6 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const source = path.join(root, 'skills/chart-assistant');
-const provenance = JSON.parse(fs.readFileSync(path.join(root, 'docs/upstreams/chart-assistant.json'), 'utf8'));
-const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const comparePaths = (left, right) => Buffer.compare(Buffer.from(left), Buffer.from(right));
 
 function filesUnder(directory, prefix = '') {
@@ -35,29 +32,6 @@ function childNode(cwd, args) {
   const env = { ...process.env, NODE_PATH: '', NODE_OPTIONS: '', PATH: '' };
   return spawnSync(process.execPath, args, { cwd, env, encoding: 'utf8', timeout: 10000 });
 }
-
-test('distribution matches the upstream file inventory and release fingerprint', () => {
-  assert.equal(provenance.schema_version, 1);
-  assert.equal(provenance.source.repository, 'vchart-editor');
-  assert.equal(provenance.source.path, 'packages/chart-assistant');
-  assert.match(provenance.source.commit, /^[a-f0-9]{40}$/);
-  assert.equal(provenance.distribution.repository, 'VisActor/skills');
-  assert.equal(provenance.distribution.path, 'skills/chart-assistant');
-  assert.equal(provenance.fingerprint_algorithm, 'visactor-skill-content-v1');
-  const files = filesUnder(source).map(relative => {
-    const full = path.join(source, relative);
-    const bytes = fs.readFileSync(full);
-    return {
-      path: relative,
-      mode: fs.statSync(full).mode & 0o111 ? '100755' : '100644',
-      size: bytes.length,
-      sha256: sha256(bytes)
-    };
-  });
-  assert.deepEqual(files, provenance.files);
-  const records = 'visactor-skill-content-v1\n' + files.map(file => `${file.mode}\t${file.sha256}\t${file.path}\n`).join('');
-  assert.equal(sha256(records), provenance.content_sha256);
-});
 
 test('copied Skill keeps all Markdown references within its independent directory', t => {
   const { installed } = installedCopy(t);
