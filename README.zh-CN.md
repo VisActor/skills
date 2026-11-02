@@ -4,6 +4,8 @@
 
 面向 VisActor 可视化生态的 Agent Skills。通过可独立安装的 Skills 制作数据故事、杂志图文和人物志海报。VChart 和 VTable Skill 在各自的库仓库中维护。
 
+**先看看能做出什么：** 访问 [VisActor Skills 官网](https://visactor.com/skills)，查看各个 Skill 的介绍与案例预览。
+
 ## Skills
 
 ### 本仓库维护
