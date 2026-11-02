@@ -1,0 +1,240 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "known-driver-profit-bridge",
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        },
+        "options": {
+          "chartType": "waterfall",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "驱动因素",
+                "影响额"
+              ],
+              "data": [
+                {
+                  "驱动因素": "期初利润",
+                  "影响额": 100
+                },
+                {
+                  "驱动因素": "销量贡献",
+                  "影响额": 25
+                },
+                {
+                  "驱动因素": "价格贡献",
+                  "影响额": 10
+                },
+                {
+                  "驱动因素": "收入贡献小计",
+                  "影响额": "e"
+                },
+                {
+                  "驱动因素": "原材料成本贡献",
+                  "影响额": -18
+                },
+                {
+                  "驱动因素": "其他费用贡献",
+                  "影响额": -7
+                },
+                {
+                  "驱动因素": "期末利润",
+                  "影响额": "e"
+                }
+              ],
+              "rows": [
+                "期初利润",
+                "销量贡献",
+                "价格贡献",
+                "收入贡献小计",
+                "原材料成本贡献",
+                "其他费用贡献",
+                "期末利润"
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "驱动因素",
+              "y": [
+                "影响额"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "textType": "rich",
+                  "text": [
+                    {
+                      "text": "2026 年利润已知贡献桥",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "lineHeight": 28,
+                      "fill": "#0F172A"
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  }
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "type": "linear",
+                  "orient": "left",
+                  "visible": true,
+                  "title": {
+                    "visible": true,
+                    "text": "利润（万元）"
+                  },
+                  "label": {
+                    "visible": true
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#E2E8F0",
+                      "lineWidth": 1
+                    }
+                  },
+                  "zero": true
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "type": "band",
+                  "orient": "bottom",
+                  "visible": true,
+                  "title": {
+                    "visible": false,
+                    "text": "类别"
+                  },
+                  "label": {
+                    "visible": true
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": false
+                  },
+                  "showAllGroupLayers": false
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false,
+                  "orient": "bottom",
+                  "position": "middle",
+                  "padding": [
+                    16,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "series-waterfall",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "label": {
+                    "visible": true
+                  },
+                  "totalLabel": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  },
+                  "stackType": "group",
+                  "groupBySign": true,
+                  "firstToTotal": true,
+                  "addLastTotal": false
+                }
+              }
+            ],
+            "dataGroupSpec": {
+              "EDITOR_ALL_DATA_GROUP": {
+                "label": {
+                  "visible": true
+                },
+                "totalLabel": {
+                  "visible": false
+                }
+              },
+              "影响额_fieldLink__editor_waterfall_total": {
+                "bar": {
+                  "style": {
+                    "fill": "#0A345E"
+                  }
+                }
+              },
+              "影响额_fieldLink_正值": {
+                "bar": {
+                  "style": {
+                    "fill": "#1A82EB"
+                  }
+                }
+              },
+              "影响额_fieldLink_负值": {
+                "bar": {
+                  "style": {
+                    "fill": "#DC6B6B"
+                  }
+                }
+              }
+            }
+          },
+          "enableEditorTheme": true,
+          "enableDataEdit": true,
+          "enableTypeChange": true
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

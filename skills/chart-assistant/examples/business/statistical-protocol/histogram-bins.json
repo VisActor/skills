@@ -1,0 +1,128 @@
+{
+  "commonOption": {
+    "theme": "clarity-light",
+    "elements": [
+      {
+        "id": "histogram-bins",
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        },
+        "options": {
+          "chartType": "histogram",
+          "enableDataEdit": true,
+          "enableTypeChange": false,
+          "enableEditorTheme": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "起点",
+                "终点",
+                "频数"
+              ],
+              "rows": [
+                "1",
+                "2"
+              ],
+              "data": [
+                {
+                  "起点": 0,
+                  "终点": 1,
+                  "频数": 1
+                },
+                {
+                  "起点": 1,
+                  "终点": 3,
+                  "频数": 3
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "binStart": "起点",
+              "binEnd": "终点",
+              "count": "频数"
+            },
+            "statistics": {
+              "kind": "histogram",
+              "input": "bins",
+              "measure": "density"
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "textType": "rich",
+                  "text": [
+                    {
+                      "text": "等待时长频率密度",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "fill": "#0F172A",
+                      "lineHeight": 28
+                    },
+                    {
+                      "text": "\n单位：分钟",
+                      "fontSize": 12,
+                      "fill": "#64748B",
+                      "lineHeight": 18
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "title": {
+                    "visible": true,
+                    "text": "等待时长（分钟）"
+                  }
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "visible": true,
+                  "title": {
+                    "visible": true,
+                    "text": "频率密度（1/分钟）"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

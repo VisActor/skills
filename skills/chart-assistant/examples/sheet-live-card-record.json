@@ -1,0 +1,39 @@
+{
+  "commonOption": {
+    "source": {
+      "appName": "经营分析",
+      "showSource": true,
+      "sourceName": "飞书销售表",
+      "pageUrl": "https://example.feishu.cn/sheets/<sheet-token>"
+    },
+    "elements": [
+      {
+        "id": "sheet-chart",
+        "type": "chart",
+        "position": { "x": 0, "y": 0, "width": 640, "height": 360 },
+        "options": {
+          "chartType": "line",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["月份", "销售额"],
+              "rows": ["1月", "2月"],
+              "data": [
+                { "月份": "1月", "销售额": 120 },
+                { "月份": "2月", "销售额": 140 }
+              ],
+              "source": {
+                "type": "larkSheet",
+                "url": "https://example.feishu.cn/sheets/<sheet-token>",
+                "config": { "tableId": "<sheet-id>", "rangeStart": "A1", "rangeEnd": "B100" }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "autoSync": true,
+  "option": { "loadContribute": "view" },
+  "note": "direct-live：A1:B100 的读取结果直接作为最终数据，不执行聚合、pivot 或派生；value.source 用于同步和编辑页 URL 回显。只有物化出 live sourceBinding 且权限/URL 校验通过时，autoSync 才成立。"
+}

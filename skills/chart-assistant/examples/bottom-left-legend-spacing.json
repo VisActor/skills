@@ -1,0 +1,26 @@
+{
+  "kind": "materialized-model-spec-patch",
+  "precondition": "用户明确要求图例位于下方左对齐；目标图已物化且离散图例 identity 已确认。此例是显式位置覆盖，不是新建默认。",
+  "modelSpec": [
+    {
+      "id": "legend-discrete",
+      "specKey": "legends",
+      "specIndex": 0,
+      "spec": {
+        "orient": "bottom",
+        "position": "start",
+        "padding": [
+          16,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "notes": [
+    "padding 顺序为 top/right/bottom/left",
+    "图例由布局系统放在绘图区下方并左对齐，不生成 x/y/offset",
+    "item.spaceRow/spaceCol 只控制图例项之间的间距"
+  ]
+}

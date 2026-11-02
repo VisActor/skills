@@ -1,0 +1,133 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 720,
+          "height": 420
+        },
+        "options": {
+          "chartType": "scatter",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["产品", "增长率", "利润率"],
+              "rows": ["A", "B", "C", "D"],
+              "data": [
+                {
+                  "产品": "A",
+                  "增长率": 0.05,
+                  "利润率": 0.1
+                },
+                {
+                  "产品": "B",
+                  "增长率": 0.15,
+                  "利润率": 0.3
+                },
+                {
+                  "产品": "C",
+                  "增长率": 0.2,
+                  "利润率": 0.15
+                },
+                {
+                  "产品": "D",
+                  "增长率": 0.08,
+                  "利润率": 0.25
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "dataType": "percent"
+                  }
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "dataType": "percent"
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "label": "产品",
+              "x": "增长率",
+              "y": "利润率"
+            },
+            "marker": {
+              "markLine": [
+                {
+                  "id": "growth-threshold",
+                  "name": "partition-line",
+                  "target": {
+                    "field": "增长率",
+                    "value": 0.1
+                  },
+                  "line": {
+                    "style": {
+                      "stroke": "#64748B",
+                      "lineDash": [4, 4]
+                    }
+                  }
+                }
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "type": "linear",
+                  "title": {
+                    "visible": true,
+                    "text": "利润率"
+                  },
+                  "label": {
+                    "formatConfig": {
+                      "dataType": "percent"
+                    }
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "visible": true,
+                  "type": "linear",
+                  "title": {
+                    "visible": true,
+                    "text": "增长率"
+                  },
+                  "label": {
+                    "formatConfig": {
+                      "dataType": "percent"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

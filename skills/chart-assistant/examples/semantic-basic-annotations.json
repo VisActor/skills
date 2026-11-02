@@ -1,0 +1,143 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 720,
+          "height": 420
+        },
+        "options": {
+          "chartType": "bar",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["季度", "销售额"],
+              "rows": ["Q1", "Q2", "Q3", "Q4"],
+              "data": [
+                {
+                  "季度": "Q1",
+                  "销售额": 80
+                },
+                {
+                  "季度": "Q2",
+                  "销售额": 120
+                },
+                {
+                  "季度": "Q3",
+                  "销售额": 100
+                },
+                {
+                  "季度": "Q4",
+                  "销售额": 160
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "季度",
+              "y": ["销售额"]
+            },
+            "marker": {
+              "markLine": [
+                {
+                  "id": "sales-target-110",
+                  "name": "reference-line",
+                  "target": {
+                    "field": "销售额",
+                    "value": 110
+                  },
+                  "label": {
+                    "visible": true,
+                    "text": "销售目标 110"
+                  }
+                }
+              ],
+              "markArea": [
+                {
+                  "id": "q2-q3-full-bars",
+                  "name": "mark-area",
+                  "target": {
+                    "ranges": [
+                      {
+                        "field": "季度",
+                        "from": "Q2",
+                        "to": "Q3"
+                      },
+                      {
+                        "field": "销售额",
+                        "from": 0,
+                        "to": 120
+                      }
+                    ]
+                  },
+                  "area": {
+                    "style": {
+                      "fill": "#DBEAFE",
+                      "fillOpacity": 0.35
+                    }
+                  }
+                }
+              ],
+              "markPoint": [
+                {
+                  "id": "q4-promotion",
+                  "name": "mark-point",
+                  "target": {
+                    "match": {
+                      "季度": "Q4"
+                    },
+                    "metric": "销售额"
+                  },
+                  "itemContent": {
+                    "type": "text",
+                    "offsetX": -40,
+                    "offsetY": -28,
+                    "text": {
+                      "type": "rich",
+                      "text": [
+                        {
+                          "text": "促销高峰"
+                        }
+                      ]
+                    }
+                  },
+                  "itemLine": {
+                    "type": "type-do"
+                  }
+                }
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "series-0",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "label": {
+                    "visible": true
+                  },
+                  "totalLabel": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                }
+              }
+            ]
+          },
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

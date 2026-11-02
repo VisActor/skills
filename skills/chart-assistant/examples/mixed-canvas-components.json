@@ -1,0 +1,57 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "title-text",
+        "type": "text",
+        "position": { "x": 24, "y": 16, "width": 592, "height": 40 },
+        "options": { "text": "收入增长主要由产品 A 驱动", "fontSize": 22, "fontWeight": "600", "fill": "#101828" }
+      },
+      {
+        "id": "note-box",
+        "type": "rect",
+        "position": { "x": 24, "y": 72, "width": 180, "height": 64 },
+        "options": {
+          "type": "rect",
+          "graphic": { "fill": "#EFF4FF", "stroke": "#84ADFF", "cornerRadius": 4 },
+          "text": { "text": "产品 A：+18%", "fontSize": 14, "fill": "#1849A9", "graphicAlign": "center", "graphicBaseline": "middle" }
+        }
+      },
+      {
+        "id": "detail-table",
+        "type": "table",
+        "position": { "x": 24, "y": 160, "width": 592, "height": 180 },
+        "options": {
+          "tableType": "ListTable",
+          "viewMode": "scroll",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["产品", "收入"],
+              "rows": ["产品A", "产品B"],
+              "data": [{ "产品": "产品A", "收入": 140 }, { "产品": "产品B", "收入": 110 }]
+            }
+          }
+        }
+      },
+      {
+        "id": "annotation-line",
+        "type": "straightLine",
+        "position": { "x": 204, "y": 94, "width": 80, "height": 1 },
+        "options": {
+          "type": "straightLine",
+          "line": { "stroke": "#667085", "lineWidth": 1 },
+          "text": { "isInitialized": false, "positionRatio": 0.5 },
+          "startSymbol": { "originSymbolType": "none" },
+          "endSymbol": { "originSymbolType": "arrow", "size": 6 },
+          "startPoint": { "x": 0, "y": 0 },
+          "endPoint": { "x": 80, "y": 0 },
+          "startConnect": { "target": "note-box", "ratio": 0.5 },
+          "endConnect": null,
+          "controlPoints": []
+        }
+      }
+    ]
+  },
+  "note": "基础画布元素可直接首次创建；line.startConnect.target 引用本 record 中稳定 element id。首次创建图表数据连接器使用 options.target，引用同画布 chart ID 并填写业务 selector、measure、position；无需模型取得 runtime datum/picker，完整双图示例见 semantic-connector-orange-breakdown.json。"
+}

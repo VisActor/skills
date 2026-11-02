@@ -1,0 +1,263 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "sales-line-mar-sep",
+        "type": "chart",
+        "options": {
+          "chartType": "line",
+          "config": {
+            "dataGroupSpec": {
+              "3—5月": {
+                "label": {
+                  "visible": false
+                },
+                "line": {
+                  "style": {
+                    "lineDash": [
+                      0
+                    ],
+                    "lineWidth": 3,
+                    "stroke": "#3370FF"
+                  },
+                  "visible": true
+                },
+                "point": {
+                  "style": {
+                    "fill": "#3370FF",
+                    "lineWidth": 2,
+                    "size": 8,
+                    "stroke": "#FFFFFF"
+                  },
+                  "visible": true
+                }
+              },
+              "6—9月": {
+                "label": {
+                  "visible": false
+                },
+                "line": {
+                  "style": {
+                    "lineDash": [
+                      8,
+                      6
+                    ],
+                    "lineWidth": 3,
+                    "stroke": "#3370FF"
+                  },
+                  "visible": true
+                },
+                "point": {
+                  "style": {
+                    "fill": "#3370FF",
+                    "lineWidth": 2,
+                    "size": 8,
+                    "stroke": "#FFFFFF"
+                  },
+                  "visible": true
+                }
+              }
+            },
+            "mappingSpec": {
+              "x": "月份",
+              "y": [
+                "3—5月",
+                "6—9月"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "spec": {
+                  "text": [
+                    {
+                      "fill": "#0F172A",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "lineHeight": 28,
+                      "text": "3—9 月销售走势"
+                    },
+                    {
+                      "text": "\n6—9月使用虚线",
+                      "fontSize": 12,
+                      "fontWeight": "normal",
+                      "lineHeight": 18,
+                      "fill": "#64748B"
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  },
+                  "textType": "rich",
+                  "visible": true
+                },
+                "specIndex": 0,
+                "specKey": "title"
+              },
+              {
+                "id": "axis-left",
+                "spec": {
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "style": {
+                      "lineWidth": 1,
+                      "stroke": "#E2E8F0"
+                    },
+                    "visible": true
+                  },
+                  "label": {
+                    "visible": true
+                  },
+                  "orient": "left",
+                  "tick": {
+                    "visible": false
+                  },
+                  "title": {
+                    "text": "销售数据",
+                    "visible": true
+                  },
+                  "type": "linear"
+                },
+                "specIndex": 0,
+                "specKey": "axes"
+              },
+              {
+                "id": "axis-bottom",
+                "spec": {
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "orient": "bottom",
+                  "tick": {
+                    "visible": false
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "type": "band"
+                },
+                "specIndex": 1,
+                "specKey": "axes"
+              },
+              {
+                "id": "legend-discrete",
+                "spec": {
+                  "visible": false
+                },
+                "specIndex": 0,
+                "specKey": "legends"
+              },
+              {
+                "id": "series-0",
+                "specIndex": 0,
+                "specKey": "series",
+                "spec": {
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "id": "series-1",
+                "specIndex": 1,
+                "specKey": "series",
+                "spec": {
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                }
+              }
+            ]
+          },
+          "data": {
+            "type": "standard",
+            "value": {
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataFormat": {
+                    "separator": true
+                  },
+                  "dataType": "number"
+                },
+                {
+                  "dataFormat": {
+                    "separator": true
+                  },
+                  "dataType": "number"
+                }
+              ],
+              "columns": [
+                "月份",
+                "3—5月",
+                "6—9月"
+              ],
+              "data": [
+                {
+                  "3—5月": 30,
+                  "6—9月": null,
+                  "月份": "3月"
+                },
+                {
+                  "3—5月": 25,
+                  "6—9月": null,
+                  "月份": "4月"
+                },
+                {
+                  "3—5月": 30,
+                  "6—9月": 30,
+                  "月份": "5月"
+                },
+                {
+                  "3—5月": null,
+                  "6—9月": 27,
+                  "月份": "6月"
+                },
+                {
+                  "3—5月": null,
+                  "6—9月": 32,
+                  "月份": "7月"
+                },
+                {
+                  "3—5月": null,
+                  "6—9月": 35,
+                  "月份": "8月"
+                },
+                {
+                  "3—5月": null,
+                  "6—9月": 40,
+                  "月份": "9月"
+                }
+              ],
+              "rows": [
+                "3月",
+                "4月",
+                "5月",
+                "6月",
+                "7月",
+                "8月",
+                "9月"
+              ]
+            }
+          },
+          "enableDataEdit": true,
+          "enableEditorTheme": true,
+          "enableTypeChange": true,
+          "zIndex": 0
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        }
+      }
+    ],
+    "theme": "clarity-light"
+  }
+}

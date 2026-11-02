@@ -1,0 +1,44 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "type": "chart",
+        "position": { "x": 0, "y": 0, "width": 720, "height": 420 },
+        "options": {
+          "chartType": "barPercent",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["季度", "A销售额", "B销售额"],
+              "rows": ["Q1", "Q4"],
+              "data": [
+                { "季度": "Q1", "A销售额": 80, "B销售额": 20 },
+                { "季度": "Q4", "A销售额": 140, "B销售额": 60 }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": { "x": "季度", "y": ["A销售额", "B销售额"] },
+            "marker": {
+              "markLine": [
+                {
+                  "id": "b-layer-share-difference",
+                  "name": "hierarchy-diff-line",
+                  "target": {
+                    "from": { "match": { "季度": "Q1" }, "metric": "B销售额", "boundary": "end" },
+                    "to": { "match": { "季度": "Q4" }, "metric": "B销售额", "boundary": "end" }
+                  },
+                  "label": { "visible": true, "formatConfig": { "content": ["layerShareDiff"], "fixed": 0 } }
+                }
+              ]
+            }
+          },
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true
+        }
+      }
+    ]
+  },
+  "option": { "loadContribute": "view" }
+}
