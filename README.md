@@ -54,7 +54,7 @@ If your agent cannot access GitHub or complete installation, use the manual impo
 
 ### Command-line installation: Codex / Claude Code
 
-Run the command for the Skill you need in your project directory:
+These commands install from the repository's default branch. To use the version on your current branch, [install from your local checkout](#install-from-a-local-checkout).
 
 ```bash
 npx skills add VisActor/skills --skill chart-assistant

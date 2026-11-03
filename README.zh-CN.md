@@ -53,7 +53,7 @@ https://github.com/VisActor/skills/tree/main/skills/chart-storytelling
 
 ### 命令行安装：Codex / Claude Code
 
-在项目目录中，执行所需 Skill 对应的命令：
+以下命令从仓库默认分支安装。要使用当前检出的版本，见[从本地仓库安装](#从本地仓库安装)。
 
 ```bash
 npx skills add VisActor/skills --skill chart-assistant
