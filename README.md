@@ -12,6 +12,7 @@ VisActor Skills provides chart, dashboard, data story and poster tools for Claud
 | --- | --- |
 | [chart-assistant](skills/chart-assistant/SKILL.md) | Business charts, MBB analysis annotations, editable Feishu cards, transparent PNGs and document image insertion |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | Analysis reports, business briefings and data features, with chart scrollytelling and annotations, delivered as HTML stories or Web-PPT |
+| [unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) | Interactive stories that use dots or icons to represent records or fixed quantities and show how groups compare and change |
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | Magazine-style visual posts (杂志风图文): HTML / PNG series for news, biographies, outfits, travel, chronological stories and explainers |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | Biography posters with photo walls, center grids, photo rings and editable timelines |
 | [person-poster](skills/person-poster/SKILL.md) | Person-led data posters with native VChart, editable HTML and high-resolution PNG |
@@ -19,12 +20,6 @@ VisActor Skills provides chart, dashboard, data story and poster tools for Claud
 | [visactor-map2d-dashboard](skills/visactor-map2d-dashboard/SKILL.md) | Interactive 2D map dashboards linking regions, metrics and records |
 | [visactor-chart-editor](skills/visactor-chart-editor/SKILL.md) | Self-service chart editing with field drag-and-drop and live data exploration |
 | [visactor-map3d-dashboard](skills/visactor-map3d-dashboard/SKILL.md) | 3D globe dashboards for regional analysis and linked evidence |
-
-### Development candidate
-
-[unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) creates interactive stories with records or quantities represented by dots, symbols, images or text units. It combines narrative design, continuous visual changes and optional exploration. The implementation modules are composable references, not page templates.
-
-This candidate is available in this checkout and is not yet included in the published release. [Install from the local checkout](#install-from-a-local-checkout) while it is under review; do not use the `main` installation URL for it yet.
 
 ### Related VisActor Skills
 
@@ -53,7 +48,7 @@ then check that the installed Skill can be discovered and invoked.
 Tell me if any confirmation or import steps require my help.
 ```
 
-Replace `chart-storytelling` in the prompt and URL with any Skill listed above. After installation, start a new task and name the Skill you want to use.
+For another Skill, open its entry in the table above and use the URL of the folder containing `SKILL.md`. After installation, start a new task and name the Skill you want to use.
 
 If your agent cannot access GitHub or complete installation, use the manual import instructions below.
 
@@ -117,7 +112,7 @@ To update a manually imported Skill, download its package from a newer Release a
 | --- | --- |
 | chart-assistant | Node.js 18+; HTTPS access for PNGs; authorized host tools or lark-cli for document insertion; Chart Assistant ISV app for editable cards. DSL generation/validation needs no Feishu authorization or local renderer |
 | chart-storytelling | Python 3.10+ (standard library) and Node.js for JavaScript checks; pinned VSeed, VChart, VTable and GSAP load from unpkg |
-| unit-data-storytelling (candidate) | Modern browser with ES modules; Node.js for module checks; optional Python 3.9+ (standard library) for the bundled preview/audit tool. Bundled examples use local assets without a required CDN or chart library |
+| unit-data-storytelling | Modern browser with ES modules; Node.js for module checks; optional Python 3.9+ (standard library) for the bundled preview/audit tool. Bundled examples use local assets without a required CDN or chart library |
 | editorial-magazine | Python 3.10+, dependencies in its [requirements.txt](skills/editorial-magazine/requirements.txt), and Chromium/Chrome for PNG export; font CDN with system fallbacks |
 | life-chronicle | Python 3.10+, dependencies in its [requirements.txt](skills/life-chronicle/requirements.txt), and Chromium/Chrome for PNG export; pinned VInfo and font CDN, see [environment setup](skills/life-chronicle/references/environment.md) |
 | person-poster | Python 3.10+, Pillow, Python Playwright/Chromium; public VChart 2.1.7 CDN or a sourced local copy; see [requirements.txt](skills/person-poster/scripts/requirements.txt) and [environment setup](skills/person-poster/references/environment.md) for POSIX/PowerShell installation and capability limits |
