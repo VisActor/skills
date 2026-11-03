@@ -7,7 +7,7 @@
 - 运行时：`skills/unit-data-storytelling/`，后续修改以本仓库为准。
 - 机制与维护工具回归：`tests/unit_data_storytelling/`；独立安装检查：`tests/test_portable_install.py`。
 - 实验、首稿、截图和过程记录：`.cache/skill-dev/unit-data-storytelling/`，不提交。
-- 固定任务：[NBA](../../cases/unit-data-storytelling/nba/README.md)、[香港夏天](../../cases/unit-data-storytelling/hong-kong-summer/README.md)、[航班延误](../../cases/unit-data-storytelling/flight-delays/README.md)；[中国人口](../../cases/unit-data-storytelling/china-population/README.md)保留输入，暂停复测。仅提供 `prompt.md` 与 `inputs/`，不提供案例 README 或作品。
+- 固定任务：[NBA](../../cases/unit-data-storytelling/nba/README.md)、[香港夏天](../../cases/unit-data-storytelling/hong-kong-summer/README.md)、[航班延误](../../cases/unit-data-storytelling/flight-delays/README.md)。仅提供 `prompt.md` 与 `inputs/`，不提供案例 README 或作品。
 - [公开作品](../../examples/README.md#unit-data-storytelling)收录香港夏夜气温、NBA 球员身高和《我的世界》玩家路径三篇完整故事，供设计参考。运行时指导独立于成品，首稿质量另行评估。
 
 ## 已确定的方向与取舍

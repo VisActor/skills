@@ -26,14 +26,13 @@ cases/<skill-name>/<case-name>/
 
 ## unit-data-storytelling
 
-| 用例 | 任务 | 状态 |
-| --- | --- | --- |
-| [nba](unit-data-storytelling/nba/README.md) | 球员身高、位置、分钟与荣誉的长期比较 | 可复测 |
-| [hong-kong-summer](unit-data-storytelling/hong-kong-summer/README.md) | 长期逐日气温与一次极端高温经历 | 可复测 |
-| [flight-delays](unit-data-storytelling/flight-delays/README.md) | 起飞延误与到达结果，保留整月航班记录 | 可复测 |
-| [china-population](unit-data-storytelling/china-population/README.md) | 人口、年龄、婚姻与生育研究输入 | 保留输入，暂停常规复测 |
+| 用例 | 任务 |
+| --- | --- |
+| [nba](unit-data-storytelling/nba/README.md) | 球员身高、位置、分钟与荣誉的长期比较 |
+| [hong-kong-summer](unit-data-storytelling/hong-kong-summer/README.md) | 长期逐日气温与一次极端高温经历 |
+| [flight-delays](unit-data-storytelling/flight-delays/README.md) | 起飞延误与到达结果，保留整月航班记录 |
 
-共享的 `tests/test_case_inputs.py` 校验文件哈希。需要检查香港、人口或航班的字段、覆盖和内部一致性时，运行 `uv run python tests/unit_data_storytelling/check_case_inputs.py --case <case-name>`；不需要每次生成作品时重复执行。这些检查不判断叙事质量。
+共享的 `tests/test_case_inputs.py` 校验文件哈希。需要检查香港或航班的字段、覆盖和内部一致性时，运行 `uv run python tests/unit_data_storytelling/check_case_inputs.py --case <case-name>`；不需要每次生成作品时重复执行。这些检查不判断叙事质量。
 
 ## person-poster
 

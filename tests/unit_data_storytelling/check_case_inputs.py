@@ -8,7 +8,7 @@ import hashlib
 import json
 import math
 import re
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
 CASES = Path(__file__).resolve().parents[2] / "cases" / "unit-data-storytelling"
@@ -104,172 +104,6 @@ def check_hong_kong(folder):
         require(int(r["center_month"]) == seasons.index(r["season"]) + 1, "ONI center month")
         require(r["series"] == "ONI_ERSSTv6", "ONI version")
         require(all(math.isfinite(float(r[k])) for k in ("sst_c", "oni_c")), "ONI values")
-
-
-def check_population(folder):
-    rows = read_csv(folder, "nbs-national-year.csv")
-    unique(rows, ["year"], "NBS annual")
-    require([int(r["year"]) for r in rows] == list(range(1978, 2026)), "NBS years")
-    for r in rows:
-        total = int(r["total_10k"])
-        require(int(r["male_10k"]) + int(r["female_10k"]) == total, f"Sex total {r['year']}")
-        require(int(r["urban_10k"]) + int(r["rural_10k"]) == total, f"Residence total {r['year']}")
-        birth, death, natural = [
-            float(r[k])
-            for k in ("birth_rate_per_1000", "death_rate_per_1000", "natural_change_per_1000")
-        ]
-        require(abs(birth - death - natural) <= 0.011, f"NBS rounded rates {r['year']}")
-    births = read_csv(folder, "nbs-births-deaths-year.csv")
-    require([int(r["year"]) for r in births] == list(range(2021, 2026)), "Birth count coverage")
-    for r in births:
-        require(int(r["births_10k"]) > 0 and int(r["deaths_10k"]) > 0, "Birth/death values")
-
-    ages = read_csv(folder, "wb-age-sex-year.csv")
-    demo = read_csv(folder, "wb-demography-year.csv")
-    unique(ages, ["year", "age_group", "sex"], "WB ages")
-    unique(demo, ["year", "indicator_id"], "WB demography")
-    groups = [f"{n}-{n + 4}" for n in range(0, 80, 5)] + ["80+"]
-    require(
-        {(int(r["year"]), r["age_group"], r["sex"]) for r in ages}
-        == {(y, a, s) for y in range(1960, 2024) for a in groups for s in ("female", "male")},
-        "WB age/sex coverage",
-    )
-    definitions = {m["id"] for m in read_json(folder / "indicator-metadata.json")}
-    require(definitions == {r["indicator_id"] for r in ages + demo}, "WB indicator definitions")
-    sums = defaultdict(float)
-    for r in ages:
-        value = float(r["population"])
-        require(math.isfinite(value) and value >= 0, "WB population value")
-        sums[r["year"], r["sex"]] += value
-    values = {(r["year"], r["indicator_id"]): float(r["value"]) for r in demo}
-    require(len(values) == 64 * 8, "WB demography coverage")
-    for year in map(str, range(1960, 2024)):
-        for sex, code in (("female", "SP.POP.TOTL.FE.IN"), ("male", "SP.POP.TOTL.MA.IN")):
-            require(
-                abs(sums[year, sex] - values[year, code]) <= 9,
-                f"WB age sum exceeds rounding allowance: {year} {sex}",
-            )
-        require(
-            abs(
-                values[year, "SP.POP.TOTL.FE.IN"]
-                + values[year, "SP.POP.TOTL.MA.IN"]
-                - values[year, "SP.POP.TOTL"]
-            )
-            <= 1,
-            "WB sex sum",
-        )
-
-    ages = read_csv(folder, "census2020-age-sex.csv")
-    unique(ages, ["age_group"], "Census ages")
-    total = next(r for r in ages if r["row_kind"] == "total")
-    details = [r for r in ages if r["row_kind"] != "total"]
-    require(len(details) == 21, "Census age groups")
-    for r in ages:
-        require(int(r["male"]) + int(r["female"]) == int(r["population"]), "Census age sex sum")
-    for field in ("population", "male", "female"):
-        require(sum(int(r[field]) for r in details) == int(total[field]), "Census age sum")
-
-    national_marital = {}
-    fields = ("population", "never_married", "married", "divorced", "widowed")
-    for file, dim, total_label, expected in (
-        ("census2020-marital-age-sex.csv", "age_group", "15+", 36),
-        ("census2020-marital-region-sex.csv", "region", "全国", 96),
-    ):
-        rows = read_csv(folder, file)
-        require(len(rows) == expected, f"{file}: count")
-        unique(rows, [dim, "sex"], file)
-        indexed = {(r[dim], r["sex"]): r for r in rows}
-        for label in {r[dim] for r in rows}:
-            for field in fields:
-                require(
-                    int(indexed[label, "all"][field])
-                    == int(indexed[label, "male"][field]) + int(indexed[label, "female"][field]),
-                    f"{file}: sex sum",
-                )
-        for r in rows:
-            require(
-                sum(int(r[f]) for f in fields[1:]) == int(r["population"]), f"{file}: marital sum"
-            )
-        for sex in ("all", "male", "female"):
-            for field in fields:
-                actual = int(indexed[total_label, sex][field])
-                require(
-                    sum(int(r[field]) for r in rows if r["sex"] == sex and r[dim] != total_label)
-                    == actual,
-                    f"{file}: aggregate sum",
-                )
-                key = (sex, field)
-                require(
-                    key not in national_marital or national_marital[key] == actual,
-                    "Census marital tables disagree",
-                )
-                national_marital[key] = actual
-
-    fert = read_csv(folder, "census2020-fertility-age.csv")
-    unique(fert, ["age_group"], "Fertility ages")
-    require(len(fert) == 8, "Fertility coverage")
-    total = next(r for r in fert if r["row_kind"] == "total")
-    for field in ("female_average", "births", "first_births", "second_births", "thirdplus_births"):
-        require(
-            sum(int(r[field]) for r in fert if r["row_kind"] != "total") == int(total[field]),
-            f"Fertility age sums: {field}",
-        )
-    for r in fert:
-        require(
-            r["period_start"] == "2019-11-01" and r["period_end"] == "2020-10-31", "Birth period"
-        )
-        require(
-            sum(int(r[k]) for k in ("first_births", "second_births", "thirdplus_births"))
-            == int(r["births"]),
-            "Birth order sum",
-        )
-        for count, rate in (
-            ("births", "birth_rate_per_1000"),
-            ("first_births", "first_rate_per_1000"),
-            ("second_births", "second_rate_per_1000"),
-            ("thirdplus_births", "thirdplus_rate_per_1000"),
-        ):
-            require(
-                abs(1000 * int(r[count]) / int(r["female_average"]) - float(r[rate])) <= 0.006,
-                f"Fertility rate: {r['age_group']} {rate}",
-            )
-    regions = read_csv(folder, "census2020-fertility-region.csv")
-    unique(regions, ["region"], "Fertility regions")
-    require(len(regions) == 32, "Fertility region count")
-    national = next(r for r in regions if r["region"] == "全国")
-    for r in fert:
-        if r["row_kind"] != "total":
-            require(
-                float(r["birth_rate_per_1000"])
-                == float(national[f"asfr_{r['age_group'].replace('-', '_')}_per_1000"]),
-                "National age rates disagree across fertility tables",
-            )
-    for r in regions:
-        require(0 < float(r["tfr_per_woman"]) < 10, "TFR unit check")
-
-    hh = read_csv(folder, "census2020-household-size.csv")
-    unique(hh, ["household_size"], "Household sizes")
-    require(len(hh) == 11, "Household coverage")
-    columns = (
-        "households",
-        "one_generation",
-        "two_generations",
-        "three_generations",
-        "four_generations",
-        "fiveplus_generations",
-    )
-    total = next(r for r in hh if r["row_kind"] == "total")
-    for column in columns:
-        require(
-            sum(int(r[column] or 0) for r in hh if r["row_kind"] != "total") == int(total[column]),
-            f"Household size sum: {column}",
-        )
-    for r in hh:
-        # Blank cells remain blank in the dataset; here only the sum of reported cells is tested.
-        require(
-            sum(int(r[c]) for c in columns[1:] if r[c] != "") == int(r["households"]),
-            "Reported household generation sum",
-        )
 
 
 def check_flights(folder):
@@ -376,7 +210,6 @@ def check_flights(folder):
 def main():
     checks = {
         "hong-kong-summer": check_hong_kong,
-        "china-population": check_population,
         "flight-delays": check_flights,
     }
     parser = argparse.ArgumentParser(description=__doc__)

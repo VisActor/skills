@@ -178,7 +178,7 @@ Alternatively, copy the complete Skill directory into your agent's skill directo
 
 ### Regression tests
 
-Unit data-storytelling has deterministic module, preview, snapshot-integrity and independent-installation checks. [Fixed tasks](cases/README.md#unit-data-storytelling) include NBA, Hong Kong summer and flight delays. Population inputs are retained with testing paused. The [showcase](examples/README.md#unit-data-storytelling) features complete stories about NBA player heights, Hong Kong summer nights and life on a multiplayer Minecraft server. No fixed browser smoke is registered yet. See the [scoped checks](CONTRIBUTING.md#select-checks-by-scope) and [maintenance context](docs/unit-data-storytelling/context-map.md).
+Unit data-storytelling has deterministic module, preview, snapshot-integrity and independent-installation checks. [Fixed tasks](cases/README.md#unit-data-storytelling) include NBA, Hong Kong summer and flight delays. The [showcase](examples/README.md#unit-data-storytelling) features complete stories about NBA player heights, Hong Kong summer nights and life on a multiplayer Minecraft server. No fixed browser smoke is registered yet. See the [scoped checks](CONTRIBUTING.md#select-checks-by-scope) and [maintenance context](docs/unit-data-storytelling/context-map.md).
 
 The Python maintenance environment requires Python 3.12+ and [uv](https://docs.astral.sh/uv/):
 
