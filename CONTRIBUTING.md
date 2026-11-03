@@ -44,7 +44,7 @@ Node.js checks use Node 24, matching CI. Browser checks also need npm dependenci
 | Scope | Deterministic regressions | Task/browser coverage |
 | --- | --- | --- |
 | chart-storytelling | `uv run pytest tests/chart_storytelling -q`; `node --test tests/test_story_vseed.cjs` after browser dependency installation | [Fixed tasks](cases/README.md); HTML and Web-PPT smoke |
-| unit-data-storytelling | `uv run pytest tests/unit_data_storytelling -q`; `node --test tests/unit_data_storytelling/*.test.mjs`; `uv run pytest tests/test_portable_install.py -q -k unit_story`; fixed-input edits use `uv run pytest tests/test_case_inputs.py -q -k unit-data-storytelling` | [NBA, Hong Kong summer and flight delays](cases/README.md#unit-data-storytelling); no fixed browser smoke; [maintenance context](docs/unit-data-storytelling/context-map.md) |
+| unit-data-storytelling | `uv run pytest tests/unit_data_storytelling -q`; `node --test tests/unit_data_storytelling/*.test.mjs`; `uv run pytest tests/test_portable_install.py -q -k unit_story` | [Three examples with prompts and inputs](examples/README.md#unit-data-storytelling); no fixed browser smoke; [maintenance context](docs/unit-data-storytelling/context-map.md) |
 | editorial-magazine | `uv run pytest tests/editorial_magazine -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |
 | life-chronicle | `uv run pytest tests/life_chronicle -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |
 | person-poster | `uv run pytest tests/person_poster -q -m "not poster_browser"`; browser regressions use `-m poster_browser` after Python Chromium installation | [Fixed task](cases/person-poster/career-evidence/README.md); native-chart, HTML-only, PNG and failure smoke |

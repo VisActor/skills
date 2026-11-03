@@ -177,7 +177,7 @@ npx skills add ./skills/person-poster
 
 ### 回归测试
 
-unit-data-storytelling 已有模块、预览工具、冻结输入完整性与独立安装的确定性检查。[固定任务](cases/README.md#unit-data-storytelling)包含 NBA、香港夏天、航班延误。[展示案例](examples/README.md#unit-data-storytelling)收录 NBA 球员身高、香港夏夜气温和《我的世界》多人生存服三篇完整作品。尚未注册固定浏览器 smoke。维护时参阅[按范围检查](CONTRIBUTING.md#select-checks-by-scope)和[维护上下文](docs/unit-data-storytelling/context-map.md)。
+unit-data-storytelling 已有模块、预览工具、冻结输入完整性与独立安装的确定性检查。[三个示例](examples/README.md#unit-data-storytelling)分别讲 NBA 球员身高、香港夏夜气温和《我的世界》多人生存服。每篇都附有完整作品、复作提示词和输入数据。尚未注册固定浏览器 smoke。维护时参阅[按范围检查](CONTRIBUTING.md#select-checks-by-scope)和[维护上下文](docs/unit-data-storytelling/context-map.md)。
 
 Python 维护环境要求 Python 3.12+ 和 [uv](https://docs.astral.sh/uv/)：
 
@@ -193,7 +193,7 @@ uv run ruff check skills tests
 
 在 Codex、Claude Code 等 Agent 中运行[固定任务](cases/README.md)，或使用自己的提示词和数据。产物、截图与日志保存在已忽略的本地工作目录中，具体见[本地调试指南](docs/debugging.md)。Agent 任务不在 CI 中运行。
 
-固定任务目前覆盖 chart-storytelling、unit-data-storytelling 和 person-poster。浏览器 smoke 覆盖故事、Web-PPT 和人物海报，详细用例见[浏览器测试指南](tests/browser/cases/README.zh-CN.md)。editorial-magazine、life-chronicle 和 chart-assistant 已有脚本回归，本仓库尚未提供固定 Agent 任务或真实宿主浏览器 smoke。
+固定任务目前覆盖 chart-storytelling 和 person-poster。浏览器 smoke 覆盖故事、Web-PPT 和人物海报，详细用例见[浏览器测试指南](tests/browser/cases/README.zh-CN.md)。editorial-magazine、life-chronicle 和 chart-assistant 已有脚本回归，本仓库尚未提供固定 Agent 任务或真实宿主浏览器 smoke。
 
 生成结果仍需检查数据准确性、可读性和交互。自动化测试通过不代表 Agent 生成的作品质量合格。Person Poster 的测试结果及待解决问题见[验证记录](docs/validation/person-poster-2026-10-28.md)。
 

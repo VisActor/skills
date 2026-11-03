@@ -7,8 +7,7 @@
 - 运行时：`skills/unit-data-storytelling/`，后续修改以本仓库为准。
 - 机制与维护工具回归：`tests/unit_data_storytelling/`；独立安装检查：`tests/test_portable_install.py`。
 - 实验、首稿、截图和过程记录：`.cache/skill-dev/unit-data-storytelling/`，不提交。
-- 固定任务：[NBA](../../cases/unit-data-storytelling/nba/README.md)、[香港夏天](../../cases/unit-data-storytelling/hong-kong-summer/README.md)、[航班延误](../../cases/unit-data-storytelling/flight-delays/README.md)。仅提供 `prompt.md` 与 `inputs/`，不提供案例 README 或作品。
-- [公开作品](../../examples/README.md#unit-data-storytelling)收录香港夏夜气温、NBA 球员身高和《我的世界》玩家路径三篇完整故事，供设计参考。运行时指导独立于成品，首稿质量另行评估。
+- [公开示例](../../examples/README.md#unit-data-storytelling)收录香港夏夜气温、NBA 球员身高和《我的世界》玩家路径。独立复作时，从所选示例取 `prompt.md` 和 `inputs/` 随 Skill 提供给创作者，完成后再对照成品。
 
 ## 已确定的方向与取舍
 
@@ -66,6 +65,6 @@
 
 ## 历史记录
 
-完整旧上下文已保存在本地 `.cache/skill-dev/unit-data-storytelling/history/context-map.original.md`；同目录 `index.json` 记录原位置和哈希。历史作品与会话线索保留在该索引中，原目录不删。精选输入与作品已分别收录于 `cases/` 和 `examples/`，其复制清单与验证证据留在本地 `.cache/skill-dev/unit-data-storytelling/case-showcase-migration-20261029/`。
+完整旧上下文已保存在本地 `.cache/skill-dev/unit-data-storytelling/history/context-map.original.md`；同目录 `index.json` 记录原位置和哈希。历史作品与会话线索保留在该索引中，原目录不删。公开作品与复作输入收录于 `examples/unit-data-storytelling/`。迁移时的复制清单与验证证据留在本地 `.cache/skill-dev/unit-data-storytelling/case-showcase-migration-20261029/`。
 
 该历史副本不随公开仓库分发；在没有本地历史的环境中，使用本页的当前决定和可核验测试，不把旧路径、版本号、端口或当时的“下一步”当作现状。未来复盘只更新当前结论和必要索引，详细运行记录继续放在本地实验目录。

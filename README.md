@@ -178,7 +178,7 @@ Alternatively, copy the complete Skill directory into your agent's skill directo
 
 ### Regression tests
 
-Unit data-storytelling has deterministic module, preview, snapshot-integrity and independent-installation checks. [Fixed tasks](cases/README.md#unit-data-storytelling) include NBA, Hong Kong summer and flight delays. The [showcase](examples/README.md#unit-data-storytelling) features complete stories about NBA player heights, Hong Kong summer nights and life on a multiplayer Minecraft server. No fixed browser smoke is registered yet. See the [scoped checks](CONTRIBUTING.md#select-checks-by-scope) and [maintenance context](docs/unit-data-storytelling/context-map.md).
+Unit data-storytelling has deterministic module, preview, snapshot-integrity and independent-installation checks. The [three examples](examples/README.md#unit-data-storytelling) cover NBA player heights, Hong Kong summer nights and life on a multiplayer Minecraft server. Each includes the finished story, its prompt and the source data for a fresh run. No fixed browser smoke is registered yet. See the [scoped checks](CONTRIBUTING.md#select-checks-by-scope) and [maintenance context](docs/unit-data-storytelling/context-map.md).
 
 The Python maintenance environment requires Python 3.12+ and [uv](https://docs.astral.sh/uv/):
 
@@ -194,7 +194,7 @@ Fixed browser cases live under [tests/browser/cases/](tests/browser/cases/README
 
 Run a [fixed task](cases/README.md) or your own prompt and data in Codex, Claude Code or another agent. Keep outputs, screenshots and logs in an ignored local workspace; see [local debugging](docs/debugging.md). Agent tasks do not run in CI.
 
-Fixed tasks currently cover chart-storytelling, unit-data-storytelling and person-poster. Browser smoke covers stories, Web-PPT and person posters; detailed cases are in the [browser test guide](tests/browser/cases/README.md). Editorial-magazine, life-chronicle and chart-assistant have script regressions but no fixed Agent tasks or real-host browser smoke in this repository.
+Fixed tasks currently cover chart-storytelling and person-poster. Browser smoke covers stories, Web-PPT and person posters; detailed cases are in the [browser test guide](tests/browser/cases/README.md). Editorial-magazine, life-chronicle and chart-assistant have script regressions but no fixed Agent tasks or real-host browser smoke in this repository.
 
 Check generated results for data accuracy, readability and interactions. Automated tests do not establish the quality of an Agent-generated work. Person Poster test results and remaining limitations are recorded in the [validation notes](docs/validation/person-poster-2026-10-28.md).
 
