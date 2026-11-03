@@ -5,6 +5,7 @@ import tempfile
 import threading
 import unittest
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -100,6 +101,41 @@ class PreviewTests(unittest.TestCase):
             with self.assertRaises(urllib.error.HTTPError) as failure:
                 urllib.request.urlopen(base + target)
             self.assertEqual(failure.exception.code, 403)
+
+    def test_audit_and_http_reject_outside_directory_indexes(self):
+        base, _ = self.start()
+        with tempfile.TemporaryDirectory(dir=self.root.parent, prefix=self.root.name + "-sibling-") as outside:
+            secret = Path(outside) / "outside.txt"
+            secret.write_text("outside sentinel")
+            for index in ("index.html", "index.htm"):
+                with self.subTest(index=index):
+                    folder = self.root / index.replace(".", "-")
+                    folder.mkdir()
+                    (folder / index).symlink_to(secret)
+                    url = f"/{folder.name}/"
+                    for method in ("GET", "HEAD"):
+                        with self.assertRaises(urllib.error.HTTPError) as failure:
+                            urllib.request.urlopen(urllib.request.Request(base + url, method=method))
+                        self.assertEqual(failure.exception.code, 403)
+                    self.assertIn("escapes", preview.audit(self.root, url)["errors"][0]["reason"])
+            with self.assertRaises(urllib.error.HTTPError) as failure:
+                urllib.request.urlopen(base + "/%2e%2e/" + Path(outside).name + "/outside.txt")
+            self.assertEqual(failure.exception.code, 403)
+
+    def test_directory_redirect_and_index_selection_match_the_audit(self):
+        self.put("故事/article.htm", "local fallback")
+        (self.root / "故事/index.htm").symlink_to("article.htm")
+        base, _ = self.start()
+        url = base + "/" + urllib.parse.quote("故事")
+        # Add the preferred index after startup to exercise live preview edits too.
+        for expected_file, expected_text in [("article.htm", "local fallback"), ("index.html", "preferred")]:
+            with self.subTest(expected_file=expected_file):
+                if expected_file == "index.html":
+                    self.put("故事/index.html", expected_text)
+                self.assertEqual(preview.audit(self.root, "故事/")["files"], ["故事/" + expected_file])
+                with urllib.request.urlopen(url + "?mode=test") as response:
+                    self.assertEqual(response.url, url + "/?mode=test")
+                    self.assertEqual(response.read().decode(), expected_text)
 
 
 if __name__ == "__main__":

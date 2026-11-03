@@ -16,19 +16,39 @@ MIME = {".mjs": "text/javascript", ".js": "text/javascript", ".svg": "image/svg+
         ".json": "application/json", ".csv": "text/csv", ".woff2": "font/woff2"}
 
 
-def local_file(root, url):
-    """Resolve decoded URLs and symlinks inside a single artifact root."""
-    name = unquote(urlsplit(url).path)
+def confined_path(root, name):
+    """Check the lexical path before probing the filesystem, then check the symlink target."""
+    base = str(root)
+    prefix = os.path.join(base, "")
+
+    def inside(path):
+        if path == base:
+            return base
+        if path.startswith(prefix):
+            return path
+        raise ValueError("Resource escapes artifact root")
+
+    candidate = inside(os.path.abspath(os.path.join(base, name)))
+    return Path(inside(os.path.realpath(candidate)))
+
+
+def local_file(root, url, *, redirect_directories=False):
+    url_path = urlsplit(url).path
+    name = unquote(url_path)
     if "\x00" in name:
         raise ValueError("NUL in resource URL")
-    target = (root / name.lstrip("/")).resolve()
-    if not target.is_relative_to(root):
-        raise ValueError("Resource escapes artifact root")
-    if target.is_dir():
-        target = (target / "index.html").resolve()
-    if not target.is_relative_to(root):
-        raise ValueError("Directory index escapes artifact root")
-    return target
+    target = confined_path(root, name.lstrip("/"))
+    if target.is_file():
+        return target
+    if not target.is_dir():
+        raise FileNotFoundError("Missing local file")
+    if redirect_directories and not url_path.endswith("/"):
+        return target  # Let the HTTP handler issue its trailing-slash redirect.
+    for name in ("index.html", "index.htm"):
+        index = confined_path(root, target / name)
+        if index.is_file():
+            return index
+    raise FileNotFoundError("No index file in directory")
 
 
 def strip_js_comments(text):
@@ -119,8 +139,6 @@ def audit(root, entry="index.html"):
         url, document, source = queue.pop(0)
         try:
             target = local_file(root, url)
-            if not target.is_file():
-                raise FileNotFoundError("Missing local file")
             name = target.relative_to(root).as_posix()
             key = (name, document)
             if key in visited:
@@ -156,15 +174,15 @@ class Handler(SimpleHTTPRequestHandler):
 
     def send_head(self):
         try:
-            local_file(Path(self.directory).resolve(), self.path)
-        except ValueError as exc:
-            self.send_error(403, str(exc))
-            return None
-        return super().send_head()
+            return super().send_head()
+        except ValueError:
+            self.send_error(403, "Forbidden resource path")
+        except FileNotFoundError:
+            self.send_error(404, "File not found")
+        return None
 
     def translate_path(self, path):
-        # Guard checked by send_head; retain directories so base handler redirects /folder.
-        return str((Path(self.directory) / unquote(urlsplit(path).path).lstrip("/")).resolve())
+        return str(local_file(Path(self.directory), path, redirect_directories=True))
 
     def list_directory(self, path):
         self.send_error(404, "No index.html in directory")
@@ -197,9 +215,7 @@ def main():
             print(json.dumps(report, ensure_ascii=False, indent=2))
             return 1 if report["errors"] else 0
         root = Path(report["root"])
-        entry = local_file(root, "/" + quote(args.entry.lstrip("/"), safe="/"))
-        if not entry.is_file():
-            raise ValueError("Preview entry does not exist")
+        local_file(root, "/" + quote(args.entry.lstrip("/"), safe="/"))
         with make_server(root, args.port) as server:
             port = server.server_address[1]
             print(json.dumps({"event": "ready", "pid": os.getpid(), "root": str(root), "port": port,
