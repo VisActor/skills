@@ -15,8 +15,7 @@
 | --- | --- | --- |
 | [天黑了，还是热。](unit-data-storytelling/hong-kong-after-dark/README.md) | 完整作品；街景引入，日期单元沿日历、历史、分布连续重组 | HKO 1961–2025 逐日气温；街景有独立署名与许可 |
 | [身高的分量](unit-data-storytelling/nba-height-story/README.md) | 完整作品；点阵标志、年代分布、分钟权重、明星与探索 | NBA 历史快照；标志、头像与数据许可分开说明 |
-| [NBA 点阵开篇](unit-data-storytelling/nba-opening/README.md) | 局部试作；主题图形展开成分布，再加入另一年代 | 真实球员与位置记录，装饰粒子另行处理 |
-| [大前锋：人数与分钟](unit-data-storytelling/nba-pf-comparison/README.md) | 局部试作；在同一段解释中对齐分布、人数占比与分钟占比 | 2000–2009 和 2020–2025，全量可用赛季 |
+| [翅膀先到了。](unit-data-storytelling/hydro-world-paths/README.md) | 跟随同一批玩家比较探险与播种的先后，用两条人数尺读出飞行与建造的最少重叠人数 | Hydro Vanilla SMP 的 1,117 个匿名账号，进度路径与累计行为分别统计 |
 
 这些是可查看、复作的表达参考，不是必须照用的页面模板，也不是当前 Skill 独立首稿能力的评测结果。固定任务与验收说明见 [cases](../cases/README.md#unit-data-storytelling)。
 
