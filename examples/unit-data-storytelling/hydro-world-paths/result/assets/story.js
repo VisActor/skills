@@ -53,11 +53,13 @@
     const next=document.createElement('div');next.className='copy';
     next.innerHTML='<p class="eyebrow"><i></i>'+c.k+'</p><h2>'+c.title+'</h2><p class="body">'+c.body+'</p><p class="aside">'+c.aside+'</p>'+(step===6?choicesHTML():'');
     words.append(next);
-    next.querySelector('select')?.addEventListener('change',e=>{selected=e.target.value;showCopy(6,true);changeView(6,false,true);setAlt(6);});
+    next.querySelector('select')?.addEventListener('change',e=>{selected=e.target.value;showCopy(6,true);changeView(6,false,true);syncPlotLabel();});
   }
-  function setAlt(step){
-    if (step===0) return;
-    const c=copyFor(step);plot.setAttribute('aria-label',c.title.replace(/<[^>]+>/g,'')+' '+c.body.replace(/<[^>]+>/g,''));
+  function syncPlotLabel(){
+    const copy=words.querySelector('.copy:not(.out)');
+    if (!copy){plot.removeAttribute('aria-label');return;}
+    const title=copy.querySelector('h2').textContent, body=copy.querySelector('.body').textContent;
+    plot.setAttribute('aria-label',title+' '+body);
   }
   const square=(x,y,size=0,opacity=0,col=colors.wing)=>({x,y,size,opacity,col:rgb(col),sprout:0});
   function rgb(str){const n=parseInt(str.slice(1),16);return [n>>16,(n>>8)&255,n&255];}
@@ -286,7 +288,7 @@
     const previous=currentStep;currentStep=n;stage.dataset.step=n;
     evidence.inert=n===0;$('#coverVisual').inert=n!==0;
     if(n===5 && previous!==6)selected='place_stairs';
-    showCopy(n);setAlt(n);
+    showCopy(n);syncPlotLabel();
     $('#plate-name').textContent=figureNames[n];$('#plot-scope').textContent=scopes[n];$('#plot-note').textContent=hints[n];
     $('#next-word').textContent=navNames[n];
     $('#back').disabled=!n;
