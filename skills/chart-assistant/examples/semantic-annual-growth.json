@@ -1,0 +1,84 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 720,
+          "height": 420
+        },
+        "options": {
+          "chartType": "line",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["年份", "收入"],
+              "rows": ["2020", "2024"],
+              "data": [
+                {
+                  "年份": 2020,
+                  "收入": 100
+                },
+                {
+                  "年份": 2024,
+                  "收入": 146.41
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "date",
+                  "timeUnit": "year"
+                },
+                {
+                  "dataType": "number"
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "年份",
+              "y": ["收入"]
+            },
+            "marker": {
+              "markLine": [
+                {
+                  "id": "income-annual-cagr",
+                  "name": "growth-line",
+                  "target": {
+                    "from": {
+                      "match": {
+                        "年份": 2020
+                      },
+                      "metric": "收入"
+                    },
+                    "to": {
+                      "match": {
+                        "年份": 2024
+                      },
+                      "metric": "收入"
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": ["CAGR"]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

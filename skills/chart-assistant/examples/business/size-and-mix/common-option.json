@@ -1,0 +1,207 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "size-and-mix-income",
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        },
+        "options": {
+          "chartType": "mekkoPercent",
+          "enableDataEdit": true,
+          "enableEditorTheme": true,
+          "enableTypeChange": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "大区",
+                "总量",
+                "食品",
+                "其他"
+              ],
+              "rows": [
+                "A",
+                "B"
+              ],
+              "data": [
+                {
+                  "大区": "A",
+                  "总量": 100,
+                  "食品": 60,
+                  "其他": 40
+                },
+                {
+                  "大区": "B",
+                  "总量": 60,
+                  "食品": 15,
+                  "其他": 45
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true
+                  }
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true
+                  }
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "大区",
+              "y": [
+                "食品",
+                "其他"
+              ],
+              "bandWidth": "总量"
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "textType": "rich",
+                  "text": [
+                    {
+                      "text": "各大区收入规模与构成",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "lineHeight": 28,
+                      "fill": "#0F172A"
+                    },
+                    {
+                      "text": "\n宽度＝收入规模（万元）；高度＝组内构成占比",
+                      "fontSize": 12,
+                      "lineHeight": 18,
+                      "fill": "#64748B"
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  }
+                }
+              },
+              {
+                "id": "series-0",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": [
+                        "percentage"
+                      ],
+                      "fixed": 0
+                    }
+                  },
+                  "totalLabel": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "id": "mekkoLabel",
+                "specKey": "mekkoLabel",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "formatConfig": {
+                    "content": [
+                      "dimension",
+                      "value"
+                    ],
+                    "contentWrap": true,
+                    "fixed": 0
+                  }
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "orient": "bottom",
+                  "position": "middle",
+                  "padding": [
+                    16,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "marker": {
+              "markLine": [
+                {
+                  "id": "food-share-difference",
+                  "name": "hierarchy-diff-line",
+                  "target": {
+                    "from": {
+                      "boundary": "start",
+                      "match": {
+                        "大区": "A"
+                      },
+                      "metric": "食品"
+                    },
+                    "to": {
+                      "boundary": "start",
+                      "match": {
+                        "大区": "B"
+                      },
+                      "metric": "食品"
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": [
+                        "layerShareDiff"
+                      ],
+                      "fixed": 0
+                    }
+                  }
+                }
+              ]
+            },
+            "color": [
+              "#1A82EB",
+              "#B8C8D8"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

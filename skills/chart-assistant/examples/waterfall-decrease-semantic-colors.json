@@ -1,0 +1,222 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "waterfall-decrease-semantic-colors",
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        },
+        "options": {
+          "chartType": "waterfallDecrease",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "",
+                "value"
+              ],
+              "data": [
+                {
+                  "": "A",
+                  "value": "e"
+                },
+                {
+                  "": "B",
+                  "value": 4
+                },
+                {
+                  "": "C",
+                  "value": 3
+                },
+                {
+                  "": "D",
+                  "value": 1
+                }
+              ],
+              "rows": [
+                "A",
+                "B",
+                "C",
+                "D"
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "",
+              "y": [
+                "value"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "textType": "rich",
+                  "text": [
+                    {
+                      "text": "各项目逐项扣减",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "lineHeight": 28,
+                      "fill": "#0F172A"
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  }
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "type": "linear",
+                  "orient": "left",
+                  "visible": true,
+                  "title": {
+                    "visible": true,
+                    "text": "数值"
+                  },
+                  "label": {
+                    "visible": true
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#E2E8F0",
+                      "lineWidth": 1
+                    }
+                  },
+                  "zero": true
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "type": "band",
+                  "orient": "bottom",
+                  "visible": true,
+                  "title": {
+                    "visible": false,
+                    "text": "类别"
+                  },
+                  "label": {
+                    "visible": true
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false,
+                  "orient": "bottom",
+                  "position": "middle",
+                  "padding": [
+                    16,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "series-waterfall",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "label": {
+                    "visible": true
+                  },
+                  "totalLabel": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  },
+                  "stackType": "group",
+                  "groupBySign": true
+                }
+              }
+            ],
+            "dataGroupSpec": {
+              "EDITOR_ALL_DATA_GROUP": {
+                "label": {
+                  "visible": true
+                },
+                "totalLabel": {
+                  "visible": false
+                }
+              },
+              "value_fieldLink__editor_waterfall_total": {
+                "bar": {
+                  "style": {
+                    "fill": "#0A345E"
+                  }
+                }
+              },
+              "value_fieldLink_正值": {
+                "bar": {
+                  "style": {
+                    "fill": "#DC6B6B"
+                  }
+                }
+              },
+              "value_fieldLink_负值": {
+                "bar": {
+                  "style": {
+                    "fill": "#1A82EB"
+                  }
+                }
+              }
+            }
+          },
+          "enableEditorTheme": true,
+          "enableDataEdit": true,
+          "enableTypeChange": true
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

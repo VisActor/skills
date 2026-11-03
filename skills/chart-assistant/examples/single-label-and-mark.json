@@ -1,0 +1,44 @@
+{
+  "kind": "materialized-single-datum-patch",
+  "precondition": "label key 和 mark match 均由当前 runtime 根据真实 series/datum 生成",
+  "modelSpec": [
+    {
+      "id": "series-sales",
+      "specKey": "series",
+      "specIndex": 0,
+      "spec": {
+        "label": {
+          "visible": true,
+          "styleMap": {
+            "产品A_2月": {
+              "visible": true,
+              "forceVisible": true,
+              "text": "140（峰值）",
+              "style": { "fill": "#2251FF", "fontWeight": 600 }
+            }
+          }
+        },
+        "seriesLabel": {
+          "visible": true,
+          "position": "end",
+          "label": {
+            "styleMap": {
+              "end-0": { "text": "产品 A", "line": { "visible": true, "style": { "stroke": "#2251FF" } } }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "markStyle": [
+    {
+      "id": "a22eec14-95bd-4f20-afbd-b318bf14a98d",
+      "seriesType": "bar",
+      "seriesIndex": 0,
+      "markName": "bar",
+      "itemKeys": ["产品", "月份"],
+      "itemKeyMap": { "产品": "产品A", "月份": "2月" },
+      "style": { "fill": "#2251FF", "stroke": "#034B6F", "lineWidth": 2 }
+    }
+  ]
+}

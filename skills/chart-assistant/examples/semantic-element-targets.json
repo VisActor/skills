@@ -1,0 +1,495 @@
+{
+  "kind": "semantic-element-target-examples",
+  "note": "commonOption是基础图，patch是当前实例的语义输入。首次创建可把patch合并到options.config：modelSpec追加保留已有配置，其他字段按原配置规则合并。样式原值不变；运行时编译成原生身份后保存。示例中的已有series-0仅适用于所给固定基础图，迁移数据时用业务target。多维单对象案例（产品A×Q2×实际）演示单柱与标签各写一条含markName的markStyle语义条目，禁止改用dataGroupSpec整组着色降格；selector/measure匹配不到唯一对象时澄清，不放宽条件扩大命中。",
+  "cases": [
+    {
+      "prompt": "数据：季度Q1、Q2、Q3、Q4；销售额100、120、140、160。生成柱图，只把Q4柱子改蓝、Q4数值标签改红加粗。",
+      "commonOption": {
+        "elements": [
+          {
+            "id": "semantic-target-chart",
+            "type": "chart",
+            "position": {
+              "x": 0,
+              "y": 0,
+              "width": 800,
+              "height": 450
+            },
+            "options": {
+              "chartType": "bar",
+              "data": {
+                "type": "standard",
+                "value": {
+                  "columns": [
+                    "季度",
+                    "销售额"
+                  ],
+                  "data": [
+                    {
+                      "季度": "Q1",
+                      "销售额": 100
+                    },
+                    {
+                      "季度": "Q2",
+                      "销售额": 120
+                    },
+                    {
+                      "季度": "Q3",
+                      "销售额": 140
+                    },
+                    {
+                      "季度": "Q4",
+                      "销售额": 160
+                    }
+                  ],
+                  "rows": [
+                    "Q1",
+                    "Q2",
+                    "Q3",
+                    "Q4"
+                  ],
+                  "columnFormats": [
+                    {
+                      "dataType": "text"
+                    },
+                    {
+                      "dataType": "number"
+                    }
+                  ]
+                }
+              },
+              "config": {
+                "mappingSpec": {
+                  "x": "季度",
+                  "y": [
+                    "销售额"
+                  ]
+                },
+                "modelSpec": [
+                  {
+                    "id": "series-0",
+                    "specKey": "series",
+                    "specIndex": 0,
+                    "spec": {
+                      "label": {
+                        "visible": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "patch": {
+        "markStyle": [
+          {
+            "markName": "bar",
+            "target": {
+              "selector": {
+                "季度": "Q4"
+              },
+              "measure": "销售额"
+            },
+            "style": {
+              "fill": "#3370FF"
+            }
+          }
+        ],
+        "modelSpec": [
+          {
+            "specKey": "series",
+            "target": {
+              "measure": "销售额"
+            },
+            "spec": {
+              "label": {
+                "styleMap": [
+                  {
+                    "target": {
+                      "selector": {
+                        "季度": "Q4"
+                      }
+                    },
+                    "value": {
+                      "style": {
+                        "fill": "#E53935",
+                        "fontWeight": "bold"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "prompt": "数据：季度Q1、Q2、Q3、Q4；销售额100、120、140、160；成本60、70、85、95。生成堆叠柱图，把销售额整组柱子改蓝、整组标签加粗。",
+      "commonOption": {
+        "elements": [
+          {
+            "id": "semantic-target-chart",
+            "type": "chart",
+            "position": {
+              "x": 0,
+              "y": 0,
+              "width": 800,
+              "height": 450
+            },
+            "options": {
+              "chartType": "bar",
+              "data": {
+                "type": "standard",
+                "value": {
+                  "columns": [
+                    "季度",
+                    "销售额",
+                    "成本"
+                  ],
+                  "data": [
+                    {
+                      "季度": "Q1",
+                      "销售额": 100,
+                      "成本": 60
+                    },
+                    {
+                      "季度": "Q2",
+                      "销售额": 120,
+                      "成本": 70
+                    },
+                    {
+                      "季度": "Q3",
+                      "销售额": 140,
+                      "成本": 85
+                    },
+                    {
+                      "季度": "Q4",
+                      "销售额": 160,
+                      "成本": 95
+                    }
+                  ],
+                  "rows": [
+                    "Q1",
+                    "Q2",
+                    "Q3",
+                    "Q4"
+                  ],
+                  "columnFormats": [
+                    {
+                      "dataType": "text"
+                    },
+                    {
+                      "dataType": "number"
+                    },
+                    {
+                      "dataType": "number"
+                    }
+                  ]
+                }
+              },
+              "config": {
+                "mappingSpec": {
+                  "x": "季度",
+                  "y": [
+                    "销售额",
+                    "成本"
+                  ]
+                },
+                "modelSpec": [
+                  {
+                    "id": "series-0",
+                    "specKey": "series",
+                    "specIndex": 0,
+                    "spec": {
+                      "label": {
+                        "visible": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "patch": {
+        "dataGroupSpec": [
+          {
+            "target": {
+              "measure": "销售额"
+            },
+            "value": {
+              "bar": {
+                "style": {
+                  "fill": "#3370FF"
+                }
+              },
+              "label": {
+                "style": {
+                  "fontWeight": "bold"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "prompt": "数据：季度Q1、Q2、Q3、Q4；销售额100、120、140、160。生成柱图，只把横轴Q4标签改红加粗、纵轴100网格线改红加粗。",
+      "commonOption": {
+        "elements": [
+          {
+            "id": "semantic-target-chart",
+            "type": "chart",
+            "position": {
+              "x": 0,
+              "y": 0,
+              "width": 800,
+              "height": 450
+            },
+            "options": {
+              "chartType": "bar",
+              "data": {
+                "type": "standard",
+                "value": {
+                  "columns": [
+                    "季度",
+                    "销售额"
+                  ],
+                  "data": [
+                    {
+                      "季度": "Q1",
+                      "销售额": 100
+                    },
+                    {
+                      "季度": "Q2",
+                      "销售额": 120
+                    },
+                    {
+                      "季度": "Q3",
+                      "销售额": 140
+                    },
+                    {
+                      "季度": "Q4",
+                      "销售额": 160
+                    }
+                  ],
+                  "rows": [
+                    "Q1",
+                    "Q2",
+                    "Q3",
+                    "Q4"
+                  ],
+                  "columnFormats": [
+                    {
+                      "dataType": "text"
+                    },
+                    {
+                      "dataType": "number"
+                    }
+                  ]
+                }
+              },
+              "config": {
+                "mappingSpec": {
+                  "x": "季度",
+                  "y": [
+                    "销售额"
+                  ]
+                },
+                "modelSpec": [
+                  {
+                    "id": "series-0",
+                    "specKey": "series",
+                    "specIndex": 0,
+                    "spec": {
+                      "label": {
+                        "visible": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "patch": {
+        "modelSpec": [
+          {
+            "specKey": "axes",
+            "target": {
+              "field": "季度",
+              "orient": "bottom"
+            },
+            "spec": {
+              "label": {
+                "styleMap": [
+                  {
+                    "target": {
+                      "value": "Q4"
+                    },
+                    "value": {
+                      "style": {
+                        "fill": "#E53935",
+                        "fontWeight": "bold"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "specKey": "axes",
+            "target": {
+              "measure": "销售额",
+              "orient": "left"
+            },
+            "spec": {
+              "grid": {
+                "styleMap": [
+                  {
+                    "target": {
+                      "value": 100
+                    },
+                    "value": {
+                      "style": {
+                        "stroke": "#E53935",
+                        "lineWidth": 3
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "prompt": "数据：产品A/产品B，季度Q1、Q2，各有实际与预算。生成分组柱图，只把产品A的Q2实际这根柱子及其数值标签标橙，其他柱子和标签不变。",
+      "note": "单对象路由正例：柱与标签各写一条含markName的markStyle语义条目，selector写完整业务键、measure区分指标。禁止改用dataGroupSpec给产品A整组着色；selector/measure在当前数据匹配不到唯一对象时澄清，不省略季度或分组值扩大命中。",
+      "commonOption": {
+        "elements": [
+          {
+            "id": "semantic-target-chart",
+            "type": "chart",
+            "position": {
+              "x": 0,
+              "y": 0,
+              "width": 800,
+              "height": 450
+            },
+            "options": {
+              "chartType": "bar",
+              "data": {
+                "type": "standard",
+                "value": {
+                  "columns": [
+                    "产品",
+                    "季度",
+                    "实际",
+                    "预算"
+                  ],
+                  "data": [
+                    {
+                      "产品": "产品A",
+                      "季度": "Q1",
+                      "实际": 100,
+                      "预算": 90
+                    },
+                    {
+                      "产品": "产品A",
+                      "季度": "Q2",
+                      "实际": 140,
+                      "预算": 120
+                    },
+                    {
+                      "产品": "产品B",
+                      "季度": "Q1",
+                      "实际": 80,
+                      "预算": 85
+                    },
+                    {
+                      "产品": "产品B",
+                      "季度": "Q2",
+                      "实际": 95,
+                      "预算": 100
+                    }
+                  ],
+                  "rows": [
+                    "产品A-Q1",
+                    "产品A-Q2",
+                    "产品B-Q1",
+                    "产品B-Q2"
+                  ],
+                  "columnFormats": [
+                    {
+                      "dataType": "text"
+                    },
+                    {
+                      "dataType": "text"
+                    },
+                    {
+                      "dataType": "number"
+                    },
+                    {
+                      "dataType": "number"
+                    }
+                  ]
+                }
+              },
+              "config": {
+                "mappingSpec": {
+                  "x": [
+                    "产品",
+                    "季度"
+                  ],
+                  "y": [
+                    "实际",
+                    "预算"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      },
+      "patch": {
+        "markStyle": [
+          {
+            "markName": "bar",
+            "target": {
+              "selector": {
+                "产品": "产品A",
+                "季度": "Q2"
+              },
+              "measure": "实际"
+            },
+            "style": {
+              "fill": "#ED7B2F"
+            }
+          },
+          {
+            "markName": "text",
+            "target": {
+              "selector": {
+                "产品": "产品A",
+                "季度": "Q2"
+              },
+              "measure": "实际"
+            },
+            "style": {
+              "fill": "#ED7B2F",
+              "fontWeight": "bold"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

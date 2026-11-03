@@ -1,0 +1,50 @@
+{
+  "kind": "reference-image-reproduction",
+  "precondition": "Use only after the target runtime accepts a VChart common spec; render and inspect before treating it as a visual match.",
+  "commonOption": {
+    "elements": [
+      {
+        "id": "capacity-chart",
+        "type": "chart",
+        "position": { "x": 0, "y": 0, "width": 960, "height": 540 },
+        "options": {
+          "spec": {
+            "type": "common",
+            "data": [{
+              "id": "capacity-analysis",
+              "values": [
+                { "Year": "2028", "Visual group": "Forecast", "Series": "Customer forecast (K)", "Value": 194 },
+                { "Year": "2028", "Visual group": "Capacity", "Series": "Current Capacity (K)", "Value": 49 },
+                { "Year": "2028", "Visual group": "Capacity", "Series": "Uplifted Capacity", "Value": 147 }
+              ]
+            }],
+            "axes": [
+              { "orient": "bottom", "type": "band", "showAllGroupLayers": false },
+              { "orient": "left", "type": "linear", "zero": true }
+            ],
+            "series": [{
+              "id": "capacity-analysis", "type": "bar", "dataId": "capacity-analysis",
+              "xField": ["Year", "Visual group"], "yField": "Value", "seriesField": "Series",
+              "stack": true, "stackValue": "capacity-analysis",
+              "label": { "visible": true, "position": "inside" }
+            }]
+          },
+          "enableDataEdit": true,
+          "enableTypeChange": true
+        }
+      },
+      {
+        "id": "uplift-callout",
+        "type": "callout",
+        "position": { "x": 420, "y": 170, "width": 150, "height": 92 },
+        "options": {
+          "type": "callout",
+          "graphic": { "fill": "#21B4E8", "lineWidth": 0, "shapePoints": [{ "x": 1.12, "y": 1.34 }] },
+          "text": { "text": "+196K", "fill": "#FFFFFF", "fontSize": 20, "textAlign": "center", "textBaseline": "middle" },
+          "zIndex": 10
+        }
+      }
+    ]
+  },
+  "note": "The callout is a canvas element. Its normalized tail tip is deliberately set down-right of the bubble to point to the target bar; remeasure it after rendering at the target card size."
+}

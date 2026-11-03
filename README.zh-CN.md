@@ -2,14 +2,15 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
-面向 VisActor 可视化生态的 Agent Skills。通过可独立安装的 Skills 制作数据故事、杂志图文和人物志海报。VChart 和 VTable Skill 在各自的库仓库中维护。
+VisActor Skills 提供图表、看板、数据故事和海报相关的技能，可在 Claude Code、Codex、WorkBuddy、豆包工作等支持 Skills 的 Agent 中使用。
+
+[官网与案例](https://visactor.com/skills) · [发布版本](https://github.com/VisActor/skills/releases) · [贡献指南](CONTRIBUTING.md)
 
 ## Skills
 
-### 本仓库维护
-
 | Skill | 能力 |
 | --- | --- |
+| [chart-assistant](skills/chart-assistant/SKILL.md) | 商务图表、MBB 分析标注、可编辑飞书卡片、透明 PNG 和文档插图 |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | 分析报告、业务简报与数据专题，结合图表滚动叙事与标注，输出 HTML 数据故事或 Web-PPT |
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | 杂志风图文：新闻、生平、穿搭、旅行、时序故事与科普，导出 HTML / PNG |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | 人物生平海报：照片墙、中心网格、照片环与可编辑时间线 |
@@ -34,15 +35,13 @@
 | [VChart Skill](https://github.com/VisActor/VChart/blob/develop/skills/vchart-development-assistant/SKILL.md) | 图表生成、问题诊断、图片还原和 React 集成 | [VisActor/VChart](https://github.com/VisActor/VChart) |
 | [VTable Skill](https://github.com/VisActor/VTable/blob/develop/skills/vtable-development-assistant/SKILL.md) | 明细表、透视表与透视图、交互和问题诊断 | [VisActor/VTable](https://github.com/VisActor/VTable) |
 
-每个 Skill 都包含完整指令、本地参考资料、模板和脚本。无需额外安装 VisActor CLI、MCP 服务，也无需为 Skill 单独配置模型 Key 或访问 VisActor 托管 API。模型能力由宿主 Agent 提供。
-
-**VisActor Skills 可在 Claude Code、Codex、WorkBuddy、豆包工作等支持 Agent Skills 的工具中使用。** 模型与工具执行能力由宿主 Agent 提供，你可以通过对话让 Agent 协助安装，也可以使用命令行或手动导入。
+每个 Skill 可单独安装，包含所需的指令、参考资料和脚本。模型调用和工具执行由 Agent 提供。
 
 ## 安装
 
-### 推荐：让 Agent 协助安装
+### 对话安装（推荐）
 
-在你使用的 Agent 工具中新建对话，复制下面的提示词即可：
+把 Skill 链接和安装要求发给 Agent，例如：
 
 ```text
 请帮我安装 chart-storytelling Skill：
@@ -53,15 +52,16 @@ https://github.com/VisActor/skills/tree/main/skills/chart-storytelling
 如果有需要我完成的确认或导入步骤，请告诉我。
 ```
 
-安装本仓库的其他 Skill 时，将提示词中的名称和 GitHub 地址末尾的 `chart-storytelling` 替换为上方“本仓库维护”列表中的 Skill 名称。例如，业务看板使用 [visactor-light-dashboard](https://github.com/VisActor/skills/tree/main/skills/visactor-light-dashboard)。安装完成后，新建任务并指定该 Skill 即可使用。
+安装其他 Skill 时，将提示词和链接中的 `chart-storytelling` 换成上表中的名称。安装后新建任务，指定要使用的 Skill。
 
 如果 Agent 无法访问 GitHub 或完成安装，可使用下面的手动导入方式。
 
 ### 命令行安装：Codex / Claude Code
 
-在你准备使用 Skills 的项目目录中执行：
+在项目目录中，执行所需 Skill 对应的命令：
 
 ```bash
+npx skills add VisActor/skills --skill chart-assistant
 npx skills add VisActor/skills --skill chart-storytelling
 npx skills add VisActor/skills --skill editorial-magazine
 npx skills add VisActor/skills --skill life-chronicle
@@ -87,7 +87,7 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 
 在 [GitHub Releases](https://github.com/VisActor/skills/releases) 中选择最新的 `skills-v*` 正式版本，在 **Assets** 中下载所需 Skill 的 ZIP，例如 `chart-storytelling.zip` 或 `visactor-light-dashboard.zip`。每个 ZIP 对应一个完整 Skill；不要选整个仓库的 **Source code (zip)**，也不要只上传 `SKILL.md`。
 
-这条安装路径不需要运行 `npx`。如果客户端要求选择文件夹，先将 ZIP 解压到同名文件夹，再选择直接包含 `SKILL.md` 的那一层，保留包内所有参考资料、模板和脚本。
+如果客户端要求选择文件夹，解压 ZIP 后选择直接包含 `SKILL.md` 的目录，并保留包内所有文件。
 
 #### WorkBuddy
 
@@ -105,7 +105,7 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 
 豆包工作支持导入本地技能文件和在对话中指定技能，见[飞书官方功能介绍](https://www.feishu.cn/content/article/7677519271848610746)。不同客户端版本的入口名称可能有所变化，以当前界面为准。
 
-导入后可以先发送：“请使用 chart-storytelling，读取它的 SKILL.md，确认配套脚本和模板可访问，并检查当前环境是否满足运行要求。”确认可用后再提交实际任务。需要更新时，从新的正式 Release 下载对应 Skill 包，通过客户端的技能管理入口更新安装副本。
+手动导入的 Skill 需要更新时，从新的 Release 下载对应包，再通过客户端的技能管理页更新。
 
 ### 运行要求
 
@@ -114,6 +114,7 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 
 | Skill | 运行依赖 |
 | --- | --- |
+| chart-assistant | Node.js 18+；PNG 需 HTTPS 网络；飞书插图需已授权的宿主工具或 lark-cli；可编辑卡片另需图表助手 ISV 应用。仅生成/校验 DSL 不要求飞书授权，无需本地图表渲染依赖 |
 | chart-storytelling | Python 3.10+（标准库）和 Node.js（校验 JavaScript）；从 unpkg 加载固定版本的 VSeed、VChart、VTable 与 GSAP |
 | unit-data-storytelling（候选） | 支持 ES modules 的现代浏览器；Node.js 用于模块检查；可选 Python 3.9+（标准库）用于自带的预览与资源检查工具。内置示例使用本地素材，不依赖指定 CDN 或图表库 |
 | editorial-magazine | Python 3.10+、其 [requirements.txt](skills/editorial-magazine/requirements.txt) 中的依赖，以及用于导出 PNG 的 Chromium/Chrome；字体从 CDN 加载，支持系统回退 |
@@ -122,7 +123,7 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 
 图片检索、生图与抠图使用宿主能力，素材要求以所选 Skill 为准。杂志模板中的占位素材需要在交付前替换。VChart/VTable Skill 的运行要求见各自仓库。
 
-Person Poster 通过 `poster_workflow.py` 完成空画布初始化、来源重放、构建、布局检查和交付核验。正式交付需要展示绑定、来源数值比对及逐位图使用依据；阅读与对比检查基于实际页面，失败产物仅作为 `draft/` 中带标识的诊断图。旧 bundle 须迁移并重新验收，见[展示契约](skills/person-poster/references/display-bindings.md)、[证据说明](skills/person-poster/references/evidence-checks.md)和[渲染说明](skills/person-poster/references/render-and-acceptance.md)。工具检查不认证来源真伪、图片权利、视觉质量或宿主最终回复。
+Person Poster 在交付前检查数据绑定、来源比对和图片使用记录。旧作品包需要迁移，详见[展示契约](skills/person-poster/references/display-bindings.md)、[证据说明](skills/person-poster/references/evidence-checks.md)和[渲染说明](skills/person-poster/references/render-and-acceptance.md)。这些检查不能替代来源核实和视觉审阅。
 
 ## 使用
 
@@ -132,17 +133,17 @@ Person Poster 通过 `poster_workflow.py` 完成空画布初始化、来源重�
 - “使用 editorial-magazine，把这篇文章及其来源整理成可编辑 HTML 和 PNG 杂志组图。”
 - “使用 life-chronicle，根据这些有来源的事件和照片制作人物志海报，时间线文字需要可编辑。”
 
-chart-storytelling 由当前 Agent 生成 VSeed 配置，再用本地脚本组装；不依赖托管图表生成服务。图片生成使用宿主能力，没有生图工具时采用计划声明的 fallback。Web-PPT 是浏览器演示稿，不是 `.pptx`。
+chart-storytelling 使用本地脚本生成 HTML 故事和 Web-PPT。Web-PPT 在浏览器中演示，不是 `.pptx` 文件；图片生成需要 Agent 提供相应工具。
 
 生成的 JavaScript/HTML 是可执行代码。请在本地预览自己生成或已审查的产物；测试浏览器并不是用于执行任意不可信提交的安全沙箱。
 
 ## 案例展示
 
-[案例目录](examples/README.md) 已收录 CO₂ 滚动故事、Las Vegas Web-PPT、6组杂志图文案例、4组人物志案例和5条人物数据海报案例（含真实剪影、HTML-only与明确虚构的AI插画案例），包含提示词、图片或页面结果，以及输入与复现限制。
+[案例目录](examples/README.md) 收录了数据故事、Web-PPT、杂志图文和海报，包含提示词、输入材料和结果。
 
 ## 开发与维护
 
-本节面向需要修改 Skills 或运行本地测试的贡献者。默认分支 `main` 提供面向用户的稳定版本；日常开发和贡献 PR 使用 `develop`，经过验证后通过 `develop` → `main` 的 PR 发布。请先阅读 [贡献指南](CONTRIBUTING.md)。
+日常开发和贡献 PR 使用 `develop`，稳定版本使用 `main`。开发约定和发布步骤见[贡献指南](CONTRIBUTING.md)。
 
 ### 仓库结构
 
@@ -182,33 +183,27 @@ Python 维护环境要求 Python 3.12+ 和 [uv](https://docs.astral.sh/uv/)：
 
 ```bash
 uv sync --locked
-uv run pytest tests -q
+uv run pytest tests -q -m "not poster_browser"
 uv run ruff check skills tests
 ```
 
 固定浏览器用例按 Skill 集中在 [tests/browser/cases/](tests/browser/cases/README.zh-CN.md)，每个用例的配置、输入和验收文件放在一起。按指南准备浏览器后，用 `uv run python tests/browser/scripts/smoke.py` 执行全部用例，也可通过 `--skill chart-storytelling` 或 `--case story-ppt` 单独选择。这些检查不调用模型。
 
-### Skill 任务调试
+### Agent 测试
 
-使用 Codex、Claude Code 或其他兼容的成熟 Agent 执行[固定任务](cases/README.md)，也可以提供自己的提示词和输入。按[本地调试指南](docs/debugging.md)建立已忽略的 `.cache/skill-dev/<skill-name>/<run-name>/` 工作目录，保留产物、截图及可导出的日志。仓库不提供模型 API harness 或统一 Agent 执行器。
+在 Codex、Claude Code 等 Agent 中运行[固定任务](cases/README.md)，或使用自己的提示词和数据。产物、截图与日志保存在已忽略的本地工作目录中，具体见[本地调试指南](docs/debugging.md)。Agent 任务不在 CI 中运行。
 
-固定任务覆盖 chart-storytelling 与 person-poster；浏览器 smoke 覆盖故事 HTML/Web-PPT，以及人物海报的图表示例（含类别配色、标签边界及缺失值与真实零值区分）、带图表及无图表的 HTML-only 交付、无图表 PNG、祖先裁切拒绝与失败导出路径。密集海报图表用例明确预期600px阅读基线失败，仅验证API/导出行为，另有 Python 浏览器回归覆盖600px下的 DOM/图表文本。smoke 另覆盖受管理图表启动、展示绑定、未绑定文字、遮挡与粗排阅读失败。受限排版固定 Agent 任务检查失败处理；真实宿主结果单独记录，不代表已满足上架条件。editorial-magazine 和 life-chronicle 已有脚本回归，尚无固定任务或浏览器 smoke。任务完成后检查数据准确性、要求和实际交互，允许不同的正确视觉表达。Agent 任务不在 CI 中运行。
+固定任务目前覆盖 chart-storytelling、unit-data-storytelling 和 person-poster。浏览器 smoke 覆盖故事、Web-PPT 和人物海报，详细用例见[浏览器测试指南](tests/browser/cases/README.zh-CN.md)。editorial-magazine、life-chronicle 和 chart-assistant 已有脚本回归，本仓库尚未提供固定 Agent 任务或真实宿主浏览器 smoke。
 
-当前 Mac 宿主结果及未关闭限制见[人物海报验证记录](docs/validation/person-poster-2026-10-28.md)。
+生成结果仍需检查数据准确性、可读性和交互。自动化测试通过不代表 Agent 生成的作品质量合格。Person Poster 的测试结果及待解决问题见[验证记录](docs/validation/person-poster-2026-10-28.md)。
 
 ## 版本管理
 
-本仓库维护的 Skills 按整个仓库统一管理版本，每次正式发布使用 Git tag 标识包含 Skill 指令、参考资料、模板和脚本的版本快照。VChart 和 VTable Skill 的版本由各自仓库管理。
+本仓库的 Skills 使用统一版本号 `skills-vMAJOR.MINOR.PATCH`：补丁版本用于兼容修复，次版本用于新增 Skill 或能力，主版本用于不兼容变更。VChart 和 VTable Skill 使用各自仓库的版本。
 
-日常修改通过 Git commit 标识，不需要每次调整 Skill 都创建发布 tag。
+默认安装跟随 `main`。反馈问题或复现结果时，请记录安装的 tag 或 commit SHA。每个 [Release](https://github.com/VisActor/skills/releases) 提供各 Skill 的独立 ZIP，以及包含内容指纹的 `skills-manifest.json`，格式见[发布产物说明](docs/release-artifacts.md)。
 
-正式 Skills 版本使用 `skills-vMAJOR.MINOR.PATCH`：补丁版本用于兼容修复，次版本用于新增 Skill 或兼容能力，主版本用于移除、重命名或不兼容的使用方式调整。
-
-默认安装跟随 `main`，因此可能在正式发版前获取到变化。发布意图写在 `.github/release-plan.json`：面向 main 的 PR 自动预检，合并一个发生变化且非空的版本计划后，等待 main CI 通过再自动发布。`version: null` 或版本未变化时不发版。发布后保留计划文件，不自动清空，后续合并不会因此重复发布。具体操作见[发布流程](CONTRIBUTING.md#publishing-skills)，已发布版本见 [Releases](https://github.com/VisActor/skills/releases)。
-
-正式 Skills Release 附带 `skills-manifest.json` 和每个 Skill 的独立 ZIP。下游分发平台可通过清单里的内容指纹判断哪些 Skill 发生变化，无需让各 Skill 跟随仓库版本一起更新。具体格式见[发布产物接口](docs/release-artifacts.md)。
-
-反馈问题或复现结果时，请记录发布 tag 或 commit SHA；分支内容会随开发变化。VTable `1.26.8` 等依赖版本表示底层库的版本，不是 Skill 的发布版本。历史 VMind SDK 的 tag 保持不变，仍归属于原 SDK。
+维护者在 `.github/release-plan.json` 中填写新版本号。发布 PR 自动预检，审核合入 `main` 并通过 CI 后自动发布，详见[发布流程](CONTRIBUTING.md#publishing-skills)。
 
 ## VMind 历史版本
 

@@ -1,0 +1,147 @@
+{
+  "commonOption": {
+    "theme": "clarity-light",
+    "elements": [
+      {
+        "id": "box-samples",
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        },
+        "options": {
+          "chartType": "boxPlot",
+          "enableDataEdit": true,
+          "enableTypeChange": false,
+          "enableEditorTheme": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "样本",
+                "渠道",
+                "等待时长"
+              ],
+              "rows": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "data": [
+                {
+                  "样本": 1,
+                  "渠道": "A",
+                  "等待时长": 1
+                },
+                {
+                  "样本": 2,
+                  "渠道": "A",
+                  "等待时长": 2
+                },
+                {
+                  "样本": 3,
+                  "渠道": "A",
+                  "等待时长": 3
+                },
+                {
+                  "样本": 4,
+                  "渠道": "A",
+                  "等待时长": 4
+                },
+                {
+                  "样本": 5,
+                  "渠道": "A",
+                  "等待时长": 100
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number"
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "group": "渠道",
+              "value": "等待时长"
+            },
+            "statistics": {
+              "kind": "boxPlot",
+              "input": "samples",
+              "quartileMethod": "linear-r7",
+              "whiskerMethod": "tukey",
+              "whiskerMultiplier": 1.5
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "textType": "rich",
+                  "text": [
+                    {
+                      "text": "渠道等待时长样本分布",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "fill": "#0F172A",
+                      "lineHeight": 28
+                    },
+                    {
+                      "text": "\n单位：分钟",
+                      "fontSize": 12,
+                      "fill": "#64748B",
+                      "lineHeight": 18
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "title": {
+                    "visible": true,
+                    "text": "渠道"
+                  }
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "visible": true,
+                  "title": {
+                    "visible": true,
+                    "text": "等待时长（分钟）"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

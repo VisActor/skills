@@ -1,0 +1,270 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "actual-forecast-sales",
+        "type": "chart",
+        "options": {
+          "chartType": "line",
+          "config": {
+            "dataGroupSpec": {
+              "实际": {
+                "label": {
+                  "visible": false
+                },
+                "line": {
+                  "style": {
+                    "lineDash": [
+                      0
+                    ],
+                    "lineWidth": 3,
+                    "stroke": "#3370FF"
+                  },
+                  "visible": true
+                },
+                "point": {
+                  "style": {
+                    "fill": "#3370FF",
+                    "lineWidth": 2,
+                    "size": 8,
+                    "stroke": "#FFFFFF"
+                  },
+                  "visible": true
+                }
+              },
+              "预测": {
+                "label": {
+                  "visible": false
+                },
+                "line": {
+                  "style": {
+                    "lineDash": [
+                      8,
+                      6
+                    ],
+                    "lineWidth": 3,
+                    "stroke": "#3370FF"
+                  },
+                  "visible": true
+                },
+                "point": {
+                  "style": {
+                    "fill": "#3370FF",
+                    "lineWidth": 2,
+                    "size": 8,
+                    "stroke": "#FFFFFF"
+                  },
+                  "visible": true
+                }
+              }
+            },
+            "mappingSpec": {
+              "x": "月份",
+              "y": [
+                "实际",
+                "预测"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "spec": {
+                  "text": [
+                    {
+                      "fill": "#0F172A",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "lineHeight": 28,
+                      "text": "2026年1—6月销售额实际与预测"
+                    },
+                    {
+                      "text": "\n实线：实际（截至3月）；虚线：已给定预测（4—6月）",
+                      "fontSize": 12,
+                      "fontWeight": "normal",
+                      "lineHeight": 18,
+                      "fill": "#64748B"
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  },
+                  "textType": "rich",
+                  "visible": true
+                },
+                "specIndex": 0,
+                "specKey": "title"
+              },
+              {
+                "id": "axis-left",
+                "spec": {
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "style": {
+                      "lineWidth": 1,
+                      "stroke": "#E2E8F0"
+                    },
+                    "visible": true
+                  },
+                  "label": {
+                    "visible": true
+                  },
+                  "orient": "left",
+                  "tick": {
+                    "visible": false
+                  },
+                  "title": {
+                    "text": "销售额",
+                    "visible": true
+                  },
+                  "type": "linear"
+                },
+                "specIndex": 0,
+                "specKey": "axes"
+              },
+              {
+                "id": "axis-bottom",
+                "spec": {
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "orient": "bottom",
+                  "tick": {
+                    "visible": false
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "type": "band",
+                  "sampling": false,
+                  "label": {
+                    "visible": true,
+                    "autoHide": true,
+                    "autoRotate": false,
+                    "overlapStrategy": "autoHide",
+                    "style": {
+                      "angle": -0.7853981633974483
+                    }
+                  }
+                },
+                "specIndex": 1,
+                "specKey": "axes"
+              },
+              {
+                "id": "legend-discrete",
+                "spec": {
+                  "visible": false
+                },
+                "specIndex": 0,
+                "specKey": "legends"
+              },
+              {
+                "id": "series-0",
+                "specIndex": 0,
+                "specKey": "series",
+                "spec": {
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "id": "series-1",
+                "specIndex": 1,
+                "specKey": "series",
+                "spec": {
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                }
+              }
+            ]
+          },
+          "data": {
+            "type": "standard",
+            "value": {
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataFormat": {
+                    "separator": true
+                  },
+                  "dataType": "number"
+                },
+                {
+                  "dataFormat": {
+                    "separator": true
+                  },
+                  "dataType": "number"
+                }
+              ],
+              "columns": [
+                "月份",
+                "实际",
+                "预测"
+              ],
+              "data": [
+                {
+                  "月份": "2026-01",
+                  "实际": 100,
+                  "预测": null
+                },
+                {
+                  "月份": "2026-02",
+                  "实际": 110,
+                  "预测": null
+                },
+                {
+                  "月份": "2026-03",
+                  "实际": 105,
+                  "预测": 105
+                },
+                {
+                  "月份": "2026-04",
+                  "实际": null,
+                  "预测": 120
+                },
+                {
+                  "月份": "2026-05",
+                  "实际": null,
+                  "预测": 125
+                },
+                {
+                  "月份": "2026-06",
+                  "实际": null,
+                  "预测": 130
+                }
+              ],
+              "rows": [
+                "2026-01",
+                "2026-02",
+                "2026-03",
+                "2026-04",
+                "2026-05",
+                "2026-06"
+              ]
+            }
+          },
+          "enableDataEdit": true,
+          "enableEditorTheme": true,
+          "enableTypeChange": true,
+          "zIndex": 0
+        },
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 540
+        }
+      }
+    ],
+    "theme": "clarity-light"
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

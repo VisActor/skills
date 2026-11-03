@@ -1,0 +1,61 @@
+[
+  {
+    "id": "layer-1",
+    "type": "chart",
+    "theme": "chart-assistant-consulting-base",
+    "canvasStyle": {
+      "themeMode": "light",
+      "backgroundColor": "#FFFFFF"
+    },
+    "elements": [
+      {
+        "id": "chart-1",
+        "type": "chart",
+        "rect": { "x": 0, "y": 0, "width": 640, "height": 360 },
+        "anchor": { "x": 0, "y": 0 },
+        "groupLevel": 0,
+        "attribute": {
+          "temp": "bar",
+          "templateVersion": "v2.0",
+          "data": {
+            "type": "standard",
+            "value": "{\"columns\":[\"月份\",\"产品A\",\"产品B\"],\"rows\":[\"1月\",\"2月\"],\"data\":[{\"月份\":\"1月\",\"产品A\":120,\"产品B\":90},{\"月份\":\"2月\",\"产品A\":140,\"产品B\":110}]}"
+          },
+          "mappingSpec": {
+            "x": "月份",
+            "y": ["产品A", "产品B"]
+          },
+          "layout": {
+            "viewBox": { "x": 48, "y": 24, "width": 572, "height": 300 },
+            "data": [
+              { "id": "axis-left", "specKey": "axes", "specIndex": 0, "layout": { "x": { "offset": 16 }, "y": { "offset": 24 }, "width": { "offset": 32 }, "height": { "offset": 300 } } },
+              { "id": "axis-bottom", "specKey": "axes", "specIndex": 1, "layout": { "x": { "offset": 48 }, "y": { "offset": 324 }, "width": { "offset": 572 }, "height": { "offset": 28 } } },
+              { "id": "region-0", "specKey": "region", "specIndex": 0, "layout": { "x": { "offset": 48 }, "y": { "offset": 24 }, "width": { "offset": 572 }, "height": { "offset": 300 } } }
+            ]
+          },
+          "color": ["#2563EB", "#94A3B8"],
+          "modelSpec": [
+            {
+              "id": "series-sales",
+              "specKey": "series",
+              "specIndex": 0,
+              "spec": {
+                "label": { "visible": true, "position": "inside" },
+                "seriesLabel": { "visible": true },
+                "totalLabel": { "visible": true }
+              }
+            }
+          ],
+          "barLink": {
+            "enable": true,
+            "spec": {
+              "linkType": "total",
+              "label": { "visible": false }
+            }
+          },
+          "zIndex": 0
+        }
+      }
+    ]
+  }
+]

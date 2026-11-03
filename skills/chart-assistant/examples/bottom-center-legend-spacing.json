@@ -1,0 +1,26 @@
+{
+  "kind": "materialized-model-spec-patch",
+  "precondition": "新建图需要离散图例且用户未指定位置；内置模板的 legend-discrete identity 已确认。编辑已有图时仅在用户要求调整图例布局时应用。",
+  "modelSpec": [
+    {
+      "id": "legend-discrete",
+      "specKey": "legends",
+      "specIndex": 0,
+      "spec": {
+        "orient": "bottom",
+        "position": "middle",
+        "padding": [
+          16,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "notes": [
+    "padding 顺序为 top/right/bottom/left",
+    "图例由布局系统放在绘图区下方并居中，不生成 x/y/offset；居中值为 middle，不是 center。",
+    "item.spaceRow/spaceCol 只控制图例项之间的间距"
+  ]
+}

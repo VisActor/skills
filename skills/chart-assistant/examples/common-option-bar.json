@@ -1,0 +1,28 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "chart-sales",
+        "type": "chart",
+        "position": { "x": 0, "y": 0, "width": 640, "height": 360 },
+        "options": {
+          "chartType": "bar",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["月份", "产品A", "产品B"],
+              "rows": ["1月", "2月"],
+              "data": [
+                { "月份": "1月", "产品A": 120, "产品B": 90 },
+                { "月份": "2月", "产品A": 140, "产品B": 110 }
+              ]
+            }
+          },
+          "enableDataEdit": true,
+          "enableTypeChange": true
+        }
+      }
+    ]
+  },
+  "note": "从零创建时先物化；不要在这里猜 modelSpec id/specIndex。"
+}

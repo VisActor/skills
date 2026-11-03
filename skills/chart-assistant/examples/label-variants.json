@@ -1,0 +1,76 @@
+{
+  "kind": "materialized-label-variant-patches",
+  "note": "每个 case 属于不同图表；identity、groupKey 和 styleMap key 均来自各自当前 runtime，不能合并照抄到同一张图。",
+  "cases": [
+    {
+      "name": "stack-total-label",
+      "modelSpec": [
+        {
+          "id": "series-stack",
+          "specKey": "series",
+          "specIndex": 0,
+          "spec": {
+            "totalLabel": {
+              "visible": true,
+              "formatConfig": { "content": ["value"], "fixed": 0 },
+              "styleMap": {
+                "totalLabel:0:2月": {
+                  "text": "230（峰值）",
+                  "style": { "fill": "#2251FF", "fontWeight": 600 }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "pie-group-inside-outside-label",
+      "dataGroupSpec": {
+        "产品A": {
+          "outsideLabel": {
+            "visible": true,
+            "position": "outside",
+            "formatConfig": { "content": ["dimension", "percentage"], "fixed": 0 },
+            "line": { "visible": true, "style": { "stroke": "#2251FF" } }
+          },
+          "insiderLabel": { "visible": false, "position": "inside" }
+        }
+      }
+    },
+    {
+      "name": "funnel-group-labels",
+      "dataGroupSpec": {
+        "到达": {
+          "outerLabel": {
+            "visible": true,
+            "formatConfig": { "content": ["dimension", "value"] }
+          },
+          "transformLabel": {
+            "visible": true,
+            "formatConfig": { "content": ["rate"], "fixed": 1 }
+          }
+        }
+      }
+    },
+    {
+      "name": "hierarchy-non-leaf-label",
+      "dataGroupSpec": {
+        "重点市场": {
+          "nonLeafLabel": { "visible": true, "position": "top" }
+        }
+      }
+    },
+    {
+      "name": "mekko-category-label",
+      "dataGroupSpec": {
+        "重点市场": {
+          "mekkoLabel": {
+            "visible": true,
+            "formatConfig": { "content": ["dimension", "percentage"], "fixed": 0 }
+          }
+        }
+      }
+    }
+  ]
+}

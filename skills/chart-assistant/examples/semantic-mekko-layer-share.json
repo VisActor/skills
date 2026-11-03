@@ -1,0 +1,136 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "chart-1",
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 720,
+          "height": 420
+        },
+        "options": {
+          "chartType": "mekkoPercent",
+          "enableDataEdit": true,
+          "enableEditorTheme": true,
+          "enableTypeChange": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "Type",
+                "宽度",
+                "Labor",
+                "Material"
+              ],
+              "rows": [
+                "BU 1",
+                "BU 2",
+                "BU 3",
+                "BU 4"
+              ],
+              "data": [
+                {
+                  "Type": "BU 1",
+                  "宽度": 11,
+                  "Labor": 32,
+                  "Material": 42
+                },
+                {
+                  "Type": "BU 2",
+                  "宽度": 50,
+                  "Labor": 27,
+                  "Material": 37
+                },
+                {
+                  "Type": "BU 3",
+                  "宽度": 120,
+                  "Labor": 20,
+                  "Material": 24
+                },
+                {
+                  "Type": "BU 4",
+                  "宽度": 40,
+                  "Labor": 8,
+                  "Material": 15
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "bandWidth": "宽度",
+              "x": "Type",
+              "y": [
+                "Labor",
+                "Material"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "spec": {
+                  "text": "BU 2 的 Labor 占比下降 1.06 个百分点",
+                  "visible": true
+                },
+                "specIndex": 0,
+                "specKey": "title"
+              }
+            ],
+            "marker": {
+              "markLine": [
+                {
+                  "id": "labor-share-diff",
+                  "name": "hierarchy-diff-line",
+                  "target": {
+                    "from": {
+                      "boundary": "start",
+                      "match": {
+                        "Type": "BU 1"
+                      },
+                      "metric": "Labor"
+                    },
+                    "to": {
+                      "boundary": "start",
+                      "match": {
+                        "Type": "BU 2"
+                      },
+                      "metric": "Labor"
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": [
+                        "layerShareDiff"
+                      ],
+                      "fixed": 2
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

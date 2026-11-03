@@ -1,0 +1,27 @@
+{
+  "kind": "minimal-render-marker-example",
+  "precondition": "仅编辑已有 coordinates 或用户明确要求这种低层定位时使用；新建业务标注按 references/semantic-marker-anchors.md 生成 target。series-sales、两个 datum 和月份 domain 均来自当前已物化的非堆叠竖向图；数值轴未 inverse",
+  "intent": {
+    "type": "growth-line",
+    "start": { "businessKey": { "月份": "1月" }, "seriesKey": "销售额" },
+    "end": { "businessKey": { "月份": "3月" }, "seriesKey": "销售额" },
+    "format": "CAGR"
+  },
+  "minimalRenderMarker": {
+    "id": "2b85bbcb-d5de-4f81-bb11-d59bc7584b5d",
+    "name": "growth-line",
+    "coordinates": [
+      { "月份": "1月", "销售额": 100, "refRelativeSeriesId": "series-sales" },
+      { "月份": "3月", "销售额": 121, "refRelativeSeriesId": "series-sales" }
+    ],
+    "line": { "style": { "lineDash": [0] } },
+    "label": {
+      "visible": true,
+      "position": "middle",
+      "text": "+10.0% CAGR"
+    }
+  },
+  "stackedBoundary": "堆叠、百分比和瀑布图不能从原始两行数据照此复制；只有能明确计算累计 anchorValue 与业务 metricValue 时才能生成。",
+  "pixelBoundary": "coordinates 仍是数据记录；最终像素由 VChart series、axis scale 与 region layout 计算。",
+  "agentBoundary": "此片段仅说明旧 coordinates 结构，不是完整保存态。编辑时保留原配置中的 metadata；本例不能作为删除字段的白名单，拖拽和格式编辑仍需目标卡片验证。"
+}

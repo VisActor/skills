@@ -1,0 +1,6 @@
+{
+  "url": "https://aeolus.example.internal/chart-assistant/<query>",
+  "autoSync": true,
+  "option": { "loadContribute": "view" },
+  "note": "record 写入时需要 JSON.stringify；URL 直接由风神插件解析并同步既有图表，不拉取 rows 或重建内置图。保留实际 requestUrl/chartType 后再判断同步和编辑能力。"
+}
