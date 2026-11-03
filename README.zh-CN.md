@@ -172,8 +172,6 @@ npx skills add ./skills/person-poster
 
 ### 回归测试
 
-unit-data-storytelling 已有模块、预览工具、冻结输入完整性与独立安装的确定性检查。[三个示例](examples/README.md#unit-data-storytelling)分别讲 NBA 球员身高、香港夏夜气温和《我的世界》多人生存服。每篇都附有完整作品、复作提示词和输入数据。尚未注册固定浏览器 smoke。维护时参阅[按范围检查](CONTRIBUTING.md#select-checks-by-scope)和[维护上下文](docs/unit-data-storytelling/context-map.md)。
-
 Python 维护环境要求 Python 3.12+ 和 [uv](https://docs.astral.sh/uv/)：
 
 ```bash

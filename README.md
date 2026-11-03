@@ -173,8 +173,6 @@ Alternatively, copy the complete Skill directory into your agent's skill directo
 
 ### Regression tests
 
-Unit data-storytelling has deterministic module, preview, snapshot-integrity and independent-installation checks. The [three examples](examples/README.md#unit-data-storytelling) cover NBA player heights, Hong Kong summer nights and life on a multiplayer Minecraft server. Each includes the finished story, its prompt and the source data for a fresh run. No fixed browser smoke is registered yet. See the [scoped checks](CONTRIBUTING.md#select-checks-by-scope) and [maintenance context](docs/unit-data-storytelling/context-map.md).
-
 The Python maintenance environment requires Python 3.12+ and [uv](https://docs.astral.sh/uv/):
 
 ```bash
