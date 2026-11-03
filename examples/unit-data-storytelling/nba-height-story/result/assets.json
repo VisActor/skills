@@ -1,0 +1,53 @@
+[
+  {
+    "file": "assets/curry.png",
+    "name": "Stephen Curry",
+    "url": "https://cdn.nba.com/headshots/nba/latest/1040x760/201939.png",
+    "source": "NBA official player profile headshot",
+    "retrieved": "2026-10-13",
+    "use": "Identity only; current portrait, not a historical season image",
+    "sha256": "01c14a7d830f81f08aca9ada5c7b7972cb50b9705868d49356d5e5ddb20af3de",
+    "bytes": 175795
+  },
+  {
+    "file": "assets/green.png",
+    "name": "Draymond Green",
+    "url": "https://cdn.nba.com/headshots/nba/latest/1040x760/203110.png",
+    "source": "NBA official player profile headshot",
+    "retrieved": "2026-10-13",
+    "use": "Identity only; current portrait, not a historical season image",
+    "sha256": "daedfe20f0eea79a10dde269c4fdbcd7b4814d217c97e5972c30b3999bf37ca6",
+    "bytes": 187923
+  },
+  {
+    "file": "assets/jokic.png",
+    "name": "Nikola Jokic",
+    "url": "https://cdn.nba.com/headshots/nba/latest/1040x760/203999.png",
+    "source": "NBA official player profile headshot",
+    "retrieved": "2026-10-13",
+    "use": "Identity only; current portrait, not a historical season image",
+    "sha256": "06b69cfb9bb438877b1523cf81b53777802412f856b8d9bdf71cdfc83e1168be",
+    "bytes": 192137
+  },
+  {
+    "file": "assets/shai.png",
+    "name": "Shai Gilgeous-Alexander",
+    "url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628983.png",
+    "source": "NBA official player profile headshot",
+    "retrieved": "2026-10-13",
+    "use": "Identity only; current portrait, not a historical season image",
+    "sha256": "0fd757aec41c46361dd608a89a0513c2d135b53390710d2f2a8271ea93d283ac",
+    "bytes": 171473
+  },
+  {
+    "file": "assets/nba-logo.svg",
+    "name": "NBA logoman vector",
+    "url": "https://cdn.nba.com/logos/leagues/logo-nba.svg",
+    "source": "NBA official website navigation, inspected 2026-10-13",
+    "retrieved": "2026-10-13",
+    "use": "Local editorial cover: player silhouette sampled into real player-position units; red/blue fields are decorative and disappear before analysis. No NBA endorsement is implied.",
+    "derived": "logo-points.mjs",
+    "sha256": "1d36997ffe2a5bc436b895cc38c3117f02b03c947306ecc54b0f719e8800828a",
+    "bytes": 2719
+  }
+]

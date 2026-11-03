@@ -8,6 +8,30 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_copied_unit_story_resolves_examples_without_source_checkout(tmp_path):
+    installed = tmp_path / "unit story skill"
+    shutil.copytree(ROOT / "skills/unit-data-storytelling", installed)
+    for entry in ("examples/index.html", "examples/reading.html"):
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(installed / "scripts/preview.py"),
+                "audit",
+                str(installed / "assets"),
+                "--entry",
+                entry,
+            ],
+            cwd=tmp_path,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        report = json.loads(result.stdout)
+        assert report["errors"] == []
+        assert report["external"] == []
+        assert entry in report["files"]
+
+
 def test_browser_lockfile_uses_public_npm_registry():
     lock = json.loads((ROOT / "tests/browser/package-lock.json").read_text())
     resolved = [

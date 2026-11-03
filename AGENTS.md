@@ -3,12 +3,12 @@
 - Follow [the contribution guide](CONTRIBUTING.md) for the contribution workflow, directory conventions and checks. Use [the publishing guide](docs/publishing.md) when preparing or recovering a release.
 - Use `main` as the default, user-facing stable branch and `develop` for day-to-day maintenance. For a release, create a `codex/release-<version>` branch from the latest `origin/develop`, add the release plan and notes there, and open one PR directly to `main`. Start new contribution branches from the latest `origin/develop` and target PRs to `develop`.
 - Runtime Skills live in `skills/<skill-name>/`, with a lowercase hyphenated directory matching the `SKILL.md` frontmatter name. Each Skill must work when copied independently without sibling Skill or maintenance-directory imports.
-- Keep tests, fixed Agent tasks and generated reports outside Skill directories. Put Skill-specific Python regressions under `tests/<skill_name>/` (hyphens become underscores); shared tooling/packaging checks and current Node.js integrations live at the test root.
+- Keep tests, fixed Agent tasks and generated reports outside Skill directories. Put Skill-specific regressions under `tests/<skill_name>/` (hyphens become underscores); shared tooling, packaging and integration checks live at the test root.
 - Keep both root READMEs aligned with the maintained Skills, install commands and runtime requirements. Document externally maintained Skills as upstream links rather than copying them here.
 - Chart Assistant runtime updates are coordinated by its maintainers; discuss behavior changes in a GitHub issue before editing the distributed copy. Keep public documentation focused on installation, usage and contribution requirements; do not include private repository identities, internal source revisions, commands or deployment-channel details.
 - Document actual fixed-task and browser-smoke coverage; installing a Skill does not imply it has either. Use mature agents for task execution; do not add a model API harness or host-specific batch runners.
 - Maintain fixed browser smoke cases under `tests/browser/cases/<skill>/<case>/`, with configuration, inputs and expectations together. Browser scripts and dependencies live under `tests/browser/`; do not embed case-specific inputs in the runner.
-- Keep fixed Agent tasks under `cases/<skill-name>/<case-name>/`, with `prompt.md`, `inputs/`, input hashes in `fixtures.json` and a README containing acceptance points. Follow [the case guide](cases/README.md); allow multiple correct outputs instead of requiring page or pixel equality.
+- Create a fixed Agent task under `cases/<skill-name>/<case-name>/` when it needs separately maintained acceptance criteria. Include `prompt.md`, `inputs/`, input hashes in `fixtures.json` and the criteria in its README. Follow [the case guide](cases/README.md); allow multiple correct outputs instead of requiring page or pixel equality.
 - Preserve user changes. Do not commit or publish unless requested.
 - Select checks by change scope using [the verification guide](CONTRIBUTING.md#verify-your-change). Documentation-only changes need link, formatting and diff checks; do not run model tasks or the full test suite by default. Use `uv run pytest` and `uv run ruff check` for affected Python paths. The broad non-browser command is `uv run pytest tests -q -m "not poster_browser"`; run relevant Node.js and browser checks separately when their behavior changes.
 - Test stable behavior; do not snapshot large instruction documents. Generalize Skill fixes from observed failures; do not add runtime rules keyed to a case id, exact fixture, prompt string or evaluation path.
@@ -18,10 +18,11 @@
 
 ## Local development workspaces
 
+- When maintaining `unit-data-storytelling`, start with [its maintenance handoff](docs/unit-data-storytelling/context-map.md).
 - Use one ignored `.cache/skill-dev/<skill-name>/<run-name>/` directory per experiment. Follow [local debugging](docs/debugging.md); `.cache/` is already ignored.
 - Keep copied inputs in `inputs/`, generated files in `outputs/`, screenshots in `screenshots/` and available session/tool logs in `logs/`. Record the Skill revision or local diff, host/model, checks and outcome in `notes.md`; note logs the host cannot export. Never put credentials in shared evidence.
 - Edit source Skills under `skills/`, then refresh the installed copy before retesting. Copy fixed inputs into the run workspace; do not modify originals during a run. Keep acceptance guidance outside the generation workspace.
-- Promote stable tasks to `cases/`, deterministic regressions to `tests/`, and reviewed showcase results to `examples/`. Keep drafts, raw logs and caches local.
+- For a fresh run of a published example, reuse its prompt and inputs from `examples/`. Keep deterministic regressions in `tests/` and drafts, raw logs and caches local.
 - Clean only directories owned by the current task. Do not delete another session's files or historical evidence automatically.
 
 ## Showcase examples

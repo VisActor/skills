@@ -9,6 +9,16 @@
 | [全球 CO₂ 数据故事](chart-storytelling/global-co2/README.md) | 暗色滚动叙事、排放与温升视角、分步图表 | OWID 数据；仅保留部分输入，无法完整重新生成 |
 | [Las Vegas Web-PPT](chart-storytelling/las-vegas-web-ppt/README.md) | 14 张网页幻灯片、商业分析图表、章节转场 | 模拟演示数据，不是真实赛事经营结果 |
 
+## unit-data-storytelling
+
+| 案例 | 范围与展示能力 | 输入说明 |
+| --- | --- | --- |
+| [天黑了，还是热。](unit-data-storytelling/hong-kong-after-dark/README.md) | 完整作品；街景引入，日期单元沿日历、历史、分布连续重组 | HKO 1961–2025 逐日气温；街景有独立署名与许可 |
+| [身高的分量](unit-data-storytelling/nba-height-story/README.md) | 完整作品；点阵标志、年代分布、分钟权重、明星与探索 | NBA 历史快照；标志、头像与数据许可分开说明 |
+| [翅膀先到了。](unit-data-storytelling/hydro-world-paths/README.md) | 跟随同一批玩家比较探险与播种的先后，用两条人数尺读出飞行与建造的最少重叠人数 | Hydro Vanilla SMP 的 1,117 个匿名账号，进度路径与累计行为分别统计 |
+
+每篇都附有提示词、输入和完整网页。想独立复作时，将该例的 `prompt.md` 和 `inputs/` 交给安装了此 Skill 的 Agent，完成后再打开 `result/` 对照。
+
 ## editorial-magazine
 
 | 案例 | 展示能力 | 输入说明 |
