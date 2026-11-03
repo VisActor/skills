@@ -1,0 +1,16 @@
+column,title,description,unit,source
+country,Country,Geographic location.,,Our World in Data - Regions (2024)
+year,Year,Year of observation.,,Our World in Data - Regions (2024)
+iso_code,ISO code,ISO 3166-1 alpha-3 three-letter country codes.,,International Organization for Standardization - Regions (2023)
+population,Population,"Population by country, available from 10,000 BCE to 2100, based on data and estimates from different sources.",people,Population based on various sources (2024) [https://ourworldindata.org/population-sources]
+cement_co2,Annual CO₂ emissions from cement,"Annual emissions of carbon dioxide (CO₂) from cement, measured in million tonnes.",million tonnes (Mt),Global Carbon Budget (2025) [https://globalcarbonbudget.org/]
+co2,Annual CO₂ emissions,"Annual total emissions of carbon dioxide (CO₂), excluding land-use change, measured in million tonnes.",million tonnes (Mt),Global Carbon Budget (2025) [https://globalcarbonbudget.org/]
+co2_per_capita,CO₂ emissions per capita,"Carbon dioxide (CO₂) emissions from burning fossil fuels and industrial processes. This includes emissions from transport, electricity generation, and heating, but not land-use change.",tonnes per person (t/person),Global Carbon Budget (2025) [https://globalcarbonbudget.org/]; Population based on various sources (2024) [https://ourworldindata.org/population-sources]
+coal_co2,Annual CO₂ emissions from coal,"Annual emissions of carbon dioxide (CO₂) from coal, measured in million tonnes.",million tonnes (Mt),Global Carbon Budget (2025) [https://globalcarbonbudget.org/]
+cumulative_co2,Cumulative CO₂ emissions,"Total cumulative emissions of carbon dioxide (CO₂), excluding land-use change, since the first year of available data, measured in million tonnes.",million tonnes (Mt),Global Carbon Budget (2025) [https://globalcarbonbudget.org/]
+flaring_co2,Annual CO₂ emissions from flaring,"Annual emissions of carbon dioxide (CO₂) from flaring, measured in million tonnes.",million tonnes (Mt),Global Carbon Budget (2025) [https://globalcarbonbudget.org/]
+gas_co2,Annual CO₂ emissions from gas,"Annual emissions of carbon dioxide (CO₂) from gas, measured in million tonnes.",million tonnes (Mt),Global Carbon Budget (2025) [https://globalcarbonbudget.org/]
+oil_co2,Annual CO₂ emissions from oil,"Annual emissions of carbon dioxide (CO₂) from oil, measured in million tonnes.",million tonnes (Mt),Global Carbon Budget (2025) [https://globalcarbonbudget.org/]
+other_industry_co2,Annual CO₂ emissions from other industry,"Annual emissions of carbon dioxide (CO₂) from other industry sources, measured in million tonnes.",million tonnes (Mt),Global Carbon Budget (2025) [https://globalcarbonbudget.org/]
+share_global_co2,Share of global annual CO₂ emissions,"Annual total emissions of carbon dioxide (CO₂), excluding land-use change, measured as a percentage of global emissions of CO₂ in the same year.",%,Global Carbon Budget (2025) [https://globalcarbonbudget.org/]
+share_global_cumulative_co2,Share of global cumulative CO₂ emissions,"Total cumulative emissions of carbon dioxide (CO₂), excluding land-use change, since the first year of available data, measured as a percentage of global total cumulative emissions of CO₂.",%,Global Carbon Budget (2025) [https://globalcarbonbudget.org/]

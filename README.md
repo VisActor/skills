@@ -12,6 +12,7 @@ VisActor Skills provides chart, dashboard, data story and poster tools for Claud
 | --- | --- |
 | [chart-assistant](skills/chart-assistant/SKILL.md) | Business charts, MBB analysis annotations, editable Feishu cards, transparent PNGs and document image insertion |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | Analysis reports, business briefings and data features, with chart scrollytelling and annotations, delivered as HTML stories or Web-PPT |
+| [creative-data-storytelling](skills/creative-data-storytelling/SKILL.md) | Public-facing interactive data stories with continuous full-bleed stages, creative visual encoding, relationship-driven animation and optional exploration; delivered as static HTML and assets |
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | Magazine-style visual posts (杂志风图文): HTML / PNG series for news, biographies, outfits, travel, chronological stories and explainers |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | Biography posters with photo walls, center grids, photo rings and editable timelines |
 | [person-poster](skills/person-poster/SKILL.md) | Person-led data posters with native VChart, editable HTML and high-resolution PNG |
@@ -58,6 +59,7 @@ Run the command for the Skill you need in your project directory:
 ```bash
 npx skills add VisActor/skills --skill chart-assistant
 npx skills add VisActor/skills --skill chart-storytelling
+npx skills add VisActor/skills --skill creative-data-storytelling
 npx skills add VisActor/skills --skill editorial-magazine
 npx skills add VisActor/skills --skill life-chronicle
 npx skills add VisActor/skills --skill person-poster
@@ -111,6 +113,7 @@ To update a manually imported Skill, download its package from a newer Release a
 | --- | --- |
 | chart-assistant | Node.js 18+; HTTPS access for PNGs; authorized host tools or lark-cli for document insertion; Chart Assistant ISV app for editable cards. DSL generation/validation needs no Feishu authorization or local renderer |
 | chart-storytelling | Python 3.10+ (standard library) and Node.js for JavaScript checks; pinned VSeed, VChart, VTable and GSAP load from unpkg |
+| creative-data-storytelling | Desktop browser with native JavaScript modules; Python 3.9+ (standard library) for the bundled preview server, Node.js for JavaScript checks; optional libraries and fonts may use public CDNs |
 | editorial-magazine | Python 3.10+, dependencies in its [requirements.txt](skills/editorial-magazine/requirements.txt), and Chromium/Chrome for PNG export; font CDN with system fallbacks |
 | life-chronicle | Python 3.10+, dependencies in its [requirements.txt](skills/life-chronicle/requirements.txt), and Chromium/Chrome for PNG export; pinned VInfo and font CDN, see [environment setup](skills/life-chronicle/references/environment.md) |
 | person-poster | Python 3.10+, Pillow, Python Playwright/Chromium; public VChart 2.1.7 CDN or a sourced local copy; see [requirements.txt](skills/person-poster/scripts/requirements.txt) and [environment setup](skills/person-poster/references/environment.md) for POSIX/PowerShell installation and capability limits |
@@ -124,6 +127,7 @@ Person Poster checks data bindings, source comparisons and image usage records b
 After installation, ask your agent to use the selected Skill with your data. For example:
 
 - “Use chart-storytelling to explain retention changes in this CSV to our growth lead as a shareable HTML story.”
+- “Use creative-data-storytelling to explain how these historical measurements changed, keeping earlier evidence visible as the story develops.”
 - “Use editorial-magazine to turn this article and its sources into an editable HTML and PNG image series.”
 - “Use life-chronicle to create a biography poster from these sourced events and photos, with editable timeline text.”
 
@@ -134,6 +138,8 @@ Generated JavaScript/HTML is executable code. Preview your own or reviewed artif
 ## Examples
 
 The [example gallery](examples/README.md) includes data stories, Web-PPT, magazine layouts and posters, with prompts, inputs and results.
+
+Creative Data Storytelling examples include [historical Chinese measures](examples/creative-data-storytelling/chi-history/README.md), [iPhone prices](examples/creative-data-storytelling/iphone-price-story/README.md) and [annual and cumulative CO₂ emissions](examples/creative-data-storytelling/co2-emissions-history/README.md). Each includes a runnable page, inputs, a prompt and a preview.
 
 ## Development and maintenance
 
@@ -161,6 +167,7 @@ From the root of your local repository, install the working copy of a Skill:
 
 ```bash
 npx skills add ./skills/chart-storytelling
+npx skills add ./skills/creative-data-storytelling
 npx skills add ./skills/editorial-magazine
 npx skills add ./skills/life-chronicle
 npx skills add ./skills/person-poster
@@ -184,7 +191,7 @@ Fixed browser cases live under [tests/browser/cases/](tests/browser/cases/README
 
 Run a [fixed task](cases/README.md) or your own prompt and data in Codex, Claude Code or another agent. Keep outputs, screenshots and logs in an ignored local workspace; see [local debugging](docs/debugging.md). Agent tasks do not run in CI.
 
-Fixed tasks currently cover chart-storytelling and person-poster. Browser smoke covers stories, Web-PPT and person posters; detailed cases are in the [browser test guide](tests/browser/cases/README.md). Editorial-magazine, life-chronicle and chart-assistant have script regressions but no fixed Agent tasks or real-host browser smoke in this repository.
+Fixed tasks currently cover chart-storytelling and person-poster. Browser smoke covers stories, Web-PPT and person posters; detailed cases are in the [browser test guide](tests/browser/cases/README.md). Editorial-magazine, life-chronicle and chart-assistant have script regressions but no fixed Agent tasks or real-host browser smoke in this repository. Creative-data-storytelling has deterministic runtime, preview and copied-installation regressions; its bundled mechanism demonstrations are implementation references. Fixed Agent tasks and automated browser smoke for this Skill are not yet included here.
 
 Check generated results for data accuracy, readability and interactions. Automated tests do not establish the quality of an Agent-generated work. Person Poster test results and remaining limitations are recorded in the [validation notes](docs/validation/person-poster-2026-10-28.md).
 

@@ -12,6 +12,7 @@ VisActor Skills 提供图表、看板、数据故事和海报相关的技能，�
 | --- | --- |
 | [chart-assistant](skills/chart-assistant/SKILL.md) | 商务图表、MBB 分析标注、可编辑飞书卡片、透明 PNG 和文档插图 |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | 分析报告、业务简报与数据专题，结合图表滚动叙事与标注，输出 HTML 数据故事或 Web-PPT |
+| [creative-data-storytelling](skills/creative-data-storytelling/SKILL.md) | 面向公众的交互式数据故事，结合持续演进的全出血舞台、创意视觉编码、关系动画与可选探索，交付静态 HTML 和资源 |
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | 杂志风图文：新闻、生平、穿搭、旅行、时序故事与科普，导出 HTML / PNG |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | 人物生平海报：照片墙、中心网格、照片环与可编辑时间线 |
 | [person-poster](skills/person-poster/SKILL.md) | 人物主导的数据信息图，原生 VChart 图表、可编辑 HTML 与高清 PNG |
@@ -57,6 +58,7 @@ https://github.com/VisActor/skills/tree/main/skills/chart-storytelling
 ```bash
 npx skills add VisActor/skills --skill chart-assistant
 npx skills add VisActor/skills --skill chart-storytelling
+npx skills add VisActor/skills --skill creative-data-storytelling
 npx skills add VisActor/skills --skill editorial-magazine
 npx skills add VisActor/skills --skill life-chronicle
 npx skills add VisActor/skills --skill person-poster
@@ -110,6 +112,7 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 | --- | --- |
 | chart-assistant | Node.js 18+；PNG 需 HTTPS 网络；飞书插图需已授权的宿主工具或 lark-cli；可编辑卡片另需图表助手 ISV 应用。仅生成/校验 DSL 不要求飞书授权，无需本地图表渲染依赖 |
 | chart-storytelling | Python 3.10+（标准库）和 Node.js（校验 JavaScript）；从 unpkg 加载固定版本的 VSeed、VChart、VTable 与 GSAP |
+| creative-data-storytelling | 支持原生 JavaScript 模块的桌面浏览器；随附预览服务需要 Python 3.9+（标准库），JavaScript 校验需要 Node.js；按需使用的库和字体可从公开 CDN 加载 |
 | editorial-magazine | Python 3.10+、其 [requirements.txt](skills/editorial-magazine/requirements.txt) 中的依赖，以及用于导出 PNG 的 Chromium/Chrome；字体从 CDN 加载，支持系统回退 |
 | life-chronicle | Python 3.10+、其 [requirements.txt](skills/life-chronicle/requirements.txt) 中的依赖，以及用于导出 PNG 的 Chromium/Chrome；固定版本的 VInfo 与字体 CDN，详见[环境说明](skills/life-chronicle/references/environment.md) |
 | person-poster | Python 3.10+、Pillow、Python Playwright/Chromium；公开 VChart 2.1.7 CDN 或有来源记录的同版本本地副本，见 [requirements.txt](skills/person-poster/scripts/requirements.txt) 和含 POSIX/PowerShell 安装及能力边界的[环境说明](skills/person-poster/references/environment.md) |
@@ -123,6 +126,7 @@ Person Poster 在交付前检查数据绑定、来源比对和图片使用记录
 安装后，在 Agent 中指定所需 Skill，并提供你的数据。例如：
 
 - “使用 chart-storytelling，向增长负责人解释这个 CSV 的留存变化，生成可分享的 HTML 故事。”
+- “使用 creative-data-storytelling，解释这些历史尺度如何变化，推进故事时保留可比较的早期证据。”
 - “使用 editorial-magazine，把这篇文章及其来源整理成可编辑 HTML 和 PNG 杂志组图。”
 - “使用 life-chronicle，根据这些有来源的事件和照片制作人物志海报，时间线文字需要可编辑。”
 
@@ -133,6 +137,8 @@ chart-storytelling 使用本地脚本生成 HTML 故事和 Web-PPT。Web-PPT 在
 ## 案例展示
 
 [案例目录](examples/README.md) 收录了数据故事、Web-PPT、杂志图文和海报，包含提示词、输入材料和结果。
+
+创意数据叙事可查看[尺有所长](examples/creative-data-storytelling/chi-history/README.md)、[iPhone 价格](examples/creative-data-storytelling/iphone-price-story/README.md)和[年度与累计 CO₂ 排放](examples/creative-data-storytelling/co2-emissions-history/README.md)，均包含可运行网页、输入、提示词和预览。
 
 ## 开发与维护
 
@@ -160,6 +166,7 @@ chart-storytelling 使用本地脚本生成 HTML 故事和 Web-PPT。Web-PPT 在
 
 ```bash
 npx skills add ./skills/chart-storytelling
+npx skills add ./skills/creative-data-storytelling
 npx skills add ./skills/editorial-magazine
 npx skills add ./skills/life-chronicle
 npx skills add ./skills/person-poster
@@ -183,7 +190,7 @@ uv run ruff check skills tests
 
 在 Codex、Claude Code 等 Agent 中运行[固定任务](cases/README.md)，或使用自己的提示词和数据。产物、截图与日志保存在已忽略的本地工作目录中，具体见[本地调试指南](docs/debugging.md)。Agent 任务不在 CI 中运行。
 
-固定任务目前覆盖 chart-storytelling 和 person-poster。浏览器 smoke 覆盖故事、Web-PPT 和人物海报，详细用例见[浏览器测试指南](tests/browser/cases/README.zh-CN.md)。editorial-magazine、life-chronicle 和 chart-assistant 已有脚本回归，本仓库尚未提供固定 Agent 任务或真实宿主浏览器 smoke。
+固定任务目前覆盖 chart-storytelling 和 person-poster。浏览器 smoke 覆盖故事、Web-PPT 和人物海报，详细用例见[浏览器测试指南](tests/browser/cases/README.zh-CN.md)。editorial-magazine、life-chronicle 和 chart-assistant 已有脚本回归，本仓库尚未提供固定 Agent 任务或真实宿主浏览器 smoke。creative-data-storytelling 已有运行模块、预览工具和独立复制安装的确定性回归；随附机制演示作为实现参考，固定 Agent 任务及自动化浏览器 smoke 尚未纳入本仓库。
 
 生成结果仍需检查数据准确性、可读性和交互。自动化测试通过不代表 Agent 生成的作品质量合格。Person Poster 的测试结果及待解决问题见[验证记录](docs/validation/person-poster-2026-10-28.md)。
 

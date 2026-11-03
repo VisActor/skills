@@ -34,6 +34,7 @@ jobs:
       - run: uv run --locked ruff check skills tests .github/scripts
       - run: uv run --locked pytest tests -q -m "not poster_browser"
       - run: node --test tests/test_chart_assistant.mjs
+      - run: node --test tests/creative_data_storytelling/*.test.mjs
       - name: Validate Skill release packages from this commit
         run: uv run --locked python .github/scripts/package_skills.py --commit HEAD --tag skills-v0.0.0 --output .cache/ci-release-artifacts
       - name: Preview release plan for main

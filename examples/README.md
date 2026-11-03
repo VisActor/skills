@@ -2,6 +2,14 @@
 
 这里展示对应 Skill 的任务提示词、输入、最终结果与预览。
 
+## creative-data-storytelling
+
+| 案例 | 展示能力 | 输入说明 |
+| --- | --- | --- |
+| [尺有所长 · 一部尺度小史](creative-data-storytelling/chi-history/README.md) | 寸尺丈组成动画、历史记录连续保留、同尺度比较与时代插画 | 28 条尺度主张、逐条出处、派生换算与 AI 场景插画 |
+| [一部 iPhone，几种价格？](creative-data-storytelling/iphone-price-story/README.md) | 价格全景到局部比较、产品图与价点共同移动、容量与调价探索 | 51 款已开售机型、154 个容量首发价、8 项后续调价与官方产品图 |
+| [每一年，都在成为历史](creative-data-storytelling/co2-emissions-history/README.md) | 全球到中美、年度到累计、差距尺与历史时间切分 | OWID 固定快照，区分真实全球总量、国家子集与完整累计 |
+
 ## chart-storytelling
 
 | 案例 | 展示能力 | 输入说明 |
