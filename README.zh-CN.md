@@ -12,7 +12,7 @@ VisActor Skills 提供图表、看板、数据故事和海报相关的技能，�
 | --- | --- |
 | [chart-assistant](skills/chart-assistant/SKILL.md) | 商务图表、MBB 分析标注、可编辑飞书卡片、透明 PNG 和文档插图 |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | 分析报告、业务简报与数据专题，结合图表滚动叙事与标注，输出 HTML 数据故事或 Web-PPT |
-| [unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) | 用点或图标代表一条记录或固定数量，通过分组和重排呈现群体之间的差异与变化 |
+| [unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) | 用单元可视化讲述交互式数据故事，每个单元代表一条记录或固定数量。随着读者滚动，单元在全屏画面中展开、对齐或重组，让人看见个案在整体中的位置，以及群体间的差异集中在哪里。 |
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | 杂志风图文：新闻、生平、穿搭、旅行、时序故事与科普，导出 HTML / PNG |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | 人物生平海报：照片墙、中心网格、照片环与可编辑时间线 |
 | [person-poster](skills/person-poster/SKILL.md) | 人物主导的数据信息图，原生 VChart 图表、可编辑 HTML 与高清 PNG |
@@ -135,6 +135,8 @@ chart-storytelling 使用本地脚本生成 HTML 故事和 Web-PPT。Web-PPT 在
 ## 案例展示
 
 [案例目录](examples/README.md) 收录了数据故事、Web-PPT、杂志图文和海报，包含提示词、输入材料和结果。
+
+香港的热夜变多了，也连得更久了吗？一格代表一个夏日。读者先看到 2022 年 7 月连续 21 个热夜，再把这段经历放回 65 个夏天的日历里，最后将每年最长的一串热夜放在同一起点比较。[阅读《天黑了，还是热。》](examples/unit-data-storytelling/hong-kong-after-dark/README.md)
 
 ## 开发与维护
 
