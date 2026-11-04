@@ -1,0 +1,118 @@
+[
+  {
+    "id": "hko_max",
+    "title": "HKO 日最高气温开放数据",
+    "provider": "香港天文台",
+    "role": "data",
+    "url": "https://data.weather.gov.hk/weatherAPI/opendata/opendata.php?dataType=CLMMAXT&station=HKO&rformat=json",
+    "final_url": "https://data.weather.gov.hk/weatherAPI/opendata/opendata.php?dataType=CLMMAXT&station=HKO&rformat=json",
+    "retrieved_at": "2026-10-19T10:52:29.632138+00:00",
+    "sha256": "743386a43e4b1609f8d9ffc06c20cddeb74390e9712832c72bc47c5bee065e79",
+    "bytes": 1435908,
+    "content_type": "application/json; charset=utf-8",
+    "used_in": [
+      "daily-temperature.csv"
+    ],
+    "processing": "选取 1961–2025，按 HKO 发布的年/月/日关联。原值与质量标志保留。"
+  },
+  {
+    "id": "hko_min",
+    "title": "HKO 日最低气温开放数据",
+    "provider": "香港天文台",
+    "role": "data",
+    "url": "https://data.weather.gov.hk/weatherAPI/opendata/opendata.php?dataType=CLMMINT&station=HKO&rformat=json",
+    "final_url": "https://data.weather.gov.hk/weatherAPI/opendata/opendata.php?dataType=CLMMINT&station=HKO&rformat=json",
+    "retrieved_at": "2026-10-19T10:52:29.491640+00:00",
+    "sha256": "cec7f279b6c7ea8cd63ae2a86d4758c9f84e96b938692038e5b09568b26c9695",
+    "bytes": 1434690,
+    "content_type": "application/json; charset=utf-8",
+    "used_in": [
+      "daily-temperature.csv"
+    ]
+  },
+  {
+    "id": "hko_mean",
+    "title": "HKO 日平均气温开放数据",
+    "provider": "香港天文台",
+    "role": "data",
+    "url": "https://data.weather.gov.hk/weatherAPI/opendata/opendata.php?dataType=CLMTEMP&station=HKO&rformat=json",
+    "final_url": "https://data.weather.gov.hk/weatherAPI/opendata/opendata.php?dataType=CLMTEMP&station=HKO&rformat=json",
+    "retrieved_at": "2026-10-19T10:52:29.663728+00:00",
+    "sha256": "1264b0ac223b1baf24e688890c642d49acd5ebecbe4375229e2841879c214a57",
+    "bytes": 1433904,
+    "content_type": "application/json; charset=utf-8",
+    "used_in": [
+      "daily-temperature.csv"
+    ]
+  },
+  {
+    "id": "hko_station",
+    "title": "气象测站一览",
+    "provider": "香港天文台",
+    "role": "metadata",
+    "url": "https://www.hko.gov.hk/en/cis/stn.htm",
+    "final_url": "https://www.hko.gov.hk/en/cis/stn.htm",
+    "retrieved_at": "2026-10-19T10:57:26.744092+00:00",
+    "sha256": "88e4e04edb57201646035558898ea1a4f235189d634a4cc7c059131483a4af1b",
+    "bytes": 66376,
+    "content_type": "text/html; charset=utf-8",
+    "used_in": [
+      "station.json"
+    ]
+  },
+  {
+    "id": "hko_terms",
+    "title": "酷热日、热夜等定义所在页",
+    "provider": "香港天文台",
+    "role": "definitions",
+    "url": "https://www.hko.gov.hk/en/climate_change/proj_hk_annual_vhot_days.htm",
+    "final_url": "https://www.hko.gov.hk/en/climate_change/proj_hk_annual_vhot_days.htm",
+    "retrieved_at": "2026-10-19T11:10:47.856636+00:00",
+    "sha256": "8375504b32dbfe417a98fb7a64232b965bd155669ddf4cdc5278eed2993d84eb",
+    "bytes": 15961,
+    "content_type": "text/html; charset=utf-8",
+    "note": "本包只引用术语定义，没有引入该页的未来气候推算数据。"
+  },
+  {
+    "id": "hko_event_202207",
+    "title": "2022 年 7 月天气概况",
+    "provider": "香港天文台",
+    "role": "background",
+    "url": "https://www.hko.gov.hk/sc/wxinfo/pastwx/mws2022/mws202207.htm",
+    "final_url": "https://www.hko.gov.hk/sc/wxinfo/pastwx/mws2022/mws202207.htm",
+    "retrieved_at": "2026-10-19T11:10:47.830911+00:00",
+    "sha256": "d12fff9d37ad85ebf4a07409640880376efc0307a37fb458bfbac2dbbac39f1a",
+    "bytes": 28657,
+    "content_type": "text/html; charset=utf-8",
+    "note": "可选事件资料；此报告中纪录类措辞以当时报告为准。生活影响仍需另找可靠记录。"
+  },
+  {
+    "id": "noaa_oni",
+    "title": "Oceanic Niño Index 文本序列",
+    "provider": "NOAA Climate Prediction Center",
+    "role": "data",
+    "url": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+    "final_url": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+    "retrieved_at": "2026-10-19T10:57:28.430450+00:00",
+    "sha256": "5d6fa3a2f857d916550d39c2c686e94cb942430195c82518e6a5d0f5ffbd0665",
+    "bytes": 23025,
+    "content_type": "text/plain; charset=utf-8",
+    "used_in": [
+      "enso-oni.csv"
+    ],
+    "processing": "选取 1961–2025；ANOM 与显式 ERSSTv6 官方表的 780 个同期单元逐个核对，按发布精度吻合。保留 SST 与 ANOM 的原始两位小数。"
+  },
+  {
+    "id": "noaa_oni_v6_notes",
+    "title": "ONI（ERSSTv6）定义与版本表",
+    "provider": "NOAA Climate Prediction Center",
+    "role": "metadata",
+    "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/",
+    "final_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/",
+    "retrieved_at": "2026-10-19T11:10:52.854332+00:00",
+    "sha256": "55986fc964a875e866f5e13418f93551ef68f7a0c252ef542b7ed0cdf13a6d6e",
+    "bytes": 163173,
+    "content_type": "text/html; charset=UTF-8",
+    "note": "三个月滑动平均、Niño 3.4 海区、每五年更新的中心 30 年基期。本包是 ONI v6；不与旧 v5 或 RONI 混用。NOAA 页面现说明官方 ENSO 监测和预测采用 RONI。"
+  }
+]

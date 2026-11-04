@@ -14,7 +14,7 @@ cp -R cases/chart-storytelling/story-retention-html/inputs "$debug_workspace/inp
 cp cases/chart-storytelling/story-retention-html/prompt.md "$debug_workspace/prompt.md"
 ```
 
-Only copy the prompt and inputs for generation. Leave the case README's acceptance criteria in the repository for review after the task. For your own task, put its prompt and source files in the same workspace structure.
+For a fresh run of a [published example](../examples/README.md), copy the prompt and input files identified in its README into the same workspace structure. Give the agent only the task and inputs. Keep the original result and any acceptance criteria for review after the run. For your own task, supply its prompt and source files the same way.
 
 Choose one host, installed and authenticated. For **Codex**:
 
@@ -41,13 +41,13 @@ Ask the agent to use `chart-storytelling` to execute `prompt.md`, read inputs fr
 ## Iterate and keep evidence
 
 - Edit source instructions and scripts in `skills/<skill-name>/`. Refresh the installed copy before each retest, or create a fresh workspace. Changing only the installed copy will not update the repository source.
-- Keep fixed inputs in `cases/` unchanged during a run. Work on the copied inputs when a task requires transformation.
+- When a task requires transforming its inputs, work on the workspace copies.
 - Save generated artifacts under `outputs/`, screenshots under `screenshots/` and available session/tool logs under `logs/`. Host logs are not collected automatically by this repository; export them where supported and note missing evidence.
 - Use `notes.md` to record the Skill commit and any local changes, host/model, task outcome, checks, failures and manual review. Keep a Skill snapshot or diff with the run when reproducing an uncommitted version.
-- Open the output in a browser and exercise required interactions. Check the case's acceptance points after generation. A rendered page alone does not establish data or visual correctness.
+- Open the output in a browser and exercise required interactions. For a fixed task, apply its acceptance criteria after generation. A rendered page alone does not establish data or visual correctness.
 - `.cache/` is ignored by Git. Keep credentials and private material out of shared reports. Clean only workspaces you own; do not delete another session's files automatically.
 
-Promote reusable task inputs and acceptance criteria to [cases/](../cases/README.md), reviewed showcase results to [examples/](../examples/README.md), and deterministic regressions to `tests/`. Keep raw logs, draft outputs and experimental screenshots local.
+Keep a reviewed example with its prompt and inputs in `examples/`. Create a [fixed task](../cases/README.md) when it needs its own acceptance criteria. Put deterministic regressions in `tests/`. Keep raw logs, draft outputs and experimental screenshots local.
 
 ## Automated checks
 

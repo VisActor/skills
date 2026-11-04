@@ -1,0 +1,12 @@
+{
+  "station_id": "HKO",
+  "name": "香港天文台",
+  "latitude_dms": "22°18′07″N",
+  "longitude_dms": "114°10′27″E",
+  "elevation_m": 32,
+  "first_operation": "1884-01-01",
+  "source_id": "hko_station",
+  "daily_date_basis": "保留 HKO 发布的日历日期；本包未独立核验各变量的逐小时日界定义。",
+  "scope": "单一测站的发布观测序列，不是全市空间平均或体感温度。",
+  "history_note": "1992/2000 年的香港参考气象站职责变更，不等于本包 HKO 温度序列在这些年份换站。本包未取得完整仪器与均一化修订历史。"
+}

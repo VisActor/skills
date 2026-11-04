@@ -76,6 +76,8 @@ jobs:
       - run: uv run --locked python -m playwright install --with-deps chromium
       - run: uv run --locked pytest tests/person_poster -q -m poster_browser
       - run: node --test tests/test_browser_assets.mjs tests/test_browser_checks.mjs tests/test_story_vseed.cjs tests/test_person_poster_runtime.mjs
+      - name: Unit data-storytelling mechanisms
+        run: node --test tests/unit_data_storytelling/*.test.mjs
       - run: uv run --locked python tests/browser/scripts/smoke.py --output-dir .cache/ci-browser-smoke
       - name: Save browser evidence
         if: ${{ always() }}

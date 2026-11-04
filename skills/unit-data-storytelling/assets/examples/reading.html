@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>单元实现 · 滚动与阅读接线</title>
+  <style>
+    :root { --font-body: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+      --font-data: "Helvetica Neue", Arial, sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #243c3e; background: #f5f3ec; font-family: var(--font-body); font-size: 18px; }
+    a { color: inherit; text-underline-offset: 4px; }
+    .prose { max-width: 760px; margin: auto; padding: 72px 32px; line-height: 1.8; }
+    .intro { min-height: 70vh; }
+    .outro { min-height: 110vh; }
+    h1 { font-size: 32px; line-height: 1.4; }
+    .eyebrow { font-size: 13px; letter-spacing: .06em; color: #52696c; }
+    .segment { display: grid; border-block: 1px solid #bdcbc2; }
+    /* Shared grid cell: cue flow sets the segment's length; the stage stays
+       inside it. No scroll interception or animation-dependent scroll lock. */
+    .stage, .flow { grid-area: 1 / 1; }
+    .stage { position: sticky; top: 0; align-self: start; height: 100vh;
+      display: grid; grid-template-rows: clamp(220px, 28vh, 260px) minmax(0, 1fr) auto;
+      gap: 12px; padding: 28px 5vw; background: #f5f3ec; }
+    .flow { pointer-events: none; }
+    /* This study reserves a stable prose area so changing the explanation does
+       not move the graphic. Distances come from its own text and viewport tests;
+       the final cue includes room before sticky exit. */
+    .cue { height: 120vh; }
+    .cue:last-child { height: 160vh; }
+    .caption { max-width: 1040px; }
+    #state-copy { display: grid; }
+    .caption-panel { grid-area: 1 / 1; }
+    .caption-panel.outgoing { pointer-events: none; }
+    .caption h2 { font-size: 30px; line-height: 1.35; font-weight: 600; margin: 0 0 16px; }
+    .caption p { line-height: 1.75; margin: 0 0 10px; }
+    svg { display: block; width: 100%; height: 100%; min-height: 0; }
+    /* These are viewBox units: at 1280×720 the plot is about 0.7× its viewBox. */
+    svg text { font-family: var(--font-body); fill: #52696c; font-size: 20px; }
+    svg .category { fill: #243c3e; font-size: 26px; }
+    svg .axis-value { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+    .stage-footer { display: flex; gap: 24px; justify-content: space-between;
+      font-size: 14px; line-height: 1.6; border-top: 1px solid #bdcbc2; padding-top: 12px; }
+    .stage-footer p { margin: 0; }
+    #sample-caption { color: #52696c; }
+    #error { color: #a33b28; }
+  </style>
+</head>
+<body>
+  <header class="prose intro">
+    <p class="eyebrow">IMPLEMENTATION STUDY / 合成数据</p>
+    <h1>滚动选目标，动画走完，证据留下。</h1>
+    <p>这是滚动与状态的接线说明，不是作品开场或页面模板。先用两段正文解释同一幅数量图，再按新的追问重排到使用月数，最后比较另一批样本。引导文字与图形共同推进，类别和单位持续可见。</p>
+    <p>向下滚动即可查看；中途停滚、反向或快速跳过都可以。末态在舞台离开前仍有阅读空间，接下来回到普通段落。</p>
+    <p><a href="./index.html">组合示例</a> · <a href="./reading.mjs">接线代码</a></p>
+  </header>
+  <main>
+    <section id="reading-segment" class="segment" aria-label="正文与图形分别推进的滚动接线">
+      <div id="reading-stage" class="stage" data-phase="loading">
+        <div class="caption" aria-live="polite">
+          <div id="state-copy"></div>
+          <p id="error" role="alert" hidden></p>
+        </div>
+        <svg id="reading-chart" viewBox="0 0 1000 520" role="img" aria-label="合成设备记录">
+          <g id="reading-guides"></g><g id="reading-units"></g>
+        </svg>
+        <div class="stage-footer">
+          <p>一点 = 一条合成记录 · 绿色手机 / 橙色台灯</p>
+          <p id="sample-caption" aria-live="polite"></p>
+        </div>
+      </div>
+      <div id="reading-flow" class="flow" aria-hidden="true">
+        <div class="cue" data-story-state="count" data-reading="count"></div>
+        <div class="cue" data-story-state="count" data-reading="count-question"></div>
+        <div class="cue" data-story-state="duration" data-reading="duration"></div>
+        <div class="cue" data-story-state="other-sample" data-reading="other-sample"></div>
+      </div>
+    </section>
+    <section class="prose outro">
+      <p class="eyebrow">普通文档流</p>
+      <h2>这一段舞台已经结束。</h2>
+      <p>这段文字位于 sticky 父容器之后。最后一幅完整画面随父容器离开；继续滚动不再更新它，返回时仍可读。</p>
+      <p>前两段说明共享数量图，文字推进时没有重新播放点的运动；第三段才改变图形目标。正文在图形变化时已开始交接，只有换样本的完整统计摘要需要等待新集合到位。</p>
+      <p>这里采用原位文字交接，也可以让正文自然经过同一幅图。局部文字运动、时长、构图和滚动距离都是本例的选择；按作品的解释任务重新安排。</p>
+      <p><a href="#reading-segment">返回舞台入口</a> · <a href="./index.html">返回组合示例</a></p>
+    </section>
+  </main>
+  <script type="module" src="./reading.mjs"></script>
+</body>
+</html>

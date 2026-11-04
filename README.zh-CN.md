@@ -13,6 +13,7 @@ VisActor Skills 提供图表、看板、数据故事和海报相关的技能，�
 | [chart-assistant](skills/chart-assistant/SKILL.md) | 商务图表、MBB 分析标注、可编辑飞书卡片、透明 PNG 和文档插图 |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | 分析报告、业务简报与数据专题，结合图表滚动叙事与标注，输出 HTML 数据故事或 Web-PPT |
 | [creative-data-storytelling](skills/creative-data-storytelling/SKILL.md) | 面向公众的交互式数据故事，结合持续演进的全出血舞台、创意视觉编码、关系动画与可选探索，交付静态 HTML 和资源 |
+| [unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) | 用点或图标代表一条记录或固定数量，通过分组和重排呈现群体之间的差异与变化 |
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | 杂志风图文：新闻、生平、穿搭、旅行、时序故事与科普，导出 HTML / PNG |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | 人物生平海报：照片墙、中心网格、照片环与可编辑时间线 |
 | [person-poster](skills/person-poster/SKILL.md) | 人物主导的数据信息图，原生 VChart 图表、可编辑 HTML 与高清 PNG |
@@ -47,13 +48,13 @@ https://github.com/VisActor/skills/tree/main/skills/chart-storytelling
 如果有需要我完成的确认或导入步骤，请告诉我。
 ```
 
-安装其他 Skill 时，将提示词和链接中的 `chart-storytelling` 换成上表中的名称。安装后新建任务，指定要使用的 Skill。
+安装其他 Skill 时，从上表打开对应条目，把 `SKILL.md` 所在目录的链接发给 Agent。安装后新建任务，指定要使用的 Skill。
 
 如果 Agent 无法访问 GitHub 或完成安装，可使用下面的手动导入方式。
 
 ### 命令行安装：Codex / Claude Code
 
-在项目目录中，执行所需 Skill 对应的命令：
+以下命令从仓库默认分支安装。要使用当前检出的版本，见[从本地仓库安装](#从本地仓库安装)。
 
 ```bash
 npx skills add VisActor/skills --skill chart-assistant
@@ -113,6 +114,7 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 | chart-assistant | Node.js 18+；PNG 需 HTTPS 网络；飞书插图需已授权的宿主工具或 lark-cli；可编辑卡片另需图表助手 ISV 应用。仅生成/校验 DSL 不要求飞书授权，无需本地图表渲染依赖 |
 | chart-storytelling | Python 3.10+（标准库）和 Node.js（校验 JavaScript）；从 unpkg 加载固定版本的 VSeed、VChart、VTable 与 GSAP |
 | creative-data-storytelling | 支持原生 JavaScript 模块的桌面浏览器；随附预览服务需要 Python 3.9+（标准库），JavaScript 校验需要 Node.js；按需使用的库和字体可从公开 CDN 加载 |
+| unit-data-storytelling | 支持 ES modules 的现代浏览器；Node.js 用于模块检查；可选 Python 3.9+（标准库）用于自带的预览与资源检查工具。内置示例使用本地素材，不依赖指定 CDN 或图表库 |
 | editorial-magazine | Python 3.10+、其 [requirements.txt](skills/editorial-magazine/requirements.txt) 中的依赖，以及用于导出 PNG 的 Chromium/Chrome；字体从 CDN 加载，支持系统回退 |
 | life-chronicle | Python 3.10+、其 [requirements.txt](skills/life-chronicle/requirements.txt) 中的依赖，以及用于导出 PNG 的 Chromium/Chrome；固定版本的 VInfo 与字体 CDN，详见[环境说明](skills/life-chronicle/references/environment.md) |
 | person-poster | Python 3.10+、Pillow、Python Playwright/Chromium；公开 VChart 2.1.7 CDN 或有来源记录的同版本本地副本，见 [requirements.txt](skills/person-poster/scripts/requirements.txt) 和含 POSIX/PowerShell 安装及能力边界的[环境说明](skills/person-poster/references/environment.md) |
@@ -149,7 +151,7 @@ chart-storytelling 使用本地脚本生成 HTML 故事和 Web-PPT。Web-PPT 在
 | 路径 | 内容 |
 | --- | --- |
 | `skills/<skill-name>/` | 可独立安装的运行内容：`SKILL.md`、参考资料、模板／资源与脚本 |
-| `tests/<skill_name>/` | 按 Skill 组织的确定性 Python 回归测试；为兼容 Python 导入，连字符改为下划线 |
+| `tests/<skill_name>/` | 按 Skill 组织的确定性回归测试；为兼容 Python 导入，连字符改为下划线 |
 | `tests/test_*` | 共用工具与安装检查，以及 Node.js 浏览器／Story 集成测试 |
 | `examples/<skill-name>/<case-name>/` | 面向用户的精选案例：提示词、输入、结果与预览 |
 | `cases/<skill-name>/<case-name>/` | 固定 Agent 任务的提示词、输入与验收要点 |
@@ -167,6 +169,7 @@ chart-storytelling 使用本地脚本生成 HTML 故事和 Web-PPT。Web-PPT 在
 ```bash
 npx skills add ./skills/chart-storytelling
 npx skills add ./skills/creative-data-storytelling
+npx skills add ./skills/unit-data-storytelling
 npx skills add ./skills/editorial-magazine
 npx skills add ./skills/life-chronicle
 npx skills add ./skills/person-poster
