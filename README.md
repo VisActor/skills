@@ -13,7 +13,7 @@ VisActor Skills provides chart, dashboard, data story and poster tools for Claud
 | [chart-assistant](skills/chart-assistant/SKILL.md) | Business charts, MBB analysis annotations, editable Feishu cards, transparent PNGs and document image insertion |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | Analysis reports, business briefings and data features, with chart scrollytelling and annotations, delivered as HTML stories or Web-PPT |
 | [creative-data-storytelling](skills/creative-data-storytelling/SKILL.md) | Public-facing interactive data stories with continuous full-bleed stages, creative visual encoding, relationship-driven animation and optional exploration; delivered as static HTML and assets |
-| [unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) | Interactive stories that use dots or icons to represent records or fixed quantities and show how groups compare and change |
+| [unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) | Create interactive data stories in which each visual unit represents one record or a fixed quantity. As readers scroll, units align and regroup in a full-screen view to show how individual observations fit into a larger pattern and where groups differ. |
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | Magazine-style visual posts (杂志风图文): HTML / PNG series for news, biographies, outfits, travel, chronological stories and explainers |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | Biography posters with photo walls, center grids, photo rings and editable timelines |
 | [person-poster](skills/person-poster/SKILL.md) | Person-led data posters with native VChart, editable HTML and high-resolution PNG |
@@ -142,6 +142,8 @@ Generated JavaScript/HTML is executable code. Preview your own or reviewed artif
 The [example gallery](examples/README.md) includes data stories, Web-PPT, magazine layouts and posters, with prompts, inputs and results.
 
 Creative Data Storytelling examples include [historical Chinese measures](examples/creative-data-storytelling/chi-history/README.md), [iPhone prices](examples/creative-data-storytelling/iphone-price-story/README.md) and [annual and cumulative CO₂ emissions](examples/creative-data-storytelling/co2-emissions-history/README.md). Each includes a runnable page, inputs, a prompt and a preview.
+
+Hot nights have become more frequent in Hong Kong. Do they also come in longer runs? Each square represents one summer day. Readers follow a stretch of 21 hot nights in July 2022, see where it falls in a calendar of 65 summers, then compare each summer’s longest stretch by lining them up at the same starting point. [Read the Hong Kong summer story (in Chinese)](examples/unit-data-storytelling/hong-kong-after-dark/README.md)
 
 ## Development and maintenance
 
