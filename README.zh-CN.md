@@ -13,7 +13,7 @@ VisActor Skills 提供图表、看板、数据故事和海报相关的技能，�
 | [chart-assistant](skills/chart-assistant/SKILL.md) | 商务图表、MBB 分析标注、可编辑飞书卡片、透明 PNG 和文档插图 |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | 分析报告、业务简报与数据专题，结合图表滚动叙事与标注，输出 HTML 数据故事或 Web-PPT |
 | [creative-data-storytelling](skills/creative-data-storytelling/SKILL.md) | 面向公众的交互式数据故事，结合持续演进的全出血舞台、创意视觉编码、关系动画与可选探索，交付静态 HTML 和资源 |
-| [unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) | 用单元可视化讲述交互式数据故事，每个单元代表一条记录或固定数量。随着读者滚动，单元在全屏画面中展开、对齐或重组，让人看见个案在整体中的位置，以及群体间的差异集中在哪里。 |
+| [unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) | 用单元可视化讲述交互式数据故事，每个数据单元代表一条记录或固定数量。在随滚动推进的全屏画面中，点阵可以聚成读者熟悉的形象，再以粒子动画散开，按时间、类别或数值重排，让读者看见个体在整体中的位置。 |
 | [editorial-magazine](skills/editorial-magazine/SKILL.md) | 杂志风图文：新闻、生平、穿搭、旅行、时序故事与科普，导出 HTML / PNG |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | 人物生平海报：照片墙、中心网格、照片环与可编辑时间线 |
 | [person-poster](skills/person-poster/SKILL.md) | 人物主导的数据信息图，原生 VChart 图表、可编辑 HTML 与高清 PNG |
@@ -143,6 +143,8 @@ chart-storytelling 使用本地脚本生成 HTML 故事和 Web-PPT。Web-PPT 在
 创意数据叙事可查看[尺有所长](examples/creative-data-storytelling/chi-history/README.md)、[iPhone 价格](examples/creative-data-storytelling/iphone-price-story/README.md)和[年度与累计 CO₂ 排放](examples/creative-data-storytelling/co2-emissions-history/README.md)，均包含可运行网页、输入、提示词和预览。
 
 香港的热夜变多了，也连得更久了吗？一格代表一个夏日。读者先看到 2022 年 7 月连续 21 个热夜，再把这段经历放回 65 个夏天的日历里，最后将每年最长的一串热夜放在同一起点比较。[阅读《天黑了，还是热。》](examples/unit-data-storytelling/hong-kong-after-dark/README.md)
+
+NBA 球员的身高怎样变了？组成 NBA 标志中球员剪影的白点随滚动散开，按场上位置和身高排成五组。读者从这批 1960 年代的球员出发，比较各个位置的身高分布后来怎样变化。[阅读《身高的分量》](examples/unit-data-storytelling/nba-height-story/README.md)
 
 ## 开发与维护
 
