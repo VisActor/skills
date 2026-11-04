@@ -44,6 +44,7 @@ Node.js checks use Node 24, matching CI. Browser checks also need npm dependenci
 | Scope | Deterministic regressions | Task/browser coverage |
 | --- | --- | --- |
 | chart-storytelling | `uv run pytest tests/chart_storytelling -q`; `node --test tests/test_story_vseed.cjs` after browser dependency installation | [Fixed tasks](cases/README.md); HTML and Web-PPT smoke |
+| creative-data-storytelling | `uv run pytest tests/creative_data_storytelling -q`; `node --test tests/creative_data_storytelling/*.test.mjs` | Runtime mechanisms, preview and copied installation; fixed Agent tasks and automated browser smoke are not yet included |
 | unit-data-storytelling | `uv run pytest tests/unit_data_storytelling -q`; `node --test tests/unit_data_storytelling/*.test.mjs`; `uv run pytest tests/test_portable_install.py -q -k unit_story` | [Three examples with prompts and inputs](examples/README.md#unit-data-storytelling); no fixed browser smoke; [maintenance context](docs/unit-data-storytelling/context-map.md) |
 | editorial-magazine | `uv run pytest tests/editorial_magazine -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |
 | life-chronicle | `uv run pytest tests/life_chronicle -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |

@@ -1,0 +1,39 @@
+{
+  "countries": [
+    "Australia",
+    "Brazil",
+    "Canada",
+    "China",
+    "Germany",
+    "India",
+    "Indonesia",
+    "Iran",
+    "Italy",
+    "Japan",
+    "Mexico",
+    "Poland",
+    "Russia",
+    "Saudi Arabia",
+    "South Africa",
+    "South Korea",
+    "Turkey",
+    "United Kingdom",
+    "United States",
+    "Vietnam"
+  ],
+  "country_years": [
+    2000,
+    2022
+  ],
+  "world_years": [
+    1850,
+    2024
+  ],
+  "selection": "Same named country subset as the old test topic; not all countries or a refreshed top-20 ranking.",
+  "emissions_scope": "Production/territorial fossil-fuel and industrial CO2, excluding land-use change; see pinned codebook.",
+  "cumulative": "Upstream cumulative values from the first available source year, not the sum of the 2000-2022 excerpt.",
+  "global_share": "Source-reported global denominator. World rows are provided separately and are not additional countries.",
+  "missing": "Empty CSV fields mean unavailable, not zero.",
+  "components": "Coal, oil, gas, cement, flaring, other industry. Verify available components and source rounding before drawing complete compositions.",
+  "revision": "Re-extracted from pinned OWID commit; use these values consistently instead of mixing old fixture numbers."
+}

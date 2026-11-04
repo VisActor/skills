@@ -1,0 +1,1331 @@
+{
+  "version": "0.1.0",
+  "prepared_on": "2026-10-10",
+  "title": "寸尺丈历史尺度研究数据",
+  "status": "ready_for_prototype_with_attribution",
+  "period_policy": "period_order只用于顺序排列；朝代标签不是准确有效期，不得据此连续插值。year仅在来源明确时填写，并保留year_role。",
+  "value_policy": "一条记录是一个来源中的尺度主张；不同说法不是不同尺制。数值精度不等于测量准确度；没有给出误差区间的记录保持null。",
+  "conversion_policy": {
+    "cun_per_chi": 10,
+    "chi_per_zhang": 10,
+    "note": "同一尺制内部的十进位展开；general convention记录的寸丈是计算派生，不是独立实测或逐项核实的法规。大尺与小尺之间的一尺二寸是跨尺制折算，不能误用为大尺内部12寸。",
+    "source_ids": [
+      "moe-chi",
+      "moe-zhang",
+      "bai-han-2014",
+      "law-1915",
+      "law-1929"
+    ]
+  },
+  "counts": {
+    "core": 18,
+    "context": 5,
+    "alternative": 4,
+    "hold": 1
+  },
+  "sources": [
+    {
+      "id": "ncm-fangdou",
+      "short_label": "国博藏品说明",
+      "title": "青铜方斗",
+      "publisher": "中国国家博物馆",
+      "url": "https://www.chnmuseum.cn/zp/zpml/csp/202008/t20200826_247424.shtml",
+      "kind": "museum_catalog",
+      "access": "页面正文已核读",
+      "locator": "藏品说明末段",
+      "note": "秦尺数值由商鞅方升测算；王莽尺由公元9年方斗铭文和实测推算。二者均非本项目实测。",
+      "accessed_on": "2026-10-10"
+    },
+    {
+      "id": "bai-han-2014",
+      "short_label": "白云翔 2014",
+      "title": "汉代尺度的考古发现及相关问题研究",
+      "author": "白云翔",
+      "publisher": "《东南文化》2014年第2期，第85–94页；中国社会科学院历史研究所转载",
+      "url": "https://lishisuo.cass.cn/xsyj/qhs/yjcg/201906/t20190625_4923668.shtml",
+      "kind": "research_article",
+      "access": "检索服务返回摘要及第一、二、三、四节相关全文段落；原站直连超时，未核纸本",
+      "locator": "摘要；第一节研究回顾；第二节盱眙大云山铜尺；第三节汉尺量值讨论",
+      "note": "作者主张23/23.4厘米，与文内转述丘光明23.1/23.5厘米须分开。索引文本核读不等同纸本和全部图表复核。",
+      "accessed_on": "2026-10-10"
+    },
+    {
+      "id": "xiong-yuan-2023",
+      "short_label": "熊长云 2023",
+      "title": "元尺考",
+      "author": "熊长云",
+      "publisher": "《故宫博物院院刊》2023年第3期，总251期，第69–81页",
+      "url": "https://www.dpm.org.cn/Uploads/File/2023/03/21/u641911f3f14bd.pdf",
+      "landing_url": "https://www.dpm.org.cn/journal/259181.html",
+      "kind": "research_article",
+      "access": "下载官方13页PDF；以页面图像核读第74、76、78、80、81页；其余页检索定位",
+      "locator": "第74、76、78、80页正文；第81页注1",
+      "note": "PDF文字提取严重乱码；已以页面图像复核采用数值。元代四尺为作者考证，不等同保存下来的四把标准尺。",
+      "accessed_on": "2026-10-10"
+    },
+    {
+      "id": "taizhou-gazetteer",
+      "short_label": "台州地区志",
+      "title": "台州地区志 第七章经济管理 第六节标准计量",
+      "publisher": "台州史志网",
+      "url": "https://tzsz.zjtz.gov.cn/art/2019/1/16/art_1229206646_54282587.html",
+      "kind": "official_gazetteer",
+      "access": "页面正文及换算表已核读",
+      "locator": "首段；一、计量管理首段；常用计量单位换算表",
+      "note": "历代数值为地方志综述，未逐项提供考据；三元尺行算术不一致，隔离待核。网页发布日期2019-01-16不是尺制出现时间。",
+      "accessed_on": "2026-10-10"
+    },
+    {
+      "id": "xi-qing-2009",
+      "short_label": "席会东 2009 转引",
+      "title": "清康熙绘本《黄河图》及相关史实考述",
+      "author": "席会东",
+      "publisher": "《故宫博物院院刊》2009年第5期，第104–126页",
+      "url": "https://www.dpm.org.cn/Uploads/File/pdf/10/99/1c/10991cf5db341972ba68735f701bc82f.pdf",
+      "landing_url": "https://www.dpm.org.cn/explode/others/210054.html?_list=1",
+      "kind": "research_article_secondary_citation",
+      "access": "下载官方单页PDF；以页面图像核读印刷第109页注2",
+      "locator": "第109页注2",
+      "note": "转引《传世历代古尺图录》及《中国历史博物馆编：简明中国文物辞典》1991年，第490页。未核原图录；保留转引身份，不视作本论文独立实测。",
+      "accessed_on": "2026-10-10"
+    },
+    {
+      "id": "law-1915",
+      "short_label": "1915年权度法转录",
+      "title": "权度法",
+      "author": "中华民国大总统公布",
+      "publisher": "1915年1月7日《政府公报》第957号；维基文库转录",
+      "url": "https://zh.wikisource.org/zh/權度法",
+      "kind": "historical_law_transcription",
+      "access": "转录文本第二、三条已核读；未核公报影印",
+      "locator": "第二条甲；第三条甲之长度",
+      "note": "1915-01-06为公布令日期，次日刊公报。只用于历史制度记录，不用于现行法律判断。",
+      "accessed_on": "2026-10-10"
+    },
+    {
+      "id": "law-1929",
+      "short_label": "1929年度量衡法转录",
+      "title": "度量衡法 民国18年",
+      "author": "中华民国国民政府公布",
+      "publisher": "维基文库历史法律转录",
+      "url": "https://zh.wikisource.org/zh/度量衡法_(民國18年)",
+      "kind": "historical_law_transcription",
+      "access": "第五、六条及页面施行日期已核读；未核原始公报",
+      "locator": "第五条；第六条长度；沿革1930-01-01施行",
+      "note": "1市尺=1/3米；保留有理数，不把33.33厘米当成精确值。实施日期不代表民间用尺当日全部统一。",
+      "accessed_on": "2026-10-10"
+    },
+    {
+      "id": "moe-chi",
+      "short_label": "教育部字典：尺",
+      "title": "异体字字典 尺 A01077",
+      "publisher": "教育部",
+      "url": "https://dict.variants.moe.edu.tw/dictView.jsp?ID=11702&q=1",
+      "kind": "dictionary_classical_citation",
+      "access": "检索服务所载《说文》引文及释义已核读",
+      "locator": "说文释形及释义引《说文》",
+      "note": "仅用于同一尺制内十寸一尺的通行关系；不采用现代公尺、台尺的米制释义换算中国古尺。",
+      "accessed_on": "2026-10-10"
+    },
+    {
+      "id": "moe-zhang",
+      "short_label": "教育部字典：丈",
+      "title": "异体字字典 丈 A00006",
+      "publisher": "教育部",
+      "url": "https://dict.variants.moe.edu.tw/dictView.jsp?educode=A00006",
+      "kind": "dictionary_classical_citation",
+      "access": "检索服务所载《说文》引文已核读",
+      "locator": "说文释形：十尺也",
+      "note": "只取古义十尺为丈；不取公丈=10米的现代释义。",
+      "accessed_on": "2026-10-10"
+    },
+    {
+      "id": "ncm-tang-ruler",
+      "short_label": "国博龙纹铜尺",
+      "title": "龙纹铜尺",
+      "publisher": "中国国家博物馆",
+      "url": "https://www.chnmuseum.cn/zp/zpml/kgfjp/202111/t20211116_252236.shtml",
+      "kind": "museum_catalog",
+      "access": "正文及检索服务藏品尺寸字段已核读",
+      "locator": "尺寸字段及等分二段、一段刻五寸的说明",
+      "note": "29.71厘米是页面标注的器物长度；本轮只作器物参考，不自动认定其刻度量值就是一个唐尺。",
+      "accessed_on": "2026-10-10"
+    },
+    {
+      "id": "zhangye-gazetteer",
+      "short_label": "张掖地区志",
+      "title": "张掖地区志 上卷 第三编经济一 计量",
+      "publisher": "张掖市史志办",
+      "url": "https://www.zhangye.gov.cn/szb/dzdt/zsbx/202307/t20230719_1080462_ghb.html",
+      "kind": "official_gazetteer",
+      "access": "页面二、计量单位制相关正文已核读",
+      "locator": "第四节 计量 → 二、计量单位制 →（一）计量单位制演变",
+      "note": "作为近现代3市尺=1米的独立复核；不使用该页的个别历史公布年份来断言法律施行日期。",
+      "accessed_on": "2026-10-10"
+    },
+    {
+      "id": "shanghai-shangyang",
+      "short_label": "上博商鞅方升",
+      "title": "商鞅方升",
+      "publisher": "上海博物馆",
+      "url": "https://www.shanghaimuseum.net/mu/frontend/pg/article/id/CI00000346",
+      "kind": "museum_catalog",
+      "access": "官方页面正文已核读",
+      "locator": "详细年代及简介",
+      "accessed_on": "2026-10-10",
+      "note": "公元前344年铸造，秦孝公十八年。用于器物年代，不用于给整个秦国标定尺制生效日。"
+    }
+  ],
+  "records": {
+    "core": [
+      {
+        "id": "qin-shangyang-inferred",
+        "period": "战国秦",
+        "period_order": 1,
+        "system_name": "商鞅方升推算尺",
+        "uses": [
+          "制度基准"
+        ],
+        "region": "战国秦",
+        "year": -344,
+        "year_role": "商鞅方升制作年代，非此标准首次生效年",
+        "chi_cm": 23.2,
+        "source_value": "23.2 cm",
+        "value_kind": "artifact_inference",
+        "role": "core",
+        "source_id": "ncm-fangdou",
+        "locator": "末段与商鞅方升对比",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "由量器测算的尺度记录；不表示所有秦代器物恰为此值。",
+        "date_source_id": "shanghai-shangyang",
+        "date_note": "本页只称战国秦；-344年另由上海博物馆藏品页面确认，见日期补充来源。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 2.32,
+          "zhang_cm": 232,
+          "zhang_m": 2.32,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "han-west-bai",
+        "period": "西汉",
+        "period_order": 2,
+        "system_name": "日常用尺参考量值",
+        "uses": [
+          "日常用尺"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 23,
+        "source_value": "23 cm",
+        "value_kind": "research_estimate",
+        "role": "core",
+        "source_id": "bai-han-2014",
+        "locator": "摘要；第三节作者结论",
+        "approximate": true,
+        "conversion_basis": "source_explicit",
+        "conversion_source_ids": [
+          "bai-han-2014"
+        ],
+        "note": "采用白云翔2014年结论。不是所有西汉尺的精确统一长度。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 2.3,
+          "zhang_cm": 230,
+          "zhang_m": 2.3,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "source_explicit",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "han-east-bai",
+        "period": "东汉",
+        "period_order": 4,
+        "system_name": "日常用尺参考量值",
+        "uses": [
+          "日常用尺"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 23.4,
+        "source_value": "23.4 cm",
+        "value_kind": "research_estimate",
+        "role": "core",
+        "source_id": "bai-han-2014",
+        "locator": "摘要；第三节作者结论",
+        "approximate": true,
+        "conversion_basis": "source_explicit",
+        "conversion_source_ids": [
+          "bai-han-2014"
+        ],
+        "note": "作者依据新发现资料提出的参考值；不得同时把旧说23.5当作另一用途的尺。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 2.34,
+          "zhang_cm": 234,
+          "zhang_m": 2.34,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "source_explicit",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "tang-small",
+        "period": "唐",
+        "period_order": 5,
+        "system_name": "小尺",
+        "uses": [
+          "律度相关用途"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 24.57,
+        "source_value": "24.57 cm",
+        "value_kind": "gazetteer_reference",
+        "role": "core",
+        "source_id": "taizhou-gazetteer",
+        "locator": "首段",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "长度采用地方志综述；用途据《元尺考》第78页解释。不是元代天文尺数值的直接复制。",
+        "supporting_source_ids": [
+          "xiong-yuan-2023"
+        ],
+        "use_locator": "第78页引用《唐六典》；调钟律、测晷景、汤药及冠冕等特定领域",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 2.457,
+          "zhang_cm": 245.7,
+          "zhang_m": 2.457,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "tang-large",
+        "period": "唐",
+        "period_order": 5,
+        "system_name": "大尺",
+        "uses": [
+          "官私日常用尺"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 29.58,
+        "source_value": "29.58 cm",
+        "value_kind": "gazetteer_reference",
+        "role": "core",
+        "source_id": "taizhou-gazetteer",
+        "locator": "首段",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "与小尺分别保留原载值；两数之比不精确等于1.2，不为满足比例而改数。",
+        "supporting_source_ids": [
+          "xiong-yuan-2023"
+        ],
+        "use_locator": "第78页引用《唐六典》内外官私采用大尺",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 2.958,
+          "zhang_cm": 295.8,
+          "zhang_m": 2.958,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "song-yuan-cloth",
+        "period": "宋至元",
+        "period_order": 6,
+        "system_name": "三司布帛尺 地方志综述",
+        "uses": [
+          "布帛计量"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 31,
+        "source_value": "31 cm",
+        "value_kind": "gazetteer_reference",
+        "role": "core",
+        "source_id": "taizhou-gazetteer",
+        "locator": "首段",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "来源合称宋元；不是覆盖宋元每一年、各地的单一全国标准。与元营造尺31.5不可合并。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.1,
+          "zhang_cm": 310,
+          "zhang_m": 3.1,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "yuan-official",
+        "period": "元",
+        "period_order": 7,
+        "system_name": "官尺",
+        "uses": [
+          "官方通行标准",
+          "征税记录"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 35,
+        "source_value": "35 cm",
+        "value_kind": "research_estimate",
+        "role": "core",
+        "source_id": "xiong-yuan-2023",
+        "locator": "第74、76、80页",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "熊长云的考证量值；由官印尺寸等资料推定，非四把存世标准尺之一。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.5,
+          "zhang_cm": 350,
+          "zhang_m": 3.5,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "yuan-building",
+        "period": "元",
+        "period_order": 7,
+        "system_name": "营造尺",
+        "uses": [
+          "营建",
+          "部分田亩计量"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 31.5,
+        "source_value": "31.5 cm",
+        "value_kind": "research_estimate",
+        "role": "core",
+        "source_id": "xiong-yuan-2023",
+        "locator": "第74、76、80页",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "作者采用约31.5厘米，并说明存在浮动；不自行把浮动转成误差条。",
+        "qualitative_uncertainty": "存在上下浮动，来源此处未给统一数值区间",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.15,
+          "zhang_cm": 315,
+          "zhang_m": 3.15,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "yuan-tailoring",
+        "period": "元",
+        "period_order": 7,
+        "system_name": "裁衣尺",
+        "uses": [
+          "裁衣"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 38.9,
+        "source_value": "38.9 cm",
+        "value_kind": "research_estimate",
+        "role": "core",
+        "source_id": "xiong-yuan-2023",
+        "locator": "第76、80页",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "作者按官尺及文献折算得到的约数；不把38.9当作直接实测。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.89,
+          "zhang_cm": 389,
+          "zhang_m": 3.89,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "yuan-astronomy",
+        "period": "元",
+        "period_order": 7,
+        "system_name": "天文尺",
+        "uses": [
+          "天文历法"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 24.367,
+        "source_value": "24.367 cm",
+        "value_kind": "research_estimate",
+        "role": "core",
+        "source_id": "xiong-yuan-2023",
+        "locator": "第74、76、80页",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "由登封观星台石圭表与文献尺寸推算；保留来源精度，显示可用约24.37厘米，不表示万分之一厘米测量准确度。",
+        "display_decimals": 2,
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 2.4367,
+          "zhang_cm": 243.67,
+          "zhang_m": 2.4367,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "ming-building",
+        "period": "明",
+        "period_order": 8,
+        "system_name": "官尺及营造尺",
+        "uses": [
+          "营造",
+          "官方用尺"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 32,
+        "source_value": "32 cm",
+        "value_kind": "research_secondary_reference",
+        "role": "core",
+        "source_id": "xiong-yuan-2023",
+        "locator": "第81页注1",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "作者注释归纳的明代官尺标准，不代表每件明尺实物都等长。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.2,
+          "zhang_cm": 320,
+          "zhang_m": 3.2,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "ming-tailoring",
+        "period": "明",
+        "period_order": 8,
+        "system_name": "裁衣尺",
+        "uses": [
+          "裁衣"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 35.6,
+        "source_value": "35.6 cm",
+        "value_kind": "research_secondary_reference",
+        "role": "core",
+        "source_id": "xiong-yuan-2023",
+        "locator": "第81页注1",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "沿用这篇研究同一套解释；和其他资料中的34厘米等说法未完成系统比对。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.56,
+          "zhang_cm": 356,
+          "zhang_m": 3.56,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "ming-land",
+        "period": "明",
+        "period_order": 8,
+        "system_name": "量地尺",
+        "uses": [
+          "专门量地"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 32.6,
+        "source_value": "32.6 cm",
+        "value_kind": "research_secondary_reference",
+        "role": "core",
+        "source_id": "xiong-yuan-2023",
+        "locator": "第81页注1",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "同注说明量地有时也用营造尺，标准不稳定；不可称明代唯一量地标准。",
+        "qualitative_uncertainty": "量地尺制使用不稳定",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.26,
+          "zhang_cm": 326,
+          "zhang_m": 3.26,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "qing-building",
+        "period": "清",
+        "period_order": 9,
+        "system_name": "营造尺 图录转引值",
+        "uses": [
+          "营造"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 32.03,
+        "source_value": "32.03 cm",
+        "value_kind": "research_secondary_reference",
+        "role": "core",
+        "source_id": "xi-qing-2009",
+        "locator": "第109页注2",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "论文转引古尺图录/文物辞典；原图录未核，不代表整个清代的唯一精确标准。",
+        "display_decimals": 2,
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.203,
+          "zhang_cm": 320.3,
+          "zhang_m": 3.203,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "qing-land",
+        "period": "清",
+        "period_order": 9,
+        "system_name": "量地尺 图录转引值",
+        "uses": [
+          "量地"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 34.37,
+        "source_value": "34.37 cm",
+        "value_kind": "research_secondary_reference",
+        "role": "core",
+        "source_id": "xi-qing-2009",
+        "locator": "第109页注2",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "与同一注释中的营造和裁衣尺配套比较；不同书中量地尺数值可能不同。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.437,
+          "zhang_cm": 343.7,
+          "zhang_m": 3.437,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "qing-tailoring",
+        "period": "清",
+        "period_order": 9,
+        "system_name": "裁衣尺 图录转引值",
+        "uses": [
+          "裁衣"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 35.55,
+        "source_value": "35.55 cm",
+        "value_kind": "research_secondary_reference",
+        "role": "core",
+        "source_id": "xi-qing-2009",
+        "locator": "第109页注2",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "作为该来源所列裁衣尺的代表值，非所有地区/时期裁衣尺统计均值。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.555,
+          "zhang_cm": 355.5,
+          "zhang_m": 3.555,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "republic-1915",
+        "period": "近代 1915年制度",
+        "period_order": 10,
+        "system_name": "营造尺库平制 营造尺",
+        "uses": [
+          "历史规定基准"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": 1915,
+        "year_role": "公布年",
+        "chi_cm": 32,
+        "source_value": "32 cm",
+        "value_kind": "legal_definition",
+        "role": "core",
+        "source_id": "law-1915",
+        "locator": "第二条甲；第三条甲",
+        "approximate": false,
+        "conversion_basis": "source_explicit",
+        "conversion_source_ids": [
+          "law-1915"
+        ],
+        "note": "1尺=0.32公尺，为文本定义值；不等同所有实际尺具达到该长度。",
+        "verification_note": "历史法律转录已核，原公报影印待补",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.2,
+          "zhang_cm": 320,
+          "zhang_m": 3.2,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "source_explicit",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "market-1930",
+        "period": "近现代市制",
+        "period_order": 11,
+        "system_name": "市尺",
+        "uses": [
+          "市用制基准"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": 1930,
+        "year_role": "所查历史文本标示的施行年",
+        "chi_cm": 33.333333333333336,
+        "source_value": "1/3 m",
+        "value_kind": "legal_definition",
+        "role": "core",
+        "source_id": "law-1929",
+        "locator": "第五、六条",
+        "approximate": false,
+        "conversion_basis": "source_explicit",
+        "conversion_source_ids": [
+          "law-1929"
+        ],
+        "note": "保留100/3厘米；1930年是所查历史文本标示施行年，不能用作全国民间标准即时统一的时间。",
+        "exact_fraction_cm": {
+          "numerator": 100,
+          "denominator": 3
+        },
+        "supporting_source_ids": [
+          "taizhou-gazetteer",
+          "zhangye-gazetteer"
+        ],
+        "verification_note": "原始公报影印待补；比例已有两处官方地方志交叉支持",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.333333333333,
+          "zhang_cm": 333.333333333333,
+          "zhang_m": 3.333333333333,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "source_explicit",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      }
+    ],
+    "context": [
+      {
+        "id": "xin-fangdou-inferred",
+        "period": "新莽",
+        "period_order": 3,
+        "system_name": "青铜方斗推算尺",
+        "uses": [
+          "量器铭文反推"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": 9,
+        "year_role": "器物铸造年",
+        "chi_cm": 23.03,
+        "source_value": "23.03 cm",
+        "value_kind": "artifact_inference",
+        "role": "context",
+        "source_id": "ncm-fangdou",
+        "locator": "末段",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "单件公元9年器物与铭文推算，和新莽一般性参考量值不同。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 2.303,
+          "zhang_cm": 230.3,
+          "zhang_m": 2.303,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "han-dayunshan",
+        "period": "西汉",
+        "period_order": 2,
+        "system_name": "盱眙大云山铜尺刻度量值",
+        "uses": [
+          "具体器物"
+        ],
+        "region": "江苏盱眙大云山江都王陵1号墓",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 23.3,
+        "source_value": "23.3 cm",
+        "value_kind": "specimen_scale_measurement",
+        "role": "context",
+        "source_id": "bai-han-2014",
+        "locator": "第二节 盱眙大云山铜尺",
+        "approximate": true,
+        "conversion_basis": "source_cun_marks_plus_general_zhang",
+        "conversion_source_ids": [
+          "bai-han-2014",
+          "moe-zhang"
+        ],
+        "note": "按刻度折合一尺约23.3厘米；器物通长34.6厘米含无刻度段，不能混用。",
+        "artifact_total_cm": 34.6,
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 2.33,
+          "zhang_cm": 233,
+          "zhang_m": 2.33,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "source_cun_marks_plus_general_zhang",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "taizhou-old",
+        "period": "民国时期台州",
+        "period_order": 10,
+        "system_name": "老尺",
+        "uses": [
+          "当地民间用尺"
+        ],
+        "region": "浙江台州",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 37,
+        "source_value": "1.11 市尺 = 37.0 cm",
+        "value_kind": "local_custom",
+        "role": "context",
+        "source_id": "taizhou-gazetteer",
+        "locator": "一、计量管理首段及换算表",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "地域性尺制；记录的1.11市尺与37厘米相符，不外推全国。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.7,
+          "zhang_cm": 370,
+          "zhang_m": 3.7,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "taizhou-tailoring",
+        "period": "民国时期台州",
+        "period_order": 10,
+        "system_name": "布店尺及裁缝尺",
+        "uses": [
+          "布匹交易",
+          "裁衣"
+        ],
+        "region": "浙江台州",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 33,
+        "source_value": "0.99 市尺 = 33.0 cm",
+        "value_kind": "local_custom",
+        "role": "context",
+        "source_id": "taizhou-gazetteer",
+        "locator": "一、计量管理首段及换算表",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "采用表中直接给出的0.99市尺=33厘米；同段与三元尺的相对关系仍待核。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.3,
+          "zhang_cm": 330,
+          "zhang_m": 3.3,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "taizhou-luban",
+        "period": "民国时期台州",
+        "period_order": 10,
+        "system_name": "当地鲁班尺",
+        "uses": [
+          "当地用尺"
+        ],
+        "region": "浙江台州",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 27.8,
+        "source_value": "27.8 cm",
+        "value_kind": "local_custom",
+        "role": "context",
+        "source_id": "taizhou-gazetteer",
+        "locator": "一、计量管理首段及换算表",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "仅为地方志所指当地用尺，不等同其他文献中约46厘米的门光尺。",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 2.78,
+          "zhang_cm": 278,
+          "zhang_m": 2.78,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      }
+    ],
+    "alternative": [
+      {
+        "id": "han-west-qiu",
+        "period": "西汉",
+        "period_order": 2,
+        "system_name": "日常用尺参考量值 丘光明旧说",
+        "uses": [
+          "日常用尺"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 23.1,
+        "source_value": "23.1 cm",
+        "value_kind": "reported_alternative",
+        "role": "alternative",
+        "source_id": "bai-han-2014",
+        "locator": "第一节转述1992年《历代度量衡》",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "文内转述的另一研究结论；不与23厘米平均。",
+        "alternative_to": "han-west-bai",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 2.31,
+          "zhang_cm": 231,
+          "zhang_m": 2.31,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "han-east-qiu",
+        "period": "东汉",
+        "period_order": 4,
+        "system_name": "日常用尺参考量值 丘光明旧说",
+        "uses": [
+          "日常用尺"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 23.5,
+        "source_value": "23.5 cm",
+        "value_kind": "reported_alternative",
+        "role": "alternative",
+        "source_id": "bai-han-2014",
+        "locator": "第一节转述1992年《历代度量衡》",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "保留研究分歧，非东汉另一并行尺制。",
+        "alternative_to": "han-east-bai",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 2.35,
+          "zhang_cm": 235,
+          "zhang_m": 2.35,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "ming-building-taizhou",
+        "period": "明",
+        "period_order": 8,
+        "system_name": "营造尺 地方志另一参考值",
+        "uses": [
+          "营造"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 31.7,
+        "source_value": "31.7 cm",
+        "value_kind": "reported_alternative",
+        "role": "alternative",
+        "source_id": "taizhou-gazetteer",
+        "locator": "首段",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "与研究注释中的32厘米分开保留，不制造精确连续增长曲线。",
+        "alternative_to": "ming-building",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.17,
+          "zhang_cm": 317,
+          "zhang_m": 3.17,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      },
+      {
+        "id": "qing-building-taizhou",
+        "period": "清",
+        "period_order": 9,
+        "system_name": "营造尺 地方志约值",
+        "uses": [
+          "营造"
+        ],
+        "region": "中国，来源所述适用范围",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 32,
+        "source_value": "32 cm",
+        "value_kind": "reported_alternative",
+        "role": "alternative",
+        "source_id": "taizhou-gazetteer",
+        "locator": "首段",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "综述约值32厘米与图录32.03厘米不同精度；不视作两种用途或两个年代。",
+        "alternative_to": "qing-building",
+        "uncertainty_interval_cm": null,
+        "derived": {
+          "cun_cm": 3.2,
+          "zhang_cm": 320,
+          "zhang_m": 3.2,
+          "formula": "cun_cm = chi_cm / 10; zhang_cm = chi_cm * 10; zhang_m = zhang_cm / 100",
+          "basis": "same_system_decimal_convention",
+          "note": "Calculated within the same unit system; not an independent historical measurement."
+        }
+      }
+    ],
+    "hold": [
+      {
+        "id": "taizhou-sanyuan",
+        "period": "民国时期台州",
+        "period_order": 10,
+        "system_name": "三元尺",
+        "uses": [
+          "当地用尺"
+        ],
+        "region": "浙江台州",
+        "year": null,
+        "year_role": null,
+        "chi_cm": 34.66,
+        "source_value": "1.004 市尺 = 34.66 cm",
+        "value_kind": "local_custom",
+        "role": "hold",
+        "source_id": "taizhou-gazetteer",
+        "locator": "常用计量单位换算表 三元尺行",
+        "approximate": true,
+        "conversion_basis": "same_system_decimal_convention",
+        "conversion_source_ids": [
+          "moe-chi",
+          "moe-zhang"
+        ],
+        "note": "原表1.004市尺=34.66厘米算术不一致；正文又称比市尺长4分。不得自行改为1.04后投入展示。",
+        "blocking_issue": "SOURCE_ARITHMETIC_CONFLICT",
+        "uncertainty_interval_cm": null,
+        "derived": null
+      }
+    ]
+  },
+  "comparison_groups": [
+    {
+      "id": "yuan-coexisting",
+      "label": "元代四种用尺",
+      "record_ids": [
+        "yuan-astronomy",
+        "yuan-building",
+        "yuan-official",
+        "yuan-tailoring"
+      ],
+      "interpretation": "按熊长云2023年考证，展示用途与制度并行；不声称同时同地存世四件尺具。",
+      "derived_comparison": {
+        "min_chi_cm": 24.367,
+        "max_chi_cm": 38.9,
+        "difference_per_chi_cm": 14.533,
+        "difference_per_zhang_m": 1.4533,
+        "note": "Difference between selected reference values; not a population distribution or confidence interval."
+      }
+    },
+    {
+      "id": "ming-coexisting",
+      "label": "明代用途差异",
+      "record_ids": [
+        "ming-building",
+        "ming-land",
+        "ming-tailoring"
+      ],
+      "interpretation": "同一研究注释的归纳；土地计量另有混用和不稳定情形。",
+      "derived_comparison": {
+        "min_chi_cm": 32,
+        "max_chi_cm": 35.6,
+        "difference_per_chi_cm": 3.6,
+        "difference_per_zhang_m": 0.36,
+        "note": "Difference between selected reference values; not a population distribution or confidence interval."
+      }
+    },
+    {
+      "id": "qing-coexisting",
+      "label": "清代三类用尺",
+      "record_ids": [
+        "qing-building",
+        "qing-land",
+        "qing-tailoring"
+      ],
+      "interpretation": "同一古尺图录转引所列三类代表值；不得充作全国全年唯一法定值。",
+      "derived_comparison": {
+        "min_chi_cm": 32.03,
+        "max_chi_cm": 35.55,
+        "difference_per_chi_cm": 3.52,
+        "difference_per_zhang_m": 0.352,
+        "note": "Difference between selected reference values; not a population distribution or confidence interval."
+      }
+    },
+    {
+      "id": "taizhou-local",
+      "label": "民国台州地方用尺",
+      "record_ids": [
+        "taizhou-luban",
+        "taizhou-tailoring",
+        "taizhou-old"
+      ],
+      "interpretation": "地方志所述地域性差异；三元尺因矛盾排除。",
+      "derived_comparison": {
+        "min_chi_cm": 27.8,
+        "max_chi_cm": 37,
+        "difference_per_chi_cm": 9.2,
+        "difference_per_zhang_m": 0.92,
+        "note": "Difference between selected reference values; not a population distribution or confidence interval."
+      }
+    }
+  ],
+  "artifact_references": [
+    {
+      "id": "tang-dragon-ruler",
+      "source_id": "ncm-tang-ruler",
+      "period": "唐",
+      "material": "铜",
+      "length_cm": 29.71,
+      "width_cm": 2.3,
+      "thickness_cm": 0.2,
+      "discovery": "1958年湖北武汉唐墓出土",
+      "unit_value_cm": null,
+      "use": "形制参考与实物证据入口",
+      "restriction": "此处只有器物总长，未作为一个尺的有效刻度量值录入。无图片使用授权结论。"
+    }
+  ],
+  "issues": [
+    {
+      "id": "HAN_ALTERNATIVES",
+      "record_ids": [
+        "han-west-bai",
+        "han-west-qiu",
+        "han-east-bai",
+        "han-east-qiu"
+      ],
+      "resolution": "保留作者和年份；主选2014作者结论，旧说作为备选，不取平均，不计为并行尺制。"
+    },
+    {
+      "id": "TANG_RATIO",
+      "record_ids": [
+        "tang-small",
+        "tang-large"
+      ],
+      "resolution": "保存两项原载值，不强制1.2倍精确关系；正式发布前优先补唐尺专门研究。"
+    },
+    {
+      "id": "YUAN_RATIO",
+      "record_ids": [
+        "yuan-building",
+        "yuan-official",
+        "yuan-tailoring"
+      ],
+      "resolution": "作者指出历史文献折算有精粗差异；35/31.5不是1.2，不为凑比例改动来源值。"
+    },
+    {
+      "id": "PRECISION",
+      "record_ids": [
+        "yuan-astronomy",
+        "qing-building",
+        "qing-land",
+        "qing-tailoring"
+      ],
+      "resolution": "保留来源数位，默认加约；不可据位数推测置信区间。"
+    },
+    {
+      "id": "MING_SECONDARY",
+      "record_ids": [
+        "ming-building",
+        "ming-land",
+        "ming-tailoring"
+      ],
+      "resolution": "本轮核到研究论文注释；若扩展为明代专章，应继续核其引用的明清度量衡专门研究。"
+    },
+    {
+      "id": "QING_ORIGINAL",
+      "record_ids": [
+        "qing-building",
+        "qing-land",
+        "qing-tailoring"
+      ],
+      "resolution": "原图录与文物辞典未核；现阶段必须标转引，图录个别实物与标准的关联仍待查。"
+    },
+    {
+      "id": "SOURCE_ARITHMETIC_CONFLICT",
+      "record_ids": [
+        "taizhou-sanyuan"
+      ],
+      "resolution": "隔离；1.004*(100/3)约33.467，不等于34.66，不静默修正。"
+    },
+    {
+      "id": "LOCAL_NOT_NATIONAL",
+      "record_ids": [
+        "taizhou-old",
+        "taizhou-tailoring",
+        "taizhou-luban"
+      ],
+      "resolution": "地域维度始终保留，不作为民国全国标准。"
+    },
+    {
+      "id": "LEGAL_TRANSCRIPTION",
+      "record_ids": [
+        "republic-1915",
+        "market-1930"
+      ],
+      "resolution": "法律转录与官方地方志共同用于试作；涉及法令发布日期和完整法律沿革时补原公报扫描。"
+    }
+  ]
+}

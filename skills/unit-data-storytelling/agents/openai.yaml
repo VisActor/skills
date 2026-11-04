@@ -1,4 +1,4 @@
 interface:
   display_name: "单元数据叙事"
-  short_description: "以有明确数据含义的点、图标、图片或文本单元，结合叙事编排、连续重组与交互，制作网页数据故事。"
+  short_description: "用单元可视化讲述交互式数据故事，可用粒子动画让点阵聚成形象、散开重组为数据分布。"
   default_prompt: "使用 $unit-data-storytelling，根据我的主题、数据和材料设计并实现网页数据故事，让单元的构图、比较与连续变化帮助读者理解关键发现。"

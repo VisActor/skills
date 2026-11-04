@@ -1,0 +1,368 @@
+{
+  "version": 1,
+  "preparedAt": "2026-10-12",
+  "publisher": "Apple",
+  "rightsNote": "Official Apple product imagery for local editorial prototype with source attribution. Public availability is not a separate redistribution license; review intended publication use before distributing an asset bundle.",
+  "transformPolicy": "Only format optimization; all compositions are preserved. No image generation, model substitution, raster crop, background removal, or recoloring.",
+  "assets": [
+    {
+      "modelId": "iphone-11",
+      "color": "黑色",
+      "sourcePage": "https://www.apple.com.cn/iphone/compare/",
+      "sourceStylesheet": "https://www.apple.com.cn/v/iphone/compare/am/built/styles/overview.built.css",
+      "originalUrl": "https://www.apple.com.cn/v/iphone/compare/am/images/overview/compare_iphone11_black__luskajpcyaaa_large_2x.jpg",
+      "localPath": "assets/iphone-11.webp",
+      "imageType": "official-product-front-back-pair",
+      "width": 612,
+      "height": 760,
+      "hasAlpha": false,
+      "byteLength": 30826,
+      "sourceSha256": "30a7cfc00d4cb906a6020e7591d5fba99dd384a90f9dc3157ac652f01b59613b",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedDisplay": {
+        "useFullComposition": true,
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Two views of one model, not two different products. Sizes within the canvas are source layout, not data encoding."
+      }
+    },
+    {
+      "modelId": "iphone-11-pro",
+      "color": "暗夜绿色",
+      "sourcePage": "https://www.apple.com.cn/iphone/compare/",
+      "sourceStylesheet": "https://www.apple.com.cn/v/iphone/compare/am/built/styles/overview.built.css",
+      "originalUrl": "https://www.apple.com.cn/v/iphone/compare/am/images/overview/compare_iphone11_pro_midnightgreen__ghme5a7mxnqm_large_2x.jpg",
+      "localPath": "assets/iphone-11-pro.webp",
+      "imageType": "official-product-front-back-pair",
+      "width": 612,
+      "height": 760,
+      "hasAlpha": false,
+      "byteLength": 55800,
+      "sourceSha256": "89cefc6bc9fb3454146ce73b29313f20c693aa2fdfeab0f2a748f1e4344cbfc5",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedDisplay": {
+        "useFullComposition": true,
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Two views of one model, not two different products. Sizes within the canvas are source layout, not data encoding."
+      }
+    },
+    {
+      "modelId": "iphone-12",
+      "color": "蓝色",
+      "sourcePage": "https://www.apple.com.cn/iphone/compare/",
+      "sourceStylesheet": "https://www.apple.com.cn/v/iphone/compare/am/built/styles/overview.built.css",
+      "originalUrl": "https://www.apple.com.cn/v/iphone/compare/am/images/overview/compare_iphone12_blue__ffk87fz4nuqi_large_2x.jpg",
+      "localPath": "assets/iphone-12.webp",
+      "imageType": "official-product-front-back-pair",
+      "width": 612,
+      "height": 760,
+      "hasAlpha": false,
+      "byteLength": 26324,
+      "sourceSha256": "6db1fa88727266bc8ad588e3a7ae6f44d589ba8c3036b89b31a9ba9581810853",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedDisplay": {
+        "useFullComposition": true,
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Two views of one model, not two different products. Sizes within the canvas are source layout, not data encoding."
+      }
+    },
+    {
+      "modelId": "iphone-12-mini",
+      "color": "蓝色",
+      "sourcePage": "https://www.apple.com.cn/iphone/compare/",
+      "sourceStylesheet": "https://www.apple.com.cn/v/iphone/compare/am/built/styles/overview.built.css",
+      "originalUrl": "https://www.apple.com.cn/v/iphone/compare/am/images/overview/compare_iphone12_mini_blue__iyr1fvvjraai_large_2x.jpg",
+      "localPath": "assets/iphone-12-mini.webp",
+      "imageType": "official-product-front-back-pair",
+      "width": 612,
+      "height": 760,
+      "hasAlpha": false,
+      "byteLength": 23394,
+      "sourceSha256": "29b8b243e507a501525966e8bc8f89a1a13567a01670e8a945fa746e46aef9fd",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedDisplay": {
+        "useFullComposition": true,
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Two views of one model, not two different products. Sizes within the canvas are source layout, not data encoding."
+      }
+    },
+    {
+      "modelId": "iphone-12-pro",
+      "color": "海蓝色",
+      "sourcePage": "https://www.apple.com.cn/iphone/compare/",
+      "sourceStylesheet": "https://www.apple.com.cn/v/iphone/compare/am/built/styles/overview.built.css",
+      "originalUrl": "https://www.apple.com.cn/v/iphone/compare/am/images/overview/compare_iphone12_pro_pacific_blue__gniw0xbrh7ue_large_2x.jpg",
+      "localPath": "assets/iphone-12-pro.webp",
+      "imageType": "official-product-front-back-pair",
+      "width": 612,
+      "height": 760,
+      "hasAlpha": false,
+      "byteLength": 30192,
+      "sourceSha256": "37bcaa2704523e0fae7e8d2ef6813714970ca9ff22d7d718807cbe078962d171",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedDisplay": {
+        "useFullComposition": true,
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Two views of one model, not two different products. Sizes within the canvas are source layout, not data encoding."
+      }
+    },
+    {
+      "modelId": "iphone-16-pro",
+      "color": "沙漠色钛金属",
+      "sourcePage": "https://www.apple.com.cn/iphone/compare/",
+      "sourceStylesheet": "https://www.apple.com.cn/v/iphone/compare/am/built/styles/overview.built.css",
+      "originalUrl": "https://www.apple.com.cn/v/iphone/compare/am/images/overview/compare_iphone16_pro_desert_titanium__ftixjyyve6qi_large_2x.jpg",
+      "localPath": "assets/iphone-16-pro.webp",
+      "imageType": "official-product-front-back-pair",
+      "width": 612,
+      "height": 760,
+      "hasAlpha": false,
+      "byteLength": 34094,
+      "sourceSha256": "d1440d9c9cd28ac8327de82ae28244c589de0e9bace9a6213362e007394a44c7",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedDisplay": {
+        "useFullComposition": true,
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Two views of one model, not two different products. Sizes within the canvas are source layout, not data encoding."
+      }
+    },
+    {
+      "modelId": "iphone-17",
+      "color": "薰衣草紫色",
+      "sourcePage": "https://www.apple.com.cn/iphone/compare/",
+      "sourceStylesheet": "https://www.apple.com.cn/v/iphone/compare/am/built/styles/overview.built.css",
+      "originalUrl": "https://www.apple.com.cn/v/iphone/compare/am/images/overview/compare_iphone17_lavender__etuerbkei0ya_large_2x.jpg",
+      "localPath": "assets/iphone-17.webp",
+      "imageType": "official-product-front-back-pair",
+      "width": 612,
+      "height": 760,
+      "hasAlpha": false,
+      "byteLength": 31102,
+      "sourceSha256": "2ced7489956aade0172153854c2f887c457045cf2fc754c8acc74938ed0c7331",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedDisplay": {
+        "useFullComposition": true,
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Two views of one model, not two different products. Sizes within the canvas are source layout, not data encoding."
+      }
+    },
+    {
+      "modelId": "iphone-17-pro",
+      "color": "星宇橙色",
+      "sourcePage": "https://www.apple.com.cn/iphone/compare/",
+      "sourceStylesheet": "https://www.apple.com.cn/v/iphone/compare/am/built/styles/overview.built.css",
+      "originalUrl": "https://www.apple.com.cn/v/iphone/compare/am/images/overview/compare_iphone17_pro_cosmic_orange__dm1qripnvq82_large_2x.jpg",
+      "localPath": "assets/iphone-17-pro.webp",
+      "imageType": "official-product-front-back-pair",
+      "width": 612,
+      "height": 760,
+      "hasAlpha": false,
+      "byteLength": 41576,
+      "sourceSha256": "9ddbe9f2a21c270fc2db153c949d0d7b0a4b04472ba86c74fe18db1ddf1ab76e",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedDisplay": {
+        "useFullComposition": true,
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Two views of one model, not two different products. Sizes within the canvas are source layout, not data encoding."
+      }
+    },
+    {
+      "modelId": "iphone-4",
+      "color": "黑色 / 深空灰色正面",
+      "sourcePage": "https://support.apple.com/zh-cn/108044",
+      "originalUrl": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-iphone4-colors.jpg",
+      "localPath": "assets/iphone-4.webp",
+      "imageType": "official-product-multiple-color-front-back-side-views",
+      "width": 956,
+      "height": 700,
+      "hasAlpha": false,
+      "byteLength": 67820,
+      "sourceSha256": "85b8f1dceb7f83bf23e8fce554487b42743aeeed205e4399dcd583ba8acf7304",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedFrame": {
+        "left": 243,
+        "top": 20,
+        "width": 337,
+        "height": 662
+      },
+      "recommendedDisplay": {
+        "useFullComposition": false,
+        "frameIn": "source-pixels",
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Use the recommended frame as a CSS overflow viewport of the front handset; retain the full source file. White source background is preserved. Original screen UI is illustrative and does not prove launch software version."
+      }
+    },
+    {
+      "modelId": "iphone-5s",
+      "color": "黑色 / 深空灰色正面",
+      "sourcePage": "https://support.apple.com/zh-cn/108044",
+      "originalUrl": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-iphone5s-colors.jpg",
+      "localPath": "assets/iphone-5s.webp",
+      "imageType": "official-product-multiple-color-front-back-side-views",
+      "width": 956,
+      "height": 700,
+      "hasAlpha": false,
+      "byteLength": 88214,
+      "sourceSha256": "35fb150df9e54fc697fc2850f5876793696b24809dfe1a0042c595a7da6a1289",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedFrame": {
+        "left": 366,
+        "top": 24,
+        "width": 316,
+        "height": 664
+      },
+      "recommendedDisplay": {
+        "useFullComposition": false,
+        "frameIn": "source-pixels",
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Use the recommended frame as a CSS overflow viewport of the front handset; retain the full source file. White source background is preserved. Original screen UI is illustrative and does not prove launch software version."
+      }
+    },
+    {
+      "modelId": "iphone-7",
+      "color": "黑色",
+      "sourcePage": "https://www.apple.com.cn/iphone/compare/",
+      "sourceStylesheet": "https://www.apple.com.cn/v/iphone/compare/am/built/styles/overview.built.css",
+      "originalUrl": "https://www.apple.com.cn/v/iphone/compare/am/images/overview/compare_iphone7_black__gdwleruk1yqa_large_2x.jpg",
+      "localPath": "assets/iphone-7.webp",
+      "imageType": "official-product-front-back-pair",
+      "width": 612,
+      "height": 760,
+      "hasAlpha": false,
+      "byteLength": 16166,
+      "sourceSha256": "adb194df4de45f2d2a6a04d86fa831618db34d44f3b2b3f872da5c428aeb2d18",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedDisplay": {
+        "useFullComposition": true,
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Two views of one model, not two different products. Sizes within the canvas are source layout, not data encoding."
+      }
+    },
+    {
+      "modelId": "iphone-8",
+      "color": "深空灰色",
+      "sourcePage": "https://www.apple.com.cn/iphone/compare/",
+      "sourceStylesheet": "https://www.apple.com.cn/v/iphone/compare/am/built/styles/overview.built.css",
+      "originalUrl": "https://www.apple.com.cn/v/iphone/compare/am/images/overview/compare_iphone8_spacegray__eer4a549ezwy_large_2x.jpg",
+      "localPath": "assets/iphone-8.webp",
+      "imageType": "official-product-front-back-pair",
+      "width": 612,
+      "height": 760,
+      "hasAlpha": false,
+      "byteLength": 22524,
+      "sourceSha256": "c20a770d93d4466266eb570489b1fab8807642860ccc2ace3f6f98c047efd137",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedDisplay": {
+        "useFullComposition": true,
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Two views of one model, not two different products. Sizes within the canvas are source layout, not data encoding."
+      }
+    },
+    {
+      "modelId": "iphone-8-plus",
+      "color": "深空灰色",
+      "sourcePage": "https://www.apple.com.cn/iphone/compare/",
+      "sourceStylesheet": "https://www.apple.com.cn/v/iphone/compare/am/built/styles/overview.built.css",
+      "originalUrl": "https://www.apple.com.cn/v/iphone/compare/am/images/overview/compare_iphone8plus_spacegray__ex27235welkm_large_2x.jpg",
+      "localPath": "assets/iphone-8-plus.webp",
+      "imageType": "official-product-front-back-pair",
+      "width": 612,
+      "height": 760,
+      "hasAlpha": false,
+      "byteLength": 26404,
+      "sourceSha256": "fb773e2bed04f19da387adcd776aa75f52e684f9300229e782c86b1f1703f818",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedDisplay": {
+        "useFullComposition": true,
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Two views of one model, not two different products. Sizes within the canvas are source layout, not data encoding."
+      }
+    },
+    {
+      "modelId": "iphone-air",
+      "color": "天蓝色",
+      "sourcePage": "https://www.apple.com.cn/iphone/compare/",
+      "sourceStylesheet": "https://www.apple.com.cn/v/iphone/compare/am/built/styles/overview.built.css",
+      "originalUrl": "https://www.apple.com.cn/v/iphone/compare/am/images/overview/compare_iphone_air_sky_blue__kvm15b10x6qa_large_2x.jpg",
+      "localPath": "assets/iphone-air.webp",
+      "imageType": "official-product-front-back-pair",
+      "width": 612,
+      "height": 760,
+      "hasAlpha": false,
+      "byteLength": 22506,
+      "sourceSha256": "c2afb0ea93bee950a88d30b01329e373ed40af271f8195daf4a8ef2efdaece2b",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedDisplay": {
+        "useFullComposition": true,
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Two views of one model, not two different products. Sizes within the canvas are source layout, not data encoding."
+      }
+    },
+    {
+      "modelId": "iphone-x",
+      "color": "深空灰色",
+      "sourcePage": "https://www.apple.com.cn/iphone/compare/",
+      "sourceStylesheet": "https://www.apple.com.cn/v/iphone/compare/am/built/styles/overview.built.css",
+      "originalUrl": "https://www.apple.com.cn/v/iphone/compare/am/images/overview/compare_iphoneX_spacegray__65fr9mfeduaa_large_2x.jpg",
+      "localPath": "assets/iphone-x.webp",
+      "imageType": "official-product-front-back-pair",
+      "width": 612,
+      "height": 760,
+      "hasAlpha": false,
+      "byteLength": 20356,
+      "sourceSha256": "c669c53f3f1c4167b902d611959e2d863eb3582e059009ffbcbebbfd60fdcbf3",
+      "transforms": [
+        "JPEG to WebP at quality 94; original dimensions and composition preserved; no crop, no background removal"
+      ],
+      "recommendedDisplay": {
+        "useFullComposition": true,
+        "background": "white",
+        "blendMode": "multiply",
+        "note": "Two views of one model, not two different products. Sizes within the canvas are source layout, not data encoding."
+      }
+    }
+  ],
+  "missingRequestedModels": [],
+  "totalOptimizedBytes": 537298
+}
