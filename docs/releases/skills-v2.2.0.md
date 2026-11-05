@@ -14,7 +14,8 @@ helpers, local preview tools and examples with prompts, inputs and results.
   that regroup into data views as readers progress.
 - Both Skills ship self-contained runtime modules, implementation references
   and local preview scripts. The example gallery includes historical measures,
-  CO2 emissions, iPhone prices, Hong Kong temperatures, hydropower and NBA data.
+  CO2 emissions, iPhone prices, Hong Kong temperatures, Minecraft players and
+  NBA data.
 
 Install either Skill with your agent or run:
 
