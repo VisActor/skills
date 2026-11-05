@@ -1,0 +1,1173 @@
+{
+  "world": [
+    {
+      "year": 1850,
+      "annual": 0.19684800000000002,
+      "cumulative": 4.769853
+    },
+    {
+      "year": 1851,
+      "annual": 0.19877899999999998,
+      "cumulative": 4.968631
+    },
+    {
+      "year": 1852,
+      "annual": 0.207595,
+      "cumulative": 5.176226
+    },
+    {
+      "year": 1853,
+      "annual": 0.21723699999999999,
+      "cumulative": 5.393463
+    },
+    {
+      "year": 1854,
+      "annual": 0.25503899999999996,
+      "cumulative": 5.648502000000001
+    },
+    {
+      "year": 1855,
+      "annual": 0.26026,
+      "cumulative": 5.908761999999999
+    },
+    {
+      "year": 1856,
+      "annual": 0.278246,
+      "cumulative": 6.1870069999999995
+    },
+    {
+      "year": 1857,
+      "annual": 0.28118099999999996,
+      "cumulative": 6.4681880000000005
+    },
+    {
+      "year": 1858,
+      "annual": 0.285548,
+      "cumulative": 6.753737
+    },
+    {
+      "year": 1859,
+      "annual": 0.302572,
+      "cumulative": 7.056309000000001
+    },
+    {
+      "year": 1860,
+      "annual": 0.332298,
+      "cumulative": 7.388607
+    },
+    {
+      "year": 1861,
+      "annual": 0.34919,
+      "cumulative": 7.737798
+    },
+    {
+      "year": 1862,
+      "annual": 0.355991,
+      "cumulative": 8.093789
+    },
+    {
+      "year": 1863,
+      "annual": 0.379535,
+      "cumulative": 8.473323
+    },
+    {
+      "year": 1864,
+      "annual": 0.409525,
+      "cumulative": 8.882849
+    },
+    {
+      "year": 1865,
+      "annual": 0.434851,
+      "cumulative": 9.3177
+    },
+    {
+      "year": 1866,
+      "annual": 0.449067,
+      "cumulative": 9.766768
+    },
+    {
+      "year": 1867,
+      "annual": 0.480814,
+      "cumulative": 10.247581
+    },
+    {
+      "year": 1868,
+      "annual": 0.49449400000000004,
+      "cumulative": 10.742074
+    },
+    {
+      "year": 1869,
+      "annual": 0.524731,
+      "cumulative": 11.266806
+    },
+    {
+      "year": 1870,
+      "annual": 0.536123,
+      "cumulative": 11.802929
+    },
+    {
+      "year": 1871,
+      "annual": 0.5697770000000001,
+      "cumulative": 12.372705
+    },
+    {
+      "year": 1872,
+      "annual": 0.630961,
+      "cumulative": 13.003667
+    },
+    {
+      "year": 1873,
+      "annual": 0.670467,
+      "cumulative": 13.674135
+    },
+    {
+      "year": 1874,
+      "annual": 0.628662,
+      "cumulative": 14.302797
+    },
+    {
+      "year": 1875,
+      "annual": 0.681048,
+      "cumulative": 14.983844999999999
+    },
+    {
+      "year": 1876,
+      "annual": 0.690583,
+      "cumulative": 15.674428
+    },
+    {
+      "year": 1877,
+      "annual": 0.704033,
+      "cumulative": 16.37846
+    },
+    {
+      "year": 1878,
+      "annual": 0.70965,
+      "cumulative": 17.088109
+    },
+    {
+      "year": 1879,
+      "annual": 0.759794,
+      "cumulative": 17.847904
+    },
+    {
+      "year": 1880,
+      "annual": 0.858228,
+      "cumulative": 18.706131000000003
+    },
+    {
+      "year": 1881,
+      "annual": 0.888173,
+      "cumulative": 19.594303
+    },
+    {
+      "year": 1882,
+      "annual": 0.938158,
+      "cumulative": 20.532460999999998
+    },
+    {
+      "year": 1883,
+      "annual": 0.9978619999999999,
+      "cumulative": 21.530324
+    },
+    {
+      "year": 1884,
+      "annual": 1.009762,
+      "cumulative": 22.540088
+    },
+    {
+      "year": 1885,
+      "annual": 1.017489,
+      "cumulative": 23.557576
+    },
+    {
+      "year": 1886,
+      "annual": 1.032987,
+      "cumulative": 24.590562000000002
+    },
+    {
+      "year": 1887,
+      "annual": 1.0842829999999999,
+      "cumulative": 25.674846000000002
+    },
+    {
+      "year": 1888,
+      "annual": 1.2013420000000001,
+      "cumulative": 26.876189
+    },
+    {
+      "year": 1889,
+      "annual": 1.2020979999999999,
+      "cumulative": 28.078285
+    },
+    {
+      "year": 1890,
+      "annual": 1.307255,
+      "cumulative": 29.385541
+    },
+    {
+      "year": 1891,
+      "annual": 1.3695979999999999,
+      "cumulative": 30.755139
+    },
+    {
+      "year": 1892,
+      "annual": 1.380536,
+      "cumulative": 32.135676
+    },
+    {
+      "year": 1893,
+      "annual": 1.36318,
+      "cumulative": 33.498855000000006
+    },
+    {
+      "year": 1894,
+      "annual": 1.4122270000000001,
+      "cumulative": 34.911086000000005
+    },
+    {
+      "year": 1895,
+      "annual": 1.4959639999999998,
+      "cumulative": 36.407047
+    },
+    {
+      "year": 1896,
+      "annual": 1.5454510000000001,
+      "cumulative": 37.952496
+    },
+    {
+      "year": 1897,
+      "annual": 1.6184049999999999,
+      "cumulative": 39.570902000000004
+    },
+    {
+      "year": 1898,
+      "annual": 1.7069670000000001,
+      "cumulative": 41.277871
+    },
+    {
+      "year": 1899,
+      "annual": 1.864424,
+      "cumulative": 43.142292999999995
+    },
+    {
+      "year": 1900,
+      "annual": 1.962884,
+      "cumulative": 45.105176
+    },
+    {
+      "year": 1901,
+      "annual": 2.0256279999999998,
+      "cumulative": 47.130805
+    },
+    {
+      "year": 1902,
+      "annual": 2.076956,
+      "cumulative": 49.207762
+    },
+    {
+      "year": 1903,
+      "annual": 2.264592,
+      "cumulative": 51.472352
+    },
+    {
+      "year": 1904,
+      "annual": 2.290255,
+      "cumulative": 53.762609
+    },
+    {
+      "year": 1905,
+      "annual": 2.440571,
+      "cumulative": 56.20318
+    },
+    {
+      "year": 1906,
+      "annual": 2.548978,
+      "cumulative": 58.752156
+    },
+    {
+      "year": 1907,
+      "annual": 2.9049490000000002,
+      "cumulative": 61.657105
+    },
+    {
+      "year": 1908,
+      "annual": 2.790395,
+      "cumulative": 64.4475
+    },
+    {
+      "year": 1909,
+      "annual": 2.907112,
+      "cumulative": 67.354609
+    },
+    {
+      "year": 1910,
+      "annual": 3.0502730000000002,
+      "cumulative": 70.404883
+    },
+    {
+      "year": 1911,
+      "annual": 3.097207,
+      "cumulative": 73.502094
+    },
+    {
+      "year": 1912,
+      "annual": 3.2539290000000003,
+      "cumulative": 76.756023
+    },
+    {
+      "year": 1913,
+      "annual": 3.524846,
+      "cumulative": 80.280867
+    },
+    {
+      "year": 1914,
+      "annual": 3.19775,
+      "cumulative": 83.478617
+    },
+    {
+      "year": 1915,
+      "annual": 3.148031,
+      "cumulative": 86.626648
+    },
+    {
+      "year": 1916,
+      "annual": 3.400232,
+      "cumulative": 90.026875
+    },
+    {
+      "year": 1917,
+      "annual": 3.5564989999999996,
+      "cumulative": 93.583375
+    },
+    {
+      "year": 1918,
+      "annual": 3.506085,
+      "cumulative": 97.089461
+    },
+    {
+      "year": 1919,
+      "annual": 3.0411129999999997,
+      "cumulative": 100.130578
+    },
+    {
+      "year": 1920,
+      "annual": 3.5467579999999996,
+      "cumulative": 103.677336
+    },
+    {
+      "year": 1921,
+      "annual": 3.1149940000000003,
+      "cumulative": 106.792328
+    },
+    {
+      "year": 1922,
+      "annual": 3.264717,
+      "cumulative": 110.05704700000001
+    },
+    {
+      "year": 1923,
+      "annual": 3.702996,
+      "cumulative": 113.760039
+    },
+    {
+      "year": 1924,
+      "annual": 3.716143,
+      "cumulative": 117.47618
+    },
+    {
+      "year": 1925,
+      "annual": 3.740633,
+      "cumulative": 121.21682000000001
+    },
+    {
+      "year": 1926,
+      "annual": 3.677407,
+      "cumulative": 124.894227
+    },
+    {
+      "year": 1927,
+      "annual": 4.0129470000000005,
+      "cumulative": 128.907172
+    },
+    {
+      "year": 1928,
+      "annual": 3.996311,
+      "cumulative": 132.903484
+    },
+    {
+      "year": 1929,
+      "annual": 4.28821,
+      "cumulative": 137.191688
+    },
+    {
+      "year": 1930,
+      "annual": 3.958094,
+      "cumulative": 141.149781
+    },
+    {
+      "year": 1931,
+      "annual": 3.539319,
+      "cumulative": 144.689109
+    },
+    {
+      "year": 1932,
+      "annual": 3.19259,
+      "cumulative": 147.881688
+    },
+    {
+      "year": 1933,
+      "annual": 3.362682,
+      "cumulative": 151.244375
+    },
+    {
+      "year": 1934,
+      "annual": 3.656186,
+      "cumulative": 154.900562
+    },
+    {
+      "year": 1935,
+      "annual": 3.835741,
+      "cumulative": 158.73629699999998
+    },
+    {
+      "year": 1936,
+      "annual": 4.207929,
+      "cumulative": 162.944234
+    },
+    {
+      "year": 1937,
+      "annual": 4.496713,
+      "cumulative": 167.440938
+    },
+    {
+      "year": 1938,
+      "annual": 4.229617,
+      "cumulative": 171.67056200000002
+    },
+    {
+      "year": 1939,
+      "annual": 4.4701319999999996,
+      "cumulative": 176.140703
+    },
+    {
+      "year": 1940,
+      "annual": 4.8846620000000005,
+      "cumulative": 181.025359
+    },
+    {
+      "year": 1941,
+      "annual": 4.99909,
+      "cumulative": 186.024438
+    },
+    {
+      "year": 1942,
+      "annual": 4.9825230000000005,
+      "cumulative": 191.006969
+    },
+    {
+      "year": 1943,
+      "annual": 5.075272,
+      "cumulative": 196.082234
+    },
+    {
+      "year": 1944,
+      "annual": 5.1624859999999995,
+      "cumulative": 201.244719
+    },
+    {
+      "year": 1945,
+      "annual": 4.289312,
+      "cumulative": 205.534031
+    },
+    {
+      "year": 1946,
+      "annual": 4.608545,
+      "cumulative": 210.14257800000001
+    },
+    {
+      "year": 1947,
+      "annual": 5.165204,
+      "cumulative": 215.30778099999998
+    },
+    {
+      "year": 1948,
+      "annual": 5.447883,
+      "cumulative": 220.755672
+    },
+    {
+      "year": 1949,
+      "annual": 5.204033000000001,
+      "cumulative": 225.95970300000002
+    },
+    {
+      "year": 1950,
+      "annual": 5.930406,
+      "cumulative": 231.890109
+    },
+    {
+      "year": 1951,
+      "annual": 6.381651,
+      "cumulative": 238.27175
+    },
+    {
+      "year": 1952,
+      "annual": 6.4677,
+      "cumulative": 244.739453
+    },
+    {
+      "year": 1953,
+      "annual": 6.651039,
+      "cumulative": 251.390484
+    },
+    {
+      "year": 1954,
+      "annual": 6.789734,
+      "cumulative": 258.180234
+    },
+    {
+      "year": 1955,
+      "annual": 7.444103,
+      "cumulative": 265.624344
+    },
+    {
+      "year": 1956,
+      "annual": 7.9262749999999995,
+      "cumulative": 273.550594
+    },
+    {
+      "year": 1957,
+      "annual": 8.185976,
+      "cumulative": 281.736562
+    },
+    {
+      "year": 1958,
+      "annual": 8.417517,
+      "cumulative": 290.154094
+    },
+    {
+      "year": 1959,
+      "annual": 8.855111999999998,
+      "cumulative": 299.009219
+    },
+    {
+      "year": 1960,
+      "annual": 9.386951,
+      "cumulative": 308.396156
+    },
+    {
+      "year": 1961,
+      "annual": 9.41499,
+      "cumulative": 317.81115600000004
+    },
+    {
+      "year": 1962,
+      "annual": 9.747241,
+      "cumulative": 327.558406
+    },
+    {
+      "year": 1963,
+      "annual": 10.266777,
+      "cumulative": 337.825156
+    },
+    {
+      "year": 1964,
+      "annual": 10.82447,
+      "cumulative": 348.649656
+    },
+    {
+      "year": 1965,
+      "annual": 11.310602999999999,
+      "cumulative": 359.96025
+    },
+    {
+      "year": 1966,
+      "annual": 11.862625,
+      "cumulative": 371.822875
+    },
+    {
+      "year": 1967,
+      "annual": 12.237371,
+      "cumulative": 384.06021899999996
+    },
+    {
+      "year": 1968,
+      "annual": 12.905273,
+      "cumulative": 396.9655
+    },
+    {
+      "year": 1969,
+      "annual": 13.761798,
+      "cumulative": 410.727312
+    },
+    {
+      "year": 1970,
+      "annual": 14.899139,
+      "cumulative": 425.626469
+    },
+    {
+      "year": 1971,
+      "annual": 15.503862,
+      "cumulative": 441.130312
+    },
+    {
+      "year": 1972,
+      "annual": 16.224579,
+      "cumulative": 457.354906
+    },
+    {
+      "year": 1973,
+      "annual": 17.077285,
+      "cumulative": 474.432188
+    },
+    {
+      "year": 1974,
+      "annual": 16.997912,
+      "cumulative": 491.430094
+    },
+    {
+      "year": 1975,
+      "annual": 16.988477,
+      "cumulative": 508.41856199999995
+    },
+    {
+      "year": 1976,
+      "annual": 17.862492,
+      "cumulative": 526.281062
+    },
+    {
+      "year": 1977,
+      "annual": 18.358039,
+      "cumulative": 544.6390620000001
+    },
+    {
+      "year": 1978,
+      "annual": 19.024742,
+      "cumulative": 563.663875
+    },
+    {
+      "year": 1979,
+      "annual": 19.50859,
+      "cumulative": 583.1724379999999
+    },
+    {
+      "year": 1980,
+      "annual": 19.409793,
+      "cumulative": 602.58225
+    },
+    {
+      "year": 1981,
+      "annual": 18.879756,
+      "cumulative": 621.4619379999999
+    },
+    {
+      "year": 1982,
+      "annual": 18.729741999999998,
+      "cumulative": 640.191688
+    },
+    {
+      "year": 1983,
+      "annual": 18.901775,
+      "cumulative": 659.0935
+    },
+    {
+      "year": 1984,
+      "annual": 19.45725,
+      "cumulative": 678.55075
+    },
+    {
+      "year": 1985,
+      "annual": 20.144863,
+      "cumulative": 698.695625
+    },
+    {
+      "year": 1986,
+      "annual": 20.438045,
+      "cumulative": 719.133688
+    },
+    {
+      "year": 1987,
+      "annual": 21.106188999999997,
+      "cumulative": 740.239875
+    },
+    {
+      "year": 1988,
+      "annual": 21.918756000000002,
+      "cumulative": 762.1585620000001
+    },
+    {
+      "year": 1989,
+      "annual": 22.200212999999998,
+      "cumulative": 784.3588120000001
+    },
+    {
+      "year": 1990,
+      "annual": 22.732145,
+      "cumulative": 807.091
+    },
+    {
+      "year": 1991,
+      "annual": 23.205592,
+      "cumulative": 830.296562
+    },
+    {
+      "year": 1992,
+      "annual": 22.520424,
+      "cumulative": 852.8169379999999
+    },
+    {
+      "year": 1993,
+      "annual": 22.749873,
+      "cumulative": 875.566875
+    },
+    {
+      "year": 1994,
+      "annual": 22.974598,
+      "cumulative": 898.541438
+    },
+    {
+      "year": 1995,
+      "annual": 23.516638999999998,
+      "cumulative": 922.058125
+    },
+    {
+      "year": 1996,
+      "annual": 24.233477,
+      "cumulative": 946.291562
+    },
+    {
+      "year": 1997,
+      "annual": 24.380322,
+      "cumulative": 970.671938
+    },
+    {
+      "year": 1998,
+      "annual": 24.295713,
+      "cumulative": 994.967625
+    },
+    {
+      "year": 1999,
+      "annual": 24.837771,
+      "cumulative": 1019.805375
+    },
+    {
+      "year": 2000,
+      "annual": 25.511482,
+      "cumulative": 1045.316812
+    },
+    {
+      "year": 2001,
+      "annual": 25.692994,
+      "cumulative": 1071.009875
+    },
+    {
+      "year": 2002,
+      "annual": 26.265331999999997,
+      "cumulative": 1097.275125
+    },
+    {
+      "year": 2003,
+      "annual": 27.652690999999997,
+      "cumulative": 1124.927875
+    },
+    {
+      "year": 2004,
+      "annual": 28.610023,
+      "cumulative": 1153.537875
+    },
+    {
+      "year": 2005,
+      "annual": 29.598951,
+      "cumulative": 1183.136875
+    },
+    {
+      "year": 2006,
+      "annual": 30.594151999999998,
+      "cumulative": 1213.731
+    },
+    {
+      "year": 2007,
+      "annual": 31.499256000000003,
+      "cumulative": 1245.23025
+    },
+    {
+      "year": 2008,
+      "annual": 32.04966,
+      "cumulative": 1277.279875
+    },
+    {
+      "year": 2009,
+      "annual": 31.513014,
+      "cumulative": 1308.793
+    },
+    {
+      "year": 2010,
+      "annual": 33.317672,
+      "cumulative": 1342.1105
+    },
+    {
+      "year": 2011,
+      "annual": 34.479988,
+      "cumulative": 1376.590625
+    },
+    {
+      "year": 2012,
+      "annual": 34.954733999999995,
+      "cumulative": 1411.54525
+    },
+    {
+      "year": 2013,
+      "annual": 35.27582,
+      "cumulative": 1446.821125
+    },
+    {
+      "year": 2014,
+      "annual": 35.465695,
+      "cumulative": 1482.286875
+    },
+    {
+      "year": 2015,
+      "annual": 35.403527000000004,
+      "cumulative": 1517.690375
+    },
+    {
+      "year": 2016,
+      "annual": 35.392832000000006,
+      "cumulative": 1553.083125
+    },
+    {
+      "year": 2017,
+      "annual": 35.974608999999994,
+      "cumulative": 1589.05775
+    },
+    {
+      "year": 2018,
+      "annual": 36.734004,
+      "cumulative": 1625.79175
+    },
+    {
+      "year": 2019,
+      "annual": 37.086566,
+      "cumulative": 1662.878375
+    },
+    {
+      "year": 2020,
+      "annual": 35.15823,
+      "cumulative": 1698.036625
+    },
+    {
+      "year": 2021,
+      "annual": 36.866862999999995,
+      "cumulative": 1734.9035
+    },
+    {
+      "year": 2022,
+      "annual": 37.527773,
+      "cumulative": 1772.43125
+    }
+  ],
+  "records": [
+    {
+      "id": "CHN",
+      "year": 2005,
+      "annual": 5.881991,
+      "cumulative": 99.416078
+    },
+    {
+      "id": "CHN",
+      "year": 2006,
+      "annual": 6.486185000000001,
+      "cumulative": 105.902258
+    },
+    {
+      "id": "CHN",
+      "year": 2007,
+      "annual": 6.974663,
+      "cumulative": 112.87692999999999
+    },
+    {
+      "id": "CHN",
+      "year": 2008,
+      "annual": 7.4924040000000005,
+      "cumulative": 120.369328
+    },
+    {
+      "id": "CHN",
+      "year": 2009,
+      "annual": 7.881491,
+      "cumulative": 128.25082
+    },
+    {
+      "id": "CHN",
+      "year": 2010,
+      "annual": 8.610048,
+      "cumulative": 136.860875
+    },
+    {
+      "id": "CHN",
+      "year": 2011,
+      "annual": 9.520153,
+      "cumulative": 146.38103099999998
+    },
+    {
+      "id": "CHN",
+      "year": 2012,
+      "annual": 9.767311,
+      "cumulative": 156.14832800000002
+    },
+    {
+      "id": "CHN",
+      "year": 2013,
+      "annual": 9.942371,
+      "cumulative": 166.09070300000002
+    },
+    {
+      "id": "CHN",
+      "year": 2014,
+      "annual": 9.976027,
+      "cumulative": 176.066734
+    },
+    {
+      "id": "CHN",
+      "year": 2015,
+      "annual": 9.85804,
+      "cumulative": 185.924781
+    },
+    {
+      "id": "CHN",
+      "year": 2016,
+      "annual": 9.748175,
+      "cumulative": 195.672953
+    },
+    {
+      "id": "CHN",
+      "year": 2017,
+      "annual": 10.000013999999998,
+      "cumulative": 205.672953
+    },
+    {
+      "id": "CHN",
+      "year": 2018,
+      "annual": 10.34679,
+      "cumulative": 216.01975
+    },
+    {
+      "id": "CHN",
+      "year": 2019,
+      "annual": 10.713515,
+      "cumulative": 226.73326600000001
+    },
+    {
+      "id": "CHN",
+      "year": 2020,
+      "annual": 10.896521,
+      "cumulative": 237.62978099999998
+    },
+    {
+      "id": "CHN",
+      "year": 2021,
+      "annual": 11.284400999999999,
+      "cumulative": 248.914188
+    },
+    {
+      "id": "CHN",
+      "year": 2022,
+      "annual": 11.711808000000001,
+      "cumulative": 260.625984
+    },
+    {
+      "id": "USA",
+      "year": 2005,
+      "annual": 6.126903,
+      "cumulative": 332.755438
+    },
+    {
+      "id": "USA",
+      "year": 2006,
+      "annual": 6.045326,
+      "cumulative": 338.80078100000003
+    },
+    {
+      "id": "USA",
+      "year": 2007,
+      "annual": 6.121542000000001,
+      "cumulative": 344.922312
+    },
+    {
+      "id": "USA",
+      "year": 2008,
+      "annual": 5.919220999999999,
+      "cumulative": 350.84153100000003
+    },
+    {
+      "id": "USA",
+      "year": 2009,
+      "annual": 5.486104,
+      "cumulative": 356.327656
+    },
+    {
+      "id": "USA",
+      "year": 2010,
+      "annual": 5.66925,
+      "cumulative": 361.996875
+    },
+    {
+      "id": "USA",
+      "year": 2011,
+      "annual": 5.538973,
+      "cumulative": 367.535844
+    },
+    {
+      "id": "USA",
+      "year": 2012,
+      "annual": 5.331467,
+      "cumulative": 372.867344
+    },
+    {
+      "id": "USA",
+      "year": 2013,
+      "annual": 5.4734359999999995,
+      "cumulative": 378.340781
+    },
+    {
+      "id": "USA",
+      "year": 2014,
+      "annual": 5.531385,
+      "cumulative": 383.872125
+    },
+    {
+      "id": "USA",
+      "year": 2015,
+      "annual": 5.3684970000000005,
+      "cumulative": 389.240656
+    },
+    {
+      "id": "USA",
+      "year": 2016,
+      "annual": 5.245362,
+      "cumulative": 394.486031
+    },
+    {
+      "id": "USA",
+      "year": 2017,
+      "annual": 5.195417,
+      "cumulative": 399.68140600000004
+    },
+    {
+      "id": "USA",
+      "year": 2018,
+      "annual": 5.361236,
+      "cumulative": 405.042656
+    },
+    {
+      "id": "USA",
+      "year": 2019,
+      "annual": 5.235912,
+      "cumulative": 410.27856199999997
+    },
+    {
+      "id": "USA",
+      "year": 2020,
+      "annual": 4.689953999999999,
+      "cumulative": 414.9685
+    },
+    {
+      "id": "USA",
+      "year": 2021,
+      "annual": 5.020111,
+      "cumulative": 419.988625
+    },
+    {
+      "id": "USA",
+      "year": 2022,
+      "annual": 5.055403,
+      "cumulative": 425.044062
+    }
+  ],
+  "audit": {
+    "worldTotal": 1772.43125,
+    "base1849": 4.573005,
+    "worldAnnualSumWithBase": 1772.4312399999997,
+    "annual2006": {
+      "world": 30.594151999999998,
+      "china": 6.486185000000001,
+      "usa": 6.045326,
+      "rest": 18.062640999999996
+    },
+    "cumulative2022": {
+      "world": 1772.43125,
+      "china": 260.625984,
+      "usa": 425.044062,
+      "rest": 1086.7612040000001
+    },
+    "splits": {
+      "1850": {
+        "before": 4.573005,
+        "since": 1767.8582450000001,
+        "sinceShare": 99.74199253144516,
+        "annualSum": 1767.8582349999997,
+        "annualMinusDifference": -0.000010000000429499778,
+        "years": 173
+      },
+      "1994": {
+        "before": 875.566875,
+        "since": 896.8643750000001,
+        "sinceShare": 50.600799043686465,
+        "annualSum": 896.864388,
+        "annualMinusDifference": 0.000012999999853491317,
+        "years": 29
+      },
+      "2000": {
+        "before": 1019.805375,
+        "since": 752.6258750000001,
+        "sinceShare": 42.46290935120897,
+        "annualSum": 752.625868,
+        "annualMinusDifference": -0.000007000000096013537,
+        "years": 23
+      },
+      "2022": {
+        "before": 1734.9035,
+        "since": 37.5277500000002,
+        "sinceShare": 2.1173035625500396,
+        "annualSum": 37.527773,
+        "annualMinusDifference": 0.000022999999806927462,
+        "years": 1
+      },
+      "2023": {
+        "before": 1772.43125,
+        "since": 0,
+        "sinceShare": 0,
+        "annualSum": 0,
+        "annualMinusDifference": 0,
+        "years": 0
+      }
+    },
+    "worldAnnualSumResidual": -0.000010000000429499778
+  },
+  "sources": {
+    "repository": "https://github.com/owid/co2-data",
+    "commit": "382ee6c662b0ece26e111f263b44c029afad7787",
+    "commit_date": "2026-06-02T16:33:39Z",
+    "retrieved_date": "2026-10-13",
+    "files": [
+      {
+        "file": "owid-co2-data.csv",
+        "url": "https://raw.githubusercontent.com/owid/co2-data/382ee6c662b0ece26e111f263b44c029afad7787/owid-co2-data.csv",
+        "sha256": "7f78e2b218ce4bb8c538bbec04fdc9a7982e8d40bff972e650df603899edd5f6",
+        "bytes": 14377942
+      },
+      {
+        "file": "owid-co2-codebook.csv",
+        "url": "https://raw.githubusercontent.com/owid/co2-data/382ee6c662b0ece26e111f263b44c029afad7787/owid-co2-codebook.csv",
+        "sha256": "33b4f5e00efd58c7b83863f736beba1af4df946b43642b0400c3ec38648e0e8e",
+        "bytes": 24149
+      },
+      {
+        "file": "README.md",
+        "url": "https://raw.githubusercontent.com/owid/co2-data/382ee6c662b0ece26e111f263b44c029afad7787/README.md",
+        "sha256": "6c78052304913b07e0b38b60f4e8488427cc2fb62d341ce66c1bf7974d21c9ed",
+        "bytes": 11950
+      }
+    ]
+  }
+}

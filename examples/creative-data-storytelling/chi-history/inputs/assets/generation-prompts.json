@@ -1,0 +1,28 @@
+{
+  "generator": "built-in image_gen",
+  "date": "2026-10-10",
+  "transparent_background": true,
+  "role": "Artistic era and life-scene illustrations; not artifact photographs, reconstructions, or measurement evidence",
+  "assets": [
+    {
+      "id": "qin-vessel",
+      "file": "qin-vessel.png",
+      "prompt": "Use case: historical-scene. Asset: a single isolated editorial illustration for an elegant Chinese history data story, with genuinely transparent background. Style: finely observed museum-object illustration, subtle hand-painted gouache and graphite, tactile worn surfaces, sophisticated natural pigments, soft directional light, realistic proportions, not cartoon, not a 3D render. Composition: centered complete object, generous transparent margin, no cropped edges, landscape canvas. No text, letters, numbers, captions, watermark, measurement ticks, border or UI. This is an artistic scene prop, not an authenticated reconstruction. Subject: an ancient Chinese Qin-style shallow rectangular bronze grain-measuring vessel with a short hollow rectangular handle extending left. Three-quarter elevated side view, patinated dark bronze with restrained green corrosion and dull warm highlights. Sparse loose millet grains beside it. No invented legible inscriptions. Object long and low, calm sculptural silhouette."
+    },
+    {
+      "id": "tang-silk",
+      "file": "tang-silk.png",
+      "prompt": "Use case: historical-scene. Asset: a single isolated editorial illustration for an elegant Chinese history data story, with genuinely transparent background. Style: finely observed museum-object illustration, subtle hand-painted gouache and graphite, tactile worn surfaces, sophisticated natural pigments, soft directional light, realistic proportions, not cartoon, not a 3D render. Composition: centered complete object, generous transparent margin, no cropped edges, landscape canvas. No text, letters, numbers, captions, watermark, measurement ticks, border or UI. This is an artistic scene prop, not an authenticated reconstruction. Subject: a small still life of a loosely rolled muted rust-red silk cloth with subtle Tang-inspired repeating floral roundels, a soft cream lining curling over one edge, and simple dark iron Chinese spring shears next to it. Three-quarter view. Rich quiet fabric folds, asymmetric composition, no ruler, no person, no modern scissor plastic. Object cluster wide with airy negative space."
+    },
+    {
+      "id": "yuan-robe",
+      "file": "yuan-robe.png",
+      "prompt": "Use case: historical-scene. Asset: a single isolated editorial illustration for an elegant Chinese history data story, with genuinely transparent background. Style: finely observed museum-object illustration, subtle hand-painted gouache and graphite, tactile worn surfaces, sophisticated natural pigments, soft directional light, realistic proportions, not cartoon, not a 3D render. Composition: centered complete object, generous transparent margin, no cropped edges, landscape canvas. No text, letters, numbers, captions, watermark, measurement ticks, border or UI. This is an artistic scene prop, not an authenticated reconstruction. Subject: a Yuan-era inspired ochre gold silk broad-sleeved robe, laid flat, right-crossed collar, long wide sleeves extending sideways, natural folds, subtle small cloud pattern and dark embroidered cuffs. It should be recognizable as a historical garment, softly weathered but dignified, beautifully drawn, seen directly from above. No mannequin, no person, no coat hanger, no measuring tape, no color card."
+    },
+    {
+      "id": "qing-model",
+      "file": "qing-model.png",
+      "prompt": "Use case: historical-scene. Asset: a single isolated editorial illustration for an elegant Chinese history data story, with genuinely transparent background. Style: finely observed museum-object illustration, subtle hand-painted gouache and graphite, tactile worn surfaces, sophisticated natural pigments, soft directional light, realistic proportions, not cartoon, not a 3D render. Composition: centered complete object, generous transparent margin, no cropped edges, landscape canvas. No text, letters, numbers, captions, watermark, measurement ticks, border or UI. This is an artistic scene prop, not an authenticated reconstruction. Subject: a Qing-era Chinese architect's small painted paper-and-wood architectural study model on a thin ivory rectangular base, jade-green wooden lattice walls and columns, restrained vermilion trim, removable roof hovering slightly above the frame to reveal structure, simplified scholarly model. Three-quarter elevated view, no humans or tools, no written labels. Delicate crafted edges and paper patina, wide horizontal model with transparent margins."
+    }
+  ]
+}

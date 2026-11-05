@@ -1,0 +1,467 @@
+{
+  "batchcomplete": "",
+  "query": {
+    "pages": {
+      "120639300": {
+        "pageid": 120639300,
+        "ns": 6,
+        "title": "File:HK night 佐敦 Jordan 西貢街 Saigon Street night July 2022 Px3 07.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E8%A5%BF%E8%B2%A2%E8%A1%97_Saigon_Street_night_July_2022_Px3_07.jpg/1920px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E8%A5%BF%E8%B2%A2%E8%A1%97_Saigon_Street_night_July_2022_Px3_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 1920,
+            "thumbheight": 1440,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E8%A5%BF%E8%B2%A2%E8%A1%97_Saigon_Street_night_July_2022_Px3_07.jpg/3840px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E8%A5%BF%E8%B2%A2%E8%A1%97_Saigon_Street_night_July_2022_Px3_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E8%A5%BF%E8%B2%A2%E8%A1%97_Saigon_Street_night_July_2022_Px3_07.jpg/1920px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E8%A5%BF%E8%B2%A2%E8%A1%97_Saigon_Street_night_July_2022_Px3_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 1920,
+              "height": 1440,
+              "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E8%A5%BF%E8%B2%A2%E8%A1%97_Saigon_Street_night_July_2022_Px3_07.jpg/3840px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E8%A5%BF%E8%B2%A2%E8%A1%97_Saigon_Street_night_July_2022_Px3_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/6/6c/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E8%A5%BF%E8%B2%A2%E8%A1%97_Saigon_Street_night_July_2022_Px3_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:HK_night_%E4%BD%90%E6%95%A6_Jordan_%E8%A5%BF%E8%B2%A2%E8%A1%97_Saigon_Street_night_July_2022_Px3_07.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=120639300",
+            "extmetadata": {
+              "DateTime": {
+                "value": "2022-07-18 02:58:02",
+                "source": "mediawiki-metadata",
+                "hidden": ""
+              },
+              "ObjectName": {
+                "value": "HK night 佐敦 Jordan 西貢街 Saigon Street night July 2022 Px3 07",
+                "source": "mediawiki-metadata"
+              },
+              "CommonsMetadataExtension": {
+                "value": 1.2,
+                "source": "extension",
+                "hidden": ""
+              },
+              "Categories": {
+                "value": "Self-published work|Hong Kong photographs taken on 2022-07-13|Files with coordinates missing SDC location of creation|Photographs by Anonymous Hong Kong Photographer 1|July 2022 in Jordan, Hong Kong|Taken with Xiaomi Poco X3 Pro in July 2022|Night in Jordan, Hong Kong|Buildings in Jordan, Hong Kong|Shops in Jordan, Hong Kong|Battery Street, Hong Kong - Buildings|2022 in Saigon Street, Hong Kong|Saigon Street, Hong Kong - Shops|Yau Tsim Mong Multicultural Activity Centre 油尖旺多元文化活動中心|2022 in Battery Street, Hong Kong|Battery Street, Jordan Hong Kong",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "Assessments": {
+                "value": "",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "GPSLatitude": {
+                "value": "22.307683",
+                "source": "commons-desc-page"
+              },
+              "GPSLongitude": {
+                "value": "114.168478",
+                "source": "commons-desc-page"
+              },
+              "GPSMapDatum": {
+                "value": "WGS-84",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "ImageDescription": {
+                "value": "HK night <a href=\"https://zh.wikipedia.org/wiki/%E4%BD%90%E6%95%A6\" class=\"extiw\" title=\"zh:佐敦\">zh:佐敦</a> Jordan <a href=\"https://zh.wikipedia.org/wiki/%E8%A5%BF%E8%B2%A2%E8%A1%97\" class=\"extiw\" title=\"zh:西貢街\">zh:西貢街</a> Saigon Street July 2022",
+                "source": "commons-desc-page"
+              },
+              "DateTimeOriginal": {
+                "value": "2022-07-13 19:35:59",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Bkemaoe_HOMA\" title=\"User:Bkemaoe HOMA\">Bkemaoe HOMA</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Restrictions": {
+                "value": "",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "License": {
+                "value": "cc-by-sa-4.0",
+                "source": "commons-templates",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      "120651318": {
+        "pageid": 120651318,
+        "ns": 6,
+        "title": "File:HK night 佐敦 Jordan 偉晴街 Wai Ching Street July 2022 Px3 19.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_19.jpg/1920px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_19.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 1920,
+            "thumbheight": 1440,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_19.jpg/3840px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_19.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_19.jpg/1920px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_19.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 1920,
+              "height": 1440,
+              "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_19.jpg/3840px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_19.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_19.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_19.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=120651318",
+            "extmetadata": {
+              "DateTime": {
+                "value": "2022-07-18 11:21:39",
+                "source": "mediawiki-metadata",
+                "hidden": ""
+              },
+              "ObjectName": {
+                "value": "HK night 佐敦 Jordan 偉晴街 Wai Ching Street July 2022 Px3 19",
+                "source": "mediawiki-metadata"
+              },
+              "CommonsMetadataExtension": {
+                "value": 1.2,
+                "source": "extension",
+                "hidden": ""
+              },
+              "Categories": {
+                "value": "Self-published work|Hong Kong photographs taken on 2022-07-13|Files with coordinates missing SDC location of creation|Photographs by Anonymous Hong Kong Photographer 1|July 2022 in Jordan, Hong Kong|Taken with Xiaomi Poco X3 Pro in July 2022|Night in Jordan, Hong Kong|Buildings in Jordan, Hong Kong|Shops in Jordan, Hong Kong|Wai Ching Street - Buildings|2022 in Wai Ching Street|Wai Ching Street - Shops",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "Assessments": {
+                "value": "",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "GPSLatitude": {
+                "value": "22.306950",
+                "source": "commons-desc-page"
+              },
+              "GPSLongitude": {
+                "value": "114.167846",
+                "source": "commons-desc-page"
+              },
+              "GPSMapDatum": {
+                "value": "WGS-84",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "ImageDescription": {
+                "value": "HK night <a href=\"https://zh.wikipedia.org/wiki/%E4%BD%90%E6%95%A6\" class=\"extiw\" title=\"zh:佐敦\">zh:佐敦</a> Jordan <a href=\"https://zh.wikipedia.org/wiki/%E5%81%89%E6%99%B4%E8%A1%97\" class=\"extiw\" title=\"zh:偉晴街\">zh:偉晴街</a> Wai Ching Street July 2022",
+                "source": "commons-desc-page"
+              },
+              "DateTimeOriginal": {
+                "value": "2022-07-13 19:30:44",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Bkemaoe_HOMA\" title=\"User:Bkemaoe HOMA\">Bkemaoe HOMA</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Restrictions": {
+                "value": "",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "License": {
+                "value": "cc-by-sa-4.0",
+                "source": "commons-templates",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      "120651337": {
+        "pageid": 120651337,
+        "ns": 6,
+        "title": "File:HK night 佐敦 Jordan 偉晴街 Wai Ching Street July 2022 Px3 29.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_29.jpg/1920px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 1920,
+            "thumbheight": 1440,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_29.jpg/3840px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_29.jpg/1920px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 1920,
+              "height": 1440,
+              "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_29.jpg/3840px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_29.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=120651337",
+            "extmetadata": {
+              "DateTime": {
+                "value": "2022-07-18 11:22:03",
+                "source": "mediawiki-metadata",
+                "hidden": ""
+              },
+              "ObjectName": {
+                "value": "HK night 佐敦 Jordan 偉晴街 Wai Ching Street July 2022 Px3 29",
+                "source": "mediawiki-metadata"
+              },
+              "CommonsMetadataExtension": {
+                "value": 1.2,
+                "source": "extension",
+                "hidden": ""
+              },
+              "Categories": {
+                "value": "Self-published work|Hong Kong photographs taken on 2022-07-13|Files with coordinates missing SDC location of creation|Photographs by Anonymous Hong Kong Photographer 1|July 2022 in Jordan, Hong Kong|Taken with Xiaomi Poco X3 Pro in July 2022|Wai Ching Commercial Building|Night in Jordan, Hong Kong|Buildings in Jordan, Hong Kong|Shops in Jordan, Hong Kong|Wai Ching Street - Buildings|2022 in Wai Ching Street|Wai Ching Street - Shops",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "Assessments": {
+                "value": "",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "GPSLatitude": {
+                "value": "22.307480",
+                "source": "commons-desc-page"
+              },
+              "GPSLongitude": {
+                "value": "114.167978",
+                "source": "commons-desc-page"
+              },
+              "GPSMapDatum": {
+                "value": "WGS-84",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "ImageDescription": {
+                "value": "HK night <a href=\"https://zh.wikipedia.org/wiki/%E4%BD%90%E6%95%A6\" class=\"extiw\" title=\"zh:佐敦\">zh:佐敦</a> Jordan <a href=\"https://zh.wikipedia.org/wiki/%E5%81%89%E6%99%B4%E8%A1%97\" class=\"extiw\" title=\"zh:偉晴街\">zh:偉晴街</a> Wai Ching Street July 2022",
+                "source": "commons-desc-page"
+              },
+              "DateTimeOriginal": {
+                "value": "2022-07-13 19:32:41",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Bkemaoe_HOMA\" title=\"User:Bkemaoe HOMA\">Bkemaoe HOMA</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Restrictions": {
+                "value": "",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "License": {
+                "value": "cc-by-sa-4.0",
+                "source": "commons-templates",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      "120651340": {
+        "pageid": 120651340,
+        "ns": 6,
+        "title": "File:HK night 佐敦 Jordan 偉晴街 Wai Ching Street July 2022 Px3 31.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_31.jpg/1920px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_31.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 1920,
+            "thumbheight": 1440,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_31.jpg/3840px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_31.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_31.jpg/1920px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_31.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 1920,
+              "height": 1440,
+              "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_31.jpg/3840px-HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_31.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_31.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:HK_night_%E4%BD%90%E6%95%A6_Jordan_%E5%81%89%E6%99%B4%E8%A1%97_Wai_Ching_Street_July_2022_Px3_31.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=120651340",
+            "extmetadata": {
+              "DateTime": {
+                "value": "2022-07-18 11:22:09",
+                "source": "mediawiki-metadata",
+                "hidden": ""
+              },
+              "ObjectName": {
+                "value": "HK night 佐敦 Jordan 偉晴街 Wai Ching Street July 2022 Px3 31",
+                "source": "mediawiki-metadata"
+              },
+              "CommonsMetadataExtension": {
+                "value": 1.2,
+                "source": "extension",
+                "hidden": ""
+              },
+              "Categories": {
+                "value": "Self-published work|Hong Kong photographs taken on 2022-07-13|Files with coordinates missing SDC location of creation|Photographs by Anonymous Hong Kong Photographer 1|July 2022 in Jordan, Hong Kong|Taken with Xiaomi Poco X3 Pro in July 2022|Night in Jordan, Hong Kong|Buildings in Jordan, Hong Kong|Shops in Jordan, Hong Kong|Wai Ching Street - Buildings|2022 in Wai Ching Street|Wai Ching Street - Shops",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "Assessments": {
+                "value": "",
+                "source": "commons-categories",
+                "hidden": ""
+              },
+              "GPSLatitude": {
+                "value": "22.307623",
+                "source": "commons-desc-page"
+              },
+              "GPSLongitude": {
+                "value": "114.168101",
+                "source": "commons-desc-page"
+              },
+              "GPSMapDatum": {
+                "value": "WGS-84",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "ImageDescription": {
+                "value": "HK night <a href=\"https://zh.wikipedia.org/wiki/%E4%BD%90%E6%95%A6\" class=\"extiw\" title=\"zh:佐敦\">zh:佐敦</a> Jordan <a href=\"https://zh.wikipedia.org/wiki/%E5%81%89%E6%99%B4%E8%A1%97\" class=\"extiw\" title=\"zh:偉晴街\">zh:偉晴街</a> Wai Ching Street July 2022",
+                "source": "commons-desc-page"
+              },
+              "DateTimeOriginal": {
+                "value": "2022-07-13 19:33:10",
+                "source": "commons-desc-page"
+              },
+              "Credit": {
+                "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Bkemaoe_HOMA\" title=\"User:Bkemaoe HOMA\">Bkemaoe HOMA</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "UsageTerms": {
+                "value": "Creative Commons Attribution-Share Alike 4.0",
+                "source": "commons-desc-page"
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              },
+              "Copyrighted": {
+                "value": "True",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Restrictions": {
+                "value": "",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "License": {
+                "value": "cc-by-sa-4.0",
+                "source": "commons-templates",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

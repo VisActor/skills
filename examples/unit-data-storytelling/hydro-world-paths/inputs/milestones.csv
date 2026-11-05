@@ -1,0 +1,13 @@
+key,minecraft_id,label_zh,title_source,family,accounts_with_record,accounts_with_date
+seed,minecraft:husbandry/plant_seed,播种,A Seedy Place,daily,593,593
+breed,minecraft:husbandry/breed_an_animal,繁育动物,The Parrots and the Bats,daily,463,463
+fish,minecraft:husbandry/fishy_business,钓到鱼,Fishy Business,daily,198,198
+trade,minecraft:adventure/trade,和村民交易,What a Deal!,trade,388,388
+diamond,minecraft:story/mine_diamond,获得钻石,Diamonds!,gear,879,879
+enchant,minecraft:story/enchant_item,为物品附魔,Enchanter,gear,378,378
+trim,minecraft:adventure/trim_with_any_armor_pattern,为盔甲加纹饰,Crafting a New Look,gear,345,345
+brew,minecraft:nether/brew_potion,解锁酿造进度,Local Brewery,gear,243,243
+nether,minecraft:story/enter_the_nether,进入下界,We Need to Go Deeper,explore,951,951
+end,minecraft:story/enter_the_end,进入末地,The End?,explore,690,690
+city,minecraft:end/find_end_city,到达末地城,The City at the End of the Game,explore,166,166
+wings,minecraft:end/elytra,获得鞘翅,Sky's the Limit,gear,825,825

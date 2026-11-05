@@ -1,0 +1,32 @@
+stat_id,description_source,unit,accounts,accounts_with_record,sum_raw,median_all,top3_sum_raw
+aviate,Distance gone by elytra,cm,1117,804,69591428868,8067195,5001289829
+biomes,Biomes discovered,int,1117,1117,35502,34,168
+breed,Animals bred,int,1117,463,50144,0,6752
+craft_armor,Pieces of armor crafted,int,1117,667,66217,3,28769
+craft_beacon,Beacons crafted,int,1117,93,27143,0,24965
+craft_bookshelf,Bookshelves crafted,int,1117,389,94748,0,21974
+craft_bread,"Breads, cakes and cookies made",int,1117,419,207654,0,38796
+craft_bundle,Bundles crafted,int,1117,155,34222,0,27173
+craft_clock,Clocks crafted,int,1117,68,2895,0,2195
+craft_compass,Compasses crafted,int,1117,332,27445,0,11274
+craft_ender_chest,Ender chests crafted,int,1117,275,34132,0,17290
+craft_glowstone,Glowstone crafted,int,1117,170,83925,0,38898
+craft_mineral_block,Mineral blocks crafted,int,1117,641,2563171,19,843551
+craft_paper,Paper produced,int,1117,486,6037212,0,4550857
+craft_recovery_compass,Recovery compasses crafted,int,1117,12,42,0,29
+craft_respawn_anchor,Respawn Anchors crafted,int,1117,34,3365,0,2235
+craft_sponge,Sponges dried,int,1117,86,12482,0,4225
+craft_spyglass,Spyglasses crafted,int,1117,76,2293,0,1671
+craft_sword,Swords crafted,int,1117,581,67468,1,52930
+craft_tnt,TNT crafted,int,1117,234,2832373,0,1527623
+craft_tools,Tools crafted,int,1117,851,213333,11,96965
+craft_turtle_helmet,Turtle Helmets crafted,int,1117,12,148,0,126
+craft_wool,Wool/carpets crafted/dyed,int,1117,513,1591600,0,825049
+enchant,Items enchanted,int,1117,378,15406,0,2088
+place_electrics,Redstone items placed,int,1117,621,2940128,3,1152678
+place_glass,Glass placed,int,1117,607,4692017,11,1188105
+place_stairs,Stairs built,int,1117,689,1290768,74,136171
+play,Total time played,ticks,1117,1117,11580962793,1579077,827391977
+ride_boat,Distance gone by boat,cm,1117,797,1497339432,275225,177457563
+trade,Villager trades,int,1117,388,3710190,0,1079374
+walk,Distance walked,cm,1117,1117,18932419264,3367555,1169077990

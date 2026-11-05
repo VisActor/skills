@@ -1,0 +1,26 @@
+{
+  "repository": "https://github.com/owid/co2-data",
+  "commit": "382ee6c662b0ece26e111f263b44c029afad7787",
+  "commit_date": "2026-06-02T16:33:39Z",
+  "retrieved_date": "2026-10-13",
+  "files": [
+    {
+      "file": "owid-co2-data.csv",
+      "url": "https://raw.githubusercontent.com/owid/co2-data/382ee6c662b0ece26e111f263b44c029afad7787/owid-co2-data.csv",
+      "sha256": "7f78e2b218ce4bb8c538bbec04fdc9a7982e8d40bff972e650df603899edd5f6",
+      "bytes": 14377942
+    },
+    {
+      "file": "owid-co2-codebook.csv",
+      "url": "https://raw.githubusercontent.com/owid/co2-data/382ee6c662b0ece26e111f263b44c029afad7787/owid-co2-codebook.csv",
+      "sha256": "33b4f5e00efd58c7b83863f736beba1af4df946b43642b0400c3ec38648e0e8e",
+      "bytes": 24149
+    },
+    {
+      "file": "README.md",
+      "url": "https://raw.githubusercontent.com/owid/co2-data/382ee6c662b0ece26e111f263b44c029afad7787/README.md",
+      "sha256": "6c78052304913b07e0b38b60f4e8488427cc2fb62d341ce66c1bf7974d21c9ed",
+      "bytes": 11950
+    }
+  ]
+}

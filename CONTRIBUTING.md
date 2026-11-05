@@ -18,7 +18,7 @@ VChart and VTable Skills are maintained in [VisActor/VChart](https://github.com/
 | Location | Contents |
 | --- | --- |
 | `skills/<skill-name>/` | Installable instructions, references, templates, assets and scripts |
-| `tests/<skill_name>/` | Python regressions for one Skill; use underscores for Python imports |
+| `tests/<skill_name>/` | Regressions for one Skill; use underscores for Python imports |
 | `tests/test_*` | Shared tooling checks and Node.js integration tests |
 | `cases/<skill-name>/<case-name>/` | Fixed Agent prompts, inputs and acceptance criteria; see the [case guide](cases/README.md) |
 | `tests/browser/cases/<skill-name>/<case-id>/` | Browser test configuration, inputs and expectations; see the [browser guide](tests/browser/cases/README.md) |
@@ -44,6 +44,8 @@ Node.js checks use Node 24, matching CI. Browser checks also need npm dependenci
 | Scope | Deterministic regressions | Task/browser coverage |
 | --- | --- | --- |
 | chart-storytelling | `uv run pytest tests/chart_storytelling -q`; `node --test tests/test_story_vseed.cjs` after browser dependency installation | [Fixed tasks](cases/README.md); HTML and Web-PPT smoke |
+| creative-data-storytelling | `uv run pytest tests/creative_data_storytelling -q`; `node --test tests/creative_data_storytelling/*.test.mjs` | Runtime mechanisms, preview and copied installation; fixed Agent tasks and automated browser smoke are not yet included |
+| unit-data-storytelling | `uv run pytest tests/unit_data_storytelling -q`; `node --test tests/unit_data_storytelling/*.test.mjs`; `uv run pytest tests/test_portable_install.py -q -k unit_story` | [Three examples with prompts and inputs](examples/README.md#unit-data-storytelling); no fixed browser smoke; [maintenance context](docs/unit-data-storytelling/context-map.md) |
 | editorial-magazine | `uv run pytest tests/editorial_magazine -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |
 | life-chronicle | `uv run pytest tests/life_chronicle -q` | No fixed tasks or browser smoke yet; inspect outputs with an agent |
 | person-poster | `uv run pytest tests/person_poster -q -m "not poster_browser"`; browser regressions use `-m poster_browser` after Python Chromium installation | [Fixed task](cases/person-poster/career-evidence/README.md); native-chart, HTML-only, PNG and failure smoke |
@@ -67,7 +69,7 @@ For Skill instruction changes, use a [fixed task](cases/README.md) or your own p
 `Skills CI` runs on PRs and pushes to `main` and `develop`:
 
 - **Lint and regressions** runs Ruff, Python tests excluding `poster_browser`, Chart Assistant's Node.js tests, and release packaging checks. Main PRs also preview any release plan.
-- **Browser smoke (no model)** runs browser regressions for stories, Web-PPT and person posters. It retains reports, logs, HTML and screenshots for seven days.
+- **Browser smoke (no model)** runs the unit-data-storytelling mechanism tests and browser regressions for stories, Web-PPT and person posters. It retains reports, logs, HTML and screenshots for seven days.
 
 Neither job needs model credentials. Browser tests check scripts and templates; they do not evaluate Agent-generated work. See the [browser guide](tests/browser/cases/README.md) for commands and current cases.
 

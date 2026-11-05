@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>可视化机制参考 · Creative Data Storytelling</title>
+<style>
+  :root{
+    font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    color:#193431;background:#f4f2eb;
+    --ui-ink:#193431;--ui-muted:#61716a;--ui-surface:#fffdf7;--ui-soft:#e9ede5;
+    --ui-border:#b6c1b7;--ui-accent:#234e45;--ui-on-accent:#fffdf7;--ui-focus:#a14b2e;
+    --ui-height:42px;--ui-radius:8px;
+  }
+  *{box-sizing:border-box}[hidden]{display:none!important}body{margin:0}main{max-width:1440px;margin:auto;padding:38px 5vw 80px}
+  header{border-bottom:1px solid #bac6bd;padding-bottom:28px;margin-bottom:34px}
+  h1{font-size:clamp(28px,3.6vw,48px);font-weight:580;letter-spacing:-.03em;margin:8px 0 14px}
+  h2{font-size:26px;font-weight:570}h3{font-size:21px;font-weight:550}p{line-height:1.8;max-width:76ch}
+  .eyebrow{font-size:12px;letter-spacing:.15em;color:#65766d}.muted,small{color:#61716a}
+  /* Local control styles: borrow individual parts, then supply the work's own theme. */
+  button,select{
+    font:inherit;font-size:14px;line-height:1.4;color:var(--ui-ink);
+    min-height:var(--ui-height);border:1px solid var(--ui-border);border-radius:var(--ui-radius);
+    padding:9px 14px;background:var(--ui-surface);
+  }
+  button{cursor:pointer}
+  button:not(:disabled):not([aria-pressed=true]):hover,select:not(:disabled):hover{border-color:var(--ui-accent);background:var(--ui-soft)}
+  button[aria-pressed=true]{background:var(--ui-accent);color:var(--ui-on-accent);border-color:var(--ui-accent)}
+  button:disabled,select:disabled{opacity:.55;cursor:not-allowed}
+  :focus-visible{outline:2px solid var(--ui-focus);outline-offset:3px}a{color:#28695a}
+  .controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0}.controls label{font-size:14px}
+  .state-controls,.segmented{display:inline-flex;align-items:center;gap:4px;padding:4px;border:1px solid var(--ui-border);border-radius:calc(var(--ui-radius) + 4px);background:var(--ui-soft)}
+  .state-controls button{min-height:calc(var(--ui-height) - 10px);padding:6px 12px;border:0;border-radius:var(--ui-radius);background:transparent}
+  .state-controls button[aria-pressed=true]{background:var(--ui-accent);color:var(--ui-on-accent)}
+  .state-controls button:not(:disabled):not([aria-pressed=true]):hover{background:var(--ui-surface)}
+  .explore-controls{align-items:flex-end;gap:24px}
+  .control-field{display:grid;gap:8px}
+  .control-label,.choice-field legend{font-size:13px;font-weight:600;line-height:1.4;color:var(--ui-muted)}
+  .select-wrap{position:relative;display:block}
+  .select-wrap select{appearance:none;width:100%;min-width:160px;padding-right:38px;cursor:pointer}
+  .select-wrap::after{content:"";position:absolute;right:16px;top:calc(50% - 5px);width:7px;height:7px;border:solid var(--ui-muted);border-width:0 1.5px 1.5px 0;transform:rotate(45deg);pointer-events:none}
+  select option{color:var(--ui-ink);background:var(--ui-surface)}
+  .button-quiet{border-color:transparent;background:transparent;text-decoration:underline;text-underline-offset:4px}
+  .choice-field{border:0;padding:0;margin:0;min-width:0}
+  .choice-field legend{padding:0;margin-bottom:8px}
+  .segmented label{position:relative}
+  .segmented input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+  .segmented span{display:flex;align-items:center;justify-content:center;min-height:calc(var(--ui-height) - 10px);padding:6px 16px;border-radius:var(--ui-radius);white-space:nowrap}
+  .segmented input:not(:checked):not(:disabled):hover + span{background:var(--ui-surface)}
+  .segmented input:checked + span{background:var(--ui-accent);color:var(--ui-on-accent)}
+  .segmented input:focus-visible + span{outline:2px solid var(--ui-focus);outline-offset:2px}
+  .segmented input:disabled{cursor:not-allowed}.segmented input:disabled + span{opacity:.55}
+  .check-control{display:inline-flex;align-items:center;gap:9px;cursor:pointer}
+  .check-control input{width:16px;height:16px;margin:0;accent-color:var(--ui-accent)}
+  .quant-section{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,2.5fr);gap:34px;align-items:start}
+  .reading-step{min-height:58vh;padding:20px 0 40px;border-top:1px solid #d2d9d0}
+  .reading-step:first-child{border-top:0}.reading-step p{font-size:15px}
+  .sticky{position:sticky;top:18px;min-width:0}
+  .plot{background:#fffdf7;border:1px solid #d2d9d0;border-radius:8px;overflow:hidden}
+  svg,canvas{display:block;width:100%;height:auto}svg text{font-family:inherit;font-size:16px}
+  .result{font-size:15px;min-height:32px}.status{font-size:12px;color:#6f7973}
+  .bounds-check{margin-top:12px;font-size:13px}.bounds-check pre{max-height:220px;overflow:auto;font-size:12px}
+  .mechanism-section,.unit-section{padding-top:35px;margin-top:30px;border-top:1px solid #bac6bd}
+  .mechanism-section .plot{max-width:980px}.scope{font-size:14px;color:#61716a}
+  .identity-surface{position:relative}
+  .identity-images{position:absolute;inset:0;pointer-events:none}
+  .identity-images img{position:absolute;display:block;height:auto;transform:translate(-50%,-100%)}
+  .unit-stage{position:relative}.unit-stage canvas{position:absolute;inset:0}
+  #unit-axis{pointer-events:none;position:relative}
+  .legend{display:flex;gap:20px;font-size:14px;margin:12px 0}.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
+  footer{margin-top:38px;border-top:1px solid #bac6bd;padding-top:20px;font-size:14px}
+</style>
+<main>
+  <header>
+    <div class="eyebrow">CREATIVE DATA STORYTELLING / MECHANICS</div>
+    <h1>让关系连续，让画面可读。</h1>
+    <p>用模拟数据观察几种局部机制：比较标注的交接、历史保留与聚焦、组成与累积、素材与数据一起移动，以及同批记录重组。按需要查看其中一段；这些段落不构成一条故事。</p>
+  </header>
+  <section id="comparison-example">
+  <h2 id="quantitative-example">从总体提取局部</h2>
+  <div class="controls">
+    <label class="check-control"><input type="checkbox" id="scroll-mode"> 启用本段滚动演示</label>
+    <span class="status">也可直接切换下方状态，观察停止操作、反向和快速切换。</span>
+  </div>
+  <section class="quant-section">
+    <aside>
+      <article class="reading-step"><h3>先建立总体</h3><p>六个样品共用一根量值轴。每个点是一个样品，纵向仅用于排列。</p></article>
+      <article class="reading-step"><h3>识别同一对对象</h3><p>在总体中标出 P 和 Q。名称保持对应，然后再改变观察范围。</p></article>
+      <article class="reading-step"><h3>把差值放进画面</h3><p>提取两者并缩放共同轴。它们仍是 42 和 54，改变的是观看尺度。</p></article>
+    </aside>
+    <div class="sticky">
+      <div id="quant-buttons" class="controls state-controls" role="group" aria-label="比较视图">
+        <button data-mode="overview" aria-pressed="true">全体</button>
+        <button data-mode="locate" aria-pressed="false">识别 P / Q</button>
+        <button data-mode="compare" aria-pressed="false">局部比较</button>
+        <button data-mode="explore" aria-pressed="false">自由比较</button>
+      </div>
+      <div class="plot">
+        <svg id="quant" viewBox="0 0 860 440" role="img" aria-label="模拟样品的共同尺度比较" aria-describedby="quant-summary"></svg>
+      </div>
+      <p id="quant-summary" class="result" aria-live="polite"></p>
+      <div id="comparison-controls" class="controls explore-controls" hidden>
+        <label class="control-field">
+          <span class="control-label">与 P 比较</span>
+          <span class="select-wrap"><select id="compare-with" aria-label="选择与 P 比较的样品"></select></span>
+        </label>
+        <button id="return-story" class="button-quiet">返回总体</button>
+      </div>
+      <span id="quant-status" class="status"></span>
+      <details class="bounds-check">
+        <summary>作者工具：当前占位</summary>
+        <p>按需测量本图的文字，列出越界或文字间重叠候选；正式作品按自己的构图声明要检查的关系。</p>
+        <button id="check-bounds">检查当前图形占位</button>
+        <p id="bounds-result" aria-live="polite"></p>
+        <details><summary>边界与候选记录</summary><pre id="bounds-details"></pre></details>
+      </details>
+    </div>
+  </section>
+  </section>
+  <section id="history-example" class="mechanism-section">
+    <h2>历史保留与局部聚焦</h2>
+    <p>后续观测接入同一轨迹；放大局部时，旧记录转为定位参照。这里用轨迹保留历史，其他设计也可以保留记录行、两期端点或聚合轮廓。</p>
+    <div id="history-buttons" class="controls state-controls" role="group" aria-label="历史视图">
+      <button data-mode="early" aria-pressed="true">显示到 2016</button>
+      <button data-mode="all" aria-pressed="false">完整轨迹</button>
+      <button data-mode="focus" aria-pressed="false">聚焦 2018—2024</button>
+    </div>
+    <div class="plot"><svg id="history" viewBox="0 0 860 490" role="img" aria-label="模拟观测的历史保留与局部定位" aria-describedby="history-summary"></svg></div>
+    <p id="history-summary" class="result" aria-live="polite"></p>
+    <p class="scope">借用尺度同步、显露边界与选区反解。保留哪些历史、何时聚焦、是否需要定位图由读者问题决定；此处连线仅适用于可连接的连续序列。</p>
+  </section>
+  <section id="amount-example" class="mechanism-section">
+    <h2>整体展开与增量接入</h2>
+    <p>三批新增量合计 60，可以展开解释组成，也可以接到已有的 40 上。移动同一组分段，让长度与加总关系贯穿各状态。</p>
+    <div id="amount-buttons" class="controls state-controls" role="group" aria-label="组成与累积视图">
+      <button data-mode="whole" aria-pressed="true">新增整体</button>
+      <button data-mode="parts" aria-pressed="false">展开组成</button>
+      <button data-mode="base" aria-pressed="false">接入原有量</button>
+      <button data-mode="total" aria-pressed="false">读累计总量</button>
+    </div>
+    <div class="plot"><svg id="amounts" viewBox="0 0 860 440" role="img" aria-label="可加总模拟数量的组成与累积" aria-describedby="amount-summary"></svg></div>
+    <p id="amount-summary" class="result" aria-live="polite"></p>
+    <p class="scope">借用带 ID 的区间与可中断过渡。仅覆盖无重复、同单位的非负量；基底、顺序、分项标签和展开方向需要按材料决定。负项、流入流出及比例归一化另行处理。</p>
+  </section>
+  <section id="identity-example" class="mechanism-section">
+    <h2>素材跟随数据对象</h2>
+    <p>三件虚构样品共用价格轴。图片帮助识别杯子，点的位置表达价格；比较两件样品时，图片、名称与价格点一起移动。</p>
+    <div id="identity-buttons" class="controls state-controls" role="group" aria-label="素材与数据的衔接">
+      <button data-mode="all" aria-pressed="true">三件样品</button>
+      <button data-mode="pair" aria-pressed="false">对照玻璃杯与随行杯</button>
+    </div>
+    <div class="plot"><div class="identity-surface">
+      <svg id="identity" viewBox="0 0 860 430" role="img" aria-label="虚构杯子样品的价格比较" aria-describedby="identity-summary"></svg>
+      <div class="identity-images" aria-hidden="true">
+        <img data-object-image="glass" src="identity-glass.svg" alt="" width="120" height="120" hidden>
+        <img data-object-image="mug" src="identity-mug.svg" alt="" width="120" height="120" hidden>
+        <img data-object-image="travel" src="identity-travel.svg" alt="" width="120" height="120" hidden>
+      </div>
+    </div></div>
+    <p id="identity-summary" class="result" aria-live="polite"></p>
+    <p class="scope">借用同一姿态驱动 HTML 图片与 SVG 图形的接法；图片尺寸只为识别，不表示价格或实物大小。素材、锚点偏移和比较对象由作品决定，普通配图无需加入这套控制。</p>
+  </section>
+  <section id="unit-example" class="unit-section">
+    <h2>同一批记录，改变观察问题</h2>
+    <p>60 个模拟项目：A 类项目最多，C 类项目少但服务时长较大。记录身份与类别颜色贯穿各状态；书页轮廓只承担主题识别。</p>
+    <div id="unit-buttons" class="controls state-controls" role="group" aria-label="单元视图">
+      <button data-mode="cover" aria-pressed="true">书页轮廓</button>
+      <button data-mode="distribution" aria-pressed="false">测量值分布</button>
+      <button data-mode="groups" aria-pressed="false">按类别计数</button>
+      <button data-mode="weights" aria-pressed="false">按服务时长</button>
+    </div>
+    <div class="plot unit-stage">
+      <canvas id="units" width="860" height="460" role="img" aria-label="每个圆代表一个模拟项目" aria-describedby="unit-summary unit-detail"></canvas>
+      <svg id="unit-axis" viewBox="0 0 860 460" aria-hidden="true"></svg>
+    </div>
+    <div class="legend"><span><i style="background:#297c6c"></i>A 类</span><span><i style="background:#be633c"></i>B 类</span><span><i style="background:#7c74a8"></i>C 类</span></div>
+    <p id="unit-summary" class="result" aria-live="polite"></p>
+    <div class="controls explore-controls">
+      <fieldset class="choice-field">
+        <legend>类别</legend>
+        <div id="group-filter" class="segmented">
+          <label><input type="radio" name="project-group" value="all" checked><span>全部</span></label>
+          <label><input type="radio" name="project-group" value="A"><span>A 类</span></label>
+          <label><input type="radio" name="project-group" value="B"><span>B 类</span></label>
+          <label><input type="radio" name="project-group" value="C"><span>C 类</span></label>
+        </div>
+      </fieldset>
+      <label class="control-field">
+        <span class="control-label">项目详情</span>
+        <span class="select-wrap"><select id="record-select" aria-label="选择项目查看详情"></select></span>
+      </label>
+    </div>
+    <p id="unit-detail" class="muted" aria-live="polite"></p>
+    <span id="unit-status" class="status"></span>
+  </section>
+  <footer>
+    <a href="design-frames.svg">查看三种关系的关键画面示意</a>
+    <p>可直接复用：../runtime/ 中的舞台控制、播放器、尺度、布局、读数格式、SVG 更新与占位测量函数。此页由独立示例模块装配；按需读取 comparison、history、amounts、identity 或 units.mjs。实际作品自行设计布局、素材、叙事和渲染。</p>
+  </footer>
+</main>
+<script type="module" src="./demo.mjs"></script>
+</html>

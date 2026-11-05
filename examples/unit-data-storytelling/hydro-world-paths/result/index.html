@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1b1c2e">
+<title>翅膀先到了。 · 方块田野手记</title>
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<main>
+  <div id="book">
+    <section id="stage" data-step="0" aria-label="翅膀先到了，滚动阅读">
+      <div class="sky" aria-hidden="true"></div>
+      <header class="mast">
+        <a class="brand" href="#cover" aria-label="方块田野手记，回到封面"><img src="assets/mark.svg" alt=""><span>方块田野手记</span><small>BLOCK FIELDNOTES</small></a>
+        <button class="plain" data-sources>资料与口径 <span aria-hidden="true">↗</span></button>
+      </header>
+      <div class="cover" id="coverVisual">
+        <div class="hero-words">
+          <p class="eyebrow"><i></i> 我的世界 <span>/</span> 多人生存服观察</p>
+          <h1>翅膀<br><em>先到了<span>。</span></em></h1>
+          <p class="opening">在《我的世界》，末地城附近的船上藏着一双翅膀。<br class="wide">玩家总是先找到城，再得到它吗？</p>
+          <button id="start" class="enter">翻开存档 <span aria-hidden="true">↓</span></button>
+        </div>
+        <div class="hero-art">
+          <div class="art-aura"></div>
+          <svg class="flight-etch" viewBox="0 0 830 570" aria-hidden="true">
+            <path d="M-8 456 C89 493 77 372 159 321 S352 309 397 207" fill="none" stroke="#ccb3cd" stroke-opacity=".45" stroke-dasharray="2 8"/>
+            <path d="M495 399 Q645 455 753 372" fill="none" stroke="#c3a2ac" stroke-opacity=".21" stroke-dasharray="2 7"/>
+          </svg>
+          <img class="hero-island" src="assets/end-world.svg" alt="悬岛上的末地城、停泊的飞船和一个展开鞘翅滑翔的玩家，原创示意插画。">
+        </div>
+      </div>
+      <div class="evidence" id="evidence" inert>
+        <article id="words" class="words" aria-live="polite" aria-atomic="true"></article>
+        <div class="visual">
+          <div class="plot-meta"><span id="plate-name"></span><span id="plot-scope"></span></div>
+          <div class="plot" role="img" id="plot" aria-label="">
+            <canvas id="marks" width="880" height="456" aria-hidden="true"></canvas>
+            <svg id="drawing" viewBox="0 0 880 456" preserveAspectRatio="none" aria-hidden="true"><defs>
+              <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(32)"><path d="M0 0V8" stroke="#e6edaa" stroke-opacity=".38" stroke-width="1.4"/></pattern>
+            </defs><g id="underlay"></g><g id="ink"></g></svg>
+          </div>
+          <div class="plot-note" id="plot-note"></div>
+        </div>
+      </div>
+      <footer class="rail">
+        <span class="rail-caption">HYDRO VANILLA SMP &nbsp; / &nbsp; 2026.11.03</span>
+        <span class="cover-caption">图版一 &nbsp; 末地城与它的船</span>
+        <div class="turns"><button id="back" aria-label="上一页">↑</button><button id="forward" aria-label="下一页"><b id="next-word">开始阅读</b> ↓</button></div>
+      </footer>
+    </section>
+  </div>
+  <section class="colophon" id="ground">
+    <img src="assets/field.svg" alt="一小块耕地，水从麦田与台阶之间流过。" loading="lazy">
+    <div><p class="eyebrow land-kicker"><i></i> 地面手记</p><h2><span>落到地上，</span><span>还有事做。</span></h2>
+      <p>同一份存档，可以先有翅膀，再有第一粒种子。有人展开过双翼，也给地面添了一级台阶。</p>
+      <div class="credits"><button class="plain" data-sources>数据与计算方法 ↗</button><button class="plain" id="restart">回到封面 ↑</button></div>
+    </div>
+  </section>
+</main>
+<dialog id="sources" aria-labelledby="source-title">
+ <form method="dialog"><button aria-label="关闭资料">×</button></form>
+ <p class="eyebrow"><i></i> FIELD NOTES</p><h2 id="source-title">这份存档怎么读</h2>
+ <p>数据来自 <a href="https://hydrosmp.com/" target="_blank" rel="noreferrer">Hydro Vanilla SMP</a> 的<a href="https://api.hydrosmp.com/" target="_blank" rel="noreferrer">公开统计 API</a>。使用 2026 年 11 月 3 日 14:19（北京时间）的冻结快照。样本为游玩时长、已发现环境种类都有正值记录的 1,117 个账号。文中的“人”按账号计。</p>
+ <h3>进度有先后</h3><p>12 项所选进度的首次解锁按存档时间排列，相同秒数保留并列。文中比较的鞘翅与到城、鞘翅与播种两对都没有同秒记录。“先”和“后”只比较两项印记，不代表中间没有做过别的事，也不能确定装备由谁交付。选中进度的观测日期为 2025-07-11 至 2026-11-03（UTC），各账号的观测长短不同。</p>
+ <h3>两条记录能重合多少</h3><p>飞行、放置与制作是截至快照的累计记录，有正值才算做过。行为表只给出组内人数，不能逐个配对，也不能把行为放在获得翅膀之前或之后。在 825 人里有 804 人飞过，留给“没飞过”的位置只有 21 个。举例说，635 个放过楼梯的账号中，至少 614 个也飞过，实际可能是 614 到 635 个。末节的色带表示界限，不代表匿名个体的真实排列。</p>
+ <h3>玩法与插画</h3><p>原版游戏里，鞘翅可在末地城附近的末地船找到。见 <a href="https://www.minecraft.net/en-us/article/end-city" target="_blank" rel="noreferrer">Minecraft 官方的末地城介绍</a>。场景和图符为本作原创示意插画。公开数据的使用遵循 <a href="https://api.hydrosmp.com/#terms" target="_blank" rel="noreferrer">Hydro API 使用条款</a>。</p>
+</dialog>
+<noscript><p class="noscript">此交互作品需要启用 JavaScript。快照中有 825 个账号获得鞘翅，165 个也到过末地城，其中 133 个先拿到鞘翅。至少 614 个账号既飞过，也放过楼梯。</p></noscript>
+<script src="assets/data.js"></script><script src="assets/story.js"></script>
+</body></html>

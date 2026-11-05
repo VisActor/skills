@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f3f1ea"><meta name="description" content="从 iPhone 4 到 2026 年，把机型、容量和价签放回同一个坐标，重新理解 iPhone 的价格。">
+<title>一部 iPhone，几种价格？ · 价格的形状</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect rx='8' width='40' height='40' fill='%23293fd4'/%3E%3Ctext x='10' y='29' font-size='27' fill='white'%3E¥%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css"><script type="module" src="story.mjs"></script>
+</head>
+<body>
+<a href="#reading" class="skip">跳过动画，阅读故事</a>
+<main>
+<section id="scroll-story" aria-label="iPhone 价格的连续可视化叙事">
+<div id="stage" class="stage" data-chapter="0">
+<div class="paper" aria-hidden="true"></div>
+<header class="masthead">
+<button class="brand" id="restart" aria-label="回到故事开头"><b>¥</b><span>价格的形状<small>THE SHAPE OF PRICE</small></span></button>
+<p class="edition">iPhone <span>2010 — 2026</span><i>一份关于选择的价格记录</i></p>
+<div class="header-actions"><button id="motion-toggle" aria-pressed="false">减弱动态</button><button id="source-open">数据与来源 <span>↗</span></button></div>
+</header>
+<div class="chapter-copy" id="copy"><div class="eyebrow"><span id="chapter-index">01</span><i></i><span id="chapter-kicker">从一部熟悉的手机开始</span></div><h1 id="headline">一部 iPhone，<br>几种<span>价格？</span></h1><p class="dek" id="description">从第一部 iPhone 的记忆出发，<br>把十多年的价签，重新放在一起。</p><div id="takeaway"></div><div id="supporting-note"></div></div>
+<div class="plot-heading"><span id="plot-title">一部手机的起点</span><span id="plot-scope">中国大陆官方首发价 · 人民币</span></div>
+<svg id="chart" role="group" aria-label="按价格排列的 iPhone 机型与容量"><defs><linearGradient id="stem-fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#314bd4" stop-opacity=".4"/><stop offset="1" stop-color="#314bd4" stop-opacity="0"/></linearGradient></defs><g id="grid"></g><g id="history"></g><g id="links"></g><g id="points"></g><g id="labels"></g><g id="annotations"></g></svg>
+<div id="devices" aria-hidden="true"></div>
+<div id="model-identities"></div>
+<div id="comparison-steps" hidden role="group" aria-label="容量比较步骤"><button data-comparison="entry" aria-pressed="true"><small>01</small> 比较入门价</button><span>→</span><button data-comparison="matched" aria-pressed="false"><small>02</small> 对齐到 256GB</button></div>
+<div id="hero-caption"><span>01 / OBJECT STUDY</span><p>玻璃、金属，与记忆中的价签。</p></div>
+<div id="comparison-caption"></div>
+<div id="explore-controls" hidden><div class="segmented" role="group" aria-label="选择容量比较"><button data-cap="entry" aria-pressed="true">各款起售价</button><button data-cap="256GB" aria-pressed="false">同为 256GB</button><button data-cap="512GB" aria-pressed="false">同为 512GB</button></div><label><input type="checkbox" id="show-other" checked> 包含 SE / e / Air 等分支</label><span>点击价点，查看这款手机</span></div>
+<div class="legend" id="legend"><span><i class="blue"></i>常规及其他系列</span><span><i class="orange"></i>X / XS / Pro 系列</span></div>
+<footer class="stage-footer"><button id="claim-source">本段依据 ↗</button><span id="axis-caption">首发标价 · 未作通胀调整</span><button id="next">展开价签 <span>↓</span></button></footer>
+<nav id="chapter-nav" aria-label="章节跳转"></nav>
+<div id="scroll-indicator"><span>向下滚动，看价签展开</span><i></i></div>
+<div class="progress"><i id="progress"></i></div>
+<p id="error" role="alert" hidden></p>
+</div>
+</section>
+<section id="reading" class="reading" aria-label="可阅读的故事与数据摘要"><p class="eyebrow">THE RECORD BEHIND THE STORY</p><h2>价签之外，<br>我们知道多少？</h2><div class="reading-intro"><p>这里记录的是中国大陆官方含税标价，包含首发与明确标出的后续调价。它不等于消费者实际支付，也没有衡量通胀后的购买负担。</p><p>产品变了，容量菜单变了，价格也会重新调整。成本证据帮助我们理解压力，却不能直接分摊一部手机的零售价。</p></div><div id="reading-sections"></div><button id="table-open" class="large-link">查看全部 154 个首发价 <span>↗</span></button><div class="credits"><p>数据截至 2026.10.12<br>产品图来自 Apple 官方资料。图片不按实物尺寸比较。</p><p>一个关于数据连续性与实物表达的叙事试作。<br><button id="back-top">回到开头 ↑</button></p></div></section>
+</main>
+<dialog id="detail-dialog"><button class="dialog-close" aria-label="关闭">✕</button><div id="dialog-content"></div></dialog>
+<noscript><p>本页的动态价格比较需要 JavaScript。可下载<a href="data.json">价格、规格与来源数据</a>。</p></noscript>
+</body>
+</html>

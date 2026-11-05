@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#eee9dd" />
+    <meta
+      name="description"
+      content="从寸尺丈的关系，到秦汉、唐元、清与近现代，在同一个零点上读懂尺度的差异。"
+    />
+    <title>尺有所长 · 一部尺度小史</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23964434'/%3E%3Ctext x='7' y='30' font-size='28' fill='%23f3ebdb'%3E尺%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./continuous.css" />
+    <script type="module" src="./continuous.mjs"></script>
+  </head>
+  <body class="continuous-story">
+    <a class="skip-link" href="#reading-copy">阅读数据说明</a>
+    <main>
+      <section
+        id="scroll-story"
+        aria-label="从寸尺丈到近现代：历史尺长的连续比较"
+      >
+        <div class="stage" id="stage">
+          <div class="paper-grain" aria-hidden="true"></div>
+          <div class="edge-ticks" aria-hidden="true"></div>
+          <header class="masthead">
+            <button id="restart" class="wordmark" aria-label="回到开头">
+              <span class="seal">尺</span
+              ><span>尺有所长<small>A STUDY OF MEASURES</small></span>
+            </button>
+            <div class="edition">同一个零点<span>一部尺度小史</span></div>
+            <div class="masthead-actions">
+              <button id="motion-toggle" aria-pressed="false">减弱动态</button>
+              <button class="source-button" id="sources">
+                资料与说明 <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </header>
+          <div id="scene-art" aria-hidden="true">
+            <figure id="qin-art">
+              <img src="./assets/qin-vessel.png" alt="" />
+              <figcaption>青铜量器 · 时代场景插画</figcaption>
+            </figure>
+            <figure id="tang-art">
+              <img src="./assets/tang-silk.png" alt="" />
+              <figcaption>丝绸与刀尺 · 时代场景插画</figcaption>
+            </figure>
+            <figure id="yuan-art">
+              <img src="./assets/yuan-robe.png" alt="" />
+              <figcaption>袍服 · 裁衣的时代场景插画</figcaption>
+            </figure>
+            <figure id="qing-art">
+              <img src="./assets/qing-model.png" alt="" />
+              <figcaption>
+                建筑的一丈 → 寸样的一寸 · 1∶100示意<br />按清营造参考尺换算：3.203米
+                → 3.203厘米
+              </figcaption>
+            </figure>
+          </div>
+          <aside id="meter-detail" hidden>
+            <svg viewBox="0 0 405 200" role="img" aria-label="尺与米的制度换算">
+              <g id="meter-content"></g>
+            </svg>
+          </aside>
+          <aside id="closing-detail" hidden>
+            <p>留在画面里的，是</p>
+            <strong>12<span>条参考记录</span></strong>
+            <p>年代 · 用途 · 来源<br />三个问题，才能读懂一把尺。</p>
+          </aside>
+          <svg
+            id="intro-graphic"
+            role="img"
+            aria-label="同一尺制：十寸成尺，十尺成丈"
+          >
+            <g id="intro-content"></g>
+          </svg>
+          <div id="copy" class="copy" aria-live="polite" aria-atomic="true">
+            <p class="eyebrow" id="eyebrow"></p>
+            <h1 id="headline"></h1>
+            <p class="description" id="description"></p>
+          </div>
+          <div class="plot-heading">
+            <span>一尺，有多长？</span
+            ><span
+              >厘米基准始终相同
+              <i aria-hidden="true"></i> 每行一条参考记录</span
+            >
+          </div>
+          <svg
+            id="rulers"
+            role="group"
+            aria-labelledby="graphic-title graphic-desc"
+          >
+            <title id="graphic-title">
+              从秦到近现代，逐步保留历史尺的同尺度比较
+            </title>
+            <desc id="graphic-desc"></desc>
+            <defs>
+              <linearGradient id="continuous-sheen" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0" stop-color="#fff" stop-opacity=".17" />
+                <stop offset="1" stop-color="#000" stop-opacity=".08" />
+              </linearGradient>
+              <pattern
+                id="continuous-grain"
+                width="103"
+                height="19"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M0 2H87M17 7H103M0 13H61M41 17H98"
+                  stroke="#fff"
+                  stroke-opacity=".10"
+                  stroke-width=".5"
+                />
+              </pattern>
+              <g id="row-clips"></g>
+            </defs>
+            <g id="guides"></g>
+            <g id="ruler-objects"></g>
+            <g id="annotations"></g>
+          </svg>
+          <nav class="chapter-rail" aria-label="故事章节"></nav>
+          <p id="load-error" class="load-error" hidden role="alert"></p>
+          <footer class="stage-footer">
+            <button id="source-footnote" class="source-footnote">
+              查看尺长依据 ↗</button
+            ><span class="scale-note"
+              >历史参考值 · 按比例示意，屏幕并非实长</span
+            ><button class="next" id="next">
+              加入西汉 <span aria-hidden="true">↓</span>
+            </button>
+          </footer>
+          <div class="scroll-progress" aria-hidden="true">
+            <i id="progress"></i>
+          </div>
+        </div>
+      </section>
+      <section id="reading-copy" class="reading-copy" tabindex="-1">
+        <p class="eyebrow">读图之后 / 把问题交还给你</p>
+        <h2>换一把尺，<br />重新量一量。</h2>
+        <p>
+          每条尺代表一项有来源的参考量值。纵向按叙事顺序编排，不表示年代间隔；器物推算、研究估值、地方志综述与制度定义，不能拼成逐年变化的连续观测。故事选取12条记录，下面可比较全部18条主选记录。
+        </p>
+        <p>
+          历史主图始终使用共同零点和0—40厘米范围；微小差值直接在原尺旁注明。序章的寸尺丈采用同一尺制，视野随单位展开而拉远。场景插画为艺术示意。
+        </p>
+        <div class="comparison-controls">
+          <label>第一把尺<select id="compare-a"></select></label
+          ><label>第二把尺<select id="compare-b"></select></label
+          ><label
+            >各取多少<select id="compare-unit">
+              <option value="cun">一寸</option>
+              <option value="chi" selected>一尺</option>
+              <option value="zhang">一丈</option>
+            </select></label
+          >
+        </div>
+        <svg
+          id="comparison-graphic"
+          viewBox="0 0 960 225"
+          role="img"
+          aria-label="所选两把尺的同尺度比较"
+        ></svg>
+        <p id="comparison-result" aria-live="polite"></p>
+        <div class="comparison-sources">
+          <button id="compare-source-a"></button
+          ><button id="compare-source-b"></button>
+        </div>
+        <div class="reading-actions">
+          <button id="all-data">查看全部十八条记录 ↗</button
+          ><button id="read-again">从头重读 ↑</button
+          ><a href="./measurements.json" download>下载数据 ↓</a>
+        </div>
+        <noscript
+          ><p>
+            互动比较需要JavaScript，可阅读<a href="./measurements.json"
+              >数据底稿</a
+            >。
+          </p></noscript
+        >
+      </section>
+    </main>
+    <dialog id="source-dialog" aria-labelledby="source-title">
+      <div class="dialog-header">
+        <div>
+          <p class="eyebrow">SOURCE NOTES / 数据依据</p>
+          <h2 id="source-title">尺长的参考依据</h2>
+        </div>
+        <button id="close-sources" aria-label="关闭资料面板">关闭 ×</button>
+      </div>
+      <div id="source-content"></div>
+    </dialog>
+  </body>
+</html>
