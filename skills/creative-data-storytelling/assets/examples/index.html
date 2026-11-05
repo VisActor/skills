@@ -54,6 +54,7 @@
   .quant-section{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,2.5fr);gap:34px;align-items:start}
   .reading-step{min-height:58vh;padding:20px 0 40px;border-top:1px solid #d2d9d0}
   .reading-step:first-child{border-top:0}.reading-step p{font-size:15px}
+  .reading-tail{height:0;pointer-events:none}
   .sticky{position:sticky;top:18px;min-width:0}
   .plot{background:#fffdf7;border:1px solid #d2d9d0;border-radius:8px;overflow:hidden}
   svg,canvas{display:block;width:100%;height:auto}svg text{font-family:inherit;font-size:16px}
@@ -73,7 +74,7 @@
   <header>
     <div class="eyebrow">CREATIVE DATA STORYTELLING / MECHANICS</div>
     <h1>让关系连续，让画面可读。</h1>
-    <p>用模拟数据观察几种局部机制：比较标注的交接、历史保留与聚焦、组成与累积、素材与数据一起移动，以及同批记录重组。按需要查看其中一段；这些段落不构成一条故事。</p>
+    <p>按当前问题选读一段。每个示例可以独立操作，观察同一批数据在切换参照、展开、聚焦或重组时怎样保持可读。</p>
   </header>
   <section id="comparison-example">
   <h2 id="quantitative-example">从总体提取局部</h2>
@@ -85,7 +86,8 @@
     <aside>
       <article class="reading-step"><h3>先建立总体</h3><p>六个样品共用一根量值轴。每个点是一个样品，纵向仅用于排列。</p></article>
       <article class="reading-step"><h3>识别同一对对象</h3><p>在总体中标出 P 和 Q。名称保持对应，然后再改变观察范围。</p></article>
-      <article class="reading-step"><h3>把差值放进画面</h3><p>提取两者并缩放共同轴。它们仍是 42 和 54，改变的是观看尺度。</p></article>
+      <article class="reading-step"><h3>把差值放进画面</h3><p data-reading-end>提取两者并缩放共同轴。它们仍是 42 和 54，改变的是观看尺度。</p></article>
+      <div class="reading-tail" aria-hidden="true"></div>
     </aside>
     <div class="sticky">
       <div id="quant-buttons" class="controls state-controls" role="group" aria-label="比较视图">
@@ -127,6 +129,17 @@
     <div class="plot"><svg id="history" viewBox="0 0 860 490" role="img" aria-label="模拟观测的历史保留与局部定位" aria-describedby="history-summary"></svg></div>
     <p id="history-summary" class="result" aria-live="polite"></p>
     <p class="scope">借用尺度同步、显露边界与选区反解。保留哪些历史、何时聚焦、是否需要定位图由读者问题决定；此处连线仅适用于可连接的连续序列。</p>
+  </section>
+  <section id="sequence-example" class="mechanism-section">
+    <h2>把两段热夜的第一夜对齐</h2>
+    <p>香港天文台测站的记录里，2022 和 2024 年夏天最长的一段热夜都在七月下旬结束。每格一夜。换个起点，看看哪一段持续得更久。</p>
+    <div class="controls state-controls" role="group" aria-label="热夜的时间参照">
+      <button type="button" data-origin="calendar" aria-pressed="true">按七月日期</button>
+      <button type="button" data-origin="onset" aria-pressed="false">对齐第一夜</button>
+    </div>
+    <div class="plot"><svg viewBox="0 0 860 202" role="img" aria-label="香港两个夏季最长的连续热夜段，每格一夜" aria-describedby="sequence-summary"></svg></div>
+    <p id="sequence-summary" class="result" aria-live="polite"></p>
+    <p class="scope">取各年 6 至 8 月日最低气温达到 28°C 的最长连续时段。<a href="https://data.weather.gov.hk/weatherAPI/opendata/opendata.php?dataType=CLMMINT&amp;station=HKO&amp;rformat=json">香港天文台逐日记录</a> · <a href="https://data.gov.hk/en/terms-and-conditions">资料使用条款</a></p>
   </section>
   <section id="amount-example" class="mechanism-section">
     <h2>整体展开与增量接入</h2>
@@ -194,7 +207,7 @@
   </section>
   <footer>
     <a href="design-frames.svg">查看三种关系的关键画面示意</a>
-    <p>可直接复用：../runtime/ 中的舞台控制、播放器、尺度、布局、读数格式、SVG 更新与占位测量函数。此页由独立示例模块装配；按需读取 comparison、history、amounts、identity 或 units.mjs。实际作品自行设计布局、素材、叙事和渲染。</p>
+    <p>舞台控制、播放器、尺度与布局函数都在 <code>../runtime/</code> 中。每个演示有独立的调用示例，可以单独取用。</p>
   </footer>
 </main>
 <script type="module" src="./demo.mjs"></script>

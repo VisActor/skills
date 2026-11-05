@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { accumulationSegments, areaFor, at, keyed, linearScale, mixScale, radiusForArea, visibleDomain } from "../../skills/creative-data-storytelling/assets/runtime/geometry.mjs";
 import { blendNodes, blendWithAnnotations, createPlayer, createTransition } from "../../skills/creative-data-storytelling/assets/runtime/motion.mjs";
 import { distributionLayout, groupLayout, maskSlots, silhouetteLayout } from "../../skills/creative-data-storytelling/assets/runtime/units.mjs";
-import { selectStep } from "../../skills/creative-data-storytelling/assets/runtime/scroll.mjs";
+import { reserveStageExit, selectStep } from "../../skills/creative-data-storytelling/assets/runtime/scroll.mjs";
 import { createStage } from "../../skills/creative-data-storytelling/assets/runtime/stage.mjs";
 
 const rows = [
@@ -12,6 +12,110 @@ const rows = [
   { id: "c", group: "B", value: 80, weight: 9 },
 ];
 const close = (a, b) => assert.ok(Math.abs(a - b) < 1e-9, a + " != " + b);
+
+function exitFixture({ initialHeight = "", initialPriority = "", spacerTop = 2600 } = {}) {
+  let height = initialHeight, priority = initialPriority, frameId = 0;
+  const frames = new Map(), listeners = new Map(), observers = [];
+  const dimensions = { sticky: 900, top: 18, end: 2500, spacerTop, scroll: 0, position: "sticky" };
+  const view = {
+    innerHeight: 900,
+    getComputedStyle: () => ({ position: dimensions.position, top: `${dimensions.top}px` }),
+    requestAnimationFrame(fn) { frames.set(++frameId, fn); return frameId; },
+    cancelAnimationFrame(id) { frames.delete(id); },
+    addEventListener(name, fn) { listeners.set(name, fn); },
+    removeEventListener(name) { listeners.delete(name); },
+    ResizeObserver: class {
+      constructor(fn) { this.callback = fn; this.elements = []; observers.push(this); }
+      observe(element) { this.elements.push(element); }
+      disconnect() { this.elements = []; }
+    },
+  };
+  const sticky = { getBoundingClientRect: () => ({ height: dimensions.sticky }) };
+  const readingEnd = { getBoundingClientRect: () => ({ bottom: dimensions.end - dimensions.scroll }) };
+  const spacer = {
+    parentElement: {}, getBoundingClientRect: () => ({ top: dimensions.spacerTop - dimensions.scroll }),
+    style: {
+      getPropertyValue: () => height, getPropertyPriority: () => priority,
+      setProperty(_, value, nextPriority = "") { height = value; priority = nextPriority; },
+      removeProperty() { height = ""; priority = ""; },
+    },
+  };
+  const options = { sticky, readingEnd, spacer, view };
+  return {
+    options, dimensions, view, frames, listeners, observers,
+    get height() { return height; }, get priority() { return priority; },
+    tick() { const work = [...frames.values()]; frames.clear(); work.forEach((fn) => fn()); },
+    reflow() { observers.forEach((observer) => observer.callback()); },
+  };
+}
+
+test("stage exit keeps the last paragraph at the reading line when the sticky stage releases", () => {
+  const f = exitFixture();
+  const exit = reserveStageExit(f.options);
+  const containerEnd = f.dimensions.spacerTop + Number.parseFloat(f.height);
+  const releaseScroll = containerEnd - f.dimensions.sticky - f.dimensions.top;
+  close(f.dimensions.end - releaseScroll, 360);
+  exit.dispose();
+});
+
+test("stage exit remeasurement does not accumulate space or depend on scroll position", () => {
+  const f = exitFixture();
+  const exit = reserveStageExit(f.options);
+  const initial = f.height;
+  for (const scroll of [0, 1800, 2600, 300]) {
+    f.dimensions.scroll = scroll;
+    exit.refresh(); f.reflow(); f.tick();
+    assert.equal(f.height, initial);
+  }
+  exit.dispose();
+});
+
+test("stage exit adds no space when the existing final paragraph interval is sufficient", () => {
+  const f = exitFixture({ spacerTop: 3200 });
+  const exit = reserveStageExit(f.options);
+  assert.equal(f.height, "0px");
+  exit.dispose();
+});
+
+test("stage exit follows graphic and text reflow then releases excess space on resize", () => {
+  const f = exitFixture();
+  const exit = reserveStageExit(f.options);
+  f.dimensions.sticky = 1000;
+  f.dimensions.end = 2600;
+  f.dimensions.spacerTop = 2650;
+  f.reflow(); f.tick();
+  assert.equal(f.height, "608px");
+  f.dimensions.sticky = 400;
+  f.view.innerHeight = 1200;
+  f.listeners.get("resize")(); f.tick();
+  assert.equal(f.height, "0px");
+  exit.dispose();
+});
+
+test("stage exit clears its reserve when the layout stops using a sticky stage", () => {
+  const f = exitFixture();
+  const exit = reserveStageExit(f.options);
+  f.dimensions.position = "static";
+  exit.refresh(); f.tick();
+  assert.equal(f.height, "0px");
+  exit.dispose();
+});
+
+test("stage exit disposal restores the spacer and removes pending work and observers", () => {
+  const f = exitFixture({ initialHeight: "32px", initialPriority: "important" });
+  const exit = reserveStageExit(f.options);
+  exit.refresh(); exit.dispose(); exit.dispose(); exit.refresh();
+  assert.deepEqual({ height: f.height, priority: f.priority, listeners: f.listeners.size,
+    frames: f.frames.size, observed: f.observers[0].elements.length },
+  { height: "32px", priority: "important", listeners: 0, frames: 0, observed: 0 });
+});
+
+test("stage exit rejects invalid geometry and reader placement options", () => {
+  const f = exitFixture();
+  assert.throws(() => reserveStageExit({ ...f.options, releaseRatio: 1.1 }), /releaseRatio/);
+  f.dimensions.top = Number.NaN;
+  assert.throws(() => reserveStageExit(f.options), /finite top inset/);
+});
 
 function stageFixture({ scrollY = 0, ids = ["a", "b", "c"] } = {}) {
   let time = 0, frameId = 0, width = 800, factor = 1, last;

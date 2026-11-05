@@ -38,6 +38,26 @@ const stage = createStage({
 
 只需按钮动画时直接使用 `createPlayer`；已有播放器而只缺滚动选择时使用 `observeSteps`。完整舞台接入用 `createStage` 即可，不同时再接另一套滚动监听。基础模块不推断前后对象对应、历史保留或组成关系，这些仍由[关系几何](implementation-geometry.md)与作品设计决定。
 
+### 最后画面读完再退出
+
+`createStage` 负责状态与动画，sticky 的固定范围由页面布局决定。最后一次触发之后，完整图形应继续陪伴末段正文阅读，再随章节离场；只确认动画完成，无法发现图形已经提前滚出的问题。
+
+需要按实际尺寸预留出口空间时，可调用 [scroll.mjs](../assets/runtime/scroll.mjs) 的 `reserveStageExit`。在正文列末尾放一个空的普通流块，仍位于 sticky 的父容器内；将最后一段实际正文作为 `readingEnd`，而非带大段留白的状态容器：
+
+```javascript
+import { reserveStageExit } from "./runtime/scroll.mjs";
+
+const exitSpace = reserveStageExit({
+  sticky: stagePanel,       // position: sticky、已设 top，完整画面能容纳在视口内
+  readingEnd: lastParagraph,
+  spacer: readingTail,      // 正文列末尾的空 div，无 margin / padding / min-height
+  releaseRatio: 0.4,        // 末段底部读到视口的此处后，才允许舞台开始退出
+});
+// 卸载这段作品时 exitSpace.dispose()。
+```
+
+它按舞台高度、top 和末段位置补足空间，已有距离足够时不增加；观察尺寸变化，不拦截滚轮。正文列需按普通文档流排列，改变留白不应反过来居中或拉伸前面的正文。接线见 [comparison.mjs](../assets/examples/comparison.mjs) 与示例 HTML 的 `.reading-tail`。仍按实际阅读验证触发时机和动画时长；快速略过不强制等待。
+
 ## 自动完成的衔接动画
 
 对[自动完成的衔接](stage-and-motion.md#两种时间)，滚动选择完整状态，独立时钟完成连接；只在 scroll 回调里绘制会使停滚停在半帧。若连续操作本身对应可读变量，则单独使用变量值计算状态，不把它与过渡播放进度混作同一时间。

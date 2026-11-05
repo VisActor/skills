@@ -28,28 +28,34 @@
 
 ### 实际占位与空间诊断
 
-HTML 标题、SVG 标签、图片与定位条共用舞台时，可直接用 [bounds.mjs](../assets/runtime/bounds.mjs) 读取实际边界；按自己的构图声明需要保持的空间关系。测量只读当前画面，不改样式、不重排对象，也不启动浏览器或动画：
+HTML 正文、SVG 标签、图片与导航共用空间时，用 [bounds.mjs](../assets/runtime/bounds.mjs) 或已有等效测量接入[最终检查](quality.md#一次检查怎样完成)。按自己的构图声明哪些对象应在区域内、哪些不能遮挡。测量只读当前画面，不改样式、不重排对象，也不启动浏览器或动画。下面示范核对当前正文与数据内容：
 
 ```javascript
 import { measureBounds, checkBounds } from "./runtime/bounds.mjs";
 
-const labels = [...graphic.querySelectorAll("[data-label]")]
-  .map((element) => ({ id: element.dataset.label, element }));
-const measured = measureBounds(graphic, [
-  ...labels, { id: "locator", element: graphic.querySelector(".locator") },
-]);
-const report = checkBounds(measured, [
-  { type: "inside", ids: labels.map((item) => item.id), within: "$stage" },
-  { type: "separate", ids: labels.map((item) => item.id), from: ["locator"], gap: 4 },
-]);
-// report.candidates 给出具体对象及越界方向／重叠量；回到画面判断是否需修正。
+function inspectLayout(stage, prose, dataItems) {
+  // dataItems 是当前应显示的标记与标签：[{ id, element }]。
+  const ids = dataItems.map((item) => item.id);
+  const measured = measureBounds(stage, [
+    { id: "prose", element: prose }, ...dataItems,
+  ]);
+  return checkBounds(measured, [
+    { type: "inside", ids, within: "$stage" },
+    { type: "separate", ids, from: ["prose"], gap: 4 },
+  ]);
+}
+// 在实际阅读到的画面调用；stage、activeProse、visibleDataItems 由作品提供。
+const report = inspectLayout(stage, activeProse, visibleDataItems);
+// 检查 report.checked / candidates / skipped，再回到画面核实。
 ```
 
 - `measureBounds(root, targets)` 返回 `stage / viewport / items`，全部是**相对 root 外边界左上角的渲染后 CSS 像素**。HTML 与 SVG 已通过浏览器实际边界统一，不能再当作 SVG viewBox 坐标或 Canvas 设备像素。每项使用唯一 `id`；也可传 `{ id, box: { x, y, width, height }, visible }`，由 Canvas 等绘制器提供已换算的舞台相对边界，结果会标明 `supplied`。
 - `inside` 检查 `ids` 是否位于 `within` 内，可用 `padding` 留边；`within` 可以是另一个已测量对象、`$stage` 或 `$viewport`。`separate` 检查两组对象；省略 `from` 则检查 `ids` 组内各对，可用 `gap` 保留矩形间距。只检查声明的关系，有意覆盖的素材不加入分离规则。
 - 返回 `checked / candidates / skipped`，不提供“视觉通过”评分。缺失元素与隐藏元素分别记录；未知 ID 报错。默认容忍 0.5 CSS 像素误差，可通过第三参数 `{ tolerance }` 调整。
 
-需要排查空间或核实可用面积时，在现有阅读检查中采样；页面重排后重新测量，不逐帧运行或增加单独验收阶段。边界是轴对齐矩形，并非实际着色区域：透明图片、斜线、描边、阴影、裁剪和不规则遮罩仍需看实际画面；未声明的关系、未采样的中间帧也不在结果中。演示页的“作者工具：当前占位”仅展示接法，正式作品无需带上该面板。
+选择实际承载数据的局部标记或标签，不能只拿全屏 SVG／Canvas 容器与正文比较；背景延展在正文下方可能是有意设计。需要时按相同方式加入导航、图标题或标签之间的规则；正常滚出视口的正文不要求始终位于 `$viewport` 内。
+
+在当前字体和素材实际显示后采样；布局重排后再测受影响的状态。`checked` 为零或本应显示的对象出现在 `skipped` 中，不能当成“无重叠”；先核对目标与可见状态。边界是轴对齐矩形，并非实际着色区域：透明图片、斜线、描边、阴影、裁剪和不规则遮罩仍需看实际画面；Canvas 需由绘制器提供内容边界，未声明的关系、未采样的帧不在检测范围。演示页的作者面板仅展示接法，正式作品无需带上面板，也不逐帧运行检查。
 
 ## 渲染选择
 
