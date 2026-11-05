@@ -66,8 +66,6 @@ Play CDN 在浏览器中生成样式，官方将其定位为开发试作。需�
 
 ## 可选的机制演示
 
-[assets/examples/index.html](../assets/examples/index.html) 是供作者和维护者观察机制的可运行演示页。制作作品时，通过[代码索引](implementation.md#按实现问题取用代码)定位所需接口和调用示例；需要直观看到缩放、重排、中断或反向时，再在浏览器打开相关演示。普通创作无需读取整份 HTML 或 `demo.mjs`；按索引选读独立示例，需要控件样式时再查相应 HTML/CSS 片段。它使用模拟数据说明机制，作品的布局、配色、章节与控件按自己的设计实现。
-
-按当前实现问题进入其中一段：比较对象与标注交接、历史保留与局部定位、组成与累积、素材共同移位、单元重组。可直接切换、反向或快速改目标，不必从头播放。设计理由与配图见[连续比较 A](expression-methods.md#compare)、[组成与累积](expression-methods.md#组成与累积)、[数量与权重 B](expression-methods.md#unit-weight)及[图像与实物 C](expression-methods.md#objects)。素材演示覆盖身份图片与数据锚点同步，其他实物编码按作品设计实现。
+[演示页](../assets/examples/index.html)供直观查看缩放、对齐、重排、中断或反向。制作作品时，从[代码索引](implementation.md#按实现问题取用代码)选读对应文件即可。需要查看控件样式时再读相应的 HTML/CSS 片段。
 
 需要在浏览器运行该演示时，使用项目已有静态服务；没有现成服务时，可在 `assets/` 目录运行 `uv run --no-project python -m http.server 4189 --bind 127.0.0.1`，再打开 `/examples/`，端口按实际占用调整。服务根须同时包含 `examples/` 和 `runtime/`，以便解析模块；阅读代码或制作作品无需启动该演示。
