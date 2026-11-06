@@ -1,0 +1,973 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "page-background",
+        "type": "rect",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 640
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#FAFAF8",
+            "stroke": "#FAFAF8"
+          },
+          "zIndex": -1
+        }
+      },
+      {
+        "id": "page-title",
+        "type": "text",
+        "position": {
+          "x": 32,
+          "y": 24,
+          "width": 1200,
+          "height": 52
+        },
+        "options": {
+          "text": "社群与直播的转化率仍低，增幅却领跑",
+          "fontSize": 35,
+          "fill": "#242426",
+          "fontWeight": "bold",
+          "textConfig": [
+            {
+              "text": "社群与直播的转化率仍低，增幅却领跑",
+              "fontWeight": "bold"
+            }
+          ]
+        }
+      },
+      {
+        "id": "page-context",
+        "type": "text",
+        "position": {
+          "x": 32,
+          "y": 83,
+          "width": 1192,
+          "height": 26
+        },
+        "options": {
+          "text": "六个渠道的新客转化率追踪  ·  2025 年 4 月至 2026 年 4 月",
+          "fontSize": 17,
+          "fill": "#606066",
+          "fontWeight": "normal"
+        }
+      },
+      {
+        "id": "levels-title",
+        "type": "text",
+        "position": {
+          "x": 32,
+          "y": 133,
+          "width": 560,
+          "height": 36
+        },
+        "options": {
+          "text": "当前水平仍排在末两位",
+          "fontSize": 24,
+          "fill": "#242426",
+          "fontWeight": "bold",
+          "textConfig": [
+            {
+              "text": "当前水平仍排在末两位",
+              "fontWeight": "bold"
+            }
+          ]
+        }
+      },
+      {
+        "id": "levels-subtitle",
+        "type": "text",
+        "position": {
+          "x": 32,
+          "y": 174,
+          "width": 560,
+          "height": 21
+        },
+        "options": {
+          "text": "2026 年 4 月，各渠道新客转化率",
+          "fontSize": 14,
+          "fill": "#606066",
+          "fontWeight": "normal"
+        }
+      },
+      {
+        "id": "index-title",
+        "type": "text",
+        "position": {
+          "x": 632,
+          "y": 133,
+          "width": 610,
+          "height": 36
+        },
+        "options": {
+          "text": "但相对各自起点，两者增长最快",
+          "fontSize": 24,
+          "fill": "#242426",
+          "fontWeight": "bold",
+          "textConfig": [
+            {
+              "text": "但相对各自起点，两者增长最快",
+              "fontWeight": "bold"
+            }
+          ]
+        }
+      },
+      {
+        "id": "index-subtitle",
+        "type": "text",
+        "position": {
+          "x": 632,
+          "y": 174,
+          "width": 605,
+          "height": 21
+        },
+        "options": {
+          "text": "各渠道 2025 年 4 月转化率＝100",
+          "fontSize": 14,
+          "fill": "#606066",
+          "fontWeight": "normal"
+        }
+      },
+      {
+        "id": "current-conversion",
+        "type": "chart",
+        "position": {
+          "x": 30,
+          "y": 206,
+          "width": 537,
+          "height": 369
+        },
+        "options": {
+          "chartType": "horizontalBarGroup",
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "渠道",
+                "转化率"
+              ],
+              "rows": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "data": [
+                {
+                  "渠道": "门店导购",
+                  "转化率": 0.308
+                },
+                {
+                  "渠道": "老客推荐",
+                  "转化率": 0.27
+                },
+                {
+                  "渠道": "搜索投放",
+                  "转化率": 0.212
+                },
+                {
+                  "渠道": "品牌官网",
+                  "转化率": 0.156
+                },
+                {
+                  "渠道": "社群运营",
+                  "转化率": 0.132
+                },
+                {
+                  "渠道": "直播带货",
+                  "转化率": 0.093
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "dataType": "percent",
+                    "fixed": 1
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "渠道",
+              "y": [
+                "转化率"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "orient": "left",
+                  "type": "band",
+                  "title": {
+                    "visible": false,
+                    "text": "",
+                    "style": {
+                      "fill": "#606066"
+                    }
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": false,
+                    "style": {
+                      "stroke": "#E2E2DE",
+                      "lineWidth": 1,
+                      "lineDash": []
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "autoRotate": false,
+                    "autoHide": true,
+                    "style": {
+                      "fill": "#606066"
+                    }
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "visible": true,
+                  "orient": "bottom",
+                  "type": "linear",
+                  "title": {
+                    "visible": true,
+                    "text": "新客转化率",
+                    "style": {
+                      "fill": "#606066"
+                    }
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#E2E2DE",
+                      "lineWidth": 1,
+                      "lineDash": []
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "autoRotate": false,
+                    "autoHide": true,
+                    "style": {
+                      "fill": "#606066"
+                    },
+                    "formatConfig": {
+                      "content": "value",
+                      "dataType": "percent",
+                      "fixed": 0
+                    }
+                  },
+                  "zero": true,
+                  "min": 0,
+                  "max": 0.35
+                }
+              },
+              {
+                "specKey": "series",
+                "target": {
+                  "measure": "转化率"
+                },
+                "spec": {
+                  "barWidth": 28,
+                  "label": {
+                    "visible": true,
+                    "position": "outside",
+                    "formatConfig": {
+                      "content": [
+                        "value"
+                      ],
+                      "dataType": "percent",
+                      "fixed": 1
+                    },
+                    "style": {
+                      "fill": "#606066"
+                    }
+                  }
+                }
+              }
+            ],
+            "color": [
+              "#C7C7C6"
+            ],
+            "markStyle": [
+              {
+                "id": "focus-0",
+                "markName": "bar",
+                "target": {
+                  "selector": {
+                    "渠道": "社群运营"
+                  },
+                  "measure": "转化率"
+                },
+                "style": {
+                  "fill": "#A26790"
+                }
+              },
+              {
+                "id": "focus-1",
+                "markName": "bar",
+                "target": {
+                  "selector": {
+                    "渠道": "直播带货"
+                  },
+                  "measure": "转化率"
+                },
+                "style": {
+                  "fill": "#BF8E0D"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "base100-trend",
+        "type": "chart",
+        "position": {
+          "x": 630,
+          "y": 206,
+          "width": 612,
+          "height": 369
+        },
+        "options": {
+          "chartType": "line",
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "月份",
+                "门店导购",
+                "老客推荐",
+                "搜索投放",
+                "品牌官网",
+                "社群运营",
+                "直播带货"
+              ],
+              "rows": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "data": [
+                {
+                  "月份": "2025-04",
+                  "门店导购": 100,
+                  "老客推荐": 100,
+                  "搜索投放": 100,
+                  "品牌官网": 100,
+                  "社群运营": 100,
+                  "直播带货": 100
+                },
+                {
+                  "月份": "2025-05",
+                  "门店导购": 101,
+                  "老客推荐": 100,
+                  "搜索投放": 100,
+                  "品牌官网": 101,
+                  "社群运营": 102,
+                  "直播带货": 101
+                },
+                {
+                  "月份": "2025-06",
+                  "门店导购": 102,
+                  "老客推荐": 101,
+                  "搜索投放": 101,
+                  "品牌官网": 100,
+                  "社群运营": 105,
+                  "直播带货": 103
+                },
+                {
+                  "月份": "2025-07",
+                  "门店导购": 102,
+                  "老客推荐": 102,
+                  "搜索投放": 100,
+                  "品牌官网": 100,
+                  "社群运营": 106,
+                  "直播带货": 105
+                },
+                {
+                  "月份": "2025-08",
+                  "门店导购": 103,
+                  "老客推荐": 102,
+                  "搜索投放": 101,
+                  "品牌官网": 101,
+                  "社群运营": 109,
+                  "直播带货": 106
+                },
+                {
+                  "月份": "2025-09",
+                  "门店导购": 105,
+                  "老客推荐": 103,
+                  "搜索投放": 102,
+                  "品牌官网": 101,
+                  "社群运营": 112,
+                  "直播带货": 108
+                },
+                {
+                  "月份": "2025-10",
+                  "门店导购": 105,
+                  "老客推荐": 103,
+                  "搜索投放": 103,
+                  "品牌官网": 102,
+                  "社群运营": 114,
+                  "直播带货": 110
+                },
+                {
+                  "月份": "2025-11",
+                  "门店导购": 106,
+                  "老客推荐": 105,
+                  "搜索投放": 103,
+                  "品牌官网": 101,
+                  "社群运营": 116,
+                  "直播带货": 113
+                },
+                {
+                  "月份": "2025-12",
+                  "门店导购": 107,
+                  "老客推荐": 104,
+                  "搜索投放": 102,
+                  "品牌官网": 102,
+                  "社群运营": 120,
+                  "直播带货": 115
+                },
+                {
+                  "月份": "2026-01",
+                  "门店导购": 106,
+                  "老客推荐": 106,
+                  "搜索投放": 104,
+                  "品牌官网": 102,
+                  "社群运营": 123,
+                  "直播带货": 118
+                },
+                {
+                  "月份": "2026-02",
+                  "门店导购": 108,
+                  "老客推荐": 107,
+                  "搜索投放": 105,
+                  "品牌官网": 103,
+                  "社群运营": 127,
+                  "直播带货": 121
+                },
+                {
+                  "月份": "2026-03",
+                  "门店导购": 109,
+                  "老客推荐": 107,
+                  "搜索投放": 105,
+                  "品牌官网": 103,
+                  "社群运营": 130,
+                  "直播带货": 123
+                },
+                {
+                  "月份": "2026-04",
+                  "门店导购": 110,
+                  "老客推荐": 108,
+                  "搜索投放": 106,
+                  "品牌官网": 104,
+                  "社群运营": 132,
+                  "直播带货": 124
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "月份",
+              "y": [
+                "门店导购",
+                "老客推荐",
+                "搜索投放",
+                "品牌官网",
+                "社群运营",
+                "直播带货"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "orient": "left",
+                  "type": "linear",
+                  "title": {
+                    "visible": true,
+                    "text": "转化率指数",
+                    "style": {
+                      "fill": "#606066"
+                    }
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#E2E2DE",
+                      "lineWidth": 1,
+                      "lineDash": []
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "autoRotate": false,
+                    "autoHide": true,
+                    "style": {
+                      "fill": "#606066"
+                    }
+                  },
+                  "zero": false,
+                  "min": 99,
+                  "max": 135
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "visible": true,
+                  "orient": "bottom",
+                  "type": "band",
+                  "title": {
+                    "visible": false,
+                    "text": "",
+                    "style": {
+                      "fill": "#606066"
+                    }
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": false,
+                    "style": {
+                      "stroke": "#E2E2DE",
+                      "lineWidth": 1,
+                      "lineDash": []
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "autoRotate": false,
+                    "autoHide": true,
+                    "style": {
+                      "fill": "#606066"
+                    }
+                  }
+                }
+              },
+              {
+                "specKey": "series",
+                "target": {
+                  "measure": "门店导购"
+                },
+                "spec": {
+                  "invalidType": "break",
+                  "line": {
+                    "style": {
+                      "stroke": "#D5D5D2",
+                      "lineWidth": 1.4
+                    }
+                  },
+                  "point": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  },
+                  "label": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "specKey": "series",
+                "target": {
+                  "measure": "老客推荐"
+                },
+                "spec": {
+                  "invalidType": "break",
+                  "line": {
+                    "style": {
+                      "stroke": "#D5D5D2",
+                      "lineWidth": 1.4
+                    }
+                  },
+                  "point": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  },
+                  "label": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "specKey": "series",
+                "target": {
+                  "measure": "搜索投放"
+                },
+                "spec": {
+                  "invalidType": "break",
+                  "line": {
+                    "style": {
+                      "stroke": "#D5D5D2",
+                      "lineWidth": 1.4
+                    }
+                  },
+                  "point": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  },
+                  "label": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "specKey": "series",
+                "target": {
+                  "measure": "品牌官网"
+                },
+                "spec": {
+                  "invalidType": "break",
+                  "line": {
+                    "style": {
+                      "stroke": "#D5D5D2",
+                      "lineWidth": 1.4
+                    }
+                  },
+                  "point": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  },
+                  "label": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "specKey": "series",
+                "target": {
+                  "measure": "社群运营"
+                },
+                "spec": {
+                  "invalidType": "break",
+                  "line": {
+                    "style": {
+                      "stroke": "#A26790",
+                      "lineWidth": 3.6
+                    }
+                  },
+                  "point": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  },
+                  "label": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "specKey": "series",
+                "target": {
+                  "measure": "直播带货"
+                },
+                "spec": {
+                  "invalidType": "break",
+                  "line": {
+                    "style": {
+                      "stroke": "#BF8E0D",
+                      "lineWidth": 3.6
+                    }
+                  },
+                  "point": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  },
+                  "label": {
+                    "visible": false
+                  }
+                }
+              }
+            ],
+            "color": [
+              "#D5D5D2",
+              "#D5D5D2",
+              "#D5D5D2",
+              "#D5D5D2",
+              "#A26790",
+              "#BF8E0D"
+            ],
+            "marker": {
+              "markLine": [
+                {
+                  "id": "index-100",
+                  "name": "reference-line",
+                  "target": {
+                    "field": "门店导购",
+                    "value": 100
+                  },
+                  "label": {
+                    "visible": false
+                  },
+                  "startSymbol": {
+                    "visible": false
+                  },
+                  "endSymbol": {
+                    "visible": false
+                  },
+                  "line": {
+                    "style": {
+                      "stroke": "#A2A19E",
+                      "lineWidth": 1,
+                      "lineDash": []
+                    }
+                  }
+                }
+              ],
+              "markPoint": [
+                {
+                  "id": "index-end-0",
+                  "name": "mark-point",
+                  "target": {
+                    "match": {
+                      "月份": "2026-04"
+                    },
+                    "metric": "社群运营"
+                  },
+                  "itemContent": {
+                    "type": "text",
+                    "offsetX": -3,
+                    "offsetY": -8,
+                    "position": "top",
+                    "autoRotate": false,
+                    "text": {
+                      "visible": true,
+                      "formatConfig": {
+                        "content": "value",
+                        "prefix": "社群运营  ",
+                        "fixed": 0
+                      },
+                      "padding": 0,
+                      "style": {
+                        "fill": "#A26790",
+                        "fontSize": 14,
+                        "fontWeight": "bold",
+                        "textAlign": "right"
+                      },
+                      "labelBackground": {
+                        "visible": false
+                      }
+                    }
+                  },
+                  "targetSymbol": {
+                    "visible": true,
+                    "style": {
+                      "symbolType": "circle",
+                      "size": 8,
+                      "fill": "#A26790",
+                      "stroke": "#A26790",
+                      "lineWidth": 0
+                    }
+                  },
+                  "itemLine": {
+                    "visible": false,
+                    "type": "type-do"
+                  }
+                },
+                {
+                  "id": "index-end-1",
+                  "name": "mark-point",
+                  "target": {
+                    "match": {
+                      "月份": "2026-04"
+                    },
+                    "metric": "直播带货"
+                  },
+                  "itemContent": {
+                    "type": "text",
+                    "offsetX": -3,
+                    "offsetY": -2,
+                    "position": "top",
+                    "autoRotate": false,
+                    "text": {
+                      "visible": true,
+                      "formatConfig": {
+                        "content": "value",
+                        "prefix": "直播带货  ",
+                        "fixed": 0
+                      },
+                      "padding": 0,
+                      "style": {
+                        "fill": "#BF8E0D",
+                        "fontSize": 14,
+                        "fontWeight": "bold",
+                        "textAlign": "right"
+                      },
+                      "labelBackground": {
+                        "visible": false
+                      }
+                    }
+                  },
+                  "targetSymbol": {
+                    "visible": true,
+                    "style": {
+                      "symbolType": "circle",
+                      "size": 8,
+                      "fill": "#BF8E0D",
+                      "stroke": "#BF8E0D",
+                      "lineWidth": 0
+                    }
+                  },
+                  "itemLine": {
+                    "visible": false,
+                    "type": "type-do"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "scope-note",
+        "type": "text",
+        "position": {
+          "x": 32,
+          "y": 596,
+          "width": 1200,
+          "height": 24
+        },
+        "options": {
+          "text": "合成数据  ·  转化率按各渠道首次访问的新客计算，观察其七日内下单情况。",
+          "fontSize": 13,
+          "fill": "#606066",
+          "fontWeight": "normal"
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}

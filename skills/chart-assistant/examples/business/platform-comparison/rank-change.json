@@ -1,0 +1,608 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "type": "rect",
+        "id": "paper",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 642
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#FAFCFB",
+            "stroke": "#FAFCFB"
+          },
+          "zIndex": -1
+        }
+      },
+      {
+        "type": "text",
+        "id": "eyebrow",
+        "position": {
+          "x": 32,
+          "y": 20,
+          "width": 1000,
+          "height": 25
+        },
+        "options": {
+          "text": "付费投放   /   平台成本排名",
+          "fill": "#056E68",
+          "fontWeight": "bold",
+          "fontSize": 15
+        }
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "position": {
+          "x": 30,
+          "y": 57,
+          "width": 1220,
+          "height": 53
+        },
+        "options": {
+          "text": "Facebook 的获客成本排名在 10 月升至第 2，年末排第 3",
+          "fill": "#183C3A",
+          "fontWeight": "bold",
+          "fontSize": 32
+        }
+      },
+      {
+        "type": "text",
+        "id": "context",
+        "position": {
+          "x": 32,
+          "y": 112,
+          "width": 1180,
+          "height": 30
+        },
+        "options": {
+          "text": "六个平台按当月 CPA 由低到高排名，第 1 名的获客成本最低。",
+          "fill": "#536A68",
+          "fontWeight": "normal",
+          "fontSize": 17
+        }
+      },
+      {
+        "id": "platform-cpa-ranking",
+        "type": "chart",
+        "position": {
+          "x": 44,
+          "y": 160,
+          "width": 1124,
+          "height": 389
+        },
+        "options": {
+          "chartType": "line",
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "月份",
+                "LinkedIn",
+                "Instagram",
+                "YouTube",
+                "TikTok",
+                "X",
+                "Facebook"
+              ],
+              "rows": [
+                "01 月",
+                "02 月",
+                "03 月",
+                "04 月",
+                "05 月",
+                "06 月",
+                "07 月",
+                "08 月",
+                "09 月",
+                "10 月",
+                "11 月",
+                "12 月"
+              ],
+              "data": [
+                {
+                  "月份": "01 月",
+                  "LinkedIn": 1,
+                  "Instagram": 2,
+                  "YouTube": 3,
+                  "TikTok": 5,
+                  "X": 6,
+                  "Facebook": 4
+                },
+                {
+                  "月份": "02 月",
+                  "LinkedIn": 1,
+                  "Instagram": 2,
+                  "YouTube": 4,
+                  "TikTok": 5,
+                  "X": 6,
+                  "Facebook": 3
+                },
+                {
+                  "月份": "03 月",
+                  "LinkedIn": 1,
+                  "Instagram": 2,
+                  "YouTube": 3,
+                  "TikTok": 5,
+                  "X": 6,
+                  "Facebook": 4
+                },
+                {
+                  "月份": "04 月",
+                  "LinkedIn": 1,
+                  "Instagram": 2,
+                  "YouTube": 3,
+                  "TikTok": 5,
+                  "X": 6,
+                  "Facebook": 4
+                },
+                {
+                  "月份": "05 月",
+                  "LinkedIn": 1,
+                  "Instagram": 2,
+                  "YouTube": 5,
+                  "TikTok": 4,
+                  "X": 6,
+                  "Facebook": 3
+                },
+                {
+                  "月份": "06 月",
+                  "LinkedIn": 1,
+                  "Instagram": 2,
+                  "YouTube": 5,
+                  "TikTok": 4,
+                  "X": 6,
+                  "Facebook": 3
+                },
+                {
+                  "月份": "07 月",
+                  "LinkedIn": 1,
+                  "Instagram": 2,
+                  "YouTube": 3,
+                  "TikTok": 5,
+                  "X": 6,
+                  "Facebook": 4
+                },
+                {
+                  "月份": "08 月",
+                  "LinkedIn": 1,
+                  "Instagram": 2,
+                  "YouTube": 3,
+                  "TikTok": 4,
+                  "X": 6,
+                  "Facebook": 5
+                },
+                {
+                  "月份": "09 月",
+                  "LinkedIn": 1,
+                  "Instagram": 2,
+                  "YouTube": 4,
+                  "TikTok": 5,
+                  "X": 6,
+                  "Facebook": 3
+                },
+                {
+                  "月份": "10 月",
+                  "LinkedIn": 1,
+                  "Instagram": 3,
+                  "YouTube": 4,
+                  "TikTok": 5,
+                  "X": 6,
+                  "Facebook": 2
+                },
+                {
+                  "月份": "11 月",
+                  "LinkedIn": 1,
+                  "Instagram": 2,
+                  "YouTube": 4,
+                  "TikTok": 5,
+                  "X": 6,
+                  "Facebook": 3
+                },
+                {
+                  "月份": "12 月",
+                  "LinkedIn": 1,
+                  "Instagram": 2,
+                  "YouTube": 4,
+                  "TikTok": 5,
+                  "X": 6,
+                  "Facebook": 3
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "月份",
+              "y": [
+                "LinkedIn",
+                "Instagram",
+                "YouTube",
+                "TikTok",
+                "X",
+                "Facebook"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "orient": "left",
+                  "type": "linear",
+                  "title": {
+                    "visible": true,
+                    "text": "CPA 名次",
+                    "style": {
+                      "fill": "#606066"
+                    }
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false,
+                    "tickStep": 1
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#EAEFEE",
+                      "lineWidth": 1,
+                      "lineDash": []
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "autoRotate": false,
+                    "autoHide": false,
+                    "style": {
+                      "fill": "#606066"
+                    }
+                  },
+                  "zero": false,
+                  "min": 1,
+                  "max": 6,
+                  "inverse": true,
+                  "nice": false
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "visible": true,
+                  "orient": "bottom",
+                  "type": "band",
+                  "title": {
+                    "visible": false,
+                    "text": "",
+                    "style": {
+                      "fill": "#606066"
+                    }
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": false,
+                    "style": {
+                      "stroke": "#E2E2DE",
+                      "lineWidth": 1,
+                      "lineDash": []
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "autoRotate": false,
+                    "autoHide": true,
+                    "style": {
+                      "fill": "#606066"
+                    }
+                  }
+                }
+              },
+              {
+                "target": {
+                  "measure": "LinkedIn"
+                },
+                "specKey": "series",
+                "spec": {
+                  "line": {
+                    "style": {
+                      "stroke": "#BDC8C6",
+                      "lineWidth": 2
+                    }
+                  },
+                  "point": {
+                    "visible": true,
+                    "style": {
+                      "size": 5,
+                      "fill": "#BDC8C6",
+                      "stroke": "#BDC8C6"
+                    }
+                  },
+                  "seriesLabel": {
+                    "visible": true,
+                    "position": "end",
+                    "label": {
+                      "style": {
+                        "fill": "#576C69"
+                      }
+                    }
+                  },
+                  "label": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "target": {
+                  "measure": "Instagram"
+                },
+                "specKey": "series",
+                "spec": {
+                  "line": {
+                    "style": {
+                      "stroke": "#BDC8C6",
+                      "lineWidth": 2
+                    }
+                  },
+                  "point": {
+                    "visible": true,
+                    "style": {
+                      "size": 5,
+                      "fill": "#BDC8C6",
+                      "stroke": "#BDC8C6"
+                    }
+                  },
+                  "seriesLabel": {
+                    "visible": true,
+                    "position": "end",
+                    "label": {
+                      "style": {
+                        "fill": "#576C69"
+                      }
+                    }
+                  },
+                  "label": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "target": {
+                  "measure": "YouTube"
+                },
+                "specKey": "series",
+                "spec": {
+                  "line": {
+                    "style": {
+                      "stroke": "#BDC8C6",
+                      "lineWidth": 2
+                    }
+                  },
+                  "point": {
+                    "visible": true,
+                    "style": {
+                      "size": 5,
+                      "fill": "#BDC8C6",
+                      "stroke": "#BDC8C6"
+                    }
+                  },
+                  "seriesLabel": {
+                    "visible": true,
+                    "position": "end",
+                    "label": {
+                      "style": {
+                        "fill": "#576C69"
+                      }
+                    }
+                  },
+                  "label": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "target": {
+                  "measure": "TikTok"
+                },
+                "specKey": "series",
+                "spec": {
+                  "line": {
+                    "style": {
+                      "stroke": "#BDC8C6",
+                      "lineWidth": 2
+                    }
+                  },
+                  "point": {
+                    "visible": true,
+                    "style": {
+                      "size": 5,
+                      "fill": "#BDC8C6",
+                      "stroke": "#BDC8C6"
+                    }
+                  },
+                  "seriesLabel": {
+                    "visible": true,
+                    "position": "end",
+                    "label": {
+                      "style": {
+                        "fill": "#576C69"
+                      }
+                    }
+                  },
+                  "label": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "target": {
+                  "measure": "X"
+                },
+                "specKey": "series",
+                "spec": {
+                  "line": {
+                    "style": {
+                      "stroke": "#BDC8C6",
+                      "lineWidth": 2
+                    }
+                  },
+                  "point": {
+                    "visible": true,
+                    "style": {
+                      "size": 5,
+                      "fill": "#BDC8C6",
+                      "stroke": "#BDC8C6"
+                    }
+                  },
+                  "seriesLabel": {
+                    "visible": true,
+                    "position": "end",
+                    "label": {
+                      "style": {
+                        "fill": "#576C69"
+                      }
+                    }
+                  },
+                  "label": {
+                    "visible": false
+                  }
+                }
+              },
+              {
+                "target": {
+                  "measure": "Facebook"
+                },
+                "specKey": "series",
+                "spec": {
+                  "line": {
+                    "style": {
+                      "stroke": "#056E68",
+                      "lineWidth": 4
+                    }
+                  },
+                  "point": {
+                    "visible": true,
+                    "style": {
+                      "size": 7,
+                      "fill": "#056E68",
+                      "stroke": "#056E68"
+                    }
+                  },
+                  "seriesLabel": {
+                    "visible": true,
+                    "position": "end",
+                    "label": {
+                      "style": {
+                        "fill": "#056E68"
+                      }
+                    }
+                  },
+                  "label": {
+                    "visible": false
+                  }
+                }
+              }
+            ],
+            "color": [
+              "#BCC7C6",
+              "#BCC7C6",
+              "#BCC7C6",
+              "#BCC7C6",
+              "#BCC7C6",
+              "#056E68"
+            ]
+          }
+        }
+      },
+      {
+        "type": "text",
+        "id": "scope",
+        "position": {
+          "x": 34,
+          "y": 568,
+          "width": 1210,
+          "height": 24
+        },
+        "options": {
+          "text": "2026 年 1—12 月   ·   合成数据   ·   CPA = 当月付费投放花费 ÷ 当月归因获客人数。",
+          "fill": "#536A68",
+          "fontWeight": "normal",
+          "fontSize": 15
+        }
+      },
+      {
+        "type": "text",
+        "id": "ties",
+        "position": {
+          "x": 34,
+          "y": 600,
+          "width": 1210,
+          "height": 24
+        },
+        "options": {
+          "text": "同 CPA 取并列名次，下一名跳位。本例各月均无并列。",
+          "fill": "#536A68",
+          "fontWeight": "normal",
+          "fontSize": 14
+        }
+      }
+    ]
+  }
+}

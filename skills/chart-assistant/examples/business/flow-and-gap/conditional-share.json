@@ -1,0 +1,700 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "paper",
+        "type": "rect",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 730
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#FAFBF7",
+            "stroke": "#FAFBF7"
+          },
+          "zIndex": -2
+        }
+      },
+      {
+        "id": "section",
+        "type": "text",
+        "position": {
+          "x": 43,
+          "y": 21,
+          "width": 850,
+          "height": 24.0
+        },
+        "options": {
+          "text": "客户服务     /     工单处理",
+          "fontSize": 15,
+          "fill": "#456849",
+          "fontWeight": "bold"
+        }
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "position": {
+          "x": 40,
+          "y": 53,
+          "width": 1210,
+          "height": 54.400000000000006
+        },
+        "options": {
+          "text": "30 天仍未解决的 324 笔工单，占全部工单的 3.24%",
+          "fontSize": 34,
+          "fill": "#222E27",
+          "fontWeight": "bold"
+        }
+      },
+      {
+        "id": "scope",
+        "type": "text",
+        "position": {
+          "x": 43,
+          "y": 106,
+          "width": 1150,
+          "height": 25.6
+        },
+        "options": {
+          "text": "2026 年 9 月新建工单  ·  按创建后的前 30 天归类  ·  合成数据",
+          "fontSize": 16,
+          "fill": "#53675B",
+          "fontWeight": "normal"
+        }
+      },
+      {
+        "id": "card",
+        "type": "rect",
+        "position": {
+          "x": 30,
+          "y": 152,
+          "width": 1220,
+          "height": 465
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#FFFFFF",
+            "stroke": "#FFFFFF"
+          },
+          "zIndex": -1
+        }
+      },
+      {
+        "id": "all-heading",
+        "type": "text",
+        "position": {
+          "x": 55,
+          "y": 169,
+          "width": 315,
+          "height": 27.200000000000003
+        },
+        "options": {
+          "text": "全部工单   ·   10,000 笔",
+          "fontSize": 17,
+          "fill": "#222E27",
+          "fontWeight": "bold"
+        }
+      },
+      {
+        "id": "group-heading",
+        "type": "text",
+        "position": {
+          "x": 525,
+          "y": 169,
+          "width": 390,
+          "height": 27.200000000000003
+        },
+        "options": {
+          "text": "处理去向   ·   占全部工单",
+          "fontSize": 17,
+          "fill": "#222E27",
+          "fontWeight": "bold"
+        }
+      },
+      {
+        "id": "outcome-heading",
+        "type": "text",
+        "position": {
+          "x": 978,
+          "y": 169,
+          "width": 255,
+          "height": 27.200000000000003
+        },
+        "options": {
+          "text": "人工结果   ·   占人工工单",
+          "fontSize": 17,
+          "fill": "#222E27",
+          "fontWeight": "bold"
+        }
+      },
+      {
+        "id": "ticket-flow",
+        "type": "chart",
+        "position": {
+          "x": 60,
+          "y": 208,
+          "width": 988,
+          "height": 396
+        },
+        "options": {
+          "chartType": "sankey",
+          "enableDataEdit": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "来源",
+                "去向",
+                "工单数"
+              ],
+              "rows": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7"
+              ],
+              "data": [
+                {
+                  "来源": "全部工单",
+                  "去向": "自助解决   36%",
+                  "工单数": 3600
+                },
+                {
+                  "来源": "全部工单",
+                  "去向": "用户撤回   10%",
+                  "工单数": 1000
+                },
+                {
+                  "来源": "全部工单",
+                  "去向": "转入人工   54%",
+                  "工单数": 5400
+                },
+                {
+                  "来源": "转入人工   54%",
+                  "去向": "当天解决   48%",
+                  "工单数": 2592
+                },
+                {
+                  "来源": "转入人工   54%",
+                  "去向": "次日解决   7%",
+                  "工单数": 378
+                },
+                {
+                  "来源": "转入人工   54%",
+                  "去向": "第 3–7 天解决   27%",
+                  "工单数": 1458
+                },
+                {
+                  "来源": "转入人工   54%",
+                  "去向": "第 8–30 天解决   12%",
+                  "工单数": 648
+                },
+                {
+                  "来源": "转入人工   54%",
+                  "去向": "30 天仍未解决   6%",
+                  "工单数": 324
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "fixed": 0,
+                    "separator": true
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "source": "来源",
+              "target": "去向",
+              "value": "工单数"
+            },
+            "markStyle": [
+              {
+                "id": "node-0",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "全部工单"
+                },
+                "itemValueMap": {
+                  "key": "全部工单"
+                },
+                "style": {
+                  "fill": "#86AF66"
+                }
+              },
+              {
+                "id": "node-1",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "自助解决   36%"
+                },
+                "itemValueMap": {
+                  "key": "自助解决   36%"
+                },
+                "style": {
+                  "fill": "#E9B84C"
+                }
+              },
+              {
+                "id": "node-2",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "用户撤回   10%"
+                },
+                "itemValueMap": {
+                  "key": "用户撤回   10%"
+                },
+                "style": {
+                  "fill": "#E9B84C"
+                }
+              },
+              {
+                "id": "node-3",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "转入人工   54%"
+                },
+                "itemValueMap": {
+                  "key": "转入人工   54%"
+                },
+                "style": {
+                  "fill": "#86AF66"
+                }
+              },
+              {
+                "id": "node-4",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "当天解决   48%"
+                },
+                "itemValueMap": {
+                  "key": "当天解决   48%"
+                },
+                "style": {
+                  "fill": "#86AF66"
+                }
+              },
+              {
+                "id": "node-5",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "次日解决   7%"
+                },
+                "itemValueMap": {
+                  "key": "次日解决   7%"
+                },
+                "style": {
+                  "fill": "#86AF66"
+                }
+              },
+              {
+                "id": "node-6",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "第 3–7 天解决   27%"
+                },
+                "itemValueMap": {
+                  "key": "第 3–7 天解决   27%"
+                },
+                "style": {
+                  "fill": "#86AF66"
+                }
+              },
+              {
+                "id": "node-7",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "第 8–30 天解决   12%"
+                },
+                "itemValueMap": {
+                  "key": "第 8–30 天解决   12%"
+                },
+                "style": {
+                  "fill": "#86AF66"
+                }
+              },
+              {
+                "id": "node-8",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "30 天仍未解决   6%"
+                },
+                "itemValueMap": {
+                  "key": "30 天仍未解决   6%"
+                },
+                "style": {
+                  "fill": "#BC728E"
+                }
+              },
+              {
+                "id": "flow-0",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "全部工单",
+                  "target": "自助解决   36%"
+                },
+                "itemValueMap": {
+                  "source": "全部工单",
+                  "target": "自助解决   36%"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #86AF66 0%, #E9B84C 100%)"
+                }
+              },
+              {
+                "id": "flow-1",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "全部工单",
+                  "target": "用户撤回   10%"
+                },
+                "itemValueMap": {
+                  "source": "全部工单",
+                  "target": "用户撤回   10%"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #86AF66 0%, #E9B84C 100%)"
+                }
+              },
+              {
+                "id": "flow-2",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "全部工单",
+                  "target": "转入人工   54%"
+                },
+                "itemValueMap": {
+                  "source": "全部工单",
+                  "target": "转入人工   54%"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #86AF66 0%, #86AF66 100%)"
+                }
+              },
+              {
+                "id": "flow-3",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "转入人工   54%",
+                  "target": "当天解决   48%"
+                },
+                "itemValueMap": {
+                  "source": "转入人工   54%",
+                  "target": "当天解决   48%"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #86AF66 0%, #86AF66 100%)"
+                }
+              },
+              {
+                "id": "flow-4",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "转入人工   54%",
+                  "target": "次日解决   7%"
+                },
+                "itemValueMap": {
+                  "source": "转入人工   54%",
+                  "target": "次日解决   7%"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #86AF66 0%, #86AF66 100%)"
+                }
+              },
+              {
+                "id": "flow-5",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "转入人工   54%",
+                  "target": "第 3–7 天解决   27%"
+                },
+                "itemValueMap": {
+                  "source": "转入人工   54%",
+                  "target": "第 3–7 天解决   27%"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #86AF66 0%, #86AF66 100%)"
+                }
+              },
+              {
+                "id": "flow-6",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "转入人工   54%",
+                  "target": "第 8–30 天解决   12%"
+                },
+                "itemValueMap": {
+                  "source": "转入人工   54%",
+                  "target": "第 8–30 天解决   12%"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #86AF66 0%, #86AF66 100%)"
+                }
+              },
+              {
+                "id": "flow-7",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "转入人工   54%",
+                  "target": "30 天仍未解决   6%"
+                },
+                "itemValueMap": {
+                  "source": "转入人工   54%",
+                  "target": "30 天仍未解决   6%"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #86AF66 0%, #BC728E 100%)"
+                }
+              }
+            ],
+            "modelSpec": [
+              {
+                "id": "series-sankey",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "nodeAlign": "left",
+                  "nodeWidth": 12,
+                  "nodeGap": 24,
+                  "link": {
+                    "style": {
+                      "fillOpacity": 0.57
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "position": "outside",
+                    "style": {
+                      "fill": "#1F3526"
+                    },
+                    "formatConfig": {
+                      "content": [
+                        "dimension"
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              }
+            ],
+            "color": [
+              "#86AF66"
+            ]
+          }
+        }
+      },
+      {
+        "id": "key-band",
+        "type": "rect",
+        "position": {
+          "x": 30,
+          "y": 634,
+          "width": 1220,
+          "height": 63
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#F1E9ED",
+            "stroke": "#F1E9ED"
+          },
+          "zIndex": -1
+        }
+      },
+      {
+        "id": "key-edge",
+        "type": "rect",
+        "position": {
+          "x": 30,
+          "y": 634,
+          "width": 5,
+          "height": 63
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#BC728E",
+            "stroke": "#BC728E"
+          },
+          "zIndex": -1
+        }
+      },
+      {
+        "id": "key",
+        "type": "text",
+        "position": {
+          "x": 52,
+          "y": 654,
+          "width": 310,
+          "height": 30.400000000000002
+        },
+        "options": {
+          "text": "同一组 324 笔工单",
+          "fontSize": 19,
+          "fill": "#713E55",
+          "fontWeight": "bold"
+        }
+      },
+      {
+        "id": "subshare",
+        "type": "text",
+        "position": {
+          "x": 368,
+          "y": 654,
+          "width": 412,
+          "height": 30.400000000000002
+        },
+        "options": {
+          "text": "占人工工单    324 ÷ 5,400 = 6%",
+          "fontSize": 19,
+          "fill": "#222E27",
+          "fontWeight": "normal"
+        }
+      },
+      {
+        "id": "allshare",
+        "type": "text",
+        "position": {
+          "x": 799,
+          "y": 654,
+          "width": 456,
+          "height": 30.400000000000002
+        },
+        "options": {
+          "text": "占全部工单    324 ÷ 10,000 = 3.24%",
+          "fontSize": 19,
+          "fill": "#222E27",
+          "fontWeight": "normal"
+        }
+      }
+    ]
+  }
+}

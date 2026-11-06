@@ -10,7 +10,7 @@ VisActor Skills provides chart, dashboard, data story and poster tools for Claud
 
 | Skill | Tasks |
 | --- | --- |
-| [chart-assistant](skills/chart-assistant/SKILL.md) | Business charts, MBB analysis annotations, editable Feishu cards, transparent PNGs and document image insertion |
+| [chart-assistant](skills/chart-assistant/SKILL.md) | Business charts and composition recipes, native KPI cards, MBB analysis annotations, editable Feishu cards, transparent PNGs and document image insertion |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | Analysis reports, business briefings and data features, with chart scrollytelling and annotations, delivered as HTML stories or Web-PPT |
 | [creative-data-storytelling](skills/creative-data-storytelling/SKILL.md) | Create interactive stories that compare quantities, trace patterns across ordered passages or events, or use familiar objects and individual records to explain data. Combine continuous reading with full-bleed stages and optional exploration. Deliver static HTML and assets. |
 | [unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) | Create interactive data stories in which each data unit represents a record or a fixed quantity. As readers scroll, particles can gather into a familiar image, then scatter and regroup by time, category, or value in a full-screen view, showing how individual records fit into a larger pattern. |
@@ -112,7 +112,7 @@ To update a manually imported Skill, download its package from a newer Release a
 
 | Skill | Runtime requirements |
 | --- | --- |
-| chart-assistant | Node.js 18+; HTTPS access for PNGs; authorized host tools or lark-cli for document insertion; Chart Assistant ISV app for editable cards. DSL generation/validation needs no Feishu authorization or local renderer |
+| chart-assistant | Node.js 18+; HTTPS access for PNGs; authorized host tools or lark-cli for document insertion; Chart Assistant ISV app for editable cards. Native KPI and card sizing require a host supporting their templates/protocol. DSL generation/validation needs no Feishu authorization or local renderer |
 | chart-storytelling | Python 3.10+ (standard library) and Node.js for JavaScript checks; pinned VSeed, VChart, VTable and GSAP load from unpkg |
 | creative-data-storytelling | Desktop browser with native JavaScript modules; Python 3.9+ (standard library) for the bundled preview server, Node.js for JavaScript checks; optional libraries and fonts may use public CDNs |
 | unit-data-storytelling | Modern browser with ES modules; Node.js for module checks; optional Python 3.9+ (standard library) for the bundled preview/audit tool. Bundled examples use local assets without a required CDN or chart library |

@@ -10,6 +10,8 @@
 
 目前公开的文档块 PATCH 请求未提供 `add_ons.record` 修改字段，响应能返回 record 不等于请求可写。`Record.setRecord/applyTransaction` 是当前小组件客户端接口，不能构造为外部 HTTP 请求。
 
+`editorState:"initialized"` 只表示卡片已初始化，不证明 `browserData` 已保存。仅浏览 commonOption 卡片后仍没有 browserData 是可能的正常状态。用户要求单标签、换数或分组时，若宿主提供已授权的图表编辑器，可进入编辑态、完成加载并保存，再回读完整 record；浏览态 PNG 和初始化标记不能代替这一步。没有该通道时，按下面的初始化属性白名单判断能力，不把“打开过卡片”当成已取得运行时身份，也不把此限制归因于核心编辑器不支持编辑。
+
 ## 工具要求
 
 同一身份至少具备以下已确认的服务端接口或等价工具：

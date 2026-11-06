@@ -1,0 +1,1042 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "page-background",
+        "type": "rect",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 776
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#0B1C15",
+            "stroke": "#0B1C15"
+          },
+          "zIndex": -1
+        }
+      },
+      {
+        "id": "page-title",
+        "type": "text",
+        "position": {
+          "x": 24,
+          "y": 16,
+          "width": 1000,
+          "height": 38
+        },
+        "options": {
+          "text": "采购预算的结构与流向",
+          "fontSize": 28,
+          "fill": "#EEF4E8",
+          "fontWeight": "600"
+        }
+      },
+      {
+        "id": "page-context",
+        "type": "text",
+        "position": {
+          "x": 24,
+          "y": 62,
+          "width": 1000,
+          "height": 22
+        },
+        "options": {
+          "text": "2026 年第三季度｜已分配预算｜单位：万元｜模拟数据",
+          "fontSize": 14,
+          "fill": "#B8CDC1",
+          "fontWeight": "normal"
+        }
+      },
+      {
+        "id": "procurement-kpis",
+        "type": "chart",
+        "position": {
+          "x": 24,
+          "y": 104,
+          "width": 1232,
+          "height": 132
+        },
+        "options": {
+          "chartType": "kpiCard",
+          "enableDataEdit": true,
+          "enableEditorTheme": true,
+          "enableTypeChange": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "编码",
+                "指标",
+                "主值",
+                "单位"
+              ],
+              "rows": [
+                "budget",
+                "top-two-share"
+              ],
+              "data": [
+                {
+                  "编码": "budget",
+                  "指标": "预算总额",
+                  "主值": 1200,
+                  "单位": "万元"
+                },
+                {
+                  "编码": "top-two-share",
+                  "指标": "前两家供应商预算占比",
+                  "主值": 75,
+                  "单位": "%"
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "fixed": 0,
+                    "separator": true
+                  }
+                },
+                {
+                  "dataType": "text"
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "key": "编码",
+              "name": "指标",
+              "value": "主值",
+              "unit": "单位"
+            },
+            "modelSpec": [],
+            "color": [
+              "#59BDA5"
+            ]
+          }
+        }
+      },
+      {
+        "id": "budget-flow",
+        "type": "chart",
+        "position": {
+          "x": 24,
+          "y": 270,
+          "width": 680,
+          "height": 420
+        },
+        "options": {
+          "chartType": "sankey",
+          "enableDataEdit": true,
+          "enableEditorTheme": true,
+          "enableTypeChange": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "来源",
+                "去向",
+                "金额"
+              ],
+              "rows": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15"
+              ],
+              "data": [
+                {
+                  "来源": "运营资金",
+                  "去向": "原材料",
+                  "金额": 400
+                },
+                {
+                  "来源": "运营资金",
+                  "去向": "设备",
+                  "金额": 200
+                },
+                {
+                  "来源": "运营资金",
+                  "去向": "软件",
+                  "金额": 100
+                },
+                {
+                  "来源": "资本预算",
+                  "去向": "原材料",
+                  "金额": 100
+                },
+                {
+                  "来源": "资本预算",
+                  "去向": "设备",
+                  "金额": 200
+                },
+                {
+                  "来源": "研发预算",
+                  "去向": "原材料",
+                  "金额": 100
+                },
+                {
+                  "来源": "研发预算",
+                  "去向": "软件",
+                  "金额": 100
+                },
+                {
+                  "来源": "原材料",
+                  "去向": "供应商 A",
+                  "金额": 400
+                },
+                {
+                  "来源": "原材料",
+                  "去向": "供应商 B",
+                  "金额": 100
+                },
+                {
+                  "来源": "原材料",
+                  "去向": "供应商 C",
+                  "金额": 100
+                },
+                {
+                  "来源": "设备",
+                  "去向": "供应商 A",
+                  "金额": 200
+                },
+                {
+                  "来源": "设备",
+                  "去向": "供应商 B",
+                  "金额": 100
+                },
+                {
+                  "来源": "设备",
+                  "去向": "供应商 C",
+                  "金额": 100
+                },
+                {
+                  "来源": "软件",
+                  "去向": "供应商 B",
+                  "金额": 100
+                },
+                {
+                  "来源": "软件",
+                  "去向": "供应商 D",
+                  "金额": 100
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "fixed": 0,
+                    "separator": true
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "source": "来源",
+              "target": "去向",
+              "value": "金额"
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "textType": "rich",
+                  "text": [
+                    {
+                      "text": "资金来源 → 品类 → 供应商",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "fill": "#EEF4E8",
+                      "lineHeight": 28
+                    },
+                    {
+                      "text": "\n预算金额（万元）",
+                      "fontSize": 12,
+                      "fill": "#A1C0AF",
+                      "fontWeight": "normal",
+                      "lineHeight": 18
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  }
+                }
+              },
+              {
+                "id": "series-sankey",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "label": {
+                    "visible": true,
+                    "position": "outside",
+                    "style": {
+                      "fill": "#D8E7D5"
+                    },
+                    "formatConfig": {
+                      "content": [
+                        "dimension",
+                        "value"
+                      ],
+                      "contentWrap": true,
+                      "fixed": 0,
+                      "separator": true
+                    }
+                  },
+                  "nodeAlign": "left",
+                  "link": {
+                    "style": {
+                      "fillOpacity": 0.4
+                    }
+                  },
+                  "nodeWidth": 12
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              }
+            ],
+            "color": [
+              "#2F8D79"
+            ],
+            "markStyle": [
+              {
+                "id": "flow-node-1",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "原材料"
+                },
+                "itemValueMap": {
+                  "key": "原材料"
+                },
+                "style": {
+                  "fill": "#35705A"
+                }
+              },
+              {
+                "id": "flow-node-2",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "设备"
+                },
+                "itemValueMap": {
+                  "key": "设备"
+                },
+                "style": {
+                  "fill": "#35705A"
+                }
+              },
+              {
+                "id": "flow-node-3",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "软件"
+                },
+                "itemValueMap": {
+                  "key": "软件"
+                },
+                "style": {
+                  "fill": "#35705A"
+                }
+              },
+              {
+                "id": "flow-node-6",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "供应商 A"
+                },
+                "itemValueMap": {
+                  "key": "供应商 A"
+                },
+                "style": {
+                  "fill": "#A3A153"
+                }
+              },
+              {
+                "id": "flow-node-7",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "供应商 B"
+                },
+                "itemValueMap": {
+                  "key": "供应商 B"
+                },
+                "style": {
+                  "fill": "#A3A153"
+                }
+              },
+              {
+                "id": "flow-node-8",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "供应商 C"
+                },
+                "itemValueMap": {
+                  "key": "供应商 C"
+                },
+                "style": {
+                  "fill": "#A3A153"
+                }
+              },
+              {
+                "id": "flow-node-9",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "node",
+                "itemKeys": [
+                  "key"
+                ],
+                "itemKeyMap": {
+                  "key": "供应商 D"
+                },
+                "itemValueMap": {
+                  "key": "供应商 D"
+                },
+                "style": {
+                  "fill": "#A3A153"
+                }
+              },
+              {
+                "id": "flow-link-0",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "运营资金",
+                  "target": "原材料"
+                },
+                "itemValueMap": {
+                  "source": "运营资金",
+                  "target": "原材料"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #2F8D79 0%, #35705A 100%)"
+                }
+              },
+              {
+                "id": "flow-link-1",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "运营资金",
+                  "target": "设备"
+                },
+                "itemValueMap": {
+                  "source": "运营资金",
+                  "target": "设备"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #2F8D79 0%, #35705A 100%)"
+                }
+              },
+              {
+                "id": "flow-link-2",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "运营资金",
+                  "target": "软件"
+                },
+                "itemValueMap": {
+                  "source": "运营资金",
+                  "target": "软件"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #2F8D79 0%, #35705A 100%)"
+                }
+              },
+              {
+                "id": "flow-link-3",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "资本预算",
+                  "target": "原材料"
+                },
+                "itemValueMap": {
+                  "source": "资本预算",
+                  "target": "原材料"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #2F8D79 0%, #35705A 100%)"
+                }
+              },
+              {
+                "id": "flow-link-4",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "资本预算",
+                  "target": "设备"
+                },
+                "itemValueMap": {
+                  "source": "资本预算",
+                  "target": "设备"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #2F8D79 0%, #35705A 100%)"
+                }
+              },
+              {
+                "id": "flow-link-5",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "研发预算",
+                  "target": "原材料"
+                },
+                "itemValueMap": {
+                  "source": "研发预算",
+                  "target": "原材料"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #2F8D79 0%, #35705A 100%)"
+                }
+              },
+              {
+                "id": "flow-link-6",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "研发预算",
+                  "target": "软件"
+                },
+                "itemValueMap": {
+                  "source": "研发预算",
+                  "target": "软件"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #2F8D79 0%, #35705A 100%)"
+                }
+              },
+              {
+                "id": "flow-link-7",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "原材料",
+                  "target": "供应商 A"
+                },
+                "itemValueMap": {
+                  "source": "原材料",
+                  "target": "供应商 A"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #35705A 0%, #A3A153 100%)"
+                }
+              },
+              {
+                "id": "flow-link-8",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "原材料",
+                  "target": "供应商 B"
+                },
+                "itemValueMap": {
+                  "source": "原材料",
+                  "target": "供应商 B"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #35705A 0%, #A3A153 100%)"
+                }
+              },
+              {
+                "id": "flow-link-9",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "原材料",
+                  "target": "供应商 C"
+                },
+                "itemValueMap": {
+                  "source": "原材料",
+                  "target": "供应商 C"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #35705A 0%, #A3A153 100%)"
+                }
+              },
+              {
+                "id": "flow-link-10",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "设备",
+                  "target": "供应商 A"
+                },
+                "itemValueMap": {
+                  "source": "设备",
+                  "target": "供应商 A"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #35705A 0%, #A3A153 100%)"
+                }
+              },
+              {
+                "id": "flow-link-11",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "设备",
+                  "target": "供应商 B"
+                },
+                "itemValueMap": {
+                  "source": "设备",
+                  "target": "供应商 B"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #35705A 0%, #A3A153 100%)"
+                }
+              },
+              {
+                "id": "flow-link-12",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "设备",
+                  "target": "供应商 C"
+                },
+                "itemValueMap": {
+                  "source": "设备",
+                  "target": "供应商 C"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #35705A 0%, #A3A153 100%)"
+                }
+              },
+              {
+                "id": "flow-link-13",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "软件",
+                  "target": "供应商 B"
+                },
+                "itemValueMap": {
+                  "source": "软件",
+                  "target": "供应商 B"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #35705A 0%, #A3A153 100%)"
+                }
+              },
+              {
+                "id": "flow-link-14",
+                "seriesType": "sankey",
+                "seriesIndex": 0,
+                "markName": "link",
+                "itemKeys": [
+                  "source",
+                  "target"
+                ],
+                "itemKeyMap": {
+                  "source": "软件",
+                  "target": "供应商 D"
+                },
+                "itemValueMap": {
+                  "source": "软件",
+                  "target": "供应商 D"
+                },
+                "style": {
+                  "fill": "linear-gradient(90deg, #35705A 0%, #A3A153 100%)"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "supplier-ranking",
+        "type": "chart",
+        "position": {
+          "x": 824,
+          "y": 270,
+          "width": 432,
+          "height": 420
+        },
+        "options": {
+          "chartType": "horizontalBarGroup",
+          "enableDataEdit": true,
+          "enableEditorTheme": true,
+          "enableTypeChange": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "供应商",
+                "金额"
+              ],
+              "rows": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ],
+              "data": [
+                {
+                  "供应商": "供应商 A",
+                  "金额": 600
+                },
+                {
+                  "供应商": "供应商 B",
+                  "金额": 300
+                },
+                {
+                  "供应商": "供应商 C",
+                  "金额": 200
+                },
+                {
+                  "供应商": "供应商 D",
+                  "金额": 100
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "fixed": 0,
+                    "separator": true
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "供应商",
+              "y": [
+                "金额"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": true,
+                  "textType": "rich",
+                  "text": [
+                    {
+                      "text": "供应商预算排名",
+                      "fontSize": 22,
+                      "fontWeight": "600",
+                      "fill": "#EEF4E8",
+                      "lineHeight": 28
+                    },
+                    {
+                      "text": "\n同一采购范围 · 按预算金额降序",
+                      "fontSize": 12,
+                      "fill": "#A1C0AF",
+                      "fontWeight": "normal",
+                      "lineHeight": 18
+                    }
+                  ],
+                  "textStyle": {
+                    "align": "left"
+                  }
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "orient": "left",
+                  "type": "band",
+                  "title": {
+                    "visible": false
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "label": {
+                    "style": {
+                      "fill": "#B8CDC1"
+                    }
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "visible": true,
+                  "orient": "bottom",
+                  "type": "linear",
+                  "zero": true,
+                  "title": {
+                    "visible": true,
+                    "text": "采购预算（万元）",
+                    "style": {
+                      "fill": "#B8CDC1"
+                    }
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#2B4537",
+                      "lineWidth": 1
+                    }
+                  },
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "label": {
+                    "style": {
+                      "fill": "#B8CDC1"
+                    }
+                  }
+                }
+              },
+              {
+                "id": "series-0",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": [
+                        "value"
+                      ],
+                      "fixed": 0,
+                      "separator": true
+                    },
+                    "style": {
+                      "fill": "#D8E7D5",
+                      "lineWidth": 0
+                    }
+                  }
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              }
+            ],
+            "color": [
+              "#A3A153"
+            ]
+          }
+        }
+      },
+      {
+        "id": "flow-scope",
+        "type": "text",
+        "position": {
+          "x": 24,
+          "y": 720,
+          "width": 1232,
+          "height": 24
+        },
+        "options": {
+          "text": "口径：各阶段展示同一批预算，不重复累计。",
+          "fontSize": 14,
+          "fill": "#B8CDC1",
+          "fontWeight": "normal"
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  },
+  "afterMaterialization": {
+    "elementId": "procurement-kpis",
+    "attributePatch": {
+      "kpiCardLayout": {
+        "maxColumns": 2,
+        "minCardWidth": 400,
+        "columnGap": 20,
+        "padding": 0
+      },
+      "kpiCardStyle": {
+        "card": {
+          "fill": "#153328",
+          "stroke": "#2B4A3A",
+          "lineWidth": 1,
+          "cornerRadius": 8,
+          "padding": 20
+        },
+        "name": {
+          "fill": "#AAC9B9",
+          "fontSize": 15
+        },
+        "value": {
+          "fill": "#EEF4E8",
+          "fontSize": 36,
+          "fontWeight": "bold"
+        },
+        "unit": {
+          "fill": "#AAC9B9",
+          "fontSize": 16
+        },
+        "accent": {
+          "fill": "#55BAA0",
+          "width": 4
+        }
+      }
+    }
+  },
+  "requirements": {
+    "nativeTemplates": [
+      "kpiCard",
+      "sankey",
+      "horizontalBarGroup"
+    ],
+    "cardStyling": "After creation, read the current complete editor state and apply attributePatch to the actual procurement-kpis element, preserving all other attributes. This section describes the existing native editing step; do not inject it into commonOption.",
+    "markStyle": "Node and edge identities were read from this fixed fixture. Recheck actual identities for other data or hosts; colors are not automatically rebound to roles."
+  }
+}

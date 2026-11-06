@@ -1,0 +1,959 @@
+{
+  "initialRecord": {
+    "commonOption": {
+      "theme": "clarity-light",
+      "elements": [
+        {
+          "id": "page-title",
+          "type": "text",
+          "position": {
+            "x": 24,
+            "y": 16,
+            "width": 1312,
+            "height": 44
+          },
+          "options": {
+            "text": "2026 Q3 销售绩效",
+            "fontSize": 32,
+            "fill": "#0F172A",
+            "fontWeight": "bold"
+          }
+        },
+        {
+          "id": "page-subtitle",
+          "type": "text",
+          "position": {
+            "x": 24,
+            "y": 66,
+            "width": 1312,
+            "height": 25
+          },
+          "options": {
+            "text": "7—9月销售额比目标少 20 万元，同比仍增长  ·  同比参照 2025 年同季度  ·  模拟数据",
+            "fontSize": 16,
+            "fill": "#475569",
+            "fontWeight": "normal"
+          }
+        },
+        {
+          "id": "performance-kpis",
+          "type": "chart",
+          "position": {
+            "x": 24,
+            "y": 111,
+            "width": 1306,
+            "height": 105
+          },
+          "options": {
+            "chartType": "kpiCard",
+            "enableDataEdit": true,
+            "enableTypeChange": true,
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "编码",
+                  "指标",
+                  "主值",
+                  "单位"
+                ],
+                "rows": [
+                  "revenue",
+                  "target",
+                  "attainment",
+                  "yoy"
+                ],
+                "data": [
+                  {
+                    "编码": "revenue",
+                    "指标": "实际销售额",
+                    "主值": 1180,
+                    "单位": "万元"
+                  },
+                  {
+                    "编码": "target",
+                    "指标": "目标销售额",
+                    "主值": 1200,
+                    "单位": "万元"
+                  },
+                  {
+                    "编码": "attainment",
+                    "指标": "目标达成率",
+                    "主值": 98.33333333333333,
+                    "单位": "%"
+                  },
+                  {
+                    "编码": "yoy",
+                    "指标": "销售额同比增长率",
+                    "主值": 12.380952380952381,
+                    "单位": "%"
+                  }
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true,
+                      "fixed": 1
+                    }
+                  },
+                  {
+                    "dataType": "text"
+                  }
+                ]
+              }
+            },
+            "config": {
+              "mappingSpec": {
+                "key": "编码",
+                "name": "指标",
+                "value": "主值",
+                "unit": "单位"
+              },
+              "color": [
+                "#0A345E"
+              ]
+            }
+          }
+        },
+        {
+          "id": "region-performance",
+          "type": "chart",
+          "position": {
+            "x": 24,
+            "y": 244,
+            "width": 638,
+            "height": 342
+          },
+          "options": {
+            "chartType": "horizontalBarGroup",
+            "enableDataEdit": true,
+            "enableTypeChange": true,
+            "enableEditorTheme": true,
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "地区",
+                  "目标",
+                  "实际"
+                ],
+                "rows": [
+                  "华东",
+                  "华南",
+                  "华北",
+                  "西部"
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true,
+                      "fixed": 0
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true,
+                      "fixed": 0
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "地区": "华东",
+                    "目标": 400,
+                    "实际": 420,
+                    "上年同期": 360
+                  },
+                  {
+                    "地区": "华南",
+                    "目标": 350,
+                    "实际": 300,
+                    "上年同期": 280
+                  },
+                  {
+                    "地区": "华北",
+                    "目标": 300,
+                    "实际": 260,
+                    "上年同期": 230
+                  },
+                  {
+                    "地区": "西部",
+                    "目标": 150,
+                    "实际": 200,
+                    "上年同期": 180
+                  }
+                ]
+              }
+            },
+            "config": {
+              "mappingSpec": {
+                "x": "地区",
+                "y": [
+                  "目标",
+                  "实际"
+                ]
+              },
+              "modelSpec": [
+                {
+                  "id": "chart_title",
+                  "specKey": "title",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": true,
+                    "textType": "rich",
+                    "text": [
+                      {
+                        "text": "地区目标与实际\n",
+                        "fontSize": 22,
+                        "fontWeight": "600",
+                        "lineHeight": 28,
+                        "fill": "#0F172A"
+                      },
+                      {
+                        "text": "按实际销售额降序 · 单位为万元",
+                        "fontSize": 12,
+                        "lineHeight": 18,
+                        "fill": "#64748B"
+                      }
+                    ],
+                    "textStyle": {
+                      "align": "left"
+                    }
+                  }
+                },
+                {
+                  "id": "axis-left",
+                  "specKey": "axes",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": true,
+                    "orient": "left",
+                    "type": "band",
+                    "title": {
+                      "visible": false
+                    },
+                    "grid": {
+                      "visible": false,
+                      "style": {
+                        "stroke": "#E2E8F0",
+                        "lineWidth": 1
+                      }
+                    },
+                    "domainLine": {
+                      "visible": false
+                    },
+                    "tick": {
+                      "visible": false
+                    }
+                  }
+                },
+                {
+                  "id": "axis-bottom",
+                  "specKey": "axes",
+                  "specIndex": 1,
+                  "spec": {
+                    "visible": true,
+                    "orient": "bottom",
+                    "type": "linear",
+                    "title": {
+                      "visible": true,
+                      "text": "销售额（万元）"
+                    },
+                    "showAllGroupLayers": false,
+                    "grid": {
+                      "visible": true,
+                      "style": {
+                        "stroke": "#E2E8F0",
+                        "lineWidth": 1
+                      }
+                    },
+                    "domainLine": {
+                      "visible": false
+                    },
+                    "tick": {
+                      "visible": false
+                    },
+                    "zero": true,
+                    "label": {
+                      "formatConfig": {
+                        "content": "value",
+                        "unit": "none"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "legend-discrete",
+                  "specKey": "legends",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": true,
+                    "orient": "bottom",
+                    "position": "middle",
+                    "padding": [
+                      16,
+                      0,
+                      0,
+                      0
+                    ]
+                  }
+                },
+                {
+                  "specKey": "series",
+                  "target": {
+                    "measure": "目标"
+                  },
+                  "spec": {
+                    "label": {
+                      "styleMap": [
+                        {
+                          "target": {
+                            "selector": {
+                              "地区": "华南"
+                            }
+                          },
+                          "value": {
+                            "style": {
+                              "dx": -44,
+                              "fill": "#162335",
+                              "stroke": false
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "specKey": "series",
+                  "target": {
+                    "measure": "实际"
+                  },
+                  "spec": {
+                    "label": {
+                      "styleMap": [
+                        {
+                          "target": {
+                            "selector": {
+                              "地区": "华南"
+                            }
+                          },
+                          "value": {
+                            "style": {
+                              "dx": -44,
+                              "fill": "#FFFFFF",
+                              "stroke": false
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ],
+              "dataGroupSpec": [
+                {
+                  "target": {
+                    "measure": "目标"
+                  },
+                  "value": {
+                    "bar": {
+                      "style": {
+                        "fill": "#B8C1CC"
+                      }
+                    },
+                    "label": {
+                      "visible": true
+                    }
+                  }
+                },
+                {
+                  "target": {
+                    "measure": "实际"
+                  },
+                  "value": {
+                    "bar": {
+                      "style": {
+                        "fill": "#0A345E"
+                      }
+                    },
+                    "label": {
+                      "visible": true
+                    }
+                  }
+                }
+              ],
+              "color": [
+                "#B8C1CC",
+                "#0A345E"
+              ],
+              "marker": {
+                "markLine": [
+                  {
+                    "id": "south-target-gap",
+                    "name": "hierarchy-diff-line",
+                    "expandDistance": 87,
+                    "connectDirection": "right",
+                    "target": {
+                      "from": {
+                        "match": {
+                          "地区": "华南"
+                        },
+                        "metric": "目标",
+                        "boundary": "end"
+                      },
+                      "to": {
+                        "match": {
+                          "地区": "华南"
+                        },
+                        "metric": "实际",
+                        "boundary": "end"
+                      }
+                    },
+                    "label": {
+                      "visible": true,
+                      "formatConfig": {
+                        "content": [
+                          "layerValueDiff",
+                          "layerGrowthRate"
+                        ],
+                        "prefix": "华南差额 ",
+                        "postfix": "）",
+                        "contentFormat": {
+                          "layerValueDiff": {
+                            "fixed": 0,
+                            "postfix": " 万元（"
+                          }
+                        },
+                        "nonPositiveBaseline": "differenceOnly",
+                        "fixed": 1,
+                        "separator": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "monthly-performance",
+          "type": "chart",
+          "position": {
+            "x": 712,
+            "y": 244,
+            "width": 618,
+            "height": 342
+          },
+          "options": {
+            "chartType": "line",
+            "enableDataEdit": true,
+            "enableTypeChange": true,
+            "enableEditorTheme": true,
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "月份",
+                  "目标",
+                  "实际",
+                  "上年同期"
+                ],
+                "rows": [
+                  "7月",
+                  "8月",
+                  "9月"
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true,
+                      "fixed": 0
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true,
+                      "fixed": 0
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true,
+                      "fixed": 0
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "月份": "7月",
+                    "目标": 380,
+                    "实际": 360,
+                    "上年同期": 320
+                  },
+                  {
+                    "月份": "8月",
+                    "目标": 400,
+                    "实际": 390,
+                    "上年同期": 350
+                  },
+                  {
+                    "月份": "9月",
+                    "目标": 420,
+                    "实际": 430,
+                    "上年同期": 380
+                  }
+                ]
+              }
+            },
+            "config": {
+              "mappingSpec": {
+                "x": "月份",
+                "y": [
+                  "目标",
+                  "实际",
+                  "上年同期"
+                ]
+              },
+              "modelSpec": [
+                {
+                  "id": "chart_title",
+                  "specKey": "title",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": true,
+                    "textType": "rich",
+                    "text": [
+                      {
+                        "text": "月度销售走势\n",
+                        "fontSize": 22,
+                        "fontWeight": "600",
+                        "lineHeight": 28,
+                        "fill": "#0F172A"
+                      },
+                      {
+                        "text": "实际、目标与上年相同月份销售额",
+                        "fontSize": 12,
+                        "lineHeight": 18,
+                        "fill": "#64748B"
+                      }
+                    ],
+                    "textStyle": {
+                      "align": "left"
+                    }
+                  }
+                },
+                {
+                  "id": "axis-left",
+                  "specKey": "axes",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": true,
+                    "orient": "left",
+                    "type": "linear",
+                    "title": {
+                      "visible": true,
+                      "text": "销售额（万元）"
+                    },
+                    "grid": {
+                      "visible": true,
+                      "style": {
+                        "stroke": "#E2E8F0",
+                        "lineWidth": 1
+                      }
+                    },
+                    "domainLine": {
+                      "visible": false
+                    },
+                    "tick": {
+                      "visible": false
+                    },
+                    "zero": true,
+                    "label": {
+                      "formatConfig": {
+                        "content": "value",
+                        "unit": "none"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "axis-bottom",
+                  "specKey": "axes",
+                  "specIndex": 1,
+                  "spec": {
+                    "visible": true,
+                    "orient": "bottom",
+                    "type": "band",
+                    "title": {
+                      "visible": false
+                    },
+                    "showAllGroupLayers": false,
+                    "grid": {
+                      "visible": false,
+                      "style": {
+                        "stroke": "#E2E8F0",
+                        "lineWidth": 1
+                      }
+                    },
+                    "domainLine": {
+                      "visible": false
+                    },
+                    "tick": {
+                      "visible": false
+                    }
+                  }
+                },
+                {
+                  "id": "legend-discrete",
+                  "specKey": "legends",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": true,
+                    "orient": "bottom",
+                    "position": "middle",
+                    "padding": [
+                      16,
+                      0,
+                      0,
+                      0
+                    ]
+                  }
+                },
+                {
+                  "id": "series-0",
+                  "specKey": "series",
+                  "specIndex": 0,
+                  "spec": {
+                    "label": {
+                      "visible": false
+                    },
+                    "seriesLabel": {
+                      "visible": false
+                    },
+                    "line": {
+                      "style": {
+                        "stroke": "#B8C1CC",
+                        "lineDash": [
+                          5,
+                          4
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "series-1",
+                  "specKey": "series",
+                  "specIndex": 1,
+                  "spec": {
+                    "label": {
+                      "visible": false
+                    },
+                    "seriesLabel": {
+                      "visible": false
+                    },
+                    "line": {
+                      "style": {
+                        "stroke": "#0A345E",
+                        "lineDash": []
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "series-2",
+                  "specKey": "series",
+                  "specIndex": 2,
+                  "spec": {
+                    "label": {
+                      "visible": false
+                    },
+                    "seriesLabel": {
+                      "visible": false
+                    },
+                    "line": {
+                      "style": {
+                        "stroke": "#C98734",
+                        "lineDash": [
+                          5,
+                          4
+                        ]
+                      }
+                    }
+                  }
+                }
+              ],
+              "dataGroupSpec": {
+                "目标": {
+                  "line": {
+                    "style": {
+                      "stroke": "#B8C1CC",
+                      "lineDash": [
+                        5,
+                        4
+                      ]
+                    }
+                  },
+                  "point": {
+                    "style": {
+                      "fill": "#B8C1CC",
+                      "stroke": "#B8C1CC"
+                    }
+                  },
+                  "label": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                },
+                "实际": {
+                  "line": {
+                    "style": {
+                      "stroke": "#0A345E"
+                    }
+                  },
+                  "point": {
+                    "style": {
+                      "fill": "#0A345E",
+                      "stroke": "#0A345E"
+                    }
+                  },
+                  "label": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                },
+                "上年同期": {
+                  "line": {
+                    "style": {
+                      "stroke": "#C98734",
+                      "lineDash": [
+                        5,
+                        4
+                      ]
+                    }
+                  },
+                  "point": {
+                    "style": {
+                      "fill": "#C98734",
+                      "stroke": "#C98734"
+                    }
+                  },
+                  "label": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                }
+              },
+              "color": [
+                "#B8C1CC",
+                "#0A345E",
+                "#C98734"
+              ]
+            }
+          }
+        },
+        {
+          "id": "performance-detail",
+          "type": "table",
+          "position": {
+            "x": 24,
+            "y": 618,
+            "width": 1306,
+            "height": 259
+          },
+          "options": {
+            "tableType": "ListTable",
+            "viewMode": "zoom",
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "地区",
+                  "实际（万元）",
+                  "目标（万元）",
+                  "差额（万元）",
+                  "目标达成率",
+                  "同比增长率"
+                ],
+                "rows": [
+                  "华东",
+                  "华南",
+                  "华北",
+                  "西部"
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true,
+                      "fixed": 0
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true,
+                      "fixed": 0
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true,
+                      "fixed": 0
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true,
+                      "fixed": 1,
+                      "dataType": "percent"
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "separator": true,
+                      "fixed": 1,
+                      "dataType": "percent"
+                    }
+                  }
+                ],
+                "data": [
+                  {
+                    "地区": "华东",
+                    "实际（万元）": 420,
+                    "目标（万元）": 400,
+                    "差额（万元）": 20,
+                    "目标达成率": 1.05,
+                    "同比增长率": 0.16666666666666674
+                  },
+                  {
+                    "地区": "华南",
+                    "实际（万元）": 300,
+                    "目标（万元）": 350,
+                    "差额（万元）": -50,
+                    "目标达成率": 0.8571428571428571,
+                    "同比增长率": 0.0714285714285714
+                  },
+                  {
+                    "地区": "华北",
+                    "实际（万元）": 260,
+                    "目标（万元）": 300,
+                    "差额（万元）": -40,
+                    "目标达成率": 0.8666666666666667,
+                    "同比增长率": 0.13043478260869557
+                  },
+                  {
+                    "地区": "西部",
+                    "实际（万元）": 200,
+                    "目标（万元）": 150,
+                    "差额（万元）": 50,
+                    "目标达成率": 1.3333333333333333,
+                    "同比增长率": 0.11111111111111116
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "option": {
+      "loadContribute": "view"
+    }
+  },
+  "afterMaterialization": {
+    "elementId": "performance-detail",
+    "attributePatch": {
+      "title": {
+        "visible": true,
+        "_initialize_": false,
+        "text": "地区绩效明细",
+        "textStyle": {
+          "fontSize": 22,
+          "fontWeight": "600",
+          "fill": "#0F172A",
+          "textAlign": "left"
+        },
+        "padding": [
+          0,
+          0,
+          12,
+          0
+        ]
+      },
+      "layout": {
+        "x1": 24,
+        "y1": 618,
+        "x2": 1330,
+        "y2": 877
+      },
+      "colWidth": {
+        "edit_colWidth_0": {
+          "col": 0,
+          "width": 150
+        },
+        "edit_colWidth_1": {
+          "col": 1,
+          "width": 230
+        },
+        "edit_colWidth_2": {
+          "col": 2,
+          "width": 230
+        },
+        "edit_colWidth_3": {
+          "col": 3,
+          "width": 230
+        },
+        "edit_colWidth_4": {
+          "col": 4,
+          "width": 232
+        },
+        "edit_colWidth_5": {
+          "col": 5,
+          "width": 232
+        }
+      }
+    }
+  },
+  "requirements": {
+    "nativeTemplates": [
+      "kpiCard",
+      "horizontalBarGroup",
+      "line",
+      "ListTable"
+    ],
+    "mode": "snapshot",
+    "tableTitle": "Apply attributePatch to the actual materialized table, including measured content height; preserve all other editor data. Layout coordinates are verified for this fixture only. Save the resulting complete browserData."
+  }
+}

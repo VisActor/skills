@@ -1,0 +1,2148 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "page-background",
+        "type": "rect",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 760
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#FAFAF8",
+            "stroke": "#FAFAF8"
+          },
+          "zIndex": -1
+        }
+      },
+      {
+        "id": "page-title",
+        "type": "text",
+        "position": {
+          "x": 30,
+          "y": 14,
+          "width": 1200,
+          "height": 52
+        },
+        "options": {
+          "text": "改版后跌幅最大的南站店，最早回到原有转化率",
+          "fontSize": 32,
+          "fontWeight": "bold",
+          "fill": "#222B30"
+        }
+      },
+      {
+        "id": "page-context",
+        "type": "text",
+        "position": {
+          "x": 31,
+          "y": 71,
+          "width": 1200,
+          "height": 25
+        },
+        "options": {
+          "text": "三家门店在不同月份改版。南站店一度回落 3.2 个百分点，第 5 个月已超过改版月水平。",
+          "fontSize": 17,
+          "fontWeight": "normal",
+          "fill": "#646B70"
+        }
+      },
+      {
+        "id": "drop-head",
+        "type": "text",
+        "position": {
+          "x": 30,
+          "y": 127,
+          "width": 470,
+          "height": 35
+        },
+        "options": {
+          "text": "南站店的转化率降幅最大",
+          "fontSize": 23,
+          "fontWeight": "bold",
+          "fill": "#222B30"
+        }
+      },
+      {
+        "id": "drop-unit",
+        "type": "text",
+        "position": {
+          "x": 31,
+          "y": 168,
+          "width": 476,
+          "height": 22
+        },
+        "options": {
+          "text": "改版月与随后八个月最低值  ·  新客转化率",
+          "fontSize": 14,
+          "fontWeight": "normal",
+          "fill": "#646B70"
+        }
+      },
+      {
+        "id": "recovery-head",
+        "type": "text",
+        "position": {
+          "x": 521,
+          "y": 127,
+          "width": 732,
+          "height": 35
+        },
+        "options": {
+          "text": "同样从第 0 月出发，恢复速度不同",
+          "fontSize": 23,
+          "fontWeight": "bold",
+          "fill": "#222B30"
+        }
+      },
+      {
+        "id": "recovery-unit",
+        "type": "text",
+        "position": {
+          "x": 522,
+          "y": 168,
+          "width": 720,
+          "height": 22
+        },
+        "options": {
+          "text": "相对各店改版月的变化（百分点）   ·   竖线标记改版月",
+          "fontSize": 14,
+          "fontWeight": "normal",
+          "fill": "#646B70"
+        }
+      },
+      {
+        "id": "row-0",
+        "type": "text",
+        "position": {
+          "x": 31,
+          "y": 211,
+          "width": 465,
+          "height": 25
+        },
+        "options": {
+          "text": "东城店  ·  2024-01",
+          "fontSize": 17,
+          "fontWeight": "bold",
+          "fill": "#222B30"
+        }
+      },
+      {
+        "id": "drop-0",
+        "type": "text",
+        "position": {
+          "x": 31,
+          "y": 241,
+          "width": 220,
+          "height": 23
+        },
+        "options": {
+          "text": "下降 1.6 个百分点",
+          "fontSize": 14,
+          "fontWeight": "normal",
+          "fill": "#646B70"
+        }
+      },
+      {
+        "id": "event-extrema-0",
+        "type": "chart",
+        "position": {
+          "x": 32,
+          "y": 265,
+          "width": 450,
+          "height": 91
+        },
+        "options": {
+          "chartType": "dumbbell",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "门店",
+                "窗口最低",
+                "改版月"
+              ],
+              "rows": [
+                "0"
+              ],
+              "data": [
+                {
+                  "门店": "东城店",
+                  "窗口最低": 0.248,
+                  "改版月": 0.264
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "dataType": "percent",
+                    "fixed": 1
+                  }
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "dataType": "percent",
+                    "fixed": 1
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "门店",
+              "y": [
+                "窗口最低",
+                "改版月"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "orient": "left",
+                  "type": "band",
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "label": {
+                    "visible": false,
+                    "style": {
+                      "fill": "#646B70"
+                    }
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": false,
+                    "style": {
+                      "stroke": "#EAEBEA",
+                      "lineDash": []
+                    }
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "orient": "bottom",
+                  "type": "linear",
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false,
+                    "tickStep": 0.02
+                  },
+                  "label": {
+                    "visible": true,
+                    "style": {
+                      "fill": "#646B70"
+                    },
+                    "formatConfig": {
+                      "content": "value",
+                      "dataType": "percent",
+                      "fixed": 0
+                    }
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#EAEBEA",
+                      "lineDash": []
+                    }
+                  },
+                  "min": 0.2,
+                  "max": 0.28,
+                  "zero": false,
+                  "nice": false
+                }
+              },
+              {
+                "id": "series-dumbbell-connector",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "barWidth": 4,
+                  "bar": {
+                    "style": {
+                      "fill": "#62776F",
+                      "fillOpacity": 0.73
+                    }
+                  }
+                }
+              },
+              {
+                "id": "series-dumbbell-before",
+                "specKey": "series",
+                "specIndex": 1,
+                "spec": {
+                  "point": {
+                    "style": {
+                      "fill": "#AF635C",
+                      "size": 13
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "position": "left",
+                    "space": 5,
+                    "formatConfig": {
+                      "content": [
+                        "value"
+                      ],
+                      "dataType": "percent",
+                      "fixed": 1
+                    },
+                    "style": {
+                      "fill": "#AF635C"
+                    }
+                  }
+                }
+              },
+              {
+                "id": "series-dumbbell-after",
+                "specKey": "series",
+                "specIndex": 2,
+                "spec": {
+                  "point": {
+                    "style": {
+                      "fill": "#356355",
+                      "size": 13
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "position": "right",
+                    "space": 5,
+                    "formatConfig": {
+                      "content": [
+                        "value"
+                      ],
+                      "dataType": "percent",
+                      "fixed": 1
+                    },
+                    "style": {
+                      "fill": "#356355"
+                    }
+                  }
+                }
+              }
+            ],
+            "color": [
+              "#AF635C",
+              "#356355"
+            ]
+          },
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true
+        }
+      },
+      {
+        "id": "event-trend-0",
+        "type": "chart",
+        "position": {
+          "x": 522,
+          "y": 221,
+          "width": 710,
+          "height": 133
+        },
+        "options": {
+          "chartType": "line",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "相对月",
+                "较事件月变化"
+              ],
+              "rows": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16"
+              ],
+              "data": [
+                {
+                  "相对月": -4,
+                  "较事件月变化": -0.1
+                },
+                {
+                  "相对月": -3,
+                  "较事件月变化": 0.1
+                },
+                {
+                  "相对月": -2,
+                  "较事件月变化": 0
+                },
+                {
+                  "相对月": -1,
+                  "较事件月变化": -0.2
+                },
+                {
+                  "相对月": 0,
+                  "较事件月变化": 0
+                },
+                {
+                  "相对月": 1,
+                  "较事件月变化": -0.4
+                },
+                {
+                  "相对月": 2,
+                  "较事件月变化": -0.9
+                },
+                {
+                  "相对月": 3,
+                  "较事件月变化": -1.1
+                },
+                {
+                  "相对月": 4,
+                  "较事件月变化": -1.5
+                },
+                {
+                  "相对月": 5,
+                  "较事件月变化": -1.3
+                },
+                {
+                  "相对月": 6,
+                  "较事件月变化": -1.6
+                },
+                {
+                  "相对月": 7,
+                  "较事件月变化": -1.2
+                },
+                {
+                  "相对月": 8,
+                  "较事件月变化": -1.1
+                },
+                {
+                  "相对月": 9,
+                  "较事件月变化": -1.3
+                },
+                {
+                  "相对月": 10,
+                  "较事件月变化": -1.1
+                },
+                {
+                  "相对月": 11,
+                  "较事件月变化": -0.8
+                },
+                {
+                  "相对月": 12,
+                  "较事件月变化": -0.6
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "相对月",
+              "y": [
+                "较事件月变化"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "orient": "left",
+                  "type": "linear",
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false,
+                    "tickStep": 2
+                  },
+                  "label": {
+                    "visible": true,
+                    "style": {
+                      "fill": "#646B70"
+                    }
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#EAEBEA",
+                      "lineDash": []
+                    }
+                  },
+                  "min": -4,
+                  "max": 2,
+                  "nice": false,
+                  "zero": false
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "orient": "bottom",
+                  "type": "band",
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false,
+                    "tickStep": 2
+                  },
+                  "label": {
+                    "visible": true,
+                    "style": {
+                      "fill": "#646B70"
+                    }
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": false,
+                    "style": {
+                      "stroke": "#EAEBEA",
+                      "lineDash": []
+                    }
+                  }
+                }
+              },
+              {
+                "specKey": "series",
+                "target": {
+                  "measure": "较事件月变化"
+                },
+                "spec": {
+                  "invalidType": "break",
+                  "line": {
+                    "style": {
+                      "stroke": "#568997",
+                      "lineWidth": 3
+                    }
+                  },
+                  "point": {
+                    "visible": false
+                  },
+                  "label": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                }
+              }
+            ],
+            "color": [
+              "#568997"
+            ],
+            "marker": {
+              "markLine": [
+                {
+                  "id": "baseline-0",
+                  "name": "reference-line",
+                  "target": {
+                    "field": "较事件月变化",
+                    "value": 0
+                  },
+                  "label": {
+                    "visible": false
+                  },
+                  "startSymbol": {
+                    "visible": false
+                  },
+                  "endSymbol": {
+                    "visible": false
+                  },
+                  "line": {
+                    "style": {
+                      "stroke": "#A5AAA7",
+                      "lineWidth": 1,
+                      "lineDash": []
+                    }
+                  }
+                },
+                {
+                  "id": "event-zero-0",
+                  "name": "reference-line",
+                  "target": {
+                    "field": "相对月",
+                    "value": 0
+                  },
+                  "label": {
+                    "visible": false
+                  },
+                  "startSymbol": {
+                    "visible": false
+                  },
+                  "endSymbol": {
+                    "visible": false
+                  },
+                  "line": {
+                    "style": {
+                      "stroke": "#C08B89",
+                      "lineWidth": 2,
+                      "lineDash": []
+                    }
+                  }
+                }
+              ],
+              "markPoint": [
+                {
+                  "id": "event-anchor-0",
+                  "name": "mark-point",
+                  "target": {
+                    "match": {
+                      "相对月": 0
+                    },
+                    "metric": "较事件月变化"
+                  },
+                  "itemContent": {
+                    "type": "text",
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "refX": 0,
+                    "refY": 0,
+                    "text": {
+                      "text": " ",
+                      "visible": false,
+                      "padding": 0,
+                      "labelBackground": {
+                        "visible": false
+                      }
+                    }
+                  },
+                  "itemLine": {
+                    "visible": false,
+                    "startSymbol": {
+                      "visible": false
+                    },
+                    "endSymbol": {
+                      "visible": false
+                    }
+                  },
+                  "targetSymbol": {
+                    "visible": true,
+                    "style": {
+                      "symbolType": "circle",
+                      "size": 10,
+                      "fill": "#FFFFFF",
+                      "stroke": "#568997",
+                      "lineWidth": 2.5
+                    }
+                  }
+                },
+                {
+                  "id": "end-value-0",
+                  "name": "mark-point",
+                  "target": {
+                    "match": {
+                      "相对月": 12
+                    },
+                    "metric": "较事件月变化"
+                  },
+                  "itemContent": {
+                    "type": "text",
+                    "autoRotate": false,
+                    "offsetX": -3,
+                    "offsetY": -14,
+                    "refX": 0,
+                    "refY": 0,
+                    "text": {
+                      "formatConfig": {
+                        "content": "value",
+                        "fixed": 1,
+                        "postfix": " 个百分点"
+                      },
+                      "style": {
+                        "fill": "#568997",
+                        "fontWeight": "bold",
+                        "textAlign": "right",
+                        "textBaseline": "bottom"
+                      },
+                      "labelBackground": {
+                        "visible": false
+                      },
+                      "padding": 0
+                    }
+                  },
+                  "itemLine": {
+                    "visible": false,
+                    "startSymbol": {
+                      "visible": false
+                    },
+                    "endSymbol": {
+                      "visible": false
+                    }
+                  },
+                  "targetSymbol": {
+                    "visible": true,
+                    "size": 6,
+                    "style": {
+                      "size": 6,
+                      "fill": "#568997",
+                      "stroke": "#ffffff",
+                      "lineWidth": 1
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true
+        }
+      },
+      {
+        "id": "row-1",
+        "type": "text",
+        "position": {
+          "x": 31,
+          "y": 365,
+          "width": 465,
+          "height": 25
+        },
+        "options": {
+          "text": "河西店  ·  2025-02",
+          "fontSize": 17,
+          "fontWeight": "bold",
+          "fill": "#222B30"
+        }
+      },
+      {
+        "id": "drop-1",
+        "type": "text",
+        "position": {
+          "x": 31,
+          "y": 395,
+          "width": 220,
+          "height": 23
+        },
+        "options": {
+          "text": "下降 1.9 个百分点",
+          "fontSize": 14,
+          "fontWeight": "normal",
+          "fill": "#646B70"
+        }
+      },
+      {
+        "id": "event-extrema-1",
+        "type": "chart",
+        "position": {
+          "x": 32,
+          "y": 419,
+          "width": 450,
+          "height": 91
+        },
+        "options": {
+          "chartType": "dumbbell",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "门店",
+                "窗口最低",
+                "改版月"
+              ],
+              "rows": [
+                "0"
+              ],
+              "data": [
+                {
+                  "门店": "河西店",
+                  "窗口最低": 0.232,
+                  "改版月": 0.251
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "dataType": "percent",
+                    "fixed": 1
+                  }
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "dataType": "percent",
+                    "fixed": 1
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "门店",
+              "y": [
+                "窗口最低",
+                "改版月"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "orient": "left",
+                  "type": "band",
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "label": {
+                    "visible": false,
+                    "style": {
+                      "fill": "#646B70"
+                    }
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": false,
+                    "style": {
+                      "stroke": "#EAEBEA",
+                      "lineDash": []
+                    }
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "orient": "bottom",
+                  "type": "linear",
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false,
+                    "tickStep": 0.02
+                  },
+                  "label": {
+                    "visible": true,
+                    "style": {
+                      "fill": "#646B70"
+                    },
+                    "formatConfig": {
+                      "content": "value",
+                      "dataType": "percent",
+                      "fixed": 0
+                    }
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#EAEBEA",
+                      "lineDash": []
+                    }
+                  },
+                  "min": 0.2,
+                  "max": 0.28,
+                  "zero": false,
+                  "nice": false
+                }
+              },
+              {
+                "id": "series-dumbbell-connector",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "barWidth": 4,
+                  "bar": {
+                    "style": {
+                      "fill": "#62776F",
+                      "fillOpacity": 0.73
+                    }
+                  }
+                }
+              },
+              {
+                "id": "series-dumbbell-before",
+                "specKey": "series",
+                "specIndex": 1,
+                "spec": {
+                  "point": {
+                    "style": {
+                      "fill": "#AF635C",
+                      "size": 13
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "position": "left",
+                    "space": 5,
+                    "formatConfig": {
+                      "content": [
+                        "value"
+                      ],
+                      "dataType": "percent",
+                      "fixed": 1
+                    },
+                    "style": {
+                      "fill": "#AF635C"
+                    }
+                  }
+                }
+              },
+              {
+                "id": "series-dumbbell-after",
+                "specKey": "series",
+                "specIndex": 2,
+                "spec": {
+                  "point": {
+                    "style": {
+                      "fill": "#356355",
+                      "size": 13
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "position": "right",
+                    "space": 5,
+                    "formatConfig": {
+                      "content": [
+                        "value"
+                      ],
+                      "dataType": "percent",
+                      "fixed": 1
+                    },
+                    "style": {
+                      "fill": "#356355"
+                    }
+                  }
+                }
+              }
+            ],
+            "color": [
+              "#AF635C",
+              "#356355"
+            ]
+          },
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true
+        }
+      },
+      {
+        "id": "event-trend-1",
+        "type": "chart",
+        "position": {
+          "x": 522,
+          "y": 375,
+          "width": 710,
+          "height": 133
+        },
+        "options": {
+          "chartType": "line",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "相对月",
+                "较事件月变化"
+              ],
+              "rows": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16"
+              ],
+              "data": [
+                {
+                  "相对月": -4,
+                  "较事件月变化": -0.4
+                },
+                {
+                  "相对月": -3,
+                  "较事件月变化": -0.1
+                },
+                {
+                  "相对月": -2,
+                  "较事件月变化": 0.1
+                },
+                {
+                  "相对月": -1,
+                  "较事件月变化": -0.2
+                },
+                {
+                  "相对月": 0,
+                  "较事件月变化": 0
+                },
+                {
+                  "相对月": 1,
+                  "较事件月变化": -0.3
+                },
+                {
+                  "相对月": 2,
+                  "较事件月变化": -0.6
+                },
+                {
+                  "相对月": 3,
+                  "较事件月变化": -0.5
+                },
+                {
+                  "相对月": 4,
+                  "较事件月变化": -0.8
+                },
+                {
+                  "相对月": 5,
+                  "较事件月变化": -1.1
+                },
+                {
+                  "相对月": 6,
+                  "较事件月变化": -1.6
+                },
+                {
+                  "相对月": 7,
+                  "较事件月变化": -1.4
+                },
+                {
+                  "相对月": 8,
+                  "较事件月变化": -1.9
+                },
+                {
+                  "相对月": 9,
+                  "较事件月变化": -1.7
+                },
+                {
+                  "相对月": 10,
+                  "较事件月变化": -1.6
+                },
+                {
+                  "相对月": 11,
+                  "较事件月变化": -1.8
+                },
+                {
+                  "相对月": 12,
+                  "较事件月变化": -1.5
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "相对月",
+              "y": [
+                "较事件月变化"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "orient": "left",
+                  "type": "linear",
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false,
+                    "tickStep": 2
+                  },
+                  "label": {
+                    "visible": true,
+                    "style": {
+                      "fill": "#646B70"
+                    }
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#EAEBEA",
+                      "lineDash": []
+                    }
+                  },
+                  "min": -4,
+                  "max": 2,
+                  "nice": false,
+                  "zero": false
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "orient": "bottom",
+                  "type": "band",
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false,
+                    "tickStep": 2
+                  },
+                  "label": {
+                    "visible": true,
+                    "style": {
+                      "fill": "#646B70"
+                    }
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": false,
+                    "style": {
+                      "stroke": "#EAEBEA",
+                      "lineDash": []
+                    }
+                  }
+                }
+              },
+              {
+                "specKey": "series",
+                "target": {
+                  "measure": "较事件月变化"
+                },
+                "spec": {
+                  "invalidType": "break",
+                  "line": {
+                    "style": {
+                      "stroke": "#B78552",
+                      "lineWidth": 3
+                    }
+                  },
+                  "point": {
+                    "visible": false
+                  },
+                  "label": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                }
+              }
+            ],
+            "color": [
+              "#B78552"
+            ],
+            "marker": {
+              "markLine": [
+                {
+                  "id": "baseline-1",
+                  "name": "reference-line",
+                  "target": {
+                    "field": "较事件月变化",
+                    "value": 0
+                  },
+                  "label": {
+                    "visible": false
+                  },
+                  "startSymbol": {
+                    "visible": false
+                  },
+                  "endSymbol": {
+                    "visible": false
+                  },
+                  "line": {
+                    "style": {
+                      "stroke": "#A5AAA7",
+                      "lineWidth": 1,
+                      "lineDash": []
+                    }
+                  }
+                },
+                {
+                  "id": "event-zero-1",
+                  "name": "reference-line",
+                  "target": {
+                    "field": "相对月",
+                    "value": 0
+                  },
+                  "label": {
+                    "visible": false
+                  },
+                  "startSymbol": {
+                    "visible": false
+                  },
+                  "endSymbol": {
+                    "visible": false
+                  },
+                  "line": {
+                    "style": {
+                      "stroke": "#C08B89",
+                      "lineWidth": 2,
+                      "lineDash": []
+                    }
+                  }
+                }
+              ],
+              "markPoint": [
+                {
+                  "id": "event-anchor-1",
+                  "name": "mark-point",
+                  "target": {
+                    "match": {
+                      "相对月": 0
+                    },
+                    "metric": "较事件月变化"
+                  },
+                  "itemContent": {
+                    "type": "text",
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "refX": 0,
+                    "refY": 0,
+                    "text": {
+                      "text": " ",
+                      "visible": false,
+                      "padding": 0,
+                      "labelBackground": {
+                        "visible": false
+                      }
+                    }
+                  },
+                  "itemLine": {
+                    "visible": false,
+                    "startSymbol": {
+                      "visible": false
+                    },
+                    "endSymbol": {
+                      "visible": false
+                    }
+                  },
+                  "targetSymbol": {
+                    "visible": true,
+                    "style": {
+                      "symbolType": "circle",
+                      "size": 10,
+                      "fill": "#FFFFFF",
+                      "stroke": "#B78552",
+                      "lineWidth": 2.5
+                    }
+                  }
+                },
+                {
+                  "id": "end-value-1",
+                  "name": "mark-point",
+                  "target": {
+                    "match": {
+                      "相对月": 12
+                    },
+                    "metric": "较事件月变化"
+                  },
+                  "itemContent": {
+                    "type": "text",
+                    "autoRotate": false,
+                    "offsetX": -3,
+                    "offsetY": -14,
+                    "refX": 0,
+                    "refY": 0,
+                    "text": {
+                      "formatConfig": {
+                        "content": "value",
+                        "fixed": 1,
+                        "postfix": " 个百分点"
+                      },
+                      "style": {
+                        "fill": "#B78552",
+                        "fontWeight": "bold",
+                        "textAlign": "right",
+                        "textBaseline": "bottom"
+                      },
+                      "labelBackground": {
+                        "visible": false
+                      },
+                      "padding": 0
+                    }
+                  },
+                  "itemLine": {
+                    "visible": false,
+                    "startSymbol": {
+                      "visible": false
+                    },
+                    "endSymbol": {
+                      "visible": false
+                    }
+                  },
+                  "targetSymbol": {
+                    "visible": true,
+                    "size": 6,
+                    "style": {
+                      "size": 6,
+                      "fill": "#B78552",
+                      "stroke": "#ffffff",
+                      "lineWidth": 1
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true
+        }
+      },
+      {
+        "id": "row-2",
+        "type": "text",
+        "position": {
+          "x": 31,
+          "y": 519,
+          "width": 465,
+          "height": 25
+        },
+        "options": {
+          "text": "南站店  ·  2026-01",
+          "fontSize": 17,
+          "fontWeight": "bold",
+          "fill": "#222B30"
+        }
+      },
+      {
+        "id": "drop-2",
+        "type": "text",
+        "position": {
+          "x": 31,
+          "y": 549,
+          "width": 220,
+          "height": 23
+        },
+        "options": {
+          "text": "下降 3.2 个百分点",
+          "fontSize": 14,
+          "fontWeight": "normal",
+          "fill": "#646B70"
+        }
+      },
+      {
+        "id": "event-extrema-2",
+        "type": "chart",
+        "position": {
+          "x": 32,
+          "y": 573,
+          "width": 450,
+          "height": 91
+        },
+        "options": {
+          "chartType": "dumbbell",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "门店",
+                "窗口最低",
+                "改版月"
+              ],
+              "rows": [
+                "0"
+              ],
+              "data": [
+                {
+                  "门店": "南站店",
+                  "窗口最低": 0.215,
+                  "改版月": 0.247
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "dataType": "percent",
+                    "fixed": 1
+                  }
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "dataType": "percent",
+                    "fixed": 1
+                  }
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "门店",
+              "y": [
+                "窗口最低",
+                "改版月"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "orient": "left",
+                  "type": "band",
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false
+                  },
+                  "label": {
+                    "visible": false,
+                    "style": {
+                      "fill": "#646B70"
+                    }
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": false,
+                    "style": {
+                      "stroke": "#EAEBEA",
+                      "lineDash": []
+                    }
+                  }
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "orient": "bottom",
+                  "type": "linear",
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false,
+                    "tickStep": 0.02
+                  },
+                  "label": {
+                    "visible": true,
+                    "style": {
+                      "fill": "#646B70"
+                    },
+                    "formatConfig": {
+                      "content": "value",
+                      "dataType": "percent",
+                      "fixed": 0
+                    }
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#EAEBEA",
+                      "lineDash": []
+                    }
+                  },
+                  "min": 0.2,
+                  "max": 0.28,
+                  "zero": false,
+                  "nice": false
+                }
+              },
+              {
+                "id": "series-dumbbell-connector",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "barWidth": 4,
+                  "bar": {
+                    "style": {
+                      "fill": "#62776F",
+                      "fillOpacity": 0.73
+                    }
+                  }
+                }
+              },
+              {
+                "id": "series-dumbbell-before",
+                "specKey": "series",
+                "specIndex": 1,
+                "spec": {
+                  "point": {
+                    "style": {
+                      "fill": "#AF635C",
+                      "size": 13
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "position": "left",
+                    "space": 5,
+                    "formatConfig": {
+                      "content": [
+                        "value"
+                      ],
+                      "dataType": "percent",
+                      "fixed": 1
+                    },
+                    "style": {
+                      "fill": "#AF635C"
+                    }
+                  }
+                }
+              },
+              {
+                "id": "series-dumbbell-after",
+                "specKey": "series",
+                "specIndex": 2,
+                "spec": {
+                  "point": {
+                    "style": {
+                      "fill": "#356355",
+                      "size": 13
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "position": "right",
+                    "space": 5,
+                    "formatConfig": {
+                      "content": [
+                        "value"
+                      ],
+                      "dataType": "percent",
+                      "fixed": 1
+                    },
+                    "style": {
+                      "fill": "#356355"
+                    }
+                  }
+                }
+              }
+            ],
+            "color": [
+              "#AF635C",
+              "#356355"
+            ]
+          },
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true
+        }
+      },
+      {
+        "id": "event-trend-2",
+        "type": "chart",
+        "position": {
+          "x": 522,
+          "y": 529,
+          "width": 710,
+          "height": 133
+        },
+        "options": {
+          "chartType": "line",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "相对月",
+                "较事件月变化"
+              ],
+              "rows": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16"
+              ],
+              "data": [
+                {
+                  "相对月": -4,
+                  "较事件月变化": -0.5
+                },
+                {
+                  "相对月": -3,
+                  "较事件月变化": -0.6
+                },
+                {
+                  "相对月": -2,
+                  "较事件月变化": -0.3
+                },
+                {
+                  "相对月": -1,
+                  "较事件月变化": -0.4
+                },
+                {
+                  "相对月": 0,
+                  "较事件月变化": 0
+                },
+                {
+                  "相对月": 1,
+                  "较事件月变化": -3.2
+                },
+                {
+                  "相对月": 2,
+                  "较事件月变化": -1.7
+                },
+                {
+                  "相对月": 3,
+                  "较事件月变化": -1.1
+                },
+                {
+                  "相对月": 4,
+                  "较事件月变化": -0.5
+                },
+                {
+                  "相对月": 5,
+                  "较事件月变化": 0.1
+                },
+                {
+                  "相对月": 6,
+                  "较事件月变化": 0.5
+                },
+                {
+                  "相对月": 7,
+                  "较事件月变化": 0.4
+                },
+                {
+                  "相对月": 8,
+                  "较事件月变化": 0.8
+                },
+                {
+                  "相对月": 9,
+                  "较事件月变化": null
+                },
+                {
+                  "相对月": 10,
+                  "较事件月变化": null
+                },
+                {
+                  "相对月": 11,
+                  "较事件月变化": null
+                },
+                {
+                  "相对月": 12,
+                  "较事件月变化": null
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "number"
+                },
+                {
+                  "dataType": "number"
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "相对月",
+              "y": [
+                "较事件月变化"
+              ]
+            },
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "axis-left",
+                "specKey": "axes",
+                "specIndex": 0,
+                "spec": {
+                  "orient": "left",
+                  "type": "linear",
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false,
+                    "tickStep": 2
+                  },
+                  "label": {
+                    "visible": true,
+                    "style": {
+                      "fill": "#646B70"
+                    }
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": true,
+                    "style": {
+                      "stroke": "#EAEBEA",
+                      "lineDash": []
+                    }
+                  },
+                  "min": -4,
+                  "max": 2,
+                  "nice": false,
+                  "zero": false
+                }
+              },
+              {
+                "id": "axis-bottom",
+                "specKey": "axes",
+                "specIndex": 1,
+                "spec": {
+                  "orient": "bottom",
+                  "type": "band",
+                  "visible": true,
+                  "domainLine": {
+                    "visible": false
+                  },
+                  "tick": {
+                    "visible": false,
+                    "tickStep": 2
+                  },
+                  "label": {
+                    "visible": true,
+                    "style": {
+                      "fill": "#646B70"
+                    }
+                  },
+                  "title": {
+                    "visible": false
+                  },
+                  "grid": {
+                    "visible": false,
+                    "style": {
+                      "stroke": "#EAEBEA",
+                      "lineDash": []
+                    }
+                  }
+                }
+              },
+              {
+                "specKey": "series",
+                "target": {
+                  "measure": "较事件月变化"
+                },
+                "spec": {
+                  "invalidType": "break",
+                  "line": {
+                    "style": {
+                      "stroke": "#786A80",
+                      "lineWidth": 3
+                    }
+                  },
+                  "point": {
+                    "visible": false
+                  },
+                  "label": {
+                    "visible": false
+                  },
+                  "seriesLabel": {
+                    "visible": false
+                  }
+                }
+              }
+            ],
+            "color": [
+              "#786A80"
+            ],
+            "marker": {
+              "markLine": [
+                {
+                  "id": "baseline-2",
+                  "name": "reference-line",
+                  "target": {
+                    "field": "较事件月变化",
+                    "value": 0
+                  },
+                  "label": {
+                    "visible": false
+                  },
+                  "startSymbol": {
+                    "visible": false
+                  },
+                  "endSymbol": {
+                    "visible": false
+                  },
+                  "line": {
+                    "style": {
+                      "stroke": "#A5AAA7",
+                      "lineWidth": 1,
+                      "lineDash": []
+                    }
+                  }
+                },
+                {
+                  "id": "event-zero-2",
+                  "name": "reference-line",
+                  "target": {
+                    "field": "相对月",
+                    "value": 0
+                  },
+                  "label": {
+                    "visible": false
+                  },
+                  "startSymbol": {
+                    "visible": false
+                  },
+                  "endSymbol": {
+                    "visible": false
+                  },
+                  "line": {
+                    "style": {
+                      "stroke": "#C08B89",
+                      "lineWidth": 2,
+                      "lineDash": []
+                    }
+                  }
+                }
+              ],
+              "markPoint": [
+                {
+                  "id": "event-anchor-2",
+                  "name": "mark-point",
+                  "target": {
+                    "match": {
+                      "相对月": 0
+                    },
+                    "metric": "较事件月变化"
+                  },
+                  "itemContent": {
+                    "type": "text",
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "refX": 0,
+                    "refY": 0,
+                    "text": {
+                      "text": " ",
+                      "visible": false,
+                      "padding": 0,
+                      "labelBackground": {
+                        "visible": false
+                      }
+                    }
+                  },
+                  "itemLine": {
+                    "visible": false,
+                    "startSymbol": {
+                      "visible": false
+                    },
+                    "endSymbol": {
+                      "visible": false
+                    }
+                  },
+                  "targetSymbol": {
+                    "visible": true,
+                    "style": {
+                      "symbolType": "circle",
+                      "size": 10,
+                      "fill": "#FFFFFF",
+                      "stroke": "#786A80",
+                      "lineWidth": 2.5
+                    }
+                  }
+                },
+                {
+                  "id": "end-value-2",
+                  "name": "mark-point",
+                  "target": {
+                    "match": {
+                      "相对月": 8
+                    },
+                    "metric": "较事件月变化"
+                  },
+                  "itemContent": {
+                    "type": "text",
+                    "autoRotate": false,
+                    "offsetX": -3,
+                    "offsetY": -14,
+                    "refX": 0,
+                    "refY": 0,
+                    "text": {
+                      "formatConfig": {
+                        "content": "value",
+                        "fixed": 1,
+                        "postfix": " 个百分点"
+                      },
+                      "style": {
+                        "fill": "#786A80",
+                        "fontWeight": "bold",
+                        "textAlign": "right",
+                        "textBaseline": "bottom"
+                      },
+                      "labelBackground": {
+                        "visible": false
+                      },
+                      "padding": 0
+                    }
+                  },
+                  "itemLine": {
+                    "visible": false,
+                    "startSymbol": {
+                      "visible": false
+                    },
+                    "endSymbol": {
+                      "visible": false
+                    }
+                  },
+                  "targetSymbol": {
+                    "visible": true,
+                    "size": 6,
+                    "style": {
+                      "size": 6,
+                      "fill": "#786A80",
+                      "stroke": "#ffffff",
+                      "lineWidth": 1
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "enableDataEdit": true,
+          "enableTypeChange": true,
+          "enableEditorTheme": true
+        }
+      },
+      {
+        "id": "point-key",
+        "type": "text",
+        "position": {
+          "x": 31,
+          "y": 680,
+          "width": 480,
+          "height": 22
+        },
+        "options": {
+          "text": "红点为窗口最低值，绿点为改版月水平",
+          "fontSize": 14,
+          "fontWeight": "normal",
+          "fill": "#646B70"
+        }
+      },
+      {
+        "id": "period-unit",
+        "type": "text",
+        "position": {
+          "x": 798,
+          "y": 680,
+          "width": 240,
+          "height": 22
+        },
+        "options": {
+          "text": "距各店改版的月数",
+          "fontSize": 14,
+          "fontWeight": "normal",
+          "fill": "#646B70"
+        }
+      },
+      {
+        "id": "scope-note",
+        "type": "text",
+        "position": {
+          "x": 31,
+          "y": 727,
+          "width": 1210,
+          "height": 22
+        },
+        "options": {
+          "text": "合成数据   ·   三店共同观察到第 8 月。南站店此后尚无观测，另外两店的第 9 至 12 月仅供背景参考。",
+          "fontSize": 14,
+          "fontWeight": "normal",
+          "fill": "#646B70"
+        }
+      }
+    ]
+  },
+  "option": {
+    "loadContribute": "view"
+  }
+}
