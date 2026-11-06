@@ -112,7 +112,7 @@ To update a manually imported Skill, download its package from a newer Release a
 
 | Skill | Runtime requirements |
 | --- | --- |
-| chart-assistant | Node.js 18+; HTTPS access for PNGs; authorized host tools or lark-cli for document insertion; Chart Assistant ISV app for editable cards. Native KPI and card sizing require a host supporting their templates/protocol. DSL generation/validation needs no Feishu authorization or local renderer |
+| chart-assistant | Reading resources and generating/explaining configuration need readable Skill files; bundled scripts require Node.js 18+. PNGs need HTTPS and binary file delivery; document insertion needs authorized host tools or lark-cli; editable cards need the Chart Assistant ISV app. Source sync needs the corresponding plugin, permissions and live binding. See the [compatibility declaration](skills/chart-assistant/SKILL.md) for conditions and fallback delivery. Native KPI and card sizing require host template/protocol support |
 | chart-storytelling | Python 3.10+ (standard library) and Node.js for JavaScript checks; pinned VSeed, VChart, VTable and GSAP load from unpkg |
 | creative-data-storytelling | Desktop browser with native JavaScript modules; Python 3.9+ (standard library) for the bundled preview server, Node.js for JavaScript checks; optional libraries and fonts may use public CDNs |
 | unit-data-storytelling | Modern browser with ES modules; Node.js for module checks; optional Python 3.9+ (standard library) for the bundled preview/audit tool. Bundled examples use local assets without a required CDN or chart library |

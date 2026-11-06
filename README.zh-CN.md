@@ -111,7 +111,7 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 
 | Skill | 运行依赖 |
 | --- | --- |
-| chart-assistant | Node.js 18+；PNG 需 HTTPS 网络；飞书插图需已授权的宿主工具或 lark-cli；可编辑卡片另需图表助手 ISV 应用。原生 KPI 与卡片尺寸行为需宿主支持相应模板/协议。仅生成/校验 DSL 不要求飞书授权，无需本地图表渲染依赖 |
+| chart-assistant | 读取资料及生成/解释配置只需包内资源可读；包内脚本需 Node.js 18+。PNG 需 HTTPS 与二进制文件交付能力；飞书插图需已授权的宿主工具或 lark-cli；可编辑卡片需图表助手 ISV 应用。来源同步需对应插件、权限及 live binding。具体条件及缺能力降级见 [compatibility 声明](skills/chart-assistant/SKILL.md)。原生 KPI 与卡片尺寸需宿主模板/协议支持 |
 | chart-storytelling | Python 3.10+（标准库）和 Node.js（校验 JavaScript）；从 unpkg 加载固定版本的 VSeed、VChart、VTable 与 GSAP |
 | creative-data-storytelling | 支持原生 JavaScript 模块的桌面浏览器；随附预览服务需要 Python 3.9+（标准库），JavaScript 校验需要 Node.js；按需使用的库和字体可从公开 CDN 加载 |
 | unit-data-storytelling | 支持 ES modules 的现代浏览器；Node.js 用于模块检查；可选 Python 3.9+（标准库）用于自带的预览与资源检查工具。内置示例使用本地素材，不依赖指定 CDN 或图表库 |
