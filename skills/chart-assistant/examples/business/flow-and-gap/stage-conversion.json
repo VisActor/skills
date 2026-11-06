@@ -1,0 +1,465 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "paper",
+        "type": "rect",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 664
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#F3F7F6",
+            "stroke": "#F3F7F6",
+            "lineWidth": 0
+          },
+          "zIndex": -1
+        }
+      },
+      {
+        "id": "kicker",
+        "type": "text",
+        "position": {
+          "x": 36,
+          "y": 24,
+          "width": 1190,
+          "height": 24
+        },
+        "options": {
+          "text": "渠道表现   /   新访客转化",
+          "fontSize": 15,
+          "fontWeight": "bold",
+          "fill": "#126E68"
+        }
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "position": {
+          "x": 32,
+          "y": 59,
+          "width": 1220,
+          "height": 59
+        },
+        "options": {
+          "text": "自然渠道试用率更高，最终付费率却低 3 个百分点",
+          "fontSize": 35,
+          "fontWeight": "bold",
+          "fill": "#173C43"
+        }
+      },
+      {
+        "id": "sub",
+        "type": "text",
+        "position": {
+          "x": 35,
+          "y": 119,
+          "width": 1200,
+          "height": 33
+        },
+        "options": {
+          "text": "自然渠道的试用用户中，40% 完成激活；付费渠道这一步达到 75%。",
+          "fontSize": 19,
+          "fontWeight": "normal",
+          "fill": "#476568"
+        }
+      },
+      {
+        "id": "organic-card",
+        "type": "rect",
+        "position": {
+          "x": 24,
+          "y": 171,
+          "width": 606,
+          "height": 404
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#FFFFFF",
+            "stroke": "#FFFFFF",
+            "lineWidth": 0
+          },
+          "zIndex": -1
+        }
+      },
+      {
+        "id": "organic-heading",
+        "type": "text",
+        "position": {
+          "x": 48,
+          "y": 188,
+          "width": 550,
+          "height": 30
+        },
+        "options": {
+          "text": "自然渠道",
+          "fontSize": 23,
+          "fontWeight": "bold",
+          "fill": "#557479"
+        }
+      },
+      {
+        "id": "organic-scope",
+        "type": "text",
+        "position": {
+          "x": 48,
+          "y": 228,
+          "width": 550,
+          "height": 23
+        },
+        "options": {
+          "text": "10,000 名新访客",
+          "fontSize": 15,
+          "fontWeight": "normal",
+          "fill": "#476568"
+        }
+      },
+      {
+        "id": "organic",
+        "type": "chart",
+        "position": {
+          "x": 48,
+          "y": 260,
+          "width": 558,
+          "height": 304
+        },
+        "options": {
+          "chartType": "funnel",
+          "enableDataEdit": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "步骤",
+                "人数"
+              ],
+              "rows": [
+                "0",
+                "1",
+                "2",
+                "3"
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true,
+                    "fixed": 0
+                  }
+                }
+              ],
+              "data": [
+                {
+                  "步骤": "访问",
+                  "人数": 10000
+                },
+                {
+                  "步骤": "试用",
+                  "人数": 7500
+                },
+                {
+                  "步骤": "激活",
+                  "人数": 3000
+                },
+                {
+                  "步骤": "首次付费",
+                  "人数": 2400
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "category": "步骤",
+              "value": "人数"
+            },
+            "color": [
+              "#557479",
+              "#557479",
+              "#557479",
+              "#557479"
+            ],
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "series-0",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "isTransform": true,
+                  "isCone": false,
+                  "maxSize": "58%",
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": [
+                        "arrivalRate"
+                      ],
+                      "fixed": 0
+                    }
+                  },
+                  "transformLabel": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": "rate",
+                      "fixed": 0
+                    }
+                  },
+                  "outerLabel": {
+                    "visible": true,
+                    "line": {
+                      "visible": true
+                    },
+                    "formatConfig": {
+                      "content": [
+                        "dimension",
+                        "value"
+                      ],
+                      "separator": true,
+                      "fixed": 0
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "paid-card",
+        "type": "rect",
+        "position": {
+          "x": 650,
+          "y": 171,
+          "width": 606,
+          "height": 404
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#FFFFFF",
+            "stroke": "#FFFFFF",
+            "lineWidth": 0
+          },
+          "zIndex": -1
+        }
+      },
+      {
+        "id": "paid-heading",
+        "type": "text",
+        "position": {
+          "x": 674,
+          "y": 188,
+          "width": 550,
+          "height": 30
+        },
+        "options": {
+          "text": "付费渠道",
+          "fontSize": 23,
+          "fontWeight": "bold",
+          "fill": "#126E68"
+        }
+      },
+      {
+        "id": "paid-scope",
+        "type": "text",
+        "position": {
+          "x": 674,
+          "y": 228,
+          "width": 550,
+          "height": 23
+        },
+        "options": {
+          "text": "10,000 名新访客",
+          "fontSize": 15,
+          "fontWeight": "normal",
+          "fill": "#476568"
+        }
+      },
+      {
+        "id": "paid",
+        "type": "chart",
+        "position": {
+          "x": 674,
+          "y": 260,
+          "width": 558,
+          "height": 304
+        },
+        "options": {
+          "chartType": "funnel",
+          "enableDataEdit": true,
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "步骤",
+                "人数"
+              ],
+              "rows": [
+                "0",
+                "1",
+                "2",
+                "3"
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true,
+                    "fixed": 0
+                  }
+                }
+              ],
+              "data": [
+                {
+                  "步骤": "访问",
+                  "人数": 10000
+                },
+                {
+                  "步骤": "试用",
+                  "人数": 6000
+                },
+                {
+                  "步骤": "激活",
+                  "人数": 4500
+                },
+                {
+                  "步骤": "首次付费",
+                  "人数": 2700
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "category": "步骤",
+              "value": "人数"
+            },
+            "color": [
+              "#126E68",
+              "#126E68",
+              "#126E68",
+              "#126E68"
+            ],
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "series-0",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "isTransform": true,
+                  "isCone": false,
+                  "maxSize": "58%",
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": [
+                        "arrivalRate"
+                      ],
+                      "fixed": 0
+                    }
+                  },
+                  "transformLabel": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": "rate",
+                      "fixed": 0
+                    }
+                  },
+                  "outerLabel": {
+                    "visible": true,
+                    "line": {
+                      "visible": true
+                    },
+                    "formatConfig": {
+                      "content": [
+                        "dimension",
+                        "value"
+                      ],
+                      "separator": true,
+                      "fixed": 0
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "encoding",
+        "type": "text",
+        "position": {
+          "x": 35,
+          "y": 594,
+          "width": 1220,
+          "height": 27
+        },
+        "options": {
+          "text": "深色色块内为累计到达率（占该渠道访客），相邻色块之间为上一步转化率。",
+          "fontSize": 16,
+          "fontWeight": "normal",
+          "fill": "#173C43"
+        }
+      },
+      {
+        "id": "source",
+        "type": "text",
+        "position": {
+          "x": 35,
+          "y": 631,
+          "width": 1230,
+          "height": 24
+        },
+        "options": {
+          "text": "合成数据   ·   按首次访问来源划分渠道，每名访客在 30 天内按顺序计入各阶段一次。",
+          "fontSize": 14,
+          "fontWeight": "normal",
+          "fill": "#476568"
+        }
+      }
+    ]
+  }
+}

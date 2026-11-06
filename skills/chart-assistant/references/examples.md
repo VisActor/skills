@@ -1,5 +1,53 @@
 # Examples 使用索引
 
+## 按需读图与选图理由
+
+以下答法使用两个已有样例。用户换数、改图后，按当前图面和数据重新取例。
+
+### 订阅流失页
+
+**怎么读？** 先看左图哪根柱最高。1 至 4 月入组的 1,000 名订户中，有 178 人在 M2 首次流失，占 17.8%，是前四个月龄中最高的。再看右表的 M2 列，四批各有 18%、20%、18%、16% 的订户在这个月龄首次流失。往右读到空格表示还没到该月龄，“缺报”表示已经到期但数据未知，0% 表示已观察且无人首次流失。
+
+**为什么选柱图和矩阵？** 要比较订阅后的同一阶段，1 月和 2 月入组用户的 M2 分别落在 3 月和 4 月。把 M2 对齐在同一列，就能直接比较两批订户，也能看出哪些批次尚未观察到这个阶段。左侧柱图只汇总已完整观察四个月的同一组订户，方便找出这 1,000 名订户在前四个月龄的首次流失高峰。[订阅流失样例](../examples/business/cohort-window/two-phase.json)
+
+### 工单条件比例桑基图
+
+**怎么读？** 从左侧 10,000 笔工单沿“转入人工”往右看。进入人工的有 5,400 笔，其中 324 笔在 30 天后仍未解决。线越宽表示工单越多。这 324 笔占人工工单的 6%，换成全部工单作分母就是 3.24%。
+
+**为什么选桑基图？** 这里既要知道未解决工单来自哪个分支，又要比较它占子群和总体的份额。从“30 天仍未解决”沿流带回到“转入人工”，再看左侧的全部工单，就能找到两个分母。如果只问这批未解决工单占全部多少，直接回答 3.24% 就够了。[工单桑基图样例](../examples/business/flow-and-gap/conditional-share.json)
+
+## 原生指标卡
+
+[收入、毛利率与费用三卡样例](../examples/kpi-card.json)使用一个原生图表元素展示三行数据，包含百分比、百分点、低好方向及单卡描边。单卡最小 DSL、布局与样式字段见 [kpiCard](kpi-card.md)。
+
+## 带月度小图的指标卡
+
+[四项订阅指标的两阶段样例](../examples/business/monthly-kpi/two-phase.json)在每张卡里展示当期主值、环比和十二个月的实际与目标。先创建组件，再按[配方](business/recipes/monthly-kpi.md)将每张卡的成员成组并高亮所选月份。
+
+## 指标小多图与排名变化图
+
+[指标小多图](../examples/business/platform-comparison/metric-small-multiples.json)用 ListTable 数据条按平台和渠道对齐四个指标列。[排名变化图](../examples/business/platform-comparison/rank-change.json)用折线比较六个平台每月的 CPA 名次。两个合成样例均可独立加载 commonOption。尺度、并列和换数步骤见[配方](business/recipes/platform-comparison.md)。
+
+## 条件比例、阶段流动与缺口情景
+
+[条件桑基图](../examples/business/flow-and-gap/conditional-share.json)展开一个子群并保留总体分母。[渠道漏斗](../examples/business/flow-and-gap/stage-conversion.json)并排展示各渠道的累计到达和相邻转化。[缺口情景](../examples/business/flow-and-gap/gap-scenario.json)用同面积树图核对基准构成、预计分流与剩余。三个合成样例都可独立加载 commonOption，输入要求与换数见[业务配方](business/recipes/flow-and-gap.md)。
+
+## Cohort 生命周期与观察窗口
+
+[订阅流失矩阵与月龄分布](../examples/business/cohort-window/two-phase.json)包含可创建的柱图与表格，以及物化后的表格样式。每个批次占一行，M1 从首次付费的下一个日历月开始。左图只比较已完整观察四个月的同一组订户。分母选择、三类单元格及换数步骤见[配方](business/recipes/cohort-window.md)。
+
+## 参照与时间基准
+
+[当前水平与基期指数](../examples/business/reference-time/level-and-index.json)用横条比较同期水平，在指数趋势中用相同颜色和线尾标签追踪重点对象。[事件相对时间](../examples/business/reference-time/event-alignment.json)按事件逐行配对左侧的基准至低点与右侧的恢复轨迹，分面共用尺度，各自停在观察截止。参照定义和比较窗口见[合成输入](../examples/business/reference-time/input.json)，按需选用与换数要点见[配方](business/recipes/reference-and-time.md)。
+
+## 结构与来源解释页
+
+[采购预算流向与供应商排名](../examples/business/structure-source-page/common-option.json)消费[外部已准备结果的合成输入](../examples/business/structure-source-page/input.json)，用 Sankey 看来源→品类→供应商、条形图比较终端金额，支持原生KPI的宿主另以前置卡片展示总额及前两家占比。实例的固定色值只演示参考图风格；实际用法按当前主题、背景对比和颜色语义选择，不要求同色盘或三阶段必用渐变。各截面均为1,200万元，两段边合计2,400不能当总额；A/B合计900、占总体75%，不等于品类内份额。相邻流量不证明完整路径或议价能力。选择其他构成／贡献表达及编辑边界见[配方](business/recipes/structure-source-page.md)。
+
+## 目标与实际绩效页
+
+[两阶段绩效页](../examples/business/performance-page/two-phase.json)使用[模拟月×地区销售输入](../examples/business/performance-page/input.json)，先创建原生 KPI、地区成对条形图、月度折线和标准表，再对实际物化的表格设置原生标题；完整编辑态须由运行时读取后保存，不手写布局身份。合计实际1180、目标1200、上年同期1050，达成98.3%、同比增长12.4%，说明“同比增长”与“未达目标”可以同时成立。原生 `kpiCard` 需要宿主支持，卡片只展示已给定汇总字段；跨组件更新边界见[绩效页配方](business/recipes/performance-page.md)。
+
 ## 预算与实际
 
 [季度预算比较](../examples/business/baseline-comparison/common-option.json)：960×540 的完整 commonOption，Q1 预算 100、实际 120，动态本层差额／差异率为 +20／+20%；合计预算 400、实际 420，合计率 +5%。实际深色、预算浅灰通过语义分组样式定位，不猜 series ID。标题保持稳定主题，不写死合计结论。适用输入、零负基准、百分点、纹理和编辑边界见 [基准比较配方](business/recipes/baseline-comparison.md)。

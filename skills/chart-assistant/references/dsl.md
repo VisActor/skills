@@ -254,6 +254,7 @@ interface IModelSpec {
 - `barLink`：柱/条系列连接，不放进 `modelSpec.seriesLabel`。
 - `syncAxisDomain`：仅本地 `dualAxis`。
 - `butterflyAxisPosition`：仅本地 `butterfly`，控制类目轴位置，默认 `center`；只影响布局，不改数据与映射。`center` 时轴标题/轴线/刻度线/网格线与水平对齐不提供配置。
+- `kpiCardLayout`、`kpiCardStyle`、`kpiCardStyleMap`：指标卡的组布局、共享样式和按唯一业务键定位的单卡样式，见 [指标卡模板](kpi-card.md)。
 - `markZIndexRange`：本地 `scatter` 气泡/单点层级。
 
 业务定位与年度声明见 [semantic-marker-anchors.md](semantic-marker-anchors.md)；样式、旧坐标单位及 addable 规则见 [markers.md](markers.md)。新建差异 marker 用 from/to 业务目标，不只凭原始行手写最终 coordinates。

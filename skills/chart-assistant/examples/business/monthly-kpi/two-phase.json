@@ -1,0 +1,1405 @@
+{
+  "initialRecord": {
+    "commonOption": {
+      "elements": [
+        {
+          "type": "rect",
+          "id": "bg",
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 489
+          },
+          "options": {
+            "type": "rect",
+            "graphic": {
+              "fill": "#FFFFFF",
+              "stroke": "#FFFFFF"
+            },
+            "zIndex": -2
+          }
+        },
+        {
+          "type": "text",
+          "id": "head",
+          "position": {
+            "x": 28,
+            "y": 21,
+            "width": 1100,
+            "height": 45
+          },
+          "options": {
+            "text": "订阅经营月报",
+            "fontSize": 30,
+            "fill": "#392F2A",
+            "fontWeight": "bold"
+          }
+        },
+        {
+          "type": "text",
+          "id": "sub",
+          "position": {
+            "x": 29,
+            "y": 75,
+            "width": 1300,
+            "height": 28
+          },
+          "options": {
+            "text": "选中月份    2025 年 1 月       /       环比参照    2024 年 12 月",
+            "fontSize": 17,
+            "fill": "#736861",
+            "fontWeight": "normal"
+          }
+        },
+        {
+          "type": "rect",
+          "id": "churn-tile",
+          "position": {
+            "x": 26,
+            "y": 125,
+            "width": 334,
+            "height": 275
+          },
+          "options": {
+            "type": "rect",
+            "graphic": {
+              "fill": "#FFF9F1",
+              "stroke": "#FFF9F1"
+            },
+            "zIndex": -1
+          }
+        },
+        {
+          "type": "chart",
+          "id": "churn-snapshot",
+          "position": {
+            "x": 42,
+            "y": 139,
+            "width": 300,
+            "height": 112
+          },
+          "options": {
+            "chartType": "kpiCard",
+            "enableDataEdit": true,
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "指标",
+                  "主值",
+                  "单位",
+                  "环比",
+                  "方向"
+                ],
+                "data": [
+                  {
+                    "指标": "订阅流失率",
+                    "主值": 2.8,
+                    "单位": "%",
+                    "环比": 0.12,
+                    "方向": -1
+                  }
+                ],
+                "rows": [
+                  "0"
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "fixed": 1,
+                      "separator": true
+                    }
+                  },
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "dataType": "percent",
+                      "fixed": 1
+                    }
+                  },
+                  {
+                    "dataType": "number"
+                  }
+                ]
+              }
+            },
+            "config": {
+              "mappingSpec": {
+                "name": "指标",
+                "value": "主值",
+                "unit": "单位",
+                "mom": "环比",
+                "direction": "方向"
+              }
+            }
+          }
+        },
+        {
+          "type": "chart",
+          "id": "churn-months",
+          "position": {
+            "x": 36,
+            "y": 275,
+            "width": 314,
+            "height": 113
+          },
+          "options": {
+            "chartType": "bullet",
+            "enableDataEdit": true,
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "月份状态",
+                  "实际",
+                  "目标"
+                ],
+                "data": [
+                  {
+                    "月份状态": "1\n●",
+                    "实际": 2.8,
+                    "目标": 2.7
+                  },
+                  {
+                    "月份状态": "2\n○",
+                    "实际": 2.6,
+                    "目标": 2.7
+                  },
+                  {
+                    "月份状态": "3\n●",
+                    "实际": 2.9,
+                    "目标": 2.7
+                  },
+                  {
+                    "月份状态": "4\n●",
+                    "实际": 2.7,
+                    "目标": 2.6
+                  },
+                  {
+                    "月份状态": "5\n○",
+                    "实际": 2.5,
+                    "目标": 2.6
+                  },
+                  {
+                    "月份状态": "6\n○",
+                    "实际": 2.5,
+                    "目标": 2.6
+                  },
+                  {
+                    "月份状态": "7\n○",
+                    "实际": 2.4,
+                    "目标": 2.5
+                  },
+                  {
+                    "月份状态": "8\n●",
+                    "实际": 2.6,
+                    "目标": 2.5
+                  },
+                  {
+                    "月份状态": "9\n○",
+                    "实际": 2.5,
+                    "目标": 2.5
+                  },
+                  {
+                    "月份状态": "10\n○",
+                    "实际": 2.3,
+                    "目标": 2.4
+                  },
+                  {
+                    "月份状态": "11\n○",
+                    "实际": 2.4,
+                    "目标": 2.4
+                  },
+                  {
+                    "月份状态": "12\n○",
+                    "实际": 2.2,
+                    "目标": 2.4
+                  }
+                ],
+                "rows": [
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "11"
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number"
+                  },
+                  {
+                    "dataType": "number"
+                  }
+                ]
+              }
+            },
+            "config": {
+              "mappingSpec": {
+                "x": "月份状态",
+                "y": [
+                  "实际",
+                  "目标"
+                ]
+              },
+              "color": [
+                "#CEC8C0",
+                "#574E48"
+              ],
+              "modelSpec": [
+                {
+                  "id": "chart_title",
+                  "specKey": "title",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false
+                  }
+                },
+                {
+                  "id": "legend-discrete",
+                  "specKey": "legends",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false
+                  }
+                },
+                {
+                  "id": "bullet-axis-value",
+                  "specKey": "axes",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false,
+                    "zero": true
+                  }
+                },
+                {
+                  "id": "bullet-axis-category",
+                  "specKey": "axes",
+                  "specIndex": 1,
+                  "spec": {
+                    "visible": true,
+                    "tick": {
+                      "visible": false
+                    },
+                    "domainLine": {
+                      "visible": false
+                    },
+                    "grid": {
+                      "visible": false
+                    },
+                    "title": {
+                      "visible": false
+                    },
+                    "label": {
+                      "autoHide": false,
+                      "autoRotate": false,
+                      "style": {
+                        "fill": "#736861"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "bullet-actual",
+                  "specKey": "series",
+                  "specIndex": 0,
+                  "spec": {
+                    "barWidth": "52%",
+                    "bar": {
+                      "style": {
+                        "fill": "#CEC8C0"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "bullet-target",
+                  "specKey": "series",
+                  "specIndex": 1,
+                  "spec": {
+                    "point": {
+                      "style": {
+                        "size": [
+                          21,
+                          2
+                        ],
+                        "fill": "#574E48",
+                        "stroke": false
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "id": "lost-tile",
+          "position": {
+            "x": 376,
+            "y": 125,
+            "width": 334,
+            "height": 275
+          },
+          "options": {
+            "type": "rect",
+            "graphic": {
+              "fill": "#FFF9F1",
+              "stroke": "#FFF9F1"
+            },
+            "zIndex": -1
+          }
+        },
+        {
+          "type": "chart",
+          "id": "lost-snapshot",
+          "position": {
+            "x": 392,
+            "y": 139,
+            "width": 300,
+            "height": 112
+          },
+          "options": {
+            "chartType": "kpiCard",
+            "enableDataEdit": true,
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "指标",
+                  "主值",
+                  "单位",
+                  "环比",
+                  "方向"
+                ],
+                "data": [
+                  {
+                    "指标": "流失月收入",
+                    "主值": 32,
+                    "单位": "万元",
+                    "环比": -0.1111111111,
+                    "方向": -1
+                  }
+                ],
+                "rows": [
+                  "0"
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "fixed": 0,
+                      "separator": true
+                    }
+                  },
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "dataType": "percent",
+                      "fixed": 1
+                    }
+                  },
+                  {
+                    "dataType": "number"
+                  }
+                ]
+              }
+            },
+            "config": {
+              "mappingSpec": {
+                "name": "指标",
+                "value": "主值",
+                "unit": "单位",
+                "mom": "环比",
+                "direction": "方向"
+              }
+            }
+          }
+        },
+        {
+          "type": "chart",
+          "id": "lost-months",
+          "position": {
+            "x": 386,
+            "y": 275,
+            "width": 314,
+            "height": 113
+          },
+          "options": {
+            "chartType": "bullet",
+            "enableDataEdit": true,
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "月份状态",
+                  "实际",
+                  "目标"
+                ],
+                "data": [
+                  {
+                    "月份状态": "1\n●",
+                    "实际": 32,
+                    "目标": 31
+                  },
+                  {
+                    "月份状态": "2\n○",
+                    "实际": 30,
+                    "目标": 31
+                  },
+                  {
+                    "月份状态": "3\n●",
+                    "实际": 34,
+                    "目标": 32
+                  },
+                  {
+                    "月份状态": "4\n○",
+                    "实际": 28,
+                    "目标": 32
+                  },
+                  {
+                    "月份状态": "5\n○",
+                    "实际": 29,
+                    "目标": 30
+                  },
+                  {
+                    "月份状态": "6\n●",
+                    "实际": 32,
+                    "目标": 30
+                  },
+                  {
+                    "月份状态": "7\n○",
+                    "实际": 26,
+                    "目标": 29
+                  },
+                  {
+                    "月份状态": "8\n○",
+                    "实际": 28,
+                    "目标": 29
+                  },
+                  {
+                    "月份状态": "9\n○",
+                    "实际": 25,
+                    "目标": 28
+                  },
+                  {
+                    "月份状态": "10\n●",
+                    "实际": 29,
+                    "目标": 27
+                  },
+                  {
+                    "月份状态": "11\n○",
+                    "实际": 24,
+                    "目标": 26
+                  },
+                  {
+                    "月份状态": "12\n○",
+                    "实际": 22,
+                    "目标": 25
+                  }
+                ],
+                "rows": [
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "11"
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number"
+                  },
+                  {
+                    "dataType": "number"
+                  }
+                ]
+              }
+            },
+            "config": {
+              "mappingSpec": {
+                "x": "月份状态",
+                "y": [
+                  "实际",
+                  "目标"
+                ]
+              },
+              "color": [
+                "#CEC8C0",
+                "#574E48"
+              ],
+              "modelSpec": [
+                {
+                  "id": "chart_title",
+                  "specKey": "title",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false
+                  }
+                },
+                {
+                  "id": "legend-discrete",
+                  "specKey": "legends",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false
+                  }
+                },
+                {
+                  "id": "bullet-axis-value",
+                  "specKey": "axes",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false,
+                    "zero": true
+                  }
+                },
+                {
+                  "id": "bullet-axis-category",
+                  "specKey": "axes",
+                  "specIndex": 1,
+                  "spec": {
+                    "visible": true,
+                    "tick": {
+                      "visible": false
+                    },
+                    "domainLine": {
+                      "visible": false
+                    },
+                    "grid": {
+                      "visible": false
+                    },
+                    "title": {
+                      "visible": false
+                    },
+                    "label": {
+                      "autoHide": false,
+                      "autoRotate": false,
+                      "style": {
+                        "fill": "#736861"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "bullet-actual",
+                  "specKey": "series",
+                  "specIndex": 0,
+                  "spec": {
+                    "barWidth": "52%",
+                    "bar": {
+                      "style": {
+                        "fill": "#CEC8C0"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "bullet-target",
+                  "specKey": "series",
+                  "specIndex": 1,
+                  "spec": {
+                    "point": {
+                      "style": {
+                        "size": [
+                          21,
+                          2
+                        ],
+                        "fill": "#574E48",
+                        "stroke": false
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "id": "active-tile",
+          "position": {
+            "x": 726,
+            "y": 125,
+            "width": 334,
+            "height": 275
+          },
+          "options": {
+            "type": "rect",
+            "graphic": {
+              "fill": "#FFF9F1",
+              "stroke": "#FFF9F1"
+            },
+            "zIndex": -1
+          }
+        },
+        {
+          "type": "chart",
+          "id": "active-snapshot",
+          "position": {
+            "x": 742,
+            "y": 139,
+            "width": 300,
+            "height": 112
+          },
+          "options": {
+            "chartType": "kpiCard",
+            "enableDataEdit": true,
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "指标",
+                  "主值",
+                  "单位",
+                  "环比",
+                  "方向"
+                ],
+                "data": [
+                  {
+                    "指标": "月活跃订户",
+                    "主值": 1240,
+                    "单位": "人",
+                    "环比": 0.0,
+                    "方向": 1
+                  }
+                ],
+                "rows": [
+                  "0"
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "fixed": 0,
+                      "separator": true
+                    }
+                  },
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "dataType": "percent",
+                      "fixed": 1
+                    }
+                  },
+                  {
+                    "dataType": "number"
+                  }
+                ]
+              }
+            },
+            "config": {
+              "mappingSpec": {
+                "name": "指标",
+                "value": "主值",
+                "unit": "单位",
+                "mom": "环比",
+                "direction": "方向"
+              }
+            }
+          }
+        },
+        {
+          "type": "chart",
+          "id": "active-months",
+          "position": {
+            "x": 736,
+            "y": 275,
+            "width": 314,
+            "height": 113
+          },
+          "options": {
+            "chartType": "bullet",
+            "enableDataEdit": true,
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "月份状态",
+                  "实际",
+                  "目标"
+                ],
+                "data": [
+                  {
+                    "月份状态": "1\n○",
+                    "实际": 1240,
+                    "目标": 1220
+                  },
+                  {
+                    "月份状态": "2\n○",
+                    "实际": 1310,
+                    "目标": 1250
+                  },
+                  {
+                    "月份状态": "3\n●",
+                    "实际": 1280,
+                    "目标": 1310
+                  },
+                  {
+                    "月份状态": "4\n○",
+                    "实际": 1370,
+                    "目标": 1320
+                  },
+                  {
+                    "月份状态": "5\n○",
+                    "实际": 1350,
+                    "目标": 1330
+                  },
+                  {
+                    "月份状态": "6\n○",
+                    "实际": 1450,
+                    "目标": 1390
+                  },
+                  {
+                    "月份状态": "7\n○",
+                    "实际": 1460,
+                    "目标": 1420
+                  },
+                  {
+                    "月份状态": "8\n●",
+                    "实际": 1410,
+                    "目标": 1460
+                  },
+                  {
+                    "月份状态": "9\n○",
+                    "实际": 1510,
+                    "目标": 1480
+                  },
+                  {
+                    "月份状态": "10\n○",
+                    "实际": 1550,
+                    "目标": 1530
+                  },
+                  {
+                    "月份状态": "11\n○",
+                    "实际": 1620,
+                    "目标": 1560
+                  },
+                  {
+                    "月份状态": "12\n○",
+                    "实际": 1660,
+                    "目标": 1630
+                  }
+                ],
+                "rows": [
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "11"
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number"
+                  },
+                  {
+                    "dataType": "number"
+                  }
+                ]
+              }
+            },
+            "config": {
+              "mappingSpec": {
+                "x": "月份状态",
+                "y": [
+                  "实际",
+                  "目标"
+                ]
+              },
+              "color": [
+                "#CEC8C0",
+                "#574E48"
+              ],
+              "modelSpec": [
+                {
+                  "id": "chart_title",
+                  "specKey": "title",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false
+                  }
+                },
+                {
+                  "id": "legend-discrete",
+                  "specKey": "legends",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false
+                  }
+                },
+                {
+                  "id": "bullet-axis-value",
+                  "specKey": "axes",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false,
+                    "zero": true
+                  }
+                },
+                {
+                  "id": "bullet-axis-category",
+                  "specKey": "axes",
+                  "specIndex": 1,
+                  "spec": {
+                    "visible": true,
+                    "tick": {
+                      "visible": false
+                    },
+                    "domainLine": {
+                      "visible": false
+                    },
+                    "grid": {
+                      "visible": false
+                    },
+                    "title": {
+                      "visible": false
+                    },
+                    "label": {
+                      "autoHide": false,
+                      "autoRotate": false,
+                      "style": {
+                        "fill": "#736861"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "bullet-actual",
+                  "specKey": "series",
+                  "specIndex": 0,
+                  "spec": {
+                    "barWidth": "52%",
+                    "bar": {
+                      "style": {
+                        "fill": "#CEC8C0"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "bullet-target",
+                  "specKey": "series",
+                  "specIndex": 1,
+                  "spec": {
+                    "point": {
+                      "style": {
+                        "size": [
+                          21,
+                          2
+                        ],
+                        "fill": "#574E48",
+                        "stroke": false
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "id": "new-tile",
+          "position": {
+            "x": 1076,
+            "y": 125,
+            "width": 334,
+            "height": 275
+          },
+          "options": {
+            "type": "rect",
+            "graphic": {
+              "fill": "#FFF9F1",
+              "stroke": "#FFF9F1"
+            },
+            "zIndex": -1
+          }
+        },
+        {
+          "type": "chart",
+          "id": "new-snapshot",
+          "position": {
+            "x": 1092,
+            "y": 139,
+            "width": 300,
+            "height": 112
+          },
+          "options": {
+            "chartType": "kpiCard",
+            "enableDataEdit": true,
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "指标",
+                  "主值",
+                  "单位",
+                  "环比",
+                  "方向"
+                ],
+                "data": [
+                  {
+                    "指标": "新增付费订户",
+                    "主值": 100,
+                    "单位": "人",
+                    "环比": 0.25,
+                    "方向": 1
+                  }
+                ],
+                "rows": [
+                  "0"
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "fixed": 0,
+                      "separator": true
+                    }
+                  },
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "dataType": "percent",
+                      "fixed": 1
+                    }
+                  },
+                  {
+                    "dataType": "number"
+                  }
+                ]
+              }
+            },
+            "config": {
+              "mappingSpec": {
+                "name": "指标",
+                "value": "主值",
+                "unit": "单位",
+                "mom": "环比",
+                "direction": "方向"
+              }
+            }
+          }
+        },
+        {
+          "type": "chart",
+          "id": "new-months",
+          "position": {
+            "x": 1086,
+            "y": 275,
+            "width": 314,
+            "height": 113
+          },
+          "options": {
+            "chartType": "bullet",
+            "enableDataEdit": true,
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "月份状态",
+                  "实际",
+                  "目标"
+                ],
+                "data": [
+                  {
+                    "月份状态": "1\n○",
+                    "实际": 100,
+                    "目标": 96
+                  },
+                  {
+                    "月份状态": "2\n●",
+                    "实际": 94,
+                    "目标": 98
+                  },
+                  {
+                    "月份状态": "3\n○",
+                    "实际": 109,
+                    "目标": 100
+                  },
+                  {
+                    "月份状态": "4\n○",
+                    "实际": 112,
+                    "目标": 101
+                  },
+                  {
+                    "月份状态": "5\n●",
+                    "实际": 102,
+                    "目标": 103
+                  },
+                  {
+                    "月份状态": "6\n○",
+                    "实际": 111,
+                    "目标": 105
+                  },
+                  {
+                    "月份状态": "7\n○",
+                    "实际": 123,
+                    "目标": 107
+                  },
+                  {
+                    "月份状态": "8\n○",
+                    "实际": 132,
+                    "目标": 111
+                  },
+                  {
+                    "月份状态": "9\n○",
+                    "实际": 119,
+                    "目标": 118
+                  },
+                  {
+                    "月份状态": "10\n○",
+                    "实际": 137,
+                    "目标": 120
+                  },
+                  {
+                    "月份状态": "11\n●",
+                    "实际": 129,
+                    "目标": 130
+                  },
+                  {
+                    "月份状态": "12\n○",
+                    "实际": 140,
+                    "目标": 136
+                  }
+                ],
+                "rows": [
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "11"
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number"
+                  },
+                  {
+                    "dataType": "number"
+                  }
+                ]
+              }
+            },
+            "config": {
+              "mappingSpec": {
+                "x": "月份状态",
+                "y": [
+                  "实际",
+                  "目标"
+                ]
+              },
+              "color": [
+                "#CEC8C0",
+                "#574E48"
+              ],
+              "modelSpec": [
+                {
+                  "id": "chart_title",
+                  "specKey": "title",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false
+                  }
+                },
+                {
+                  "id": "legend-discrete",
+                  "specKey": "legends",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false
+                  }
+                },
+                {
+                  "id": "bullet-axis-value",
+                  "specKey": "axes",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false,
+                    "zero": true
+                  }
+                },
+                {
+                  "id": "bullet-axis-category",
+                  "specKey": "axes",
+                  "specIndex": 1,
+                  "spec": {
+                    "visible": true,
+                    "tick": {
+                      "visible": false
+                    },
+                    "domainLine": {
+                      "visible": false
+                    },
+                    "grid": {
+                      "visible": false
+                    },
+                    "title": {
+                      "visible": false
+                    },
+                    "label": {
+                      "autoHide": false,
+                      "autoRotate": false,
+                      "style": {
+                        "fill": "#736861"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "bullet-actual",
+                  "specKey": "series",
+                  "specIndex": 0,
+                  "spec": {
+                    "barWidth": "52%",
+                    "bar": {
+                      "style": {
+                        "fill": "#CEC8C0"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "bullet-target",
+                  "specKey": "series",
+                  "specIndex": 1,
+                  "spec": {
+                    "point": {
+                      "style": {
+                        "size": [
+                          21,
+                          2
+                        ],
+                        "fill": "#574E48",
+                        "stroke": false
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "text",
+          "id": "legend",
+          "position": {
+            "x": 29,
+            "y": 417,
+            "width": 1370,
+            "height": 26
+          },
+          "options": {
+            "text": "橙柱  所选月份       短横  各月目标       ○  达标       ●  未达标",
+            "fontSize": 16,
+            "fill": "#392F2A",
+            "fontWeight": "normal"
+          }
+        },
+        {
+          "type": "text",
+          "id": "definition",
+          "position": {
+            "x": 29,
+            "y": 452,
+            "width": 1382,
+            "height": 25
+          },
+          "options": {
+            "text": "流失率与流失月收入越低越好，活跃与新增越高越好。等于目标算达标。各卡独立刻度，环比按相对变化计算。  ·  合成数据",
+            "fontSize": 14,
+            "fill": "#736861",
+            "fontWeight": "normal"
+          }
+        }
+      ]
+    }
+  },
+  "afterMaterialization": {
+    "cards": [
+      {
+        "face": "churn-tile",
+        "summary": "churn-snapshot",
+        "trend": "churn-months",
+        "selectedMarkStyleId": "selected-churn",
+        "selectedCategory": "1\n●"
+      },
+      {
+        "face": "lost-tile",
+        "summary": "lost-snapshot",
+        "trend": "lost-months",
+        "selectedMarkStyleId": "selected-lost",
+        "selectedCategory": "1\n●"
+      },
+      {
+        "face": "active-tile",
+        "summary": "active-snapshot",
+        "trend": "active-months",
+        "selectedMarkStyleId": "selected-active",
+        "selectedCategory": "1\n○"
+      },
+      {
+        "face": "new-tile",
+        "summary": "new-snapshot",
+        "trend": "new-months",
+        "selectedMarkStyleId": "selected-new",
+        "selectedCategory": "1\n○"
+      }
+    ],
+    "summaryAttributePatch": {
+      "kpiCardStyle": {
+        "card": {
+          "fill": "#FFF9F1",
+          "stroke": "#FFF9F1",
+          "cornerRadius": 0,
+          "lineWidth": 0,
+          "padding": 0
+        },
+        "accent": {
+          "visible": false
+        },
+        "name": {
+          "fill": "#392F2A"
+        },
+        "value": {
+          "fill": "#BE571C"
+        },
+        "unit": {
+          "fill": "#BE571C"
+        },
+        "comparisonLabel": {
+          "fill": "#736861"
+        }
+      },
+      "kpiCardLayout": {
+        "padding": 0
+      }
+    },
+    "selectedActual": {
+      "measure": "实际",
+      "categoryField": "月份状态",
+      "markName": "bar",
+      "style": {
+        "fill": "#BE571C"
+      }
+    },
+    "apply": [
+      "本节是示例操作说明，宿主只加载 initialRecord.commonOption。等元素就绪后读取当前完整编辑态，按 cards 的三个元素 ID 定位本实例中的底板、摘要与趋势。新建本例时，只将 summaryAttributePatch 合并到四个摘要的同名已保存属性。",
+      "在每张物化后的子弹图中，找到映射“实际”的柱系列及与 selectedCategory 完全相等的唯一数据项。从当前拾取器读取系列类型和索引、mark 名称、itemKeys 与 itemKeyMap，以本卡的 selectedMarkStyleId 保存这一根柱的 selectedActual.style。初次写入若 ID 已被无关覆盖占用，改用图内唯一的新 ID 并记录。切月时只替换已确认属于本卡的高亮项，保留其余覆盖。无法唯一定位时保留原状并说明缺项。",
+      "每张卡仅选择自己的三个成员，分别调用宿主成组操作，由宿主为本次创建生成独立的新组 ID。在已成组的卡上更新数据时沿用当前组，保存包含全部元素的当前编辑态。"
+    ]
+  },
+  "checks": {
+    "source": "合成月度快照",
+    "canvas": {
+      "width": 1440,
+      "height": 489
+    },
+    "selectedMonth": "2025-01",
+    "comparisonMonth": "2024-12",
+    "comparisonValues": {
+      "churn-snapshot": 2.5,
+      "lost-snapshot": 36,
+      "active-snapshot": 1240,
+      "new-snapshot": 80
+    },
+    "changeMonth": {
+      "selectedMonth": "2025-02",
+      "comparisonMonth": "2025-01",
+      "expected": [
+        {
+          "summary": "churn-snapshot",
+          "value": 2.6,
+          "mom": -0.0714285714,
+          "trend": "churn-months",
+          "selectedCategory": "2\n○"
+        },
+        {
+          "summary": "lost-snapshot",
+          "value": 30,
+          "mom": -0.0625,
+          "trend": "lost-months",
+          "selectedCategory": "2\n○"
+        },
+        {
+          "summary": "active-snapshot",
+          "value": 1310,
+          "mom": 0.0564516129,
+          "trend": "active-months",
+          "selectedCategory": "2\n○"
+        },
+        {
+          "summary": "new-snapshot",
+          "value": 94,
+          "mom": -0.06,
+          "trend": "new-months",
+          "selectedCategory": "2\n●"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1301 @@
+{
+  "initialRecord": {
+    "commonOption": {
+      "elements": [
+        {
+          "id": "paper",
+          "type": "rect",
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 1280,
+            "height": 694
+          },
+          "options": {
+            "type": "rect",
+            "graphic": {
+              "fill": "#FAF7F2",
+              "stroke": "#FAF7F2",
+              "lineWidth": 0
+            },
+            "zIndex": -2
+          }
+        },
+        {
+          "id": "left-card",
+          "type": "rect",
+          "position": {
+            "x": 24,
+            "y": 146,
+            "width": 348,
+            "height": 480
+          },
+          "options": {
+            "type": "rect",
+            "graphic": {
+              "fill": "#FFFFFF",
+              "stroke": "#FFFFFF",
+              "lineWidth": 0
+            },
+            "zIndex": -1
+          }
+        },
+        {
+          "id": "matrix-card",
+          "type": "rect",
+          "position": {
+            "x": 388,
+            "y": 146,
+            "width": 868,
+            "height": 480
+          },
+          "options": {
+            "type": "rect",
+            "graphic": {
+              "fill": "#FFFFFF",
+              "stroke": "#FFFFFF",
+              "lineWidth": 0
+            },
+            "zIndex": -1
+          }
+        },
+        {
+          "id": "kicker",
+          "type": "text",
+          "position": {
+            "x": 32,
+            "y": 22,
+            "width": 650,
+            "height": 24
+          },
+          "options": {
+            "text": "订阅分析     /     用户生命周期",
+            "fontSize": 14,
+            "fontWeight": "bold",
+            "fill": "#AB4A13"
+          }
+        },
+        {
+          "id": "headline",
+          "type": "text",
+          "position": {
+            "x": 30,
+            "y": 52,
+            "width": 1210,
+            "height": 54
+          },
+          "options": {
+            "text": "首次订阅后的第 2 个月，流失最集中",
+            "fontSize": 34,
+            "fontWeight": "bold",
+            "fill": "#322C28"
+          }
+        },
+        {
+          "id": "deck",
+          "type": "text",
+          "position": {
+            "x": 32,
+            "y": 106,
+            "width": 1200,
+            "height": 28
+          },
+          "options": {
+            "text": "在观察满四个月的 1—4 月批次中，每 1,000 名新订户有 178 人在 M2 首次流失。",
+            "fontSize": 17,
+            "fontWeight": "normal",
+            "fill": "#70665E"
+          }
+        },
+        {
+          "id": "left-title",
+          "type": "text",
+          "position": {
+            "x": 42,
+            "y": 164,
+            "width": 325,
+            "height": 32
+          },
+          "options": {
+            "text": "相同四批用户的前四个月",
+            "fontSize": 21,
+            "fontWeight": "bold",
+            "fill": "#322C28"
+          }
+        },
+        {
+          "id": "left-sub",
+          "type": "text",
+          "position": {
+            "x": 42,
+            "y": 207,
+            "width": 326,
+            "height": 25
+          },
+          "options": {
+            "text": "以 1,000 名入组订户为共同分母",
+            "fontSize": 14,
+            "fontWeight": "normal",
+            "fill": "#70665E"
+          }
+        },
+        {
+          "id": "age-profile",
+          "type": "chart",
+          "position": {
+            "x": 43,
+            "y": 255,
+            "width": 306,
+            "height": 309
+          },
+          "options": {
+            "chartType": "barGroup",
+            "enableDataEdit": true,
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "月龄",
+                  "首次流失率"
+                ],
+                "rows": [
+                  "0",
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "data": [
+                  {
+                    "月龄": "M1",
+                    "首次流失率": 0.059
+                  },
+                  {
+                    "月龄": "M2",
+                    "首次流失率": 0.178
+                  },
+                  {
+                    "月龄": "M3",
+                    "首次流失率": 0.113
+                  },
+                  {
+                    "月龄": "M4",
+                    "首次流失率": 0.072
+                  }
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "dataType": "percent",
+                      "fixed": 1
+                    }
+                  }
+                ]
+              }
+            },
+            "config": {
+              "mappingSpec": {
+                "x": "月龄",
+                "y": [
+                  "首次流失率"
+                ]
+              },
+              "color": [
+                "#E2C8AC"
+              ],
+              "markStyle": [
+                {
+                  "id": "peak-age",
+                  "target": {
+                    "selector": {
+                      "月龄": "M2"
+                    },
+                    "measure": "首次流失率"
+                  },
+                  "markName": "bar",
+                  "style": {
+                    "fill": "#AB4A13"
+                  }
+                }
+              ],
+              "modelSpec": [
+                {
+                  "id": "chart_title",
+                  "specKey": "title",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false
+                  }
+                },
+                {
+                  "id": "legend-discrete",
+                  "specKey": "legends",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": false
+                  }
+                },
+                {
+                  "id": "axis-left",
+                  "specKey": "axes",
+                  "specIndex": 0,
+                  "spec": {
+                    "visible": true,
+                    "min": 0,
+                    "max": 0.2,
+                    "label": {
+                      "formatConfig": {
+                        "content": "value",
+                        "dataType": "percent",
+                        "fixed": 0
+                      }
+                    },
+                    "tick": {
+                      "tickStep": 0.05
+                    },
+                    "grid": {
+                      "visible": true,
+                      "style": {
+                        "stroke": "#E9E1D6"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "series-0",
+                  "specKey": "series",
+                  "specIndex": 0,
+                  "spec": {
+                    "label": {
+                      "visible": true,
+                      "formatConfig": {
+                        "content": [
+                          "value"
+                        ],
+                        "dataType": "percent",
+                        "fixed": 1
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "matrix-title",
+          "type": "text",
+          "position": {
+            "x": 405,
+            "y": 164,
+            "width": 640,
+            "height": 32
+          },
+          "options": {
+            "text": "各订阅批次的首次流失率",
+            "fontSize": 21,
+            "fontWeight": "bold",
+            "fill": "#322C28"
+          }
+        },
+        {
+          "id": "matrix-sub",
+          "type": "text",
+          "position": {
+            "x": 406,
+            "y": 204,
+            "width": 822,
+            "height": 21
+          },
+          "options": {
+            "text": "按首次付费月份入组  ·  橙色越深，首次流失占比越高",
+            "fontSize": 14,
+            "fontWeight": "normal",
+            "fill": "#70665E"
+          }
+        },
+        {
+          "id": "cohort-matrix",
+          "type": "table",
+          "position": {
+            "x": 406,
+            "y": 224,
+            "width": 838,
+            "height": 364
+          },
+          "options": {
+            "tableType": "ListTable",
+            "viewMode": "zoom",
+            "data": {
+              "type": "standard",
+              "value": {
+                "columns": [
+                  "首次订阅月",
+                  "入组人数",
+                  "M1",
+                  "M2",
+                  "M3",
+                  "M4",
+                  "M5",
+                  "M6",
+                  "M7"
+                ],
+                "rows": [
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7"
+                ],
+                "data": [
+                  {
+                    "首次订阅月": "1 月",
+                    "入组人数": 200,
+                    "M1": 0.07,
+                    "M2": 0.18,
+                    "M3": 0.12,
+                    "M4": 0.08,
+                    "M5": 0.05,
+                    "M6": 0.03,
+                    "M7": 0.0
+                  },
+                  {
+                    "首次订阅月": "2 月",
+                    "入组人数": 200,
+                    "M1": 0.06,
+                    "M2": 0.2,
+                    "M3": 0.13,
+                    "M4": 0.07,
+                    "M5": 0.06,
+                    "M6": 0.02,
+                    "M7": null
+                  },
+                  {
+                    "首次订阅月": "3 月",
+                    "入组人数": 300,
+                    "M1": 0.05,
+                    "M2": 0.18,
+                    "M3": 0.1,
+                    "M4": 0.08,
+                    "M5": 0.04,
+                    "M6": null,
+                    "M7": null
+                  },
+                  {
+                    "首次订阅月": "4 月",
+                    "入组人数": 300,
+                    "M1": 0.06,
+                    "M2": 0.16,
+                    "M3": 0.11,
+                    "M4": 0.06,
+                    "M5": null,
+                    "M6": null,
+                    "M7": null
+                  },
+                  {
+                    "首次订阅月": "5 月",
+                    "入组人数": 200,
+                    "M1": 0.07,
+                    "M2": 0.15,
+                    "M3": 0.09,
+                    "M4": null,
+                    "M5": null,
+                    "M6": null,
+                    "M7": null
+                  },
+                  {
+                    "首次订阅月": "6 月",
+                    "入组人数": 100,
+                    "M1": 0.05,
+                    "M2": "缺报",
+                    "M3": null,
+                    "M4": null,
+                    "M5": null,
+                    "M6": null,
+                    "M7": null
+                  },
+                  {
+                    "首次订阅月": "7 月",
+                    "入组人数": 100,
+                    "M1": 0.04,
+                    "M2": null,
+                    "M3": null,
+                    "M4": null,
+                    "M5": null,
+                    "M6": null,
+                    "M7": null
+                  },
+                  {
+                    "首次订阅月": "8 月",
+                    "入组人数": 200,
+                    "M1": null,
+                    "M2": null,
+                    "M3": null,
+                    "M4": null,
+                    "M5": null,
+                    "M6": null,
+                    "M7": null
+                  }
+                ],
+                "columnFormats": [
+                  {
+                    "dataType": "text"
+                  },
+                  {
+                    "dataType": "number"
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "dataType": "percent",
+                      "fixed": 0
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "dataType": "percent",
+                      "fixed": 0
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "dataType": "percent",
+                      "fixed": 0
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "dataType": "percent",
+                      "fixed": 0
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "dataType": "percent",
+                      "fixed": 0
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "dataType": "percent",
+                      "fixed": 0
+                    }
+                  },
+                  {
+                    "dataType": "number",
+                    "dataFormat": {
+                      "dataType": "percent",
+                      "fixed": 0
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "matrix-key",
+          "type": "text",
+          "position": {
+            "x": 406,
+            "y": 594,
+            "width": 830,
+            "height": 25
+          },
+          "options": {
+            "text": "0%  已观察且无人流失　　  灰格  已到期但缺报　　  空白  尚未到观察月",
+            "fontSize": 14,
+            "fontWeight": "normal",
+            "fill": "#70665E"
+          }
+        },
+        {
+          "id": "foot",
+          "type": "text",
+          "position": {
+            "x": 32,
+            "y": 626,
+            "width": 1210,
+            "height": 25
+          },
+          "options": {
+            "text": "M1 为首次付费后的下一个日历月。每格 = 该月龄首次取消订阅人数 ÷ 该批次初始订户数。",
+            "fontSize": 15,
+            "fontWeight": "normal",
+            "fill": "#322C28"
+          }
+        },
+        {
+          "id": "source",
+          "type": "text",
+          "position": {
+            "x": 32,
+            "y": 658,
+            "width": 1100,
+            "height": 22
+          },
+          "options": {
+            "text": "合成数据   ·   观察截至 2026 年 8 月 31 日",
+            "fontSize": 13,
+            "fontWeight": "normal",
+            "fill": "#70665E"
+          }
+        }
+      ]
+    }
+  },
+  "afterMaterialization": {
+    "elementId": "cohort-matrix",
+    "attributePatch": {
+      "layout": {
+        "x1": 406,
+        "y1": 224,
+        "x2": 1244,
+        "y2": 588
+      },
+      "title": {
+        "visible": false,
+        "_initialize_": false
+      },
+      "colWidth": {
+        "0": {
+          "col": 0,
+          "width": 119
+        },
+        "1": {
+          "col": 1,
+          "width": 108
+        },
+        "2": {
+          "col": 2,
+          "width": 86
+        },
+        "3": {
+          "col": 3,
+          "width": 86
+        },
+        "4": {
+          "col": 4,
+          "width": 86
+        },
+        "5": {
+          "col": 5,
+          "width": 86
+        },
+        "6": {
+          "col": 6,
+          "width": 86
+        },
+        "7": {
+          "col": 7,
+          "width": 86
+        },
+        "8": {
+          "col": 8,
+          "width": 86
+        }
+      },
+      "cellStyle": {
+        "cell_2_0": {
+          "col": 2,
+          "row": 0,
+          "style": {
+            "bgColor": "#F9D8AE",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_3_0": {
+          "col": 3,
+          "row": 0,
+          "style": {
+            "bgColor": "#9F4619",
+            "color": "#FFFFFF",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_4_0": {
+          "col": 4,
+          "row": 0,
+          "style": {
+            "bgColor": "#F3AE72",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_5_0": {
+          "col": 5,
+          "row": 0,
+          "style": {
+            "bgColor": "#F9D8AE",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_6_0": {
+          "col": 6,
+          "row": 0,
+          "style": {
+            "bgColor": "#F9D8AE",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_7_0": {
+          "col": 7,
+          "row": 0,
+          "style": {
+            "bgColor": "#FFF2DF",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_8_0": {
+          "col": 8,
+          "row": 0,
+          "style": {
+            "bgColor": "#FFF2DF",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_2_1": {
+          "col": 2,
+          "row": 1,
+          "style": {
+            "bgColor": "#F9D8AE",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_3_1": {
+          "col": 3,
+          "row": 1,
+          "style": {
+            "bgColor": "#9F4619",
+            "color": "#FFFFFF",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_4_1": {
+          "col": 4,
+          "row": 1,
+          "style": {
+            "bgColor": "#F3AE72",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_5_1": {
+          "col": 5,
+          "row": 1,
+          "style": {
+            "bgColor": "#F9D8AE",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_6_1": {
+          "col": 6,
+          "row": 1,
+          "style": {
+            "bgColor": "#F9D8AE",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_7_1": {
+          "col": 7,
+          "row": 1,
+          "style": {
+            "bgColor": "#FFF2DF",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_8_1": {
+          "col": 8,
+          "row": 1,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_2_2": {
+          "col": 2,
+          "row": 2,
+          "style": {
+            "bgColor": "#F9D8AE",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_3_2": {
+          "col": 3,
+          "row": 2,
+          "style": {
+            "bgColor": "#9F4619",
+            "color": "#FFFFFF",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_4_2": {
+          "col": 4,
+          "row": 2,
+          "style": {
+            "bgColor": "#F3AE72",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_5_2": {
+          "col": 5,
+          "row": 2,
+          "style": {
+            "bgColor": "#F9D8AE",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_6_2": {
+          "col": 6,
+          "row": 2,
+          "style": {
+            "bgColor": "#FFF2DF",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_7_2": {
+          "col": 7,
+          "row": 2,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_8_2": {
+          "col": 8,
+          "row": 2,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_2_3": {
+          "col": 2,
+          "row": 3,
+          "style": {
+            "bgColor": "#F9D8AE",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_3_3": {
+          "col": 3,
+          "row": 3,
+          "style": {
+            "bgColor": "#CE6D32",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_4_3": {
+          "col": 4,
+          "row": 3,
+          "style": {
+            "bgColor": "#F3AE72",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_5_3": {
+          "col": 5,
+          "row": 3,
+          "style": {
+            "bgColor": "#F9D8AE",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_6_3": {
+          "col": 6,
+          "row": 3,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_7_3": {
+          "col": 7,
+          "row": 3,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_8_3": {
+          "col": 8,
+          "row": 3,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_2_4": {
+          "col": 2,
+          "row": 4,
+          "style": {
+            "bgColor": "#F9D8AE",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_3_4": {
+          "col": 3,
+          "row": 4,
+          "style": {
+            "bgColor": "#CE6D32",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_4_4": {
+          "col": 4,
+          "row": 4,
+          "style": {
+            "bgColor": "#F9D8AE",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_5_4": {
+          "col": 5,
+          "row": 4,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_6_4": {
+          "col": 6,
+          "row": 4,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_7_4": {
+          "col": 7,
+          "row": 4,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_8_4": {
+          "col": 8,
+          "row": 4,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_2_5": {
+          "col": 2,
+          "row": 5,
+          "style": {
+            "bgColor": "#F9D8AE",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_3_5": {
+          "col": 3,
+          "row": 5,
+          "style": {
+            "bgColor": "#D6D9DB",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_4_5": {
+          "col": 4,
+          "row": 5,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_5_5": {
+          "col": 5,
+          "row": 5,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_6_5": {
+          "col": 6,
+          "row": 5,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_7_5": {
+          "col": 7,
+          "row": 5,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_8_5": {
+          "col": 8,
+          "row": 5,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_2_6": {
+          "col": 2,
+          "row": 6,
+          "style": {
+            "bgColor": "#FFF2DF",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_3_6": {
+          "col": 3,
+          "row": 6,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_4_6": {
+          "col": 4,
+          "row": 6,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_5_6": {
+          "col": 5,
+          "row": 6,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_6_6": {
+          "col": 6,
+          "row": 6,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_7_6": {
+          "col": 7,
+          "row": 6,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_8_6": {
+          "col": 8,
+          "row": 6,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_2_7": {
+          "col": 2,
+          "row": 7,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_3_7": {
+          "col": 3,
+          "row": 7,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_4_7": {
+          "col": 4,
+          "row": 7,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_5_7": {
+          "col": 5,
+          "row": 7,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_6_7": {
+          "col": 6,
+          "row": 7,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_7_7": {
+          "col": 7,
+          "row": 7,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        },
+        "cell_8_7": {
+          "col": 8,
+          "row": 7,
+          "style": {
+            "bgColor": "#F8F6F2",
+            "color": "#35291F",
+            "textAlign": "center",
+            "fontSize": 15,
+            "borderColor": "#FFFFFF",
+            "borderLineWidth": 1
+          }
+        }
+      },
+      "theme": {
+        "bodyStyle": {
+          "bgColor": "#FFFFFF",
+          "color": "#322C28",
+          "fontSize": 15,
+          "textAlign": "center",
+          "borderColor": "#F0EAE2"
+        },
+        "headerStyle": {
+          "bgColor": "#F2E9DD",
+          "color": "#322C28",
+          "fontWeight": "bold",
+          "textAlign": "center",
+          "borderColor": "#FFFFFF"
+        }
+      }
+    }
+  }
+}

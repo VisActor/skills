@@ -5,7 +5,7 @@ export const editableConfigKeys = new Set([
   'templateVersion', 'dataTransposed', 'transposed', 'dataGroupSpec', 'markStyle',
   'markZIndexRange', 'barLink', 'trendLine', 'partitionArea',
   'smallMultiplesChartType', 'smallMultiplesColumns',
-  'butterflyAxisPosition'
+  'butterflyAxisPosition', 'kpiCardLayout', 'kpiCardStyle', 'kpiCardStyleMap'
 ]);
 const elementTypes = new Set([
   'chart', 'table', 'text', 'rect', 'oval', 'diamond', 'callout', 'image', 'svg',

@@ -10,7 +10,7 @@ VisActor Skills 提供图表、看板、数据故事和海报相关的技能，�
 
 | Skill | 能力 |
 | --- | --- |
-| [chart-assistant](skills/chart-assistant/SKILL.md) | 商务图表、MBB 分析标注、可编辑飞书卡片、透明 PNG 和文档插图 |
+| [chart-assistant](skills/chart-assistant/SKILL.md) | 商务图表与组合配方、原生 KPI 指标卡、MBB 分析标注、可编辑飞书卡片、透明 PNG 和文档插图 |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | 分析报告、业务简报与数据专题，结合图表滚动叙事与标注，输出 HTML 数据故事或 Web-PPT |
 | [creative-data-storytelling](skills/creative-data-storytelling/SKILL.md) | 面向公众的交互式数据故事。按叙事需要比较量值、沿材料顺序揭示前后呼应，或用实物和单元表达数据。可结合连续阅读、全出血舞台和自由探索。交付静态 HTML 与资源。 |
 | [unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) | 用单元可视化讲述交互式数据故事，每个数据单元代表一条记录或固定数量。在随滚动推进的全屏画面中，点阵可以聚成读者熟悉的形象，再以粒子动画散开，按时间、类别或数值重排，让读者看见个体在整体中的位置。 |
@@ -111,7 +111,7 @@ npx skills add VisActor/VTable --skill vtable-development-assistant
 
 | Skill | 运行依赖 |
 | --- | --- |
-| chart-assistant | Node.js 18+；PNG 需 HTTPS 网络；飞书插图需已授权的宿主工具或 lark-cli；可编辑卡片另需图表助手 ISV 应用。仅生成/校验 DSL 不要求飞书授权，无需本地图表渲染依赖 |
+| chart-assistant | Node.js 18+；PNG 需 HTTPS 网络；飞书插图需已授权的宿主工具或 lark-cli；可编辑卡片另需图表助手 ISV 应用。原生 KPI 与卡片尺寸行为需宿主支持相应模板/协议。仅生成/校验 DSL 不要求飞书授权，无需本地图表渲染依赖 |
 | chart-storytelling | Python 3.10+（标准库）和 Node.js（校验 JavaScript）；从 unpkg 加载固定版本的 VSeed、VChart、VTable 与 GSAP |
 | creative-data-storytelling | 支持原生 JavaScript 模块的桌面浏览器；随附预览服务需要 Python 3.9+（标准库），JavaScript 校验需要 Node.js；按需使用的库和字体可从公开 CDN 加载 |
 | unit-data-storytelling | 支持 ES modules 的现代浏览器；Node.js 用于模块检查；可选 Python 3.9+（标准库）用于自带的预览与资源检查工具。内置示例使用本地素材，不依赖指定 CDN 或图表库 |
