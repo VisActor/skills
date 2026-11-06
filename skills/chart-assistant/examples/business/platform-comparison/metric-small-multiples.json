@@ -1,0 +1,497 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "page",
+        "type": "rect",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 728
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#F6F8F7",
+            "stroke": "#F6F8F7"
+          },
+          "zIndex": -2
+        }
+      },
+      {
+        "id": "kicker",
+        "type": "text",
+        "position": {
+          "x": 36,
+          "y": 24,
+          "width": 1000,
+          "height": 24.0
+        },
+        "options": {
+          "text": "渠道表现     /     平台绩效指标小多图",
+          "fontSize": 15,
+          "fill": "#326563",
+          "fontWeight": "bold"
+        }
+      },
+      {
+        "id": "heading",
+        "type": "text",
+        "position": {
+          "x": 34,
+          "y": 60,
+          "width": 1215,
+          "height": 52.800000000000004
+        },
+        "options": {
+          "text": "Facebook 的付费曝光最多，Instagram 的付费转化更多",
+          "fontSize": 33,
+          "fill": "#173C43",
+          "fontWeight": "bold"
+        }
+      },
+      {
+        "id": "sub",
+        "type": "text",
+        "position": {
+          "x": 36,
+          "y": 115,
+          "width": 1200,
+          "height": 28.8
+        },
+        "options": {
+          "text": "Instagram 的付费曝光比 Facebook 少 400 万次，转化却多 1,000 笔。",
+          "fontSize": 18,
+          "fill": "#173C43",
+          "fontWeight": "normal"
+        }
+      },
+      {
+        "id": "card",
+        "type": "rect",
+        "position": {
+          "x": 22,
+          "y": 161,
+          "width": 1236,
+          "height": 516
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#FFFFFF",
+            "stroke": "#FFFFFF"
+          },
+          "zIndex": -1
+        }
+      },
+      {
+        "id": "performance-grid",
+        "type": "table",
+        "position": {
+          "x": 34,
+          "y": 171,
+          "width": 1210,
+          "height": 493
+        },
+        "options": {
+          "tableType": "ListTable",
+          "spec": {
+            "columns": [
+              {
+                "field": "平台",
+                "title": "平台",
+                "width": 147,
+                "style": {
+                  "textAlign": "left",
+                  "color": "#28484E"
+                },
+                "mergeCell": true
+              },
+              {
+                "field": "渠道",
+                "title": "渠道",
+                "width": 78,
+                "style": {
+                  "textAlign": "left",
+                  "color": "#28484E"
+                }
+              },
+              {
+                "field": "ROAS",
+                "title": "ROAS / 倍",
+                "width": 137,
+                "style": {
+                  "textAlign": "left",
+                  "color": "#28484E"
+                }
+              },
+              {
+                "field": "曝光",
+                "title": "曝光（万次）",
+                "width": 208,
+                "style": {
+                  "textAlign": "left",
+                  "color": "#28484E",
+                  "barColor": "#AEC0C1",
+                  "barBgColor": "transparent",
+                  "barHeight": 7,
+                  "barBottom": 2,
+                  "barPadding": [
+                    0,
+                    12,
+                    0,
+                    12
+                  ]
+                },
+                "cellType": "progressbar",
+                "min": 0,
+                "max": 2400
+              },
+              {
+                "field": "转化",
+                "title": "转化（笔）",
+                "width": 216,
+                "style": {
+                  "textAlign": "left",
+                  "color": "#28484E",
+                  "barColor": "#AEC0C1",
+                  "barBgColor": "transparent",
+                  "barHeight": 7,
+                  "barBottom": 2,
+                  "barPadding": [
+                    0,
+                    12,
+                    0,
+                    12
+                  ]
+                },
+                "cellType": "progressbar",
+                "min": 0,
+                "max": 18000
+              },
+              {
+                "field": "转化率",
+                "title": "转化率（%）",
+                "width": 197,
+                "style": {
+                  "textAlign": "left",
+                  "color": "#28484E",
+                  "barColor": "#AEC0C1",
+                  "barBgColor": "transparent",
+                  "barHeight": 7,
+                  "barBottom": 2,
+                  "barPadding": [
+                    0,
+                    12,
+                    0,
+                    12
+                  ]
+                },
+                "cellType": "progressbar",
+                "min": 0,
+                "max": 0.2
+              },
+              {
+                "field": "收入",
+                "title": "收入（万元）",
+                "width": 226,
+                "style": {
+                  "textAlign": "left",
+                  "color": "#28484E",
+                  "barColor": "#AEC0C1",
+                  "barBgColor": "transparent",
+                  "barHeight": 7,
+                  "barBottom": 2,
+                  "barPadding": [
+                    0,
+                    12,
+                    0,
+                    12
+                  ]
+                },
+                "cellType": "progressbar",
+                "min": 0,
+                "max": 270
+              }
+            ],
+            "records": [
+              {
+                "平台": "Instagram",
+                "渠道": "自然",
+                "ROAS": "—",
+                "曝光": 160,
+                "转化": 2880,
+                "转化率": 0.18,
+                "收入": 43.2
+              },
+              {
+                "平台": "Instagram",
+                "渠道": "付费",
+                "ROAS": 30,
+                "曝光": 1900,
+                "转化": 17100,
+                "转化率": 0.09,
+                "收入": 256.5
+              },
+              {
+                "平台": "Facebook",
+                "渠道": "自然",
+                "ROAS": "—",
+                "曝光": 170,
+                "转化": 2210,
+                "转化率": 0.13,
+                "收入": 33.15
+              },
+              {
+                "平台": "Facebook",
+                "渠道": "付费",
+                "ROAS": 25,
+                "曝光": 2300,
+                "转化": 16100,
+                "转化率": 0.07,
+                "收入": 241.5
+              },
+              {
+                "平台": "YouTube",
+                "渠道": "自然",
+                "ROAS": "—",
+                "曝光": 120,
+                "转化": 1200,
+                "转化率": 0.1,
+                "收入": 18
+              },
+              {
+                "平台": "YouTube",
+                "渠道": "付费",
+                "ROAS": 19,
+                "曝光": 950,
+                "转化": 4750,
+                "转化率": 0.05,
+                "收入": 71.25
+              },
+              {
+                "平台": "TikTok",
+                "渠道": "自然",
+                "ROAS": "—",
+                "曝光": 280,
+                "转化": 1680,
+                "转化率": 0.06,
+                "收入": 25.2
+              },
+              {
+                "平台": "TikTok",
+                "渠道": "付费",
+                "ROAS": 9,
+                "曝光": 210,
+                "转化": 630,
+                "转化率": 0.03,
+                "收入": 9.45
+              },
+              {
+                "平台": "LinkedIn",
+                "渠道": "自然",
+                "ROAS": "—",
+                "曝光": 80,
+                "转化": 240,
+                "转化率": 0.03,
+                "收入": 3.6
+              },
+              {
+                "平台": "LinkedIn",
+                "渠道": "付费",
+                "ROAS": 8,
+                "曝光": 640,
+                "转化": 1280,
+                "转化率": 0.02,
+                "收入": 19.2
+              },
+              {
+                "平台": "X / Twitter",
+                "渠道": "自然",
+                "ROAS": "—",
+                "曝光": 60,
+                "转化": 300,
+                "转化率": 0.05,
+                "收入": 4.5
+              },
+              {
+                "平台": "X / Twitter",
+                "渠道": "付费",
+                "ROAS": 10,
+                "曝光": 320,
+                "转化": 960,
+                "转化率": 0.03,
+                "收入": 14.4
+              }
+            ],
+            "defaultRowHeight": 37,
+            "defaultHeaderRowHeight": 45,
+            "customCellStyle": [
+              {
+                "id": "paid",
+                "style": {
+                  "barColor": "#124955",
+                  "borderColor": [
+                    "#FFFFFF",
+                    "#FFFFFF",
+                    "#B4C7C8",
+                    "#FFFFFF"
+                  ],
+                  "borderLineWidth": [
+                    0,
+                    0,
+                    1,
+                    0
+                  ]
+                }
+              }
+            ],
+            "customCellStyleArrangement": [
+              {
+                "cellPosition": {
+                  "range": {
+                    "start": {
+                      "row": 2,
+                      "col": 0
+                    },
+                    "end": {
+                      "row": 2,
+                      "col": 6
+                    }
+                  }
+                },
+                "customStyleId": "paid"
+              },
+              {
+                "cellPosition": {
+                  "range": {
+                    "start": {
+                      "row": 4,
+                      "col": 0
+                    },
+                    "end": {
+                      "row": 4,
+                      "col": 6
+                    }
+                  }
+                },
+                "customStyleId": "paid"
+              },
+              {
+                "cellPosition": {
+                  "range": {
+                    "start": {
+                      "row": 6,
+                      "col": 0
+                    },
+                    "end": {
+                      "row": 6,
+                      "col": 6
+                    }
+                  }
+                },
+                "customStyleId": "paid"
+              },
+              {
+                "cellPosition": {
+                  "range": {
+                    "start": {
+                      "row": 8,
+                      "col": 0
+                    },
+                    "end": {
+                      "row": 8,
+                      "col": 6
+                    }
+                  }
+                },
+                "customStyleId": "paid"
+              },
+              {
+                "cellPosition": {
+                  "range": {
+                    "start": {
+                      "row": 10,
+                      "col": 0
+                    },
+                    "end": {
+                      "row": 10,
+                      "col": 6
+                    }
+                  }
+                },
+                "customStyleId": "paid"
+              },
+              {
+                "cellPosition": {
+                  "range": {
+                    "start": {
+                      "row": 12,
+                      "col": 0
+                    },
+                    "end": {
+                      "row": 12,
+                      "col": 6
+                    }
+                  }
+                },
+                "customStyleId": "paid"
+              }
+            ],
+            "theme": {
+              "headerStyle": {
+                "bgColor": "#EAF0EF",
+                "color": "#153F47",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "textAlign": "left",
+                "padding": [
+                  0,
+                  12,
+                  0,
+                  12
+                ],
+                "borderLineWidth": 0
+              },
+              "bodyStyle": {
+                "color": "#28484E",
+                "fontSize": 15,
+                "bgColor": "#FFFFFF",
+                "borderLineWidth": 0,
+                "padding": [
+                  0,
+                  12,
+                  4,
+                  12
+                ],
+                "textAlign": "left"
+              }
+            },
+            "autoWrapText": false,
+            "showFrozenIcon": false
+          },
+          "viewMode": "zoom",
+          "enableDataEdit": true,
+          "enableEditorTheme": false
+        }
+      },
+      {
+        "id": "scope",
+        "type": "text",
+        "position": {
+          "x": 37,
+          "y": 691,
+          "width": 1210,
+          "height": 22.400000000000002
+        },
+        "options": {
+          "text": "合成数据   ·   2026 年 9 月   ·   转化率 = 转化笔数 ÷ 曝光次数   ·   ROAS = 归因收入 ÷ 广告支出，自然渠道无广告支出。",
+          "fontSize": 14,
+          "fill": "#526B6B",
+          "fontWeight": "normal"
+        }
+      }
+    ]
+  }
+}

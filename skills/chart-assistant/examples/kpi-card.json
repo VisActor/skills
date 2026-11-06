@@ -1,0 +1,95 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "type": "chart",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 760,
+          "height": 128
+        },
+        "options": {
+          "chartType": "kpiCard",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "编码",
+                "指标",
+                "本期",
+                "单位",
+                "同比",
+                "环比",
+                "达成率",
+                "方向"
+              ],
+              "data": [
+                {
+                  "编码": "revenue",
+                  "指标": "销售收入",
+                  "本期": 1286,
+                  "单位": "万元",
+                  "同比": "+12.8%",
+                  "环比": "+3.4%",
+                  "达成率": 0.875,
+                  "方向": 1
+                },
+                {
+                  "编码": "margin",
+                  "指标": "毛利率",
+                  "本期": 34.8,
+                  "单位": "%",
+                  "同比": "+2.1pp",
+                  "环比": "-0.4pp",
+                  "达成率": 0.946,
+                  "方向": 1
+                },
+                {
+                  "编码": "expense",
+                  "指标": "管理费用",
+                  "本期": 96.8,
+                  "单位": "万元",
+                  "同比": "-4.1%",
+                  "方向": -1
+                }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "name": "指标",
+              "value": "本期",
+              "key": "编码",
+              "unit": "单位",
+              "yoy": "同比",
+              "mom": "环比",
+              "completion": "达成率",
+              "direction": "方向"
+            },
+            "kpiCardLayout": {
+              "maxColumns": 3,
+              "columnGap": 12,
+              "rowGap": 12
+            },
+            "kpiCardStyleMap": [
+              {
+                "target": {
+                  "selector": {
+                    "编码": "expense"
+                  }
+                },
+                "value": {
+                  "card": {
+                    "stroke": "#475569",
+                    "lineWidth": 2
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

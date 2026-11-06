@@ -1,6 +1,7 @@
 import { at, keyed, linearScale, mixScale, radiusForArea } from "../runtime/geometry.mjs";
 import { blendNodes, blendWithAnnotations } from "../runtime/motion.mjs";
 import { createStage } from "../runtime/stage.mjs";
+import { reserveStageExit } from "../runtime/scroll.mjs";
 import { createValueFormat } from "../runtime/format.mjs";
 import { createSvgLayer, setSvgAttributes, svgElement } from "../runtime/svg.mjs";
 import { measureBounds, checkBounds } from "../runtime/bounds.mjs";
@@ -11,6 +12,7 @@ import { measureBounds, checkBounds } from "../runtime/bounds.mjs";
  * root 提供 #quant（viewBox 0 0 860 440）、.reading-step、#quant-buttons、
  * #quant-summary / #quant-status、#scroll-mode、#comparison-controls、#compare-with、
  * #return-story，以及 #check-bounds / #bounds-result / #bounds-details 作者工具节点。
+ * .sticky 是固定图形的外层，[data-reading-end] 是末段正文，.reading-tail 是正文列末尾的空块。
  * 数据与完整状态在 quantitativePose，连续几何在 blendQuantitative，绘制在 renderQuantitative。
  * 选择自己的记录、尺度、布局与控件；通用控制和稳定 SVG 节点由 runtime 提供。
  */
@@ -122,6 +124,9 @@ export function mountComparison(root) {
           : "六个样品使用同一量值轴；纵向只负责排列。";
     }
   }
+  const exitSpace = reserveStageExit({
+    sticky: $(".sticky"), readingEnd: $("[data-reading-end]"), spacer: $(".reading-tail"),
+  });
   const qStage = createStage({
     element: $("#quant"),
     steps: [...root.querySelectorAll(".reading-step")].map((element, i) => ({
@@ -174,6 +179,6 @@ export function mountComparison(root) {
   qGo("overview", { immediate: true });
   return { dispose() {
     listeners.abort();
-    [qStage, qTicks, qMarks, qAnnotations].forEach((controller) => controller.dispose());
+    [exitSpace, qStage, qTicks, qMarks, qAnnotations].forEach((controller) => controller.dispose());
   } };
 }

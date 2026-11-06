@@ -1,0 +1,494 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "paper",
+        "type": "rect",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 658
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#F7F8F7",
+            "stroke": "#F7F8F7",
+            "lineWidth": 0
+          },
+          "zIndex": -2
+        }
+      },
+      {
+        "id": "left-card",
+        "type": "rect",
+        "position": {
+          "x": 28,
+          "y": 162,
+          "width": 588,
+          "height": 400
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#FFFFFF",
+            "stroke": "#FFFFFF",
+            "lineWidth": 0
+          },
+          "zIndex": -1
+        }
+      },
+      {
+        "id": "right-card",
+        "type": "rect",
+        "position": {
+          "x": 664,
+          "y": 162,
+          "width": 588,
+          "height": 400
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#FFFFFF",
+            "stroke": "#FFFFFF",
+            "lineWidth": 0
+          },
+          "zIndex": -1
+        }
+      },
+      {
+        "id": "kicker",
+        "type": "text",
+        "position": {
+          "x": 34,
+          "y": 21,
+          "width": 1040,
+          "height": 25
+        },
+        "options": {
+          "text": "客服运营   /   自助处理方案测算",
+          "fill": "#107569",
+          "fontSize": 15,
+          "fontWeight": "bold"
+        }
+      },
+      {
+        "id": "headline",
+        "type": "text",
+        "position": {
+          "x": 32,
+          "y": 55,
+          "width": 1220,
+          "height": 52
+        },
+        "options": {
+          "text": "若自助方案按预期分流，仍有 780 件工单待处理",
+          "fill": "#183456",
+          "fontSize": 34,
+          "fontWeight": "bold"
+        }
+      },
+      {
+        "id": "summary",
+        "type": "text",
+        "position": {
+          "x": 33,
+          "y": 111,
+          "width": 1220,
+          "height": 28
+        },
+        "options": {
+          "text": "以本周积压的 2,400 件工单为基线，四类自助流程预计合计可分流 1,620 件，占积压总量的 67.5%。",
+          "fill": "#566778",
+          "fontSize": 17,
+          "fontWeight": "normal"
+        }
+      },
+      {
+        "id": "before",
+        "type": "text",
+        "position": {
+          "x": 49,
+          "y": 184,
+          "width": 530,
+          "height": 32
+        },
+        "options": {
+          "text": "当前积压",
+          "fill": "#183456",
+          "fontSize": 22,
+          "fontWeight": "bold"
+        }
+      },
+      {
+        "id": "before-sub",
+        "type": "text",
+        "position": {
+          "x": 49,
+          "y": 225,
+          "width": 538,
+          "height": 25
+        },
+        "options": {
+          "text": "深蓝面积按工单类型拆分，共 2,400 件",
+          "fill": "#566778",
+          "fontSize": 15,
+          "fontWeight": "normal"
+        }
+      },
+      {
+        "id": "after",
+        "type": "text",
+        "position": {
+          "x": 685,
+          "y": 184,
+          "width": 530,
+          "height": 32
+        },
+        "options": {
+          "text": "方案情景",
+          "fill": "#183456",
+          "fontSize": 22,
+          "fontWeight": "bold"
+        }
+      },
+      {
+        "id": "after-sub",
+        "type": "text",
+        "position": {
+          "x": 685,
+          "y": 225,
+          "width": 545,
+          "height": 25
+        },
+        "options": {
+          "text": "青绿色为各类预计分流量，深蓝为剩余积压",
+          "fill": "#566778",
+          "fontSize": 15,
+          "fontWeight": "normal"
+        }
+      },
+      {
+        "id": "baseline",
+        "type": "chart",
+        "position": {
+          "x": 48,
+          "y": 254,
+          "width": 548,
+          "height": 283
+        },
+        "options": {
+          "chartType": "treemap",
+          "enableDataEdit": true,
+          "config": {
+            "mappingSpec": {
+              "category": [
+                "工单类型"
+              ],
+              "value": "件数"
+            },
+            "color": [
+              "#183456",
+              "#183456",
+              "#183456",
+              "#183456"
+            ],
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "series-0",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "nonLeafLabel": {
+                    "visible": false
+                  },
+                  "leaf": {
+                    "style": {
+                      "stroke": "#FFFFFF",
+                      "lineWidth": 2
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": [
+                        "dimension",
+                        "value"
+                      ],
+                      "contentWrap": true,
+                      "separator": true,
+                      "fixed": 0
+                    },
+                    "style": {
+                      "fill": "#FFFFFF",
+                      "stroke": false
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "工单类型",
+                "件数"
+              ],
+              "rows": [
+                "账号访问",
+                "账单核对",
+                "资料更新",
+                "查件"
+              ],
+              "data": [
+                {
+                  "工单类型": "账号访问",
+                  "件数": 960
+                },
+                {
+                  "工单类型": "账单核对",
+                  "件数": 720
+                },
+                {
+                  "工单类型": "资料更新",
+                  "件数": 480
+                },
+                {
+                  "工单类型": "查件",
+                  "件数": 240
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true,
+                    "fixed": 0
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "scenario",
+        "type": "chart",
+        "position": {
+          "x": 684,
+          "y": 254,
+          "width": 548,
+          "height": 283
+        },
+        "options": {
+          "chartType": "treemap",
+          "enableDataEdit": true,
+          "config": {
+            "mappingSpec": {
+              "category": [
+                "工单类型"
+              ],
+              "value": "件数"
+            },
+            "color": [
+              "#377C78",
+              "#377C78",
+              "#377C78",
+              "#377C78",
+              "#183456"
+            ],
+            "modelSpec": [
+              {
+                "id": "chart_title",
+                "specKey": "title",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "legend-discrete",
+                "specKey": "legends",
+                "specIndex": 0,
+                "spec": {
+                  "visible": false
+                }
+              },
+              {
+                "id": "series-0",
+                "specKey": "series",
+                "specIndex": 0,
+                "spec": {
+                  "nonLeafLabel": {
+                    "visible": false
+                  },
+                  "leaf": {
+                    "style": {
+                      "stroke": "#FFFFFF",
+                      "lineWidth": 2
+                    }
+                  },
+                  "label": {
+                    "visible": true,
+                    "formatConfig": {
+                      "content": [
+                        "dimension",
+                        "value"
+                      ],
+                      "contentWrap": true,
+                      "separator": true,
+                      "fixed": 0
+                    },
+                    "style": {
+                      "fill": "#FFFFFF",
+                      "stroke": false
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": [
+                "工单类型",
+                "件数"
+              ],
+              "rows": [
+                "账号访问",
+                "账单核对",
+                "资料更新",
+                "查件",
+                "剩余积压"
+              ],
+              "data": [
+                {
+                  "工单类型": "账号访问",
+                  "件数": 690
+                },
+                {
+                  "工单类型": "账单核对",
+                  "件数": 510
+                },
+                {
+                  "工单类型": "资料更新",
+                  "件数": 300
+                },
+                {
+                  "工单类型": "查件",
+                  "件数": 120
+                },
+                {
+                  "工单类型": "剩余积压",
+                  "件数": 780
+                }
+              ],
+              "columnFormats": [
+                {
+                  "dataType": "text"
+                },
+                {
+                  "dataType": "number",
+                  "dataFormat": {
+                    "separator": true,
+                    "fixed": 0
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "arrow",
+        "type": "text",
+        "position": {
+          "x": 619,
+          "y": 377,
+          "width": 43,
+          "height": 50
+        },
+        "options": {
+          "text": "→",
+          "fill": "#107569",
+          "fontSize": 30,
+          "fontWeight": "bold"
+        }
+      },
+      {
+        "id": "line",
+        "type": "rect",
+        "position": {
+          "x": 32,
+          "y": 584,
+          "width": 1216,
+          "height": 1
+        },
+        "options": {
+          "type": "rect",
+          "graphic": {
+            "fill": "#CBD5D4",
+            "stroke": "#CBD5D4",
+            "lineWidth": 0
+          },
+          "zIndex": 0
+        }
+      },
+      {
+        "id": "note",
+        "type": "text",
+        "position": {
+          "x": 33,
+          "y": 601,
+          "width": 1210,
+          "height": 25
+        },
+        "options": {
+          "text": "情景假设   四类工单互斥。分流量为各流程的预估承接量，测算期间内无新增工单。",
+          "fill": "#183456",
+          "fontSize": 16,
+          "fontWeight": "normal"
+        }
+      },
+      {
+        "id": "source",
+        "type": "text",
+        "position": {
+          "x": 33,
+          "y": 634,
+          "width": 1200,
+          "height": 20
+        },
+        "options": {
+          "text": "合成数据   ·   单位为件",
+          "fill": "#566778",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        }
+      }
+    ]
+  }
+}

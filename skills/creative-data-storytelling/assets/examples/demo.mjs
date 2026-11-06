@@ -2,6 +2,7 @@
 // Read the relevant specimen for wiring; use assets/runtime directly in a story's own design.
 import { mountComparison } from "./comparison.mjs";
 import { mountHistory } from "./history.mjs";
+import { mountSequence } from "./sequence.mjs";
 import { mountAmounts } from "./amounts.mjs";
 import { mountIdentity } from "./identity.mjs";
 import { mountUnits } from "./units.mjs";
@@ -9,6 +10,7 @@ import { mountUnits } from "./units.mjs";
 const examples = [
   mountComparison(document.querySelector("#comparison-example")),
   mountHistory(document.querySelector("#history-example")),
+  mountSequence(document.querySelector("#sequence-example")),
   mountAmounts(document.querySelector("#amount-example")),
   mountIdentity(document.querySelector("#identity-example")),
   mountUnits(document.querySelector("#unit-example")),

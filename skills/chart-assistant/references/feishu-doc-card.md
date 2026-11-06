@@ -146,6 +146,7 @@ interface ChartAssistantRecord {
   __auto_fit_size_mode?: "auto"|"manual";
   __auto_fit_user_resized?: boolean;
   __auto_fit_pending?: boolean;
+  __auto_fit_lock_after_apply?: boolean;
   __auto_fit_trigger?: "common_option"|"url_sync"|"browser_data_init";
 }
 ```
@@ -162,9 +163,10 @@ const recordObject = {
   autoSync: true, // 只有明确要求且来源有资格时
   __auto_fit_mode: "auto",
   __auto_fit_trigger: "browser_data_init",
-  __auto_fit_size_mode: "manual",
-  __auto_fit_user_resized: true,
-  __auto_fit_pending: false
+  __auto_fit_size_mode: "auto",
+  __auto_fit_user_resized: false,
+  __auto_fit_pending: true,
+  __auto_fit_lock_after_apply: true
 };
 
 const child = {
@@ -202,9 +204,10 @@ const recordObject = {
   },
   __auto_fit_mode: "auto",
   __auto_fit_trigger: "common_option",
-  __auto_fit_size_mode: "manual",
-  __auto_fit_user_resized: true,
-  __auto_fit_pending: false
+  __auto_fit_size_mode: "auto",
+  __auto_fit_user_resized: false,
+  __auto_fit_pending: true,
+  __auto_fit_lock_after_apply: true
 };
 ```
 
@@ -218,9 +221,10 @@ const recordObject = {
   option: { loadContribute: "view" },
   __auto_fit_mode: "auto",
   __auto_fit_trigger: "url_sync",
-  __auto_fit_size_mode: "manual",
-  __auto_fit_user_resized: true,
-  __auto_fit_pending: false
+  __auto_fit_size_mode: "auto",
+  __auto_fit_user_resized: false,
+  __auto_fit_pending: true,
+  __auto_fit_lock_after_apply: true
 };
 ```
 
@@ -249,9 +253,10 @@ JSON.stringify({
   browserData: layerData,
   __auto_fit_mode: "auto",
   __auto_fit_trigger: "browser_data_init",
-  __auto_fit_size_mode: "manual",
-  __auto_fit_user_resized: true,
-  __auto_fit_pending: false
+  __auto_fit_size_mode: "auto",
+  __auto_fit_user_resized: false,
+  __auto_fit_pending: true,
+  __auto_fit_lock_after_apply: true
 })
 
 // 只有确知是旧版保存数据
@@ -260,9 +265,10 @@ JSON.stringify({
   dataVersion: actualOriginalVersion,
   __auto_fit_mode: "auto",
   __auto_fit_trigger: "browser_data_init",
-  __auto_fit_size_mode: "manual",
-  __auto_fit_user_resized: true,
-  __auto_fit_pending: false
+  __auto_fit_size_mode: "auto",
+  __auto_fit_user_resized: false,
+  __auto_fit_pending: true,
+  __auto_fit_lock_after_apply: true
 })
 ```
 
@@ -270,7 +276,11 @@ JSON.stringify({
 
 ## 9. 卡片尺寸与运行时字段
 
-Skill 新建卡片默认写入与工具栏“固定卡片尺寸”相同的三个 record 顶层字段：`__auto_fit_size_mode:"manual"`、`__auto_fit_user_resized:true`、`__auto_fit_pending:false`；同时写 `__auto_fit_mode:"auto"` 供日后恢复自适应。`commonOption`、URL、独立 `browserData` 新卡分别写 `__auto_fit_trigger:"common_option"`、`"url_sync"`、`"browser_data_init"`。缺少 trigger 时，前两种来源首次打开会被重置为自适应，独立 `browserData` 来源日后无法恢复自适应。保留卡片内“恢复卡片自适应”的入口；不要用 `option.autoFitContainerByBounds:false` 代替固定模式。用户明确要求自适应时遵从用户要求。其余自动适配状态不要在首次创建时生成：
+Skill 新建卡片默认“首次贴合内容后固定”：写入 `__auto_fit_mode:"auto"`、`__auto_fit_size_mode:"auto"`、`__auto_fit_user_resized:false`、`__auto_fit_pending:true`、`__auto_fit_lock_after_apply:true`。`commonOption`、URL、独立 `browserData` 新卡分别写 `__auto_fit_trigger:"common_option"`、`"url_sync"`、`"browser_data_init"`。宿主首次按正文实际宽度完成布局，测量真实内容包围盒，计算高度并保留上下安全留白及必要的来源栏空间；适配成功后保存高度，切到 `__auto_fit_size_mode:"manual"`、`__auto_fit_user_resized:true`、`__auto_fit_pending:false`，消费标记为 `__auto_fit_lock_after_apply:false`。重开、编辑或同步后不再自动改变卡片高度。
+
+内容尚未物化、测量无效或保存失败时，不提前固定；保留 pending 请求供后续重试。保留卡片内“恢复卡片自适应”的入口：用户恢复后取消一次性标记，继续按内容和宿主宽度适配。用户在首轮完成前手动固定时也取消该标记，尊重其当前尺寸。
+
+用户明确指定固定高度时，使用自己的 `commonOption.component.size.height` 和直接固定状态 `__auto_fit_size_mode:"manual"`、`__auto_fit_user_resized:true`、`__auto_fit_pending:false`，不请求首轮自动测量。用户明确要求持续自适应时，使用自动状态并省略或设 `__auto_fit_lock_after_apply:false`。不要用 `option.autoFitContainerByBounds:false` 代替固定模式，否则会失去恢复入口。历史卡片没有一次性标记时不自动迁移。此行为须由支持该字段的宿主运行时执行；Skill 配置本身不代表线上首次适配已完成。其余自动适配状态不要在首次创建时生成：
 
 ```ts
 {
@@ -280,7 +290,7 @@ Skill 新建卡片默认写入与工具栏“固定卡片尺寸”相同的三�
 }
 ```
 
-这些其余字段由浏览态在物化、测量和用户手动改尺寸时维护。复制 record 时保留原尺寸语义；从初始化配置创建新图时不要复制旧 `commonOption.component.size`，新卡使用自身确定的尺寸。已有卡片替换保留原 size 与尺寸模式。`record.url` 不进入 browserData 自动尺寸标记路径；URL 首次加载按 URL/commonOption 宿主流程处理。写后 readback 核对三个固定模式字段；打开卡片后的实际尺寸与工具栏状态另按真实宿主验证，不以回读代替。
+这些其余字段由浏览态在物化、测量和用户手动改尺寸时维护。复制 record 时保留原尺寸语义；从初始化配置创建新图时不要复制旧 `commonOption.component.size`，新卡使用自身确定的尺寸。已有卡片替换保留原 size 与尺寸模式。`record.url` 不进入 browserData 自动尺寸标记路径；URL 首次加载按 URL/commonOption 宿主流程处理。创建后 readback 核对首次适配请求；打开卡片后的实际高度、固定状态和重开保持另按真实宿主验证，不以初始回读代替。
 
 ## 10. 权限
 

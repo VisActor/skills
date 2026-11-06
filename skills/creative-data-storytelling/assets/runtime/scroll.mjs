@@ -50,3 +50,61 @@ export function observeSteps(elements, onChange, {
     },
   };
 }
+
+// Optional layout companion; ordinary scrolling and animation timing stay independent.
+// spacer: an empty final block in the reading column, inside the sticky containing block.
+// readingEnd: the actual last paragraph, not a padded/min-height reading-step wrapper.
+// Keep the stage pinned at least until that paragraph's bottom reaches releaseRatio * viewport height.
+export function reserveStageExit({
+  sticky, readingEnd, spacer, releaseRatio = 0.4,
+  view = sticky?.ownerDocument?.defaultView ?? globalThis,
+}) {
+  if (![sticky, readingEnd, spacer].every((element) => element?.getBoundingClientRect) ||
+      new Set([sticky, readingEnd, spacer]).size !== 3 || !spacer.style || !spacer.parentElement)
+    throw new Error("Stage exit requires distinct measurable sticky, readingEnd and a mounted spacer");
+  if (!Number.isFinite(releaseRatio) || releaseRatio < 0 || releaseRatio > 1)
+    throw new Error("Stage exit releaseRatio must be in [0, 1]");
+
+  const originalHeight = spacer.style.getPropertyValue("height");
+  const originalPriority = spacer.style.getPropertyPriority("height");
+  let frame = null, disposed = false;
+  function update() {
+    frame = null;
+    if (disposed) return;
+    const style = view.getComputedStyle(sticky);
+    let space = 0;
+    if (style.position === "sticky") {
+      const height = sticky.getBoundingClientRect().height;
+      const inset = Number.parseFloat(style.top);
+      const end = readingEnd.getBoundingClientRect().bottom;
+      const start = spacer.getBoundingClientRect().top;
+      if (![height, inset, end, start, view.innerHeight].every(Number.isFinite) || height <= 0 || view.innerHeight <= 0)
+        throw new Error("Stage exit needs a visible sticky stage with a finite top inset and viewport");
+      // At release, container bottom = sticky top + sticky height.
+      // spacer.top is unaffected by its own height, avoiding cumulative growth on remeasure.
+      space = Math.max(0, Math.ceil(height + inset + end - start - view.innerHeight * releaseRatio));
+    }
+    const value = `${space}px`;
+    if (spacer.style.getPropertyValue("height") !== value) spacer.style.setProperty("height", value);
+  }
+  function refresh() {
+    if (!disposed && frame === null) frame = view.requestAnimationFrame(update);
+  }
+  update();
+  view.addEventListener("resize", refresh);
+  const observer = view.ResizeObserver ? new view.ResizeObserver(refresh) : null;
+  // The reading column covers text/font reflow; the sticky element covers changing graphic height.
+  for (const element of new Set([sticky, readingEnd, spacer.parentElement])) observer?.observe(element);
+  return {
+    refresh,
+    dispose() {
+      if (disposed) return;
+      disposed = true;
+      view.removeEventListener("resize", refresh);
+      observer?.disconnect();
+      if (frame !== null) view.cancelAnimationFrame(frame);
+      if (originalHeight) spacer.style.setProperty("height", originalHeight, originalPriority);
+      else spacer.style.removeProperty("height");
+    },
+  };
+}
