@@ -1,6 +1,35 @@
-import { at, lerp, linearScale, mixScale, radiusForArea } from "../runtime/geometry.mjs";
-import { blendNodes, createPlayer } from "../runtime/motion.mjs";
-import { distributionLayout, groupLayout, maskSlots, silhouetteLayout } from "../runtime/units.mjs";
+import { at, lerp, linearScale, mixScale, radiusForArea } from "../../runtime/geometry.mjs";
+import { blendNodes, createPlayer } from "../../runtime/motion.mjs";
+import { distributionLayout, groupLayout, maskSlots, silhouetteLayout } from "../../runtime/units.mjs";
+
+// 改写入口：记录、类别颜色、量值域与面积标定；类别变化时同步 HTML 图例和筛选项。
+export const unitExample = {
+  rows: Array.from({ length: 60 }, (_, i) => ({
+    id: "项目 " + String(i + 1).padStart(2, "0"),
+    group: i < 30 ? "A" : i < 50 ? "B" : "C",
+    weight: i < 30 ? 2 + i % 4 : i < 50 ? 10 + i % 6 : 28 + i % 10,
+    value: 20 + ((i * 3 + Math.floor(i / 11)) % 7) * 10,
+  })),
+  colors: { A: "#297c6c", B: "#be633c", C: "#7c74a8" },
+  domain: [0, 100], countArea: 64, areaPerUnit: 5,
+};
+
+// 轮廓边界可加少量散开运动；数据布局之间直接对应，面积仍只由权重决定。
+export function blendUnits(a, b, t) {
+  if (t <= 0) return a;
+  if (t >= 1) return b;
+  const nodes = blendNodes(a.nodes, b.nodes, t);
+  const arc = a.mode === "cover" || b.mode === "cover" ? Math.sin(Math.PI * t) * 22 : 0;
+  if (t > 0 && t < 1 && arc) for (const [id, node] of nodes) {
+    // 任意稳定字符串 ID 都能得到固定方向，不依赖编号格式或当前筛选后的序号。
+    let hash = 0;
+    for (const char of id) hash = (Math.imul(hash, 31) + char.codePointAt(0)) >>> 0;
+    const angle = (hash % 360) * Math.PI / 180;
+    node.x += Math.cos(angle) * arc;
+    node.y += Math.sin(angle) * arc;
+  }
+  return { ...b, nodes, scale: mixScale(a.scale, b.scale, t), axisOpacity: lerp(a.axisOpacity, b.axisOpacity, t) };
+}
 
 /**
  * 同批记录的轮廓、分布、计数与权重重组；独立接线示例。
@@ -8,20 +37,16 @@ import { distributionLayout, groupLayout, maskSlots, silhouetteLayout } from "..
  * root 提供 #units（Canvas）与叠放的 #unit-axis（SVG，viewBox 0 0 860 460）、
  * #unit-summary / #unit-status / #unit-detail、#record-select、#group-filter、#unit-buttons。
  * 按钮 data-mode 为 cover / distribution / groups / weights；类别选项为 all / A / B / C。
- * unitPose 选择布局，blendUnits 保留 ID，renderUnits 绘制；详情回到真实记录。
+ * 先改 unitExample；unitPose 选布局，blendUnits 保留 ID，renderUnits 绘制。
+ * slots 改主题轮廓；value/weight 的单位文字在 renderUnits 和 updateDetail，按题材改写。
  * 本例轮廓、数据、布局和颜色仅示范接线；字符串渲染只用于固定文本。
  */
-export function mountUnits(root) {
+export function mountUnits(root, config = unitExample) {
   const $ = (selector) => root.querySelector(selector);
   const listeners = new AbortController();
   const listen = (target, type, handler) => target.addEventListener(type, handler, { signal: listeners.signal });
-  const colors = { A: "#297c6c", B: "#be633c", C: "#7c74a8" };
-  const projects = Array.from({ length: 60 }, (_, i) => ({
-    id: "项目 " + String(i + 1).padStart(2, "0"),
-    group: i < 30 ? "A" : i < 50 ? "B" : "C",
-    weight: i < 30 ? 2 + i % 4 : i < 50 ? 10 + i % 6 : 28 + i % 10,
-    value: 20 + ((i * 3 + Math.floor(i / 11)) % 7) * 10,
-  }));
+  const { rows: projects, colors, domain, countArea, areaPerUnit } = config;
+  const allGroups = Object.keys(colors);
   const slots = maskSlots(35, 25, (x, y) => {
     const distance = Math.abs(x - 0.5);
     return distance > 0.03 && distance < 0.43 && y > 0.22 - distance * 0.3 && y < 0.88 - distance * 0.3;
@@ -29,26 +54,14 @@ export function mountUnits(root) {
   let unitMode = "cover", filter = "all", currentUnits = null, unitMoving = false;
   const selectedProjects = () => projects.filter((row) => filter === "all" || row.group === filter);
   function unitPose(mode) {
-    const rows = selectedProjects(), groups = filter === "all" ? ["A", "B", "C"] : [filter];
-    let nodes, scale = linearScale([0, 100], [65, 825]);
-    if (mode === "cover") nodes = silhouetteLayout(rows, slots, { x: 185, y: 20, width: 475, height: 400 });
+    const rows = selectedProjects(), groups = filter === "all" ? allGroups : [filter];
+    let nodes, scale = linearScale(domain, [65, 825]);
+    if (mode === "cover") nodes = silhouetteLayout(rows, slots, { x: 185, y: 20, width: 475, height: 400, countArea });
     else if (mode === "distribution") {
-      const distribution = distributionLayout(rows, groups, { width: 860, height: 460 });
+      const distribution = distributionLayout(rows, groups, { width: 860, height: 460, domain, countArea });
       nodes = distribution.nodes; scale = distribution.scale;
-    } else nodes = groupLayout(rows, groups, { width: 860, height: 460, weighted: mode === "weights" });
+    } else nodes = groupLayout(rows, groups, { width: 860, height: 460, weighted: mode === "weights", countArea, areaPerUnit });
     return { mode, groups, nodes, scale, rows, axisOpacity: mode === "distribution" ? 1 : 0 };
-  }
-  function blendUnits(a, b, t) {
-    // Artistic release is used only across the cover boundary and vanishes at endpoints.
-    // A redirect snapshots any offset already present; ordinary data transitions stay direct.
-    const nodes = blendNodes(a.nodes, b.nodes, t);
-    const arc = a.mode === "cover" || b.mode === "cover" ? Math.sin(Math.PI * t) * 22 : 0;
-    if (t > 0 && t < 1 && arc) for (const [id, node] of nodes) {
-      const index = Number(id.slice(-2));
-      node.x += Math.cos(index * 2.39) * arc;
-      node.y += Math.sin(index * 2.39) * arc;
-    }
-    return { ...b, nodes, scale: mixScale(a.scale, b.scale, t), axisOpacity: lerp(a.axisOpacity, b.axisOpacity, t) };
   }
   const canvas = $("#units"), context = canvas.getContext("2d");
   function fitCanvas() {
@@ -80,7 +93,8 @@ export function mountUnits(root) {
     }
     if (pose.axisOpacity) {
       parts.push('<g opacity="' + pose.axisOpacity + '">');
-      for (let value = 0; value <= 100; value += 20) {
+      for (let i = 0; i <= 5; i++) {
+        const value = lerp(domain[0], domain[1], i / 5);
         const x = at(pose.scale, value);
         parts.push('<text x="' + x + '" y="432" text-anchor="middle" fill="#61716a">' + value + "</text>");
       }
@@ -96,7 +110,7 @@ export function mountUnits(root) {
       }).join("；");
       $("#unit-summary").textContent = pose.mode === "cover"
         ? pose.rows.length + " 项模拟记录组成书页轮廓；轮廓位置不表示数据。"
-        : pose.mode === "weights" ? "圆面积 = 服务时长 × 5 像素²/小时。共 " + total + " 小时。" + breakdown
+        : pose.mode === "weights" ? "圆面积 = 服务时长 × " + areaPerUnit + " 像素²/小时。共 " + total + " 小时。" + breakdown
           : "每圆一项，颜色表示类别。" + breakdown;
     }
   }

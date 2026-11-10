@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>从总体提取局部 · 局部机制</title>
+  <link rel="stylesheet" href="../mechanism.css">
+</head>
+<body>
+<main>
+  <nav class="eyebrow"><a href="../index.html#mechanisms">全部示例</a> / 局部机制 · comparison</nav>
+  <section id="comparison-example">
+  <h1 id="quantitative-example">从总体提取局部</h1>
+  <div class="controls">
+    <label class="check-control"><input type="checkbox" id="scroll-mode"> 启用本段滚动演示</label>
+    <span class="status">也可直接切换下方状态，观察停止操作、反向和快速切换。</span>
+  </div>
+  <section class="quant-section">
+    <aside>
+      <article class="reading-step"><h3>先建立总体</h3><p>六个模拟样品，条长表示重量，共用零基线。纵向仅用于排列。</p></article>
+      <article class="reading-step"><h3>识别同一对对象</h3><p>在总体中标出 P 和 Q。名称保持对应，然后再改变观察范围。</p></article>
+      <article class="reading-step"><h3>把差值放进画面</h3><p data-reading-end>原来的两根条移入比较区，零点保持，刻度与条长一起缩放。它们仍是 42 克和 54 克，端点间标出相差的 12 克。</p></article>
+      <div class="reading-tail" aria-hidden="true"></div>
+    </aside>
+    <div class="sticky">
+      <div id="quant-buttons" class="controls state-controls" role="group" aria-label="比较视图">
+        <button data-mode="overview" aria-pressed="true">全体</button>
+        <button data-mode="locate" aria-pressed="false">识别 P / Q</button>
+        <button data-mode="compare" aria-pressed="false">局部比较</button>
+        <button data-mode="explore" aria-pressed="false">自由比较</button>
+      </div>
+      <div class="plot">
+        <svg id="quant" viewBox="0 0 860 440" role="img" aria-label="六个模拟样品的重量，条形共用零基线" aria-describedby="quant-summary"></svg>
+      </div>
+      <p id="quant-summary" class="result" aria-live="polite"></p>
+      <div id="comparison-controls" class="controls explore-controls" hidden>
+        <label class="control-field">
+          <span class="control-label">与 P 比较</span>
+          <span class="select-wrap"><select id="compare-with" aria-label="选择与 P 比较的样品"></select></span>
+        </label>
+        <button id="return-story" class="button-quiet">返回总体</button>
+      </div>
+      <span id="quant-status" class="status"></span>
+      <details class="bounds-check">
+        <summary>作者工具：当前占位</summary>
+        <p>按需测量本图的文字，列出越界或文字间重叠候选；正式作品按自己的构图声明要检查的关系。</p>
+        <button id="check-bounds">检查当前图形占位</button>
+        <p id="bounds-result" aria-live="polite"></p>
+        <details><summary>边界与候选记录</summary><pre id="bounds-details"></pre></details>
+      </details>
+    </div>
+    <details id="example-notes" class="scope"><summary>表达理由与改编</summary>
+  <p><strong>表达理由：</strong><a href="../../../references/expression-methods.md#全局到局部原位强调提取还是保留缩略图">整体到局部</a>：原位认出对象后移动同一对条形，交代比较来自哪里；共同零点与尺度保证差额可读。原位已清楚时高亮足够。</p>
+  <p><strong>改编空间：</strong>稳定身份与可比口径支撑这段关系。可换题材、点线或单元、素材与布局；零基线条长适用于本例非负量。保留、提取或收起哪些对象，由当前追问决定。</p>
+  <p><strong>代码入口：</strong><code>comparisonSamples</code> 换数据，<code>quantitativePose / blendQuantitative / renderQuantitative</code> 管布局、衔接与绘制。滚动、探索和占位工具按需取用；完整解释参考 <a href="../overview-detail/index.html">overview-detail</a>。</p>
+  <p><a href="scene.mjs">本例数据与代码</a></p>
+</details>
+  </section>
+  </section>
+  <footer><a href="scene.mjs">本例数据与动画代码</a> · <a href="../mechanism.css">控件与预览样式</a></footer>
+</main>
+<script type="module">
+  import { mountComparison } from "./scene.mjs";
+  const example = mountComparison(document.querySelector("#comparison-example"));
+  addEventListener("pagehide", event => { if (!event.persisted) example.dispose(); });
+</script>
+</body>
+</html>

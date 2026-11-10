@@ -1,26 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1000" style="max-width:100%;height:auto" viewBox="0 0 1200 1000" role="img" aria-labelledby="title desc">
   <title id="title">从发现到画面：三种关系的原创示意</title>
-  <desc id="desc">模拟数据。A 从总体提取 P42 与 Q54，在共同坐标显示差值12。B 六项记录从等大点变为按权重的面积，中心保持。C 两期金额20与24使用共同零点分成5、8、7和8、9、7，物件标识与量值分开。</desc>
+  <desc id="desc">模拟数据。A 从总体提取 P42 克与 Q54 克，两根条保留零基线并显示差值12克。B 六项记录从等大点变为按权重的面积，中心保持。C 两期金额20与24使用共同零点分成5、8、7和8、9、7，物件标识与量值分开。</desc>
   <style>text{font-family:system-ui,"PingFang SC","Microsoft YaHei",sans-serif;fill:#23463c;font-size:19px}.title{font-size:32px}.label{font-size:23px}.small{font-size:16px;fill:#64766a}.line{stroke:#b5c4b8;stroke-width:1}.a{fill:#297c6c}.b{fill:#bf6744}.c{fill:#7c74a8}.inverse text{fill:white;text-anchor:middle}</style>
   <rect width="1200" height="1000" fill="#f5f3eb"/>
   <text x="45" y="52" class="title">同一个发现，先选择构图，再设计连接</text>
   <text x="45" y="83" class="small">教学示意 · 模拟数据 · 每行是一组可独立调整的设计，不是固定章节</text>
   <path d="M40 110H1160M40 405H1160M40 688H1160" class="line"/>
   <text x="45" y="150" class="label">A / 提取局部，读出差值</text>
-  <text x="80" y="194" class="small">总体：同一量值基准</text>
-  <path d="M90 342H510" class="line"/>
-  <text x="85" y="367" class="small">0</text><text x="482" y="367" class="small">100</text>
-  <circle cx="178" cy="232" r="5" fill="#8c9c8c"/><circle cx="258" cy="256" r="7" class="a"/><circle cx="306" cy="287" r="7" class="b"/>
-  <circle cx="362" cy="244" r="5" fill="#8c9c8c"/><circle cx="426" cy="306" r="5" fill="#8c9c8c"/><circle cx="466" cy="264" r="5" fill="#8c9c8c"/>
-  <text x="244" y="240">P</text><text x="302" y="314">Q</text>
+  <text x="80" y="194" class="small">总体：条长比较重量</text>
+  <path d="M90 208V342H490" class="line" fill="none"/>
+  <text x="85" y="367" class="small">0</text><text x="476" y="367" class="small">100 克</text>
+  <rect x="90" y="214" width="88" height="12" fill="#8c9c8c"/>
+  <rect x="90" y="234" width="168" height="12" class="a"/>
+  <rect x="90" y="254" width="216" height="12" class="b"/>
+  <rect x="90" y="274" width="272" height="12" fill="#8c9c8c"/>
+  <rect x="90" y="294" width="336" height="12" fill="#8c9c8c"/>
+  <rect x="90" y="314" width="376" height="12" fill="#8c9c8c"/>
+  <text x="63" y="245" class="small">P</text><text x="63" y="265" class="small">Q</text>
+  <text x="268" y="245" class="small">42</text><text x="316" y="265" class="small">54</text>
   <path d="M545 272H625m-12-9 12 9-12 9" fill="none" stroke="#60796b" stroke-width="2"/>
-  <text x="683" y="194" class="small">同一对对象：共同轴连续放大</text>
-  <path d="M700 342H1100" class="line"/>
-  <text x="693" y="367" class="small">35</text><text x="1090" y="367" class="small">65</text>
-  <circle cx="793.33" cy="246" r="7" class="a"/><text x="753" y="222">P · 42</text>
-  <circle cx="953.33" cy="277" r="7" class="b"/><text x="935" y="254">Q · 54</text>
-  <path d="M793.33 296v14h160v-14" fill="none" stroke="#bf6744" stroke-width="2"/>
-  <text x="858" y="337" class="b">12</text>
+  <text x="683" y="194" class="small">同一对对象：保留零点，连续放大</text>
+  <path d="M700 208V342H1100" class="line" fill="none"/>
+  <text x="693" y="367" class="small">0</text><text x="1084" y="367" class="small">60 克</text>
+  <rect x="700" y="224" width="280" height="22" class="a"/><text x="670" y="242">P</text><text x="990" y="242">42</text>
+  <rect x="700" y="284" width="360" height="22" class="b"/><text x="670" y="302">Q</text><text x="1070" y="302">54</text>
+  <path d="M980 250V269H1060V280" fill="none" stroke="#bf6744" stroke-width="2"/>
+  <text x="1020" y="262" text-anchor="middle" class="b small">12 克</text>
   <text x="45" y="445" class="label">B / 保留身份，改变“分量”</text>
   <text x="80" y="483" class="small">每项等大：六项记录</text>
   <g class="a"><circle cx="130" cy="543" r="7"/><circle cx="220" cy="543" r="7"/><circle cx="310" cy="543" r="7"/><circle cx="130" cy="610" r="7"/></g>

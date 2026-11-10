@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 1000">
+<title>帝国大厦建筑高度范围的简化立面；不绘功能性天线</title>
+<defs>
+  <linearGradient id="stone"><stop stop-color="#929b9c"/><stop offset=".48" stop-color="#e5dfcc"/><stop offset=".52" stop-color="#c0bcad"/><stop offset="1" stop-color="#747f80"/></linearGradient>
+  <pattern id="windows" width="19" height="26" patternUnits="userSpaceOnUse"><path d="M6 7v13M11 7v13" stroke="#394e55" stroke-width="3" opacity=".54"/></pattern>
+  <clipPath id="shape"><path d="M0 1000V891H27V823H52V733H73V276H92V203H111V149H129V99H146V43H155V0H165V43H174V99H191V149H209V203H228V276H247V733H268V823H293V891H320V1000Z"/></clipPath>
+</defs>
+<g clip-path="url(#shape)"><path d="M0 0H320V1000H0Z" fill="url(#stone)"/><path d="M0 210H320V1000H0Z" fill="url(#windows)"/>
+<path d="M73 276H247M52 733H268M27 823H293M0 891H320M92 203H228M111 149H209M129 99H191" stroke="#f7edd4" stroke-width="4" opacity=".65"/>
+<path d="M145 115V997M174 115V997M96 284V992M224 284V992" stroke="#d7d1bb" stroke-width="6" opacity=".45"/>
+<path d="M147 931H173V1000H147Z" fill="#213941"/><path d="M154 57H166V140H154Z" fill="#567079"/>
+</g></svg>

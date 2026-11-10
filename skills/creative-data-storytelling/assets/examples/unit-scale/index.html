@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>一会儿，是多久？ · 基准、部分与倍数</title>
+  <style>
+    :root{--paper:#f3eee3;--ink:#283d3e;--muted:#7e8780;--rule:#c9cbbb;--accent:#b55335;--teal:#6f9693;color:var(--ink);background:var(--paper);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% 24%,#fcf8ee,transparent 60%),var(--paper)}a{color:inherit;text-underline-offset:5px}header{position:absolute;top:0;left:0;right:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:26px 4vw;font-size:13px;letter-spacing:.07em}header a{text-decoration:none}.brand{display:flex;align-items:center;gap:12px}.watch{width:33px;height:33px;color:var(--accent)}
+    .story{display:grid;grid-template-columns:minmax(250px,29%) minmax(0,1fr);gap:2.5vw;padding:0 3.5vw 0 5vw;position:relative}.reading-flow{grid-area:1/1;padding-top:24vh}.unit-stage{grid-area:1/2;position:sticky;top:0;height:100vh;min-height:520px;display:flex;align-items:center}figure{margin:0;width:100%}svg[data-visual]{display:block;width:100%;max-height:92vh;overflow:visible}svg text{font-family:inherit;font-variant-numeric:tabular-nums}.axis text{font-size:21px;fill:var(--muted)}.main-reading{fill:var(--ink);font-size:65px;font-weight:500;letter-spacing:-.04em}.part-reading,.unit-reading{font-size:23px;fill:var(--muted)}.pointer{fill:none;stroke:var(--muted);stroke-width:1.3}.original-note text{font-size:21px}.record-name{font-size:25px}.record-value{font-size:27px}.gap-reading{font-size:25px;fill:var(--ink)}.gap-rule{fill:none;stroke:var(--ink);stroke-width:1.5}
+    article{min-height:92vh}article:last-of-type{min-height:0}.copy{padding:10px 0 44px}.eyebrow{font-size:12px!important;color:var(--accent)!important;letter-spacing:.13em;margin-bottom:26px!important}h1,h2{font-family:"Songti SC","Noto Serif CJK SC",serif;font-weight:550;letter-spacing:.01em;line-height:1.45;margin:0 0 28px}h1{font-size:clamp(35px,3.3vw,52px)}h2{font-size:clamp(29px,2.6vw,40px)}.copy p{font-size:17px;line-height:1.95;margin:0 0 16px;color:#64716d}.copy em{font-style:normal;color:var(--accent)}.cue{font-size:13px!important;margin-top:30px!important;color:var(--muted)!important}.reading-tail{height:0}footer{border-top:1px solid var(--rule);padding:38px 7vw 60px;background:var(--paper)}footer p{max-width:920px;font-size:14px;line-height:1.9;color:#68756e}footer h2{font-size:26px;margin-bottom:14px}details{max-width:960px;margin-top:28px}summary{cursor:pointer;font-size:15px}code{font-size:.92em}:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
+  </style>
+</head>
+<body>
+  <header><span class="brand"><svg class="watch" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="22" r="14" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M16 3h8M20 3v5M20 13v10l6 4M30 10l3-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>时间的分量</span><a href="../index.html#unit-scale">示例索引 ↗</a></header>
+  <main id="unit-story"><section class="story" aria-label="从一分钟认识部分与倍数，再比较两次等待">
+    <div class="reading-flow">
+      <article id="start"><div class="copy" data-state="reference"><p class="eyebrow">先认识一小段时间</p><h1>你说的<br>「一会儿」，<br>是多久？</h1><p>等一份外卖，等一班车。<br>先把<em>一分钟</em>放在眼前。</p><p class="cue">向下看，这一分钟会一直在。 ↓</p></div></article>
+      <article id="seconds"><div class="copy" data-state="parts"><p class="eyebrow">把同一段时间看细</p><h2>这段时间，<br>还可以分开看。</h2><p>一分钟有 <em><span data-reading="parts">60</span> 秒</em>。每一格是一秒，分开的仍是刚才那一分钟。</p></div></article>
+      <article id="hour"><div class="copy" data-state="multiple"><p class="eyebrow">把同样的一份接起来</p><h2><span data-reading="copies">60</span> 个一分钟，<br>才是一小时。</h2><p>把视野放远，原来的一分钟仍留在开头。再把其余的分钟接上，一小时才完整。</p><p>小小的一格，与长长的一段，<br>用的是同一份时间。</p></div></article>
+      <article id="waits"><div class="copy" data-state="compare"><p class="eyebrow">用同一段时间作参照</p><h2>都说等一会儿，<br>却差了 <span data-reading="gap">12</span> 分钟。</h2><p>这两条演示记录中，取餐等了 <em><span data-reading="record:meal">6</span> 分钟</em>，候车等了 <em><span data-reading="record:bus">18</span> 分钟</em>。</p><p>沿用刚才的分钟参照，把这两次等候放大来看。候车多出的那段时间，就能直接看见。</p><p class="cue" data-reading-end>等候记录为模拟数据，不代表实际场所的平均用时。</p></div></article>
+      <div class="reading-tail" aria-hidden="true"></div>
+    </div>
+    <div class="unit-stage"><figure><svg data-visual viewBox="0 0 960 730" role="img" aria-label="一分钟及其分段"></svg></figure></div>
+  </section></main>
+  <footer>
+    <h2>从认识单位，进入具体问题。</h2>
+    <p>本片段到两条等候记录的比较为止。若接入真实等候数据，下一段可以继续追问：这种差异只是两次经历，还是一群人的共同处境？</p>
+    <details id="example-notes"><summary>设计解释与改编入口</summary>
+      <p><strong>叙事设计：</strong><a href="../../../references/design.md#开篇与收尾">从基本关系引入</a>：先认识一份，再看内部和倍数，最后借已建立的参照比较记录。等待只是题材；当前问题已无需解释单位时，可直接从比较开始。</p>
+      <p><strong>可视化选择：</strong><a href="../../../references/expression-methods.md#同量换单位与量级参照">拆分、重复与缩放</a>分别可见：同一条带等分时总量不变；保留原份并接入新份时总量增加；共同尺度改变时，原份身份与真实量值不变。时间带最后收拢为分钟参照，放大后比较记录另行加入，不伪装成从参照中拆出的经历。</p>
+      <p><strong>改编空间：</strong>可换长度、质量、容量或其他有明确换算依据的量，重选素材、方向与布局；圆形、点阵等需另算几何。按追问借用其中一个操作或整段。非等分组成用真实分项，不强套等份。</p>
+      <p><strong>代码入口：</strong><code>unitScaleExample</code> 配基准量、等分与重复份数、比较记录；<code>unitScalePose / blendUnitScale</code> 分别安排结果与衔接，<code>unitScaleGeometry</code> 共用尺度。此布局支持两个比较对象、2–120等分及重复份；正文和图共用 <code>unitScaleReading</code>。</p>
+      <p><a href="scene.mjs">本例数据与代码</a></p>
+    </details>
+  </footer>
+  <script type="module">import { mountUnitScale } from "./scene.mjs"; mountUnitScale(document.querySelector("#unit-story"));</script>
+</body></html>

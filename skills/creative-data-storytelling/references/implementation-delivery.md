@@ -66,6 +66,6 @@ Play CDN 在浏览器中生成样式，官方将其定位为开发试作。需�
 
 ## 可选的机制演示
 
-[演示页](../assets/examples/index.html)供直观查看缩放、对齐、重排、中断或反向。制作作品时，从[代码索引](implementation.md#按实现问题取用代码)选读对应文件即可。需要查看控件样式时再读相应的 HTML/CSS 片段。
+[示例总览](../assets/examples/index.html)只导航到各自独立的预览。制作作品时，从方法卡或[实现问题索引](implementation.md#按实现问题取用代码)直接进入选中目录；无需读取总览源码。控件样式需要时再读相应 HTML 和共用的 `mechanism.css`。
 
 需要在浏览器运行该演示时，使用项目已有静态服务；没有现成服务时，可在 `assets/` 目录运行 `uv run --no-project python -m http.server 4189 --bind 127.0.0.1`，再打开 `/examples/`，端口按实际占用调整。服务根须同时包含 `examples/` 和 `runtime/`，以便解析模块；阅读代码或制作作品无需启动该演示。

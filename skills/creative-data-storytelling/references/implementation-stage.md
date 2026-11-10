@@ -56,13 +56,13 @@ const exitSpace = reserveStageExit({
 // 卸载这段作品时 exitSpace.dispose()。
 ```
 
-它按舞台高度、top 和末段位置补足空间，已有距离足够时不增加；观察尺寸变化，不拦截滚轮。正文列需按普通文档流排列，改变留白不应反过来居中或拉伸前面的正文。接线见 [comparison.mjs](../assets/examples/comparison.mjs) 与示例 HTML 的 `.reading-tail`。仍按实际阅读验证触发时机和动画时长；快速略过不强制等待。
+它按舞台高度、top 和末段位置补足空间，已有距离足够时不增加；观察尺寸变化，不拦截滚轮。正文列需按普通文档流排列，改变留白不应反过来居中或拉伸前面的正文。接线见 [comparison/scene.mjs](../assets/examples/comparison/scene.mjs) 与示例 HTML 的 `.reading-tail`。仍按实际阅读验证触发时机和动画时长；快速略过不强制等待。
 
 ## 自动完成的衔接动画
 
-对[自动完成的衔接](stage-and-motion.md#两种时间)，滚动选择完整状态，独立时钟完成连接；只在 scroll 回调里绘制会使停滚停在半帧。若连续操作本身对应可读变量，则单独使用变量值计算状态，不把它与过渡播放进度混作同一时间。
+对[自动完成的衔接](design.md#停留与衔接)，滚动选择完整状态，独立时钟完成连接；只在 scroll 回调里绘制会使停滚停在半帧。若连续操作本身对应可读变量，则单独使用变量值计算状态，不把它与过渡播放进度混作同一时间。
 
-需要独立的动画控制时，直接调用 [motion.mjs](../assets/runtime/motion.mjs) 的 `createPlayer`：采样当前姿态、维持单一时钟循环、支持中断重定向与销毁；作品的几何与渲染通过 `blend` 和 `render` 注入。`createStage` 已在内部使用它。需要查看 SVG／Canvas 接线时，再选读 [amounts.mjs](../assets/examples/amounts.mjs) 或 [units.mjs](../assets/examples/units.mjs) 的 `blend / render`。
+需要独立的动画控制时，直接调用 [motion.mjs](../assets/runtime/motion.mjs) 的 `createPlayer`：采样当前姿态、维持单一时钟循环、支持中断重定向与销毁；作品的几何与渲染通过 `blend` 和 `render` 注入。`createStage` 已在内部使用它。需要查看 SVG／Canvas 接线时，再选读 [amounts/scene.mjs](../assets/examples/amounts/scene.mjs) 或 [units/scene.mjs](../assets/examples/units/scene.mjs) 的 `blend / render`。
 
 ```javascript
 const player = createPlayer(initialPose, { blend, render, duration: 700 });
@@ -88,6 +88,6 @@ player.goTo(nextPose);
 
 按[控件选择与外观](material-direction.md#探索控件的选择与外观)实现操作。优先用语义化的 `button`、`select`、`input` 与关联标签；互斥选项可用同名 radio 组成可见的选项组，操作按钮的选中状态与实际数据状态同步。原生选择框可统一闭合外观，展开菜单仍受浏览器与系统影响；需要搜索、多选或完整定制弹层时，再选适合当前技术栈的成熟控件。
 
-需要借用控件外观时，只读取[示例页](../assets/examples/index.html) 中 `.state-controls`、`.segmented`、`.select-wrap` 及相应 HTML 片段，`--ui-*` 变量统一局部外观。需要接线时读 [comparison.mjs](../assets/examples/comparison.mjs) 的 `qGo`，或 [units.mjs](../assets/examples/units.mjs) 的类别过滤、详情选择与 `unitGo`；它们接入同一数据与动画入口。作品只保留能回答探索问题的操作。
+需要借用控件外观时，读取 [mechanism.css](../assets/examples/mechanism.css) 中 `.state-controls`、`.segmented`、`.select-wrap` 及[比较](../assets/examples/comparison/index.html)或[单元](../assets/examples/units/index.html)目录的 HTML；`--ui-*` 变量统一局部外观。接线见各自 `scene.mjs` 的 `qGo`、类别过滤与 `unitGo`，均接入同一数据与动画入口。作品只保留能回答探索问题的操作。
 
 确定返回主线、重置与保存选择的行为；不默认实现持久化。控件聚焦、动态正文高度与 scroll anchoring 可能触发舞台跳动，检查实际行为后再局部修正，不全局关闭正常滚动。

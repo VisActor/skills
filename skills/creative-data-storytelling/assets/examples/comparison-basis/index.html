@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>借得多，就更常借吗？ · 改变比较口径</title>
+<style>
+  :root{color:#213c4c;background:#f3f6f4;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}*{box-sizing:border-box}body{margin:0}a{color:inherit;text-underline-offset:5px}
+  header{display:flex;justify-content:space-between;padding:26px 5vw;border-bottom:1px solid #ccd7d8;font-size:13px}.story{display:grid;grid-template-columns:minmax(275px,29%) minmax(0,1fr);gap:3vw;padding:0 5vw;position:relative}.basis-stage{grid-area:1/2;position:sticky;top:0;height:100vh;min-height:550px;display:flex;align-items:center}figure{margin:0;width:100%}svg{width:100%;max-height:91vh;overflow:visible;display:block}svg text{font-family:inherit}.axis text{font-size:21px;fill:#73878f}.axis line{stroke:#d8e0df;stroke-dasharray:3 6}.district{font-size:30px}.value{font-size:27px;font-variant-numeric:tabular-nums}.population,.basis-caption{font-size:20px;fill:#657b84}
+  .reading-flow{grid-area:1/1;position:relative;padding-top:25vh}article{min-height:90vh}article:last-of-type{min-height:0}.copy{padding:14px 0 30px}.kicker{font-size:12px;letter-spacing:.12em;color:#657b84;margin:0 0 18px}h1,h2{font-family:"Songti SC","Noto Serif CJK SC",serif;font-size:clamp(32px,3vw,43px);line-height:1.45;font-weight:600;margin:0 0 22px}p{font-size:17px;line-height:1.85;margin:0}em{color:#b95c43;font-style:normal;white-space:nowrap}.reading-tail{height:0}
+  footer{padding:40px 8vw 64px;border-top:1px solid #ccd7d8}footer p{font-size:14px;max-width:840px;margin:14px 0;color:#657b84}details{margin-top:26px;max-width:880px}summary{cursor:pointer}details h3{font-size:16px;margin:26px 0 8px}code{font-size:.95em}
+</style></head><body>
+<header><span>两座城区的借阅记录 · 模拟数据</span><a href="../index.html#story-examples">示例索引 ↗</a></header>
+<main id="basis-story">
+  <section class="story" aria-label="从借阅总量到人均借阅">
+    <div class="basis-stage"><figure><svg viewBox="0 0 1120 680" role="img" aria-label="两区借阅比较"></svg></figure></div>
+    <div class="reading-flow">
+      <article id="total"><div class="copy" data-state="total"><p class="kicker">同一年 · 先看总量</p><h1>借得多，<br>就更常借吗？</h1><p>青河区一年借出 <span data-record="qinghe">120 万册</span>，河湾区为 <span data-record="hewan">90 万册</span>。只看总量，青河领先。</p></div></article>
+      <article id="population"><div class="copy" data-state="population"><p class="kicker">还有一个条件不同</p><h2>借书的人，<br>不一样多。</h2><p>青河有 <span data-record="qinghe" data-field="population">40 万人</span>，河湾只有 <span data-record="hewan" data-field="population">15 万人</span>。较大的总量，面对的也是较大的人口。</p></div></article>
+      <article id="shares"><div class="copy" data-state="shares"><p class="kicker">先取一样大的人口份额</p><h2>都按 5 万人，<br>平均分一份。</h2><p>青河每份 <span data-record="qinghe" data-field="share">15 万册</span>，河湾每份 <em data-record="hewan" data-field="share">30 万册</em>。同样大小的人口份额，顺序已经倒过来了。</p></div></article>
+      <article id="rate"><div class="copy" data-state="rate"><p class="kicker">把同一份额换算到每个人</p><h2>总量较小，<br>人均反而更高。</h2><p>青河为 <span data-record="qinghe" data-field="rate">3 册 / 人</span>，河湾为 <em data-record="hewan" data-field="rate">6 册 / 人</em>。</p><p data-reading-end>这衡量人均借阅量；借阅者比例、个人习惯和借阅服务的成因，还需要其他数据。</p></div></article>
+      <div class="reading-tail" aria-hidden="true"></div>
+    </div>
+  </section>
+  <footer><p>两区名称、人口及同年借阅量均为模拟。借阅包括重复借阅，分母是常住人口。分段是均分后的平均份额，不是实际居民分组的记录；人均借阅册次不等于每名居民实际借阅册数。</p>
+    <details id="example-notes"><summary>叙事、可视化选择与改编</summary>
+  <p><strong>叙事设计：</strong><a href="../../../references/expression-methods.md#改变比较口径">直观差异 → 对齐分母后再判断</a>。总量领先，是否意味着每个人更多？沿用已有总量比较，补上人口分母，再看人均结果。排序是否反转由数据决定。</p>
+  <p><strong>可视化选择：</strong>将总量分成等人口的平均份额，突出一份后换成人均尺度，使除数的作用可见。对象身份保留，单位与读数随尺度交接；这些份额是计算平均，不代表真实个体。</p>
+  <p><strong>改编空间：</strong>可用于其他合理的分母与标准化比较，重选对象、单位和构图。只需比较人均时可直接展示结果；需要解释分母时才展开份额。非整数分母可改用直接换尺度；同容量、同龄等条件匹配需要真实对应记录。</p>
+  <p><strong>代码入口：</strong><code>basisExample</code> 配总量、人口与 <code>quantum</code>，当前分段最多40份；计算单位需对齐。<code>basisReading / basisPose / blendBasis</code> 管读数、份额与交接。更多对象重排空间，新口径可接后续分布或变化。</p>
+  <p><a href="scene.mjs">本例数据与代码</a></p>
+</details>
+  </footer>
+</main>
+<script type="module">import { mountBasis } from "./scene.mjs";const story=mountBasis(document.querySelector("#basis-story"));addEventListener("pagehide",e=>{if(!e.persisted)story.dispose()});</script>
+</body></html>

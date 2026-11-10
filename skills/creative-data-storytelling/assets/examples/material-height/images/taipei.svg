@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 1000">
+<title>台北101建筑尖顶及分节外形的简化立面</title>
+<defs>
+<linearGradient id="glass"><stop stop-color="#3d7778"/><stop offset=".49" stop-color="#9db9a9"/><stop offset=".5" stop-color="#668f88"/><stop offset="1" stop-color="#2b5961"/></linearGradient>
+<pattern id="windows" width="14" height="15" patternUnits="userSpaceOnUse"><path d="M2 0V15M0 13H14" stroke="#d6d6ba" stroke-width="1.5" opacity=".55"/></pattern>
+<path id="shape" d="M13 1000V916H36L29 847H47L36 764H55L44 681H63L52 598H71L60 515H79L68 432H87L76 349H95L84 266H102L98 191H108V140H117V0H123V140H132V191H142L138 266H156L145 349H164L153 432H172L161 515H180L169 598H188L177 681H196L185 764H204L193 847H211L204 916H227V1000Z"/>
+<clipPath id="clip"><use href="#shape"/></clipPath>
+</defs>
+<g clip-path="url(#clip)"><path d="M0 0H240V1000H0Z" fill="url(#glass)"/><path d="M0 190H240V1000H0Z" fill="url(#windows)"/>
+<path d="M98 191H142M84 266H156M76 349H164M68 432H172M60 515H180M52 598H188M44 681H196M36 764H204M29 847H211M13 916H227" stroke="#e3dbc0" stroke-width="5"/>
+<path d="M117 142V993" stroke="#c6ccaf" stroke-width="4" opacity=".7"/><circle cx="120" cy="885" r="18" fill="#506b62" stroke="#e0c591" stroke-width="4"/>
+</g></svg>

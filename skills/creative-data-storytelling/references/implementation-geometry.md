@@ -14,7 +14,7 @@
 
 目标布局可返回以键索引的节点、尺度、标注和可见性。高度、长度、价格等锚点从数据和尺度计算；堆叠／避让偏移单独保存，不增加测量精度。
 
-参与构图变化的身份图片也有锚点、尺寸与显隐，和对应图形一起计算目标布局。同一图片需要移位或缩放时，在共同坐标基准下从当前呈现位置向目标过渡，可由同一播放器更新 DOM 位置与图形渲染；换图片时明确进入、退出时机。普通背景配图仍按文档流排布，不必加入动画状态。接法不明确时看 [identity.mjs](../assets/examples/identity.mjs) 的 `identityPose / blendIdentity / renderIdentity`：同一姿态同时驱动 HTML 图片和 SVG 数据点、标签；素材与样例坐标可替换。该示例中两层严格共用 SVG 比例容器，百分比位置才与 viewBox 一致；存在留白、裁切或不同容器时须换算到实际坐标，不能照搬百分比。
+参与构图变化的身份图片也有锚点、尺寸与显隐，和对应图形一起计算目标布局。同一图片需要移位或缩放时，在共同坐标基准下从当前呈现位置向目标过渡，可由同一播放器更新 DOM 位置与图形渲染；换图片时明确进入、退出时机。普通背景配图仍按文档流排布，不必加入动画状态。接法不明确时看 [identity/scene.mjs](../assets/examples/identity/scene.mjs) 的 `identityPose / blendIdentity / renderIdentity`：同一姿态同时驱动 HTML 图片和 SVG 数据点、标签；素材与样例坐标可替换。该示例中两层严格共用 SVG 比例容器，百分比位置才与 viewBox 一致；存在留白、裁切或不同容器时须换算到实际坐标，不能照搬百分比。
 
 面积编码使用 `area = K × weight`、`radius = sqrt(area / π)`；可直接比较的视图共用 K 与分母。增大命中范围不应增大数据圆。多标签权重可能重复展示，不能重复求总体。
 
@@ -26,18 +26,18 @@
 
 | 设计关系 | 布局计算与状态更新步骤 | 可复用部分与边界 |
 | --- | --- | --- |
-| 总体提取局部／精确比较 | 按记录键选中对象 → 计算局部尺度与目标布局 → 同步计算轴、数据锚点、标签与差值 → 退出无用背景 | `linearScale / mixScale / at`；见 [comparison.mjs](../assets/examples/comparison.mjs) 的 `quantitativePose / renderQuantitative`。值不变时明确变化的是观察范围 |
+| 总体提取局部／精确比较 | 按记录键选中对象 → 计算局部尺度与目标布局 → 同步计算轴、数据锚点、标签与差值 → 退出无用背景 | `linearScale / mixScale / at`；见 [comparison/scene.mjs](../assets/examples/comparison/scene.mjs) 的 `quantitativePose / renderQuantitative`。值不变时明确变化的是观察范围 |
 | 同一对象跨期更新 | 选择观测 → 按对象键匹配 → 分别更新量值、进入退出与缺失 → 在定义的状态阶段交接年份和说明 | `blendNodes / createPlayer`；现有进入退出默认渐变。属性更新不等于累计；无个体对应时改用聚合几何或并置 |
 | 从两期量值转为增减比较 | 保留对象键与两期端点 → 取两端之间的区间 → 将起点对齐零参照 → 读取有符号差值 | 见[端点到差值](#两期端点到差值)；差值需要相同口径，百分比变化另算分母 |
 | 同批记录重组 | 对同一记录集计算两套布局 → 按稳定 ID 匹配 → 插值呈现位置／面积 → 同步新分组标签与图例 | `distributionLayout / groupLayout / blendNodes`。需曲线路径时自行扩展 `blend`，路径偏移在两端归零 |
-| 展开组成／接入增量 | 核对可加总记录 → 计算部分的值域区间 → 从区间得到位置与长度 → 展开或逐段显露 → 落到可核对的整体 | `accumulationSegments` 与 [amounts.mjs](../assets/examples/amounts.mjs) 的 `amountPose / renderAmounts`；从同一批分段生成各状态，普通节点匹配不推断一对多关系 |
+| 展开组成／接入增量 | 核对可加总记录 → 计算部分的值域区间 → 从区间得到位置与长度 → 展开或逐段显露 → 落到可核对的整体 | `accumulationSegments` 与 [amounts/scene.mjs](../assets/examples/amounts/scene.mjs) 的 `amountPose / renderAmounts`；从同一批分段生成各状态，普通节点匹配不推断一对多关系 |
 | 口径或舞台更换 | 计算新完整状态 → 交接仍有效的问题／参照 → 更新单位与图例 → 释放退出内容 | 可直接切换、渐显或采用已设计的主题转场；没有对应的图形不强行匹配 |
 
 复杂动作可在 `blend` 内分阶段控制“识别、变化、解释”，阶段顺序由作品决定。跨阶段中断时，从当前可见几何接续，不能跳回理想起点重播。新目标的标题、年份与数值需要明确的交接时点，避免旧图仍在场而结论已经全换。
 
 ### 两期端点到差值
 
-当问题从“前后各有多少”转为“增加或减少多少”，可保留两个端点的对应，将起点移到零、终点移到差值位置。[difference.mjs](../assets/examples/difference.mjs) 单独示范这段接线，含增加、减少和不变；图文读数共用计算结果与格式。
+当问题从“前后各有多少”转为“增加或减少多少”，可保留两个端点的对应，将起点移到零、终点移到差值位置。[difference/scene.mjs](../assets/examples/difference/scene.mjs) 单独示范这段接线，含增加、减少和不变；图文读数共用计算结果与格式。
 
 输入为 `svg`、`readout`、`plotRange`、`rowY(id)` 和 `renderAxis(scale, reading)`；轴函数收到 `null` 时隐藏轴。`mountDifference(...)` 返回 `show("levels" | "change")` 与 `dispose()`，不会接管滚动。换记录、尺度与外观时编辑该示例的 `facts` 和绘制部分；从历史图进入时另接所选对象在原图的实际位置。
 
@@ -45,17 +45,17 @@
 
 ### 历史与当前从同一状态生成
 
-设计选择保留历史后，目标状态需要同时包含历史参照与当前观测，不能只向渲染器传本期子集。历史可生成轨迹、记录行、基准或聚合轮廓，具体形式按[历史保留判断](stage-and-motion.md#让历史仍可比较)选择。
+设计选择保留历史后，目标状态需要同时包含历史参照与当前观测，不能只向渲染器传本期子集。历史可生成轨迹、记录行、基准或聚合轮廓，具体形式按[历史与基准的取舍](expression-methods.md#历史中的变化与基准)选择。
 
 同一条留存记录用稳定键复用图形；同一对象的多期观测同时可见时，用观测键区分实例。更新重点只改变强调、标签或布局，不因焦点改变而重新创建整组历史。筛选、缩放与反向都从目标状态重算哪些参照应存在，不能只靠“向画布追加”维护历史。
 
 将标签锚定到它解释的对象或轴，按同一尺度更新。目标状态分别确定数据图形、必要标签与补充说明的显隐，收起说明不删除作为参照的记录；反向或直达均按目标状态还原，不靠“播放过一次”永久隐藏引导。行重排或聚焦时，先为目标标签计算可用空间；移动中有冲突时可延后显示次要说明，保留主要身份与参照。
 
-接线见 [history.mjs](../assets/examples/history.mjs) 的 `historyPose / blendHistory / renderHistory`：完整来源与当前截止范围分开，显露边界推进时旧轨迹留在场上；直接跳转、反向和聚焦均由目标状态重算。移动的显露边界不生成新观测，读数取实际记录。本例是完整、可连线的序列；缺测段需断开或说明，记录行与双期并置可用不同几何承接相同的保留原则。
+接线见 [history/scene.mjs](../assets/examples/history/scene.mjs) 的 `historyPose / blendHistory / renderHistory`：完整来源与当前截止范围分开，显露边界推进时旧轨迹留在场上；直接跳转、反向和聚焦均由目标状态重算。移动的显露边界不生成新观测，读数取实际记录。本例是完整、可连线的序列；缺测段需断开或说明，记录行与双期并置可用不同几何承接相同的保留原则。
 
 ### 全局定位与局部尺度
 
-采用[缩略图定位](expression-methods.md#全局到局部何时保留缩略图)时，两幅视图共用来源、对象身份与选区，但分别计算尺度：总体用固定全域，主图使用当前聚焦域。主图缩放时插值其尺度，轴、标记与标签使用同一帧映射；用当帧主图尺度反解绘图区两端的值，映射到总体尺度得到选区边界。线性轴可用 `v = (x - b) / k` 反解，避免另一个动画进度让定位窗口与主图脱节。
+采用[缩略图定位](expression-methods.md#全局到局部原位强调提取还是保留缩略图)时，两幅视图共用来源、对象身份与选区，但分别计算尺度：总体用固定全域，主图使用当前聚焦域。主图缩放时插值其尺度，轴、标记与标签使用同一帧映射；用当帧主图尺度反解绘图区两端的值，映射到总体尺度得到选区边界。线性轴可用 `v = (x - b) / k` 反解，避免另一个动画进度让定位窗口与主图脱节。
 
 定位窗口、当前区间文字与主图内容来自同一状态。总览和局部若宽度相同但时间域不同，不能把相同横坐标当成相同时间；通过选区与必要端点说明对应。位置关系已经清楚时省去重复轴与图例。[geometry.mjs](../assets/runtime/geometry.mjs) 的 `visibleDomain(currentScale, plotRange)` 反解当前范围；`renderHistory` 将该范围投到总体尺度。它示范主图与参照的同步，定位图的位置、大小和必要性仍由作品决定。
 
@@ -75,7 +75,7 @@ const nodes = new Map(segments.map((segment) => [segment.id, {
 
 用 `at(scale, start)` 与 `at(scale, end)` 算每段边界，长度取端点距离。组成可从 `base = 0` 开始，把同一个整体内的区间展开；累计则先画 `[0, base]`，让新增段从自己的起点向终点显露。保持旧段可见即可表达“在已有量上增加”，不必把整个图淡出重画。显示数值取原始计算结果，不把像素长度或插值当来源值。
 
-接线见 [amounts.mjs](../assets/examples/amounts.mjs) 的 `amountPose / blendAmounts / renderAmounts`：同一组分段可以合为一条带、展开读取、接上基底，再读累计量；展开与平移时保留 ID 和长度，标注按对应关系交接。选择其中需要的动作即可，不必使用整套状态顺序。示例覆盖非负量；净流入流出、百分比归一化、聚合单元与余量需要各自的几何。
+接线见 [amounts/scene.mjs](../assets/examples/amounts/scene.mjs) 的 `amountPose / blendAmounts / renderAmounts`：同一组分段可以合为一条带、展开读取、接上基底，再读累计量；展开与平移时保留 ID 和长度，标注按对应关系交接。选择其中需要的动作即可，不必使用整套状态顺序。示例覆盖非负量；净流入流出、百分比归一化、聚合单元与余量需要各自的几何。
 
 ### 让解释标注与对象一起交接
 
@@ -83,7 +83,7 @@ const nodes = new Map(segments.map((segment) => [segment.id, {
 
 [motion.mjs](../assets/runtime/motion.mjs) 的 `blendWithAnnotations(from, to, t, blendGeometry, timing)` 提供一种可选接法：失效标注先退出 → 注入的几何函数移动对象和尺度 → 新标注在到位后进入。仍然有效的标注持续跟随；没有标注交接时使用完整几何进度。中断时把已经呈现的几何与标注透明度一起作为新起点。
 
-两端姿态中的 `annotations` 是 keyed Map，每项至少包含 `id` 和 `opacity`；值、对象 ID、单位等由渲染器读取。键标识同一个事实与比较口径，换对象、期间或量值时换键，不直接覆盖旧标注的内容。`blendGeometry` 接收两端姿态和局部进度，返回作品自己的几何；具体例子见 [comparison.mjs](../assets/examples/comparison.mjs) 的 `blendQuantitative / renderQuantitative`。阶段比例只是示例参数，若关系始终清楚，也可让标注全程跟随，不必采用先退后入。
+两端姿态中的 `annotations` 是 keyed Map，每项至少包含 `id` 和 `opacity`；值、对象 ID、单位等由渲染器读取。键标识同一个事实与比较口径，换对象、期间或量值时换键，不直接覆盖旧标注的内容。`blendGeometry` 接收两端姿态和局部进度，返回作品自己的几何；具体例子见 [comparison/scene.mjs](../assets/examples/comparison/scene.mjs) 的 `blendQuantitative / renderQuantitative`。阶段比例只是示例参数，若关系始终清楚，也可让标注全程跟随，不必采用先退后入。
 
 ## 主题轮廓与单元重组
 

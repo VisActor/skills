@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>连涨四年，然后呢？ · 连续解释示范</title>
+  <style>
+    :root { --paper:#f3f4ee; --ink:#243b38; --accent:#b44d2e; --history:#6a9290;
+      color:var(--ink); background:var(--paper); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; }
+    * { box-sizing:border-box; } body { margin:0; } a { color:inherit; text-underline-offset:5px; }
+    .masthead { position:absolute; top:26px; left:5vw; right:5vw; z-index:3; display:flex; justify-content:space-between;
+      border-bottom:1px solid #bfcac1; padding-bottom:18px; font-size:13px; letter-spacing:.04em; }
+    .masthead a { text-decoration:none; }
+    .story { position:relative; display:grid; grid-template-columns:minmax(270px,28%) minmax(0,1fr); gap:3vw; padding:0 5vw; }
+    .history-stage { grid-area:1/2; position:sticky; top:0; height:100vh; min-height:560px;
+      display:flex; align-items:center; padding:100px 0 30px; }
+    figure { width:100%; margin:0; }
+    svg { display:block; width:100%; height:auto; max-height:calc(100vh - 180px); overflow:visible; }
+    svg text { font-family:inherit; fill:var(--ink); }
+    .axis text { font-size:22px; fill:#627570; } .axis line { stroke:#d2dcd4; }
+    .readout { font-size:28px; font-variant-numeric:tabular-nums; }
+    .current,.gap-label { fill:var(--accent); } .gap-label { font-size:24px; }
+    figcaption { font-size:12px; color:#627570; margin:10px 0 0 5%; }
+    .reading-flow { grid-area:1/1; position:relative; padding-top:21vh; }
+    article { min-height:88vh; scroll-margin-top:22vh; }
+    article:last-of-type { min-height:0; }
+    .copy { padding:12px 0 20px; }
+    .eyebrow { font-size:12px; letter-spacing:.12em; color:#627570; margin:0 0 14px; }
+    h1,h2 { font-family:"Songti SC","Noto Serif CJK SC","SimSun",serif; font-weight:600; font-size:clamp(32px,3.1vw,44px);
+      line-height:1.4; letter-spacing:-.03em; margin:0 0 24px; }
+    p { margin:0; font-size:17px; line-height:1.8; } em { font-style:normal; color:var(--accent); white-space:nowrap; }
+    .reading-tail { height:0; }
+    footer { border-top:1px solid #bfcac1; padding:45px 8vw 65px; }
+    footer p { max-width:780px; font-size:14px; color:#627570; margin:12px 0; }
+    details { margin-top:24px; max-width:860px; } summary { cursor:pointer; }
+    details h3 { margin:28px 0 8px; font-size:17px; font-weight:600; }
+    details code { font-size:.92em; } .links { display:flex; gap:28px; }
+    @media(max-height:730px) { .reading-flow { padding-top:140px; } .copy { padding-bottom:10px; }
+      h1,h2 { font-size:36px; margin-bottom:18px; } }
+  </style>
+</head>
+<body>
+  <header class="masthead"><span>连涨四年，然后呢？</span><a href="../index.html#story-examples">连续解释示范 ↗</a></header>
+  <main id="history-story">
+    <section class="story" aria-label="订单历史与旧基准比较">
+      <div class="history-stage">
+        <figure><svg viewBox="0 0 1120 555" role="img" aria-label="模拟订单记录"></svg>
+          <figcaption>模拟订单数据 · 线连接各年记录，坐标保持不变</figcaption></figure>
+      </div>
+      <div class="reading-flow">
+        <article id="before"><div class="copy" data-state="before">
+          <p class="eyebrow">先留住一个参照 · 2016—2019</p>
+          <h1>一年 <span data-record="year-2019">100 万单</span>，<br>记住这个位置。</h1>
+          <p>订单逐年增加，到 <span data-record="year-2019" data-field="year">2019</span> 年来到这段记录的最高点。</p>
+        </div></article>
+        <article id="fall"><div class="copy" data-state="fall">
+          <p class="eyebrow">同一条历史继续 · 2020</p>
+          <h2>随后一年，<br>落到了 <em data-record="year-2020">61 万单</em>。</h2>
+          <p>一年的回落，抹去了此前数年的增长；订单量低于这段记录开始时的 <span data-record="year-2016">72 万单</span>。</p>
+        </div></article>
+        <article id="recovery"><div class="copy" data-state="recovery">
+          <p class="eyebrow">继续看后面的记录 · 2021—2024</p>
+          <h2>连续四年，<br>都在增长。</h2>
+          <p>订单回升到 <em data-record="year-2024">97 万单</em>。只看最近四年，是一条向上的线。</p>
+        </div></article>
+        <article id="compare"><div class="copy" data-state="compare">
+          <p class="eyebrow">回到最初的参照</p>
+          <h2>增长了，<br>还没回到原位。</h2>
+          <p data-reading-end>把 <span data-record="year-2019" data-field="year">2019</span> 年的高度延伸过来：当前还比那时<em data-gap="compare">低 3 万单</em>。增长方向与恢复程度，回答的是两个问题。</p>
+        </div></article>
+        <div class="reading-tail" aria-hidden="true"></div>
+      </div>
+    </section>
+    <footer>
+      <p>本页使用模拟订单数据说明一种解释过程，不代表真实企业或行业。它只比较记录，没有为变化指定原因。</p>
+      <details id="example-notes" open><summary>叙事、可视化选择与改编</summary>
+  <p><strong>叙事设计：</strong><a href="../../../references/expression-methods.md#历史中的变化与基准">变化 → 旧基准比较</a>。先经历回升，再追问“是否回到从前”：最近方向向上，当前水平却仍低于旧高点。若前文已说明回升，可直接接入基准比较。</p>
+  <p><strong>可视化选择：</strong>保留轨迹让增长有历史参照；基准线从旧高点延伸到当前端点，把“与过去比”画出来。时间轴交代过程，端点差距回答结果，两者使用同一组观测。</p>
+  <p><strong>改编空间：</strong>适合同口径观测与有意义的基准。只问两期差异可并置比较；要解释过程可用轨迹、柱形或单元，缺测处另行交代。重选时期、基准与素材，按新数据重写结论；回落、恢复和回看不是固定章节。</p>
+  <p><strong>代码入口：</strong><code>historyExample</code> 配置记录、单位、<code>baselineId / stops</code>；<code>historyStoryPose / blendHistoryStory</code> 安排显露与基准交接，<code>data-record / data-gap</code> 绑定正文。保留当前端点即可接后续追问。</p>
+  <p><a href="scene.mjs">本例数据与代码</a></p>
+</details>
+    </footer>
+  </main>
+  <noscript><p>2019 年为 100 万单，2020 年降至 61 万单，随后四年回升至 97 万单。交互需启用 JavaScript。</p></noscript>
+  <script type="module">
+    import { mountHistoryStory } from "./scene.mjs";
+    let story, frame;
+    function start() {
+      if (innerHeight > 0 && document.querySelector("svg").getBoundingClientRect().width > 0)
+        story = mountHistoryStory(document.querySelector("#history-story"));
+      else frame = requestAnimationFrame(start);
+    }
+    frame = requestAnimationFrame(start);
+    addEventListener("pagehide", (event) => { if (!event.persisted) { cancelAnimationFrame(frame); story?.dispose(); } });
+  </script>
+</body>
+</html>

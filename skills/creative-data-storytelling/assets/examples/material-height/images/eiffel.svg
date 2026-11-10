@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 1000">
+<title>埃菲尔铁塔主体的简化立面，不含旗杆与通信天线</title>
+<defs>
+<linearGradient id="iron"><stop stop-color="#826c51"/><stop offset=".45" stop-color="#d0b789"/><stop offset=".65" stop-color="#ab936b"/><stop offset="1" stop-color="#665b49"/></linearGradient>
+<path id="outline" fill-rule="evenodd" d="M201 0H219L222 62H237V85H225C229 270 241 422 272 612L290 670C312 793 352 899 415 1000H332C322 850 280 782 210 777C140 782 98 850 88 1000H5C68 899 108 793 130 670L148 612C179 422 191 270 195 85H183V62H198Z M210 158L195 320H225Z M191 353L175 475H245L229 353Z M172 510L152 626H268L248 510Z M146 686L131 738H289L274 686Z"/>
+<clipPath id="body"><use href="#outline"/></clipPath>
+</defs>
+<use href="#outline" fill="url(#iron)"/>
+<g clip-path="url(#body)" fill="none" stroke="#e0c99f" stroke-width="4" opacity=".84">
+<path d="M200 92L230 164L195 235L237 305L185 376L248 447L170 518L265 589L143 658L294 726L112 794L323 862L75 930L366 1000M220 92L190 164L225 235L183 305L235 376L172 447L250 518L155 589L277 658L126 726L308 794L97 862L345 930L54 1000"/>
+<path d="M184 133H236M180 202H240M175 273H245M165 343H255M158 413H262M149 483H271M137 553H283M121 623H299M102 693H318M83 763H337M55 833H365M30 903H390M7 973H413"/>
+</g>
+<g fill="#c4ab7e" stroke="#e3cfa8" stroke-width="3">
+<path d="M181 62H239V82H181Z"/>
+<path d="M143 612H277V634H143Z"/>
+<path d="M114 738H306V762H114Z"/>
+<path d="M0 986H92V1000H0ZM328 986H420V1000H328Z"/>
+</g>
+<path d="M140 740Q210 718 280 740" fill="none" stroke="#554b3e" stroke-width="6"/>
+</svg>

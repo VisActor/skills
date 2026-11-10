@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>把两段热夜的第一夜对齐 · 局部机制</title>
+  <link rel="stylesheet" href="../mechanism.css">
+</head>
+<body>
+<main>
+  <nav class="eyebrow"><a href="../index.html#mechanisms">全部示例</a> / 局部机制 · sequence</nav>
+  <section id="sequence-example" class="mechanism-section">
+    <h1>把两段热夜的第一夜对齐</h1>
+    <p>香港天文台测站的记录里，2022 和 2024 年夏天最长的一段热夜都在七月下旬结束。每格一夜。换个起点，看看哪一段持续得更久。</p>
+    <div class="controls state-controls" role="group" aria-label="热夜的时间参照">
+      <button type="button" data-origin="calendar" aria-pressed="true">按七月日期</button>
+      <button type="button" data-origin="onset" aria-pressed="false">对齐第一夜</button>
+    </div>
+    <div class="plot"><svg viewBox="0 0 860 202" role="img" aria-label="香港两个夏季最长的连续热夜段，每格一夜" aria-describedby="sequence-summary"></svg></div>
+    <p id="sequence-summary" class="result" aria-live="polite"></p>
+    <details id="example-notes" class="scope"><summary>表达理由与改编</summary>
+  <p><strong>表达理由：</strong><a href="../../../references/expression-methods.md#sequence">序列对齐</a>：原日期说明何时发生，共同起点使持续多久更易比较。每格保留日期和时长，整段平移；间隔与缺测仍有含义。</p>
+  <p><strong>改编与接线：</strong>可用于有起止依据的不同事件或经历，重选对齐事件与排列。只问持续长度可直接对齐；要解释分散与连续，还需保留完整日期分布。本例 <code>runs</code> 是两段七月内日号；跨月改为完整日期或连续日偏移，并同步 <code>x / makeAxis</code> 与标签。</p>
+  <p><a href="scene.mjs">本例数据与代码</a></p>
+</details>
+    <p class="scope">取各年 6 至 8 月日最低气温达到 28°C 的最长连续时段。<a href="https://data.weather.gov.hk/weatherAPI/opendata/opendata.php?dataType=CLMMINT&amp;station=HKO&amp;rformat=json">香港天文台逐日记录</a> · <a href="https://data.gov.hk/en/terms-and-conditions">资料使用条款</a></p>
+  </section>
+  <footer><a href="scene.mjs">本例数据与动画代码</a> · <a href="../mechanism.css">控件与预览样式</a></footer>
+</main>
+<script type="module">
+  import { mountSequence } from "./scene.mjs";
+  const example = mountSequence(document.querySelector("#sequence-example"));
+  addEventListener("pagehide", event => { if (!event.persisted) example.dispose(); });
+</script>
+</body>
+</html>

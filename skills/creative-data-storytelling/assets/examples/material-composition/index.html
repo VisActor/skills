@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>扔掉的食物，最多来自哪里？</title>
+  <link rel="preload" as="image" href="images/home.webp">
+  <link rel="preload" as="image" href="images/service.webp">
+  <link rel="preload" as="image" href="images/retail.webp">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f0e4; --ink: #293c32; --muted: #637166; --rule: #cecbbd;
+      --home: #ad512f; --service: #416c61; --retail: #b4924e; --retail-ink: #80612c;
+      --body: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      --display: "Songti SC", "Noto Serif CJK SC", "SimSun", serif;
+      font-family: var(--body); color: var(--ink); background: var(--paper);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    a { color: inherit; text-underline-offset: 5px; }
+    a:focus-visible, summary:focus-visible { outline: 2px solid var(--home); outline-offset: 6px; }
+    .masthead { position: absolute; top: 28px; left: 4vw; right: 4vw; z-index: 2; display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 1px solid var(--rule); font-size: 13px; letter-spacing: .07em; }
+    .masthead a { text-decoration: none; color: var(--muted); }
+    main { max-width: 1680px; margin: auto; }
+    .story { display: grid; grid-template-columns: minmax(290px, 30%) minmax(0, 1fr); gap: 3vw; padding: 0 4vw; }
+    .reading-flow { grid-column: 1; grid-row: 1; padding-top: clamp(150px, 24vh, 235px); }
+    .reading-flow article { scroll-margin-top: 25vh; }
+    .opening { padding-bottom: 42vh; }
+    .composition { padding-bottom: 48vh; }
+    .kicker { font-size: 12px; line-height: 1.6; letter-spacing: .14em; color: var(--muted); margin: 0 0 22px; }
+    h1, h2 { font-family: var(--display); font-weight: 600; letter-spacing: -.035em; line-height: 1.35; margin: 0 0 24px; }
+    h1 { font-size: clamp(36px, 3.8vw, 56px); }
+    h2 { font-size: clamp(32px, 3vw, 46px); }
+    h2 em { font-style: normal; color: var(--home); }
+    p { font-size: 17px; line-height: 1.9; margin: 0 0 20px; }
+    .body-copy { max-width: 22em; }
+    .continue { display: inline-flex; gap: 32px; padding: 12px 0; margin-top: 14px; border-bottom: 1px solid var(--ink); text-decoration: none; font-size: 14px; }
+    .main-number { display: flex; gap: 8px; align-items: baseline; margin: 20px 0 12px; color: var(--home); }
+    .main-number strong { font-family: Georgia, "Times New Roman", serif; font-size: clamp(58px, 6vw, 88px); line-height: 1.1; font-weight: 400; font-variant-numeric: lining-nums tabular-nums; }
+    .main-number span { font-size: 17px; }
+    .small { font-size: 14px; color: var(--muted); }
+    .stage-panel { position: sticky; top: 0; grid-column: 2; grid-row: 1; height: 100vh; min-height: 560px; padding: 120px 0 40px; display: flex; flex-direction: column; justify-content: center; }
+    .stage-heading { display: flex; justify-content: space-between; align-items: baseline; padding: 0 3%; font-size: 13px; color: var(--muted); }
+    .stage-heading span:last-child { letter-spacing: .12em; }
+    .stage-figure { margin: 0; min-height: 0; }
+    svg { display: block; width: 100%; height: auto; max-height: calc(100vh - 205px); overflow: visible; }
+    svg text { font-family: var(--body); fill: var(--ink); }
+    .category { font-size: 23px; font-weight: 500; }
+    .value { font-size: 48px; font-family: Georgia, "Times New Roman", serif; font-variant-numeric: lining-nums tabular-nums; }
+    .axis-note { font-size: 17px; fill: var(--muted); }
+    .half-label { font-size: 20px; fill: var(--home); }
+    .stage-caption { padding: 0 3%; color: var(--muted); font-size: 13px; line-height: 1.7; min-height: 23px; }
+    .reading-tail { height: 0; pointer-events: none; }
+    .afterword { padding: 55px 4vw 60px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 2fr; gap: 6vw; }
+    .afterword h2 { font-size: 26px; }
+    .afterword p { font-size: 14px; }
+    details { grid-column: 1 / -1; border-top: 1px solid var(--rule); padding-top: 24px; }
+    summary { cursor: pointer; font-size: 15px; }
+    .design-notes { max-width: 850px; padding-top: 24px; }
+    .design-notes p { margin-bottom: 16px; }
+    .links { display: flex; gap: 28px; flex-wrap: wrap; }
+    @media (max-height: 730px) {
+      .reading-flow { padding-top: 145px; }
+      .stage-panel { padding-top: 90px; padding-bottom: 24px; }
+      h1 { font-size: 42px; }
+      svg { max-height: calc(100vh - 155px); }
+    }
+  </style>
+</head>
+<body>
+  <header class="masthead"><span>餐桌之后 / FOOD WASTE</span><a href="../index.html#story-examples">连续解释示范 ↗</a></header>
+  <main id="material-story">
+    <section class="story" aria-label="食物废弃物的组成">
+      <div class="reading-flow">
+        <article class="opening" id="start" data-story-state="places">
+          <p class="kicker">全球 · 2022</p>
+          <h1>扔掉的食物，<br>最多来自哪里？</h1>
+          <p class="body-copy">没吃完的一餐，餐厅留下的饭菜，货架上没卖出的食物。三个熟悉的场景，留下的废弃物一样多吗？</p>
+          <a class="continue" href="#composition">看看它们各占多少 <span aria-hidden="true">↓</span></a>
+        </article>
+        <article class="composition" id="composition" data-story-state="shares">
+          <p class="kicker">把三个环节放在一起</p>
+          <h2>一年，约 <span data-total>10.5</span> 亿吨。</h2>
+          <p class="body-copy">这是 2022 年全球家庭、餐饮服务和零售环节产生的食物废弃物总量。</p>
+          <p class="small">统计包括可食用与不可食用部分。</p>
+        </article>
+        <article class="majority" id="majority" data-story-state="majority">
+          <p class="kicker">最多的一部分</p>
+          <h2><em>一半以上，</em><br>在家里产生。</h2>
+          <div class="main-number"><strong data-home-share>60%</strong><span>来自家庭</span></div>
+          <p class="body-copy" data-reading-end>家庭这一段越过了半数。餐饮服务和零售加起来，占其余的 <span data-other-share>40%</span>。</p>
+        </article>
+        <div class="reading-tail" aria-hidden="true"></div>
+      </div>
+      <div class="stage-panel">
+        <div class="stage-heading"><span>零售与消费环节</span><span>2022</span></div>
+        <figure class="stage-figure">
+          <svg id="material-chart" viewBox="0 0 1000 515" role="img" aria-label="家庭、餐饮服务与零售场景" aria-describedby="chart-description"></svg>
+          <figcaption id="chart-description" class="stage-caption">三处场景，共同构成零售与消费环节的食物废弃物。</figcaption>
+        </figure>
+      </div>
+    </section>
+    <footer class="afterword">
+      <div><p class="kicker">数据与素材</p><h2>这条色带，包含什么？</h2></div>
+      <div>
+        <p>统计包含可食用与不可食用部分，不包含生产及供应链上游损失。占比采用报告公布的四舍五入值；它们比较的是三个环节在总量中的份额，不是各环节自身的浪费率。</p>
+        <p>来源：<a href="https://www.unep.org/en/news-and-stories/press-release/world-squanders-over-1-billion-meals-day-un-report">UNEP / WRAP，《Food Waste Index Report 2024》</a>。三张插画为原创生成的情境示意，不是实景照片。</p>
+      </div>
+      <details id="example-notes"><summary>叙事、可视化选择与改编</summary>
+<div class="design-notes">
+  <p><strong>叙事设计：</strong><a href="../../../references/expression-methods.md#objects">熟悉场景引入</a> → <a href="../../../references/expression-methods.md#组成与累积">组成与份额比较</a>。先认出废弃物来自哪些生活场景，再看它们怎样构成总量，最后判断家庭是否超过半数。</p>
+  <p><strong>可视化选择：</strong>图片保持类别身份，色带长度承担占比；同一组对象从场景进入首尾相接的组成带。半数线直接检验当前发现，图片的大小和食物数量不表示统计量。</p>
+  <p><strong>改编空间：</strong>适用于同分母、互不重复且覆盖总体的分项。情境、图片、构图和参照可重选；前文已认识类别时可直接进入组成。也可用分段物件或固定量单元表达，保留正确份额；各类别自身的比率需分别比较。</p>
+  <p><strong>代码入口：</strong><code>foodWaste</code> 换分项与图片，<code>shareScale / materialPose / blendMaterialPose</code> 改几何和交接。家庭重点、半数线与 <code>data-home-share</code> 一起按新问题调整；图片继续跟随类别，便于接后续比较。</p>
+  <p><a href="scene.mjs">本例数据与代码</a></p>
+</div>
+</details>
+    </footer>
+  </main>
+  <noscript><p>交互图需要 JavaScript。2022 年家庭占 60%，餐饮服务占 28%，零售占 12%；来源及范围见上方说明。</p></noscript>
+  <script type="module">
+    import { mountMaterialStory } from "./scene.mjs";
+    // Embedded previews can initially have a zero viewport. Mount once layout is measurable.
+    let story, pendingFrame;
+    function start() {
+      if (innerHeight > 0 && document.querySelector("#material-chart").getBoundingClientRect().width > 0) {
+        story = mountMaterialStory(document.querySelector("#material-story"));
+      } else pendingFrame = requestAnimationFrame(start);
+    }
+    pendingFrame = requestAnimationFrame(start);
+    addEventListener("pagehide", (event) => {
+      if (!event.persisted) { cancelAnimationFrame(pendingFrame); story?.dispose(); }
+    });
+  </script>
+</body>
+</html>

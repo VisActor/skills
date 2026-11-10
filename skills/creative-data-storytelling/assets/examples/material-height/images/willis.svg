@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 1000">
+<title>威利斯大厦建筑高度范围的简化立面；不绘屋顶天线</title>
+<defs>
+<linearGradient id="steel"><stop stop-color="#36474e"/><stop offset=".48" stop-color="#7e9094"/><stop offset=".5" stop-color="#54666d"/><stop offset="1" stop-color="#20383f"/></linearGradient>
+<pattern id="grid" width="11" height="13" patternUnits="userSpaceOnUse"><path d="M1 0V13M0 10H11" stroke="#9fb4b5" stroke-width="1.1" opacity=".6"/></pattern>
+<clipPath id="shape"><path d="M0 1000V478H45V240H91V0H183V475H230V1000Z"/></clipPath>
+</defs>
+<g clip-path="url(#shape)"><path d="M0 0H230V1000H0Z" fill="url(#steel)"/><path d="M0 0H230V1000H0Z" fill="url(#grid)"/>
+<path d="M45 240V1000M91 0V1000M137 0V1000M183 0V1000" stroke="#b2bdb4" stroke-width="2"/>
+<path d="M91 3H183M45 243H91M0 481H45M183 478H230" stroke="#d8d8c7" stroke-width="5"/>
+<path d="M93 214H181M47 459H181M3 727H227M3 922H227" stroke="#172d35" stroke-width="12"/>
+</g></svg>

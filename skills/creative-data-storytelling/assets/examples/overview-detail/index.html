@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>同样五公里，差在哪里？ · 连续解释示范</title>
+  <style>
+    :root { --paper:#14252c; --ink:#e9e9de; --muted:#7c9297; --river:#96cfbd; --hill:#e8af75;
+      background:var(--paper); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; }
+    * { box-sizing:border-box; } body { margin:0; } a { color:inherit; text-underline-offset:5px; }
+    .masthead { position:absolute; top:28px; left:5vw; right:5vw; display:flex; justify-content:space-between; z-index:2;
+      padding-bottom:20px; border-bottom:1px solid #395057; font-size:13px; } .masthead a { text-decoration:none; }
+    .story { display:grid; grid-template-columns:minmax(280px,29%) minmax(0,1fr); gap:3vw; padding:0 5vw; }
+    .reading-flow { grid-area:1/1; padding-top:22vh; }
+    article { padding-bottom:65vh; scroll-margin-top:25vh; } article:last-of-type { padding-bottom:0; }
+    .eyebrow { font-size:12px; color:var(--muted); letter-spacing:.11em; margin:0 0 24px; }
+    h1,h2 { font-family:"Songti SC","Noto Serif CJK SC","SimSun",serif; font-weight:600; font-size:clamp(34px,3.5vw,50px);
+      line-height:1.38; letter-spacing:-.025em; margin:0 0 24px; }
+    p { font-size:17px; line-height:1.9; margin:0 0 18px; }
+    .river { color:var(--river); } .hill { color:var(--hill); }
+    .big { margin:32px 0 16px; font-size:17px; color:var(--hill); }
+    .big strong { font-family:Georgia,serif; font-weight:400; font-size:82px; margin-right:8px; }
+    .detail-stage { grid-area:1/2; position:sticky; top:0; height:100vh; min-height:560px; padding:100px 0 35px;
+      display:flex; align-items:center; }
+    figure { margin:0; width:100%; } svg { display:block; width:100%; max-height:calc(100vh - 160px); overflow:visible; }
+    svg text { font-family:inherit; } .axis text,.axis-title { fill:var(--muted); font-size:17px; }
+    .axis line { stroke:#2e434a; } .axis .zero line { stroke:#8aa2a6; stroke-width:1.5; }
+    .name { font-size:20px; } .value { font-size:21px; font-variant-numeric:tabular-nums; }
+    .distance { font-size:16px; } .gap text { fill:var(--ink); font-size:26px; }
+    figcaption { margin:20px 0 0 17%; font-size:12px; color:#9aafb0; line-height:1.7; }
+    .reading-tail { height:0; }
+    footer { padding:46px 5vw 65px; border-top:1px solid #395057; }
+    footer p { max-width:800px; font-size:14px; color:#9aafb0; } details { margin-top:24px; } summary { cursor:pointer; }
+    details p { margin-top:18px; } .links { display:flex; gap:24px; }
+    @media(max-height:730px) { .reading-flow { padding-top:145px; } h1,h2 { font-size:38px; } .detail-stage { padding-top:86px; } }
+  </style>
+</head>
+<body>
+  <header class="masthead"><span>同样五公里，差在哪里？</span><a href="../index.html#story-examples">连续解释示范 ↗</a></header>
+  <main id="detail-story">
+    <section class="story" aria-label="从通勤全体记录提取两条比较">
+      <div class="reading-flow">
+        <article id="overview" data-state="overview">
+          <p class="eyebrow">先看全部 · 模拟通勤记录</p>
+          <h1>同一个目的地，<br>要花多久？</h1>
+          <p>12 条路线，单程从十几分钟到近一小时。路线长度各不相同，直接比快慢还不够。</p>
+        </article>
+        <article id="select" data-state="select">
+          <p class="eyebrow">从全局中找出这一对</p>
+          <h2>这两条，<br>都是五公里。</h2>
+          <p><span class="river">河岸路</span>和<span class="hill">山坡路</span>有相同的路程。先找到这两条路线，再单独比较它们的用时。</p>
+        </article>
+        <article id="compare" data-state="compare">
+          <p class="eyebrow">保留对象 · 放大比较尺度</p>
+          <h2>路程相同，<br>用时没有对齐。</h2>
+          <div class="big"><strong data-gap>12</strong>分钟</div>
+          <p data-reading-end>这是两条记录的时间差。距离相同，并不意味着通勤体验相同；这组记录还不能告诉我们差异由什么造成。</p>
+        </article>
+        <div class="reading-tail" aria-hidden="true"></div>
+      </div>
+      <div class="detail-stage"><figure>
+        <svg viewBox="0 0 1000 535" role="img" aria-label="12 条模拟通勤记录"></svg>
+        <figcaption>条形对应路线 · 条长表示分钟 · 从同一个零点开始</figcaption>
+      </figure></div>
+    </section>
+    <footer>
+      <p>本页是模拟记录，用来演示“先识别、再提取、最后比较”的读法，没有实际交通调查或因果判断。条长表示通勤分钟数，缩放时始终保留零点；条的粗细只用于突出当前对象。</p>
+      <details id="example-notes"><summary>叙事、可视化选择与改编</summary>
+  <p><strong>叙事设计：</strong><a href="../../../references/expression-methods.md#全局到局部原位强调提取还是保留缩略图">全局 → 局部比较</a>。从总体中挑出一对值得追问的记录，先让读者认出它们，再回答“相差多少”。选择理由来自正文与数据；可直接承接已有全景。</p>
+  <p><strong>可视化选择：</strong>先原位突出，再移动同一对条形，交代局部来自哪里。条长适合精读用时；共同零点与同步缩放保持可比，差值标注省去来回读数。其他记录退出，把空间留给当前问题。</p>
+  <p><strong>改编空间：</strong>对象需有稳定身份、可比口径和选取理由。原位已能读清时，高亮足够；需要定位时保留适量总体参照。点、线、区间或单元都可承担提取，重新安排尺度、素材与空间即可延续这段思路。</p>
+  <p><strong>代码入口：</strong><code>journeys / comparisonIds</code> 选记录，<code>detailStoryPose / blendDetailStory</code> 管布局与运动，<code>mountDetailStory</code> 绑定差额。结束后可沿用这对记录继续解释，或回到原全景；本例行数和正文段数按新任务调整。</p>
+  <p><a href="scene.mjs">本例数据与代码</a></p>
+</details>
+    </footer>
+  </main>
+  <noscript><p>河岸路 31 分钟，山坡路 43 分钟，两条路线都是 5 公里。交互需启用 JavaScript。</p></noscript>
+  <script type="module">
+    import { mountDetailStory } from "./scene.mjs";
+    let story, frame;
+    function start() {
+      if (innerHeight > 0 && document.querySelector("svg").getBoundingClientRect().width > 0)
+        story = mountDetailStory(document.querySelector("#detail-story"));
+      else frame = requestAnimationFrame(start);
+    }
+    frame = requestAnimationFrame(start);
+    addEventListener("pagehide", (event) => { if (!event.persisted) { cancelAnimationFrame(frame); story?.dispose(); } });
+  </script>
+</body>
+</html>

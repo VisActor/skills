@@ -1,15 +1,20 @@
-import { at, lerp, linearScale } from "../runtime/geometry.mjs";
-import { createPlayer } from "../runtime/motion.mjs";
-import { svgElement } from "../runtime/svg.mjs";
+import { at, lerp, linearScale } from "../../runtime/geometry.mjs";
+import { createPlayer } from "../../runtime/motion.mjs";
+import { svgElement } from "../../runtime/svg.mjs";
 
 // HKO station, June through August: the longest uninterrupted run with Tmin >= 28°C.
 // Both runs lie in July. Endpoints are inclusive dates; a missing day breaks a run.
-const runs = [
+export const runs = [
   { year: 2022, first: 9, last: 29, color: "#97603a" },
   { year: 2024, first: 20, last: 26, color: "#28695a" },
 ];
 const nights = (run) => run.last - run.first + 1;
 
+/**
+ * 改写 runs 的两条记录；本例 first/last 是同一个七月内的日号，含首尾两天。
+ * 跨月时先改用完整日期/连续日偏移，再同步 x、日期标签与两套 makeAxis；不能直接混用日号。
+ * mountSequence 的行距和轴位置服务于两行构图；缺测先拆段。对齐只平移，格宽与间隔保留。
+ */
 export function mountSequence(root) {
   const plot = root.querySelector("svg");
   const summary = root.querySelector("[aria-live]");
@@ -46,11 +51,11 @@ export function mountSequence(root) {
   }
   const calendar = makeAxis("七月日期", [1, 5, 10, 15, 20, 25, 31], (n) => n + " 日");
   const elapsed = makeAxis("从第一夜起", [1, 7, 14, 21, 28], (n) => "第 " + n + " 夜");
-  const [longer, shorter] = runs;
+  const [a, b] = runs;
   const readings = [
-    "两段热夜的结束日期，在各自的七月只差 " + Math.abs(longer.last - shorter.last) + " 天。",
-    longer.year + " 年持续 " + nights(longer) + " 夜，" + shorter.year + " 年持续 " + nights(shorter)
-      + " 夜，相差 " + (nights(longer) - nights(shorter)) + " 夜。",
+    "两段热夜的结束日期，在各自的七月只差 " + Math.abs(a.last - b.last) + " 天。",
+    a.year + " 年持续 " + nights(a) + " 夜，" + b.year + " 年持续 " + nights(b)
+      + " 夜，相差 " + Math.abs(nights(a) - nights(b)) + " 夜。",
   ];
   const player = createPlayer(0, {
     duration: 950,

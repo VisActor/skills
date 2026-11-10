@@ -1,0 +1,577 @@
+{
+  "version": 1,
+  "examples": [
+    {
+      "id": "unit-scale",
+      "title": "先认识一份，再看部分与倍数",
+      "kind": "story",
+      "relations": ["开篇引入", "单位换算", "等分整体", "重复份额", "尺度缩放", "基准比较"],
+      "readerTask": "认识一份后，怎样看清它的内部与倍数，并用这个参照理解新的比较？",
+      "dataNeeds": "有明确换算依据的基准量、等分数和重复份数；比较记录同单位且非负。本例以等份长度表达，非等分组成或其他图形需重算几何。",
+      "dataKind": "秒、分钟、小时的单位关系，以及两条模拟等候时长；不作真实场所结论。",
+      "preview": "assets/examples/unit-scale/index.html",
+      "code": "assets/examples/unit-scale/scene.mjs",
+      "method": "references/expression-methods.md#同量换单位与量级参照",
+      "process": ["建立一份基准", "保持整体长度，显露等分", "放远共同尺度，保留原份并接续其他份数", "将时间带收拢为分钟参照，同步放大后加入独立记录并比较差额"],
+      "retain": "同量等分保持总量，重复增加份数，缩放改变像素映射；原份身份与共同单位可辨。",
+      "adapt": "unitScaleExample 配基准量、等分数、重复份数与两条记录；unitScalePose / blendUnitScale 管构图与时序，unitScaleGeometry 共用尺度。可只借其中一种操作，改写主题与图形时保留当前追问所需关系。",
+      "handoff": { "enter": "从一个易认的对象或数量建立读法；已有上下文也可直接进入拆分或比较。", "leave": "保留学会的单位与参照，接入真实比较、分布或变化；模拟记录只作演示。" },
+      "dependencies": ["assets/runtime/geometry.mjs", "assets/runtime/motion.mjs", "assets/runtime/stage.mjs", "assets/runtime/scroll.mjs", "assets/runtime/svg.mjs"],
+      "assets": [],
+      "relatedExample": "amounts"
+    },
+    {
+      "id": "time-history",
+      "title": "历史继续生长，再回到旧基准",
+      "relations": [
+        "时序变化",
+        "保留历史",
+        "基准比较"
+      ],
+      "readerTask": "近期变化的方向，与相对旧基准的水平，是否指向同一个判断？",
+      "dataNeeds": "同口径、有序的连续观测，以及有解释意义的基准；缺测或不可比时期需另行处理。",
+      "dataKind": "模拟订单记录，2016—2024；无真实行业结论。",
+      "preview": "assets/examples/time-history/index.html",
+      "code": "assets/examples/time-history/scene.mjs",
+      "method": "references/expression-methods.md#历史中的变化与基准",
+      "process": [
+        "建立旧参照",
+        "沿原轨迹显露回落",
+        "接入恢复期并停留",
+        "延伸旧基准，标出仍有的差距"
+      ],
+      "retain": "可比较的历史、当前观测和有依据的基准；图形、范围与推进顺序可按追问重选。",
+      "adapt": "historyExample 配记录、单位、基准和停留端点；historyStoryPose / blendHistoryStory 管显露与比较，正文读数共用计算。HTML 说明叙事理由与局部取用条件。",
+      "handoff": {
+        "enter": "承接已经提到的时期或增长判断，让旧参照先在图中可见。",
+        "leave": "留下完整轨迹及被比较的端点；可接入时期解释、组成分析或下一组比较，不必重新画一张全景。"
+      },
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": [],
+      "kind": "story",
+      "relatedExample": "history"
+    },
+    {
+      "id": "record-comparison",
+      "title": "新记录加入，旧参照仍在",
+      "kind": "story",
+      "relations": [
+        "加入记录",
+        "共同尺度",
+        "保留参照",
+        "并行记录",
+        "条形比较"
+      ],
+      "readerTask": "已有认识遇到新记录或并行记录时，差异怎样补充原来的判断？",
+      "dataNeeds": "同单位、可比较的非负量值、稳定记录身份及参照；新记录不是累计增量，时期顺序不自动代表连续观测。",
+      "dataKind": "秦、两汉、唐、元的七条来源主张，保留推算、研究参考和地方志综述身份。",
+      "process": [
+        "建立一条参考记录和共同零点",
+        "新记录加入新行，旧条保留量值与身份",
+        "同一时期的并行记录一起展开",
+        "在主图端点之间比较差值"
+      ],
+      "retain": "记录独立、身份与口径可比，所需参照仍可辨；本例用零基线条长，各条不相加。",
+      "adapt": "recordExample 配记录、stops 和 pair；recordPose / recordGeometry 管排列与几何，blendRecords 管加入。HTML 说明叙事动机、其他图形的取用条件及正文绑定。",
+      "handoff": {
+        "enter": "承接已解释的一条记录，从它的实际位置加入其他记录。",
+        "leave": "留下已建立的比较范围，可继续加入记录、提取局部或改变比较口径。"
+      },
+      "preview": "assets/examples/record-comparison/index.html",
+      "code": "assets/examples/record-comparison/scene.mjs",
+      "method": "references/expression-methods.md#新记录加入共同尺度",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": [],
+      "relatedExample": "comparison"
+    },
+    {
+      "id": "overview-detail",
+      "title": "先认出对象，再靠近比较",
+      "relations": [
+        "整体到局部",
+        "提取对象",
+        "共同尺度",
+        "差值比较"
+      ],
+      "readerTask": "知道局部比较来自全景里的哪两个对象，并直接看见差额。",
+      "dataNeeds": "全景内有稳定身份的记录、可比量值及选取理由。本段用零基线条长比较非负用时；整体到局部也可采用点、线或单元。局部已可读时，原位高亮可能足够。",
+      "dataKind": "12 条模拟通勤记录；相同路程不代表已控制所有条件。",
+      "preview": "assets/examples/overview-detail/index.html",
+      "code": "assets/examples/overview-detail/scene.mjs",
+      "method": "references/expression-methods.md#全局到局部原位强调提取还是保留缩略图",
+      "process": [
+        "用零基线条形展示全体",
+        "在原位识别一对记录",
+        "原来的两根条移位，保持零点，轴与条长一起缩放",
+        "停在有端点差值的比较画面"
+      ],
+      "retain": "选中对象与原总体的对应关系、选择依据和比较口径；是否提取、怎样标记与排列取决于当前问题。",
+      "adapt": "journeys / comparisonIds 选记录，detailStoryPose / blendDetailStory 改布局与衔接。HTML 说明提取理由、替代表达和前后承接。",
+      "handoff": {
+        "enter": "直接接已有全景；若全景已实现，从它的当前姿态和同一批 ID 开始，不再播放重复开场。",
+        "leave": "留下选中记录、单位和差值；可以解释某个对象或反向返回全景。其他记录退出主图，不必留下重复小图。"
+      },
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": [],
+      "kind": "story",
+      "relatedExample": "comparison"
+    },
+    {
+      "id": "material-composition",
+      "title": "从熟悉场景进入组成比较",
+      "relations": [
+        "素材引入",
+        "类别识别",
+        "组成",
+        "占比",
+        "部分与整体"
+      ],
+      "readerTask": "从认识组成对象，到判断它们的份额及重要程度。",
+      "dataNeeds": "分项不重叠、分母与单位一致、覆盖完整总体；图片只识别类别，精确长度另行编码。",
+      "dataKind": "UNEP / WRAP 2024 报告的 2022 年数据；60/28/12 为公布的舍入占比，图片是生成示意。",
+      "preview": "assets/examples/material-composition/index.html",
+      "code": "assets/examples/material-composition/scene.mjs",
+      "method": "references/expression-methods.md#objects",
+      "process": [
+        "用三张图片建立类别",
+        "图片与名称随组成区间移位",
+        "色带就位后出现读数",
+        "增加半数参照，突出最大部分"
+      ],
+      "retain": "类别身份、同分母份额与完整总体；图片、量值标记、参照和排列可以重选。",
+      "adapt": "foodWaste 换分项和图片，shareScale / materialPose / blendMaterialPose 改几何与交接。HTML 说明场景引入、份额证据及需要随问题替换的重点。",
+      "handoff": {
+        "enter": "可作为主题引入，也可承接已出现的同一批类别图片，避免重新介绍。",
+        "leave": "留下各类别的身份、色彩和占比；可继续展开某一部分，或将同一组区间接入跨期比较。"
+      },
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs",
+        "assets/runtime/format.mjs"
+      ],
+      "assets": [
+        "assets/examples/material-composition/images/home.webp",
+        "assets/examples/material-composition/images/service.webp",
+        "assets/examples/material-composition/images/retail.webp"
+      ],
+      "kind": "story",
+      "relatedExample": "identity"
+    },
+    {
+      "id": "material-trend",
+      "title": "素材直接标记观测，时间推进后比较涨幅",
+      "relations": [
+        "素材",
+        "身份",
+        "时序变化",
+        "同比涨幅",
+        "多系列比较"
+      ],
+      "readerTask": "主体怎样变化，换到可比口径后，相关对象的走势是否一致？",
+      "dataNeeds": "有序观测及可核对的上年同期正值；各自频率和日期保留。素材识别观测，不按数值缩放，价格指数不可相加为成本。",
+      "dataKind": "The Economist 澳大利亚半年报价、ABS 季度食材 CPI；2017—2024 展示，2016 支持同比。",
+      "method": "references/expression-methods.md#objects",
+      "process": [
+        "素材直接落在观测点，依次显露并保留历史",
+        "同批观测保持时间位置，从价格转同比",
+        "保留主体，逐一引入食材参照",
+        "减少历史图像，停在走势分歧"
+      ],
+      "retain": "观测身份、真实日期与前后指标口径；素材、标记、参照选择和观察顺序可重新设计。",
+      "adapt": "trendExample 配观测、previousId、素材与状态；createTrendModel 算同比，trendPose / blendTrend / trendMarks 管位置与显露。HTML 说明追问、素材职责及改写条件。",
+      "handoff": {
+        "enter": "从一个可识别物件或已出现的主系列进入，以读者关心的量值开始。",
+        "leave": "保留主系列及当前参照；可继续检验另一条解释线索，或回到已经建立的共同尺度。"
+      },
+      "assets": [
+        "assets/examples/material-trend/images/burger.svg",
+        "assets/examples/material-trend/images/bread.svg",
+        "assets/examples/material-trend/images/beef.svg"
+      ],
+      "relatedExample": "identity",
+      "kind": "story",
+      "preview": "assets/examples/material-trend/index.html",
+      "code": "assets/examples/material-trend/scene.mjs",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs"
+      ]
+    },
+    {
+      "id": "material-height",
+      "title": "后来者，高出多少？",
+      "kind": "story",
+      "relations": [
+        "素材",
+        "尺寸编码",
+        "时序变化",
+        "共同尺度",
+        "尺度缩放",
+        "加入记录",
+        "保留参照"
+      ],
+      "readerTask": "新信息进入已有比较时，怎样保留参照看清差异，并按需要调整观看范围？",
+      "dataNeeds": "独立可比的量值及有意义的加入理由；本例用素材长度编码真实尺寸，需统一高度口径并校准素材端点。",
+      "dataKind": "七座经典地标，1889—2010；铁塔主体与摩天楼建筑高度，排除旗杆与通信天线，不作统一排名。",
+      "process": [
+        "从早期地标建立较近的共同尺度",
+        "新记录加入时保留旧对象，超出视域时先共同缩放",
+        "在主图比较小幅超越、跨过基准与大幅跃升",
+        "保留全部地标，回看最初的参照"
+      ],
+      "retain": "记录身份、真实量值和可比参照；本例所有对象共用零点与当帧比例，观看范围可改变。",
+      "adapt": "skylineExample 配记录、素材端点、比较对与 axisMax；skylineGeometry / skylineTicks 共用 pose.scale，blendSkyline 管衔接。HTML 说明叙事动机及换题材、图形与素材的空间。",
+      "handoff": {
+        "enter": "从已经认识的一件对象进入尺寸比较；可沿用其素材、位置与计量口径。",
+        "leave": "保留已建立的同尺度对象，可继续加入记录、提取局部或转向解释尺寸变化的条件。"
+      },
+      "preview": "assets/examples/material-height/index.html",
+      "code": "assets/examples/material-height/scene.mjs",
+      "method": "references/expression-methods.md#objects",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": [
+        "assets/examples/material-height/images/eiffel.svg",
+        "assets/examples/material-height/images/chrysler.svg",
+        "assets/examples/material-height/images/empire.svg",
+        "assets/examples/material-height/images/willis.svg",
+        "assets/examples/material-height/images/petronas.svg",
+        "assets/examples/material-height/images/taipei.svg",
+        "assets/examples/material-height/images/burj.svg"
+      ],
+      "relatedExample": "record-comparison"
+    },
+    {
+      "id": "comparison-basis",
+      "title": "总量领先，换成人均呢？",
+      "relations": [
+        "比较口径",
+        "分母",
+        "归一化",
+        "人均",
+        "共同尺度"
+      ],
+      "readerTask": "直观的总量差异，对齐分母后是否仍成立？",
+      "dataNeeds": "同范围总量与正分母；本构图将分母整分为不超过 40 份，份额是计算平均而非实际个体。条件筛选需另用真实对应记录。",
+      "dataKind": "两个虚构城区的同年借阅量和人口。",
+      "method": "references/expression-methods.md#改变比较口径",
+      "process": [
+        "先看总量差",
+        "补充人口分母",
+        "突出等人口的平均份额",
+        "同一份额换成人均尺度"
+      ],
+      "retain": "同一对象的总量、真实分母、计算份额和单位对应；具体分段、标记及视角顺序可重选。",
+      "adapt": "basisExample 配总量、分母、quantum 与单位；basisReading / basisPose / blendBasis 管读数、份额和交接。HTML 区分分母解释与直接比较，说明整分限制及可改编空间。",
+      "handoff": {
+        "enter": "可直接承接已有总量比较，从尚未说明的分母开始。",
+        "leave": "保留新口径的比较结果，再看分布或历史；不必回放总量。"
+      },
+      "assets": [],
+      "relatedExample": "difference",
+      "kind": "story",
+      "preview": "assets/examples/comparison-basis/index.html",
+      "code": "assets/examples/comparison-basis/scene.mjs",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs"
+      ]
+    },
+    {
+      "id": "increment-stock",
+      "title": "年度差异，怎样接成累计轨迹",
+      "relations": [
+        "累积",
+        "新增与累计",
+        "历史基底",
+        "差距变化"
+      ],
+      "readerTask": "当期新增的优势，如何影响从不同基底出发的累计结果？",
+      "dataNeeds": "两对象的可比基底、完整期间内不重复的非负新增；有移出、销毁或重估时要改为完整净变化模型。",
+      "dataKind": "两份虚构地方影像档案，2021 年底基底与 2022—2024 年新增。",
+      "method": "references/expression-methods.md#组成与累积",
+      "process": [
+        "年度并列柱共用零点，比较各年差异",
+        "突出需要解释的一年",
+        "统一缩放，引入旧存量，年度柱段依次抬升接入",
+        "保留年份与累计轨迹，比较最后端点"
+      ],
+      "retain": "基底与每期增量的归属、单位和可加总关系；本例同批柱段从当期量变为累计轨迹中的增量。",
+      "adapt": "stockExample 配基底、增量与状态，stockTotals 共用计算，stockGeometry 管 assembly。HTML 说明叙事取舍、非负边界及换顺序和图形时的改写。",
+      "handoff": {
+        "enter": "从已知的新增优势或累计起点进入，区分它们回答的问题。",
+        "leave": "保留已建立的累计量，继续比较新时期或检验收录范围，不清空原有量。"
+      },
+      "assets": [],
+      "relatedExample": "amounts",
+      "kind": "story",
+      "preview": "assets/examples/increment-stock/index.html",
+      "code": "assets/examples/increment-stock/scene.mjs",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs"
+      ]
+    },
+    {
+      "id": "sequence-recurrence",
+      "title": "同一句话，在不同位置再次出现",
+      "kind": "story",
+      "relations": [
+        "序列",
+        "出现位置",
+        "重复",
+        "呼应",
+        "关系"
+      ],
+      "readerTask": "相同内容在不同位置再次出现时，语境与关系发生了什么变化？",
+      "dataNeeds": "可定位的原始片段、顺序和有依据的对应关系；场次不等于时长，弧线不自动表示因果或流动。",
+      "dataKind": "自写虚构短剧，八场中的三次对白及两条明确标注的呼应；表达参考 Common Threads。",
+      "process": [
+        "从一次出现建立位置与读法",
+        "新片段就位后绘出与前文的呼应",
+        "保留原位置，读说话人与处境的变化",
+        "回看序列中的几次出现"
+      ],
+      "retain": "片段出处、原序列位置和有依据的对应；连线形态、排列与显露顺序由问题决定。",
+      "adapt": "recurrenceExample 配 scenes / occurrences / links / stops，links.basis 给出依据；recurrenceGeometry / blendRecurrence 管显露与连接。HTML 说明语境追问、关系证据及替代构图。",
+      "handoff": {
+        "enter": "可从已提到的一个原文片段进入，先在序列中定位。",
+        "leave": "保留片段出处与关系，可接原文详情或另一主题；密集关系重新安排泳道或矩阵。"
+      },
+      "preview": "assets/examples/sequence-recurrence/index.html",
+      "code": "assets/examples/sequence-recurrence/scene.mjs",
+      "method": "references/expression-methods.md#序列可视化",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": [],
+      "relatedExample": "sequence"
+    },
+    {
+      "id": "comparison",
+      "kind": "mechanism",
+      "title": "从总体提取局部",
+      "relations": [
+        "整体到局部",
+        "共同尺度",
+        "差值比较",
+        "探索"
+      ],
+      "readerTask": "跟住同一对记录，看见尺度改变后数值与差额仍对应。",
+      "dataNeeds": "有稳定身份、同口径的可比量值；本例以零基线条长比较非负量。",
+      "dataKind": "六个模拟样品的重量。",
+      "preview": "assets/examples/comparison/index.html",
+      "code": "assets/examples/comparison/scene.mjs",
+      "method": "references/expression-methods.md#compare",
+      "adapt": "scene.mjs 的 comparisonSamples → quantitativePose / blendQuantitative / renderQuantitative；HTML 的 example-notes 区分核心、滚动、探索与作者工具。",
+      "dependencies": [
+        "assets/runtime/bounds.mjs",
+        "assets/runtime/format.mjs",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": [
+        "assets/examples/mechanism.css"
+      ]
+    },
+    {
+      "id": "history",
+      "kind": "mechanism",
+      "title": "历史保留与局部聚焦",
+      "relations": [
+        "时序变化",
+        "保留历史",
+        "局部定位"
+      ],
+      "readerTask": "新增观测接入原轨迹，聚焦时仍能定位其历史范围。",
+      "dataNeeds": "可连接的有序观测；缺测需断开。只在局部仍需定位时保留缩略参照。",
+      "dataKind": "2012—2024 的七条模拟观测。",
+      "preview": "assets/examples/history/index.html",
+      "code": "assets/examples/history/scene.mjs",
+      "method": "references/expression-methods.md#历史中的变化与基准",
+      "adapt": "scene.mjs 的 historyWindowExample 改记录、阅读端点与范围；historyPose 决定是否需要定位图，条件见 HTML 的 example-notes。",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs"
+      ],
+      "assets": [
+        "assets/examples/mechanism.css"
+      ]
+    },
+    {
+      "id": "sequence",
+      "kind": "mechanism",
+      "title": "从原日期换到共同起点",
+      "relations": [
+        "序列",
+        "对齐",
+        "持续时间"
+      ],
+      "readerTask": "保留每格的日期与宽度，将两段的第一夜对齐比较持续时长。",
+      "dataNeeds": "有序片段及可靠的起止位置；间隔有意义，缺测不能算连续。",
+      "dataKind": "香港天文台测站 2022、2024 年夏季最长热夜段，页面附来源。",
+      "preview": "assets/examples/sequence/index.html",
+      "code": "assets/examples/sequence/scene.mjs",
+      "method": "references/expression-methods.md#sequence",
+      "adapt": "scene.mjs 的 runs 是两个七月内的起止日号；跨月与更多行的改写边界见 HTML 的 example-notes。",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": [
+        "assets/examples/mechanism.css"
+      ]
+    },
+    {
+      "id": "amounts",
+      "kind": "mechanism",
+      "title": "整体展开与增量接入",
+      "relations": [
+        "组成",
+        "累积",
+        "部分与整体"
+      ],
+      "readerTask": "同一批分段先展开，再接到原有量上，读出可核对的总量。",
+      "dataNeeds": "同单位、不重复的非负可加总分项；基底及期间覆盖明确。",
+      "dataKind": "三批新增量合计 60，原有量 40。",
+      "preview": "assets/examples/amounts/index.html",
+      "code": "assets/examples/amounts/scene.mjs",
+      "method": "references/expression-methods.md#组成与累积",
+      "adapt": "scene.mjs 的 amountExample 改数据/基底/格式，createAmountModel 共用尺度与读数，amountPose 改排列；可加总条件与状态取舍见 HTML 的 example-notes。",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/format.mjs"
+      ],
+      "assets": [
+        "assets/examples/mechanism.css"
+      ]
+    },
+    {
+      "id": "identity",
+      "kind": "mechanism",
+      "title": "素材跟随数据对象",
+      "relations": [
+        "素材",
+        "身份",
+        "共同锚点"
+      ],
+      "readerTask": "图片、名称与价格标记一同移动，比较时仍能认出对象。",
+      "dataNeeds": "图片识别对象，点的位置编码量值；图片面积不表示数量或实物尺寸。",
+      "dataKind": "三件虚构杯子样品与价格，SVG 插画用于识别。",
+      "preview": "assets/examples/identity/index.html",
+      "code": "assets/examples/identity/scene.mjs",
+      "method": "references/expression-methods.md#objects",
+      "adapt": "scene.mjs 的 identityExample 改记录、比较对象与视域；HTML 图片 ID 与记录一致，identityPose 改锚点。取用条件见 example-notes。",
+      "dependencies": [
+        "assets/runtime/format.mjs",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": [
+        "assets/examples/mechanism.css",
+        "assets/examples/identity/images/glass.svg",
+        "assets/examples/identity/images/mug.svg",
+        "assets/examples/identity/images/travel.svg"
+      ]
+    },
+    {
+      "id": "units",
+      "kind": "mechanism",
+      "title": "同批记录改变布局与权重",
+      "relations": [
+        "单元",
+        "分布",
+        "重组",
+        "权重",
+        "探索"
+      ],
+      "readerTask": "同一批项目从主题轮廓进入分布，再比较数量和服务时长。",
+      "dataNeeds": "有稳定 ID 的逐条记录、类别、量值和非负权重；轮廓只作主题识别。",
+      "dataKind": "60 个模拟项目；A 类数量多，C 类数量少但服务时长大。",
+      "preview": "assets/examples/units/index.html",
+      "code": "assets/examples/units/scene.mjs",
+      "method": "references/expression-methods.md#unit-distribution",
+      "adapt": "scene.mjs 的 unitExample 改记录/类别/标定，slots 改轮廓；unitPose / blendUnits / renderUnits 接状态，HTML 的 example-notes 说明各状态用途。",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/units.mjs"
+      ],
+      "assets": [
+        "assets/examples/mechanism.css"
+      ]
+    },
+    {
+      "id": "difference",
+      "kind": "mechanism",
+      "title": "两期端点转为有符号差值",
+      "relations": [
+        "比较",
+        "差值",
+        "增减",
+        "共同参照"
+      ],
+      "readerTask": "同一记录的两个端点转到零参照，区分增加、减少与不变。",
+      "dataNeeds": "两期同口径可比较量值；差值域含零及正负结果。",
+      "dataKind": "三条模拟记录分别增加、减少与不变。",
+      "preview": "assets/examples/difference/index.html",
+      "code": "assets/examples/difference/scene.mjs",
+      "method": "references/expression-methods.md#compare",
+      "adapt": "scene.mjs 的 differenceExample 改数据/域；index.html 的 rowY / renderAxis 改排列与刻度，example-notes 解释参照变化。",
+      "dependencies": [
+        "assets/runtime/format.mjs",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": [
+        "assets/examples/mechanism.css"
+      ]
+    }
+  ]
+}

@@ -24,7 +24,7 @@
 
 [svg.mjs](../assets/runtime/svg.mjs) 的 `createSvgLayer` 接受 keyed Map 或含唯一 `id` 的记录序列，管理一个独立 `<g>`：进入时调用 `create`，后续帧只 `update`，当帧姿态不再包含该 ID 时才移除。`create` 返回新建 SVG 元素，可带作品自己的子元素和事件；节点与事件保留，事件中用 `marks.data(id)` 读取当前记录。它沿用现有播放器，不另开时钟；已有 D3 join 等更新机制时无需叠加使用。
 
-`setSvgAttributes` 只更新传入属性，`null / undefined` 移除属性；`svgElement(tag, attributes, text)` 将文本作为文字写入。[端点到差值](implementation-geometry.md#两期端点到差值)将格式化、稳定节点与播放器接在同一段代码里；[comparison.mjs](../assets/examples/comparison.mjs) 的 `renderQuantitative` 另示范轴、点和标注分别更新。
+`setSvgAttributes` 只更新传入属性，`null / undefined` 移除属性；`svgElement(tag, attributes, text)` 将文本作为文字写入。[端点到差值](implementation-geometry.md#两期端点到差值)将格式化、稳定节点与播放器接在同一段代码里；[comparison/scene.mjs](../assets/examples/comparison/scene.mjs) 的 `renderQuantitative` 另示范轴、点和标注分别更新。
 
 ### 实际占位与空间诊断
 

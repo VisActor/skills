@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>每年收得更多，累计呢？ · 新增与累计</title>
+<style>
+:root{color:#e5eee7;background:#172b33;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}*{box-sizing:border-box}body{margin:0}a{color:inherit;text-underline-offset:5px}header{display:flex;justify-content:space-between;padding:27px 5vw;border-bottom:1px solid #3a4d52;font-size:13px;color:#a0b5b5}.lead{max-width:880px;margin:0 auto;padding:65px 35px 70px;text-align:center}.lead h1{font-family:"Songti SC","Noto Serif CJK SC",serif;font-size:clamp(36px,4vw,57px);line-height:1.4;font-weight:550;margin:0 0 24px}.lead p{max-width:540px;margin:auto;font-size:18px;line-height:1.9;color:#bacac5}.kicker{font-size:12px!important;letter-spacing:.12em;color:#a0b5b5!important;margin:0 0 16px}
+.story{position:relative;display:grid;grid-template-columns:minmax(245px,25%) minmax(0,1fr);gap:2vw;padding:0 4vw}.archive-stage{grid-area:1/2;position:sticky;top:0;height:100vh;min-height:530px;display:flex;align-items:center}figure{margin:0;width:100%}svg{display:block;width:100%;max-height:92vh;overflow:visible}svg text{font-family:inherit}.axis line{stroke:#365058;stroke-dasharray:3 6}.axis text{fill:#8ea6a6;font-size:20px}.metric{fill:#b7c9c7;font-size:21px}.legend{font-size:21px}.years text{fill:#a4b9b7;font-size:23px}.total{font-size:30px;font-variant-numeric:tabular-nums}.increment{font-size:25px;font-variant-numeric:tabular-nums}
+.reading-flow{grid-area:1/1;position:relative;padding-top:28vh}article{min-height:98vh}article:last-of-type{min-height:0}.copy{padding:12px 0 32px}h2{font-family:"Songti SC","Noto Serif CJK SC",serif;font-size:clamp(30px,2.7vw,40px);line-height:1.4;font-weight:550;margin:0 0 22px}.copy p{font-size:17px;line-height:1.9;color:#bacac5;margin:0}.copy em{font-style:normal;color:#e7af69;white-space:nowrap}.reading-tail{height:0}footer{border-top:1px solid #3a4d52;padding:40px 8vw 65px}footer p{font-size:14px;line-height:1.85;max-width:860px;color:#a0b5b5;margin:14px 0}details{max-width:900px;margin-top:26px}summary{cursor:pointer}details h3{font-size:16px;margin:26px 0 8px}code{font-size:.95em}
+</style></head><body>
+<header><span>两份地方影像档案 · 模拟记录</span><a href="../index.html#story-examples">示例索引 ↗</a></header>
+<main id="stock-story">
+<section class="lead"><p class="kicker">从这一年，到这些年</p><h1>每年收得更多，<br>累计就更多了吗？</h1><p>东岸连续三年收进的影像都比西岸多。把这三年的记录接回原有档案，答案才完整。</p></section>
+<section class="story" aria-label="年度新增转为沿时间展开的累计轨迹">
+<div class="archive-stage"><figure><svg viewBox="0 0 1050 690" role="img" aria-label="年度新增比较"></svg></figure></div>
+<div class="reading-flow">
+<article id="annual"><div class="copy" data-state="annual"><p class="kicker">先看每一年</p><h2>三年里，<br>东岸每年都更多。</h2><p>把同一年的新增放在一起，差异很清楚：东岸不仅领先，还在逐年增加。</p></div></article>
+<article id="latest"><div class="copy" data-state="latest"><p class="kicker">2024 年的差异</p><h2>这一年，<br>已经是三倍。</h2><p>东岸新增 <em data-fact="east-latest">300 份</em>，西岸新增 <span data-fact="west-latest">100 份</span>。如果只看今年，东岸明显领先。</p></div></article>
+<article id="accumulate"><div class="copy" data-state="accumulate"><p class="kicker">再把起点接回来</p><h2>但档案，<br>不是从零开始的。</h2><p>2021 年底，西岸原本多出 <span data-fact="initialGap">1,000 份</span>。接下来每年的新增，都要加在前一年的已有量之上。</p></div></article>
+<article id="compare"><div class="copy" data-state="compare"><p class="kicker">沿着这些年，看结果</p><h2>每年多收一些，<br>还没有追上。</h2><p>如今，东岸累计 <em data-fact="east-total">1,920 份</em>，西岸累计 <span data-fact="west-total">2,500 份</span>。</p><p data-reading-end>三年缩小了 <span data-fact="closed">420 份</span>差距，但仍相差 <span data-fact="finalGap">580 份</span>。增长更快，与总量更多，回答的是不同问题。</p></div></article>
+<div class="reading-tail" aria-hidden="true"></div>
+</div></section>
+<footer><p>本例使用模拟记录：2021 年底已有量及 2022—2024 年完整新增，假定没有移出、重复收录或销毁；不代表真实机构。</p>
+<details id="example-notes"><summary>叙事、可视化选择与改编</summary>
+  <p><strong>叙事设计：</strong><a href="../../../references/expression-methods.md#组成与累积">新增优势 → 追问累计结果</a>。先看每年谁增加更多，再把各自的旧基底接回来，解释“增长更快”为何不一定“总量更多”。前文已建立新增差异时，可从基底开始。</p>
+  <p><strong>可视化选择：</strong>年度并列柱共用零点，先读各年差异；同一批柱段换尺度、接到前一年累计端点，呈现累积关系。柱段长度仍是当年新增，柱顶成为累计量，年份与对象身份保留。</p>
+  <p><strong>改编空间：</strong>需要可比基底与期间完整、不重复的增量；本例仅处理非负新增。可从累计结果倒查新增，也可换成横条、堆叠或其他量值表达。只问年度变化时无需累积；移出、负项和重估须纳入净变化，重写几何与结论。</p>
+  <p><strong>代码入口：</strong><code>stockExample</code> 配基底、增量和状态，<code>stockTotals</code> 共用计算，<code>stockGeometry</code> 用 <code>assembly</code> 安排缩放与抬升。保留量值和归属，按实际年份密度、比较对象及正文重新排布。</p>
+  <p><a href="scene.mjs">本例数据与代码</a></p>
+</details></footer></main>
+<script type="module">import { mountStock } from './scene.mjs';const story=mountStock(document.querySelector('#stock-story'));addEventListener('pagehide',e=>{if(!e.persisted)story.dispose()});</script></body></html>

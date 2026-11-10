@@ -1,7 +1,17 @@
-import { at, lerp, linearScale } from "../runtime/geometry.mjs";
-import { createPlayer } from "../runtime/motion.mjs";
-import { createValueFormat } from "../runtime/format.mjs";
-import { createSvgLayer, setSvgAttributes, svgElement } from "../runtime/svg.mjs";
+import { at, lerp, linearScale } from "../../runtime/geometry.mjs";
+import { createPlayer } from "../../runtime/motion.mjs";
+import { createValueFormat } from "../../runtime/format.mjs";
+import { createSvgLayer, setSvgAttributes, svgElement } from "../../runtime/svg.mjs";
+
+// 改写入口：同口径的两期值；差值域须覆盖零与所有结果，HTML 的刻度和行位置随之调整。
+export const differenceExample = {
+  rows: [
+    { id: "a", name: "甲", before: 40, after: 65 },
+    { id: "b", name: "乙", before: 30, after: 18 },
+    { id: "c", name: "丙", before: 12, after: 12 },
+  ],
+  levelDomain: [0, 70], changeDomain: [-15, 30], unit: "件",
+};
 
 /**
  * 同口径两期端点 → 以零为参照的有符号差值，包含增加、减少、不变的模拟记录。
@@ -9,17 +19,14 @@ import { createSvgLayer, setSvgAttributes, svgElement } from "../runtime/svg.mjs
  * 输入：SVG 元素、读数元素、横向像素范围、rowY(id) 行位置函数；
  * renderAxis(scale, reading) 按给定尺度绘轴，scale 为 null 时隐藏轴。
  * view.show("levels" | "change") 选择完整状态，view.dispose() 释放播放器与图层。
- * 替换 facts、尺度和绘制样式以匹配自己的设计；从已有图形进入时另接原图的实际几何。
+ * 改 differenceExample；index.html 的 rowY / renderAxis 负责行布局和刻度。
+ * 连接时隐藏两端刻度，因为移动中的坐标不再代表任一端的量值；原始记录与行身份保留。
  */
 export function mountDifference({ svg, readout, plotRange, rowY, renderAxis }) {
-  const facts = [
-    { id: "a", name: "甲", before: 40, after: 65 },
-    { id: "b", name: "乙", before: 30, after: 18 },
-    { id: "c", name: "丙", before: 12, after: 12 },
-  ].map(row => ({ ...row, delta: row.after - row.before }));
-  const reading = createValueFormat({ unit: "件", digits: 0 });
-  const levels = linearScale([0, 70], plotRange);
-  const changes = linearScale([-15, 30], plotRange); // 比较域包含零及所有差值。
+  const facts = differenceExample.rows.map(row => ({ ...row, delta: row.after - row.before }));
+  const reading = createValueFormat({ unit: differenceExample.unit, digits: 0 });
+  const levels = linearScale(differenceExample.levelDomain, plotRange);
+  const changes = linearScale(differenceExample.changeDomain, plotRange);
   const describe = (row, mode) => mode === "levels"
     ? `${row.name}：${reading.format(row.before)} → ${reading.format(row.after)}`
     : `${row.name}：${row.delta > 0 ? "+" : ""}${reading.format(row.delta)}`;
