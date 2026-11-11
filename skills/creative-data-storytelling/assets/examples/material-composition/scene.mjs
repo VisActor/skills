@@ -9,11 +9,12 @@ import { createSvgLayer, svgElement, setSvgAttributes } from "../../runtime/svg.
  * 一段有素材、组成编码与阅读节奏的完整装配参考，不是运行模块或整页模板。
  * 入口见同目录 index.html。独立取用时保留 runtime 的相对依赖。
  * 数据/图片：foodWaste；主题：HTML 的 CSS 变量；节奏：mount 的 duration 与正文间距。
- * 改 foodWaste 的分项与图片后，同步 materialPose 的 home 强调、半数参照及 HTML 的 data-home-share。
+ * 改 data 的分项、图片与 focusId；HTML 的 data-focus-share / data-other-share 绑定当前重点。
+ * 只取 places / shares 时可不设 focusId；majority 需重点份额确实超过半数。
  * 三种场景的图片尺寸服务于识别，色带长度才表示占比；更换比较问题时一起改正文与参照。
  */
 export const foodWaste = {
-  year: 2022, totalBillionTonnes: 1.05,
+  year: 2022, totalBillionTonnes: 1.05, focusId: "home",
   source: "https://www.unep.org/en/news-and-stories/press-release/world-squanders-over-1-billion-meals-day-un-report",
   rows: [
     { id: "home", label: "家庭", share: 60, image: "images/home.webp", imageAspect: 4 / 3, introX: 185, introWidth: 335, shareWidth: 405 },
@@ -29,9 +30,12 @@ const percent = createValueFormat({ unit: "%", separator: "", digits: 0 });
 export function materialPose(mode, data = foodWaste) {
   if (!["places", "shares", "majority"].includes(mode)) throw new Error("Unknown material story state: " + mode);
   const rows = data.rows;
+  const byId = keyed(rows), focus = byId.get(data.focusId);
   if (rows.some((row) => !Number.isFinite(row.share) || row.share < 0) ||
       Math.abs(rows.reduce((sum, row) => sum + row.share, 0) - 100) > 1e-8)
     throw new Error("This composition needs nonnegative, disjoint shares with one denominator and a 100% total");
+  if (mode === "majority" && (!focus || focus.share <= 50))
+    throw new Error("Majority reading needs a focusId whose share is greater than 50%");
   const grouped = mode !== "places";
   let start = 0;
   const nodes = keyed(rows.map((row) => {
@@ -46,7 +50,7 @@ export function materialPose(mode, data = foodWaste) {
       imageBottom: grouped ? 316 : 335,
       labelX: grouped ? x + width / 2 : row.introX,
       bandOpacity: grouped ? 1 : 0,
-      imageOpacity: mode === "majority" && row.id !== "home" ? 0.55 : 1,
+      imageOpacity: mode === "majority" && row.id !== data.focusId ? 0.55 : 1,
       opacity: 1,
     };
   }));
@@ -68,12 +72,17 @@ export function mountMaterialStory(root, { data = foodWaste, duration = 1250 } =
   const $ = (selector) => root.querySelector(selector);
   const svg = $("#material-chart");
   const colors = getComputedStyle(root);
-  const colorFor = (id) => colors.getPropertyValue("--" + id).trim();
   const byId = keyed(data.rows);
+  const colorFor = (id) => byId.get(id)?.color ?? (colors.getPropertyValue("--" + id).trim() || "#56776c");
+  const steps = [...root.querySelectorAll("[data-story-state]")].map((element) => ({ element, id: element.dataset.storyState }));
+  steps.forEach(step => materialPose(step.id, data));
   const total = createValueFormat({ divisor: 0.1, digits: 1 });
-  $("[data-total]").textContent = total.number(data.totalBillionTonnes);
-  $("[data-home-share]").textContent = percent.format(byId.get("home").share);
-  $("[data-other-share]").textContent = percent.format(100 - byId.get("home").share);
+  if ($("[data-total]")) $("[data-total]").textContent = total.number(data.totalBillionTonnes);
+  root.querySelectorAll("[data-focus-share], [data-other-share]").forEach(el => {
+    const focus = byId.get(data.focusId);
+    if (!focus) throw new Error("Focus share text needs an existing focusId");
+    el.textContent = percent.format(el.hasAttribute("data-focus-share") ? focus.share : 100 - focus.share);
+  });
   const listeners = new AbortController();
   const imageLayer = createSvgLayer(svg, {
     attributes: { "data-layer": "scenes" },
@@ -107,11 +116,10 @@ export function mountMaterialStory(root, { data = foodWaste, duration = 1250 } =
     },
   });
   const guide = svgElement("g", { "aria-hidden": "true", opacity: 0, "data-guide": "half" });
-  const halfX = shareScale.x + shareScale.width / 2;
-  guide.append(svgElement("line", { x1: halfX, x2: halfX, y1: shareScale.y, y2: shareScale.y + shareScale.height,
+  guide.append(svgElement("line", { y1: shareScale.y, y2: shareScale.y + shareScale.height,
     stroke: colors.getPropertyValue("--paper").trim(), "stroke-width": 3 }),
-  svgElement("line", { x1: halfX, x2: halfX, y1: 368, y2: 384, stroke: colorFor("home"), "stroke-width": 1.5 }),
-  svgElement("text", { x: halfX, y: 408, "text-anchor": "middle", class: "half-label" }, "一半 · 50%"));
+  svgElement("path", { fill: "none", stroke: colorFor(data.focusId), "stroke-width": 1.5 }),
+  svgElement("text", { y: 510, "text-anchor": "middle", class: "half-label" }, "全部的一半 · 50%"));
   svg.append(guide);
   const extent = svgElement("g", { "aria-hidden": "true", opacity: 0 });
   extent.append(svgElement("text", { x: shareScale.x, y: 500, class: "axis-note" }, "0"),
@@ -123,22 +131,29 @@ export function mountMaterialStory(root, { data = foodWaste, duration = 1250 } =
     imageLayer.render(pose.nodes);
     bandLayer.render(pose.nodes);
     labels.render([...pose.nodes.values()].map((node) => ({ ...node, readoutOpacity })));
+    const focus = pose.nodes.get(data.focusId);
+    if (focus) {
+      const halfX = focus.x + shareScale.width / 2;
+      setSvgAttributes(guide.children[0], { x1: halfX, x2: halfX });
+      setSvgAttributes(guide.children[1], { d: `M${focus.x},477v7H${halfX}v-7` });
+      setSvgAttributes(guide.children[2], { x: (focus.x + halfX) / 2 });
+    }
     setSvgAttributes(guide, { opacity: pose.annotations.get("half-of-total")?.opacity ?? 0 });
     setSvgAttributes(extent, { opacity: readoutOpacity });
     svg.dataset.state = pose.mode;
     svg.dataset.moving = String(frame.moving);
     if (!frame.moving) {
       const description = pose.mode === "places"
-        ? "三处场景，共同构成零售与消费环节的食物废弃物。"
+        ? data.rows.map(row => row.label).join("、") + "，共同构成全部分项。"
         : data.rows.map((row) => row.label + "占 " + percent.format(row.share)).join("，") + "。";
       svg.setAttribute("aria-label", description);
-      $("#chart-description").textContent = pose.mode === "places" ? description : "全球零售与消费环节 · 色带长度表示占比";
+      $("#chart-description").textContent = pose.mode === "places" ? description : "同一总体 · 色带长度表示占比";
     }
   }
   const exit = reserveStageExit({ sticky: $(".stage-panel"), readingEnd: $("[data-reading-end]"),
     spacer: $(".reading-tail"), releaseRatio: 0.4 });
   const stage = createStage({ element: svg,
-    steps: [...root.querySelectorAll("[data-story-state]")].map((element) => ({ element, id: element.dataset.storyState })),
+    steps,
     layout: (id) => materialPose(id, data), blend: blendMaterialPose, render, duration, viewportRatio: 0.59,
   });
   // Navigation stays ordinary document scrolling; it does not become a second animation controller.

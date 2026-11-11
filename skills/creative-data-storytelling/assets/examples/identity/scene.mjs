@@ -16,19 +16,19 @@ export const identityExample = {
 
 /**
  * 同一对象姿态同时驱动 HTML 图片与 SVG 证据；独立接线示例。
- * 用法：mountIdentity(document.querySelector("#identity-example"))，返回 dispose()。
+ * 用法：mountIdentity(root, config = identityExample)，返回 dispose()。
  * root 提供 #identity（viewBox 0 0 860 430）、#identity-summary、#identity-buttons；
- * 按钮 data-mode 为 all / pair，图片 data-object-image 对应 glass / mug / travel。
+ * 按钮 data-mode 为 all / pair，图片 data-object-image 对应 config.rows 中的 ID。
  * HTML 图片层与 SVG 共用无内边距的比例容器；图片绝对定位并使用 translate(-50%, -100%)。
  * identityPose / blendIdentity / renderIdentity 展示共同锚点，图片本身不编码价格。
  * 改 identityExample 的数据/范围、identityPose 的图片偏移与大小、HTML 的素材和正文。
  * 异容器或裁切时需换算坐标；普通配图无需进入共同姿态。
  */
-export function mountIdentity(root) {
+export function mountIdentity(root, config = identityExample) {
   const $ = (selector) => root.querySelector(selector);
   const listeners = new AbortController();
   const listen = (target, type, handler) => target.addEventListener(type, handler, { signal: listeners.signal });
-  const { rows: identityRows, selected, domains, ticks, unit } = identityExample;
+  const { rows: identityRows, selected, domains, ticks, unit } = config;
   const identitySize = { width: 860, height: 430 };
   const identityFormat = createValueFormat({ unit, digits: 0 });
   const identitySvg = $("#identity");

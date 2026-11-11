@@ -15,18 +15,18 @@ export const differenceExample = {
 
 /**
  * 同口径两期端点 → 以零为参照的有符号差值，包含增加、减少、不变的模拟记录。
- * 用法：const view = mountDifference({ svg, readout, plotRange, rowY, renderAxis });
+ * 用法：const view = mountDifference({ svg, readout, plotRange, rowY, renderAxis, config });
  * 输入：SVG 元素、读数元素、横向像素范围、rowY(id) 行位置函数；
  * renderAxis(scale, reading) 按给定尺度绘轴，scale 为 null 时隐藏轴。
  * view.show("levels" | "change") 选择完整状态，view.dispose() 释放播放器与图层。
- * 改 differenceExample；index.html 的 rowY / renderAxis 负责行布局和刻度。
+ * config 默认 differenceExample；rowY / renderAxis 仍由调用方负责行布局和刻度。
  * 连接时隐藏两端刻度，因为移动中的坐标不再代表任一端的量值；原始记录与行身份保留。
  */
-export function mountDifference({ svg, readout, plotRange, rowY, renderAxis }) {
-  const facts = differenceExample.rows.map(row => ({ ...row, delta: row.after - row.before }));
-  const reading = createValueFormat({ unit: differenceExample.unit, digits: 0 });
-  const levels = linearScale(differenceExample.levelDomain, plotRange);
-  const changes = linearScale(differenceExample.changeDomain, plotRange);
+export function mountDifference({ svg, readout, plotRange, rowY, renderAxis, config = differenceExample }) {
+  const facts = config.rows.map(row => ({ ...row, delta: row.after - row.before }));
+  const reading = createValueFormat({ unit: config.unit, digits: config.digits ?? 0 });
+  const levels = linearScale(config.levelDomain, plotRange);
+  const changes = linearScale(config.changeDomain, plotRange);
   const describe = (row, mode) => mode === "levels"
     ? `${row.name}：${reading.format(row.before)} → ${reading.format(row.after)}`
     : `${row.name}：${row.delta > 0 ? "+" : ""}${reading.format(row.delta)}`;

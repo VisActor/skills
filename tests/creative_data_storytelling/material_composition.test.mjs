@@ -47,3 +47,25 @@ test("redirecting an unfinished scene keeps object identity and the sampled pose
   assert.deepEqual([...final.pose.nodes.keys()], [...middle.nodes.keys()]);
   assert.deepEqual([...final.pose.nodes.values()].map((node) => node.row.share), foodWaste.rows.map((row) => row.share));
 });
+
+test("composition can highlight a different category without renaming it to home", () => {
+  const data = { ...foodWaste, focusId: "late", rows: foodWaste.rows.map((row, i) =>
+    ({ ...row, id: ["first", "second", "late"][i], share: [15, 25, 60][i] })) };
+  const from = materialPose("shares", data), to = materialPose("majority", data);
+  for (const t of [0, .25, .5, .9, 1]) {
+    const pose = blendMaterialPose(from, to, t);
+    assert.equal(pose.nodes.get("late").imageOpacity, 1);
+    assert.equal(pose.nodes.get("late").x, shareScale.x + .4 * shareScale.width);
+    assert.equal(pose.nodes.get("late").width, .6 * shareScale.width);
+  }
+  assert.equal(to.nodes.get("first").imageOpacity, .55);
+});
+
+test("composition-only fragment works without a focus but a majority claim still needs evidence", () => {
+  const data = { rows: foodWaste.rows.map((row, i) => ({ ...row, id: "kind-" + i, share: [25, 40, 35][i] })) };
+  const places = materialPose("places", data), shares = materialPose("shares", data);
+  assert.deepEqual([...places.nodes.keys()], [...shares.nodes.keys()]);
+  assert.equal([...shares.nodes.values()].reduce((sum, node) => sum + node.width, 0), shareScale.width);
+  assert.throws(() => materialPose("majority", data), /focusId/);
+  assert.throws(() => materialPose("majority", { ...data, focusId: "kind-1" }), /50%/);
+});

@@ -27,7 +27,7 @@
     <p id="identity-summary" class="result" aria-live="polite"></p>
     <details id="example-notes" class="scope"><summary>表达理由与改编</summary>
   <p><strong>表达理由：</strong><a href="../../../references/expression-methods.md#objects">素材识别对象</a>：图片、名称与量值标记共用锚点，变化中仍可认出同一对象。本例点的位置表示价格，图片大小服务识别。</p>
-  <p><strong>改编与接线：</strong>照片、图标或文字都可承担身份；选择跟随哪些对象由追问决定。<code>identityExample</code> 配记录、<code>selected</code> 与视域；图片 ID 对应记录，<code>identityPose</code> 改锚点偏移。图像层与几何层共用无内边距的比例容器，普通配图可静态安排。</p>
+  <p><strong>改编与接线：</strong>照片、图标或文字都可承担身份；选择跟随哪些对象由追问决定。<code>mountIdentity(root, config)</code> 接记录、<code>selected</code> 与视域，配置形状见 <code>identityExample</code>；图片 ID 对应记录。图像层与几何层共用无内边距的比例容器，锚点偏移在 <code>identityPose</code> 调整，普通配图可静态安排。</p>
   <p><a href="scene.mjs">本例数据与代码</a></p>
 </details>
   </section>

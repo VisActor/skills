@@ -118,7 +118,7 @@
         "停在有端点差值的比较画面"
       ],
       "retain": "选中对象与原总体的对应关系、选择依据和比较口径；是否提取、怎样标记与排列取决于当前问题。",
-      "adapt": "journeys / comparisonIds 选记录，detailStoryPose / blendDetailStory 改布局与衔接。HTML 说明提取理由、替代表达和前后承接。",
+      "adapt": "mountDetailStory 接 rows、selected、layout；标签区、行距与比较位置可配置，detailStoryPose / blendDetailStory 保持对象和零基线连续。正文另行解释选取理由。",
       "handoff": {
         "enter": "直接接已有全景；若全景已实现，从它的当前姿态和同一批 ID 开始，不再播放重复开场。",
         "leave": "留下选中记录、单位和差值；可以解释某个对象或反向返回全景。其他记录退出主图，不必留下重复小图。"
@@ -157,7 +157,7 @@
         "增加半数参照，突出最大部分"
       ],
       "retain": "类别身份、同分母份额与完整总体；图片、量值标记、参照和排列可以重选。",
-      "adapt": "foodWaste 换分项和图片，shareScale / materialPose / blendMaterialPose 改几何与交接。HTML 说明场景引入、份额证据及需要随问题替换的重点。",
+      "adapt": "mountMaterialStory 接 data：分项、素材、颜色及 focusId。只取 places / shares 可省略重点；majority 需份额超过半数，图片不编码量值。",
       "handoff": {
         "enter": "可作为主题引入，也可承接已出现的同一批类别图片，避免重新介绍。",
         "leave": "留下各类别的身份、色彩和占比；可继续展开某一部分，或将同一组区间接入跨期比较。"
@@ -199,7 +199,7 @@
         "减少历史图像，停在走势分歧"
       ],
       "retain": "观测身份、真实日期与前后指标口径；素材、标记、参照选择和观察顺序可重新设计。",
-      "adapt": "trendExample 配观测、previousId、素材与状态；createTrendModel 算同比，trendPose / blendTrend / trendMarks 管位置与显露。HTML 说明追问、素材职责及改写条件。",
+      "adapt": "mountTrend 接 config：观测、素材、停留点和读数格式；raw 可独立取用，yoy 才需去年同期依据。trendPose / blendTrend / trendMarks 保持时间身份与连续显露。",
       "handoff": {
         "enter": "从一个可识别物件或已出现的主系列进入，以读者关心的量值开始。",
         "leave": "保留主系列及当前参照；可继续检验另一条解释线索，或回到已经建立的共同尺度。"
@@ -431,7 +431,7 @@
       "preview": "assets/examples/history/index.html",
       "code": "assets/examples/history/scene.mjs",
       "method": "references/expression-methods.md#历史中的变化与基准",
-      "adapt": "scene.mjs 的 historyWindowExample 改记录、阅读端点与范围；historyPose 决定是否需要定位图，条件见 HTML 的 example-notes。",
+      "adapt": "mountHistory(root, config) 接记录、early / focus、轴域与刻度，默认配置见 historyWindowExample；定位窗口跟随当前尺度。",
       "dependencies": [
         "assets/runtime/geometry.mjs",
         "assets/runtime/motion.mjs"
@@ -505,7 +505,7 @@
       "preview": "assets/examples/identity/index.html",
       "code": "assets/examples/identity/scene.mjs",
       "method": "references/expression-methods.md#objects",
-      "adapt": "scene.mjs 的 identityExample 改记录、比较对象与视域；HTML 图片 ID 与记录一致，identityPose 改锚点。取用条件见 example-notes。",
+      "adapt": "mountIdentity(root, config) 接记录、比较对象、域与单位，配置形状见 identityExample；HTML 图片 ID 与记录对应，共用姿态。",
       "dependencies": [
         "assets/runtime/format.mjs",
         "assets/runtime/geometry.mjs",
@@ -562,7 +562,7 @@
       "preview": "assets/examples/difference/index.html",
       "code": "assets/examples/difference/scene.mjs",
       "method": "references/expression-methods.md#compare",
-      "adapt": "scene.mjs 的 differenceExample 改数据/域；index.html 的 rowY / renderAxis 改排列与刻度，example-notes 解释参照变化。",
+      "adapt": "mountDifference 的 config 接两期数据、域、单位和精度；调用方提供 rowY / renderAxis。连接时先交接参照，落位后显示有符号差值。",
       "dependencies": [
         "assets/runtime/format.mjs",
         "assets/runtime/geometry.mjs",

@@ -9,6 +9,7 @@ import { createSvgLayer, setSvgAttributes, svgElement } from "../../runtime/svg.
 // Economist: AUS half-year prices. ABS: quarterly bread A2327061R, beef A2327241X,
 // June 2024 Table 7. 2016 records support same-period year-on-year calculations.
 export const trendExample = {
+  "metric": "巨无霸价格", "unit": "澳元", "valuePrefix": "$",
   "primaryId": "burger",
   "startDate": "2017-01-01",
   "endDate": "2024-07-01",
@@ -191,11 +192,15 @@ const fmt = (n, digits = 1) => new Intl.NumberFormat('zh-CN', { maximumFractionD
 const signed = n => `${n > 0 ? '+' : ''}${fmt(n)}%`;
 
 export function createTrendModel(config = trendExample) {
-  keyed(config.series); const start = Date.parse(config.startDate), end = Date.parse(config.endDate);
+  keyed(config.series); const stops = keyed(config.stops);
+  // 原值片段不需要为未使用的同比状态补数据；进入同比的系列才核查同期分母。
+  const rateIds = new Set([...stops.values()].filter(stop => stop.basis === 'yoy').flatMap(stop => stop.visible ?? []));
+  const start = Date.parse(config.startDate), end = Date.parse(config.endDate);
   if (!(Number.isFinite(start) && end > start)) throw new Error('Trend needs an ordered date window');
   const rows = config.series.map(series => {
     const records = keyed(series.observations);
-    if (!Number.isInteger(series.frequency) || series.frequency < 1 || 12 % series.frequency) throw new Error("Observation frequency must divide the year");
+    const needsRate = rateIds.has(series.id);
+    if (needsRate && (!Number.isInteger(series.frequency) || series.frequency < 1 || 12 % series.frequency)) throw new Error("Observation frequency must divide the year");
     const period = date => Math.floor((Number(date.slice(5,7))-1)/(12/series.frequency));
     series.observations.forEach((p,i,all) => {
       if (!Number.isFinite(p.value) || p.value < 0 || !Number.isFinite(Date.parse(p.date)) ||
@@ -203,29 +208,34 @@ export function createTrendModel(config = trendExample) {
     });
     const points = series.observations.filter(p => Date.parse(p.date) >= start && Date.parse(p.date) <= end).map(p => {
       const previous = records.get(p.previousId);
-      if (!previous || previous.value <= 0 || Number(previous.date.slice(0,4)) !== Number(p.date.slice(0,4))-1 || period(previous.date) !== period(p.date))
+      if (needsRate && (!previous || previous.value <= 0 || Number(previous.date.slice(0,4)) !== Number(p.date.slice(0,4))-1 || period(previous.date) !== period(p.date)))
         throw new Error('Each displayed observation needs a positive prior-year record: ' + p.id);
-      return { ...p, time: Date.parse(p.date), yoy: (p.value / previous.value - 1) * 100 };
+      return { ...p, time: Date.parse(p.date), yoy: needsRate ? (p.value / previous.value - 1) * 100 : null };
     });
     if (points.length < 2) throw new Error('Trend needs at least two displayed observations');
     if (series.comparisonMarkId && !points.some(p=>p.id===series.comparisonMarkId)) throw new Error('Comparison material must mark a displayed observation');
     return { ...series, points };
   });
   keyed(rows.flatMap(row => row.points));
-  const byId = new Map(rows.map(row=>[row.id,row])), primary = byId.get(config.primaryId), stops = keyed(config.stops);
+  const byId = new Map(rows.map(row=>[row.id,row])), primary = byId.get(config.primaryId);
   if (!primary) throw new Error('primaryId must identify an existing series');
   for (const stop of stops.values()) {
     if (!['raw','yoy'].includes(stop.basis) || !stop.visible?.includes(primary.id) || stop.visible.some(id=>!byId.has(id)) ||
         (stop.basis==='raw' && (stop.visible.length!==1 || !primary.points.some(p=>p.id===stop.throughId))))
       throw new Error('Reading needs known series, basis and an observed raw endpoint');
   }
-  const prices=primary.points.map(p=>p.value), rates=rows.flatMap(row=>row.points.map(p=>p.yoy));
-  const rawLow=Math.floor((Math.min(...prices)-.1)*2)/2, rawHigh=Math.ceil((Math.max(...prices)+.1)*2)/2;
+  const prices=primary.points.map(p=>p.value), rates=rows.flatMap(row=>row.points.map(p=>p.yoy)).filter(Number.isFinite);
+  const span=Math.max(...prices)-Math.min(...prices) || Math.max(Math.abs(prices[0])*.2,1), power=10**Math.floor(Math.log10(span/8));
+  const rawStep=[1,2,5,10].find(n=>n*power>=span/8)*power;
+  const rawLow=Math.floor((Math.min(...prices)-span*.03)/rawStep)*rawStep, rawHigh=Math.ceil((Math.max(...prices)+span*.03)/rawStep)*rawStep;
   const rateLow=Math.floor((Math.min(0,...rates)-1)/5)*5, rateHigh=Math.ceil((Math.max(0,...rates)+1)/5)*5;
-  return { rows,byId,primary,stops,start,end,x:linearScale([start,end],[plot.left,plot.right]),
-    rawScale:linearScale([rawLow,rawHigh],[plot.bottom,plot.top]), rateScale:linearScale([rateLow,rateHigh],[plot.bottom,plot.top]),
-    rawTicks:Array.from({length:Math.round((rawHigh-rawLow)*2)+1},(_,i)=>rawLow+i*.5),
-    rateTicks:Array.from({length:Math.round((rateHigh-rateLow)/5)+1},(_,i)=>rateLow+i*5) };
+  const metric=config.metric ?? '数值', unit=config.unit ?? '', prefix=config.valuePrefix ?? '';
+  return { rows,byId,primary,stops,start,end,metric,unit,
+    amount:config.formatValue ?? (value=>prefix+fmt(value,2)+(prefix || !unit ? '' : ' '+unit)),
+    x:linearScale([start,end],[plot.left,plot.right]),
+    rawScale:linearScale([rawLow,rawHigh],[plot.bottom,plot.top]), rateScale:rates.length?linearScale([rateLow,rateHigh],[plot.bottom,plot.top]):null,
+    rawTicks:Array.from({length:Math.round((rawHigh-rawLow)/rawStep)+1},(_,i)=>rawLow+i*rawStep),
+    rateTicks:rates.length?Array.from({length:Math.round((rateHigh-rateLow)/5)+1},(_,i)=>rateLow+i*5):[] };
 }
 
 export function trendPose(id,model=createTrendModel()) {
@@ -234,10 +244,10 @@ export function trendPose(id,model=createTrendModel()) {
   for (const row of model.rows) {
     const visible=stop.visible.includes(row.id), through=rate?row.points.length-1:Math.max(0,row.points.findIndex(p=>p.id===stop.throughId));
     lines.set(row.id,{id:row.id,row,reveal:visible?through:0,opacity:visible?1:0});
-    row.points.forEach(p=>nodes.set(p.id,{id:p.id,row:p,x:at(model.x,p.time),y:at(rate?model.rateScale:model.rawScale,rate?p.yoy:p.value)}));
+    row.points.forEach(p=>nodes.set(p.id,{id:p.id,row:p,x:at(model.x,p.time),y:at(rate && p.yoy!==null?model.rateScale:model.rawScale,rate && p.yoy!==null?p.yoy:p.value)}));
     if(visible) {
       const p=row.points[through], key=`${row.id}/${stop.basis}/${p.id}`;
-      annotations.set(key,{id:key,seriesId:row.id,pointId:p.id,text:rate?signed(p.yoy):`$${fmt(p.value,2)}`,opacity:1});
+      annotations.set(key,{id:key,seriesId:row.id,pointId:p.id,text:rate?signed(p.yoy):model.amount(p.value),opacity:1});
     }
   }
   const endpoint=rate?model.primary.points.at(-1):model.primary.points.find(p=>p.id===stop.throughId);
@@ -276,11 +286,12 @@ export function mountTrend(root,{config=trendExample,duration=1700}={}) {
   root.querySelectorAll('[data-observation]').forEach(el=>{
     const point=model.rows.flatMap(r=>r.points).find(p=>p.id===el.dataset.observation);
     if(!point) throw new Error('Missing prose observation: '+el.dataset.observation);
+    if(el.dataset.metric==='yoy' && point.yoy===null) throw new Error('YoY text needs a series with a configured yoy reading: '+point.id);
     el.textContent=el.dataset.metric==='yoy'?signed(point.yoy):fmt(point.value,2);
   });
   const grid=svgElement('g',{class:'axis'}),rawAxis=svgElement('g'),rateAxis=svgElement('g');
-  for(const [group,ticks,scale,title] of [[rawAxis,model.rawTicks,model.rawScale,'巨无霸价格 / 澳元'],[rateAxis,model.rateTicks,model.rateScale,'相对上年同期 / %']]) {
-    ticks.forEach(tick=>group.append(svgElement('line',{x1:plot.left,x2:plot.right,y1:at(scale,tick),y2:at(scale,tick),class:tick===0?'zero':''}),svgElement('text',{x:58,y:at(scale,tick)+6,'text-anchor':'end'},tick)));
+  for(const [group,ticks,scale,title] of [[rawAxis,model.rawTicks,model.rawScale,[model.metric,model.unit].filter(Boolean).join(' / ')],[rateAxis,model.rateTicks,model.rateScale,'相对上年同期 / %']]) {
+    ticks.forEach(tick=>group.append(svgElement('line',{x1:plot.left,x2:plot.right,y1:at(scale,tick),y2:at(scale,tick),class:tick===0?'zero':''}),svgElement('text',{x:58,y:at(scale,tick)+6,'text-anchor':'end'},fmt(tick,6))));
     group.append(svgElement('text',{x:plot.left,y:45,class:'axis-title'},title));
   }
   grid.append(rawAxis,rateAxis);svg.append(grid);
@@ -304,9 +315,9 @@ export function mountTrend(root,{config=trendExample,duration=1700}={}) {
     setSvgAttributes(rawAxis,{opacity:clamp01(1-pose.basis*5)});setSvgAttributes(rateAxis,{opacity:clamp01((pose.basis-.8)*5)});
     paths.render([...pose.lines.values()].map(line=>({...line,path:revealedPath(line.row,pose.nodes,line.reveal)})));
     marks.render(trendMarks(model,pose));labels.render(pose.annotations);
-    dateLabel.textContent=pose.basis>.5?'2017 — 2024':`${new Date(pose.time).getUTCFullYear()}`;
+    dateLabel.textContent=pose.basis>.5?`${new Date(model.start).getUTCFullYear()} — ${new Date(model.end).getUTCFullYear()}`:`${new Date(pose.time).getUTCFullYear()}`;
     svg.dataset.state=pose.id;svg.dataset.moving=String(frame.moving);
-    if(!frame.moving) svg.setAttribute('aria-label',`${pose.basis?'同比涨幅':'价格'}。`+[...pose.annotations.values()].map(label=>`${model.byId.get(label.seriesId).name} ${label.text}`).join('；'));
+    if(!frame.moving) svg.setAttribute('aria-label',`${pose.basis?'同比涨幅':model.metric}。`+[...pose.annotations.values()].map(label=>`${model.byId.get(label.seriesId).name} ${label.text}`).join('；'));
   }
   const exit=reserveStageExit({sticky:$('.price-stage'),readingEnd:$('[data-reading-end]'),spacer:$('.reading-tail'),releaseRatio:.4});
   const stage=createStage({element:svg,steps:[...root.querySelectorAll('[data-state]')].map(element=>({element,id:element.dataset.state})),layout:id=>trendPose(id,model),blend:blendTrend,render,duration,viewportRatio:.55});

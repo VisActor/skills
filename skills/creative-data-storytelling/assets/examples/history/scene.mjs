@@ -9,7 +9,7 @@ export const historyWindowExample = {
 
 /**
  * 历史显露 → 完整轨迹 → 局部聚焦；独立接线示例。
- * 用法：mountHistory(document.querySelector("#history-example"))，返回 dispose()。
+ * 用法：mountHistory(root, config = historyWindowExample)，返回 dispose()。
  * root 提供 #history（viewBox 0 0 860 490）、#history-summary、#history-buttons；
  * 按钮的 data-mode 为 early / all / focus。
  * historyPose 计算当前范围，blendHistory 同步尺度，renderHistory 从当帧尺度反解定位窗。
@@ -17,13 +17,13 @@ export const historyWindowExample = {
  * 固定示例可连线；缺测应先断开，不把缺测跨过去画成已有轨迹。
  * 字符串渲染只用于本例固定文本；外部标签用 textContent 或安全属性。
  */
-export function mountHistory(root) {
+export function mountHistory(root, config = historyWindowExample) {
   const $ = (selector) => root.querySelector(selector);
   const listeners = new AbortController();
   const listen = (target, type, handler) => target.addEventListener(type, handler, { signal: listeners.signal });
   // History specimen: a reveal boundary, a changing viewing range and an optional locator.
   // These states are independent targets, not a required narrative sequence.
-  const { rows: historyRows, early, focus, yDomain, yTicks } = historyWindowExample;
+  const { rows: historyRows, early, focus, yDomain, yTicks } = config;
   const extent = [historyRows[0].time, historyRows.at(-1).time];
   const historyRange = [85, 805], historyY = linearScale(yDomain, [302, 35]);
   const historyGlobal = linearScale(extent, historyRange);

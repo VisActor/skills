@@ -264,6 +264,45 @@ test("chronological reveal retains earlier material marks at their actual observ
   assert.ok(compared.every(p=>p.x===b.nodes.get(p.id).x && p.y===b.nodes.get(p.id).y));
 });
 
+test("raw-only material trends need no frequency or prior-year data and preserve observations through interruption", () => {
+  const config = { primaryId: "cups", metric: "零售价", unit: "元", startDate: "2020-01-01", endDate: "2023-01-01",
+    series: [{ id: "cups", name: "杯子", image: "cup.svg", observations: [1200, 1500, 1300, 1800].map((value, i) =>
+      ({ id: "cup-" + i, date: `${2020 + i}-01-01`, value })) }],
+    stops: [{ id: "start", basis: "raw", visible: ["cups"], throughId: "cup-0" },
+      { id: "end", basis: "raw", visible: ["cups"], throughId: "cup-3" }] };
+  const snapshot = structuredClone(config), model = createTrendModel(config);
+  assert.equal(model.rateScale, null);
+  assert.deepEqual(model.rateTicks, []);
+  assert.ok(model.rawTicks.length < 20);
+  const start = trendPose("start", model), end = trendPose("end", model);
+  assert.equal([...end.annotations.values()][0].text, "1,800 元");
+  const transition = createTransition(start, { blend: blendTrend, duration: 1000 });
+  transition.target(end, 0);
+  const middle = transition.sample(500).pose;
+  assert.ok(trendMarks(model, middle).some(mark => mark.opacity > 0 && mark.id === "cup-0"));
+  assert.ok([...middle.nodes.values()].every(node => Number.isFinite(node.x) && Number.isFinite(node.y)));
+  transition.target(start, 500);
+  assert.deepEqual(transition.sample(500).pose, middle);
+  assert.deepEqual(transition.sample(1600).pose, start);
+  assert.deepEqual(config, snapshot);
+  const withRate = { ...config, stops: [...config.stops, { id: "rate", basis: "yoy", visible: ["cups"] }] };
+  assert.throws(() => createTrendModel(withRate), /frequency/);
+  assert.throws(() => createTrendModel({ ...withRate, series: [{ ...config.series[0], frequency: 1 }] }), /prior-year/);
+});
+
+test("a trend series unused by rate readings does not need synthetic year-ago observations", () => {
+  const config = structuredClone(trendExample);
+  config.stops = config.stops.filter(stop => stop.id !== "beef");
+  const row = config.series.find(row => row.id === "beef");
+  row.observations = row.observations.filter(point => point.date >= config.startDate);
+  row.observations.forEach(point => { delete point.previousId; });
+  delete row.frequency;
+  const model = createTrendModel(config), pose = trendPose("bread", model);
+  assert.equal(pose.lines.get("beef").opacity, 0);
+  assert.ok([...pose.nodes.values()].every(node => Number.isFinite(node.y)));
+  assert.ok(model.primary.points.every(point => Number.isFinite(point.yoy)));
+});
+
 test("basis comparison preserves raw totals in equal shares and derives final person rates from the same records", () => {
   const model = createBasisModel(), shares = basisPose("shares", model), rate = basisPose("rate", model);
   for (const row of model.rows) {
@@ -486,6 +525,24 @@ test("detail extraction keeps a fixed zero and accurate bar lengths throughout r
   assert.throws(() => detailStoryPose("compare", journeys, ["river", "unknown"]), /selected ids/);
   assert.throws(() => detailStoryPose("overview", journeys.map((row, i) => i ? row : { ...row, minutes: -1 })), /nonnegative/);
   assert.ok(Number.isFinite(detailStoryPose("overview", journeys.map((row) => ({ ...row, minutes: 0 }))).scale.k));
+});
+
+test("detail extraction accepts a larger label column and more rows without changing identity or zero", () => {
+  const rows = Array.from({ length: 16 }, (_, i) => ({ id: "route-" + i, label: "经过老城区的路线 " + i, minutes: 12 + i * 3, km: 5 }));
+  const selected = ["route-1", "route-14"], layout = { width: 1240, height: 660, left: 420, right: 1140,
+    secondaryX: 320, bottom: 560, rowGap: 30, compareTop: 180, compareGap: 230 };
+  const a = detailStoryPose("select", rows, selected, layout), b = detailStoryPose("compare", rows, selected, layout);
+  for (const t of [0, .25, .5, .9, 1]) {
+    const pose = blendDetailStory(a, b, t);
+    assert.equal(at(pose.scale, 0), layout.left);
+    for (const node of pose.nodes.values()) {
+      assert.equal(node.row, rows.find(row => row.id === node.id));
+      assert.ok(node.y >= pose.layout.top && node.y < pose.layout.bottom);
+    }
+  }
+  assert.equal(b.nodes.get(selected[1]).y, layout.compareTop + layout.compareGap);
+  assert.throws(() => detailStoryPose("overview", rows, selected), /layout.*room/);
+  assert.throws(() => detailStoryPose("compare", rows, selected, { ...layout, compareGap: 500 }), /layout.*room/);
 });
 
 test("sample bars retain zero, source values and identity during extraction and changing comparison partners", () => {

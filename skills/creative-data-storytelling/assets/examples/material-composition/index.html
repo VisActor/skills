@@ -88,7 +88,7 @@
         <article class="majority" id="majority" data-story-state="majority">
           <p class="kicker">最多的一部分</p>
           <h2><em>一半以上，</em><br>在家里产生。</h2>
-          <div class="main-number"><strong data-home-share>60%</strong><span>来自家庭</span></div>
+          <div class="main-number"><strong data-focus-share>60%</strong><span>来自家庭</span></div>
           <p class="body-copy" data-reading-end>家庭这一段越过了半数。餐饮服务和零售加起来，占其余的 <span data-other-share>40%</span>。</p>
         </article>
         <div class="reading-tail" aria-hidden="true"></div>
@@ -112,7 +112,7 @@
   <p><strong>叙事设计：</strong><a href="../../../references/expression-methods.md#objects">熟悉场景引入</a> → <a href="../../../references/expression-methods.md#组成与累积">组成与份额比较</a>。先认出废弃物来自哪些生活场景，再看它们怎样构成总量，最后判断家庭是否超过半数。</p>
   <p><strong>可视化选择：</strong>图片保持类别身份，色带长度承担占比；同一组对象从场景进入首尾相接的组成带。半数线直接检验当前发现，图片的大小和食物数量不表示统计量。</p>
   <p><strong>改编空间：</strong>适用于同分母、互不重复且覆盖总体的分项。情境、图片、构图和参照可重选；前文已认识类别时可直接进入组成。也可用分段物件或固定量单元表达，保留正确份额；各类别自身的比率需分别比较。</p>
-  <p><strong>代码入口：</strong><code>foodWaste</code> 换分项与图片，<code>shareScale / materialPose / blendMaterialPose</code> 改几何和交接。家庭重点、半数线与 <code>data-home-share</code> 一起按新问题调整；图片继续跟随类别，便于接后续比较。</p>
+  <p><strong>代码入口：</strong><code>mountMaterialStory(root, { data })</code> 换分项、图片和 <code>focusId</code>；各行可给 <code>color</code>。只用 <code>places / shares</code> 可省略重点及相应正文绑定；<code>majority</code> 仍要求重点份额超过半数。<code>shareScale / materialPose / blendMaterialPose</code> 管几何与交接，<code>data-focus-share / data-other-share</code> 绑定重点及余量。</p>
   <p><a href="scene.mjs">本例数据与代码</a></p>
 </div>
 </details>
