@@ -18,10 +18,10 @@
 
 1. 新建模式需要 `POST /docx/v1/documents` 等价能力；已有文档插卡可省略。
 2. 能原样提交 `document.block.children.create`，包括 `block_type: 40`、`add_ons.component_type_id` 和字符串 `record`；只支持富文本段落的普通文档工具不满足。
-3. 能读取文档和新 block，完成同一身份的 readback。
+3. 能返回第11节所需的可信已验证写入结果，或在结果不足时以同一身份读取目标文档/新block；不要求模型重复读取工具已验证的信息。
 4. 能使用用户或受控应用身份访问目标文档；不能让模型生成、保存或转述 token/app secret。
 
-若任何一项缺失，iDA 只能生成并校验 DSL/record/request plan，必须明确说明“未执行写入”，不能声称已创建卡片。业务宿主若没有通用 raw OpenAPI，推荐提供窄接口 `create_chart_assistant_card`，由服务端负责 OAuth、组件 ID、幂等、OpenAPI 调用和 readback；输入可接受 `ILayerData[]`、commonOption 或 URL，但服务端必须先按模式校验并包装 record。
+若任何一项缺失，iDA只交付可完成的DSL/record/request plan，明确说明“未执行写入”，不能声称已创建卡片。业务宿主若没有通用raw OpenAPI，推荐提供窄接口 `create_chart_assistant_card`，由服务端负责OAuth、组件ID、幂等、按输入模式校验与包装record、OpenAPI调用及必要回读，并返回已验证结果；输入可接受 `ILayerData[]`、commonOption或URL。
 
 ### 1.2 安装与可用性检查
 
@@ -236,11 +236,13 @@ const recordObject = {
 
 ## 7. 创建前检查
 
+以下定义生成输入与执行工具的必要约束，不是模型在工具之外另跑一轮预检的清单。工具对最终提交按所选模式完成检查，已有同等覆盖直接复用；缺少覆盖时仅由调用端补一次对应检查。写后证据沿第11节复用，旧卡替换仍按专用协议处理。
+
 - 新建文档时 title、folder、执行身份和最终访问者明确；已有文档时 document/parent/index 明确。
 
-- commonOption 模式检查非空 elements 的 position/options 及所选 chart 入口；browserData 模式检查非空 ILayerData[] 的 ID/rect/attribute；url 模式检查受支持的 URL，不要求预先存在 browserData。
-- 有 standard 数据时检查保存字符串可解析、mapping 字段存在；URL 模式在物化后核实。
-- modelSpec/专属字段经过模板能力校验。
+- commonOption 模式使用非空 elements、合法 position/options 及一个 chart 入口；browserData 模式保留完整非空 ILayerData[] 的 ID/rect/attribute；url 模式使用受支持的 URL，不要求预先存在 browserData。
+- standard 保存字符串可解析，mapping 引用存在的字段；URL 模式的实际数据映射采用物化结果。
+- modelSpec/专属字段遵从当前模板能力；执行工具返回的能力错误只修对应项。
 - live URL/config 齐全，autoSync 意图明确；sourceBinding 是物化后核实项，不在 commonOption config 中生成。
 - 不含 token、cookie、临时 OAuth、component instance ID、旧 block ID。
 - 新建副本按目标宿主协议处理 comment/editorState；原卡替换仅按[替换协议](existing-card-replacement.md)显式去除已确认的会话缓存与空评论实例绑定，并记录字段名。其他认证数据、非空评论或未知宿主绑定拒绝，不套用通用清理。
@@ -290,7 +292,7 @@ Skill 新建卡片默认“首次贴合内容后固定”：写入 `__auto_fit_m
 }
 ```
 
-这些其余字段由浏览态在物化、测量和用户手动改尺寸时维护。复制 record 时保留原尺寸语义；从初始化配置创建新图时不要复制旧 `commonOption.component.size`，新卡使用自身确定的尺寸。已有卡片替换保留原 size 与尺寸模式。`record.url` 不进入 browserData 自动尺寸标记路径；URL 首次加载按 URL/commonOption 宿主流程处理。创建后 readback 核对首次适配请求；打开卡片后的实际高度、固定状态和重开保持另按真实宿主验证，不以初始回读代替。
+这些其余字段由浏览态在物化、测量和用户手动改尺寸时维护。复制 record 时保留原尺寸语义；从初始化配置创建新图时不要复制旧 `commonOption.component.size`，新卡使用自身确定的尺寸。已有卡片替换保留原 size 与尺寸模式。`record.url` 不进入 browserData 自动尺寸标记路径；URL 首次加载按 URL/commonOption 宿主流程处理。首次适配请求采用工具的已验证写入结果，结果不足时按第11节回读；打开卡片后的实际高度、固定状态和重开保持属于真实宿主验证，不以初始配置结果代替。
 
 ## 10. 权限
 
@@ -304,25 +306,22 @@ Skill 新建卡片默认“首次贴合内容后固定”：写入 `__auto_fit_m
 
 新建配置验证的证据只记录文档/块身份、组件类型、revision、提交配置的比较结果及不含凭证的协议字段。`aeolusToken` 等会话缓存不属于用户提交配置，记录其字段名被排除即可，不记录值或带值的差异。未知新增字段需判断是否为认证/实例状态，不默默忽略后声称完整等价。已有卡片编辑仍按[完整记录与实例投影](existing-card-replacement.md#1-读取与计划)保留未知非认证字段；安全证据投影不是可直接写回的完整编辑记录。
 
-至少使用等价的文档基本信息和单 block 读取能力；原生路径为：
+普通新卡优先复用可信工具返回的已验证结果：结果应明确关联本次提交、实际文档/块身份、所选record模式的完整配置等价结果与必要协议字段；仅有成功标志、block ID或裸2xx不够。已有相应证据时不再额外GET。结果不足或不明确时，只对缺少的信息做一次目标回读；新建文档缺少身份/title/folder结果时读取基本信息，卡片缺少配置结果时读取单block。原生路径为：
 
 ```http
 GET /open-apis/docx/v1/documents/:document_id
 GET /open-apis/docx/v1/documents/:document_id/blocks/:block_id
 ```
 
-必须验证：
+工具的已验证结果或本次目标回读应提供对应的写入证据：
 
-1. 新建模式下，创建响应有 `document_id`，并能用同一身份读取文档基本信息；title/folder 与请求一致。
-2. block API 返回新 block ID、`client_token` 和文档新 revision。
-3. 回读 block 后 `block_type = 40`，component_type_id 为正式 ISV ID `blk_67add0469786801c34ce1a4e`。
-4. record 可解析，所选模式存在且没有冲突。
-5. 完整配置 record 与提交计划等价：browserData、commonOption 或 url 及未知非认证字段均按所选模式保留；编码变化时比较完整解码语义，不以局部字段相同代替完整校验。对宿主新增会话缓存仅记录显式排除的字段名，不将凭证落盘；无法确认的新增字段保留为待核对项。
-6. source URL/config/autoSync 及已有 sourceBinding 没丢；未物化的新 commonOption/url 不要求预先产生 sourceBinding，也不能仅凭配置推断同步成功。
-7. theme/color/title/modelSpec/marker/MBB 没丢。
-8. 修改已有卡片时，用户要求的目标变更正确，数据、映射、来源、其他标注、尺寸及其他未授权修改的字段保持；实例投影仅限替换协议明确允许且已记录的字段。
+1. 新建文档的 `document_id`、title/folder和执行身份对应本次请求；卡片结果包含新block ID、`client_token`及文档revision。
+2. 卡片 `block_type = 40`，component_type_id为正式ISV ID `blk_67add0469786801c34ce1a4e`；record可解析，所选模式存在且没有冲突。
+3. 完整record与提交计划等价：browserData、commonOption或url及未知非认证字段按所选模式保留，编码变化按完整解码语义比较；theme/color/title/modelSpec/marker/MBB均属于该配置。宿主新增会话缓存仅记录排除字段名，无法确认的新增字段列为待核对项，不将凭证落盘。
+4. source URL/config/autoSync及已有sourceBinding保留；未物化的新commonOption/url不要求预先产生sourceBinding，配置结果不证明同步成功。
+5. 已有卡片更新只改授权目标，保留数据、映射、来源、其他标注、尺寸及未修改字段；实例投影只限替换协议明确允许且已记录的字段。
 
-只收到 2xx 不等于写入完成，必须完成上述配置 readback。配置 readback 不证明正文渲染、继续编辑或实际自动同步通过，按实际证据说明验证范围。已有卡片替换仍须完成下述删除及最终回读流程。
+配置结果不证明正文渲染、继续编辑或实际自动同步通过，按实际证据说明范围。已有卡片替换仍按[替换协议](existing-card-replacement.md)完成候选完整性、删旧前父子关系/当前索引/版本与最终状态检查，普通新卡的结果复用不免除这些步骤。
 
 ## 12. 部分失败、更新与安全
 

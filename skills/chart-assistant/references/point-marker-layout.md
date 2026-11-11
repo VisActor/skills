@@ -48,4 +48,4 @@
 
 首次创建内置图输出 `commonOption`，标注放在 `elements[].options.config.marker`。编辑既有卡片时，读取完整当前 record，在对应 `browserData` 图表的 `attribute.marker.markPoint[]` 中按 ID 最小更新；保留其余字段、元素与标注 ID、业务 `target` 以及其他用户位置。不要修改旧 `commonOption` 后假定已覆盖优先加载的 `browserData`。具体保存方式沿用 [已有卡片替换流程](existing-card-replacement.md)。
 
-写回后 readback 检查文字、偏移、引线、ID 和 target。交付说明配置与回读结果；用户要求视觉验证时，另按实际图面检查说明结果及限制。
+采用写入工具已验证的结果，覆盖文字、偏移、引线、ID、target及其余未修改字段的保留情况；已有完整回读证据时不再GET，结果不足时按[卡片协议](feishu-doc-card.md#11-写后-readback)只补取缺少的信息。交付说明实际执行范围；用户要求视觉验证时，另按实际图面说明结果及限制。

@@ -20,7 +20,7 @@
 
 ## 执行与交付
 
-先按 [工作流校验](workflow.md#commonoption-交付前校验) 生成和校验最终 DSL，再运行脚本。以下命令在已安装的 Skill 根目录执行；宿主在其它目录时用实际技能目录定位脚本，不猜开发仓库路径。
+直接将最终输入交给导出客户端；客户端在执行出口对选中的commonOption做一次必要结构校验，并检查返回的PNG，不再独立运行预检命令。保存态优先且不套新建默认样式校验，不校验record中的旧commonOption。以下命令在已安装的Skill根目录执行；宿主在其它目录时用实际技能目录定位脚本，不猜开发仓库路径。等价HTTP工具应复用其执行出口的必要校验，未覆盖时由调用端对同一输入执行一次。
 
 ```bash
 node scripts/export-image.mjs --input ./chart.json --output ./chart.png

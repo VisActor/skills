@@ -126,11 +126,12 @@ Marker 还有两层模板限制：pie/rose/radar/map/progress/wordCloud/funnel/b
 读取当前 DSL/来源
 → 判定操作类别
 → 验证模板和数据
-→ 解析稳定 identity
+→ 沿用可靠 identity，依赖尚未取得的实例身份时先物化并解析
 → 生成最小 patch
-→ 物化/渲染
-→ readback
-→ 复核映射、局部 identity、来源与同步状态
+→ 需要实际应用时物化最小 patch
+→ 执行当前操作并采用工具的应用结果与诊断
+→ 写入结果不足时做一次目标 readback
+→ 只处理本次报错或未完成项
 ```
 
-没有物化能力时，只完成不依赖 runtime identity 的全局/分组级操作；其余返回清晰的前置条件。
+生成最小patch时保留未修改的映射、局部identity、来源和同步语义。工具已返回可信已验证的结果时不再回读；用户要求看效果或排查视觉问题时才渲染。没有物化能力时，只完成不依赖runtime identity的全局/分组级操作；其余返回清晰的前置条件。
