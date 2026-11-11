@@ -7,24 +7,24 @@ import { createSvgLayer, setSvgAttributes, svgElement } from "../../runtime/svg.
 // 新记录占新行，旧记录不变成另一条记录，也不与新记录相加。
 // 改 records / stops / axis 后重写正文；domain 覆盖全体，保持共同零点。
 // 此构图容纳七条短名称记录；更多记录需重新安排行距与阅读范围。
-// 来源主张、时期顺序不是连续观测；不连接为尺长曲线。
+// 模拟各馆开馆时公布的每周开放时长；新馆加入不是旧馆时长更新，不连成同一对象的轨迹。
 export const recordExample = {
-  metric: "一尺长度", unit: "厘米", baselineId: "qin", axis: { max: 42, ticks: [0, 10, 20, 30, 40] },
+  metric: "开馆时每周开放时长", unit: "小时", baselineId: "cedar", axis: { max: 105, ticks: [0, 21, 42, 63, 84, 105] },
   records: [
-    { id: "qin", label: "战国秦", detail: "量器推算", value: 23.2, period: "秦", source: "国博：青铜方斗说明" },
-    { id: "west-han", label: "西汉", detail: "研究参考", value: 23.0, period: "两汉", source: "白云翔，2014" },
-    { id: "east-han", label: "东汉", detail: "研究参考", value: 23.4, period: "两汉", source: "白云翔，2014" },
-    { id: "tang-small", label: "唐 · 小尺", detail: "地方志综述", value: 24.57, period: "唐", source: "台州地区志" },
-    { id: "tang-large", label: "唐 · 大尺", detail: "地方志综述", value: 29.58, period: "唐", source: "台州地区志" },
-    { id: "yuan-building", label: "元 · 营造尺", detail: "营建用途", value: 31.5, period: "元", source: "熊长云《元尺考》，2023" },
-    { id: "yuan-clothing", label: "元 · 裁衣尺", detail: "裁衣用途", value: 38.9, period: "元", source: "熊长云《元尺考》，2023" },
+    { id: "cedar", label: "青杉馆", detail: "2016 · 综合馆", value: 42 },
+    { id: "maple", label: "枫桥馆", detail: "2018 · 社区馆", value: 30 },
+    { id: "harbor", label: "海湾馆", detail: "2020 · 综合馆", value: 56 },
+    { id: "family", label: "童阅馆", detail: "2022 · 亲子馆", value: 28 },
+    { id: "study", label: "书桌馆", detail: "2022 · 自习馆", value: 84 },
+    { id: "garden", label: "花园馆", detail: "2025 · 社区馆", value: 35 },
+    { id: "night", label: "星灯馆", detail: "2025 · 夜读馆", value: 98 },
   ],
   stops: [
-    { id: "reference", visible: ["qin"], focus: ["qin"] },
-    { id: "han", visible: ["qin", "west-han", "east-han"], focus: ["west-han", "east-han"] },
-    { id: "tang", visible: ["qin", "west-han", "east-han", "tang-small", "tang-large"], focus: ["tang-small", "tang-large"] },
-    { id: "yuan", visible: ["qin", "west-han", "east-han", "tang-small", "tang-large", "yuan-building", "yuan-clothing"], focus: ["yuan-building", "yuan-clothing"] },
-    { id: "difference", visible: ["qin", "west-han", "east-han", "tang-small", "tang-large", "yuan-building", "yuan-clothing"], focus: ["yuan-building", "yuan-clothing"], pair: ["yuan-building", "yuan-clothing"] },
+    { id: "reference", visible: ["cedar"], focus: ["cedar"] },
+    { id: "arrivals", visible: ["cedar", "maple", "harbor"], focus: ["maple", "harbor"] },
+    { id: "branches", visible: ["cedar", "maple", "harbor", "family", "study"], focus: ["family", "study"] },
+    { id: "latest", visible: ["cedar", "maple", "harbor", "family", "study", "garden", "night"], focus: ["garden", "night"] },
+    { id: "difference", visible: ["cedar", "maple", "harbor", "family", "study", "garden", "night"], focus: ["garden", "night"], pair: ["garden", "night"] },
   ],
 };
 const plot = { left: 205, right: 865, center: 318, rowGap: 62 };
@@ -133,7 +133,7 @@ export function mountRecords(root, { config = recordExample, duration = 1150 } =
         fill: isBase ? "var(--reference)" : "var(--accent)", opacity: isBase ? .9 : lerp(.33, .94, node.focus) });
       setSvgAttributes(clips.get(node.id), { x: node.zero, y: -20, width: node.clipWidth, height: 40 });
       setSvgAttributes(g.children[3], { x: node.end + 13, opacity: node.labelOpacity, fill: node.focus ? "var(--accent)" : "var(--muted)" });
-      g.children[3].textContent = "约 " + model.format(node.row.value);
+      g.children[3].textContent = model.format(node.row.value);
     },
   });
   let current;
@@ -166,7 +166,7 @@ export function mountRecords(root, { config = recordExample, duration = 1150 } =
     setSvgAttributes(reference, { y1: Math.min(...visible.map(row => row.y)) - 28, y2: Math.max(...visible.map(row => row.y)) + 28 });
     svg.dataset.state = pose.id; svg.dataset.moving = String(frame.moving);
     if (!frame.moving) svg.setAttribute("aria-label", "共同零点，每条记录独立比较。" +
-      visible.map(row => row.row.label + "约 " + model.amount(row.row.value)).join("；"));
+      visible.map(row => row.row.label + " " + model.amount(row.row.value)).join("；"));
   }
   const exit = reserveStageExit({ sticky: $(".record-stage"), readingEnd: $("[data-reading-end]"), spacer: $(".reading-tail"), releaseRatio: .4 });
   const stage = createStage({ element: svg, steps: [...root.querySelectorAll("[data-state]")].map(element => ({ element, id: element.dataset.state })),

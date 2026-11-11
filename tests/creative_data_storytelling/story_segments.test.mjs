@@ -129,7 +129,9 @@ test("each chosen view covers its records and can refocus the same comparison wi
 
 test("joining records preserves every old quantity on one scale without summing lengths", () => {
   const model = createRecordModel(), snapshot = structuredClone(recordExample);
-  for (const [before, after] of [["reference", "han"], ["han", "tang"], ["tang", "yuan"]]) {
+  const stops = recordExample.stops.filter(stop => !stop.pair).map(stop => stop.id);
+  for (let i = 1; i < stops.length; i++) {
+    const [before, after] = [stops[i - 1], stops[i]];
     const a = recordPose(before, model), b = recordPose(after, model);
     const old = recordGeometry(model, a).filter(row => row.reveal === 1);
     for (const t of [0, .2, .35, .6, .9, 1]) {
@@ -151,10 +153,10 @@ test("joining records preserves every old quantity on one scale without summing 
 });
 
 test("record reflow makes room before revealing new bars and responds to replacement values", () => {
-  const model = createRecordModel(), a = recordPose("reference", model), b = recordPose("yuan", model);
+  const model = createRecordModel(), a = recordPose("reference", model), b = recordPose("latest", model);
   const early = blendRecords(a, b, .2), ready = blendRecords(a, b, .35);
-  assert.equal(early.nodes.get("west-han").reveal, 0);
-  assert.equal(ready.nodes.get("qin").y, b.nodes.get("qin").y);
+  assert.equal(early.nodes.get("maple").reveal, 0);
+  assert.equal(ready.nodes.get(model.baselineId).y, b.nodes.get(model.baselineId).y);
   const config = {
     metric: "板材长度", unit: "毫米", baselineId: "reference/甲", records: [
       { id: "reference/甲", value: 12 }, { id: "variant/乙", value: 40 }, { id: "variant/丙", value: 27 },
@@ -202,7 +204,7 @@ test("recurrence geometry follows changed source positions and refuses unsupport
 
 test("joining records and recurrence arcs reverse from the sampled intermediate pose", () => {
   for (const [from, to, blend] of [
-    [recordPose("reference"), recordPose("yuan"), blendRecords],
+    [recordPose("reference"), recordPose("latest"), blendRecords],
     [recurrencePose("first"), recurrencePose("reverse"), blendRecurrence],
   ]) {
     const transition = createTransition(from, { blend, duration: 1000 });
