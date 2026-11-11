@@ -5,6 +5,7 @@ import { open, link, unlink, access } from 'node:fs/promises';
 import { resolve, dirname, basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { randomUUID } from 'node:crypto';
+import { validateCommonOption } from './common-option-validation.mjs';
 
 // 产品域名依据 chart-editor-app/src/utils/http.ts；新入口须部署后才可线上使用。
 export const DEFAULT_ENDPOINT = 'https://charteasy.visactor.com/api/v1/chart_assistant/export_image';
@@ -129,6 +130,11 @@ export async function exportImage({
     await file.close();
   }
   const payload = buildRequest(value, { width, height, layoutWidth, autoLayoutWidth, dpr, background });
+  // 只校验实际选中的 commonOption，不给已有保存态套新建默认样式，也不检查旧配置。
+  if (payload.input.type === 'commonOption') {
+    const errors = validateCommonOption(payload.input.commonOption);
+    if (errors.length) throw new Error(`commonOption 结构校验失败：\n${errors.join('\n')}`);
+  }
   const { bytes, headers } = await requestPng(endpoint, payload, timeoutMs, maxResponseBytes);
   if (
     bytes.length < 45 ||

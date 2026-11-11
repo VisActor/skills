@@ -2,7 +2,7 @@
 
 `modelSpec` 是图表内部 VChart model 的持久化增量，不是任意配置袋。已有原生身份可直接复用；没有身份时，受支持的 series/axes/legends 可使用 [业务 target 输入](element-editing.md#0-语义-target只补现有-dsl-的定位)，实例编译后仍保存原结构。
 
-每个条目都必须包含 `specKey` 和对象形式的 `spec`。坐标轴写成 `{id:"axis-left",specKey:"axes",specIndex:0,spec:{...轴配置}}`，或受支持的 `{specKey:"axes",target:{field:"原始字段"},spec:{...轴配置}}`；不要把 `{orient:"left",type:"linear",label:...}` 裸轴对象放进 `modelSpec`。裸轴形状仅用于 `options.spec.axes` 的原生 VChart spec；编辑器会按 `specKey` 筛选组件，放错层级可能不报错却忽略轴设置。交付前运行结构校验，不能以加载没有崩溃判定设置已生效。
+每个条目都必须包含 `specKey` 和对象形式的 `spec`。坐标轴写成 `{id:"axis-left",specKey:"axes",specIndex:0,spec:{...轴配置}}`，或受支持的 `{specKey:"axes",target:{field:"原始字段"},spec:{...轴配置}}`；不要把 `{orient:"left",type:"linear",label:...}` 裸轴对象放进 `modelSpec`。裸轴形状仅用于 `options.spec.axes` 的原生 VChart spec；编辑器会按 `specKey` 筛选组件，放错层级可能不报错却忽略轴设置。结构检查按[执行出口规则](validation.md#commonoption-交付前校验)对最终输入完成一次，已有工具结果直接复用；只生成配置时按本契约生成。不能以结构通过或加载没有崩溃判定设置已在图面生效。
 
 ## 1. 组件身份：`id`、`specKey`、`specIndex`
 

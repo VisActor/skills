@@ -52,7 +52,7 @@ interface SemanticChartConnector {
 
 目标结构或 chartId 引用错误在加载前报错。图元就绪后若目标缺失、候选歧义、来源或锚点不支持，对应连接器不创建，报告具体错误；不要默认取第一项、猜坐标或以普通直线替代。基础图表仍可完成加载。
 
-验收不能只看 `afterAllLayerReady`：检查 `layer.commonOptionErrors` / `commonOptionError` 事件，并回读最终保存态，核对连接器数量、两端 chartId、业务对象和位置。结构校验通过不代表实际图元定位或视觉验收通过。
+实际执行连接器时不能只看 `afterAllLayerReady`：采用 `layer.commonOptionErrors` / `commonOptionError` 的运行时诊断和最终保存态，核对连接器数量、两端chartId、业务对象和位置。工具已返回这些结果时直接复用，不再额外GET；信息不足时只补取缺少的结果。结构校验通过不代表实际图元定位或视觉验收通过。
 
 ## 完整示例
 
