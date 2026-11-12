@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>从一个人，看见覆盖的边界 · 解释片段</title><link rel="stylesheet" href="../segment-preview.css"></head>
+<body>
+<header class="site-header"><a class="brand" href="../index.html#person-coverage"><span class="brand-mark" aria-hidden="true">↗</span><span>看见关系<small>VISUAL EXPLANATIONS</small></span></a><button id="about" class="text-button">设计与数据 ↗</button></header>
+<main id="stage-shell">
+ <aside class="story"><div class="eyebrow" id="eyebrow"></div><div class="copy"><h1 id="headline"></h1><p id="description"></p></div>
+ <div class="metric"><span id="metric-value"></span><span id="metric-unit"></span></div><p class="metric-label" id="metric-label"></p><div class="choices" id="choices"></div>
+ <div class="story-bottom"><span class="data-badge"></span><p></p></div></aside>
+ <section class="visual" aria-label="连续可视化舞台"><svg id="scene" role="img"></svg></section>
+</main>
+<footer class="playback"><span class="chapter-name" id="chapter-name"></span><div class="state-controls"><button id="prev" aria-label="上一步">←</button><span id="state-count"></span><button id="next">继续 →</button></div><div class="secondary-controls"><span class="scroll-hint">滚轮 / 方向键也可推进</span><button class="text-button" id="replay">↺ 重看本段</button></div></footer>
+<dialog id="notes"><button class="close-dialog" aria-label="关闭说明">×</button><details id="example-notes" open><summary>叙事、可视化选择与改编</summary>
+<p><strong>叙事设计：</strong><a href="../../../references/design.md#unit-detail">代表与群体</a>。先用一个女孩认识腰围与尺码，再把她放回同龄分布；保留旧群体、加入成年女性，检验同一尺码范围是否足够。</p><p><strong>可视化选择：</strong>人物缩小入群后，横向位置承担腰围量值；两组共用尺码背景与轴。橙色只突出当前追问涉及的边界和超出部分，使供给范围与人群位置直接相遇。</p><p><strong>改编空间：</strong>可换成服务覆盖、预算与价格、设施与使用者等题材，也可用点、区间或密度表达。按追问取人物引入、群体对照或边界比较；无须保留人物素材、左右布局或原有步骤。</p><p><strong>数据与素材：</strong>两组各取 P10–P90 的百分位位置，不是真实受访者，也不是同一个人长大。NCHS 公布百分位间插值，显示中间 80%；00–16 码范围沿用原作参照，不代表所有品牌。只比较腰围，不判断整件衣服是否合身。人物为自绘矢量。</p><p><strong>代码入口：</strong>coverageData / sizing-coverage.mjs 配分布和边界；coverageX / coverageLayout 管共同轴与避让；example.states 配正文，example.mount 返回 pose / blend / render。替换数据时同步代表选择、标注与布局；只换素材时保留量值锚点。</p><p><a href="scene.mjs">本例数据与动画</a> · <a href="https://pudding.cool/2026/02/womens-sizing/">Sizing Chaos · 设计参照</a> · <a href="https://stacks.cdc.gov/view/cdc/174595">NCHS 表 11–12 · 腰围统计</a></p>
+</details></dialog>
+<script type="module">
+import { example } from './scene.mjs';
+import { mountExamplePreview } from '../segment-preview.mjs';
+// 只装配本例预览；作品可将 pose / blend / render 接到自己的正文与舞台。
+const preview = mountExamplePreview(document.body, example);
+addEventListener('pagehide', event => { if (!event.persisted) preview.dispose(); });
+</script></body></html>

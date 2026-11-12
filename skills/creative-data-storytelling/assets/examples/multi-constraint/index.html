@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>满足一个条件，另一个呢？ · 解释片段</title><link rel="stylesheet" href="../segment-preview.css"></head>
+<body>
+<header class="site-header"><a class="brand" href="../index.html#multi-constraint"><span class="brand-mark" aria-hidden="true">↗</span><span>看见关系<small>VISUAL EXPLANATIONS</small></span></a><button id="about" class="text-button">设计与数据 ↗</button></header>
+<main id="stage-shell">
+ <aside class="story"><div class="eyebrow" id="eyebrow"></div><div class="copy"><h1 id="headline"></h1><p id="description"></p></div>
+ <div class="metric"><span id="metric-value"></span><span id="metric-unit"></span></div><p class="metric-label" id="metric-label"></p><div class="choices" id="choices"></div>
+ <div class="story-bottom"><span class="data-badge"></span><p></p></div></aside>
+ <section class="visual" aria-label="连续可视化舞台"><svg id="scene" role="img"></svg></section>
+</main>
+<footer class="playback"><span class="chapter-name" id="chapter-name"></span><div class="state-controls"><button id="prev" aria-label="上一步">←</button><span id="state-count"></span><button id="next">继续 →</button></div><div class="secondary-controls"><span class="scroll-hint">滚轮 / 方向键也可推进</span><button class="text-button" id="replay">↺ 重看本段</button></div></footer>
+<dialog id="notes"><button class="close-dialog" aria-label="关闭说明">×</button><details id="example-notes" open><summary>叙事、可视化选择与改编</summary>
+<p><strong>叙事设计：</strong><a href="../../../references/design.md#fit-constraints">多个条件与功能后果</a>。先确认腰围匹配，再沿同一轮廓看臀围；换到另一尺码后，臀围合适而腰围偏小，说明单个条件不能代替整体判断。</p><p><strong>可视化选择：</strong>身体固定，衣物轮廓连续变化；差异填色与强调跟随当前观察部位，读者能看见换方案带来的取舍。横向按围度比例示意，不是实物正面宽度。</p><p><strong>改编空间：</strong>可比较鞋与脚、设备与安装条件，也可用对齐指标或容许区间表达非几何约束。按实际问题选择要看的条件、方案与顺序；轮廓、方向、布局和切换次数都可重设。</p><p><strong>数据与素材：</strong>数值仅作演示。示意不模拟厚度、弹性或三维试穿；换真实几何时同时改测量模型与轮廓。</p><p><strong>代码入口：</strong>fitData 换身体与候选规格；fitDifferences 计算差异，contourWidth / outline 定义轮廓；example.mount 中 pose / render 安排当前部位、轮廓变换与标注。</p><p><a href="scene.mjs">本例数据与动画</a> · <a href="https://pudding.cool/2026/02/womens-sizing/">Sizing Chaos · 设计参照</a></p>
+</details></dialog>
+<script type="module">
+import { example } from './scene.mjs';
+import { mountExamplePreview } from '../segment-preview.mjs';
+// 只装配本例预览；作品可将 pose / blend / render 接到自己的正文与舞台。
+const preview = mountExamplePreview(document.body, example);
+addEventListener('pagehide', event => { if (!event.persisted) preview.dispose(); });
+</script></body></html>

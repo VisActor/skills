@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>同一条件下，后来去了哪里？ · 解释片段</title><link rel="stylesheet" href="../segment-preview.css"></head>
+<body>
+<header class="site-header"><a class="brand" href="../index.html#cohort-flow"><span class="brand-mark" aria-hidden="true">↗</span><span>看见关系<small>VISUAL EXPLANATIONS</small></span></a><button id="about" class="text-button">设计与数据 ↗</button></header>
+<main id="stage-shell">
+ <aside class="story"><div class="eyebrow" id="eyebrow"></div><div class="copy"><h1 id="headline"></h1><p id="description"></p></div>
+ <div class="metric"><span id="metric-value"></span><span id="metric-unit"></span></div><p class="metric-label" id="metric-label"></p><div class="choices" id="choices"></div>
+ <div class="story-bottom"><span class="data-badge"></span><p></p></div></aside>
+ <section class="visual" aria-label="连续可视化舞台"><svg id="scene" role="img"></svg></section>
+</main>
+<footer class="playback"><span class="chapter-name" id="chapter-name"></span><div class="state-controls"><button id="prev" aria-label="上一步">←</button><span id="state-count"></span><button id="next">继续 →</button></div><div class="secondary-controls"><span class="scroll-hint">滚轮 / 方向键也可推进</span><button class="text-button" id="replay">↺ 重看本段</button></div></footer>
+<dialog id="notes"><button class="close-dialog" aria-label="关闭说明">×</button><details id="example-notes" open><summary>叙事、可视化选择与改编</summary>
+<p><strong>叙事设计：</strong><a href="../../../references/design.md#flows">去向比较</a>。先建立共同起始档位，沿一组记录认识去向，再接入另一组，集中比较当前追问关心的终点。</p><p><strong>可视化选择：</strong>终点共用排列，带宽表示人数，终点数字表示各组内部的比例；分母不等时，两者分开读。点先解释一人及其路径，抵达后退出，由色带接续；末态沿原路径强调差异。</p><p><strong>改编空间：</strong>可换就业去向、升学、用户路径或物质分流。已有流向读法时可直接画带，未必从点开始；方向、终点排列和观察顺序可重设。跨多个阶段需重新布局并处理每阶段的来源与去向，当前示例只演示一段分流。</p><p><strong>数据与素材：</strong>默认每组 100 人的演示数据，一点一条配对记录。相同起始收入档位不等于所有条件相同；带宽与比例展示去向，原因需要另外的证据。</p><p><strong>代码入口：</strong>example.mount(svg, {data, names}) 接两组人数和终点；flowSummary 统一计数、比例与正文，flowGeometry / targetY 管人数尺度与排列。flowSegments / ribbon / flowPoint 连接色带与记录；更换终点数量或量级时另调布局。</p><p><a href="scene.mjs">本例数据与动画</a> · <a href="https://www.nytimes.com/interactive/2018/03/19/upshot/race-class-white-and-black-men.html">Race and Economic Opportunity · 设计参照</a></p>
+</details></dialog>
+<script type="module">
+import { example } from './scene.mjs';
+import { mountExamplePreview } from '../segment-preview.mjs';
+// 只装配本例预览；作品可将 pose / blend / render 接到自己的正文与舞台。
+const preview = mountExamplePreview(document.body, example);
+addEventListener('pagehide', event => { if (!event.persisted) preview.dispose(); });
+</script></body></html>

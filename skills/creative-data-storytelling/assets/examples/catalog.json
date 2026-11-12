@@ -572,6 +572,150 @@
       "assets": [
         "assets/examples/mechanism.css"
       ]
+    },
+    {
+      "id": "person-coverage",
+      "title": "从一个人，看见覆盖的边界",
+      "kind": "story",
+      "relations": [
+        "人物引入",
+        "素材",
+        "群体分布",
+        "覆盖范围",
+        "共同尺度"
+      ],
+      "readerTask": "一个人在群体哪里，供给范围又能覆盖谁？让人物缩小进入同龄分布，保留同一边界，再接入另一群体。",
+      "dataNeeds": "可比较的分布与覆盖边界；代表位置有依据。汇总百分位可示意分布，不能冒充真实个体或纵向跟踪。",
+      "dataKind": "NCHS 2021–2023 女性腰围百分位及原作转录的 ASTM 2021 尺码参照。",
+      "preview": "assets/examples/person-coverage/index.html",
+      "code": "assets/examples/person-coverage/scene.mjs",
+      "design": "references/design.md#unit-detail",
+      "adapt": "coverageData → coverageX / coverageLayout → example.mount",
+      "dependencies": [
+        "assets/examples/segment-preview.mjs",
+        "assets/examples/segment-preview.css",
+        "assets/examples/segment-draw.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": [
+        "assets/examples/person-coverage/sizing-coverage.mjs"
+      ]
+    },
+    {
+      "id": "multi-constraint",
+      "title": "满足一个条件，另一个呢？",
+      "kind": "story",
+      "relations": [
+        "多个条件",
+        "素材",
+        "实物轮廓",
+        "适配",
+        "方案比较"
+      ],
+      "readerTask": "满足腰围也满足臀围吗？固定身体，依次突出两处轮廓差异，再换规格观察取舍。",
+      "dataNeeds": "同一对象在多个约束上的量值，以及可比较的候选规格；轮廓表达需要对应的几何依据。",
+      "dataKind": "身体与两种衣物规格均为演示设定，围度驱动二维示意轮廓。",
+      "preview": "assets/examples/multi-constraint/index.html",
+      "code": "assets/examples/multi-constraint/scene.mjs",
+      "design": "references/design.md#fit-constraints",
+      "adapt": "fitData → fitDifferences / contourWidth → example.mount",
+      "dependencies": [
+        "assets/examples/segment-preview.mjs",
+        "assets/examples/segment-preview.css",
+        "assets/examples/segment-draw.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": []
+    },
+    {
+      "id": "object-fit",
+      "title": "尺寸差异，变成使用后果",
+      "kind": "story",
+      "relations": [
+        "实物尺寸",
+        "素材",
+        "功能后果",
+        "样本比较",
+        "简洁探索"
+      ],
+      "readerTask": "几厘米的差异会怎样影响使用？让同一物品按共同尺度试放，再把代表放回两组样本，比较能放下的比例。",
+      "dataNeeds": "容器轮廓、物品尺寸和分组样本；只有容量总数，不能推断具体物品是否能放下。",
+      "dataKind": "40 个演示口袋、手机与钱包的二维直立适配，不对应真实品牌或性别群体。",
+      "preview": "assets/examples/object-fit/index.html",
+      "code": "assets/examples/object-fit/scene.mjs",
+      "design": "references/design.md#fit-constraints",
+      "adapt": "example.mount(svg, {rows}) / objects → itemTop / fits / fitSummary → pose / read / render",
+      "dependencies": [
+        "assets/examples/segment-preview.mjs",
+        "assets/examples/segment-preview.css",
+        "assets/examples/segment-draw.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": []
+    },
+    {
+      "id": "records-composition",
+      "title": "从具体记录，重新理解构成",
+      "kind": "story",
+      "relations": [
+        "记录提取",
+        "分类变化",
+        "组成",
+        "面积图",
+        "时序比较"
+      ],
+      "readerTask": "一类变少等于整体变少吗？从歌曲提取类别，回到各期完整分母，扩大分类后再比较同两个时期。",
+      "dataNeeds": "带身份、时间、类别和权重的记录；各期有完整分母，同一分类口径能跨期比较。",
+      "dataKind": "The Pudding 公开的 5,141 首歌曲，1958–2023.09，沿用原作分类与前十停留周数。",
+      "preview": "assets/examples/records-composition/index.html",
+      "code": "assets/examples/records-composition/scene.mjs",
+      "design": "references/design.md#composition",
+      "adapt": "songs / periods → buildLayouts / areaBoundary → example.mount",
+      "dependencies": [
+        "assets/examples/segment-preview.mjs",
+        "assets/examples/segment-preview.css",
+        "assets/examples/segment-draw.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": [
+        "assets/examples/records-composition/love-songs.mjs",
+        "assets/examples/records-composition/LOVE-SONGS-LICENSE.txt"
+      ]
+    },
+    {
+      "id": "cohort-flow",
+      "title": "同一条件下，后来去了哪里？",
+      "kind": "story",
+      "relations": [
+        "去向",
+        "分流",
+        "桑基图",
+        "群体比较"
+      ],
+      "readerTask": "同一起点的两组人去了哪里？点沿流带分开、抵达后退出，两组共用一列去向，再突出一条去向比较。",
+      "dataNeeds": "可靠的起点—终点配对或分流计数，明确各组分母与共同终点；不能用两期边际总量推造路径。",
+      "dataKind": "两组各 100 条虚构配对记录；不对应真实族群，也不解释去向差异的原因。",
+      "preview": "assets/examples/cohort-flow/index.html",
+      "code": "assets/examples/cohort-flow/scene.mjs",
+      "design": "references/design.md#flows",
+      "adapt": "example.mount(svg, {data, names}) → flowSummary / flowGeometry → flowSegments / flowPoint / ribbon",
+      "dependencies": [
+        "assets/examples/segment-preview.mjs",
+        "assets/examples/segment-preview.css",
+        "assets/examples/segment-draw.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/svg.mjs"
+      ],
+      "assets": []
     }
   ]
 }
