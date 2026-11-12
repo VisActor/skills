@@ -17,6 +17,9 @@ export async function loadCatalog(root = installedRoot) {
       typeof entry.design !== "string" || !entry.design ||
       !Array.isArray(entry.relations) || !Array.isArray(entry.dependencies) || !Array.isArray(entry.assets))
       throw new Error("Invalid or duplicate example entry: " + entry.id);
+    if (entry.keywords !== undefined && (!Array.isArray(entry.keywords) ||
+      entry.keywords.some((keyword) => typeof keyword !== "string" || !keyword.trim())))
+      throw new Error("Invalid search keywords for example: " + entry.id);
     ids.add(entry.id);
   }
   for (const entry of catalog.examples) {
@@ -26,11 +29,17 @@ export async function loadCatalog(root = installedRoot) {
   return catalog.examples;
 }
 
+function searchText(value) {
+  return value.normalize("NFKC").toLowerCase().replace(/[-_\u2010-\u2015]/gu, " ");
+}
+
 export function listExamples(entries, query = "") {
-  const terms = query.toLocaleLowerCase().trim().split(/\s+/u).filter(Boolean);
+  const terms = searchText(query).trim().split(/\s+/u).filter(Boolean);
   return entries.filter((entry) => {
-    const text = [entry.id, entry.title, ...entry.relations, entry.readerTask, entry.dataNeeds].join(" ").toLocaleLowerCase();
-    return terms.every((term) => text.includes(term));
+    const text = searchText([entry.id, entry.title, ...entry.relations, ...(entry.keywords ?? []), entry.readerTask, entry.dataNeeds].join(" "));
+    const words = new Set(text.match(/[a-z0-9]+/g) ?? []);
+    // Chinese terms can match within phrases; Latin words must not match outline or baseline when searching for line.
+    return terms.every((term) => /^[a-z0-9]+$/u.test(term) ? words.has(term) : text.includes(term));
   }).map(({ id, kind, title, readerTask }) => ({ id, kind, title, readerTask }));
 }
 
@@ -153,13 +162,20 @@ async function inspectionView(details, root) {
 
 export async function runCli(args) {
   if (!args.length || ["--help", "help", "-h"].includes(args[0])) {
-    return "node scripts/examples.mjs list [--query 关键词]\nnode scripts/examples.mjs inspect <id>\nlist 按字面关键词筛选简短候选；多个词需同时命中。inspect 返回所选设计解释、条件、改写入口与复制清单；路径相对 root，entryLines 标出源码入口，不返回 HTML 或 JS 源码。";
+    return "node scripts/examples.mjs list [--query 关键词]\nnode scripts/examples.mjs inspect <id>\nlist 按中英文关键词与常见别名筛选简短候选；多个词需同时命中，无匹配时标明并返回完整短目录。inspect 返回所选设计解释、条件、改写入口与复制清单；路径相对 root，entryLines 标出源码入口，不返回 HTML 或 JS 源码。";
   }
   const [command, ...rest] = args;
   if (command === "list") {
     if (rest.length !== 0 && !(rest.length === 2 && rest[0] === "--query" && rest[1] && !rest[1].startsWith("--")))
       throw new Error("Usage: list [--query 关键词]");
-    return { examples: listExamples(await loadCatalog(), rest[1] ?? "") };
+    const entries = await loadCatalog(), query = rest[1] ?? "";
+    const examples = listExamples(entries, query);
+    if (examples.length || !query.trim()) return { examples };
+    return {
+      query, matchCount: 0, fallback: "catalog",
+      message: "没有字面匹配。以下是完整短目录，并非匹配结果；按追问选择，再用 inspect <id> 查看具体说明。",
+      examples: listExamples(entries),
+    };
   }
   if (command === "inspect" && rest.length === 1 && !rest[0].startsWith("--")) {
     const root = await realpath(installedRoot);

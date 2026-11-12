@@ -3,6 +3,7 @@
   "examples": [
     {
       "id": "unit-scale",
+      "keywords": ["等分", "倍数", "开场", "opening", "unit conversion", "subdivision", "multiples", "scale zoom", "reference unit"],
       "title": "先认识一份，再看部分与倍数",
       "kind": "story",
       "relations": ["开篇引入", "单位换算", "等分整体", "重复份额", "尺度缩放", "基准比较"],
@@ -22,6 +23,7 @@
     },
     {
       "id": "time-history",
+      "keywords": ["折线图", "线图", "时间序列", "趋势", "基线", "line chart", "time series", "trend", "baseline", "historical context", "progressive reveal"],
       "title": "历史继续生长，再回到旧基准",
       "relations": [
         "时序变化",
@@ -59,6 +61,7 @@
     },
     {
       "id": "record-comparison",
+      "keywords": ["条形图", "柱状图", "柱形图", "新增记录", "横向比较", "bar chart", "column chart", "shared scale", "record comparison", "new records", "reference values"],
       "title": "新记录加入，旧参照仍在",
       "kind": "story",
       "relations": [
@@ -98,6 +101,7 @@
     },
     {
       "id": "overview-detail",
+      "keywords": ["条形图", "柱状图", "聚焦", "放大", "提取比较", "overview to detail", "focus and context", "drill down", "zoom", "bar chart"],
       "title": "先认出对象，再靠近比较",
       "relations": [
         "整体到局部",
@@ -136,6 +140,7 @@
     },
     {
       "id": "material-composition",
+      "keywords": ["图像", "图片", "图标", "组成带", "堆积条形图", "堆叠条形图", "百分比", "image", "icon", "pictorial", "composition", "part to whole", "stacked bar chart", "proportion"],
       "title": "从熟悉场景进入组成比较",
       "relations": [
         "素材引入",
@@ -180,6 +185,7 @@
     },
     {
       "id": "material-trend",
+      "keywords": ["图片", "图标", "图像标记", "折线图", "涨幅", "趋势", "image marker", "icon", "line chart", "time series", "growth rate", "year over year"],
       "title": "素材直接标记观测，时间推进后比较涨幅",
       "relations": [
         "素材",
@@ -223,6 +229,7 @@
     },
     {
       "id": "material-height",
+      "keywords": ["象形图", "实物比较", "高度比较", "图片缩放", "量尺", "pictorial chart", "pictogram", "scaled image", "height comparison", "shared scale", "rescaling"],
       "title": "新记录加入，超出范围时扩大共用标尺",
       "kind": "story",
       "relations": [
@@ -272,6 +279,7 @@
     },
     {
       "id": "comparison-basis",
+      "keywords": ["标准化", "口径切换", "总量与人均", "分母比较", "per capita", "normalization", "normalisation", "denominator", "comparison basis", "total versus rate"],
       "title": "总量领先，换成人均呢？",
       "relations": [
         "比较口径",
@@ -311,6 +319,7 @@
     },
     {
       "id": "increment-stock",
+      "keywords": ["累计", "累加", "存量", "增量", "年度新增", "cumulative", "accumulation", "stock and flow", "annual increments", "bar chart"],
       "title": "年度差异，怎样接成累计轨迹",
       "relations": [
         "累积",
@@ -349,6 +358,7 @@
     },
     {
       "id": "sequence-recurrence",
+      "keywords": ["弧线图", "重复出现", "旋律动机", "复现", "arc diagram", "sequence", "recurrence", "motif", "repetition", "connections"],
       "title": "同一句话，在不同位置再次出现",
       "kind": "story",
       "relations": [
@@ -388,6 +398,7 @@
     },
     {
       "id": "comparison",
+      "keywords": ["条形图", "柱状图", "局部放大", "提取比较", "bar chart", "overview to detail", "focus and context", "zoom", "difference"],
       "kind": "mechanism",
       "title": "从总体提取局部",
       "relations": [
@@ -418,6 +429,7 @@
     },
     {
       "id": "history",
+      "keywords": ["折线图", "线图", "趋势", "时间序列", "缩略图定位", "line chart", "time series", "context preservation", "focus and context", "overview inset"],
       "kind": "mechanism",
       "title": "历史保留与局部聚焦",
       "relations": [
@@ -442,6 +454,7 @@
     },
     {
       "id": "sequence",
+      "keywords": ["时间对齐", "起点对齐", "共同起点", "持续时长", "时间线", "temporal alignment", "aligned start", "duration", "timeline"],
       "kind": "mechanism",
       "title": "从原日期换到共同起点",
       "relations": [
@@ -467,6 +480,7 @@
     },
     {
       "id": "amounts",
+      "keywords": ["堆积条形图", "堆叠条形图", "拆分", "合并", "累计", "增量", "stacked bar chart", "composition", "part to whole", "accumulation", "decomposition"],
       "kind": "mechanism",
       "title": "整体展开与增量接入",
       "relations": [
@@ -492,6 +506,7 @@
     },
     {
       "id": "identity",
+      "keywords": ["图片", "图像", "图标", "对象识别", "图像标记", "点图", "image marker", "icon", "dot plot", "identity", "object continuity", "shared anchor"],
       "kind": "mechanism",
       "title": "素材跟随数据对象",
       "relations": [
@@ -521,6 +536,7 @@
     },
     {
       "id": "units",
+      "keywords": ["单元图", "点阵", "粒子", "点图", "轮廓", "重排", "unit chart", "dot plot", "particle", "particles", "regrouping", "distribution", "weighting", "silhouette"],
       "kind": "mechanism",
       "title": "同批记录改变布局与权重",
       "relations": [
@@ -548,6 +564,7 @@
     },
     {
       "id": "difference",
+      "keywords": ["差额", "前后对比", "有符号差值", "增减对比", "before after", "difference", "delta", "signed change", "comparison"],
       "kind": "mechanism",
       "title": "两期端点转为有符号差值",
       "relations": [
@@ -575,6 +592,7 @@
     },
     {
       "id": "person-coverage",
+      "keywords": ["人物", "人群", "尺码", "分布图", "覆盖率", "人物图标", "person", "human figure", "population distribution", "coverage", "percentile", "image", "icon"],
       "title": "从一个人，看见覆盖的边界",
       "kind": "story",
       "relations": [
@@ -605,6 +623,7 @@
     },
     {
       "id": "multi-constraint",
+      "keywords": ["多个约束", "腰臀", "尺码", "轮廓", "形状比较", "取舍", "multiple constraints", "waist hip", "contour", "shape comparison", "tradeoff", "fit", "image", "silhouette"],
       "title": "满足一个条件，另一个呢？",
       "kind": "story",
       "relations": [
@@ -633,6 +652,7 @@
     },
     {
       "id": "object-fit",
+      "keywords": ["口袋", "手机", "容器", "试放", "尺寸适配", "容量与形状", "pocket", "phone", "container", "object fit", "dimensional fit", "physical fit", "sample comparison", "image"],
       "title": "尺寸差异，变成使用后果",
       "kind": "story",
       "relations": [
@@ -661,6 +681,7 @@
     },
     {
       "id": "records-composition",
+      "keywords": ["堆积面积图", "堆叠面积图", "百分比面积图", "构成变化", "歌曲分类", "分类口径", "stacked area chart", "composition over time", "reclassification", "weighted share", "music"],
       "title": "从具体记录，重新理解构成",
       "kind": "story",
       "relations": [
@@ -692,6 +713,7 @@
     },
     {
       "id": "cohort-flow",
+      "keywords": ["流向", "流向图", "流量图", "流带", "流动", "起点终点", "配对记录", "sankey diagram", "flow diagram", "ribbon", "origin destination", "cohort comparison"],
       "title": "同一条件下，后来去了哪里？",
       "kind": "story",
       "relations": [

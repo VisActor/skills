@@ -35,7 +35,7 @@
 node /path/to/creative-data-storytelling/scripts/examples.mjs inspect <id>
 ```
 
-返回的 `explanation` 是完整短解释，供判断适用条件与设计取舍；需要观察构图和运动时打开 `read.layout` 预览。`read.code` 定位布局、过渡与绘制，`copyAlongside` 列出采用本例时的依赖，接入与改编见[实现参考](implementation.md)。其他候选可用同一命令的 `list --query 关键词` 检索，无需通读总览或全部示例。
+返回的 `explanation` 是完整短解释，供判断适用条件与设计取舍；需要观察构图和运动时打开 `read.layout` 预览。`read.code` 定位布局、过渡与绘制，`copyAlongside` 列出采用本例时的依赖，接入与改编见[实现参考](implementation.md)。其他候选可用同一命令的 `list` 浏览短目录，或 `list --query 关键词` 按中英文关键词与常见别名筛选；无字面匹配时会标明并返回完整短目录，供按追问判断，无需通读总览或全部示例。
 
 | 叙事中的追问 | 可选表达与取舍 | 数据条件与比较依据 | 参照 ID 与关键过程 |
 | --- | --- | --- | --- |

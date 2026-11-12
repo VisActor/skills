@@ -37,6 +37,86 @@ test("discovery returns bounded metadata and filters relationship terms without 
   assert.ok(listExamples(entries).every((entry) => !Object.hasOwn(entry, "code") && !Object.hasOwn(entry, "dependencies")));
 });
 
+test("CLI queries with matches return only matching candidates", async () => {
+  const entries = await loadCatalog();
+  assert.deepEqual(await runCli(["list", "--query", "整体 局部"]), {
+    examples: listExamples(entries, "整体 局部"),
+  });
+});
+
+test("CLI listing without search terms remains a plain compact catalog", async () => {
+  const expected = { examples: listExamples(await loadCatalog()) };
+  assert.deepEqual(await runCli(["list"]), expected);
+  assert.deepEqual(await runCli(["list", "--query", "  "]), expected);
+});
+
+test("bilingual chart, narrative and material keywords find relevant examples", async () => {
+  const entries = await loadCatalog();
+  for (const [query, id] of [
+    ["流向", "cohort-flow"], ["sankey diagram", "cohort-flow"],
+    ["堆积面积图", "records-composition"], ["stacked area chart", "records-composition"],
+    ["柱状图", "record-comparison"], ["bar chart", "record-comparison"],
+    ["折线图", "time-history"], ["line chart", "time-history"],
+    ["象形图", "material-height"], ["pictorial chart", "material-height"],
+    ["单位换算", "unit-scale"], ["unit conversion", "unit-scale"],
+    ["人均", "comparison-basis"], ["per capita", "comparison-basis"],
+    ["累计", "increment-stock"], ["cumulative", "increment-stock"],
+    ["图像标记", "material-trend"], ["image marker", "material-trend"],
+    ["口袋", "object-fit"], ["pocket", "object-fit"],
+    ["多个约束", "multi-constraint"], ["multiple constraints", "multi-constraint"],
+    ["弧线图", "sequence-recurrence"], ["arc diagram", "sequence-recurrence"],
+    ["时间对齐", "sequence"], ["temporal alignment", "sequence"],
+    ["群体分布", "person-coverage"], ["population distribution", "person-coverage"],
+    ["单元图", "units"], ["unit chart", "units"],
+  ]) {
+    assert.ok(listExamples(entries, query).some(entry => entry.id === id), `${query}: missing ${id}`);
+  }
+  for (const query of ["河流图", "streamgraph"]) {
+    assert.ok(!listExamples(entries, query).some(entry => entry.id === "records-composition"));
+  }
+});
+
+test("keyword search normalizes bilingual input and matches whole Latin words with AND terms", () => {
+  const entry = (id, keywords) => ({ id, title: id, kind: "mechanism", relations: [], keywords });
+  const entries = [entry("curve", ["line chart", "折线图"]), entry("contour", ["outline", "baseline", "linear"]),
+    entry("bars", ["bar chart", "条形图"])];
+  for (const query of ["BAR CHART", "bar-chart", "ｂａｒ　ｃｈａｒｔ", "bar 条形图"]) {
+    assert.deepEqual(listExamples(entries, query).map(item => item.id), ["bars"]);
+  }
+  assert.deepEqual(listExamples(entries, "line").map(item => item.id), ["curve"]);
+  assert.deepEqual(listExamples(entries, "line 条形图"), []);
+  assert.ok(listExamples(entries).every(item => !Object.hasOwn(item, "keywords")));
+});
+
+test("catalog keywords are optional and reject malformed search metadata", async (t) => {
+  const fixture = await explanationFixture(t, '<details id="example-notes"><p>Fixture.</p></details>');
+  const catalogPath = path.join(fixture.installed, "assets/examples/catalog.json");
+  await writeFile(catalogPath, JSON.stringify({ version: 1, examples: [fixture.entry] }));
+  assert.equal((await loadCatalog(fixture.installed)).length, 1);
+  for (const keywords of ["line chart", [""], [null], [42]]) {
+    await writeFile(catalogPath, JSON.stringify({ version: 1, examples: [{ ...fixture.entry, keywords }] }));
+    await assert.rejects(loadCatalog(fixture.installed), /Invalid search keywords/);
+  }
+});
+
+test("CLI zero-match fallback lists the catalog without requiring example pages or source", async (t) => {
+  const installed = await mkdtemp(path.join(tmpdir(), "story-catalog-fallback-"));
+  t.after(() => rm(installed, { recursive: true, force: true }));
+  const entries = await loadCatalog();
+  await mkdir(path.join(installed, "scripts"), { recursive: true });
+  await mkdir(path.join(installed, "assets/examples"), { recursive: true });
+  await cp(path.join(root, "scripts/examples.mjs"), path.join(installed, "scripts/examples.mjs"));
+  await writeFile(path.join(installed, "assets/examples/catalog.json"), JSON.stringify({ version: 1, examples: entries }));
+  const query = "__unmatched_catalog_query_8349__";
+  const { stdout } = await exec(process.execPath, [path.join(installed, "scripts/examples.mjs"), "list", "--query", query], { cwd: tmpdir() });
+  const result = JSON.parse(stdout);
+  assert.equal(result.query, query);
+  assert.equal(result.matchCount, 0);
+  assert.equal(result.fallback, "catalog");
+  assert.ok(typeof result.message === "string" && result.message.trim());
+  assert.deepEqual(result.examples, listExamples(entries));
+});
+
 test("inspect returns only selected design paragraphs with readable entities and resolved links", async (t) => {
   const fixture = await explanationFixture(t, `
     <style>STYLE_SENTINEL</style><p>PAGE_SENTINEL</p>
