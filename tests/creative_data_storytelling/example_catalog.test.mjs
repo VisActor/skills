@@ -18,14 +18,14 @@ async function explanationFixture(t, html) {
   const entry = {
     id: "fixture", kind: "story", title: "Fixture", relations: [],
     preview: "assets/examples/fixture/index.html", code: "assets/examples/fixture/scene.mjs",
-    method: "references/method.md#relation", dependencies: [], assets: [],
+    design: "references/design.md#relation", dependencies: [], assets: [],
   };
   const preview = path.join(installed, entry.preview);
   await mkdir(path.dirname(preview), { recursive: true });
   await mkdir(path.join(installed, "references"));
   await writeFile(preview, html);
   await writeFile(path.join(installed, entry.code), "throw new Error('SOURCE_BODY_SENTINEL');");
-  await writeFile(path.join(installed, "references/method.md"), "# Relation");
+  await writeFile(path.join(installed, "references/design.md"), "# Relation");
   return { installed, entry, preview };
 }
 
@@ -44,7 +44,7 @@ test("inspect returns only selected design paragraphs with readable entities and
     <details class="scope" id='example-notes'>
       <summary>SUMMARY_SENTINEL</summary>
       <p><strong>Reason:</strong> A &amp; B keep <code>x &lt; 10</code>; &#215; &#x4EBA;&nbsp;units.</p>
-      <p>Use <a href="../../../references/method.md#relation">the <em>method</em></a> and <a href="#middle">the middle</a>.</p>
+      <p>Use <a href="../../../references/design.md#relation">the <em>design</em></a> and <a href="#middle">the middle</a>.</p>
       <p><a href="https://example.com/?a=1&amp;b=2">external reference</a></p>
     </details><script>SCRIPT_SENTINEL</script>`);
   const inspected = await inspectExample([fixture.entry], fixture.entry.id, fixture.installed);
@@ -52,11 +52,11 @@ test("inspect returns only selected design paragraphs with readable entities and
     source: fixture.preview + "#example-notes",
     paragraphs: [
       "Reason: A & B keep x < 10; × 人 units.",
-      "Use the method and the middle.",
+      "Use the design and the middle.",
       "external reference",
     ],
     links: [
-      { label: "the method", target: path.join(fixture.installed, "references/method.md") + "#relation" },
+      { label: "the design", target: path.join(fixture.installed, "references/design.md") + "#relation" },
       { label: "the middle", target: fixture.preview + "#middle" },
       { label: "external reference", target: "https://example.com/?a=1&b=2" },
     ],
@@ -99,6 +99,8 @@ test("CLI inspection preserves design notes and a complete copy manifest with on
     assert.deepEqual(view.explanation.paragraphs, full.explanation.paragraphs);
     assert.equal(view.dataNeeds, full.dataNeeds);
     assert.equal(view.adapt, full.adapt);
+    assert.equal(view.design, entry.design);
+    assert.equal(path.resolve(view.root, view.design.split("#")[0]), full.optional.design.path);
     assert.equal(path.resolve(view.root, view.explanation.source), full.explanation.source);
     assert.deepEqual(view.explanation.links.map(link => ({ ...link,
       target: /^[a-z]+:/i.test(link.target) ? link.target : path.resolve(view.root, link.target),

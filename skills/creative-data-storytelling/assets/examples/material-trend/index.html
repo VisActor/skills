@@ -25,8 +25,8 @@
 <p>数据：<a href="https://github.com/TheEconomist/big-mac-data">The Economist 巨无霸价格数据</a>（澳大利亚半年报价）；<a href="https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia/jun-quarter-2024">ABS，2024 年六月季度，表 7</a>（面包 A2327061R、牛肉与小牛肉 A2327241X，八个首府城市加权平均）。展示 2017—2024 年观察，以 2016 年同半年度／同季度记录支持同比计算；季度值放在季末，保留各自频率，未补造相同日期。连线只连接观测。</p>
 <p>表达参考：<a href="https://www.abc.net.au/news/2024-08-05/cost-of-living-interest-rates-burgers/104156654">ABC：What's driving up burger prices?</a>。此页重写短篇叙事和代码，以静态 SVG 直接标记观测。采用冻结原始记录自行计算，不逐像素复制原作。</p>
 <details id="example-notes"><summary>叙事、可视化选择与改编</summary>
-  <p><strong>叙事设计：</strong><a href="../../../references/expression-methods.md#历史中的变化与基准">看变化</a> → <a href="../../../references/expression-methods.md#改变比较口径">换口径比较</a>。先看汉堡价格如何停顿与加速，再问食材是否同样上涨。换成同比后逐项引入参照，检验走势是否一致；走势相似本身不足以证明原因。</p>
-  <p><strong>可视化选择：</strong><a href="../../../references/expression-methods.md#objects">素材直接标记观测</a>，让具体物件与时间中的读数相连。转换同比时保留日期和记录身份，只改变纵向量值；各系列共用涨幅尺度，图片尺寸负责识别与重点。</p>
+  <p><strong>叙事设计：</strong><a href="../../../references/design.md#history">看变化</a> → <a href="../../../references/design.md#comparison-basis">换口径比较</a>。先看汉堡价格如何停顿与加速，再问食材是否同样上涨。换成同比后逐项引入参照，检验走势是否一致；走势相似本身不足以证明原因。</p>
+  <p><strong>可视化选择：</strong><a href="../../../references/design.md#objects">素材直接标记观测</a>，让具体物件与时间中的读数相连。转换同比时保留日期和记录身份，只改变纵向量值；各系列共用涨幅尺度，图片尺寸负责识别与重点。</p>
   <p><strong>改编空间：</strong>可换对象、素材、指标、参照及先后顺序；图片也可换成普通标记，密集序列只突出关键观测。只问走势可保留原值；比较涨幅须有同期间正值基数，缺测不补成事实。价格指数不能相加成成本。</p>
   <p><strong>代码入口：</strong><code>mountTrend(root, { config })</code> 换观测、素材与停留点，<code>metric / unit / formatValue</code> 换读数。只选 <code>raw</code> 不需去年数据；用到 <code>yoy</code> 的系列才需 <code>frequency / previousId</code>。<code>trendPose / blendTrend / trendMarks</code> 管位置与显露；新正文和相近端点的标注仍按画面安排。</p>
   <p><a href="scene.mjs">本例数据与代码</a></p>

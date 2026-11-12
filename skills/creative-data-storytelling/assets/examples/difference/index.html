@@ -18,7 +18,7 @@
   <div class="plot" style="max-width:980px"><svg id="difference" viewBox="0 0 860 380" role="img" aria-label="三条模拟记录的两期量值与差值" aria-describedby="readout"></svg></div>
   <p id="readout" class="result" aria-live="polite"></p>
     <details id="example-notes" class="scope"><summary>表达理由与改编</summary>
-  <p><strong>表达理由：</strong><a href="../../../references/expression-methods.md#compare">两期比较 → 增减比较</a>：两端先说明各有多少，再把每行起点移到零，让差值的正负与大小直接可比。移动改变参照，原始记录和差额保留；过渡时交接刻度。</p>
+  <p><strong>表达理由：</strong><a href="../../../references/design.md#compare">两期比较 → 增减比较</a>：两端先说明各有多少，再把每行起点移到零，让差值的正负与大小直接可比。移动改变参照，原始记录和差额保留；过渡时交接刻度。</p>
   <p><strong>改编与接线：</strong>需要同口径两期量值。可换题材、标记和排列；只问增减时可直接展示差值。给 <code>mountDifference({ …, config })</code> 传数据、域、单位和 <code>digits</code>；<code>rowY / renderAxis</code> 仍由调用方布局与绘轴。差值域覆盖零及所有结果；接前图时从已有对象的位置开始。</p>
   <p><a href="scene.mjs">本例数据与代码</a></p>
 </details>

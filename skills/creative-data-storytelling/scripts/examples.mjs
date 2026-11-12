@@ -14,6 +14,7 @@ export async function loadCatalog(root = installedRoot) {
   for (const entry of catalog.examples) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(entry.id) || ids.has(entry.id) || !entry.title ||
       !["story", "mechanism"].includes(entry.kind) ||
+      typeof entry.design !== "string" || !entry.design ||
       !Array.isArray(entry.relations) || !Array.isArray(entry.dependencies) || !Array.isArray(entry.assets))
       throw new Error("Invalid or duplicate example entry: " + entry.id);
     ids.add(entry.id);
@@ -91,8 +92,8 @@ export async function inspectExample(entries, id, root = installedRoot) {
     Promise.all(entry.dependencies.map((file) => resource(canonicalRoot, file))),
     Promise.all(entry.assets.map((file) => resource(canonicalRoot, file))),
   ]);
-  const methodFile = entry.method.split("#")[0];
-  const method = await resource(canonicalRoot, methodFile);
+  const designFile = entry.design.split("#")[0];
+  const design = await resource(canonicalRoot, designFile);
   const related = entry.relatedExample && entries.find((candidate) => candidate.id === entry.relatedExample);
   const relatedExample = related ? {
     id: related.id, kind: related.kind, title: related.title,
@@ -106,11 +107,11 @@ export async function inspectExample(entries, id, root = installedRoot) {
     dataNeeds: entry.dataNeeds, dataKind: entry.dataKind, process: entry.process,
     retain: entry.retain, adapt: entry.adapt, handoff: entry.handoff,
     read: { previewAndLayout: preview, dataAndAnimation: code },
-    optional: { method: { ...method, anchor: entry.method.split("#")[1] ?? null }, ...(relatedExample && { relatedExample }) },
+    optional: { design: { ...design, anchor: entry.design.split("#")[1] ?? null }, ...(relatedExample && { relatedExample }) },
     copyAlongside: { dependencies, assets },
     readingBytes: preview.bytes + code.bytes,
     copyBytes: [preview, code, ...dependencies, ...assets].reduce((sum, file) => sum + file.bytes, 0),
-    usage: "explanation 直接提取自所选 HTML 的 example-notes。结合预览理解过程，再确定借用整段、局部操作或重新设计；采用实现时读 scene.mjs，页面装配再读 HTML。复制 read 与 copyAlongside 所列文件，保持相对目录或同步改写引用；无需复制总览、目录或 relatedExample。运行依赖通常直接导入，不读源码。使用自己的数据与正文，保留当前追问所需的对象关系和参照。",
+    usage: "explanation 提取自所选 HTML 的 example-notes，用于理解叙事与视觉关系；预览用于观察构图与运动。改编实现时读 scene.mjs 的相关部分，调整装配时读 HTML。采用本例时复制 read 与 copyAlongside 所列文件，保持相对目录或同步修改引用；无需复制总览、目录或 relatedExample。运行依赖按接口导入，排错或扩展时再查源码。",
   };
 }
 
@@ -126,7 +127,7 @@ async function inspectionView(details, root) {
     if (name) entryLines[name] = index + 1;
   });
   const relative = target => path.isAbsolute(target) ? path.relative(root, target).split(path.sep).join("/") : target;
-  const method = details.optional.method;
+  const design = details.optional.design;
   return {
     id: details.id, kind: details.kind, title: details.title, root,
     dataNeeds: details.dataNeeds, dataKind: details.dataKind,
@@ -140,13 +141,13 @@ async function inspectionView(details, root) {
       code: { file: code.relative, bytes: code.bytes, lines: lines.length, entryLines },
       layout: details.read.previewAndLayout.relative,
     },
-    method: method.relative + (method.anchor ? "#" + method.anchor : ""),
+    design: design.relative + (design.anchor ? "#" + design.anchor : ""),
     ...(details.optional.relatedExample && { relatedExample: details.optional.relatedExample.id }),
     copyAlongside: {
       dependencies: details.copyAlongside.dependencies.map(file => file.relative),
       assets: details.copyAlongside.assets.map(file => file.relative),
     },
-    usage: "本地路径相对 root。采用实现时读 code 的相关过程，entryLines 为定位行号；页面装配再读 layout。连同 copyAlongside 复制并保持相对目录；运行依赖通常直接导入。",
+    usage: "本地路径相对 root。explanation 用于设计理解；改编实现时按 entryLines 定位 code 中的相关部分，调整装配时读 layout。采用本例时连同 copyAlongside 复制并保持相对目录；运行依赖按接口导入，排错或扩展时再查源码。",
   };
 }
 

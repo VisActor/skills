@@ -20,7 +20,7 @@
   </section>
   <footer><p>两区名称、人口及同年借阅量均为模拟。借阅包括重复借阅，分母是常住人口。分段是均分后的平均份额，不是实际居民分组的记录；人均借阅册次不等于每名居民实际借阅册数。</p>
     <details id="example-notes"><summary>叙事、可视化选择与改编</summary>
-  <p><strong>叙事设计：</strong><a href="../../../references/expression-methods.md#改变比较口径">直观差异 → 对齐分母后再判断</a>。总量领先，是否意味着每个人更多？沿用已有总量比较，补上人口分母，再看人均结果。排序是否反转由数据决定。</p>
+  <p><strong>叙事设计：</strong><a href="../../../references/design.md#comparison-basis">直观差异 → 对齐分母后再判断</a>。总量领先，是否意味着每个人更多？沿用已有总量比较，补上人口分母，再看人均结果。排序是否反转由数据决定。</p>
   <p><strong>可视化选择：</strong>将总量分成等人口的平均份额，突出一份后换成人均尺度，使除数的作用可见。对象身份保留，单位与读数随尺度交接；这些份额是计算平均，不代表真实个体。</p>
   <p><strong>改编空间：</strong>可用于其他合理的分母与标准化比较，重选对象、单位和构图。只需比较人均时可直接展示结果；需要解释分母时才展开份额。非整数分母可改用直接换尺度；同容量、同龄等条件匹配需要真实对应记录。</p>
   <p><strong>代码入口：</strong><code>basisExample</code> 配总量、人口与 <code>quantum</code>，当前分段最多40份；计算单位需对齐。<code>basisReading / basisPose / blendBasis</code> 管读数、份额与交接。更多对象重排空间，新口径可接后续分布或变化。</p>

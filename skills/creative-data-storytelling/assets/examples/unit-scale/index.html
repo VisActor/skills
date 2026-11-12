@@ -27,7 +27,7 @@
     <p>本片段到两条等候记录的比较为止。若接入真实等候数据，下一段可以继续追问：这种差异只是两次经历，还是一群人的共同处境？</p>
     <details id="example-notes"><summary>设计解释与改编入口</summary>
       <p><strong>叙事设计：</strong><a href="../../../references/design.md#开篇与收尾">从基本关系引入</a>：先认识一份，再看内部和倍数，最后借已建立的参照比较记录。等待只是题材；当前问题已无需解释单位时，可直接从比较开始。</p>
-      <p><strong>可视化选择：</strong><a href="../../../references/expression-methods.md#同量换单位与量级参照">拆分、重复与缩放</a>分别可见：同一条带等分时总量不变；保留原份并接入新份时总量增加；共同尺度改变时，原份身份与真实量值不变。时间带最后收拢为分钟参照，放大后比较记录另行加入，不伪装成从参照中拆出的经历。</p>
+      <p><strong>可视化选择：</strong><a href="../../../references/design.md#unit-scale">拆分、重复与缩放</a>分别可见：同一条带等分时总量不变；保留原份并接入新份时总量增加；共同尺度改变时，原份身份与真实量值不变。时间带最后收拢为分钟参照，放大后比较记录另行加入，不伪装成从参照中拆出的经历。</p>
       <p><strong>改编空间：</strong>可换长度、质量、容量或其他有明确换算依据的量，重选素材、方向与布局；圆形、点阵等需另算几何。按追问借用其中一个操作或整段。非等分组成用真实分项，不强套等份。</p>
       <p><strong>代码入口：</strong><code>unitScaleExample</code> 配基准量、等分与重复份数、比较记录；<code>unitScalePose / blendUnitScale</code> 分别安排结果与衔接，<code>unitScaleGeometry</code> 共用尺度。此布局支持两个比较对象、2–120等分及重复份；正文和图共用 <code>unitScaleReading</code>。</p>
       <p><a href="scene.mjs">本例数据与代码</a></p>

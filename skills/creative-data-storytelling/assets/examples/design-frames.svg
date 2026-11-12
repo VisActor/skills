@@ -46,5 +46,5 @@
   <text x="807" y="816">20</text><text x="927" y="879">24</text>
   <path d="M190 901V783M790 835v68H910v-6" class="line" fill="none"/>
   <text x="834" y="927">+4</text>
-  <text x="45" y="975" class="small">设计推导见方法卡 expression-methods.md 中的 A／B／C；动画和探索见 index.html。</text>
+  <text x="45" y="975" class="small">A／B 的设计理由见 comparison／units 示例；C 见素材指导。动画与探索入口见 index.html。</text>
 </svg>

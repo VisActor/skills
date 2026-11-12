@@ -23,8 +23,8 @@
 <p>数据：<a href="https://www.toureiffel.paris/en/news/history-and-culture/300-330-meters-story-towers-height">埃菲尔铁塔官网</a>区分300米主体与含旗杆约312米；<a href="https://www.skyscraper.org/tallest-towers/chrysler-building/">The Skyscraper Museum 的克莱斯勒大厦</a>；The Skyscraper Center 的 <a href="https://www.skyscrapercenter.com/building/wd/261">帝国大厦</a>、<a href="https://www.skyscrapercenter.com/building/building/169">威利斯大厦</a>、<a href="https://www.skyscrapercenter.com/building/wd/149">国油双峰塔</a>、<a href="https://www.skyscrapercenter.com/building/taipei-101/117">台北101</a>；<a href="https://newsletter.ctbuh.org/eblast/BurjKhalifa/BurjKhalifaHeight.html">CTBUH 2010年哈利法塔高度确认</a>。威利斯大厦的年份采用数据库 Completion 字段。资料核对于2026年11月10日。</p>
 <p>素材为本例原创简化矢量立面，主体或建筑尖顶与地面对齐计量端点；未绘旗杆和功能性天线。竖直高度按数据比例呈现，楼宽、窗格与外立面细节用于识别，不是测绘图。</p>
 <details id="example-notes"><summary>叙事、可视化选择与改编</summary>
-  <p><strong>叙事设计：</strong><a href="../../../references/expression-methods.md#新记录加入共同尺度">新信息加入 → 保留参照比较</a>。本例用建成年代推动加入，分别看小幅超越、跨过基准和明显跃升，再回看最初参照。其他题材可由新对象、条件或证据推动，不必逐年展示。</p>
-  <p><strong>可视化选择：</strong><a href="../../../references/expression-methods.md#objects">实物尺寸编码</a>让建筑身份与高度合为一个标记。较高对象进入前共同扩展尺度，旧对象仍可比较；零点、真实读数不变，刻度与素材同步缩放。显露表示记录加入，不表示施工进度。</p>
+  <p><strong>叙事设计：</strong><a href="../../../references/design.md#record-comparison">新信息加入 → 保留参照比较</a>。本例用建成年代推动加入，分别看小幅超越、跨过基准和明显跃升，再回看最初参照。其他题材可由新对象、条件或证据推动，不必逐年展示。</p>
+  <p><strong>可视化选择：</strong><a href="../../../references/design.md#objects">实物尺寸编码</a>让建筑身份与高度合为一个标记。较高对象进入前共同扩展尺度，旧对象仍可比较；零点、真实读数不变，刻度与素材同步缩放。显露表示记录加入，不表示施工进度。</p>
   <p><strong>改编空间：</strong>可换题材、素材、图形、排列和加入契机。普通柱形可沿用长度比较；点或有依据的连续轨迹也可借用保留参照与缩放的思路，另写几何。采用素材尺寸编码时统一口径、校准可见端点；选择新视域时覆盖当前比较对象。</p>
   <p><strong>代码入口：</strong><code>skylineExample</code> 配记录、比较对、<code>axisMax</code> 与素材 <code>topY / baseY</code>；<code>skylinePose</code> 管排列，<code>skylineGeometry / skylineTicks</code> 共用尺度，<code>blendSkyline</code> 安排变化。<code>data-height / data-gap</code> 共用读数；对象数、布局与正文重新设计。</p>
   <p><a href="scene.mjs">本例数据与代码</a></p>

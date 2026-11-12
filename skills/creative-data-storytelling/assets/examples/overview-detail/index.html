@@ -66,7 +66,7 @@
     <footer>
       <p>本页是模拟记录，用来演示“先识别、再提取、最后比较”的读法，没有实际交通调查或因果判断。条长表示通勤分钟数，缩放时始终保留零点；条的粗细只用于突出当前对象。</p>
       <details id="example-notes"><summary>叙事、可视化选择与改编</summary>
-  <p><strong>叙事设计：</strong><a href="../../../references/expression-methods.md#全局到局部原位强调提取还是保留缩略图">全局 → 局部比较</a>。从总体中挑出一对值得追问的记录，先让读者认出它们，再回答“相差多少”。选择理由来自正文与数据；可直接承接已有全景。</p>
+  <p><strong>叙事设计：</strong><a href="../../../references/design.md#overview-detail">全局 → 局部比较</a>。从总体中挑出一对值得追问的记录，先让读者认出它们，再回答“相差多少”。选择理由来自正文与数据；可直接承接已有全景。</p>
   <p><strong>可视化选择：</strong>先原位突出，再移动同一对条形，交代局部来自哪里。条长适合精读用时；共同零点与同步缩放保持可比，差值标注省去来回读数。其他记录退出，把空间留给当前问题。</p>
   <p><strong>改编空间：</strong>对象需有稳定身份、可比口径和选取理由。原位已能读清时，高亮足够；需要定位时保留适量总体参照。点、线、区间或单元都可承担提取，重新安排尺度、素材与空间即可延续这段思路。</p>
   <p><strong>代码入口：</strong><code>mountDetailStory(root, { rows, selected, layout })</code> 换记录、选中项与空间；<code>layout</code> 可调标签区、行距、比较位置及画布尺寸，<code>detailStoryPose / blendDetailStory</code> 让轴、条形和标注同步。沿用这对记录继续解释或返回全景；正文与选择理由另行改写。</p>

@@ -20,7 +20,7 @@
     <div class="plot"><svg id="history" viewBox="0 0 860 490" role="img" aria-label="模拟观测的历史保留与局部定位" aria-describedby="history-summary"></svg></div>
     <p id="history-summary" class="result" aria-live="polite"></p>
     <details id="example-notes" class="scope"><summary>表达理由与改编</summary>
-  <p><strong>表达理由：</strong><a href="../../../references/expression-methods.md#历史中的变化与基准">历史保留与局部聚焦</a>：新观测沿轨迹显露，使前后起伏同时可见。缩略窗口只在局部仍需定位时保留，不承担第二份分析。</p>
+  <p><strong>表达理由：</strong><a href="../../../references/design.md#history">历史保留与局部聚焦</a>：新观测沿轨迹显露，使前后起伏同时可见。放大后用缩略窗口标出主图所在时期，两者由同一当前范围生成；读者无需重新猜测位置。局部已能定位时可去掉缩略图，它不承担第二份分析。</p>
   <p><strong>改编与接线：</strong>需要可连接的同口径观测，缺测先断开。<code>mountHistory(root, config)</code> 接记录、<code>early / focus</code> 与轴域，配置形状见 <code>historyWindowExample</code>；<code>historyPose</code> 管状态及定位图显隐。可换标记、范围与排列；需解释旧基准时参考 <a href="../time-history/index.html">time-history</a>。</p>
   <p><a href="scene.mjs">本例数据与代码</a></p>
 </details>

@@ -11,7 +11,7 @@
       "dataKind": "秒、分钟、小时的单位关系，以及两条模拟等候时长；不作真实场所结论。",
       "preview": "assets/examples/unit-scale/index.html",
       "code": "assets/examples/unit-scale/scene.mjs",
-      "method": "references/expression-methods.md#同量换单位与量级参照",
+      "design": "references/design.md#unit-scale",
       "process": ["建立一份基准", "保持整体长度，显露等分", "放远共同尺度，保留原份并接续其他份数", "将时间带收拢为分钟参照，同步放大后加入独立记录并比较差额"],
       "retain": "同量等分保持总量，重复增加份数，缩放改变像素映射；原份身份与共同单位可辨。",
       "adapt": "unitScaleExample 配基准量、等分数、重复份数与两条记录；unitScalePose / blendUnitScale 管构图与时序，unitScaleGeometry 共用尺度。可只借其中一种操作，改写主题与图形时保留当前追问所需关系。",
@@ -33,7 +33,7 @@
       "dataKind": "模拟订单记录，2016—2024；无真实行业结论。",
       "preview": "assets/examples/time-history/index.html",
       "code": "assets/examples/time-history/scene.mjs",
-      "method": "references/expression-methods.md#历史中的变化与基准",
+      "design": "references/design.md#history",
       "process": [
         "建立旧参照",
         "沿原轨迹显露回落",
@@ -85,7 +85,7 @@
       },
       "preview": "assets/examples/record-comparison/index.html",
       "code": "assets/examples/record-comparison/scene.mjs",
-      "method": "references/expression-methods.md#新记录加入共同尺度",
+      "design": "references/design.md#record-comparison",
       "dependencies": [
         "assets/runtime/geometry.mjs",
         "assets/runtime/motion.mjs",
@@ -110,7 +110,7 @@
       "dataKind": "12 条模拟通勤记录；相同路程不代表已控制所有条件。",
       "preview": "assets/examples/overview-detail/index.html",
       "code": "assets/examples/overview-detail/scene.mjs",
-      "method": "references/expression-methods.md#全局到局部原位强调提取还是保留缩略图",
+      "design": "references/design.md#overview-detail",
       "process": [
         "用零基线条形展示全体",
         "在原位识别一对记录",
@@ -149,7 +149,7 @@
       "dataKind": "UNEP / WRAP 2024 报告的 2022 年数据；60/28/12 为公布的舍入占比，图片是生成示意。",
       "preview": "assets/examples/material-composition/index.html",
       "code": "assets/examples/material-composition/scene.mjs",
-      "method": "references/expression-methods.md#objects",
+      "design": "references/design.md#objects",
       "process": [
         "用三张图片建立类别",
         "图片与名称随组成区间移位",
@@ -191,7 +191,7 @@
       "readerTask": "用汉堡图片标记每次报价。保留日期与观测记录，把纵轴从价格换成同比涨幅，再逐项加入食材参照。",
       "dataNeeds": "有序观测及可核对的上年同期正值；各自频率和日期保留。素材识别观测，不按数值缩放，价格指数不可相加为成本。",
       "dataKind": "The Economist 澳大利亚半年报价、ABS 季度食材 CPI；2017—2024 展示，2016 支持同比。",
-      "method": "references/expression-methods.md#objects",
+      "design": "references/design.md#objects",
       "process": [
         "素材直接落在观测点，依次显露并保留历史",
         "同批观测保持时间位置，从价格转同比",
@@ -251,7 +251,7 @@
       },
       "preview": "assets/examples/material-height/index.html",
       "code": "assets/examples/material-height/scene.mjs",
-      "method": "references/expression-methods.md#objects",
+      "design": "references/design.md#objects",
       "dependencies": [
         "assets/runtime/geometry.mjs",
         "assets/runtime/motion.mjs",
@@ -283,7 +283,7 @@
       "readerTask": "先把两组总量都按每 N 人一份平均切分，再各取一份除以 N，换算到每人后重新比较。",
       "dataNeeds": "同范围总量与正分母；本构图将分母整分为不超过 40 份，份额是计算平均而非实际个体。条件筛选需另用真实对应记录。",
       "dataKind": "两个虚构城区的同年借阅量和人口。",
-      "method": "references/expression-methods.md#改变比较口径",
+      "design": "references/design.md#comparison-basis",
       "process": [
         "先看总量差",
         "补充人口分母",
@@ -321,7 +321,7 @@
       "readerTask": "先并列各年新增柱，再把同一批柱段从各自旧基底逐年接成累计量，看新增领先的一方是否追上。",
       "dataNeeds": "两对象的可比基底、完整期间内不重复的非负新增；有移出、销毁或重估时要改为完整净变化模型。",
       "dataKind": "两份虚构地方影像档案，2021 年底基底与 2022—2024 年新增。",
-      "method": "references/expression-methods.md#组成与累积",
+      "design": "references/design.md#accumulation",
       "process": [
         "年度并列柱共用零点，比较各年差异",
         "突出需要解释的一年",
@@ -375,7 +375,7 @@
       },
       "preview": "assets/examples/sequence-recurrence/index.html",
       "code": "assets/examples/sequence-recurrence/scene.mjs",
-      "method": "references/expression-methods.md#序列可视化",
+      "design": "references/design.md#sequence",
       "dependencies": [
         "assets/runtime/geometry.mjs",
         "assets/runtime/motion.mjs",
@@ -401,7 +401,7 @@
       "dataKind": "六个模拟样品的重量。",
       "preview": "assets/examples/comparison/index.html",
       "code": "assets/examples/comparison/scene.mjs",
-      "method": "references/expression-methods.md#compare",
+      "design": "references/design.md#compare",
       "adapt": "scene.mjs 的 comparisonSamples → quantitativePose / blendQuantitative / renderQuantitative；HTML 的 example-notes 区分核心、滚动、探索与作者工具。",
       "dependencies": [
         "assets/runtime/bounds.mjs",
@@ -430,7 +430,7 @@
       "dataKind": "2012—2024 的七条模拟观测。",
       "preview": "assets/examples/history/index.html",
       "code": "assets/examples/history/scene.mjs",
-      "method": "references/expression-methods.md#历史中的变化与基准",
+      "design": "references/design.md#history",
       "adapt": "mountHistory(root, config) 接记录、early / focus、轴域与刻度，默认配置见 historyWindowExample；定位窗口跟随当前尺度。",
       "dependencies": [
         "assets/runtime/geometry.mjs",
@@ -454,7 +454,7 @@
       "dataKind": "香港天文台测站 2022、2024 年夏季最长热夜段，页面附来源。",
       "preview": "assets/examples/sequence/index.html",
       "code": "assets/examples/sequence/scene.mjs",
-      "method": "references/expression-methods.md#sequence",
+      "design": "references/design.md#sequence",
       "adapt": "scene.mjs 的 runs 是两个七月内的起止日号；跨月与更多行的改写边界见 HTML 的 example-notes。",
       "dependencies": [
         "assets/runtime/geometry.mjs",
@@ -479,7 +479,7 @@
       "dataKind": "三批新增量合计 60，原有量 40。",
       "preview": "assets/examples/amounts/index.html",
       "code": "assets/examples/amounts/scene.mjs",
-      "method": "references/expression-methods.md#组成与累积",
+      "design": "references/design.md#composition",
       "adapt": "scene.mjs 的 amountExample 改数据/基底/格式，createAmountModel 共用尺度与读数，amountPose 改排列；可加总条件与状态取舍见 HTML 的 example-notes。",
       "dependencies": [
         "assets/runtime/geometry.mjs",
@@ -504,7 +504,7 @@
       "dataKind": "三件虚构杯子样品与价格，SVG 插画用于识别。",
       "preview": "assets/examples/identity/index.html",
       "code": "assets/examples/identity/scene.mjs",
-      "method": "references/expression-methods.md#objects",
+      "design": "references/design.md#objects",
       "adapt": "mountIdentity(root, config) 接记录、比较对象、域与单位，配置形状见 identityExample；HTML 图片 ID 与记录对应，共用姿态。",
       "dependencies": [
         "assets/runtime/format.mjs",
@@ -535,7 +535,7 @@
       "dataKind": "60 个模拟项目；A 类数量多，C 类数量少但服务时长大。",
       "preview": "assets/examples/units/index.html",
       "code": "assets/examples/units/scene.mjs",
-      "method": "references/expression-methods.md#unit-distribution",
+      "design": "references/design.md#unit-distribution",
       "adapt": "scene.mjs 的 unitExample 改记录/类别/标定，slots 改轮廓；unitPose / blendUnits / renderUnits 接状态，HTML 的 example-notes 说明各状态用途。",
       "dependencies": [
         "assets/runtime/geometry.mjs",
@@ -561,7 +561,7 @@
       "dataKind": "三条模拟记录分别增加、减少与不变。",
       "preview": "assets/examples/difference/index.html",
       "code": "assets/examples/difference/scene.mjs",
-      "method": "references/expression-methods.md#compare",
+      "design": "references/design.md#compare",
       "adapt": "mountDifference 的 config 接两期数据、域、单位和精度；调用方提供 rowY / renderAxis。连接时先交接参照，落位后显示有符号差值。",
       "dependencies": [
         "assets/runtime/format.mjs",
