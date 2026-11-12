@@ -6,7 +6,7 @@ import { observeSteps, selectStep } from "./scroll.mjs";
 // blend(from, to, progress) and render(pose, frame) belong to the work.
 export function createStage({
   element, steps, layout, blend, render, duration = 700,
-  viewportRatio = 0.58, hysteresis = 12,
+  viewportRatio = 0.58, hysteresis = 12, onReading,
   view = element?.ownerDocument?.defaultView ?? globalThis,
 }) {
   if (!element?.getBoundingClientRect || !Array.isArray(steps) || !steps.length ||
@@ -22,7 +22,8 @@ export function createStage({
   const elements = steps.map((step) => step.element);
   const initialIndex = selectStep(elements.map((cue) => cue.getBoundingClientRect().top),
     view.innerHeight * viewportRatio);
-  let targetId = steps[initialIndex].id, disposed = false, refreshRequested = false;
+  let readingIndex = initialIndex, targetId = steps[initialIndex].id, disposed = false, refreshRequested = false;
+  onReading?.({ id: targetId, index: readingIndex });
   let size = measure();
   const initial = layout(targetId, size);
   const player = createPlayer(initial, {
@@ -49,6 +50,9 @@ export function createStage({
     player.goTo(pose, options);
   }
   const reader = observeSteps(elements, (index) => {
+    const changed = index !== readingIndex || steps[index].id !== targetId;
+    readingIndex = index;
+    if (changed) onReading?.({ id: steps[index].id, index });
     if (steps[index].id !== targetId) goTo(steps[index].id);
   }, {
     view, viewportRatio, hysteresis,
@@ -64,6 +68,7 @@ export function createStage({
 
   return {
     goTo,
+    syncReading() { if (!disposed) reader.sync(); },
     setReadingEnabled(enabled) { if (!disposed) reader.setEnabled(enabled); },
     // Recompute after data, fonts or surrounding content changes; reflow settles directly.
     refresh() {
@@ -72,7 +77,7 @@ export function createStage({
       reader.refresh();
     },
     // targetId is the requested state, not a claim that its transition has finished.
-    sample: () => ({ targetId, ...player.sample() }),
+    sample: () => ({ readingIndex, targetId, ...player.sample() }),
     dispose() {
       if (disposed) return;
       disposed = true;

@@ -179,7 +179,7 @@ test("stage finishes its transition after scrolling stops", () => {
   f.tick(60);
   assert.ok(f.last.pose.x > 80 && f.last.pose.x < 400);
   f.tick(110);
-  assert.deepEqual(f.stage.sample(), { targetId: "b", pose: { id: "b", x: 400 }, moving: false, progress: 1 });
+  assert.deepEqual(f.stage.sample(), { readingIndex: 1, targetId: "b", pose: { id: "b", x: 400 }, moving: false, progress: 1 });
   assert.equal(f.frames.size, 0);
   f.stage.dispose();
 });

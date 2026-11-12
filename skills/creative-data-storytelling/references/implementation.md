@@ -1,22 +1,18 @@
 # 实现参考：按当前问题取用
 
-本页将已确定的解释过程落实为布局、过渡与绘制。设计阶段按[选择表](design.md#从追问选择表达)理解相关参照；实现时优先取用适用的运行接口与示例实现，按需要改编。
+按当前实现问题查接口；已从示例进入对应用法时，无需返回本页。
 
-## 将解释过程接入作品
+## 改编示例
 
-- 改编示例时，从 `inspect <id>` 的 `adapt` 确认改动范围，用 `root`、`read.code.file` 与 `entryLines` 定位相关的数据、布局、过渡或绘制代码；调整页面装配时再读 `read.layout`。采用本例时连同 `copyAlongside` 复制所需依赖和素材，保持相对目录或同步修改引用。
-- 对象 ID、正文读数、图形几何与强调从自己的数据生成。沿用示例结构时，仍按实际对象数量、标签与数值范围调整；修改编码则同步修改轴、标注和运动，保留选定的解释关系。
-- 接入已有舞台时，使用前段当前对象与姿态作为起点，将后续状态接入同一更新入口；同一属性由一套控制机制驱动。独立舞台可分别控制，身份色与主题前后协调，可比较的量值使用一致口径；改用其他指标时交代变化。
-- 将正文与图形放进整篇的[阅读空间](design.md#主画面与阅读空间)，保留需要的交互，移除演示作者说明和重复入口。停留与退出按实际正文安排；原演示的页面高度不直接当作新作品参数。
-
-完整片段与基础示例沿用同一接入方式。重新设计的构图也可借用其中的尺度、对象匹配或过渡；下表定位实际需要的运行接口，各接口页保留必要的调用示范。
+`inspect <id>` 提供改编范围、源码入口和复制清单；按 `entryLines` 读取所需函数，页面装配变化时再读 HTML。关系不变时可保留模型与过渡，只换绘制和正文；改用不同编码时，相应几何仍需重算。采用代码时连同 `copyAlongside` 复制依赖，保持相对目录或同步修改引用。
 
 ## 按实现问题取用代码
 
 | 当前实现问题 | 接口说明与接法 |
 | --- | --- |
-| 滚动选择状态，连接自动完成 | [createStage / observeSteps](implementation-stage.md#文字滚动与舞台更新) |
-| 末段正文仍在阅读，舞台已经滚走 | [reserveStageExit 与 reading-tail](implementation-stage.md#最后画面读完再退出) |
+| 新建滚动舞台，接通正文、箭头、动画、尺寸更新和出口 | 默认导入 `assets/stage-wiring/connect.mjs` 的 `connectReading`；[参数与调用示例](implementation-stage.md#文字滚动与舞台更新)，无需先读模块源码 |
+| 已有滚动接线，只需补充或排错 | [底层 createStage / observeSteps](implementation-stage.md#文字滚动与舞台更新)；保留可靠接线 |
+| 末段正文仍在阅读，舞台已经滚走 | 配置 `connectReading({ exit: ... })`；[几何条件与底层 reserveStageExit](implementation-stage.md#最后画面读完再退出) |
 | 独立播放、中断与反向 | [createPlayer](implementation-stage.md#自动完成的衔接动画) |
 | 图文共用读数；稳定更新 SVG | [createValueFormat / createSvgLayer](implementation-rendering.md#共用读数格式与-svg-更新) |
 | 最终检查中的越界或遮挡测量 | [measureBounds / checkBounds](implementation-rendering.md#实际占位与空间诊断) |
