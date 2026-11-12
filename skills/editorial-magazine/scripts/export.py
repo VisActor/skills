@@ -71,6 +71,9 @@ def export(
     font_mode: str = "auto",
     font_assets: Path | None = None,
     font_timeout: float = 20,
+    *,
+    expected_size: tuple[int, int] | None = None,
+    inner_pages_only: bool = False,
 ) -> dict:
     if font_mode not in ("auto", "offline", "system") or font_timeout <= 0:
         raise ValueError("Invalid font mode or timeout")
@@ -126,6 +129,42 @@ def export(
                     new Promise((_, reject) => setTimeout(() => reject(Error('Resources timed out')), 15000))
                 ])""")
                 report.update(page.evaluate(AUDIT))
+                if not inner_pages_only and page.locator("[data-page]").count() > 1:
+                    biography_errors = page.evaluate("""() => {
+                        const pages = [...document.querySelectorAll('[data-page]')];
+                        if (!document.querySelector('[data-template="biography-cover"], .mc-bio, .panorama, [data-template="biography"], .bio-detail')) return [];
+                        const overview = pages[1];
+                        const hero = overview.querySelector('.bio-body .portrait img');
+                        const flows = ['.chronology', '.topics'].map(side =>
+                            overview.querySelector(side + ' .portrait-exclusion'));
+                        if (!hero || flows.some(el => !el || getComputedStyle(el).shapeOutside === 'none' || el.offsetHeight === 0))
+                            return ['人物全景页缺少中央抠图或左右轮廓绕排；请从 biography.html 保留第二页的正文结构和样式。'];
+                        const canvas = document.createElement('canvas');
+                        canvas.width = canvas.height = 64;
+                        const ctx = canvas.getContext('2d');
+                        if (!hero.naturalWidth) return ['人物全景页的中央肖像无法读取。'];
+                        ctx.drawImage(hero, 0, 0, 64, 64);
+                        const alpha = ctx.getImageData(0, 0, 64, 64).data.filter((_, i) => i % 4 === 3);
+                        return alpha.some(a => a < 32) && alpha.some(a => a > 224) ? [] :
+                            ['请使用有实际透明轮廓的主肖像并重新计算左右绕排。'];
+                    }""")
+                    report["errors"].extend(biography_errors)
+                if expected_size is not None:
+                    covers = page.locator('[data-page][data-page-role="cover"]')
+                    first = page.locator("[data-page]").first
+                    if not inner_pages_only and (
+                        covers.count() != 1 or first.get_attribute("data-page-role") != "cover"
+                    ):
+                        report["errors"].append(
+                            "完整组图须保留场景模板的独立封面，放在第 1 页，再接总览或正文。"
+                        )
+                    for meta in report["pages"]:
+                        if (meta["width"], meta["height"]) != expected_size:
+                            report["errors"].append(
+                                f"第 {meta['page']} 页画布为 {meta['width']}×{meta['height']}，"
+                                f"本次需要 {expected_size[0]}×{expected_size[1]}。"
+                            )
+
                 if report["externalRequests"]:
                     report["errors"].append(
                         "External resources blocked; inline CSS, fonts and images"
@@ -176,7 +215,22 @@ def main() -> int:
     parser.add_argument(
         "--font-timeout", type=float, default=20, help="Total CDN loading deadline in seconds"
     )
+    parser.add_argument(
+        "--inner-pages-only",
+        action="store_true",
+        help="Export requested interior pages without a cover",
+    )
+    parser.add_argument(
+        "--page-size",
+        nargs=2,
+        type=int,
+        metavar=("WIDTH", "HEIGHT"),
+        default=(1080, 1440),
+        help="Requested output dimensions in pixels (default mobile edition: 1080 1440)",
+    )
     args = parser.parse_args()
+    if min(args.page_size) <= 0:
+        parser.error("--page-size requires two positive pixel dimensions")
     try:
         report = export(
             args.html,
@@ -185,6 +239,8 @@ def main() -> int:
             args.font_mode,
             args.font_assets,
             args.font_timeout,
+            expected_size=tuple(args.page_size),
+            inner_pages_only=args.inner_pages_only,
         )
     except (OSError, ValueError) as exc:
         print(str(exc), file=sys.stderr)
