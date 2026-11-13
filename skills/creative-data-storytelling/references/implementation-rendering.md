@@ -2,6 +2,12 @@
 
 实现图文共用读数、SVG 更新或排查空间时读本页。舞台调度见[舞台接线](implementation-stage.md)，布局计算见[关系几何](implementation-geometry.md)。
 
+## 渲染选择
+
+连续舞台优先采用 SVG：精确尺度、路径、素材与可单独交互的标记由同一姿态更新；Canvas 可承担大量重复单元；HTML 承担正文、控件与语义详情。按实际规模测量，不规定未经验证的数量阈值。Canvas 的可访问性、命中检测与文本需另行设计。
+
+ECharts 等整图配置库不作为连续舞台的默认实现，以免各状态重新生成独立图表。D3 的尺度、布局或数据绑定可按需使用；已有库能保留所需对象和过渡时也可沿用。素材可用静态图片配合 SVG 定位，不需要把艺术细节全部手绘成路径，也不用图片替代可测量的轴与标记。
+
 ## 数据、布局和控制分开
 
 静态图可由整理后的数据直接计算几何并渲染；需要动态变化或交互时，再接入状态与控制机制：
@@ -27,6 +33,8 @@
 `setSvgAttributes` 只更新传入属性，`null / undefined` 移除属性；`svgElement(tag, attributes, text)` 将文本作为文字写入。[端点到差值](implementation-geometry.md#两期端点到差值)将格式化、稳定节点与播放器接在同一段代码里；[comparison/scene.mjs](../assets/examples/comparison/scene.mjs) 的 `renderQuantitative` 另示范轴、点和标注分别更新。
 
 ### 实际占位与空间诊断
+
+出现目标、画面或尺寸不同步时，先区分两种观测：`connection.stage.status()` 的 `target: { id, revision }` 是请求；`rendered: { revision, final }` 是最近一次同步 render 成功返回的记录，同一 revision 且 final 为真才表示该请求已提交终态。`size / error / disposed` 辅助定位；同一状态换参数或显式刷新也会使旧绘制失效。`stage.sample()` 按时钟返回当帧姿态与 moving，时间已到不保证终态实际画过；以上都不代替图文与素材的视觉验收。
 
 简单页面沿用浏览器观察或 DOM 测量即可。[bounds.mjs](../assets/runtime/bounds.mjs) 可独立调用；需要诊断终态、过期帧／尺寸或异步更新时，再用 [inspection.mjs](../assets/runtime/inspection.mjs) 的 `createInspection`。只声明本次有风险的读数、对象与空间关系，不配置全页测试；未调用时不扫描页面。诊断在开发时按需启用，正式成品默认不带检查实例或面板，舞台自身的状态与错误记录保留。
 
@@ -62,9 +70,3 @@ const report = await inspection.capture({ target: "comparison", timeout: 2500 })
 选择实际承载数据的局部标记或标签，不能只拿全屏 SVG／Canvas 容器与正文比较；背景延展在正文下方可能是有意设计。需要时按相同方式加入导航、图标题或标签之间的规则；正常滚出视口的正文不要求始终位于 `$viewport` 内。
 
 在当前字体和素材实际显示后采样，重排后只复查受影响处。`checked` 为零或对象在 `skipped` 中，不能当成“无重叠”。边界是轴对齐矩形，并非着色区域：透明素材、描边、裁剪等仍需看图；Canvas 需由绘制器提供内容边界。
-
-## 渲染选择
-
-连续舞台优先采用 SVG：精确尺度、路径、素材与可单独交互的标记由同一姿态更新；Canvas 可承担大量重复单元；HTML 承担正文、控件与语义详情。按实际规模测量，不规定未经验证的数量阈值。Canvas 的可访问性、命中检测与文本需另行设计。
-
-ECharts 等整图配置库不作为连续舞台的默认实现，以免各状态重新生成独立图表。D3 的尺度、布局或数据绑定可按需使用；已有库能保留所需对象和过渡时也可沿用。素材可用静态图片配合 SVG 定位，不需要把艺术细节全部手绘成路径，也不用图片替代可测量的轴与标记。

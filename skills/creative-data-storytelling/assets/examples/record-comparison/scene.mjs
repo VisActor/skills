@@ -77,7 +77,9 @@ export function recordPose(id, model = createRecordModel()) {
     const key = a.id + "/" + b.id;
     annotations.set(key, { id: key, a, b, value: Math.abs(b.value - a.value), opacity: 1 });
   }
-  return { id, nodes, annotations };
+  // 网格围绕当前比较组展开；横向尺度不变，不把少量记录与轴分置画布两端。
+  const halfSpan = (visible.length - 1) * plot.rowGap / 2 + 28;
+  return { id, nodes, annotations, frame: { top: plot.center - halfSpan, bottom: plot.center + halfSpan } };
 }
 
 export function blendRecords(from, to, t) {
@@ -95,7 +97,9 @@ export function blendRecords(from, to, t) {
       const before = a.nodes.get(id).reveal, after = b.nodes.get(id).reveal;
       node.reveal = lerp(before, after, after < before ? exit : enter);
     }
-    return { ...b, nodes };
+    return { ...b, nodes, frame: {
+      top: lerp(a.frame.top, b.frame.top, move), bottom: lerp(a.frame.bottom, b.frame.bottom, move),
+    } };
   });
 }
 
@@ -112,6 +116,8 @@ export function mountRecords(root, { config = recordExample, duration = 1150 } =
   const $ = selector => root.querySelector(selector), svg = $("svg");
   let model = createRecordModel(config), plot = model.layout, sizeKey;
   const prefix = "records-" + ++nextInstance, defs = svgElement("defs"), grid = svgElement("g", { class: "axis" });
+  const gridLines = [], tickLabels = [];
+  let axisTitle;
   svg.append(defs, grid);
   const reference = svgElement("line", { stroke: "var(--reference)", "stroke-dasharray": "4 5", "stroke-width": 1.3 });
   svg.append(reference);
@@ -127,12 +133,15 @@ export function mountRecords(root, { config = recordExample, duration = 1150 } =
     plot = model.layout;
     setSvgAttributes(svg, { viewBox: `0 0 ${plot.width} ${plot.height}` });
     grid.replaceChildren();
+    gridLines.length = tickLabels.length = 0;
     for (const tick of model.ticks) {
       const x = at(model.scale, tick);
-      grid.append(svgElement('line', { x1:x, x2:x, y1:plot.top, y2:plot.bottom, class:tick===0?'zero':'' }),
-        svgElement('text', { x, y:plot.bottom+32, 'text-anchor':'middle' }, model.format(tick)));
+      const line = svgElement('line', { x1:x, x2:x, class:tick===0?'zero':'' });
+      const label = svgElement('text', { x, 'text-anchor':'middle' }, model.format(tick));
+      gridLines.push(line); tickLabels.push(label); grid.append(line, label);
     }
-    grid.append(svgElement('text', { x:plot.right, y:plot.bottom+68, 'text-anchor':'end', class:'axis-title' }, model.metric+' / '+model.unit));
+    axisTitle = svgElement('text', { x:plot.right, 'text-anchor':'end', class:'axis-title' }, model.metric+' / '+model.unit);
+    grid.append(axisTitle);
     const baselineX = at(model.scale, model.records.get(model.baselineId).value);
     setSvgAttributes(reference, { x1:baselineX, x2:baselineX });
   }
@@ -193,6 +202,9 @@ export function mountRecords(root, { config = recordExample, duration = 1150 } =
     current = pose;
     const rows = recordGeometry(model, pose), visible = rows.filter(row => row.reveal > 0);
     marks.render(rows); comparisons.render(pose.annotations);
+    for (const line of gridLines) setSvgAttributes(line, { y1: pose.frame.top, y2: pose.frame.bottom });
+    for (const label of tickLabels) setSvgAttributes(label, { y: pose.frame.bottom + 32 });
+    setSvgAttributes(axisTitle, { y: pose.frame.bottom + 68 });
     // Keep the sentence complete; strengthen its numbers as the matching marks become readable.
     for (const el of readings) {
       const pair = model.stops.get(el.dataset.pairGap)?.pair;
@@ -200,8 +212,7 @@ export function mountRecords(root, { config = recordExample, duration = 1150 } =
         : rows.find(row => row.id === el.dataset.recordValue)?.labelOpacity ?? 0;
       el.style.opacity = String(.7 + .3 * opacity);
     }
-    setSvgAttributes(reference, { y1: visible.length ? Math.min(...visible.map(row => row.y)) - 28 : plot.center,
-      y2: visible.length ? Math.max(...visible.map(row => row.y)) + 28 : plot.center,
+    setSvgAttributes(reference, { y1: pose.frame.top, y2: pose.frame.bottom,
       opacity: pose.nodes.get(model.baselineId).reveal });
     svg.dataset.state = pose.id; svg.dataset.moving = String(frame.moving);
     if (!frame.moving) svg.setAttribute("aria-label", "共同零点，每条记录独立比较。" +

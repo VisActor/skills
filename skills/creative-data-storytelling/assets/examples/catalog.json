@@ -746,6 +746,114 @@
       "relatedExample": "sequence"
     },
     {
+      "id": "frequency-and-runs",
+      "title": "天数相同，连续经历却不同",
+      "kind": "story",
+      "keywords": [
+        "连续性",
+        "频次",
+        "持续时间",
+        "缺货",
+        "日期",
+        "连续段",
+        "时间对齐",
+        "frequency",
+        "duration",
+        "runs",
+        "calendar",
+        "sequence",
+        "temporal alignment"
+      ],
+      "relations": [
+        "计数与持续",
+        "恢复日期",
+        "连续段对齐"
+      ],
+      "readerTask": "同样缺货六天，先看日期间隔，再让同一批日期卡按连续段对齐，理解一次缺货会持续多久。",
+      "dataNeeds": "同一观察窗口、统一粒度与逐日状态；未知日期打断连续段，只有总次数不能还原持续性。",
+      "dataKind": "两家虚构商店同一商品的28天记录，均缺货六天；并非真实商业观察。",
+      "process": [
+        "等大日期卡比较缺货总天数",
+        "原卡回到真实日期，显出间隔与连续段",
+        "整段移到共同起点，比较一次持续多久"
+      ],
+      "retain": "日期身份、真实间隔、共同格距；缺货天数、次数与持续时间不混淆。",
+      "adapt": "frequencyExample 配 days、groups.outOfStock 与可选 unknown；createFrequency 派生读数，layout / blend 改排列与连接，mountFrequency 接入共享阅读。可只取日期到连续段，题材、正文与构图另选。",
+      "handoff": {
+        "enter": "已有事件总数或日历都可进入；按当前追问选择起点。",
+        "leave": "保留连续段与持续长度，回答总数没有解释的经历差异。"
+      },
+      "preview": "assets/examples/frequency-and-runs/index.html",
+      "code": "assets/examples/frequency-and-runs/scene.mjs",
+      "design": "references/design.md#sequence",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs",
+        "assets/runtime/copy.mjs",
+        "assets/stage-wiring/connect.mjs"
+      ],
+      "assets": [],
+      "relatedExample": "sequence"
+    },
+    {
+      "id": "count-to-contribution",
+      "title": "数量更多，贡献也更多吗？",
+      "kind": "story",
+      "keywords": [
+        "单元",
+        "权重",
+        "面积",
+        "贡献",
+        "集中",
+        "书籍",
+        "封面",
+        "份额",
+        "count",
+        "contribution",
+        "weight",
+        "area",
+        "concentration",
+        "share",
+        "unit chart"
+      ],
+      "relations": [
+        "数量与权重",
+        "个体贡献",
+        "集中程度"
+      ],
+      "readerTask": "同一批书从等大封面转为阅读量面积，再追问类别优势是否集中在一本书上；也可改问数量与阅读份额。",
+      "dataNeeds": "同一范围内有稳定身份、类别和非负贡献量的小集合；未知与零分开，总贡献为正。",
+      "dataKind": "十本合成书目与同一时期的阅读次数；封面为原创示意，阅读事件不等于读者人数。",
+      "process": [
+        "等大封面先比较各类数量",
+        "同批封面按共同面积标定显示阅读量",
+        "按追问比较头部与其余，或并置数量与贡献份额"
+      ],
+      "retain": "对象身份、来源类别、实际封面面积与共同标定；份额比较保留两种度量的完整分母。",
+      "adapt": "contributionExample 换记录，createContribution 派生合计、头部与份额；packBooks 是小集合矩形排布，layout / blend 连接几何。mountContribution 的 ending 选择一种结尾，按新数据改写正文，不预设反转。",
+      "handoff": {
+        "enter": "可由对象数量进入，也可直接承接已有的贡献分布。",
+        "leave": "回答贡献由谁撑起或份额如何不同，不强接另一条分析路线。"
+      },
+      "preview": "assets/examples/count-to-contribution/index.html",
+      "code": "assets/examples/count-to-contribution/scene.mjs",
+      "design": "references/design.md#unit-weight",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs",
+        "assets/runtime/copy.mjs",
+        "assets/stage-wiring/connect.mjs"
+      ],
+      "assets": [],
+      "relatedExample": "units"
+    },
+    {
       "id": "comparison",
       "keywords": [
         "条形图",

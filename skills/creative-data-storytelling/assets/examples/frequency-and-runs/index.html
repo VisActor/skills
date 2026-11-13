@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>都缺货六天，经历也一样吗？</title>
+<style>
+:root{--paper:#f4f3ec;--ink:#223f3c;--muted:#667971;--rule:#cbd4ca;--a:#286d70;--b:#ac5035;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+*{box-sizing:border-box}body,figure{margin:0}[hidden]{display:none!important}a{color:inherit;text-underline-offset:5px}button,a,summary{touch-action:manipulation}:focus-visible{outline:2px solid var(--b);outline-offset:5px}
+.story{display:grid;position:relative}.frequency-stage,.scroll-track{grid-area:1/1}.scroll-track{pointer-events:none}.frequency-stage{position:sticky;top:0;align-self:start;height:100vh;min-height:640px;display:grid;grid-template-rows:64px auto minmax(0,1fr) 70px;z-index:1;background:var(--paper)}
+.masthead{margin:0 5vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);font-size:13px;color:var(--muted)}.masthead a{text-decoration:none}.brand{font-weight:600;letter-spacing:.12em;color:var(--ink)}
+.reading-panels{width:min(900px,84vw);margin:auto;padding:25px 0 8px;min-height:175px}.kicker{font-size:12px;letter-spacing:.1em;color:var(--muted);margin:0 0 10px}h1,h2{font-family:"Songti SC","Noto Serif CJK SC",serif;font-weight:600;font-size:clamp(30px,3.1vw,43px);line-height:1.45;margin:0 0 12px}.reading-panels p:not(.kicker){font-size:18px;line-height:1.85;margin:0;color:#4e655e;max-width:860px}strong{font-weight:600}.a{color:var(--a)}.b{color:var(--b)}
+figure{min-height:0;display:flex;align-items:center;justify-content:center;padding:0 5vw}svg{display:block;width:100%;height:100%;max-width:1400px;overflow:visible}svg text{font-family:inherit;font-variant-numeric:tabular-nums;fill:var(--ink)}svg .day{font-size:18px;fill:inherit}svg .group-name{font-size:26px;font-weight:600}svg .reading{font-size:21px}svg .caption{font-size:19px;fill:var(--muted)}svg .run-label{font-size:21px;fill:var(--b)}svg .tick{font-size:20px}
+.stage-bottom{margin:0 5vw;display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;border-top:1px solid var(--rule);font-size:12px;color:var(--muted)}.step-controls{display:flex;align-items:center;gap:20px}.step-controls button,.step-controls a{font:inherit;font-size:15px;border:1px solid var(--rule);border-radius:40px;background:transparent;color:var(--ink);height:42px;padding:0 18px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none}.step-controls [data-prev]{font-size:24px;padding:0;width:42px}.step-controls [data-next],.step-controls [data-finish]{background:var(--ink);color:var(--paper);border-color:var(--ink);min-width:105px}.step-controls button:disabled{opacity:.28;cursor:default}.position{font-variant-numeric:tabular-nums}.hint{text-align:right}
+footer{border-top:1px solid var(--rule);padding:32px 8vw 64px;color:var(--muted);font-size:14px;line-height:1.9}footer>p,details{max-width:930px}summary{cursor:pointer;color:var(--ink)}details{margin-top:26px}details p{margin:16px 0}code{font-size:.94em}
+@media(max-height:760px){.frequency-stage{grid-template-rows:52px auto minmax(0,1fr) 60px}.reading-panels{padding:18px 0 4px;min-height:155px}h1,h2{font-size:32px;margin-bottom:8px}.reading-panels p:not(.kicker){font-size:17px}.kicker{margin-bottom:7px}}
+</style>
+</head>
+<body>
+<main id="frequency-story">
+<section class="story" aria-label="从缺货天数比较到连续缺货时长">
+<div class="frequency-stage">
+<header class="masthead"><span class="brand">买不到的那些天</span><a href="../index.html#frequency-and-runs">示例索引 ↗</a></header>
+<div class="reading-panels" aria-live="polite" aria-atomic="true">
+<article data-copy="count"><p class="kicker">同一商品 · 同一段观察期</p><h1>都缺货六天，经历也一样吗？</h1><p>在同样的 <span data-value="days">28</span> 天里，<strong class="a"><span data-value="group0Name">甲店</span>缺货 <span data-value="group0Count">6</span> 天</strong>，<strong class="b"><span data-value="group1Name">乙店</span>也缺货 <span data-value="group1Count">6</span> 天</strong>。只看总数，似乎没有差别。</p></article>
+<article data-copy="calendar" hidden><p class="kicker">缺货发生在什么时候</p><h2>六天，分散在哪些日子？</h2><p><span data-value="group0Name">甲店</span>的缺货日之间都有间隔；<span data-value="group1Name">乙店</span>却从<strong class="b">第 <span data-value="group1Start">9</span> 天到第 <span data-value="group1End">14</span> 天连续缺货</strong>。碰上甲店缺货，隔天再来就有货；乙店却可能连等好几天。</p></article>
+<article data-copy="runs" hidden><p class="kicker">一次缺货，会持续多久</p><h2>总天数相同，一次等待却不同。</h2><p><strong class="a"><span data-value="group0Name">甲店</span>分成 <span data-value="group0Runs">6</span> 次，每次 <span data-value="group0Longest">1</span> 天</strong>；<strong class="b"><span data-value="group1Name">乙店</span>只有 <span data-value="group1Runs">1</span> 次，却持续 <span data-value="group1Longest">6</span> 天</strong>。总共缺了几天，还不足以说明一次会让人等多久。</p></article>
+</div>
+<figure><svg data-visual viewBox="0 0 1100 450" role="img" aria-label="两家店的逐日缺货记录"></svg></figure>
+<div class="stage-bottom"><span data-key>每张卡 = 一个缺货日 · 数字为日号</span><nav class="step-controls" aria-label="推进解释"><button type="button" data-prev aria-label="上一步" disabled>←</button><span class="position" data-position aria-hidden="true">1 / 3</span><button type="button" data-next aria-label="下一步">继续 →</button><a href="#sources" data-finish hidden>数据与设计 ↓</a></nav><span class="hint">滚动 / 方向键也可推进</span></div>
+</div><div class="scroll-track" aria-hidden="true"></div>
+</section>
+<footer id="sources">
+<p>两家店与逐日记录均为模拟数据，只比较一个商品在共同观察窗口内的缺货情况。已知每天是否有货；缺货天数、连续缺货次数和持续天数是不同指标。</p>
+<details id="example-notes"><summary>叙事、可视化选择与改编</summary>
+<p><strong>叙事：</strong><a href="../../../references/design.md#sequence">从相同总数追问经历是否相同</a>。两组先各有六张卡，恢复日期后才看见间隔；最后用一次缺货的长度回答“会连续等多久”。若前文已有日期，可直接接入连续段比较，无需重讲计数。</p>
+<p><strong>设计：</strong>同一张卡始终代表同一天。日期位置揭示相邻与间断；连续段整体移到共同起点，格距一致，长度表示持续天数。横轴含义从原日期交接为段内天数，原日期仍可悬停回查。这里突出长段，是因为连续性回答当前追问；不必给每个单元加高亮。</p>
+<p><strong>条件与改编：</strong>需要共同观察窗口、统一粒度与逐日状态；只有总次数不能补出持续性，缺测会打断连续段。可换为设备停机、热夜或其他状态，重选日历、条带、符号和布局；若只比较发生次数，计数终态就足够。题材、结论和三步顺序均可重写。</p>
+<p><strong>代码：</strong><code>mountFrequency(root,{config})</code> 接入；<code>frequencyExample</code> 配窗口、两组 <code>outOfStock</code> 与可选 <code>unknown</code> 日号，其余日为已知非缺货。<code>createFrequency / consecutiveRuns</code> 计算读数，<code>layout / blend</code> 保留身份并连接三种排列。<code>layout</code> 参数可调画布、横向范围与行距；更多组、更长窗口需重新排布。正文的 <code>data-value</code> 与图形共用读数，替换数据后按实际结果改写句子。</p>
+<p>页面使用 <a href="../../../references/implementation-stage.md#文字滚动与舞台更新"><code>connectReading</code></a> 和 <code>createCopyHandoff</code>，共同触发图文变化并保留末态阅读。<a href="scene.mjs">本例代码</a>；只取起点对齐可看基础示例 <a href="../sequence/index.html">sequence</a>。</p>
+</details>
+</footer>
+</main>
+<script type="module">import {mountFrequency} from './scene.mjs';const story=mountFrequency(document.querySelector('#frequency-story'));addEventListener('pagehide',e=>{if(!e.persisted)story.dispose()});</script>
+</body>
+</html>

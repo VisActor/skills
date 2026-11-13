@@ -23,7 +23,7 @@ footer{padding:30px 8vw 60px;border-top:1px solid var(--rule);font-size:14px;lin
 <footer id="notes"><p>两批记录均为模拟，只说明平均数与尾部比例可以给出不同信息，不代表某项服务的实际效果。“久等”在本例中指等候至少 <span data-threshold>60</span> <span data-unit>分钟</span>。</p>
 <details id="example-notes"><summary>叙事、设计与改编</summary>
 <p><strong>叙事：</strong>用容易读懂的平均差异开篇，接着追问它能否代表每个人。属于简单发现引入与汇总转分布；第一项证据显示平均改善与尾部不变可以同时成立。</p>
-<p><strong>设计：</strong>开篇以文字和两个读数建立期待，不提前要求读完整坐标。原来的均值移动到各自分布上方，随后记录与一小时参照显露；均值和尾部留在同一画面。两期是独立样本，圆点没有跨期配对移动。</p>
+<p><strong>设计：</strong>开篇用整屏空间安排问题与两个均值，靠读数字号、间距和留白建立重点，无需配图或完整坐标。原来的均值移动到各自分布上方，随后记录与一小时参照显露；均值和尾部留在同一画面。两期是独立样本，圆点没有跨期配对移动。</p>
 <p><strong>改编：</strong>可换成成绩、时长、价格等“汇总是否代表所有记录”的问题，也可改用区间或直方图。入口可只有问题，也可直接给少量证据；无需强造反转。只关心均值时，简短比较本身就够，不必追加分布。</p>
 <p><strong>代码：</strong><a href="scene.mjs">waitingExample / waitingPose / blendWaiting</a> 分别提供数据、画面和衔接；均值、差额、阈值及各组人数由同一模型绑定图文，换样本后重写结论。几何随容器计算，长标签或密集点需另排。<code>mountQuestionOpening</code> 使用共享 <code>connectReading</code>，答案等证据落稳再出现，<a href="../../runtime/copy.mjs"><code>createCopyHandoff</code></a> 在固定位置完成正文淡出、淡入。</p>
 </details></footer></main>

@@ -29,6 +29,21 @@ python3 /path/to/skill/scripts/preview.py audit /path/to/output
 
 联网试作可直接通过 CDN 引入浏览器可用的 CSS 或 JavaScript，在地址中指定所用版本并说明联网要求，无需为此创建包管理或构建项目。离线交付将依赖和资源随作品提供。浏览器脚本中的导入须能解析；npm 包名的裸导入需要打包或配置模块地址。已有示例的相对 ES module 导入可通过静态 HTTP 服务运行；要求双击打开时按该条件组织资源并验证。单 HTML 交付可内联 CSS、脚本与必要资源，仍保留便于修订的源码。
 
+### 按需打包为单 HTML
+
+目录交付已经满足需求时不必打包。需要双击离线打开时，可直接运行 [pack.mjs](../scripts/pack.mjs)，无需阅读源码或创建构建项目：
+
+```sh
+node /path/to/skill/scripts/pack.mjs /path/to/output/index.html --output /path/to/delivery/story.html
+# 资源位于入口的上层目录时，用 --root 指定包含全部本地资源的根目录。
+```
+
+工具用解析器和 esbuild 收集本地模块、CSS、图片、字体及静态数据引用；保留编辑源码，不覆盖已有文件。首次需要 Node.js/npm 与网络，将锁定的工具依赖安装到用户缓存，不修改 skill；之后可使用缓存。输入可为一个相对模块入口，也可为按顺序执行的经典脚本。
+
+CDN、无法确定的动态资源地址、缺失文件及超出根目录的引用会报错，不生成半成品。`srcset`、音视频、iframe、多模块入口及特殊脚本加载策略暂不处理，可沿用目录交付。浏览器即时生成的 Tailwind 样式需先编译为本地 CSS。输出报告列出内嵌资源、文件体积和仍保留的导航/来源链接；超过 10 MiB 会提示体积，图片不自动降质。
+
+打包证明静态依赖已收集，不证明运行行为和视觉正确。按原有[作品验收](quality.md)检查打包后的入口；若没有实际用 `file://` 打开，交付记录不要写成已验证双击离线。
+
 ### 使用 Tailwind 时
 
 联网试作可在 HTML 中直接引入 [Play CDN](https://tailwindcss.com/docs/installation/play-cdn)，无需安装或构建。以下以 Tailwind 4 为例，将脚本和主题放在 `<head>` 中；色值仅示范主题变量，按作品艺术方向替换：

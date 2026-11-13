@@ -249,6 +249,36 @@ test("record filtering still rejects missing comparison evidence and overflowing
   assert.throws(() => createRecordModel({ ...focusedRecords, layout: { rowGap: 300 } }), /Record layout/);
 });
 
+test("record comparison keeps its axis near sparse rows and expands for more records without changing the scale", () => {
+  const model = createRecordModel();
+  const one = recordPose("reference", model), many = recordPose("latest", model), few = recordPose("difference", model);
+  assert.ok(one.frame.bottom - one.frame.top < few.frame.bottom - few.frame.top);
+  assert.ok(few.frame.bottom - few.frame.top < many.frame.bottom - many.frame.top);
+  for (const pose of [one, many, few]) {
+    const rows = recordGeometry(model, pose).filter(row => row.reveal === 1);
+    assert.equal(pose.frame.bottom - rows.at(-1).y, 28);
+    assert.equal(rows[0].y - pose.frame.top, 28);
+    assert.equal(pose.frame.top + pose.frame.bottom, model.layout.center * 2);
+    assert.ok(rows.every(row => row.zero === model.layout.left && row.end === at(model.scale, row.row.value)));
+  }
+});
+
+test("record frame follows reflow through interruption and return without leaving visible rows outside", () => {
+  const model = createRecordModel(), a = recordPose("reference", model), b = recordPose("latest", model);
+  const player = createTransition(a, { blend: blendRecords, duration: 1000 });
+  player.target(b, 0);
+  const interrupted = player.sample(500).pose;
+  player.target(a, 500);
+  assert.deepEqual(player.sample(500).pose, interrupted);
+  for (const now of [500, 600, 800, 1000, 1300, 1500]) {
+    const pose = player.sample(now).pose;
+    for (const row of recordGeometry(model, pose).filter(row => row.reveal > 0)) {
+      assert.ok(row.y >= pose.frame.top && row.y <= pose.frame.bottom);
+    }
+  }
+  assert.deepEqual(player.sample(1500).pose, a);
+});
+
 test("recurrence links wait for both source occurrences while source positions stay fixed", () => {
   const model = createRecurrenceModel(), snapshot = structuredClone(recurrenceExample);
   const a = recurrencePose("first", model), b = recurrencePose("reverse", model);

@@ -12,7 +12,7 @@
       border-bottom:1px solid #bfcac1; padding-bottom:18px; font-size:13px; letter-spacing:.04em; }
     .masthead a { text-decoration:none; }
     .story { position:relative; display:grid; grid-template-columns:minmax(270px,28%) minmax(0,1fr); gap:3vw; padding:0 5vw; }
-    .history-stage { grid-area:1/2; position:sticky; top:0; height:100vh; min-height:560px;
+    .history-stage { grid-area:1/2; position:sticky; top:0; height:100vh; height:100dvh; min-height:0;
       display:flex; align-items:center; padding:100px 0 30px; }
     figure { width:100%; margin:0; }
     svg { display:block; width:100%; height:auto; max-height:calc(100vh - 180px); overflow:visible; }
@@ -75,8 +75,8 @@
       <p>本页使用模拟订单数据说明一种解释过程，不代表真实企业或行业。它只比较记录，没有为变化指定原因。</p>
       <details id="example-notes" open><summary>叙事、可视化选择与改编</summary>
   <p><strong>叙事设计：</strong><a href="../../../references/design.md#history">变化 → 旧基准比较</a>。先经历回升，再追问“是否回到从前”：最近方向向上，当前水平却仍低于旧高点。若前文已说明回升，可直接接入基准比较。</p>
-  <p><strong>可视化选择：</strong>保留轨迹让增长有历史参照；基准线从旧高点延伸到当前端点，把“与过去比”画出来。时间轴交代过程，端点差距回答结果，两者使用同一组观测。</p>
-  <p><strong>改编空间：</strong>适合同口径观测与有意义的基准。只问两期差异可并置比较；要解释过程可用轨迹、柱形或单元，缺测处另行交代。重选时期、基准与素材，按新数据重写结论；回落、恢复和回看不是固定章节。</p>
+  <p><strong>可视化选择：</strong>保留轨迹让增长有历史参照；基准线从旧高点延伸到当前端点，把“与过去比”画出来。时间轴交代过程，端点差距回答结果，两者使用同一组观测。舞台随窗口变化，图与图注居中安排；本例固定构图等比适配，保留坐标、标注与轨迹的相对位置。</p>
+  <p><strong>改编空间：</strong>适合同口径观测与有意义的基准。只问两期差异可并置比较；要解释过程可用轨迹、柱形或单元，缺测处另行交代。重选时期、基准与素材，按新数据重写结论；若窄图使文字过小或日期过密，再重排标签与绘图区，不能仅靠持续缩小画布。回落、恢复和回看不是固定章节。</p>
   <p><strong>代码入口：</strong><code>historyExample</code> 配置记录、单位、<code>baselineId / stops</code>；<code>historyStoryPose / blendHistoryStory</code> 安排显露与基准交接，<code>data-record / data-gap</code> 绑定正文。保留当前端点即可接后续追问。滚动接入见 <a href="../../../references/implementation-stage.md#文字滚动与舞台更新"><code>connectReading</code> 用法</a>。</p>
   <p><a href="scene.mjs">本例数据与代码</a></p>
 </details>

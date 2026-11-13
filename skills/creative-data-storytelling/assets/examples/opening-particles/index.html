@@ -20,7 +20,7 @@ footer{padding:32px 7vw 60px;border-top:1px solid var(--rule);font-size:14px;lin
 <footer id="notes"><p>原创熊猫 SVG 与 <span data-count>360</span> 条合成年龄记录。点阵的黑白颜色用于识别主题，进入分布后统一颜色；浅底区域标出小于 <span data-threshold>10</span> 岁的记录。本例不作真实种群判断。</p>
 <details id="example-notes"><summary>叙事、设计与改编</summary>
 <p><strong>叙事：</strong>用熟悉的熊猫形象引出“个体年龄怎样分布”，再用一个区间的数量作首次观察。属于主题形象引入与逐条记录分布；10 岁只是观察界线，不是幼崽或成年的分类。</p>
-<p><strong>设计：</strong>同一批记录先组成面孔，再沿年龄排开。黑白色只服务形象；位置表达年龄，浅底圈定观察区间。重组时保留原问题，落稳后显露区间读数，正文在原位置淡入答案。稳定 ID 保持连续，中途弧线不表示个体迁移或年龄变化。</p>
+<p><strong>设计：</strong>整屏内将短问题与大幅点阵面孔并置，先留出辨认形象的空间，再让同一批记录沿年龄排开。黑白色只服务形象；位置表达年龄，浅底圈定观察区间。重组时保留原问题，落稳后显露区间读数，正文在原位置淡入答案。稳定 ID 保持连续，中途弧线不表示个体迁移或年龄变化。</p>
 <p><strong>改编：</strong>轮廓可换物件、文字或简单图标，落点可换分组、分布或其他数据排列。先确定第一项发现，再选能引出它的形象；形象无助于认识主题时，可直接从文字或数据开始。记录少就简化轮廓；需要更多装饰粒子时，另行交接并说明，不能增加虚构的统计单元。</p>
 <p><strong>代码：</strong><a href="scene.mjs">particleOpening / particlePose / blendParticles</a> 分别配置数据与素材、两态构图、连续路径；<code>sampleFigure</code> 从本地 SVG/透明图采样。阈值、区间人数、总数及占比共用模型；换数据后重写观察，按容器与密度调整布局。<code>mountParticleOpening</code> 使用共享 <code>connectReading</code>；固定正文用 <a href="../../runtime/copy.mjs"><code>createCopyHandoff</code></a> 保留布局空间并交接，场景决定答案何时成立。采样与记录插值也可单独取用。</p>
 </details></footer><p class="error" role="alert" hidden></p></main>

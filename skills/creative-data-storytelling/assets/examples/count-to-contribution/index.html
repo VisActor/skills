@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>书架上的多数，阅读里的少数</title>
+<style>
+:root{--paper:#172e30;--ink:#f2efdf;--muted:#b7c8bd;--rule:#49645f;--a:#8bc5bd;--b:#efac78;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+*{box-sizing:border-box}body,figure{margin:0}[hidden]{display:none!important}a{color:inherit;text-underline-offset:5px}:focus-visible{outline:2px solid var(--b);outline-offset:5px}
+.story{display:grid;position:relative}.contribution-stage,.scroll-track{grid-area:1/1}.scroll-track{pointer-events:none}.contribution-stage{position:sticky;top:0;align-self:start;height:100vh;min-height:640px;display:grid;grid-template-rows:64px minmax(0,1fr) 70px;z-index:1;background:radial-gradient(ellipse at 70% 45%,#213d3e,transparent 65%),var(--paper)}
+.masthead{margin:0 4vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);font-size:13px;color:var(--muted)}.masthead a{text-decoration:none}.brand{color:var(--ink);letter-spacing:.1em}.composition{display:grid;grid-template-columns:minmax(265px,29%) minmax(0,1fr);gap:2vw;min-height:0;padding:0 4vw}.reading-panels{align-self:center;padding:10px 0}.kicker{font-size:12px;letter-spacing:.1em;color:var(--muted);margin:0 0 22px}h1,h2{font-family:"Songti SC","Noto Serif CJK SC",serif;font-size:clamp(31px,3vw,43px);font-weight:600;line-height:1.45;letter-spacing:-.02em;margin:0 0 25px}.reading-panels p:not(.kicker){font-size:18px;line-height:1.95;margin:0 0 18px;color:var(--muted)}strong{font-weight:550}.a{color:var(--a)}.b{color:var(--b)}.conclusion{color:var(--ink)!important}
+figure{display:grid;grid-template-rows:36px minmax(0,1fr);min-height:0;padding:12px 0}.legend{display:flex;gap:22px;align-items:center;font-size:13px;color:var(--muted);padding:0 4%}.legend span:before{content:"";display:inline-block;width:9px;height:12px;background:var(--a);margin-right:7px;vertical-align:-1px}.legend span+span:before{background:var(--b)}svg{display:block;width:100%;height:100%;min-height:0;overflow:visible}svg text{font-family:inherit;fill:var(--ink)}svg .name{font-size:27px;font-weight:500}svg .number{font-family:Georgia,"Times New Roman",serif;font-size:48px;font-variant-numeric:lining-nums tabular-nums}svg .caption{font-size:21px;fill:var(--muted)}svg .measure{font-size:23px;fill:var(--muted)}svg .cover-title{font-size:18px;fill:#153334}
+.stage-bottom{margin:0 4vw;display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;border-top:1px solid var(--rule);font-size:12px;color:var(--muted)}.step-controls{display:flex;align-items:center;gap:20px}.step-controls button,.step-controls a{font:inherit;font-size:15px;border:1px solid var(--rule);border-radius:40px;background:transparent;color:var(--ink);height:42px;padding:0 18px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none}.step-controls [data-prev]{font-size:24px;padding:0;width:42px}.step-controls [data-next],.step-controls [data-finish]{background:var(--ink);color:var(--paper);border-color:var(--ink);min-width:105px}.step-controls button:disabled{opacity:.28;cursor:default}.position{font-variant-numeric:tabular-nums}.hint{text-align:right}
+footer{border-top:1px solid var(--rule);padding:32px 7vw 64px;color:var(--muted);font-size:14px;line-height:1.9}footer>p,details{max-width:950px}summary{cursor:pointer;color:var(--ink)}details{margin-top:26px}details p{margin:16px 0}code{font-size:.94em}.alternate{display:flex;gap:22px;flex-wrap:wrap;margin:20px 0;font-size:14px}.alternate a{text-underline-offset:6px}
+@media(max-height:760px){.contribution-stage{grid-template-rows:52px minmax(0,1fr) 60px}.reading-panels h1,.reading-panels h2{font-size:33px;margin-bottom:20px}.reading-panels p:not(.kicker){font-size:17px;line-height:1.85}.kicker{margin-bottom:16px}}
+</style>
+</head>
+<body>
+<main id="contribution-story">
+<section class="story" aria-label="书目数量、阅读贡献与集中程度">
+<div class="contribution-stage">
+<header class="masthead"><span class="brand">书架上的多数，阅读里的少数</span><a href="../index.html#count-to-contribution">示例索引 ↗</a></header>
+<div class="composition">
+<div class="reading-panels" aria-live="polite" aria-atomic="true">
+<article data-copy="count"><p class="kicker">同一份书单 · 同一统计时期</p><h1>书目更多，<br>就有更多阅读吗？</h1><p><strong class="a"><span data-value="group0Name">城市书写</span>有 <span data-value="group0Count">6</span> 本</strong>，<strong class="b"><span data-value="group1Name">自然随笔</span>有 <span data-value="group1Count">4</span> 本</strong>。前者占了书单的多数，阅读次数也会更多吗？</p></article>
+<article data-copy="contribution" hidden><p class="kicker">从书目数量，看到阅读次数</p><h2>书少的一边，<br>被读得更多。</h2><p><span data-value="group0Name">城市书写</span>合计 <strong class="a"><span data-value="group0Reads">90</span> 次阅读</strong>，<span data-value="group1Name">自然随笔</span>却有 <strong class="b"><span data-value="group1Reads">150</span> 次</strong>。</p><p data-ending="concentration">自然随笔里，《<span data-value="headName">山间</span>》格外突出。这一类的优势，有多少来自它？</p><p data-ending="shares">书单没有变，阅读的分配却不同。自然随笔占了多少书目，又获得了多少阅读？</p></article>
+<article data-copy="concentration" data-ending="concentration" hidden><p class="kicker">优势由谁撑起</p><h2><span data-value="headShare">50%</span> 的阅读，<br>落在同一本书上。</h2><p>《<span data-value="headName">山间</span>》有 <strong class="b"><span data-value="head">120</span> 次阅读</strong>，其余 <span data-value="others">9</span> 本合计也是 <strong><span data-value="rest">120</span> 次</strong>。</p><p class="conclusion">自然随笔的阅读优势，主要由这一本书撑起。一个类别的总量，还藏着内部的差别。</p></article>
+<article data-copy="shares" data-ending="shares" hidden><p class="kicker">同一批书，两种份额</p><h2>四成的书目，<br>六成多的阅读。</h2><p><span data-value="group1Name">自然随笔</span>占书目的 <strong class="b"><span data-value="group1CountShare">40%</span></strong>，却获得 <strong class="b"><span data-value="group1ReadShare">62.5%</span> 的阅读</strong>。</p><p class="conclusion">自然随笔在书单里是少数，在阅读中却占了多数。</p></article>
+</div>
+<figure><div class="legend" aria-label="封面颜色表示题材"><span data-value="group0Name">城市书写</span><span data-value="group1Name">自然随笔</span></div><svg data-visual viewBox="0 0 1000 680" role="img" aria-label="同批书籍的数量与阅读贡献"></svg></figure>
+</div>
+<div class="stage-bottom"><span>合成书目与阅读记录 · 封面为原创示意</span><nav class="step-controls" aria-label="推进解释"><button type="button" data-prev aria-label="上一步" disabled>←</button><span class="position" data-position aria-hidden="true">1 / 3</span><button type="button" data-next aria-label="下一步">继续 →</button><a href="#sources" data-finish hidden>数据与设计 ↓</a></nav><span class="hint">滚动 / 方向键也可推进</span></div>
+</div><div class="scroll-track" aria-hidden="true"></div>
+</section>
+<footer id="sources">
+<p>书名、题材与阅读次数均为模拟数据。每次阅读是一条阅读事件，不等于一个读者，也不能据此判断作品质量或受欢迎的原因。面积只计封面矩形，不计群落之间的空隙。</p>
+<nav class="alternate" aria-label="同一份数据的另一种追问"><a href="?view=concentration">看总量由谁撑起 ↗</a><a href="?view=shares">改问书目与阅读份额 ↗</a></nav>
+<details id="example-notes"><summary>叙事、可视化选择与改编</summary>
+<p><strong>叙事：</strong><a href="../../../references/design.md#unit-weight">数量多，贡献也多吗？</a>等大封面先让数量可数，阅读量再改变原来的判断；接着追问优势是否集中于个别对象。另一结尾比较数量与阅读的份额，两种追问择一即可，不是固定的后续章节。</p>
+<p><strong>设计：</strong>封面既识别书籍，也在重排后保留个体。贡献画面按实际矩形面积编码，宽高按面积平方根变化，两类共用标定；按题材着色，提取头部后仍保留来源。面积群落让集中程度明显，附近读数负责精确核对。若只需比较接近的比例，可换成共同基线长度，不必保留封面。</p>
+<p><strong>改编：</strong>适合同一范围、带稳定身份和非负贡献量的小集合。可换项目、产品等对象，重选素材、构图与步骤；只需要数量与权重转换时，取前两态或基础 <a href="../units/index.html">units</a>。缩放表示度量方式改变，不表示对象随时间变大。零贡献在数量视图保留、贡献面积为零；不可把未知值记作零。</p>
+<p><strong>代码：</strong><code>mountContribution(root,{config,ending})</code> 接入；<code>contributionExample</code> 配两类对象与阅读量，<code>createContribution</code> 派生合计、头部和份额，<code>data-value</code> 绑定图文读数。<code>packBooks / layout / blend</code> 分别负责小集合矩形排布、状态与面积插值；<code>layout</code> 配画布、组中心与群落空间。更多对象、长标签或不规则素材需另排几何；不要把各组分别撑满到同样大小。</p>
+<p><code>ending</code> 可选 <code>concentration</code> 或 <code>shares</code>。后者上排是同批书目的数量参照副本，两行总面积相等、各为 100%，不是新增书目。换数据后按新结果改写正文，反转与“一本等于其余”都不是前提。正文、滚动与退出使用 <a href="../../../references/implementation-stage.md#文字滚动与舞台更新"><code>connectReading</code></a>、<code>createCopyHandoff</code>；<a href="scene.mjs">本例代码</a>。</p>
+</details>
+</footer>
+</main>
+<script type="module">import {mountContribution} from './scene.mjs';const ending=new URLSearchParams(location.search).get('view')==='shares'?'shares':'concentration';const story=mountContribution(document.querySelector('#contribution-story'),{ending});addEventListener('pagehide',e=>{if(!e.persisted)story.dispose()});</script>
+</body>
+</html>

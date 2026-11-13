@@ -25,7 +25,7 @@ footer{padding:30px 8vw 60px;border-top:1px solid var(--rule);font-size:14px;lin
 <footer id="notes"><p>馆名、年份和开放时长均为模拟数据。新增记录是新馆的开馆安排，不表示老馆时长随时间变化；周总时长不能回答具体几点开门。</p><p><a href="../record-comparison/index.html">继续看完整片段：接入更多新馆，再检验最长者是否典型 ↗</a></p>
 <details id="example-notes"><summary>叙事、设计与改编</summary>
 <p><strong>叙事：</strong>先给读者一张可以带走的参照，再问新馆是否开放更久。属于情境引入与新记录比较；一短一长的结果，修正“新馆就会开得更久”的预期。</p>
-<p><strong>设计：</strong>告示里的 42 小时、馆名与绿色延续到条形，图形不必从纸张变形而来。正文自然带入同一量值，再在共同零点下加入新行；答案等端点读得清再出现。保留参照身份比装饰性的转场更重要。</p>
+<p><strong>设计：</strong>页头以下用整屏空间并置问题与告示，让 42 小时成为视觉参照。开篇整体自然滚出，告示的量值、馆名与绿色延续到条形，再在共同零点下加入新行；答案等端点读得清再出现。连续的是参照身份，图形不必从纸张变形而来。</p>
 <p><strong>改编：</strong>可换成旧报价、容量、成绩、使用年限等有依据的参照，素材、图形和叙事方向都可重设。告示只是一种入口；有意义的基准也可以直接写在正文。第一项比较要有相同口径，不把新记录画成原对象的更新。</p>
 <p><strong>代码：</strong><a href="scene.mjs">referenceOpening</a> 筛选三条记录与两态，复用 <code>mountRecords</code>；改 <code>records / stops / axis</code> 及 HTML。自然滚动的引入与后面的持续舞台分开布局，舞台仍使用共享 <code>connectReading</code>。进一步调整几何见 <a href="../record-comparison/scene.mjs">原场景代码</a>。</p>
 </details></footer></main>
