@@ -20,6 +20,7 @@
     .river { color:var(--river); } .hill { color:var(--hill); }
     .big { margin:32px 0 16px; font-size:17px; color:var(--hill); }
     .big strong { font-family:Georgia,serif; font-weight:400; font-size:82px; margin-right:8px; }
+    .big small { display:block; margin-top:8px; font-size:14px; color:var(--muted); }
     .detail-stage { grid-area:1/2; position:sticky; top:0; height:100vh; min-height:560px; padding:100px 0 35px;
       display:flex; align-items:center; }
     figure { margin:0; width:100%; } svg { display:block; width:100%; max-height:calc(100vh - 160px); overflow:visible; }
@@ -41,20 +42,20 @@
     <section class="story" aria-label="从通勤全体记录提取两条比较">
       <div class="reading-flow">
         <article id="overview" data-state="overview">
-          <p class="eyebrow">先看全部 · 模拟通勤记录</p>
+          <p class="eyebrow">十二条路线 · 模拟通勤记录</p>
           <h1>同一个目的地，<br>要花多久？</h1>
           <p>12 条路线，单程从十几分钟到近一小时。路线长度各不相同，直接比快慢还不够。</p>
         </article>
         <article id="select" data-state="select">
-          <p class="eyebrow">从全局中找出这一对</p>
+          <p class="eyebrow">同样五公里的两条路线</p>
           <h2>这两条，<br>都是五公里。</h2>
-          <p><span class="river">河岸路</span>和<span class="hill">山坡路</span>有相同的路程。先找到这两条路线，再单独比较它们的用时。</p>
+          <p><span class="river">河岸路</span>和<span class="hill">山坡路</span>都长五公里。路程相同，是否也意味着花在路上的时间相近？</p>
         </article>
         <article id="compare" data-state="compare">
-          <p class="eyebrow">保留对象 · 放大比较尺度</p>
+          <p class="eyebrow">同样路程，不同用时</p>
           <h2>路程相同，<br>用时没有对齐。</h2>
-          <div class="big"><strong data-gap>12</strong>分钟</div>
-          <p data-reading-end>这是两条记录的时间差。距离相同，并不意味着通勤体验相同；这组记录还不能告诉我们差异由什么造成。</p>
+          <div class="big"><strong data-gap>12</strong>分钟<small>山坡路比河岸路多用的时间</small></div>
+          <p data-reading-end><span class="hill">山坡路</span>的用时更长。距离相同，通勤时间仍有差异；至于是否来自坡度、路况或出行方式，这组记录还不能回答。</p>
         </article>
         <div class="reading-tail" aria-hidden="true"></div>
       </div>
@@ -67,9 +68,9 @@
       <p>本页是模拟记录，用来演示“先识别、再提取、最后比较”的读法，没有实际交通调查或因果判断。条长表示通勤分钟数，缩放时始终保留零点；条的粗细只用于突出当前对象。</p>
       <details id="example-notes"><summary>叙事、可视化选择与改编</summary>
   <p><strong>叙事设计：</strong><a href="../../../references/design.md#overview-detail">全局 → 局部比较</a>。从总体中挑出一对值得追问的记录，先让读者认出它们，再回答“相差多少”。选择理由来自正文与数据；可直接承接已有全景。</p>
-  <p><strong>可视化选择：</strong>先原位突出，再移动同一对条形，交代局部来自哪里。条长适合精读用时；共同零点与同步缩放保持可比，差值标注省去来回读数。其他记录退出，把空间留给当前问题。</p>
+  <p><strong>可视化选择：</strong>先原位突出，再让同一对条形及名称移入比较位置，交代局部来自哪里。条长精读用时，轴与端点读数按同一尺度缩放；差值标注在比较到位后出现，避免对象尚在移动、解释已指向终点。其他记录退出，把空间留给当前问题。</p>
   <p><strong>改编空间：</strong>对象需有稳定身份、可比口径和选取理由。原位已能读清时，高亮足够；需要定位时保留适量总体参照。点、线、区间或单元都可承担提取，重新安排尺度、素材与空间即可延续这段思路。</p>
-  <p><strong>代码入口：</strong><code>mountDetailStory(root, { rows, selected, layout })</code> 换记录、选中项与空间；<code>layout</code> 可调标签区、行距、比较位置及画布尺寸，<code>detailStoryPose / blendDetailStory</code> 让轴、条形和标注同步。沿用这对记录继续解释或返回全景；正文与选择理由另行改写。</p>
+  <p><strong>代码入口：</strong><code>mountDetailStory(root, { rows, selected, layout })</code> 换记录、选中项与空间；<code>layout</code> 可调标签区、行距、比较位置及画布尺寸，<code>detailStoryPose / blendDetailStory</code> 让轴、条形和标注同步。沿用这对记录继续解释或返回全景；正文与选择理由另行改写。滚动接入见 <a href="../../../references/implementation-stage.md#文字滚动与舞台更新"><code>connectReading</code> 用法</a>。</p>
   <p><a href="scene.mjs">本例数据与代码</a></p>
 </details>
     </footer>

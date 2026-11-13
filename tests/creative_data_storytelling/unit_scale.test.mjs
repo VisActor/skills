@@ -96,3 +96,46 @@ test("invalid conversion and record inputs are rejected before rendering", () =>
   assert.throws(() => createUnitScaleModel({ ...unitScaleExample, records: unitScaleExample.records.map(row => ({ ...row, value: -1 })) }), /nonnegative/);
   assert.throws(() => unitScalePose("missing"), /Unknown/);
 });
+
+test("conversion-only data needs no comparison records or comparison reading", () => {
+  const config = {
+    base: { value: 1000, name: "升", divisions: 10, partName: "分升" },
+    multiple: { copies: 5, name: "桶" },
+    layout: { width: 1100, height: 620, left: 160, right: 970, baseline: 250, axisY: 430 },
+  };
+  const model = createUnitScaleModel(config), reading = unitScaleReading(model);
+  assert.deepEqual(reading.values, []);
+  assert.equal(reading.gap, null);
+  assert.equal(model.total, 5000);
+  for (const [before, after] of [["reference", "parts"], ["parts", "multiple"], ["multiple", "parts"]]) {
+    const a = unitScalePose(before, model), b = unitScalePose(after, model);
+    for (const t of [0, .25, .5, .75, 1]) {
+      const pose = blendUnitScale(a, b, t), geometry = unitScaleGeometry(model, pose);
+      assert.deepEqual(geometry.comparisons, []);
+      assert.equal(geometry.zero, 160);
+      assert.equal(geometry.units[0].y, 250);
+      near(geometry.units.reduce((sum, node) => sum + node.value * node.reveal, 0), pose.copies * model.base.value);
+      assert.ok(geometry.end <= model.layout.right);
+    }
+  }
+  assert.throws(() => unitScalePose("compare", model), /needs two comparison records/);
+  assert.deepEqual(createUnitScaleModel({ ...config, records: [] }).records, []);
+});
+
+test("unit comparison layout moves marks and preserves shared-scale ratios", () => {
+  const model = createUnitScaleModel({ ...unitScaleExample,
+    layout: { width: 1100, height: 680, left: 180, right: 980, baseline: 270, axisY: 460,
+      comparisonTop: 230, comparisonRowGap: 130 } });
+  const pose = unitScalePose("compare", model), geometry = unitScaleGeometry(model, pose);
+  assert.deepEqual(geometry.comparisons.map(row => row.y), [230, 360]);
+  assert.equal(geometry.units[0].y, 599);
+  near(geometry.comparisons[1].width / geometry.comparisons[0].width, 3);
+  near(at(pose.scale, model.comparisonTicks.at(-1) * 1.05), model.layout.right);
+});
+
+test("unit layout fails visibly when the drawing does not fit instead of compressing text", () => {
+  for (const layout of [{ right: 1000 }, { baseline: 500 }, { comparisonRowGap: 30 }, { left: NaN }]) {
+    assert.throws(() => createUnitScaleModel({ ...unitScaleExample, layout }), /Unit scale layout/);
+  }
+  assert.throws(() => createUnitScaleModel({ ...unitScaleExample, records: [unitScaleExample.records[0]] }), /either no comparison records or two/);
+});

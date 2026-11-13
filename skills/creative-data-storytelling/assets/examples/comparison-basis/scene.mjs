@@ -118,7 +118,7 @@ export function mountBasis(root, { config = basisExample, duration = 1550 } = {}
       setSvgAttributes(g.children[0], { x: end + 16, y: item.y + 38, fill: item.row.color });
       g.children[0].textContent = basisReading(model, item.row, item.basis);
       setSvgAttributes(g.children[1], { x: plot.left + 5, y: item.y + 164 });
-      g.children[1].textContent = item.basis === "share" ? `平均分给每 ${format(model.quantum)} ${model.populationUnit}`
+      g.children[1].textContent = item.basis === "share" ? `折合每 ${format(model.quantum)} ${model.populationUnit}`
         : item.basis === "rate" ? "全部借阅量 ÷ 常住人口" : "";
     } });
   function render(pose, frame) {

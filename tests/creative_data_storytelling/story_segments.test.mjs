@@ -172,6 +172,83 @@ test("record reflow makes room before revealing new bars and responds to replace
   assert.throws(() => createRecordModel({ ...config, axis: { max: 20, ticks: [0, 20] } }), /cover every record/);
 });
 
+const focusedRecords = {
+  metric: "服务时长", unit: "分钟", baselineId: "counter", axis: { max: 100, ticks: [0, 25, 50, 75, 100] },
+  layout: { width: 1200, height: 720, left: 360, right: 1030, top: 80, bottom: 590, center: 320, rowGap: 100 },
+  records: [
+    { id: "counter", label: "人工窗口办理", value: 90 },
+    { id: "online", label: "线上预约后到场办理", value: 35 },
+    { id: "self", label: "自助终端办理", value: 20 },
+    { id: "express", label: "快速通道办理", value: 12 },
+  ],
+  stops: [
+    { id: "all", visible: ["counter", "online", "self"], focus: ["counter"] },
+    { id: "pair", visible: ["online", "self"], focus: ["online", "self"], pair: ["online", "self"] },
+    { id: "mixed", visible: ["online", "express"], focus: ["express"] },
+    { id: "separate", visible: ["counter"], focus: ["counter"] },
+  ],
+};
+
+test("focusing records can retire the baseline and later restore it without changing values or scale", () => {
+  const model = createRecordModel(focusedRecords), all = recordPose("all", model), pair = recordPose("pair", model);
+  assert.equal(pair.nodes.get("counter").reveal, 0);
+  assert.deepEqual([pair.nodes.get("online").y, pair.nodes.get("self").y], [270, 370]);
+  assert.equal([...pair.annotations.values()][0].value, 15);
+  for (const [a, b] of [[all, pair], [pair, all]]) for (const t of [0, .15, .35, .6, .85, 1]) {
+    for (const row of recordGeometry(model, blendRecords(a, b, t))) {
+      assert.equal(row.row, model.records.get(row.id));
+      assert.equal(row.zero, 360);
+      assert.ok(Math.abs(row.width / model.scale.k - row.row.value) < 1e-8);
+      assert.ok(row.reveal >= 0 && row.reveal <= 1);
+    }
+  }
+});
+
+test("mixed record replacement clears outgoing rows, reflows survivors, then reveals arrivals", () => {
+  const model = createRecordModel(focusedRecords);
+  // No annotations: sample geometry timing directly, including a change in survivor position.
+  const a = recordPose("all", model), b = recordPose("mixed", model);
+  const exiting = blendRecords(a, b, .15), moving = blendRecords(a, b, .45), entering = blendRecords(a, b, .8);
+  assert.equal(exiting.nodes.get("online").y, a.nodes.get("online").y);
+  assert.ok(exiting.nodes.get("counter").reveal < 1);
+  assert.equal(exiting.nodes.get("express").reveal, 0);
+  assert.equal(moving.nodes.get("counter").reveal, 0);
+  assert.equal(moving.nodes.get("express").reveal, 0);
+  assert.ok(moving.nodes.get("online").y < a.nodes.get("online").y && moving.nodes.get("online").y > b.nodes.get("online").y);
+  assert.equal(entering.nodes.get("online").y, b.nodes.get("online").y);
+  assert.equal(entering.nodes.get("express").y, b.nodes.get("express").y);
+  assert.ok(entering.nodes.get("express").reveal > 0 && entering.nodes.get("express").reveal < 1);
+});
+
+test("mixed and disjoint record transitions resume continuously after reversal or a jump", () => {
+  const model = createRecordModel(focusedRecords), initial = recordPose("all", model), target = recordPose("mixed", model);
+  for (const interruption of [160, 450, 800]) {
+    const transition = createTransition(initial, { blend: blendRecords, duration: 1000 });
+    transition.target(target, 0);
+    const middle = transition.sample(interruption).pose;
+    const next = recordPose("separate", model);
+    transition.target(next, interruption);
+    assert.deepEqual(transition.sample(interruption).pose, middle);
+    for (const elapsed of [0, 100, 500, 900, 1000]) {
+      const pose = transition.sample(interruption + elapsed).pose;
+      for (const row of recordGeometry(model, pose)) {
+        assert.ok(Number.isFinite(row.y) && Number.isFinite(row.clipWidth));
+        assert.ok(row.reveal >= 0 && row.reveal <= 1);
+      }
+    }
+    assert.deepEqual(transition.sample(interruption + 1000).pose, next);
+  }
+});
+
+test("record filtering still rejects missing comparison evidence and overflowing row layouts", () => {
+  for (const stop of [
+    { id: "bad", visible: [], focus: [] },
+    { id: "bad", visible: ["online"], focus: ["counter"] },
+    { id: "bad", visible: ["online", "self"], focus: [], pair: ["online", "counter"] },
+  ]) assert.throws(() => createRecordModel({ ...focusedRecords, stops: [stop] }), /visible/);
+  assert.throws(() => createRecordModel({ ...focusedRecords, layout: { rowGap: 300 } }), /Record layout/);
+});
+
 test("recurrence links wait for both source occurrences while source positions stay fixed", () => {
   const model = createRecurrenceModel(), snapshot = structuredClone(recurrenceExample);
   const a = recurrencePose("first", model), b = recurrencePose("reverse", model);
@@ -239,6 +316,42 @@ test("trend uses same-period yearly changes, preserves source dates and changes 
   absent.series[0].observations = absent.series[0].observations.filter(p => p.id !== "burger-2016-1");
   assert.throws(() => createTrendModel(absent), /prior-year record/);
   assert.deepEqual(trendExample, snapshot);
+});
+
+test("the opening material becomes the first observation without changing its identity or value", () => {
+  const model = createTrendModel(), cover = trendPose("cover", model), first = trendPose("start", model);
+  const id = model.primary.points[0].id;
+  for (const t of [0, .2, .5, .8, 1]) {
+    const pose = blendTrend(cover, first, t), marks = trendMarks(model, pose).filter(mark => mark.opacity > 0);
+    assert.equal(marks.length, 1);
+    assert.equal(marks[0].id, id);
+    assert.equal(marks[0].point, first.nodes.get(id).row);
+    assert.ok(marks[0].size >= 54 && marks[0].size <= 250);
+  }
+  const transition = createTransition(cover, { blend: blendTrend, duration: 1000 });
+  transition.target(first, 0);
+  const middle = transition.sample(430).pose;
+  transition.target(cover, 430);
+  assert.deepEqual(transition.sample(430).pose, middle);
+  assert.deepEqual(transition.sample(1500).pose, cover);
+  const invalid = structuredClone(trendExample);
+  invalid.stops[0].throughId = model.primary.points[1].id;
+  assert.throws(() => createTrendModel(invalid), /first raw observation/);
+});
+
+test("trend layout adapts to desktop plotting space while retaining dates and raw-to-rate positions", () => {
+  for (const [width, height] of [[1152, 396], [1068, 690]]) {
+    const model = createTrendModel({ ...trendExample, layout: { width, height, left:64, right:width-166, top:58, bottom:height-72 } });
+    const from = trendPose("rise", model), to = trendPose("rate", model);
+    for (const t of [0, .3, .7, 1]) {
+      const pose = blendTrend(from, to, t);
+      for (const point of model.primary.points) {
+        assert.equal(pose.nodes.get(point.id).x, at(model.x, point.time));
+        assert.ok(pose.nodes.get(point.id).y >= model.plot.top && pose.nodes.get(point.id).y <= model.plot.bottom);
+      }
+    }
+  }
+  assert.throws(() => createTrendModel({ ...trendExample, layout:{right:1190} }), /endpoint labels/);
 });
 
 test("chronological reveal retains earlier material marks at their actual observations without image leaders", () => {

@@ -61,29 +61,37 @@ export function buildLayouts(){
  cached={all,serenade,heartache,stack};return cached;
 }
 const states=[
- {name:'从熟悉的歌开始',title:'听到这些歌，你会叫它们<em>“情歌”。</em>',description:'从 Elvis Presley 到 Ed Sheeran，直白的示爱一直都在。每个圆点是一首进入 Billboard 前十的歌曲，圆面积表示它停留的周数。'},
- {name:'提取直接示爱的歌曲',title:'先把这些<em>示爱</em>，放回它们的年代。',description:'粉色歌曲从全部记录中移出，横向位置仍然是上榜时间。其余歌曲暂时退到下方；这些都是刚才的同一批歌。'},
- {name:'回到完整分母',title:'90 年代以后，直白的示爱<em>占得更少了。</em>',description:'让其余歌曲回来，把每个时期看作 100%。按前十停留周数加权，直接示爱从 1990 年代的 26.4%，降至 2020–23 年的 12.2%。'},
- {name:'从其余歌曲中找出失恋',title:'但《Someone Like You》，<em>也在讲爱。</em>',description:'蓝色从刚才的灰色里显现：它们讲的是失恋与思念。改变了分类，才发现“其他歌曲”里还藏着另一种情歌。'},
- {name:'提取失恋与思念',title:'表达变了，<em>失恋的歌仍在。</em>',description:'把这些蓝色歌曲沿同一时间尺度提取出来。Yesterday、Someone Like You、Blinding Lights，属于同一个主题，却来自不同年代。'},
- {name:'两种主题重新汇合',title:'把失恋算上，<em>仍然解释不完。</em>',description:'粉色与蓝色合起来，从 1990 年代的 45.5% 降到 2020–23 年的 27.3%。但剩下的灰色，并不全是与爱无关的歌。'},
- {name:'继续打开其余歌曲',title:'有的歌，已经<em>换了爱的对象。</em>',description:'复杂的关系、追求、告别旧爱，以及爱自己。继续从同一批灰色记录中提取，原作还划分了这些不同的主题。'},
- {name:'重新回答最初的问题',title:'直白示爱少了，<em>爱的表达不止一种。</em>',description:`从 1990 年代到 2020–23 年，直接示爱由 ${(100*cumulativeShare(3,0)).toFixed(1)}% 降到 ${(100*cumulativeShare(6,0)).toFixed(1)}%；较宽的爱情主题由 ${(100*cumulativeShare(3,6)).toFixed(1)}% 降到 ${(100*cumulativeShare(6,6)).toFixed(1)}%。下降仍在，但幅度不同。`}
+ {name:'从熟悉的歌开始',title:'听到这些歌，你会叫它们<em>“情歌”。</em>',description:'图中标出的几首歌，都在直接向爱人表达爱意。每个圆是一首 Billboard 前十歌曲，圆越大，在前十停留越久。'},
+ {name:'不同时期的示爱歌曲',title:'这样的情歌，<em>变少了吗？</em>',description:'各年代都能找到这样的歌。但要判断它们有没有变少，还得放回同期全部热门歌曲中，看看占了多少份额。'},
+ {name:'各时期的份额',title:'与 90 年代相比，<em>直接示爱的份额更小了。</em>',description:`以各期全部歌曲在前十停留的总周数为分母，直接示爱的份额从 1990 年代的 ${(100*cumulativeShare(3,0)).toFixed(1)}%，降到 2020–23 年的 ${(100*cumulativeShare(6,0)).toFixed(1)}%。但“情歌”只有示爱这一种吗？`,highlights:[{text:`${(100*cumulativeShare(3,0)).toFixed(1)}%`,color:'#ce5472'},{text:`${(100*cumulativeShare(6,0)).toFixed(1)}%`,color:'#ce5472'}]},
+ {name:'另一种情歌',title:'但《Someone Like You》，<em>也在讲爱。</em>',description:'Adele 唱的是失恋与思念。这同样是关于爱的歌，却没有被算进刚才“直接示爱”的粉色部分。'},
+ {name:'同一主题的不同年代',title:'不同的年代，<em>也在唱失恋。</em>',description:'从《Yesterday》到《Blinding Lights》，相隔半个多世纪。这些失恋与思念的歌，补上了刚才没有计入的另一种爱情经验。'},
+ {name:'两种主题重新汇合',title:'加上失恋，<em>降幅仍然明显。</em>',description:'把失恋与思念也算进来，近年的份额仍低于 1990 年代。灰色部分里，还藏着哪些与爱有关的歌？'},
+ {name:'爱的其他模样',title:'爱，还不止<em>这两种模样。</em>',description:'《Flowers》唱的是爱自己。追求、复杂的关系、告别旧爱，也让“爱情主题”的范围比直接示爱更宽。'},
+ {name:'重新回答最初的问题',title:'直接示爱的份额，<em>降得更多。</em>',description:`仍比较 1990 年代与 2020–23 年：把失恋、追求和爱自己等主题也算进来，份额从 ${(100*cumulativeShare(3,6)).toFixed(1)}% 降到 ${(100*cumulativeShare(6,6)).toFixed(1)}%，降幅小得多。判断“情歌少了没有”，也要说清楚哪些歌算作情歌。`,highlights:[{text:`${(100*cumulativeShare(3,6)).toFixed(1)}%`,color:'#4d4659'},{text:`${(100*cumulativeShare(6,6)).toFixed(1)}%`,color:'#4d4659'}]}
 ].map(s=>({...s,value:'',unit:'',metric:''}));
 export const example={
- id:'records-composition',short:'记录与构成',title:'情歌变少了，还是表达爱的方式变了？',eyebrow:'先认识歌曲，再改变观察范围',viewBox:'0 0 1440 720',duration:1900,
+ id:'records-composition',short:'记录与构成',title:'情歌变少了，还是表达爱的方式变了？',eyebrow:'热门歌曲里的爱情 · 1958—2023',viewBox:'0 0 1440 720',duration:1900,
  theme:{paper:'#f5f2e8',ink:'#3e3d47',muted:'#83818a',accent:'#ce5472',line:'#d9d7ce',panel:'#faf8f0'},
  dataBadge:'公开歌曲数据',dataCaption:'The Pudding · 1958—2023.09',states,
  mount(svg){
   const layouts=buildLayouts(),areaGroup=el(svg,'g'),paths=categories.map((c,i)=>{const pts=[...areaBoundary(i),...areaBoundary(i-1).toReversed()];return el(areaGroup,'path',{d:pts.map((p,j)=>(j?'L':'M')+p.x+','+p.y).join(' ')+'Z',fill:c.color});});
-  const grid=el(svg,'g');for(const v of [0,25,50,75,100]){const y=BOTTOM-H*v/100;line(grid,L,y,R,y,{stroke:'#ede9df','stroke-width':1,'stroke-dasharray':v===0?'0':'2 6'});txt(grid,84,y+4,v+'%',{'text-anchor':'end',style:'font-size:12px;fill:#8b8891'});}
+  const grid=el(svg,'g');for(const v of [0,25,50,75,100]){const y=BOTTOM-H*v/100;line(grid,L,y,R,y,{stroke:'#ede9df','stroke-width':1,'stroke-dasharray':v===0?'0':'2 6'});txt(grid,84,y+4,v+'%',{'text-anchor':'end',style:'font-size:14px;fill:#665e66'});}
   const foreign=el(svg,'foreignObject',{x:0,y:0,width:1440,height:720,'pointer-events':'none'});
   const canvas=document.createElementNS('http://www.w3.org/1999/xhtml','canvas');canvas.width=2880;canvas.height=1440;canvas.style.cssText='width:1440px;height:720px;display:block';foreign.append(canvas);const ctx=canvas.getContext('2d');
   const axis=el(svg,'g');line(axis,L,BOTTOM+15,R,BOTTOM+15,{stroke:'#b9b8b1','stroke-width':1});
-  const axisTicks=periods.map((p,i)=>{const year=1960+i*10,g=el(axis,'g'),tick=line(g,0,BOTTOM+14,0,BOTTOM+20,{stroke:'#bab8b1'}),label=txt(g,0,660,String(year),{'text-anchor':'middle',style:'font-size:15px',class:'num'});return {year,period:p,g,label};});
-  const key=el(svg,'g'),legendNodes=categories.map((c,i)=>{const g=el(key,'g');el(g,'circle',{cx:112+i*164,cy:202,r:4.5,fill:c.color});txt(g,125+i*164,207,c.label,{style:'font-size:14px'});return g;});
-  const footer=txt(svg,100,704,'5,141 首歌 · 来源：The Pudding · 数据截至 2023 年 9 月',{style:'font-size:11px;fill:#8b8891'});
-  const measure=txt(svg,1340,704,'',{'text-anchor':'end',style:'font-size:11px;fill:#8b8891'});
+  const comparisonPeriods = [3, 6];
+  const axisTicks=periods.map((period,i)=>{
+   const year=1960+i*10,g=el(axis,'g');
+   line(g,0,BOTTOM+14,0,BOTTOM+20,{stroke:'#bab8b1'});
+   const label=txt(g,0,660,String(year),{'text-anchor':'middle',style:'font-size:17px',class:'num'});
+   return {year,period,g,label,compared:comparisonPeriods.includes(i)};
+  });
+  const key=el(svg,'g'),legendNodes=categories.map((c,i)=>{const g=el(key,'g');el(g,'circle',{cx:112+i*164,cy:202,r:4.5,fill:c.color});txt(g,125+i*164,207,c.label,{style:'font-size:15px'});return g;});
+  const noteStyle = 'font-size:15px;fill:#625d64';
+  txt(svg,R,694,'5,141 首歌 · 来源：The Pudding · 数据截至 2023 年 9 月',{'text-anchor':'end',style:noteStyle});
+  const pointMeasure=txt(svg,L,694,'圆面积＝前十停留周数 · 横向＝上榜时间',{style:noteStyle});
+  const bandMeasure=txt(svg,L,227,'按上榜时期汇总 · 色带厚度＝该类歌曲前十周数 ÷ 同期全部歌曲前十周数',{style:noteStyle});
   const examples=[
    {title:"Can't Help Falling In Love",artist:'Elvis Presley',states:[0,1],lx:210,ly:246},
    {title:'Happy Together',artist:'The Turtles',states:[0,1],lx:510,ly:242},
@@ -93,7 +101,26 @@ export const example={
    {title:'Blinding Lights',artist:'The Weeknd',states:[3,4],lx:1190,ly:350},
    {title:'Flowers',artist:'Miley Cyrus',states:[6],lx:1120,ly:276}
   ].map(f=>{const i=songs.findIndex(s=>s.title===f.title&&s.artist.includes(f.artist));if(i<0)throw new Error('Missing featured song '+f.title);const g=el(svg,'g'),leader=el(g,'path',{fill:'none',stroke:'#9b959d','stroke-width':1}),ring=el(g,'circle',{fill:'none',stroke:categories[categoryIndex.get(songs[i].category)].color,'stroke-width':1.5});txt(g,f.lx,f.ly,f.title,{'text-anchor':'middle',style:'font-size:18px;font-family:Georgia,serif;font-style:italic'});txt(g,f.lx,f.ly+21,f.artist+' · '+Math.floor(songs[i].year),{'text-anchor':'middle',style:'font-size:12px;fill:#85808b'});return {...f,i,g,leader,ring};});
-  const callouts=[2,5,7].map(step=>{const g=el(svg,'g'),boundaries=step===7?[0,6]:[step===2?0:1];for(const c of boundaries)for(const i of [3,6]){const x=yearX(periods[i].center),y=BOTTOM-H*cumulativeShare(i,c),v=(cumulativeShare(i,c)*100).toFixed(1),color=c===6?'#4d4659':'#b44e70';line(g,x,y-8,x,y+8,{stroke:color,'stroke-width':2});txt(g,x,y-19,v+'%',{'text-anchor':'middle',style:'font-size:27px;fill:'+color,class:'num'});}return{step,g};});
+  const callouts=[2,5,7].map(step=>{
+   const g=el(svg,'g'),boundaries=step===7?[0,6]:[step===2?0:1];
+   for(const category of boundaries)for(const period of comparisonPeriods){
+    const share=cumulativeShare(period,category);
+    const x=yearX(periods[period].center),y=BOTTOM-H*share;
+    const value=(share*100).toFixed(1)+'%';
+    const color=category===6?'#4d4659':'#b44e70';
+    const callout=el(g,'g',{'data-share-category':category,'data-share-period':period});
+    if(step===7&&category===0){
+     line(callout,x,y-16,x,y,{stroke:color,'stroke-width':2});
+     el(callout,'circle',{cx:x,cy:y,r:2.6,fill:color});
+     el(callout,'rect',{x:x-48,y:y-52,width:96,height:36,rx:5,fill:'#fffaf1',stroke:color,'stroke-width':1});
+     txt(callout,x,y-26,value,{'text-anchor':'middle',style:'font-size:25px;fill:#772b47',class:'num'});
+    }else{
+     line(callout,x,y-8,x,y+8,{stroke:color,'stroke-width':2});
+     txt(callout,x,y-19,value,{'text-anchor':'middle',style:'font-size:27px;fill:'+color,class:'num'});
+    }
+   }
+   return{step,g};
+  });
   const totalGuide=el(svg,'path',{d:areaBoundary(6).map((p,i)=>(i?'L':'M')+p.x+','+p.y).join(' '),fill:'none',stroke:'#68586c','stroke-width':1.7});
   const tooltip=el(svg,'g',{visibility:'hidden','pointer-events':'none'}),tipBox=el(tooltip,'rect',{rx:4,fill:'#fffdf6',stroke:'#c9c3c7','stroke-width':1,width:370,height:63}),tipTitle=txt(tooltip,14,25,'',{style:'font-size:16px;font-family:Georgia,serif'}),tipDetail=txt(tooltip,14,47,'',{style:'font-size:11px;fill:#847c87'});
   const poses=states.map((_,step)=>{
@@ -125,11 +152,18 @@ export const example={
    lastPose=p;tooltip.setAttribute('visibility','hidden');ctx.setTransform(2,0,0,2,0,0);ctx.clearRect(0,0,1440,720);
    paths.forEach((path,i)=>{const color='rgb('+Array.from(p.bandColors.slice(i*3,i*3+3),Math.round).join(',')+')';attr(path,{fill:color,stroke:color,'stroke-width':.6,opacity:p.area*.92});});
    for(let i=0;i<songs.length;i++){const k=i*7,a=p.nodes[k+3];if(a<.01)continue;ctx.globalAlpha=a;ctx.fillStyle='rgb('+Math.round(p.nodes[k+4])+','+Math.round(p.nodes[k+5])+','+Math.round(p.nodes[k+6])+')';ctx.beginPath();ctx.arc(p.nodes[k],p.nodes[k+1],p.nodes[k+2],0,Math.PI*2);ctx.fill();}
-   ctx.globalAlpha=1;attr(grid,{opacity:p.grid*.7});for(const a of axisTicks){const x=lerp(yearX(a.year),yearX(a.period.center),p.periodAxis);attr(a.g,{transform:'translate('+x+',0)'});a.label.textContent=p.periodAxis>.5?a.period.label:String(a.year);}
+   ctx.globalAlpha=1;attr(grid,{opacity:p.grid});
+   for(const a of axisTicks){
+    const x=lerp(yearX(a.year),yearX(a.period.center),p.periodAxis);
+    attr(a.g,{transform:'translate('+x+',0)'});
+    attr(a.label,{'font-weight':a.compared&&p.grid>.85?650:400});
+    a.label.textContent=p.periodAxis>.5?a.period.label:String(a.year);
+   }
    attr(totalGuide,{opacity:p.allLove});callouts.forEach(c=>attr(c.g,{opacity:p.labels[c.step]}));
    for(const f of examples){const opacity=f.states.reduce((s,i)=>s+p.labels[i],0),k=f.i*7,x=p.nodes[k],y=p.nodes[k+1],r=p.nodes[k+2];attr(f.g,{opacity});attr(f.leader,{d:'M'+f.lx+','+(f.ly+30)+' L'+f.lx+','+(f.ly+44)+' L'+x+','+(y-r-5)});attr(f.ring,{cx:x,cy:y,r:r+4});}
    legendNodes.forEach((g,i)=>{const cat=categories[i].id,opacity=cat===1?1:cat===2?clamp01((p.stage-2)):cat===0?1:clamp01(p.stage-5);attr(g,{opacity});const label=g.querySelector('text');if(cat===0)label.textContent=p.stage>=6.7?'非爱情主题':'其余歌曲';});
-   measure.textContent=p.periodAxis>.6?'色带厚度＝各期前十停留周数占比':'圆面积＝前十停留周数 · 横向＝上榜时间';
+   const bandNoteOpacity=clamp01((p.periodAxis-.5)/.5);
+   attr(pointMeasure,{opacity:1-bandNoteOpacity});attr(bandMeasure,{opacity:bandNoteOpacity});
   }
   function onMove(event){
    if(document.body.dataset.moving==='true')return;
@@ -139,6 +173,8 @@ export const example={
    const s=songs[nearest];tipTitle.textContent=s.title.length>43?s.title.slice(0,40)+'…':s.title;tipDetail.textContent=Math.floor(s.year)+' · '+categories[categoryIndex.get(s.category)].label+' · 前十 '+s.weeks+' 周 · '+s.artist.slice(0,30);attr(tooltip,{transform:'translate('+Math.min(1060,Math.max(70,pt.x+16))+','+Math.min(610,Math.max(205,pt.y-79))+')',visibility:'visible'});
   }
   const onLeave=()=>tooltip.setAttribute('visibility','hidden');svg.addEventListener('pointermove',onMove);svg.addEventListener('pointerleave',onLeave);
-  return{pose:step=>poses[step],blend,render,dispose(){svg.removeEventListener('pointermove',onMove);svg.removeEventListener('pointerleave',onLeave);}};
+  // The second state asks a question. Findings wait for their existing on-chart evidence.
+  const copyReady=(step,p)=>step===1||p.labels[step]>=.9;
+  return{pose:step=>poses[step],blend,render,copyReady,dispose(){svg.removeEventListener('pointermove',onMove);svg.removeEventListener('pointerleave',onLeave);}};
  }
 };

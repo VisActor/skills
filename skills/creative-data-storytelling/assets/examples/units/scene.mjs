@@ -46,6 +46,8 @@ export function mountUnits(root, config = unitExample) {
   const listeners = new AbortController();
   const listen = (target, type, handler) => target.addEventListener(type, handler, { signal: listeners.signal });
   const { rows: projects, colors, domain, countArea, areaPerUnit } = config;
+  const areaScaleNote = $("[data-unit-area-scale]");
+  if (areaScaleNote) areaScaleNote.textContent = "圆面积 = 服务时长 × " + areaPerUnit + " 像素²/小时。";
   const allGroups = Object.keys(colors);
   const slots = maskSlots(35, 25, (x, y) => {
     const distance = Math.abs(x - 0.5);
@@ -74,6 +76,7 @@ export function mountUnits(root, config = unitExample) {
   function renderUnits(pose, frame) {
     currentUnits = pose;
     unitMoving = frame.moving;
+    root.toggleAttribute("data-unit-moving", frame.moving);
     context.clearRect(0, 0, 860, 460);
     for (const node of pose.nodes.values()) {
       context.globalAlpha = node.opacity;
@@ -106,11 +109,11 @@ export function mountUnits(root, config = unitExample) {
       const total = pose.rows.reduce((sum, row) => sum + row.weight, 0);
       const breakdown = pose.groups.map((group) => {
         const members = pose.rows.filter((row) => row.group === group);
-        return group + "：" + (pose.mode === "weights" ? members.reduce((sum, row) => sum + row.weight, 0) + " 小时" : members.length + " 项");
+        return group + " 类：" + (pose.mode === "weights" ? members.reduce((sum, row) => sum + row.weight, 0) + " 小时" : members.length + " 项");
       }).join("；");
       $("#unit-summary").textContent = pose.mode === "cover"
         ? pose.rows.length + " 项模拟记录组成书页轮廓；轮廓位置不表示数据。"
-        : pose.mode === "weights" ? "圆面积 = 服务时长 × " + areaPerUnit + " 像素²/小时。共 " + total + " 小时。" + breakdown
+        : pose.mode === "weights" ? (pose.groups.length === 1 ? breakdown : "共 " + total + " 小时。" + breakdown)
           : "每圆一项，颜色表示类别。" + breakdown;
     }
   }

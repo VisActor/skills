@@ -93,7 +93,8 @@ export function mountStock(root,{config=stockExample,duration=2200}={}) {
   const joins=createSvgLayer(svg,{create(){return svgElement('path',{fill:'none','stroke-width':2.5});},update(path,c){setSvgAttributes(path,{d:`M${c.fromX},${c.y}H${c.toX}`,stroke:c.archive.color,opacity:c.opacity*.8});}});
   const bases=createSvgLayer(svg,{create(){return svgElement('circle',{r:5.5});},update(node,p){setSvgAttributes(node,{cx:p.x,cy:p.y,fill:p.archive.color,opacity:p.opacity});}});
   const bars=createSvgLayer(svg,{create(p){return svgElement('rect',{'data-record':p.id,rx:1});},update(node,p){setSvgAttributes(node,{x:p.x-p.width/2,y:p.y,width:p.width,height:p.height,fill:p.archive.color,opacity:p.opacity});}});
-  const bracket=svgElement('path',{fill:'none',stroke:'#cdd9d5','stroke-width':1.5});svg.append(bracket);
+  const initialBracket=svgElement('path',{fill:'none',stroke:'#cdd9d5','stroke-width':1.5,'data-initial-gap':''});
+  const bracket=svgElement('path',{fill:'none',stroke:'#cdd9d5','stroke-width':1.5});svg.append(initialBracket,bracket);
   let geometry;
   const labels=createSvgLayer(svg,{create(){return svgElement('text',{'text-anchor':'middle'});},update(node,label){
     let x,y;setSvgAttributes(node,{opacity:label.opacity,fill:label.archive?.color??'#e5eee7',class:label.role==='annual'?'increment':'total'});
@@ -107,6 +108,9 @@ export function mountStock(root,{config=stockExample,duration=2200}={}) {
     geometry=stockGeometry(model,pose);joins.render(geometry.connectors);bases.render(geometry.starts);bars.render(geometry.segments);labels.render(pose.annotations);
     setSvgAttributes(annualAxis,{opacity:clamp01(1-geometry.zoom*4)});setSvgAttributes(stockAxis,{opacity:clamp01((geometry.zoom-.7)/.3)});setSvgAttributes(baseYear,{opacity:geometry.baseOpacity});
     title.textContent=pose.assembly>.99?`累计收录 / ${config.unit}`:pose.assembly>.01?'把每年的新增接回已有量':`年度新增 / ${config.unit}`;
+    const [first,second]=geometry.starts,x=Math.min(first.x,second.x)-24;
+    setSvgAttributes(initialBracket,{d:`M${first.x-8},${first.y}H${x}V${second.y}H${second.x-8}`,
+      opacity:initial[0]===initial[1]?0:geometry.baseOpacity*lerp(.85,.43,pose.gap)});
     const [a,b]=end.map(v=>at(geometry.scale,v));setSvgAttributes(bracket,{d:`M883,${a}H899V${b}H883`,opacity:pose.gap});
     svg.dataset.state=pose.id;svg.dataset.moving=String(frame.moving);svg.dataset.assembly=String(pose.assembly);
     if(!frame.moving)svg.setAttribute('aria-label',pose.assembly?model.archives.map((a,i)=>`${a.name}累计 ${model.amount(end[i])}`).join('；'):model.archives.map(a=>`${a.name}年度新增 ${a.additions.map(r=>`${r.year} 年 ${model.amount(r.amount)}`).join('，')}`).join('；'));
@@ -114,5 +118,5 @@ export function mountStock(root,{config=stockExample,duration=2200}={}) {
   const exit=reserveStageExit({sticky:$('.archive-stage'),readingEnd:$('[data-reading-end]'),spacer:$('.reading-tail'),releaseRatio:.4});
   const stage=createStage({element:svg,steps:[...root.querySelectorAll('[data-state]')].map(element=>({element,id:element.dataset.state})),layout:id=>stockPose(id,model),blend:blendStock,render,duration,viewportRatio:.55});
   document.fonts.ready.then(()=>stage.refresh());
-  return {sample:stage.sample,dispose(){stage.dispose();exit.dispose();joins.dispose();bases.dispose();bars.dispose();labels.dispose();grid.remove();years.remove();legend.remove();bracket.remove();title.remove();}};
+  return {sample:stage.sample,dispose(){stage.dispose();exit.dispose();joins.dispose();bases.dispose();bars.dispose();labels.dispose();grid.remove();years.remove();legend.remove();initialBracket.remove();bracket.remove();title.remove();}};
 }

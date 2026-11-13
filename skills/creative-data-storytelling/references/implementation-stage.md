@@ -4,7 +4,12 @@
 
 ## 文字滚动与舞台更新
 
-先按[阅读空间](design.md#主画面与阅读空间)安排正文与图形。舞台可在共同父容器中使用 `position: sticky`；正文按普通文档流排列，只在需要画面回应的位置设置状态标记。接口不生成页面布局，正文长度与舞台高度由作品决定。
+先按[阅读空间](design.md#主画面与阅读空间)选择正文如何陪伴图形；上下、左右或浮层是布局选择，不需要另写滚动引擎。
+
+| 阅读方式 | 适合的内容与接法 |
+| --- | --- |
+| 正文自然滚动，图形停留 | 段落需要连续阅读、长短有变化；普通文档流中的正文标记触发 sticky 图形。见 [time-history](../assets/examples/time-history/index.html)。浮动卡片也可沿用这条接线，另安排遮挡与阅读空间。 |
+| 正文固定，随状态交接 | 短正文陪伴同一主画面；普通流阅读轨道选态，`createCopyHandoff` 负责固定区换段。图书馆用原位淡入淡出，汉堡另加轻微上移；布局仍由作品决定。 |
 
 新建滚动舞台时，默认直接调用 [connect.mjs](../assets/stage-wiring/connect.mjs) 的 `connectReading`，按下面的接口接入，不必先读模块源码。复制时同时带上 `runtime/{stage,motion,scroll,geometry}.mjs`，保持原目录关系。需要查看整页装配时，再选读[可运行示范](../assets/stage-wiring/index.html)与其 [scene.mjs](../assets/stage-wiring/scene.mjs)；文字、条形图和左右布局都可替换。
 
@@ -29,9 +34,13 @@ const { stage } = connection;
 
 正文固定换段时，`reading` 可改为空的普通流容器，与 sticky 舞台放在同一父区间；传 `track: { ids }` 生成阅读标记。默认每段一视口阅读空间，可用 `extent: ({ id, index, viewportHeight }) => 像素长度` 调整；这是观看空间，不是动画时长。此时 `exit: { sticky: stagePanel, releaseRatio: 0 }` 自动取末段标记与尾部留白，保证完整末段读完再退出。上下、左右或浮层排布只改变 HTML/CSS 与绘图函数。
 
-需要箭头或按键时，加 `navigation: { scope: stagePanel, previous: backButton, next: nextButton }`；按键只在当前舞台生效，保留输入框、对话框与边界处的正常操作。`connection.navigate(indexOrId)` 跳到对应阅读区间，图形仍自动衔接；`onReading({ id, index })` 同步固定正文。可选 `hashFor: ({ id, index }) => 字符串` 处理本段锚点，`keyboard: false` 关闭按键。不要另写滚轮拦截或按钮状态机。整页接入见上面的可运行示范。
+需要箭头或按键时，加 `navigation: { scope: stagePanel, previous: backButton, next: nextButton }`；按键只在当前舞台生效，保留输入框、对话框与边界处的正常操作。`connection.navigate(indexOrId)` 跳到对应阅读区间，图形仍自动衔接；`onReading({ id, index })` 通知正文已读到哪段，具体内容与显露时机由作品决定。可选 `hashFor: ({ id, index }) => 字符串` 处理本段锚点，`keyboard: false` 关闭按键。不要另写滚轮拦截或按钮状态机。接入实例见 [record-comparison](../assets/examples/record-comparison/scene.mjs) 与五段示例共用的 [segment-preview](../assets/examples/segment-preview.mjs)。
 
-这个函数组合已有 `createStage` 与可选 `reserveStageExit`，在 `pageshow` 和页面恢复可见时刷新，统一释放监听、尺寸观察和播放器。已有可靠接线时可以继续直接使用 [createStage](../assets/runtime/stage.mjs)，传入 `steps: [{ id, element }]`，无需再套这一层。
+固定正文调用 [copy.mjs](../assets/runtime/copy.mjs) 的 `createCopyHandoff(copyContainer, { duration: 260, offsetY: 0 })`。容器内各段以 `data-copy="状态ID"` 标识，`show(id)` 先淡出再淡入；`offsetY: 5` 可让新段轻微上移，设为 `0` 保持原位。各段共同占位，快速倒回从当前透明度接续，卸载时 `dispose()`。同一状态换数据时，可单次调用 `show(id, { update: () => 更新该段内容 })`，在旧文字退去后更新；不要在每个动画帧里重复提交更新函数。五个片段的动态正文接法见 [segment-preview.mjs](../assets/examples/segment-preview.mjs)。
+
+图文通常在同一次阅读触发中开始交接，正文可先完成，图形继续变化。保持句子完整，关键数字的强调可跟随图内标注，不必为此延后整段正文；确需先观察再揭示答案的段落，再由场景延后 `show`，如[点阵开篇](../assets/examples/opening-particles/scene.mjs)。共享模块不推断证据是否成立。自然滚动正文保持原生阅读，无需接入换段模块。
+
+`connectReading` 组合已有 `createStage` 与可选 `reserveStageExit`，在 `pageshow` 和页面恢复可见时刷新，统一释放监听、尺寸观察和播放器。已有可靠接线时可以继续直接使用 [createStage](../assets/runtime/stage.mjs)，传入 `steps: [{ id, element }]`，无需再套这一层。
 
 窗口或容器尺寸改变时，重新调用 `layout` 并直接落到当前目标状态的新布局。字体、数据或周围文档内容变化后，可调用 `connection.refresh()` 重算布局与出口；直接使用 `createStage` 时用 `stage.refresh()`。无需重新创建播放器。
 

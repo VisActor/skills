@@ -29,6 +29,18 @@ async function explanationFixture(t, html) {
   return { installed, entry, preview };
 }
 
+test("opening previews are discoverable with their own explanations and code entries", async () => {
+  const entries = await loadCatalog();
+  const openings = listExamples(entries, "开篇").filter(entry => entry.kind === "opening");
+  for (const id of ['opening-material', 'opening-reference', 'opening-question', 'opening-particles'])
+    assert.ok(openings.some(entry => entry.id === id));
+  for (const { id } of openings) {
+    const selected = await inspectExample(entries, id);
+    assert.ok(selected.explanation.paragraphs.length > 0);
+    assert.ok(selected.read.dataAndAnimation.bytes > 0);
+  }
+});
+
 test("discovery returns bounded metadata and filters relationship terms without loading source bodies", async () => {
   const entries = await loadCatalog();
   const selected = listExamples(entries, "整体 局部");
@@ -237,7 +249,7 @@ test("catalog resources cannot traverse or symlink outside the skill", async () 
   } finally { await rm(temporary, { recursive: true, force: true }); }
 });
 
-test("a selected example runs from its declared files without the gallery or another example", async () => {
+test("a selected example runs from its declared dependency closure without the gallery", async () => {
   const entries = await loadCatalog();
   const temporary = await mkdtemp(path.join(tmpdir(), "story-example-bundles-"));
   try {

@@ -6,6 +6,23 @@ import {fitDifferences,contourWidth} from '../../skills/creative-data-storytelli
 import {pockets,objects,itemTop,fits,fitCounts,example as pocketExample} from '../../skills/creative-data-storytelling/assets/examples/object-fit/scene.mjs';
 import {periods,songs,cumulativeShare,connectedShare,areaBoundary,yearX,buildLayouts} from '../../skills/creative-data-storytelling/assets/examples/records-composition/scene.mjs';
 import {flowData,flowSummary,flowSegments,ribbon,flowRecords,flowPoint,flowGeometry,targetY,example as flowExample} from '../../skills/creative-data-storytelling/assets/examples/cohort-flow/scene.mjs';
+import {renderDescription} from '../../skills/creative-data-storytelling/assets/examples/segment-preview.mjs';
+
+test('Prose emphasis preserves literal content and matches whole numeric readings',()=>{
+ const element={ownerDocument:{createElement:tagName=>({tagName,style:{}})},replaceChildren(...nodes){this.children=nodes;}};
+ const text='98 厘米的身体，多出 8 厘米；<img src=x> 保持为文字。';
+ renderDescription(element,text,[{text:'8 厘米',color:'#ba5436'},'不存在']);
+ assert.equal(element.children.map(node=>typeof node==='string'?node:node.textContent).join(''),text);
+ assert.deepEqual(element.children.filter(node=>typeof node!=='string').map(node=>[node.tagName,node.textContent,node.style.color]),[['strong','8 厘米','#ba5436']]);
+});
+
+test('Changing a description clears previous emphasis without changing the words',()=>{
+ const element={ownerDocument:{createElement:tagName=>({tagName,style:{}})},replaceChildren(...nodes){this.children=nodes;}};
+ renderDescription(element,'相差 9.5 厘米',['9.5 厘米','5 厘米']);
+ assert.equal(element.children.filter(node=>typeof node!=='string').length,1);
+ renderDescription(element,'这次两边都能放下。');
+ assert.deepEqual(element.children,['这次两边都能放下。']);
+});
 
 const check = test;
 check('Age groups retain distinct percentile identities',()=>assert.equal(new Set([...coverageData.groupA,...coverageData.groupB].map(d=>d.id)).size,82));

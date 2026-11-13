@@ -14,22 +14,21 @@
   <header><span class="brand"><svg class="watch" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="22" r="14" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M16 3h8M20 3v5M20 13v10l6 4M30 10l3-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>时间的分量</span><a href="../index.html#unit-scale">示例索引 ↗</a></header>
   <main id="unit-story"><section class="story" aria-label="从一分钟认识部分与倍数，再比较两次等待">
     <div class="reading-flow">
-      <article id="start"><div class="copy" data-state="reference"><p class="eyebrow">先认识一小段时间</p><h1>你说的<br>「一会儿」，<br>是多久？</h1><p>等一份外卖，等一班车。<br>先把<em>一分钟</em>放在眼前。</p><p class="cue">向下看，这一分钟会一直在。 ↓</p></div></article>
-      <article id="seconds"><div class="copy" data-state="parts"><p class="eyebrow">把同一段时间看细</p><h2>这段时间，<br>还可以分开看。</h2><p>一分钟有 <em><span data-reading="parts">60</span> 秒</em>。每一格是一秒，分开的仍是刚才那一分钟。</p></div></article>
-      <article id="hour"><div class="copy" data-state="multiple"><p class="eyebrow">把同样的一份接起来</p><h2><span data-reading="copies">60</span> 个一分钟，<br>才是一小时。</h2><p>把视野放远，原来的一分钟仍留在开头。再把其余的分钟接上，一小时才完整。</p><p>小小的一格，与长长的一段，<br>用的是同一份时间。</p></div></article>
-      <article id="waits"><div class="copy" data-state="compare"><p class="eyebrow">用同一段时间作参照</p><h2>都说等一会儿，<br>却差了 <span data-reading="gap">12</span> 分钟。</h2><p>这两条演示记录中，取餐等了 <em><span data-reading="record:meal">6</span> 分钟</em>，候车等了 <em><span data-reading="record:bus">18</span> 分钟</em>。</p><p>沿用刚才的分钟参照，把这两次等候放大来看。候车多出的那段时间，就能直接看见。</p><p class="cue" data-reading-end>等候记录为模拟数据，不代表实际场所的平均用时。</p></div></article>
+      <article id="start"><div class="copy" data-state="reference"><p class="eyebrow">取餐、候车时的那句话</p><h1>你说的<br>「一会儿」，<br>是多久？</h1><p>取餐和候车，都可能听到一句“等一会儿”，却未必是同样长的等待。先用<em>一分钟</em>作参照。</p><p class="cue">向下继续 ↓</p></div></article>
+      <article id="seconds"><div class="copy" data-state="parts"><p class="eyebrow">分钟与秒</p><h2>一分钟，<br>有 <span data-reading="parts">60</span> 秒。</h2><p>每格一秒，合起来仍是刚才那一分钟。</p></div></article>
+      <article id="hour"><div class="copy" data-state="multiple"><p class="eyebrow">分钟与小时</p><h2><span data-reading="copies">60</span> 个一分钟，<br>是一小时。</h2><p>刚才细分一分钟，时长没变。现在接上一份份一分钟，<em>等待才变长。</em></p></div></article>
+      <article id="waits"><div class="copy" data-state="compare"><p class="eyebrow">取餐与候车 · 两次等待</p><h2>都说等一会儿，<br>却差了 <span data-reading="gap">12</span> 分钟。</h2><p>取餐等了 <em style="color:#c16b42"><span data-reading="record:meal">6</span> 分钟</em>，候车等了 <em style="color:#366d73"><span data-reading="record:bus">18</span> 分钟</em>。把“一会儿”换成具体的分钟数，才能判断自己还要等多久。</p><p class="cue" data-reading-end>等候记录为模拟数据，不代表实际场所的平均用时。</p></div></article>
       <div class="reading-tail" aria-hidden="true"></div>
     </div>
     <div class="unit-stage"><figure><svg data-visual viewBox="0 0 960 730" role="img" aria-label="一分钟及其分段"></svg></figure></div>
   </section></main>
   <footer>
-    <h2>从认识单位，进入具体问题。</h2>
-    <p>本片段到两条等候记录的比较为止。若接入真实等候数据，下一段可以继续追问：这种差异只是两次经历，还是一群人的共同处境？</p>
     <details id="example-notes"><summary>设计解释与改编入口</summary>
       <p><strong>叙事设计：</strong><a href="../../../references/design.md#开篇与收尾">从基本关系引入</a>：先认识一份，再看内部和倍数，最后借已建立的参照比较记录。等待只是题材；当前问题已无需解释单位时，可直接从比较开始。</p>
-      <p><strong>可视化选择：</strong><a href="../../../references/design.md#unit-scale">拆分、重复与缩放</a>分别可见：同一条带等分时总量不变；保留原份并接入新份时总量增加；共同尺度改变时，原份身份与真实量值不变。时间带最后收拢为分钟参照，放大后比较记录另行加入，不伪装成从参照中拆出的经历。</p>
-      <p><strong>改编空间：</strong>可换长度、质量、容量或其他有明确换算依据的量，重选素材、方向与布局；圆形、点阵等需另算几何。按追问借用其中一个操作或整段。非等分组成用真实分项，不强套等份。</p>
-      <p><strong>代码入口：</strong><code>unitScaleExample</code> 配基准量、等分与重复份数、比较记录；<code>unitScalePose / blendUnitScale</code> 分别安排结果与衔接，<code>unitScaleGeometry</code> 共用尺度。此布局支持两个比较对象、2–120等分及重复份；正文和图共用 <code>unitScaleReading</code>。</p>
+      <p><strong>可视化选择：</strong><a href="../../../references/design.md#unit-scale">拆分、重复与缩放</a>各解释一种关系：等分保留总量；倍数增长先扩展视域，再保留原份、接入其余份，使读者分清“同一份在画面中变短”和“数量增加”。反向先收回新增份数，再靠近原份。进入比较时，时间带收拢为分钟参照，独立记录另行显露；两者始终共用当前尺度，记录不冒充参照拆出的部分。</p>
+      <p><strong>改编空间：</strong>可换长度、质量、容量或其他有明确换算依据的量，重选素材、方向与布局；圆形、点阵等需另算几何。按追问借用其中一个操作或整段。两次等候不能代表群体；接入真实记录后，才可继续追问这种差异是否普遍。非等分组成用真实分项，不强套等份。</p>
+      <p><strong>代码入口：</strong><code>unitScaleExample</code> 配量值；只讲单位时省略 <code>records</code> 和 HTML 中的 <code>compare</code> 阅读段，将 <code>data-reading-end</code> 放到实际末段。保留比较时传两条记录。<code>layout</code> 可覆盖画布宽高、<code>left/right</code>、<code>baseline/axisY</code>、<code>comparisonTop/comparisonRowGap</code>；默认值见代码，字体与配色仍由 CSS 控制。此绘制支持 2–120 等分及重复份。滚动接入见 <a href="../../../references/implementation-stage.md#文字滚动与舞台更新"><code>connectReading</code> 用法</a>。</p>
+      <p><code>unitScalePose</code> 定终态，<code>blendUnitScale</code> 分开尺度与份数进度，<code>unitScaleGeometry</code> 与绘制共用当帧尺度；图文读数共用 <code>unitScaleReading</code>。超出水平等份与两项比较的构图时，改写这条链路。</p>
       <p><a href="scene.mjs">本例数据与代码</a></p>
     </details>
   </footer>

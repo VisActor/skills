@@ -45,9 +45,9 @@ export const example={
  id:'cohort-flow',short:'起点与去向',title:'同样的起点，不同的后来',eyebrow:'从共同起点，追到共同终点',viewBox:'0 0 1440 720',duration:2400,
  theme:{paper:'#142e36',ink:'#eef0df',muted:'#99b0ae',accent:'#e2b66b',line:'#355058',panel:'#193a40'},dataCaption:'虚构的两组配对记录，不对应真实族群。',
  states:[
-  {name:'同一起点',title:'起点一样，<br><em>后来呢？</em>',description:'',value:'',unit:'',metric:''},
-  {name:'沿着一组人的去向',title:'沿着 A 组，<br><em>看到不同去向。</em>',description:'',value:'',unit:'',metric:''},
-  {name:'另一组接入同一列终点',title:'同一列终点，<br><em>两种分流。</em>',description:'B 组从右侧加入。流带共用人数尺度；终点数字是各组内部的比例。相同起点，并没有得到相同结果。',value:'',unit:'',metric:''},
+  {name:'同一起点',title:'父母同在最高档，<br><em>孩子后来呢？</em>',description:'',value:'',unit:'',metric:''},
+  {name:'沿着一组人的去向',title:'父母在最高档，<br><em>孩子未必留下。</em>',description:'',value:'',unit:'',metric:''},
+  {name:'另一组接入同一列终点',title:'另一组人，<br><em>去向一样吗？</em>',description:'',value:'',unit:'',metric:''},
   {name:'沿最低档看回起点',title:'同在起点，<br><em>不同的后来。</em>',description:'',value:'',unit:'',metric:''}
  ],
  mount(svg,{data=flowData,names=outcomeNames}={}){
@@ -56,14 +56,16 @@ export const example={
   function read(step){
    const {A,B}=summary,result={...example.states[step]};
    if(step===0)result.description=`这两组人，父母都处在最高收入档。${A.total===B.total?`每组各取 ${A.total} 人`:`A 组 ${A.total} 人，B 组 ${B.total} 人`}，看看他们成年后会到哪里。`;
-   if(step===1)result.description=`${A.total} 人从共同起点分开。${A.values[0]} 人到达${names[0]}，${A.values[last]} 人到达${names[last]}；路径越宽，到达这一档的人越多。`;
-   if(step===3)result.description=`只看通向${names[last]}的两条路径：A 组 ${A.values[last]} 人（${number(A.shares[last])}%），B 组 ${B.values[last]} 人（${number(B.shares[last])}%）。去向的差异已经可见，原因还需要其他证据。`;
+   if(step===1){result.description=`A 组的 ${A.total} 人中，成年后有 ${A.values[0]} 人仍在${names[0]}，${A.values[last]} 人到了${names[last]}。父母所处的收入档，没有决定所有人的去向。`;result.highlights=[`${A.values[0]} 人`,`${A.values[last]} 人`];}
+   if(step===2){result.description=`B 组父母也在最高收入档，但孩子成年后到达${names[0]}的比例是 ${number(B.shares[0])}%，A 组为 ${number(A.shares[0])}%。两组的其他去向，是否也有差别？`;result.highlights=[{text:`${number(B.shares[0])}%`,color:'#81c1b7'},{text:`${number(A.shares[0])}%`,color:'#e2b66b'}];}
+   if(step===3){result.description=`到达${names[last]}的，A 组有 ${A.values[last]} 人（${number(A.shares[last])}%），B 组有 ${B.values[last]} 人（${number(B.shares[last])}%）。父母收入档相同，成年去向仍有差异；原因还需要其他证据。`;result.highlights=[{text:`${A.values[last]} 人（${number(A.shares[last])}%）`,color:'#e2b66b'},{text:`${B.values[last]} 人（${number(B.shares[last])}%）`,color:'#81c1b7'}];}
    return result;
   }
   const colors={A:'#e2b66b',B:'#81c1b7'},groups=[],targetLabels=[];
   const relation=el(svg,'g');txt(relation,950,75,'父母都在最高收入档',{'text-anchor':'middle',style:'font-size:18px;fill:#d2ddd4'});
   el(relation,'path',{d:'M550 113 V101 H1350 V113',fill:'none',stroke:'#6d8585','stroke-width':1});
   const unitNote=txt(svg,950,142,'每一点是一人',{'text-anchor':'middle',style:'font-size:13px;fill:#9ab0ac'});
+  const flowNote=txt(svg,1350,145,'流带宽度表示人数，终点百分比按各组人数计算',{'text-anchor':'end',style:'font-size:15px;fill:#b5c8c4'});
   const targetHeading=txt(svg,950,118,'成年后的收入档',{'text-anchor':'middle',style:'font-size:13px;fill:#9ab0ac'});
   const pathLayer=el(svg,'g'),pointLayer=el(svg,'g'),targetLayer=el(svg,'g');
   for(let i=0;i<names.length;i++){
@@ -86,7 +88,8 @@ export const example={
   function pose(step){return{step,a:step>=1?1:0,b:step>=2?1:0,focus:step>=3?1:0};}
   function render(p){
    const hasTargets=clamp01(p.a*3),finishedA=clamp01((p.a-.93)/.07),finishedB=clamp01((p.b-.93)/.07);
-   attr(relation,{opacity:lerp(1,.65,hasTargets)});unitNote.textContent=p.a>.3?'流带宽度 = 人数 · 数字 = 各组占比':'每一点是一人';attr(targetHeading,{opacity:hasTargets});
+   attr(relation,{opacity:lerp(1,.65,hasTargets)});attr(unitNote,{opacity:1-hasTargets});
+   attr(flowNote,{opacity:hasTargets});attr(targetHeading,{opacity:hasTargets});
    for(const g of groups){const progress=p[g.group.toLowerCase()],travel=clamp01(progress/.86),pointsVisible=1-clamp01((progress-.87)/.13);attr(g.source,{opacity:clamp01(travel*3)});attr(g.size,{opacity:lerp(1,.75,p.focus)});
     for(const {segment,path,tip} of g.paths){const current=clamp01((travel-.07)/.93),focused=segment.id===last;attr(path,{d:ribbon(segment,g.sx,g.ex,current),opacity:clamp01(travel*4)*(focused?lerp(.26,.73,p.focus):lerp(.26,.055,p.focus))});attr(tip,{opacity:clamp01((travel-.92)/.08)*(focused?1:lerp(1,.27,p.focus))});}
     for(const record of g.records){const point=flowPoint(record,travel),focused=record.segment.id===last;attr(record.circle,{cx:point.x,cy:point.y,r:lerp(2.6,2.2,travel),opacity:pointsVisible*(focused?1:lerp(1,.17,p.focus))});}

@@ -2,6 +2,7 @@ import { at, clamp01, keyed, lerp, linearScale } from "../../runtime/geometry.mj
 import { blendNodes, blendWithAnnotations } from "../../runtime/motion.mjs";
 import { createStage } from "../../runtime/stage.mjs";
 import { reserveStageExit } from "../../runtime/scroll.mjs";
+import { createCopyHandoff } from "../../runtime/copy.mjs";
 import { createSvgLayer, setSvgAttributes, svgElement } from "../../runtime/svg.mjs";
 
 // Images are centered on observed coordinates; no leaders or image-size quantity encoding.
@@ -88,7 +89,7 @@ export const trendExample = {
     {
       "id": "beef",
       "name": "牛肉与小牛肉",
-      "color": "#507d77",
+      "color": "#406e66",
       "image": "./images/beef.svg",
       "frequency": 4,
       "observations": [
@@ -130,6 +131,7 @@ export const trendExample = {
     }
   ],
   "stops": [
+    { "id": "cover", "basis": "raw", "throughId": "burger-2017-1", "visible": ["burger"], "cover": true },
     {
       "id": "start",
       "basis": "raw",
@@ -187,12 +189,16 @@ export const trendExample = {
     }
   ]
 };
-const plot = { left: 76, right: 886, top: 96, bottom: 540 };
+const defaultPlot = { width: 1200, height: 460, left: 76, right: 1010, top: 58, bottom: 368 };
 const fmt = (n, digits = 1) => new Intl.NumberFormat('zh-CN', { maximumFractionDigits: digits }).format(n);
 const signed = n => `${n > 0 ? '+' : ''}${fmt(n)}%`;
 
 export function createTrendModel(config = trendExample) {
   keyed(config.series); const stops = keyed(config.stops);
+  const plot = { ...defaultPlot, ...config.layout };
+  if (!Object.values(plot).every(Number.isFinite) || plot.left < 55 || plot.top < 40 ||
+      plot.right <= plot.left || plot.bottom <= plot.top || plot.right + 130 > plot.width || plot.bottom + 65 > plot.height)
+    throw new Error('Trend layout needs room for axes and endpoint labels');
   // 原值片段不需要为未使用的同比状态补数据；进入同比的系列才核查同期分母。
   const rateIds = new Set([...stops.values()].filter(stop => stop.basis === 'yoy').flatMap(stop => stop.visible ?? []));
   const start = Date.parse(config.startDate), end = Date.parse(config.endDate);
@@ -223,6 +229,8 @@ export function createTrendModel(config = trendExample) {
     if (!['raw','yoy'].includes(stop.basis) || !stop.visible?.includes(primary.id) || stop.visible.some(id=>!byId.has(id)) ||
         (stop.basis==='raw' && (stop.visible.length!==1 || !primary.points.some(p=>p.id===stop.throughId))))
       throw new Error('Reading needs known series, basis and an observed raw endpoint');
+    if (stop.cover && (stop.basis !== 'raw' || stop.throughId !== primary.points[0].id))
+      throw new Error('A cover presents only the first raw observation before entering its timeline');
   }
   const prices=primary.points.map(p=>p.value), rates=rows.flatMap(row=>row.points.map(p=>p.yoy)).filter(Number.isFinite);
   const span=Math.max(...prices)-Math.min(...prices) || Math.max(Math.abs(prices[0])*.2,1), power=10**Math.floor(Math.log10(span/8));
@@ -230,7 +238,7 @@ export function createTrendModel(config = trendExample) {
   const rawLow=Math.floor((Math.min(...prices)-span*.03)/rawStep)*rawStep, rawHigh=Math.ceil((Math.max(...prices)+span*.03)/rawStep)*rawStep;
   const rateLow=Math.floor((Math.min(0,...rates)-1)/5)*5, rateHigh=Math.ceil((Math.max(0,...rates)+1)/5)*5;
   const metric=config.metric ?? '数值', unit=config.unit ?? '', prefix=config.valuePrefix ?? '';
-  return { rows,byId,primary,stops,start,end,metric,unit,
+  return { rows,byId,primary,stops,start,end,metric,unit,plot,
     amount:config.formatValue ?? (value=>prefix+fmt(value,2)+(prefix || !unit ? '' : ' '+unit)),
     x:linearScale([start,end],[plot.left,plot.right]),
     rawScale:linearScale([rawLow,rawHigh],[plot.bottom,plot.top]), rateScale:rates.length?linearScale([rateLow,rateHigh],[plot.bottom,plot.top]):null,
@@ -251,13 +259,17 @@ export function trendPose(id,model=createTrendModel()) {
     }
   }
   const endpoint=rate?model.primary.points.at(-1):model.primary.points.find(p=>p.id===stop.throughId);
-  return {id,nodes,lines,annotations,basis:rate?1:0,compare:stop.visible.length>1?1:0,time:endpoint.time};
+  if (stop.cover) {
+    const point=nodes.get(endpoint.id);
+    point.x=model.plot.width/2; point.y=(model.plot.top+model.plot.bottom)/2-24;
+  }
+  return {id,nodes,lines,annotations,cover:stop.cover?1:0,basis:rate?1:0,compare:stop.visible.length>1?1:0,time:endpoint.time};
 }
 
 export function blendTrend(a,b,t) {
   return blendWithAnnotations(a,b,t,(from,to,p)=>({...to,
     nodes:blendNodes(from.nodes,to.nodes,p,['x','y']), lines:blendNodes(from.lines,to.lines,p,['reveal','opacity']),
-    basis:lerp(from.basis,to.basis,p),compare:lerp(from.compare,to.compare,p),time:lerp(from.time,to.time,p)}));
+    cover:lerp(from.cover,to.cover,p),basis:lerp(from.basis,to.basis,p),compare:lerp(from.compare,to.compare,p),time:lerp(from.time,to.time,p)}));
 }
 
 // Only the connecting path interpolates; material marks belong to actual observations.
@@ -277,50 +289,87 @@ export function trendMarks(model,pose) {
     const tip=clamp01(1-Math.abs(line.reveal-i)*2), history=row.id===model.primary.id?1-pose.compare:0;
     // A meaningful interior observation can identify a series when its endpoint is crowded.
     const focus=row.comparisonMarkId?lerp(tip,point.id===row.comparisonMarkId?1:0,pose.compare):tip;
-    return {...position,id:point.id,point,row,size:lerp(34,54,focus),opacity:line.opacity*reached*Math.max(history,focus)};
+    return {...position,id:point.id,point,row,size:lerp(lerp(34,54,focus),250,pose.cover),opacity:line.opacity*reached*Math.max(history,focus)};
   }));
 }
 
-export function mountTrend(root,{config=trendExample,duration=1700}={}) {
-  const model=createTrendModel(config),$=s=>root.querySelector(s),svg=$('svg');
+export function mountTrend(root,{config=trendExample,duration=1500}={}) {
+  const $=s=>root.querySelector(s),svg=$('svg');
+  let model=createTrendModel(config),plot=model.plot,sizeKey;
   root.querySelectorAll('[data-observation]').forEach(el=>{
     const point=model.rows.flatMap(r=>r.points).find(p=>p.id===el.dataset.observation);
     if(!point) throw new Error('Missing prose observation: '+el.dataset.observation);
-    if(el.dataset.metric==='yoy' && point.yoy===null) throw new Error('YoY text needs a series with a configured yoy reading: '+point.id);
-    el.textContent=el.dataset.metric==='yoy'?signed(point.yoy):fmt(point.value,2);
+    const metric=el.dataset.metric;
+    if(metric?.includes('yoy') && point.yoy===null) throw new Error('YoY text needs a configured yoy reading: '+point.id);
+    el.textContent=metric==='absolute-yoy'?fmt(Math.abs(point.yoy))+'%':metric==='yoy'?signed(point.yoy):fmt(point.value,2);
   });
   const grid=svgElement('g',{class:'axis'}),rawAxis=svgElement('g'),rateAxis=svgElement('g');
-  for(const [group,ticks,scale,title] of [[rawAxis,model.rawTicks,model.rawScale,[model.metric,model.unit].filter(Boolean).join(' / ')],[rateAxis,model.rateTicks,model.rateScale,'相对上年同期 / %']]) {
-    ticks.forEach(tick=>group.append(svgElement('line',{x1:plot.left,x2:plot.right,y1:at(scale,tick),y2:at(scale,tick),class:tick===0?'zero':''}),svgElement('text',{x:58,y:at(scale,tick)+6,'text-anchor':'end'},fmt(tick,6))));
-    group.append(svgElement('text',{x:plot.left,y:45,class:'axis-title'},title));
+  const dates=svgElement('g');grid.append(rawAxis,rateAxis,dates);svg.append(grid);
+  const dateLabel=svgElement('text',{y:22,'text-anchor':'end',class:'date-label'});svg.append(dateLabel);
+  function fit(size) {
+    const key=size.width+'/'+size.height;if(key===sizeKey)return;sizeKey=key;
+    if(!config.layout)model=createTrendModel({...config,layout:{...size,left:64,right:size.width-166,top:58,bottom:size.height-72}});
+    plot=model.plot;setSvgAttributes(svg,{viewBox:`0 0 ${plot.width} ${plot.height}`});
+    for(const [group,ticks,scale,title] of [[rawAxis,model.rawTicks,model.rawScale,[model.metric,model.unit].filter(Boolean).join(' / ')],[rateAxis,model.rateTicks,model.rateScale,'相对上年同期 / %']]) {
+      group.replaceChildren();
+      ticks.forEach(tick=>group.append(svgElement('line',{x1:plot.left,x2:plot.right,y1:at(scale,tick),y2:at(scale,tick),class:tick===0?'zero':''}),svgElement('text',{x:plot.left-18,y:at(scale,tick)+6,'text-anchor':'end'},fmt(tick,6))));
+      group.append(svgElement('text',{x:plot.left,y:22,class:'axis-title'},title));
+    }
+    dates.replaceChildren();
+    for(let y=new Date(model.start).getUTCFullYear();y<=new Date(model.end).getUTCFullYear();y++) dates.append(svgElement('text',{x:at(model.x,Date.UTC(y,0,1)),y:plot.bottom+43,'text-anchor':'middle'},y));
+    setSvgAttributes(dateLabel,{x:plot.right});
   }
-  grid.append(rawAxis,rateAxis);svg.append(grid);
-  for(let y=new Date(model.start).getUTCFullYear();y<=new Date(model.end).getUTCFullYear();y++) grid.append(svgElement('text',{x:at(model.x,Date.UTC(y,0,1)),y:591,'text-anchor':'middle'},y));
-  const dateLabel=svgElement('text',{x:plot.right,y:45,'text-anchor':'end',class:'date-label'});svg.append(dateLabel);
-  const paths=createSvgLayer(svg,{create(){return svgElement('path',{fill:'none','stroke-width':3,'stroke-linejoin':'round','stroke-linecap':'round'});},update(node,line){setSvgAttributes(node,{d:line.path.d,stroke:line.row.color,opacity:line.opacity});}});
-  const marks=createSvgLayer(svg,{create(mark){return svgElement('image',{href:new URL(mark.row.image,import.meta.url).href,'data-record':mark.id});},update(node,mark){setSvgAttributes(node,{x:mark.x-mark.size/2,y:mark.y-mark.size/2,width:mark.size,height:mark.size,opacity:mark.opacity});}});
+  const paths=createSvgLayer(svg,{create(){return svgElement('path',{fill:'none','stroke-width':2.6,'stroke-linejoin':'round','stroke-linecap':'round'});},update(node,line){setSvgAttributes(node,{d:line.path.d,stroke:line.row.color,opacity:line.opacity});}});
+  const marks=createSvgLayer(svg,{create(mark){return svgElement('image',{href:new URL(mark.row.image,import.meta.url).href,'data-record':mark.id,class:'mark-image'});},update(node,mark){setSvgAttributes(node,{x:mark.x-mark.size/2,y:mark.y-mark.size/2,width:mark.size,height:mark.size,opacity:mark.opacity});}});
   let current;
   const labels=createSvgLayer(svg,{create(){const g=svgElement('g');g.append(svgElement('text',{class:'readout'}),svgElement('text',{class:'series-name'}));return g;},update(g,label){
     const point=current.nodes.get(label.pointId),row=model.byId.get(label.seriesId),end=point.row.time===row.points.at(-1).time;
-    // Place close endpoint names on opposite sides; reconsider these offsets for new data.
-    const belowRecent=Math.max(point.y+40,...row.points.slice(-4).map(p=>current.nodes.get(p.id).y+34));
-    const offsetY=current.compare>.5?(row.id===model.primary.id?-35:belowRecent-point.y):-38;
-    const x=end?point.x-5:point.x+10;
+    // Endpoint labels stay beside their actual marks; opposite sides separate nearby series.
+    const offsetY=current.compare>.5?(row.id===model.primary.id?-35:48):-38;
+    const x=lerp(end?point.x+35:point.x+12,point.x,current.cover);
+    const y=point.y+lerp(offsetY,136,current.cover);
     setSvgAttributes(g,{opacity:label.opacity,fill:row.color});
-    setSvgAttributes(g.children[0],{x,y:point.y+offsetY,'text-anchor':end?'end':'start'});g.children[0].textContent=label.text;
-    setSvgAttributes(g.children[1],{x,y:point.y+offsetY+(offsetY>0?24:-26),'text-anchor':end?'end':'start'});g.children[1].textContent=current.compare>.5?row.name:'';
+    setSvgAttributes(g.children[0],{x,y,'text-anchor':current.cover>.5?'middle':'start','font-size':lerp(27,40,current.cover)});g.children[0].textContent=label.text;
+    const cover=current.cover>.5;
+    setSvgAttributes(g.children[1],{x,y:y+(cover?29:offsetY>0?25:-26),'text-anchor':cover?'middle':'start'});
+    g.children[1].textContent=cover?`${new Date(point.row.time).getUTCFullYear()} 年 · ${model.unit}`:current.compare>.5?row.name:'';
   }});
+  const cues=[...root.querySelectorAll('[data-step]')];
+  const copyContainer=$('.stage-copy');
+  const copy=copyContainer?createCopyHandoff(copyContainer,{duration:350,offsetY:5}):null;
+  const readings=[...root.querySelectorAll('[data-copy] [data-observation]')].map(el=>{
+    const row=model.rows.find(row=>row.points.some(point=>point.id===el.dataset.observation));
+    return {el,rowId:row.id,index:row.points.findIndex(point=>point.id===el.dataset.observation),
+      basis:el.dataset.metric?.includes('yoy')?'yoy':'raw',opacity:el.style.opacity};
+  });
+  function showReading({id}) {
+    copy?.show(id);
+    const next=$('[data-next]'),i=cues.findIndex(cue=>cue.dataset.step===id);
+    if(next){next.href=i>=0&&i<cues.length-1?'#'+cues[i+1].id:'#conclusion';next.textContent=id==='cover'?'沿着报价往后看 ↓':i===cues.length-1?'回到这份午餐 ↓':'继续往下看 ↓'}
+  }
   function render(pose,frame) {
     current=pose;
+    setSvgAttributes(grid,{opacity:1-pose.cover});setSvgAttributes(dateLabel,{opacity:1-pose.cover});
     setSvgAttributes(rawAxis,{opacity:clamp01(1-pose.basis*5)});setSvgAttributes(rateAxis,{opacity:clamp01((pose.basis-.8)*5)});
     paths.render([...pose.lines.values()].map(line=>({...line,path:revealedPath(line.row,pose.nodes,line.reveal)})));
     marks.render(trendMarks(model,pose));labels.render(pose.annotations);
     dateLabel.textContent=pose.basis>.5?`${new Date(model.start).getUTCFullYear()} — ${new Date(model.end).getUTCFullYear()}`:`${new Date(pose.time).getUTCFullYear()}`;
+    // The paragraph stays complete; number emphasis follows the observed points/labels.
+    for(const {el,rowId,index,basis} of readings) {
+      const line=pose.lines.get(rowId),note=pose.annotations.get(`${rowId}/${basis}/${el.dataset.observation}`);
+      const basisReady=basis==='yoy'?pose.basis>=.99:pose.basis<=.01;
+      const reached=line.reveal>=index && line.opacity>=.99;
+      el.style.opacity=String(.7+.3*(basisReady && reached ? note?.opacity ?? 1 : 0));
+    }
+    const scope=$('[data-scope]');
+    if(scope)scope.textContent=pose.basis>.5?'同比涨幅 · 半年报价与季度食材指数，各保留原始日期':'巨无霸 · 澳大利亚半年报价 · 澳元';
     svg.dataset.state=pose.id;svg.dataset.moving=String(frame.moving);
     if(!frame.moving) svg.setAttribute('aria-label',`${pose.basis?'同比涨幅':model.metric}。`+[...pose.annotations.values()].map(label=>`${model.byId.get(label.seriesId).name} ${label.text}`).join('；'));
   }
-  const exit=reserveStageExit({sticky:$('.price-stage'),readingEnd:$('[data-reading-end]'),spacer:$('.reading-tail'),releaseRatio:.4});
-  const stage=createStage({element:svg,steps:[...root.querySelectorAll('[data-state]')].map(element=>({element,id:element.dataset.state})),layout:id=>trendPose(id,model),blend:blendTrend,render,duration,viewportRatio:.55});
+  // Full-screen cues include a final reading interval; prose-flow hosts can retain the exit helper.
+  const exit=$('[data-reading-end]')?reserveStageExit({sticky:$('.price-stage'),readingEnd:$('[data-reading-end]'),spacer:$('.reading-tail'),releaseRatio:.4}):null;
+  const steps=cues.length?cues.map(element=>({element,id:element.dataset.step})):[...root.querySelectorAll('[data-state]')].map(element=>({element,id:element.dataset.state}));
+  const stage=createStage({element:svg,steps,layout:(id,size)=>{fit(size);return trendPose(id,model)},blend:blendTrend,render,duration,viewportRatio:.55,onReading:showReading});
   document.fonts.ready.then(()=>stage.refresh());
-  return {sample:stage.sample,dispose(){stage.dispose();exit.dispose();paths.dispose();marks.dispose();labels.dispose();grid.remove();dateLabel.remove();}};
+  return {sample:stage.sample,dispose(){stage.dispose();exit?.dispose();copy?.dispose();readings.forEach(({el,opacity})=>{el.style.opacity=opacity});paths.dispose();marks.dispose();labels.dispose();grid.remove();dateLabel.remove();}};
 }

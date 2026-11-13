@@ -9,7 +9,9 @@
 - `references/workflow.md` 保留一份设计稿；取用示例记 ID、沿用内容与必要改动，正文与全文承接仍须具体。
 - `references/implementation.md` 负责接入与运行接口，不再另列一套表达或示例目录。运行依赖通常直接复制或导入，按当前阶段读取，不合并全部参考正文。
 
-示例资源已按 `assets/examples/<id>/` 集中：`index.html` 是独立预览及装配，`scene.mjs` 是数据与动画，专用素材在 `images/`。总览只导航；原 `demo.mjs` 的整页装配已移除。目录用 `kind` 区分 15 个完整片段和 7 个局部机制，`inspect` 返回选中项的短解释、条件、改写位置与复制清单。解释只维护在 HTML，不在目录中复制一份；工具不输出装配及动画源码。局部控件样式共用 `mechanism.css`，控制与计算仍共用 `assets/runtime/`，不为每例复制运行模块或新建说明文档。
+示例资源已按 `assets/examples/<id>/` 集中：`index.html` 是独立预览及装配，`scene.mjs` 是数据与动画，专用素材在 `images/`。总览只导航；原 `demo.mjs` 的整页装配已移除。目录用 `kind` 区分 4 个开篇短例、15 个完整片段和 7 个局部机制，`inspect` 返回选中项的短解释、条件、改写位置与复制清单。解释只维护在 HTML，不在目录中复制一份；工具不输出装配及动画源码。局部控件样式共用 `mechanism.css`，控制与计算仍共用 `assets/runtime/`，不为每例复制运行模块或新建说明文档。
+
+固定正文交接（2026-11-13）：`connectReading` 原本只统一阅读选态、播放器和退出，正文显隐仍由示例装配负责。新增 `runtime/copy.mjs` 的 `createCopyHandoff`，在原布局内保留各段占位、先淡出再淡入，复用播放器处理中断；熊猫与等候开篇接入，结论显露时机仍由证据状态决定，自然滚动正文未改。42 项定向检查通过；浏览器核对实际桌面和 1280×720 的滚动、倒回、快切、占位与退出，未做新一轮独立生成测试。本轮快照与截图在 `.cache/skill-dev/creative-data-storytelling/copy-handoff-20261113-S2umT7/`。
 
 资源重组阶段只调整组织与直达路径，并给已有差值代码补齐最小预览。独立复制检查覆盖每例所需的脚本、样式与素材；实际浏览器检查覆盖全部独立入口、关键状态和完整片段的滚动衔接。当时未改正在运行的冻结包、未新增模型生成测试，不能据此判断首稿质量提高。局部变更与核验记录位于 `.cache/skill-dev/creative-data-storytelling/asset-reorganization-20261109/`。
 
@@ -66,9 +68,24 @@
 
 示例入口归位（2026-11-11）：移除 `expression-methods.md` 中间层及独立的连续片段目录。跨示例判断并入设计选择表，A／B 推导归 comparison／units，序列的具体推导归对应示例，C 的图像与金额分工归素材指导；未覆盖的 U5、汇总余量、关系、周期与流向保留指导。目录与 `inspect` 将 `method` 字段改为指向设计行的 `design`，说明与代码仍按需读取。示例数据、动画和运行模块未改；范围快照与验证记录在 `.cache/skill-dev/creative-data-storytelling/unified-example-route-20261111-gxRpIY/`。尚未启动独立生成测试，不能判断实际漏读或质量是否改善。
 
+统一入口独立复测（2026-11-11）：冻结整理后的75文件 skill，沿用上一轮尺与 iPhone 的 TASK、inputs 和调度消息，均用 gpt-6-sol / xhigh 独立生成。尺未进入具体示例；iPhone 仅搜索三个示例 HTML 的标题与锚点，未取回解释段落；两者都自行实现，未采用 runtime。本轮相关指导完整返回，不能归因于批量截断。耗时约14与15分钟，较上轮短；iPhone 局部比较更清楚，尺历史段整组重建导致动画退步，未复现舞台提前退出。冻结包、审查与读取诊断在 `.cache/skill-dev/creative-data-storytelling/unified-route-test-20261111-FuJz0F/`；不能由这两份推断普遍提速或质量改善。
+
+示例读取与设计交接（2026-11-11）：区分读参照帮助设计和采用示例代码，模型默认由 `inspect` 获取完整短解释；选择表保留表达取舍，用 ID 与实际关键过程定位，HTML 继续承担预览与装配。舞台接线说明当帧几何与稳定对象更新，避免把保留旧数据误作已实现连续动画。未增加最终验收项、未改变示例或 runtime、未修改既有首稿。当前9项目录/独立复制测试、72个文档链接和17个示例 ID 核验通过；尚未开展新模型复测。局部差异、DataMagic 对照边界与验证记录在 `.cache/skill-dev/creative-data-storytelling/example-entry-handoff-20261111-G0yN2F/`。
+
+开篇与收尾整理（2026-11-11）：在 `design.md` 原段落中明确入口内容、实际图文构图与首项证据的承接；区分主线必须完成的回答、探索延伸与按需来源，制作过程保留在已有记录。借鉴单元叙事指导中的选择依据，未引入跨 skill 依赖，未增加文件、工作流步骤、示例或验收项。本轮仅调整指导，尚未开展独立生成复测。
+
+连续过程说明整理（2026-11-11）：核对 GPT 尺与 iPhone 的漏读、终态重建和标注抢先问题后，仅改写 `unit-scale`、`record-comparison`、`overview-detail` 的既有短解释与代码入口，明确缩放与新增的先后、旧行让位及标注随当帧几何更新的原因和位置。修正单位示例说明中“放大后才加入比较记录”与实际同步显露不符的表述。未改动画代码或增加工作流规则；读取路径上一轮已改，新路径和说明的独立创作效果仍待复测。
+
+开篇与连续性独立复测（2026-11-11）：冻结最新75文件 skill，尺与 iPhone 的 TASK、inputs 及调度消息沿用上一轮，仅替换冻结路径；任务输入逐文件哈希一致。使用 gpt-6-sol / xhigh 新建两个 projectless 会话，不提供旧作品、评审结论或指定示例。后续从实际记录核对示例读取与改编、动画连续性、开篇、收尾及首稿耗时；评审关注点仅留在管理侧。冻结包与会话索引位于 `.cache/skill-dev/creative-data-storytelling/opening-continuity-test-20261111-Nbbbit/`，目前已派发，尚无质量结论。
+
+设计理解与代码取用表述统一（2026-11-11）：本轮尺与 iPhone 已完整读到所选示例短解释，但未读取示例源码或采用 runtime；不能将解释读取等同代码采用，也不能把源码阅读作为理解设计的前提。统一 SKILL、workflow、design、implementation 与 inspect 的职责：设计阶段理解叙事和视觉关系，实现阶段优先取用适用的运行接口与示例实现，改编或排错时按需读代码。仅整理现有表述，未改变示例、运行模块或接口，未追加验收步骤。接入方式的拆分与减负暂未实施；本轮也未启动独立创作测试。增量差异和检查记录位于 `.cache/skill-dev/creative-data-storytelling/workflow-wording-20261111-1794388165129/`。
+
+局部片段接入减负（2026-11-11）：`unit-scale` 可省略比较记录与 `compare` 阅读段，`layout` 开放画布、绘图区及比较行位置；`record-comparison` 的 `visible` 可收起/恢复记录，混合换入换出按退出、让位、显露衔接，保留原 ID、量值与共同尺度。沿用两个示例的现有分层，未抽成新框架。53 项相关行为与目录测试通过；桌面浏览器检查了默认示例、无最终比较的容量换算、长名称记录过滤与中途反向，并修正等分指针的文字锚点。这里验证的是接入与动画行为，尚未证明 Agent 首稿质量或工时提升。增量 diff 和接入样本位于 `.cache/skill-dev/creative-data-storytelling/scene-reuse-boundaries-20261111-1794389532110/`。
+
 其余示例接入核查（2026-11-11）：检查剩余 15 个示例，仅改 6 个。`overview-detail` 开放标签区、行距与比较位置；`material-composition` 支持指定重点及只取组成片段，半数参照跟随重点起点；`material-trend` 仅在使用同比时要求同期分母，原值可独立取用；history、identity、difference 补齐传入配置的入口。沿用既有分层与短说明，未新增运行文件或工作流步骤。52 项相关行为和目录检查通过，桌面浏览器验证替换数据、局部取用、连接中间态、反向及默认完整片段；尚未验证独立 Agent 的耗时或首稿质量。审查、接入样本与增量 diff 位于 `.cache/skill-dev/creative-data-storytelling/example-adaptation-20261111-1794390850170/`。
 
 示例与测试题材隔离（2026-11-11）：`record-comparison` 原先直接采用尺测试的朝代、量值与来源，现替换为七家虚构图书馆开馆时的每周开放时长。数值、身份、时期、对比与结论均重新设计；旧行让位、新记录显露、共同零点与原端点差值的机制不变，目录及图文绑定同步。高亮说明补入原可视化选择段：按当前追问选择新增项、比较双方或旧参照，关系已清楚时可不加。相关行为/目录测试和语法检查通过，桌面浏览器已检查逐步加入、反向、最终差值及退出。仅更新当前源 skill，旧冻结包和既有测试结果保持原样；后续尺测试应重新冻结，不把这次替换视为以往测试已无题材污染的证明。本轮增量 diff 与检查记录在 `.cache/skill-dev/creative-data-storytelling/record-theme-isolation-20261111-1794395270375/`。
+
 
 五段解释片段接入（2026-11-12）：新增 `person-coverage`、`multi-constraint`、`object-fit`、`records-composition`、`cohort-flow`。沿用已评议的独立候选，口袋收尾改为两组适配比例，歌曲收尾在同一面积图中补齐两个时期的分类对照。每段保留独立预览、短解释和代码入口；仅共用预览控制、样式与绘图小函数，不连带读取其他段落。说明分别交代叙事、设计理由、改编空间及数据条件，目录与设计选择表直达各段，不新增方法卡或工作流规则。24 项几何、分母、流量与独立复制检查通过；实际 Chrome 检查全部阅读状态、中间态、反向与交互，1440×900 和 1280×800 首尾均复核。此轮验证示例自身及读取接入，未验证整篇滚动舞台或独立模型首稿效果。局部 diff 与浏览器证据在 `.cache/skill-dev/creative-data-storytelling/five-examples-integration-20261112/`。
 
@@ -87,3 +104,13 @@
 | Sizing chaos · The Pudding | 从一个腰围处于同龄人中位数的女孩讲起，再把不同品牌的尺码放在同一条腰围轴上。回看正文自然滚动、图形保留参照的段落。 | [原作](https://pudding.cool/2026/02/womens-sizing/) |
 
 **转场美术参考。** Shopify Editions Winter ’26 的 Sidekick 段用不规则的纸边露出下一段。这里看的主要是插画的层次、画面边缘与滚动节奏。[Sidekick 段落](https://www.shopify.com/editions/winter2026#sidekick)
+
+开篇短例（2026-11-13）：新增 `opening-material`、`opening-reference`、`opening-question`，各自从引入走到第一项证据。前两者以小配置复用汉堡、图书馆场景，第三者从平均等候展开两批独立样本；不是三套整页模板。现有 design 开篇选择表、目录和 inspect 直接找到短例，短解释仍只维护在各自 HTML。没有增加工作流、阅读规则或跨 skill 依赖。正在使用的 20261113 冻结包保持不变。验证与本轮增量 diff：`.cache/skill-dev/creative-data-storytelling/opening-examples-20261113-KT2oPa/`；独立模型改编效果尚未复测。
+
+点阵开篇补充（2026-11-13）：新增 `opening-particles`，借用单元 skill 的熊猫点阵设计与原创 SVG，以 360 条合成记录从主题形象连续进入年龄分布。实现接入本 skill 的 `connectReading` 与 runtime，不引用同级 skill；目录、开篇选择表和 U2 行均可到达短解释。保留记录身份、图像颜色与数据含义的交接及结论出现时机；不同数据量和中途反向有行为测试。实际浏览器核验两种桌面尺寸、前进回退和终态停留，尚未测试独立模型的改编效果。证据与增量差异位于 `.cache/skill-dev/creative-data-storytelling/opening-particles-20261113-RUb6cM/`。
+
+四个开篇图文精修（2026-11-13）：保留已有构图、动画路径与共享滚动接线。汉堡明确半年报价的参照并从最后展示的记录计算差额；图书馆改清开放时长的比较含义；等候例按两组实际记录绑定均值、分母、阈值与差额；点阵例去掉年龄阶段暗示和过渡中的重复文案，落稳后同步显示区间人数、总数与占比。各例原有短解释同步更新，未增加工作流或规则。25 项相关行为与目录测试通过；实际浏览器复查 1440×900、1280×720 的关键画面、前进回退、证据时机及点阵舞台退出。增量 diff 与截图位于 `.cache/skill-dev/creative-data-storytelling/opening-refinement-20261113-cGiq29/`；尚未验证独立模型改编效果，未提交。
+
+正文跟随收拢（2026-11-13）：11 个固定正文示例共用已有 `createCopyHandoff`，保留上下／左右布局、原位淡入和轻微位移；新增同状态内容更新入口，旧内容退去后再更新，快速倒回仍从当前姿态接续。场景继续决定证据与结论显露时机。8 个自然滚动片段保留已有 `createStage` 与 `reserveStageExit`，实际核对末段正文仍在阅读区时图形完整停留，读过后正常退出。选择说明并入 implementation-stage，目录依赖同步，无新增流程或示例。66 项定向测试通过；浏览器覆盖固定正文换段、口袋换物品、快速倒回，以及 1280×720 的自然滚动出口与 1440×900 的开篇。未开展独立模型复测、未提交。局部 diff、原文件快照及证据：`.cache/skill-dev/creative-data-storytelling/prose-follow-20261113-aKRaGH/`。
+
+图文同时交接（2026-11-13）：图书馆和汉堡改为在 `onReading` 同时启动正文与图形，保留原位淡入和轻微上移。句子与读数完整出现，数字强调跟随条形端点／观测／差额标注，不再让整段正文等待图形终态；复用两个 mount 的开篇同步生效。原构图、图形路径及其他示例的揭示策略不变，短说明并入既有示例与 implementation-stage。57 项定向回归通过；1280×720 浏览器观测到正文 opacity=1 时图形仍 moving=true，滚动、快速回退、换指标及复用开篇均复核。未提交；增量 diff、检查记录与截图：`.cache/skill-dev/creative-data-storytelling/copy-concurrent-20261113-pmdXTV/`。

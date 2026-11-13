@@ -49,24 +49,24 @@
       </div>
       <div class="reading-flow">
         <article id="before"><div class="copy" data-state="before">
-          <p class="eyebrow">先留住一个参照 · 2016—2019</p>
-          <h1>一年 <span data-record="year-2019">100 万单</span>，<br>记住这个位置。</h1>
-          <p>订单逐年增加，到 <span data-record="year-2019" data-field="year">2019</span> 年来到这段记录的最高点。</p>
+          <p class="eyebrow">2016—2019 · 订单逐年增加</p>
+          <h1>达到 <span data-record="year-2019">100 万单</span>，<br>还会接着涨吗？</h1>
+          <p>从 <span data-record="year-2016">72 万单</span>起步，到 <span data-record="year-2019" data-field="year">2019</span> 年，订单来到这段记录的高点。随后一年的变化，打断了这段增长。</p>
         </div></article>
         <article id="fall"><div class="copy" data-state="fall">
-          <p class="eyebrow">同一条历史继续 · 2020</p>
+          <p class="eyebrow">2020 · 突然回落</p>
           <h2>随后一年，<br>落到了 <em data-record="year-2020">61 万单</em>。</h2>
           <p>一年的回落，抹去了此前数年的增长；订单量低于这段记录开始时的 <span data-record="year-2016">72 万单</span>。</p>
         </div></article>
         <article id="recovery"><div class="copy" data-state="recovery">
-          <p class="eyebrow">继续看后面的记录 · 2021—2024</p>
+          <p class="eyebrow">2021—2024 · 连续回升</p>
           <h2>连续四年，<br>都在增长。</h2>
-          <p>订单回升到 <em data-record="year-2024">97 万单</em>。只看最近四年，是一条向上的线。</p>
+          <p>订单回升到 <em data-record="year-2024">97 万单</em>。最近四年确实一直在增长，但已经回到回落前的水平了吗？</p>
         </div></article>
         <article id="compare"><div class="copy" data-state="compare">
           <p class="eyebrow">回到最初的参照</p>
           <h2>增长了，<br>还没回到原位。</h2>
-          <p data-reading-end>把 <span data-record="year-2019" data-field="year">2019</span> 年的高度延伸过来：当前还比那时<em data-gap="compare">低 3 万单</em>。增长方向与恢复程度，回答的是两个问题。</p>
+          <p data-reading-end>与 <span data-record="year-2019" data-field="year">2019</span> 年相比，当前仍<em data-gap="compare">低 3 万单</em>。连续增长是真实的，还未恢复到旧高点也是真实的。</p>
         </div></article>
         <div class="reading-tail" aria-hidden="true"></div>
       </div>
@@ -77,7 +77,7 @@
   <p><strong>叙事设计：</strong><a href="../../../references/design.md#history">变化 → 旧基准比较</a>。先经历回升，再追问“是否回到从前”：最近方向向上，当前水平却仍低于旧高点。若前文已说明回升，可直接接入基准比较。</p>
   <p><strong>可视化选择：</strong>保留轨迹让增长有历史参照；基准线从旧高点延伸到当前端点，把“与过去比”画出来。时间轴交代过程，端点差距回答结果，两者使用同一组观测。</p>
   <p><strong>改编空间：</strong>适合同口径观测与有意义的基准。只问两期差异可并置比较；要解释过程可用轨迹、柱形或单元，缺测处另行交代。重选时期、基准与素材，按新数据重写结论；回落、恢复和回看不是固定章节。</p>
-  <p><strong>代码入口：</strong><code>historyExample</code> 配置记录、单位、<code>baselineId / stops</code>；<code>historyStoryPose / blendHistoryStory</code> 安排显露与基准交接，<code>data-record / data-gap</code> 绑定正文。保留当前端点即可接后续追问。</p>
+  <p><strong>代码入口：</strong><code>historyExample</code> 配置记录、单位、<code>baselineId / stops</code>；<code>historyStoryPose / blendHistoryStory</code> 安排显露与基准交接，<code>data-record / data-gap</code> 绑定正文。保留当前端点即可接后续追问。滚动接入见 <a href="../../../references/implementation-stage.md#文字滚动与舞台更新"><code>connectReading</code> 用法</a>。</p>
   <p><a href="scene.mjs">本例数据与代码</a></p>
 </details>
     </footer>

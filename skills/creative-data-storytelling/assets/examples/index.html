@@ -23,10 +23,15 @@
 <main>
   <header>
     <div class="eyebrow">CREATIVE DATA STORYTELLING / EXAMPLES</div>
-    <h1>选一段解释，或一个局部机制。</h1>
-    <p>每个示例都有独立预览、代码和所需素材。完整片段可以改写其解释过程，局部机制可以接入已有构图；数据、主题和阅读顺序由作品决定。</p>
+    <h1>从一个入口，到一段解释。</h1>
+    <p>开篇短例、完整解释片段与局部机制都可独立查看、改写或组合。每个示例附代码和所需素材；数据、主题和阅读顺序由作品决定。</p>
     <p>本页只导航，不运行示例。Agent 可从<a href="../../references/design.md#从追问选择表达">表达与示例选择表</a>直接进入所选说明与代码，无需读取此页或其他示例源码。</p>
   </header>
+  <section id="openings">
+    <h2>开篇 → 第一项证据</h2>
+    <p>看问题、文字与主体怎样引入第一项发现。短例停在交接处，完整故事的后续另行设计；素材缩为标记、点阵展开、自然滚动和文字引入都可成立。</p>
+    <div id="opening-catalog" class="catalog"></div>
+  </section>
   <section id="story-examples">
     <h2>完整解释片段</h2>
     <p>包含相邻正文、关键构图与停留，观察一段关系怎样逐步变得清楚。预览可滚动或独立播放，作品的阅读方式另行安排。</p>
@@ -40,6 +45,7 @@
   <p id="catalog-status">正在读取示例目录…</p>
   <footer>
     <a href="design-frames.svg">三种关系的关键画面示意</a>
+    <p><a href="../stage-wiring/index.html">工程接线演示：正文、动画、出口与可选探索</a>。已有构图时按需取用，不规定作品页面。</p>
     <p>每个目录的 <code>index.html</code> 包含布局与接线，<code>scene.mjs</code> 包含数据与动画。
     公共控制与计算模块位于 <code>../runtime/</code>，按依赖取用。
     <code>node scripts/examples.mjs inspect &lt;id&gt;</code> 可直接读取该例的设计解释、改写入口与复制清单。</p>
@@ -52,7 +58,7 @@
     if (!response.ok) throw new Error("HTTP " + response.status);
     const { examples } = await response.json();
     for (const example of examples) {
-      const target = document.querySelector(example.kind === "story" ? "#story-catalog" : "#mechanism-catalog");
+      const target = document.querySelector({opening:"#opening-catalog",story:"#story-catalog",mechanism:"#mechanism-catalog"}[example.kind]);
       const card = document.createElement("article"); card.id = example.id;
       const kind = document.createElement("small"); kind.textContent = example.id + " · " + example.relations.slice(0, 3).join(" / ");
       const title = document.createElement("h3"); title.textContent = example.title;

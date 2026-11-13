@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>从具体记录，重新理解构成 · 解释片段</title><link rel="stylesheet" href="../segment-preview.css"></head>
+<title>从具体记录，重新理解构成 · 解释片段</title><link rel="stylesheet" href="../segment-preview.css"><style>
+[data-field="description"]:empty{display:none}
+body[data-example=records-composition] .copy [data-field="description"]{font-size:15px;line-height:1.8;max-width:760px;color:#5b5a61;white-space:pre-line;text-wrap:pretty}
+</style></head>
 <body>
 <header class="site-header"><a class="brand" href="../index.html#records-composition"><span class="brand-mark" aria-hidden="true">↗</span><span>看见关系<small>VISUAL EXPLANATIONS</small></span></a><button id="about" class="text-button">设计与数据 ↗</button></header>
 <main id="stage-shell">
@@ -11,7 +14,7 @@
 </main>
 <footer class="playback"><span class="chapter-name" id="chapter-name"></span><div class="state-controls"><button id="prev" aria-label="上一步">←</button><span id="state-count"></span><button id="next">继续 →</button></div><div class="secondary-controls"><span class="scroll-hint">滚轮 / 方向键也可推进</span><button class="text-button" id="replay">↺ 重看本段</button></div></footer>
 <dialog id="notes"><button class="close-dialog" aria-label="关闭说明">×</button><details id="example-notes" open><summary>叙事、可视化选择与改编</summary>
-<p><strong>叙事设计：</strong><a href="../../../references/design.md#composition">构成比较</a>。先认识几首歌，再提取同类、放回完整分母比较时期。其余记录中继续显出新类别，修正对“其他”的理解；最后在相同分类口径下回看过去与现在。</p><p><strong>可视化选择：</strong>记录保留身份、时间位置与类别色；提取让类别可辨，重新汇合恢复分母。圆面积先表示前十周数，进入构成后改由色带纵向厚度表示各期份额，点只辅助身份交接。两种分类范围都比较同一对时期。</p><p><strong>改编空间：</strong>可换消费明细、新闻主题、研究文献或使用记录，选择会改变判断的分类。类别已清楚时可省去记录引入；可用条形构成、单元或其他布局，按追问取用提取、汇合或扩展分类，不照搬八步。</p><p><strong>数据与素材：</strong>按上榜日期分期，以前十总周数加权，不是逐年榜单席位复原；曲线连接时期汇总，不是年度观测。分类含编辑判断。数据文件直接导入，来源与 MIT 许可随附；未复制音频、品牌或原作页面代码。</p><p><strong>代码入口：</strong>songs / categories / periods 定义记录、分类与分母；buildLayouts 管记录排列，areaBoundary 管构成边界；example.states 与 mount 内 blend / render 组织提取和汇合。改主题时一起更新代表记录、分类、时期及比较标注。</p><p><a href="scene.mjs">本例数据与动画</a> · <a href="https://pudding.cool/2024/11/love-songs/">Is the Love Song Dying? · 设计与数据</a> · <a href="https://github.com/the-pudding/pop-love-songs/blob/main/src/data/pop-love-songs-data-through-september-2023.json">原始歌曲记录</a> · <a href="LOVE-SONGS-LICENSE.txt">数据 MIT 许可</a></p>
+<p><strong>叙事设计：</strong><a href="../../../references/design.md#composition">构成比较</a>。先认识几首歌，再提取同类、放回完整分母比较时期。其余记录中继续显出新类别，修正对“其他”的理解；最后在相同分类口径下回看过去与现在。</p><p><strong>可视化选择：</strong>记录保留身份、时间位置与类别色；提取让类别可辨，重新汇合恢复分母。圆面积先表示前十周数，进入构成后改由色带纵向厚度表示各期份额，点只辅助身份交接。三次比较均用 1990 年代与 2020–23 年；末帧并列直接示爱与全部爱情主题两种范围。</p><p><strong>改编空间：</strong>可换消费明细、新闻主题、研究文献或使用记录，选择会改变判断的分类。类别已清楚时可省去记录引入；可用条形构成、单元或其他布局，按追问取用提取、汇合或扩展分类，不照搬八步。</p><p><strong>数据与素材：</strong>按上榜日期分期，以前十总周数加权，不是逐年榜单席位复原；曲线连接时期汇总，不是年度观测。分类含编辑判断。数据文件直接导入，来源与 MIT 许可随附；未复制音频、品牌或原作页面代码。</p><p><strong>代码入口：</strong>songs / categories / periods 定义记录、分类与分母；buildLayouts 管记录排列，areaBoundary 管构成边界；example.states 与 mount 内 blend / render 组织提取和汇合。改主题时一起更新代表记录、分类、时期及比较标注。滚动接入见 <a href="../../../references/implementation-stage.md#文字滚动与舞台更新"><code>connectReading</code> 用法</a>。</p><p><a href="scene.mjs">本例数据与动画</a> · <a href="https://pudding.cool/2024/11/love-songs/">Is the Love Song Dying? · 设计与数据</a> · <a href="https://github.com/the-pudding/pop-love-songs/blob/main/src/data/pop-love-songs-data-through-september-2023.json">原始歌曲记录</a> · <a href="LOVE-SONGS-LICENSE.txt">数据 MIT 许可</a></p>
 </details></dialog>
 <script type="module">
 import { example } from './scene.mjs';

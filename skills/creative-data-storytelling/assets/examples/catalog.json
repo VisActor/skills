@@ -2,28 +2,278 @@
   "version": 1,
   "examples": [
     {
+      "id": "opening-material",
+      "title": "熟悉的物件，成为第一项观测",
+      "kind": "opening",
+      "keywords": [
+        "开篇",
+        "引入",
+        "开场",
+        "素材",
+        "汉堡",
+        "opening",
+        "intro",
+        "image marker",
+        "cover"
+      ],
+      "relations": [
+        "物件引入",
+        "素材标记",
+        "时序变化"
+      ],
+      "readerTask": "先认出一份午餐与报价，再让同一对象接入价格历史，回答第一问。",
+      "dataNeeds": "可识别的物件、同口径有序报价及第一问；仅原值走势，无需同比资料。",
+      "dataKind": "沿用 The Economist 澳大利亚 2017—2024 年巨无霸报价与原示例素材。",
+      "process": [
+        "认识对象与一笔报价",
+        "同一素材缩为观测标记，接入坐标",
+        "保留历史，看到第一项价格变化"
+      ],
+      "retain": "对象身份、报价与日期对应；图片大小不编码价格。",
+      "adapt": "materialOpening 选择一个系列与三个状态，mountTrend 复用原场景。换素材、数据、正文和布局；需要时再改几何。",
+      "handoff": {
+        "enter": "用熟悉物件提出具体量值问题。",
+        "leave": "停在第一项走势证据，下一步分析由任务决定。"
+      },
+      "preview": "assets/examples/opening-material/index.html",
+      "code": "assets/examples/opening-material/scene.mjs",
+      "design": "references/design.md#开篇与收尾",
+      "dependencies": [
+        "assets/examples/material-trend/scene.mjs",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs",
+        "assets/runtime/copy.mjs"
+      ],
+      "assets": [
+        "assets/examples/material-trend/images/burger.svg",
+        "assets/examples/material-trend/images/bread.svg",
+        "assets/examples/material-trend/images/beef.svg"
+      ],
+      "relatedExample": "material-trend"
+    },
+    {
+      "id": "opening-reference",
+      "title": "带着一个生活参照，进入比较",
+      "kind": "opening",
+      "keywords": [
+        "开篇",
+        "引入",
+        "开场",
+        "参照",
+        "告示",
+        "opening",
+        "intro",
+        "reference",
+        "notice"
+      ],
+      "relations": [
+        "情境引入",
+        "建立参照",
+        "新记录比较"
+      ],
+      "readerTask": "一张开放告示先给出熟悉的量，随后带着同一个参照看后来者。",
+      "dataNeeds": "含义明确的参考记录与可比较的新记录；不需要记录间的真实连续变化。",
+      "dataKind": "原图书馆示例前三条模拟记录；开馆时每周开放时长。",
+      "process": [
+        "告示建立主题、问题与参照",
+        "自然滚入同一量值的条形",
+        "保留基准，加入两条新记录"
+      ],
+      "retain": "参照身份、共同零点与口径；新馆加入不表示老馆时长更新。",
+      "adapt": "referenceOpening 筛选记录、状态与尺度，mountRecords 沿用原场景；修改引入情境、数据、正文和布局。",
+      "handoff": {
+        "enter": "从读者认得的记录提出比较问题。",
+        "leave": "留下参照与首批新证据，可继续补充记录或换角度。"
+      },
+      "preview": "assets/examples/opening-reference/index.html",
+      "code": "assets/examples/opening-reference/scene.mjs",
+      "design": "references/design.md#开篇与收尾",
+      "dependencies": [
+        "assets/examples/record-comparison/scene.mjs",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs",
+        "assets/stage-wiring/connect.mjs",
+        "assets/runtime/copy.mjs"
+      ],
+      "assets": [],
+      "relatedExample": "record-comparison"
+    },
+    {
+      "id": "opening-question",
+      "title": "一个简单发现，引出还没回答的问题",
+      "kind": "opening",
+      "keywords": [
+        "开篇",
+        "引入",
+        "开场",
+        "文字",
+        "平均",
+        "分布",
+        "opening",
+        "intro",
+        "question",
+        "mean",
+        "distribution"
+      ],
+      "relations": [
+        "发现引入",
+        "汇总转分布",
+        "尾部比较"
+      ],
+      "readerTask": "从平均少等十分钟的读数进入两批记录，看久等比例是否也下降。",
+      "dataNeeds": "两批可比记录、可计算的汇总量与明确尾部口径；没有个人对应时不做跨期匹配。",
+      "dataKind": "两批各10条模拟等候记录；均值30和20分钟，至少60分钟均为2人。",
+      "process": [
+        "文字和两个均值提出追问",
+        "原均值落到各自分布中作为参照",
+        "显露记录和阈值，第一项证据回答追问"
+      ],
+      "retain": "均值、分母、阈值与独立样本身份；不把摘要展开画成两期人员流动。",
+      "adapt": "waitingExample 换记录和阈值，waitingPose 调整排布，blendWaiting 连续交接；重写问题与结论，长标签或密集记录另排。",
+      "handoff": {
+        "enter": "用少量文字与读数建立需要检验的认识。",
+        "leave": "保留汇总与尾部，可继续问差异出现在哪里；无需固定接下一章。"
+      },
+      "preview": "assets/examples/opening-question/index.html",
+      "code": "assets/examples/opening-question/scene.mjs",
+      "design": "references/design.md#开篇与收尾",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs",
+        "assets/stage-wiring/connect.mjs",
+        "assets/runtime/copy.mjs"
+      ],
+      "assets": []
+    },
+    {
+      "id": "opening-particles",
+      "title": "熟悉的形象，展开成逐条记录",
+      "kind": "opening",
+      "keywords": [
+        "开篇",
+        "引入",
+        "粒子",
+        "点阵",
+        "轮廓",
+        "熊猫",
+        "opening",
+        "intro",
+        "particles",
+        "silhouette",
+        "unit chart"
+      ],
+      "relations": [
+        "主题形象引入",
+        "单元展开",
+        "年龄分布"
+      ],
+      "readerTask": "从熊猫面孔追问个体年龄，同一批点拆开后落入分布，接住开篇的疑问。",
+      "dataNeeds": "有稳定 ID 与有限量值的逐条记录，以及复杂度适合记录数量的主题形象；轮廓位置不编码数值。",
+      "dataKind": "原创熊猫 SVG 与 360 条合成年龄记录，不代表真实种群。",
+      "process": [
+        "同一批记录组成主题形象",
+        "粒子沿稳定路径拆开并落位",
+        "年龄轴和读法显露，留下第一项分布证据"
+      ],
+      "retain": "一条记录对应一个单元；形象色与数据编码交接；不把装饰粒子或过渡位置当成统计记录。",
+      "adapt": "particleOpening 换数据和图像，particlePose 配两态构图，blendParticles 配运动；可取局部接法，轮廓复杂度与密度随数据调整。",
+      "handoff": {
+        "enter": "主题形象配一个可由数据回答的问题。",
+        "leave": "记录落在第一项证据中，后续比较或重排由任务决定。"
+      },
+      "preview": "assets/examples/opening-particles/index.html",
+      "code": "assets/examples/opening-particles/scene.mjs",
+      "design": "references/design.md#unit-intro",
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/units.mjs",
+        "assets/runtime/svg.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/stage-wiring/connect.mjs",
+        "assets/runtime/copy.mjs"
+      ],
+      "assets": [
+        "assets/examples/opening-particles/images/panda.svg"
+      ],
+      "relatedExample": "units"
+    },
+    {
       "id": "unit-scale",
-      "keywords": ["等分", "倍数", "开场", "opening", "unit conversion", "subdivision", "multiples", "scale zoom", "reference unit"],
+      "keywords": [
+        "等分",
+        "倍数",
+        "开场",
+        "opening",
+        "unit conversion",
+        "subdivision",
+        "multiples",
+        "scale zoom",
+        "reference unit"
+      ],
       "title": "先认识一份，再看部分与倍数",
       "kind": "story",
-      "relations": ["开篇引入", "单位换算", "等分整体", "重复份额", "尺度缩放", "基准比较"],
+      "relations": [
+        "开篇引入",
+        "单位换算",
+        "等分整体",
+        "重复份额",
+        "尺度缩放",
+        "基准比较"
+      ],
       "readerTask": "认识一份后，怎样看清它的内部与倍数，并用这个参照理解新的比较？",
       "dataNeeds": "有明确换算依据的基准量、等分数和重复份数；比较记录同单位且非负。本例以等份长度表达，非等分组成或其他图形需重算几何。",
       "dataKind": "秒、分钟、小时的单位关系，以及两条模拟等候时长；不作真实场所结论。",
       "preview": "assets/examples/unit-scale/index.html",
       "code": "assets/examples/unit-scale/scene.mjs",
       "design": "references/design.md#unit-scale",
-      "process": ["建立一份基准", "保持整体长度，显露等分", "放远共同尺度，保留原份并接续其他份数", "将时间带收拢为分钟参照，同步放大后加入独立记录并比较差额"],
+      "process": [
+        "建立一份基准",
+        "保持整体长度，显露等分",
+        "放远共同尺度，保留原份并接续其他份数",
+        "将时间带收拢为分钟参照，同步放大后加入独立记录并比较差额"
+      ],
       "retain": "同量等分保持总量，重复增加份数，缩放改变像素映射；原份身份与共同单位可辨。",
-      "adapt": "unitScaleExample 配基准量、等分数、重复份数与两条记录；unitScalePose / blendUnitScale 管构图与时序，unitScaleGeometry 共用尺度。可只借其中一种操作，改写主题与图形时保留当前追问所需关系。",
-      "handoff": { "enter": "从一个易认的对象或数量建立读法；已有上下文也可直接进入拆分或比较。", "leave": "保留学会的单位与参照，接入真实比较、分布或变化；模拟记录只作演示。" },
-      "dependencies": ["assets/runtime/geometry.mjs", "assets/runtime/motion.mjs", "assets/runtime/stage.mjs", "assets/runtime/scroll.mjs", "assets/runtime/svg.mjs"],
+      "adapt": "unitScaleExample 配基准量、份数、可选的两条比较记录与 layout；省略 records 和 compare 阅读段即可只讲单位。unitScalePose / blendUnitScale 管终态与过程，unitScaleGeometry 共用尺度；其他图形按关系改写。",
+      "handoff": {
+        "enter": "从一个易认的对象或数量建立读法；已有上下文也可直接进入拆分或比较。",
+        "leave": "保留学会的单位与参照，接入真实比较、分布或变化；模拟记录只作演示。"
+      },
+      "dependencies": [
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/svg.mjs"
+      ],
       "assets": [],
       "relatedExample": "amounts"
     },
     {
       "id": "time-history",
-      "keywords": ["折线图", "线图", "时间序列", "趋势", "基线", "line chart", "time series", "trend", "baseline", "historical context", "progressive reveal"],
+      "keywords": [
+        "折线图",
+        "线图",
+        "时间序列",
+        "趋势",
+        "基线",
+        "line chart",
+        "time series",
+        "trend",
+        "baseline",
+        "historical context",
+        "progressive reveal"
+      ],
       "title": "历史继续生长，再回到旧基准",
       "relations": [
         "时序变化",
@@ -61,7 +311,19 @@
     },
     {
       "id": "record-comparison",
-      "keywords": ["条形图", "柱状图", "柱形图", "新增记录", "横向比较", "bar chart", "column chart", "shared scale", "record comparison", "new records", "reference values"],
+      "keywords": [
+        "条形图",
+        "柱状图",
+        "柱形图",
+        "新增记录",
+        "横向比较",
+        "bar chart",
+        "column chart",
+        "shared scale",
+        "record comparison",
+        "new records",
+        "reference values"
+      ],
       "title": "新记录加入，旧参照仍在",
       "kind": "story",
       "relations": [
@@ -81,7 +343,7 @@
         "在主图端点之间比较差值"
       ],
       "retain": "记录独立、身份与口径可比，所需参照仍可辨；本例用零基线条长，各条不相加。",
-      "adapt": "recordExample 配记录、stops 和 pair；recordPose / recordGeometry 管排列与几何，blendRecords 管加入。HTML 说明叙事动机、其他图形的取用条件及正文绑定。",
+      "adapt": "recordExample 配记录、stops.visible / focus / pair 和 layout；visible 可收起或恢复记录。recordPose / recordGeometry 管排列与几何，blendRecords 管退出、让位与加入；HTML 说明选择与正文绑定。",
       "handoff": {
         "enter": "承接已解释的一条记录，从它的实际位置加入其他记录。",
         "leave": "留下已建立的比较范围，可继续加入记录、提取局部或改变比较口径。"
@@ -94,14 +356,27 @@
         "assets/runtime/motion.mjs",
         "assets/runtime/stage.mjs",
         "assets/runtime/scroll.mjs",
-        "assets/runtime/svg.mjs"
+        "assets/runtime/svg.mjs",
+        "assets/stage-wiring/connect.mjs",
+        "assets/runtime/copy.mjs"
       ],
       "assets": [],
       "relatedExample": "comparison"
     },
     {
       "id": "overview-detail",
-      "keywords": ["条形图", "柱状图", "聚焦", "放大", "提取比较", "overview to detail", "focus and context", "drill down", "zoom", "bar chart"],
+      "keywords": [
+        "条形图",
+        "柱状图",
+        "聚焦",
+        "放大",
+        "提取比较",
+        "overview to detail",
+        "focus and context",
+        "drill down",
+        "zoom",
+        "bar chart"
+      ],
       "title": "先认出对象，再靠近比较",
       "relations": [
         "整体到局部",
@@ -140,7 +415,22 @@
     },
     {
       "id": "material-composition",
-      "keywords": ["图像", "图片", "图标", "组成带", "堆积条形图", "堆叠条形图", "百分比", "image", "icon", "pictorial", "composition", "part to whole", "stacked bar chart", "proportion"],
+      "keywords": [
+        "图像",
+        "图片",
+        "图标",
+        "组成带",
+        "堆积条形图",
+        "堆叠条形图",
+        "百分比",
+        "image",
+        "icon",
+        "pictorial",
+        "composition",
+        "part to whole",
+        "stacked bar chart",
+        "proportion"
+      ],
       "title": "从熟悉场景进入组成比较",
       "relations": [
         "素材引入",
@@ -185,7 +475,20 @@
     },
     {
       "id": "material-trend",
-      "keywords": ["图片", "图标", "图像标记", "折线图", "涨幅", "趋势", "image marker", "icon", "line chart", "time series", "growth rate", "year over year"],
+      "keywords": [
+        "图片",
+        "图标",
+        "图像标记",
+        "折线图",
+        "涨幅",
+        "趋势",
+        "image marker",
+        "icon",
+        "line chart",
+        "time series",
+        "growth rate",
+        "year over year"
+      ],
       "title": "素材直接标记观测，时间推进后比较涨幅",
       "relations": [
         "素材",
@@ -224,12 +527,25 @@
         "assets/runtime/motion.mjs",
         "assets/runtime/stage.mjs",
         "assets/runtime/scroll.mjs",
-        "assets/runtime/svg.mjs"
+        "assets/runtime/svg.mjs",
+        "assets/runtime/copy.mjs"
       ]
     },
     {
       "id": "material-height",
-      "keywords": ["象形图", "实物比较", "高度比较", "图片缩放", "量尺", "pictorial chart", "pictogram", "scaled image", "height comparison", "shared scale", "rescaling"],
+      "keywords": [
+        "象形图",
+        "实物比较",
+        "高度比较",
+        "图片缩放",
+        "量尺",
+        "pictorial chart",
+        "pictogram",
+        "scaled image",
+        "height comparison",
+        "shared scale",
+        "rescaling"
+      ],
       "title": "新记录加入，超出范围时扩大共用标尺",
       "kind": "story",
       "relations": [
@@ -279,7 +595,18 @@
     },
     {
       "id": "comparison-basis",
-      "keywords": ["标准化", "口径切换", "总量与人均", "分母比较", "per capita", "normalization", "normalisation", "denominator", "comparison basis", "total versus rate"],
+      "keywords": [
+        "标准化",
+        "口径切换",
+        "总量与人均",
+        "分母比较",
+        "per capita",
+        "normalization",
+        "normalisation",
+        "denominator",
+        "comparison basis",
+        "total versus rate"
+      ],
       "title": "总量领先，换成人均呢？",
       "relations": [
         "比较口径",
@@ -319,7 +646,18 @@
     },
     {
       "id": "increment-stock",
-      "keywords": ["累计", "累加", "存量", "增量", "年度新增", "cumulative", "accumulation", "stock and flow", "annual increments", "bar chart"],
+      "keywords": [
+        "累计",
+        "累加",
+        "存量",
+        "增量",
+        "年度新增",
+        "cumulative",
+        "accumulation",
+        "stock and flow",
+        "annual increments",
+        "bar chart"
+      ],
       "title": "年度差异，怎样接成累计轨迹",
       "relations": [
         "累积",
@@ -358,7 +696,18 @@
     },
     {
       "id": "sequence-recurrence",
-      "keywords": ["弧线图", "重复出现", "旋律动机", "复现", "arc diagram", "sequence", "recurrence", "motif", "repetition", "connections"],
+      "keywords": [
+        "弧线图",
+        "重复出现",
+        "旋律动机",
+        "复现",
+        "arc diagram",
+        "sequence",
+        "recurrence",
+        "motif",
+        "repetition",
+        "connections"
+      ],
       "title": "同一句话，在不同位置再次出现",
       "kind": "story",
       "relations": [
@@ -398,7 +747,17 @@
     },
     {
       "id": "comparison",
-      "keywords": ["条形图", "柱状图", "局部放大", "提取比较", "bar chart", "overview to detail", "focus and context", "zoom", "difference"],
+      "keywords": [
+        "条形图",
+        "柱状图",
+        "局部放大",
+        "提取比较",
+        "bar chart",
+        "overview to detail",
+        "focus and context",
+        "zoom",
+        "difference"
+      ],
       "kind": "mechanism",
       "title": "从总体提取局部",
       "relations": [
@@ -429,7 +788,18 @@
     },
     {
       "id": "history",
-      "keywords": ["折线图", "线图", "趋势", "时间序列", "缩略图定位", "line chart", "time series", "context preservation", "focus and context", "overview inset"],
+      "keywords": [
+        "折线图",
+        "线图",
+        "趋势",
+        "时间序列",
+        "缩略图定位",
+        "line chart",
+        "time series",
+        "context preservation",
+        "focus and context",
+        "overview inset"
+      ],
       "kind": "mechanism",
       "title": "历史保留与局部聚焦",
       "relations": [
@@ -454,7 +824,17 @@
     },
     {
       "id": "sequence",
-      "keywords": ["时间对齐", "起点对齐", "共同起点", "持续时长", "时间线", "temporal alignment", "aligned start", "duration", "timeline"],
+      "keywords": [
+        "时间对齐",
+        "起点对齐",
+        "共同起点",
+        "持续时长",
+        "时间线",
+        "temporal alignment",
+        "aligned start",
+        "duration",
+        "timeline"
+      ],
       "kind": "mechanism",
       "title": "从原日期换到共同起点",
       "relations": [
@@ -480,7 +860,19 @@
     },
     {
       "id": "amounts",
-      "keywords": ["堆积条形图", "堆叠条形图", "拆分", "合并", "累计", "增量", "stacked bar chart", "composition", "part to whole", "accumulation", "decomposition"],
+      "keywords": [
+        "堆积条形图",
+        "堆叠条形图",
+        "拆分",
+        "合并",
+        "累计",
+        "增量",
+        "stacked bar chart",
+        "composition",
+        "part to whole",
+        "accumulation",
+        "decomposition"
+      ],
       "kind": "mechanism",
       "title": "整体展开与增量接入",
       "relations": [
@@ -506,7 +898,20 @@
     },
     {
       "id": "identity",
-      "keywords": ["图片", "图像", "图标", "对象识别", "图像标记", "点图", "image marker", "icon", "dot plot", "identity", "object continuity", "shared anchor"],
+      "keywords": [
+        "图片",
+        "图像",
+        "图标",
+        "对象识别",
+        "图像标记",
+        "点图",
+        "image marker",
+        "icon",
+        "dot plot",
+        "identity",
+        "object continuity",
+        "shared anchor"
+      ],
       "kind": "mechanism",
       "title": "素材跟随数据对象",
       "relations": [
@@ -536,7 +941,22 @@
     },
     {
       "id": "units",
-      "keywords": ["单元图", "点阵", "粒子", "点图", "轮廓", "重排", "unit chart", "dot plot", "particle", "particles", "regrouping", "distribution", "weighting", "silhouette"],
+      "keywords": [
+        "单元图",
+        "点阵",
+        "粒子",
+        "点图",
+        "轮廓",
+        "重排",
+        "unit chart",
+        "dot plot",
+        "particle",
+        "particles",
+        "regrouping",
+        "distribution",
+        "weighting",
+        "silhouette"
+      ],
       "kind": "mechanism",
       "title": "同批记录改变布局与权重",
       "relations": [
@@ -564,7 +984,17 @@
     },
     {
       "id": "difference",
-      "keywords": ["差额", "前后对比", "有符号差值", "增减对比", "before after", "difference", "delta", "signed change", "comparison"],
+      "keywords": [
+        "差额",
+        "前后对比",
+        "有符号差值",
+        "增减对比",
+        "before after",
+        "difference",
+        "delta",
+        "signed change",
+        "comparison"
+      ],
       "kind": "mechanism",
       "title": "两期端点转为有符号差值",
       "relations": [
@@ -592,7 +1022,21 @@
     },
     {
       "id": "person-coverage",
-      "keywords": ["人物", "人群", "尺码", "分布图", "覆盖率", "人物图标", "person", "human figure", "population distribution", "coverage", "percentile", "image", "icon"],
+      "keywords": [
+        "人物",
+        "人群",
+        "尺码",
+        "分布图",
+        "覆盖率",
+        "人物图标",
+        "person",
+        "human figure",
+        "population distribution",
+        "coverage",
+        "percentile",
+        "image",
+        "icon"
+      ],
       "title": "从一个人，看见覆盖的边界",
       "kind": "story",
       "relations": [
@@ -615,7 +1059,11 @@
         "assets/examples/segment-draw.mjs",
         "assets/runtime/motion.mjs",
         "assets/runtime/geometry.mjs",
-        "assets/runtime/svg.mjs"
+        "assets/runtime/svg.mjs",
+        "assets/stage-wiring/connect.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/copy.mjs"
       ],
       "assets": [
         "assets/examples/person-coverage/sizing-coverage.mjs"
@@ -623,7 +1071,22 @@
     },
     {
       "id": "multi-constraint",
-      "keywords": ["多个约束", "腰臀", "尺码", "轮廓", "形状比较", "取舍", "multiple constraints", "waist hip", "contour", "shape comparison", "tradeoff", "fit", "image", "silhouette"],
+      "keywords": [
+        "多个约束",
+        "腰臀",
+        "尺码",
+        "轮廓",
+        "形状比较",
+        "取舍",
+        "multiple constraints",
+        "waist hip",
+        "contour",
+        "shape comparison",
+        "tradeoff",
+        "fit",
+        "image",
+        "silhouette"
+      ],
       "title": "满足一个条件，另一个呢？",
       "kind": "story",
       "relations": [
@@ -646,13 +1109,32 @@
         "assets/examples/segment-draw.mjs",
         "assets/runtime/motion.mjs",
         "assets/runtime/geometry.mjs",
-        "assets/runtime/svg.mjs"
+        "assets/runtime/svg.mjs",
+        "assets/stage-wiring/connect.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/copy.mjs"
       ],
       "assets": []
     },
     {
       "id": "object-fit",
-      "keywords": ["口袋", "手机", "容器", "试放", "尺寸适配", "容量与形状", "pocket", "phone", "container", "object fit", "dimensional fit", "physical fit", "sample comparison", "image"],
+      "keywords": [
+        "口袋",
+        "手机",
+        "容器",
+        "试放",
+        "尺寸适配",
+        "容量与形状",
+        "pocket",
+        "phone",
+        "container",
+        "object fit",
+        "dimensional fit",
+        "physical fit",
+        "sample comparison",
+        "image"
+      ],
       "title": "尺寸差异，变成使用后果",
       "kind": "story",
       "relations": [
@@ -675,13 +1157,29 @@
         "assets/examples/segment-draw.mjs",
         "assets/runtime/motion.mjs",
         "assets/runtime/geometry.mjs",
-        "assets/runtime/svg.mjs"
+        "assets/runtime/svg.mjs",
+        "assets/stage-wiring/connect.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/copy.mjs"
       ],
       "assets": []
     },
     {
       "id": "records-composition",
-      "keywords": ["堆积面积图", "堆叠面积图", "百分比面积图", "构成变化", "歌曲分类", "分类口径", "stacked area chart", "composition over time", "reclassification", "weighted share", "music"],
+      "keywords": [
+        "堆积面积图",
+        "堆叠面积图",
+        "百分比面积图",
+        "构成变化",
+        "歌曲分类",
+        "分类口径",
+        "stacked area chart",
+        "composition over time",
+        "reclassification",
+        "weighted share",
+        "music"
+      ],
       "title": "从具体记录，重新理解构成",
       "kind": "story",
       "relations": [
@@ -704,7 +1202,11 @@
         "assets/examples/segment-draw.mjs",
         "assets/runtime/motion.mjs",
         "assets/runtime/geometry.mjs",
-        "assets/runtime/svg.mjs"
+        "assets/runtime/svg.mjs",
+        "assets/stage-wiring/connect.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/copy.mjs"
       ],
       "assets": [
         "assets/examples/records-composition/love-songs.mjs",
@@ -713,7 +1215,20 @@
     },
     {
       "id": "cohort-flow",
-      "keywords": ["流向", "流向图", "流量图", "流带", "流动", "起点终点", "配对记录", "sankey diagram", "flow diagram", "ribbon", "origin destination", "cohort comparison"],
+      "keywords": [
+        "流向",
+        "流向图",
+        "流量图",
+        "流带",
+        "流动",
+        "起点终点",
+        "配对记录",
+        "sankey diagram",
+        "flow diagram",
+        "ribbon",
+        "origin destination",
+        "cohort comparison"
+      ],
       "title": "同一条件下，后来去了哪里？",
       "kind": "story",
       "relations": [
@@ -735,7 +1250,11 @@
         "assets/examples/segment-draw.mjs",
         "assets/runtime/motion.mjs",
         "assets/runtime/geometry.mjs",
-        "assets/runtime/svg.mjs"
+        "assets/runtime/svg.mjs",
+        "assets/stage-wiring/connect.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/runtime/copy.mjs"
       ],
       "assets": []
     }

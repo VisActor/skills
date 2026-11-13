@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>平均更快了，然后呢？ · 开篇短例</title>
+<style>
+:root{--paper:#f2f4f3;--ink:#1d3d44;--muted:#647879;--point:#7d9999;--tail:#b45235;--rule:#ced9d6;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink)}*{box-sizing:border-box}body,figure{margin:0}[hidden]{display:none!important}a{color:inherit;text-underline-offset:5px}:focus-visible{outline:2px solid var(--tail);outline-offset:5px}
+.story{display:grid;position:relative}.question-stage,.scroll-track{grid-area:1/1}.question-stage{position:sticky;top:0;height:100vh;min-height:660px;align-self:start;display:grid;grid-template-rows:56px 200px minmax(0,1fr) 60px;background:var(--paper)}.scroll-track{pointer-events:none}header{display:flex;align-items:center;justify-content:space-between;margin:0 6vw;border-bottom:1px solid var(--rule);font-size:12px;color:var(--muted)}header a{text-decoration:none}
+.copy{width:min(980px,86vw);margin:auto;text-align:center;padding:24px 0 12px}.kicker{font-size:12px;letter-spacing:.1em;color:var(--muted);margin:0 0 12px}h1,h2{font-size:clamp(33px,3.2vw,46px);line-height:1.4;letter-spacing:-.035em;font-weight:580;margin:0 0 12px}.copy p:not(.kicker){font-size:18px;line-height:1.8;margin:0;color:var(--muted)}strong{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}.tail{color:var(--tail)}
+figure{min-height:0;padding:0 7vw 4px}svg{width:100%;height:100%;display:block;overflow:visible}svg text{font-family:inherit;fill:var(--ink)}.mean{font-family:Georgia,"Times New Roman",serif;font-variant-numeric:lining-nums tabular-nums}.group-label{font-size:18px}.unit{font-size:17px;fill:var(--muted)}.mean-prefix{font-size:14px;fill:var(--muted)}.tail-count{fill:var(--tail);font-size:21px;font-variant-numeric:tabular-nums}.axis line{stroke:var(--muted)}.axis text{font-size:15px;fill:var(--muted)}.scope{font-size:15px;fill:var(--tail)}
+.stage-bottom{margin:0 6vw;border-top:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;gap:22px;font-size:12px;color:var(--muted)}nav{display:flex;gap:12px;align-items:center}nav button,nav a{font:inherit;font-size:14px;min-height:42px;border:1px solid var(--rule);border-radius:24px;padding:0 18px;display:flex;align-items:center;background:transparent;color:var(--ink);text-decoration:none;cursor:pointer}nav button:disabled{opacity:.25;cursor:default}[data-next]{color:var(--paper);background:var(--ink)}
+footer{padding:30px 8vw 60px;border-top:1px solid var(--rule);font-size:14px;line-height:1.85}footer>p,details{max-width:860px}footer>p{color:var(--muted)}details{margin-top:24px}summary{cursor:pointer}details p{margin:14px 0}code{font-size:.94em}
+@media(max-height:740px){.question-stage{grid-template-rows:50px 176px minmax(0,1fr) 60px}.copy{padding:18px 0 8px}h1,h2{font-size:36px}.copy p:not(.kicker){font-size:17px}}
+</style></head><body>
+<main id="opening"><section class="story" aria-label="从平均等候进入两批记录的分布"><div class="question-stage">
+<header><span>平均之后，还有谁在等？</span><a href="../index.html#openings">开篇示例 ↗</a></header>
+<div class="copy" aria-live="polite">
+<article data-copy="question"><p class="kicker">预约等候 / 两批独立样本 · 模拟数据</p><h1>平均少等 <span data-difference>10</span> <span data-unit>分钟</span>，<br>久等的人也少了吗？</h1><p>流程调整前后，平均等候从 <strong><span data-mean="before">30</span></strong> 降到 <strong><span data-mean="after">20</span> <span data-unit>分钟</span></strong>。</p></article>
+<article data-copy="evidence" hidden><p class="kicker">两批人的等候记录</p><h2>平均更短，久等的比例却没变。</h2><p>等候至少 <strong class="tail"><span data-threshold>60</span> <span data-unit>分钟</span></strong>的，调整前是 <strong class="tail" data-tail="before">2 / 10</strong>，调整后仍是 <strong class="tail" data-tail="after">2 / 10</strong>。<br>平均少等 <strong><span data-difference>10</span> <span data-unit>分钟</span></strong>，并不意味着久等的人更少。</p></article>
+</div>
+<figure><svg viewBox="0 0 1100 420" role="img" aria-label="两批独立的模拟预约等候记录"></svg></figure>
+<div class="stage-bottom"><span data-reading-guide>两批独立样本 · 比较平均等候</span><nav aria-label="展开记录"><button type="button" data-prev aria-label="上一步" disabled>←</button><button type="button" data-next>看看每个人 →</button><a href="#notes" data-finish hidden>查看设计说明 ↓</a></nav><span>滚动 / 方向键也可推进</span></div>
+</div><div class="scroll-track" aria-hidden="true"></div></section>
+<footer id="notes"><p>两批记录均为模拟，只说明平均数与尾部比例可以给出不同信息，不代表某项服务的实际效果。“久等”在本例中指等候至少 <span data-threshold>60</span> <span data-unit>分钟</span>。</p>
+<details id="example-notes"><summary>叙事、设计与改编</summary>
+<p><strong>叙事：</strong>用容易读懂的平均差异开篇，接着追问它能否代表每个人。属于简单发现引入与汇总转分布；第一项证据显示平均改善与尾部不变可以同时成立。</p>
+<p><strong>设计：</strong>开篇以文字和两个读数建立期待，不提前要求读完整坐标。原来的均值移动到各自分布上方，随后记录与一小时参照显露；均值和尾部留在同一画面。两期是独立样本，圆点没有跨期配对移动。</p>
+<p><strong>改编：</strong>可换成成绩、时长、价格等“汇总是否代表所有记录”的问题，也可改用区间或直方图。入口可只有问题，也可直接给少量证据；无需强造反转。只关心均值时，简短比较本身就够，不必追加分布。</p>
+<p><strong>代码：</strong><a href="scene.mjs">waitingExample / waitingPose / blendWaiting</a> 分别提供数据、画面和衔接；均值、差额、阈值及各组人数由同一模型绑定图文，换样本后重写结论。几何随容器计算，长标签或密集点需另排。<code>mountQuestionOpening</code> 使用共享 <code>connectReading</code>，答案等证据落稳再出现，<a href="../../runtime/copy.mjs"><code>createCopyHandoff</code></a> 在固定位置完成正文淡出、淡入。</p>
+</details></footer></main>
+<script type="module">import {mountQuestionOpening} from './scene.mjs';const story=mountQuestionOpening(document.querySelector('#opening'));addEventListener('pagehide',e=>{if(!e.persisted)story.dispose()});</script>
+</body></html>

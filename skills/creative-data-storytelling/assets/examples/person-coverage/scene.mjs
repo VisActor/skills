@@ -37,13 +37,13 @@ function figure(parent,{variant=0,hero=false}={}){
 }
 
 export const example={
- id:'person-coverage',short:'人物与覆盖',title:'她能穿 M 码，其他人呢？',eyebrow:'从一个女孩，到一套尺码的边界',viewBox:'0 0 1440 720',duration:1900,
+ id:'person-coverage',short:'人物与覆盖',title:'腰围接近 M 码，其他人呢？',eyebrow:'从一个女孩，到一套尺码的边界',viewBox:'0 0 1440 720',duration:1900,
  theme:{paper:'#fbfaf7',ink:'#293440',muted:'#64717b',accent:focusText,line:'#d8dfe4',panel:'#ffffff'},dataBadge:'统计数据',dataCaption:'美国 · 2021–2023。人物为各组腰围百分位示意，并非个体跟踪。',
  states:[
-  {name:'从 15 岁的女孩开始',title:'15 岁，<br>从 <em style="color:#245d98">M 码</em>开始。',description:'用一位女孩代表 14–15 岁人群的中间位置：腰围 77.2 厘米，接近这套女装参照中的 M 码。',value:'',unit:'',metric:''},
-  {name:'同龄女孩，进入同一套尺码',title:'她站在中间，<br><em style="color:#245d98">女孩们却各不相同。</em>',description:'同龄女孩的腰围铺展开来。多数位置还在常规尺码内，也有人越过了边界。开头的女孩仍在原来的位置。',value:'',unit:'',metric:''},
-  {name:'保留女孩分布，加入成年女性',title:'再看成年女性，<br><em>同一套尺码够吗？</em>',description:'下方加入 20 岁及以上女性：腰围中位数是 95.7 厘米。上面的女孩分布还在，尺码的边界也没有变。',value:'',unit:'',metric:''},
-  {name:'尺码上限，落在人群中间之前',title:'常规尺码的上限，<br><em>还没到人群中间。</em>',description:'这组 00–16 码参照只到 91.4 厘米。成年女性的中位数是 95.7 厘米——至少一半人的腰围已超过这条线。',value:'',unit:'',metric:''}
+  {name:'从女孩组的中间位置开始',title:'她的腰围，<br>接近 <em style="color:#245d98">M 码</em>。',description:'这位示意女孩代表 14–15 岁人群的中间位置：腰围 77.2 厘米，接近这套女装参照中的 M 码。只看腰围，还不能判断整件衣服合身。',highlights:[{text:'77.2 厘米',color:heroColor}],value:'',unit:'',metric:''},
+  {name:'同龄女孩，进入同一套尺码',title:'她站在中间，<br><em style="color:#245d98">女孩们却各不相同。</em>',description:'同龄人的腰围有宽有窄。中间位置接近 M 码，不代表这套 00–16 码参照能覆盖所有人；有些位置已在范围之外。',value:'',unit:'',metric:''},
+  {name:'保留女孩分布，加入成年女性',title:'再看成年女性，<br><em>同一套尺码够吗？</em>',description:'20 岁及以上女性的腰围中位数为 95.7 厘米。这套参照的上限，还能覆盖人群的中间位置吗？',highlights:['95.7 厘米'],value:'',unit:'',metric:''},
+  {name:'尺码上限，落在人群中间之前',title:'这套尺码的上限，<br><em>低于成年组中位数。</em>',description:'这组 00–16 码腰围参照最高为 91.4 厘米；在这份美国数据中，20 岁及以上女性的中位数是 95.7 厘米。至少一半成年女性的腰围在范围之外，开头那位女孩的位置不能代表这一群体。',highlights:['91.4 厘米','95.7 厘米'],value:'',unit:'',metric:''}
  ],
  notes:{
   why:'抽取 Sizing Chaos 的年龄与覆盖主线：先从 15 岁女孩和 M 码建立处境，再把她缩小放回同龄分布，最后用成年女性检验同一套尺码。蓝色承接尺码参照；橙色把边界、超出范围的人物和数字连在一起。',
@@ -67,7 +67,7 @@ export const example={
   const boundaryNote=el(svg,'g'),boundaryLead=el(boundaryNote,'path',{fill:'none',stroke:focus,'stroke-width':1.2});
   const boundaryLabel=txt(boundaryNote,0,201,'16 码的腰围参照',{fill:focusText,style:'font-size:12px'}),boundaryValue=txt(boundaryNote,0,229,'91.4 cm',{class:'num',fill:focusText,style:'font-size:28px'});
   const ageA=txt(svg,520,330,'14–15 岁女孩',{style:'font-size:16px;fill:#526b81'}),ageB=txt(svg,520,470,'20 岁及以上女性',{style:'font-size:16px;fill:#526b81'});
-  const percentileNote=txt(svg,1395,105,'显示各组中央 80% 的分布',{'text-anchor':'end',style:'font-size:12px;fill:#7b8790'});
+  const percentileNote=txt(svg,520,48,'显示各组中央 80% 的分布',{style:'font-size:16px;fill:#516874'});
   const medianLayer=el(clipped,'g'),medianA=line(medianLayer,0,0,0,0,{stroke:heroColor,'stroke-width':1,opacity:.4,'stroke-dasharray':'2 5'}),medianB=line(medianLayer,0,0,0,0,{stroke:focus,'stroke-width':1,opacity:.4,'stroke-dasharray':'2 5'});
   const nodes=[];
   for(const [group,rows] of [['teen',coverageData.groupA],['adult',coverageData.groupB]])for(const [i,row] of coverageLayout(rows).entries()){

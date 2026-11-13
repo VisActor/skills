@@ -10,9 +10,9 @@
 <div class="recurrence-stage"><figure><svg viewBox="0 0 1010 650" role="img" aria-label="对白出现的场次"></svg></figure></div>
 <div class="reading-flow">
 <article id="first"><div class="copy" data-state="first"><p class="kicker">第 2 场 / 第一次远行</p><h2>出发前，<br>母亲多说了一句。</h2><p>女儿第一次去外地生活。母亲把她送到车站，临别时叮嘱她，到了打个电话。</p></div></article>
-<article id="repeat"><div class="copy" data-state="repeat"><p class="kicker">第 5 场 / 再次出发</p><h2>后来，<br>又是这句叮嘱。</h2><p>女儿已经熟悉独自生活。假期后再次离家，母亲还是说同一句话。重复让这份牵挂变得可辨。</p></div></article>
+<article id="repeat"><div class="copy" data-state="repeat"><p class="kicker">第 5 场 / 再次出发</p><h2>后来，<br>又是这句叮嘱。</h2><p>女儿已经熟悉独自生活。假期后再次离家，母亲仍叮嘱她打个电话。生活变了，这份担心没有变。</p></div></article>
 <article id="reverse"><div class="copy" data-state="reverse"><p class="kicker">第 8 场 / 送母亲远行</p><h2>这一次，<br>换女儿来说。</h2><p>母亲准备独自去旅行。女儿送她出发，也叮嘱她：到了打个电话。<em>说话的人与听话的人互换了。</em></p></div></article>
-<article id="whole"><div class="copy" data-state="whole"><p class="kicker">放回整段故事</p><h2>同一句话，<br>换了叮嘱的人。</h2><p>只数出现次数，会得到三次。把场次、人物与处境放在一起，才能看见这句叮嘱怎样从母亲传到女儿。</p><p data-reading-end>弧线连接的是经过标注的呼应；每个出现位置仍属于自己的场景。</p></div></article>
+<article id="whole"><div class="copy" data-state="whole"><p class="kicker">放回整段故事</p><h2>同一句话，<br>换了叮嘱的人。</h2><p data-reading-end>三次叮嘱，最初是母亲送女儿，后来是女儿送母亲。同样一句话，<em>关心的方向换了，牵挂留了下来。</em></p></div></article>
 <div class="reading-tail" aria-hidden="true"></div>
 </div></section>
 <footer><p>剧情、对白与场次均为本示例自写虚构材料。场次间距只表示顺序，不表示经过了多少时间。表达启发来自 <a href="https://pudding.cool/2025/12/motifs/#unlimited">The Pudding：Common Threads</a> 对重复旋律及其情境的组织；此处没有使用原作剧情、歌词、音频或代码。</p>
@@ -20,7 +20,7 @@
   <p><strong>叙事设计：</strong><a href="../../../references/design.md#sequence">序列位置 → 前后呼应</a>。虚构对白中，母亲先叮嘱女儿“到了给我打个电话”，后来女儿对母亲说出同一句话。若只问谁说过，按人物分组即可；这里按场次回看各次送行，才能读出角色与处境的改变。</p>
   <p><strong>可视化选择：</strong>标记留在原场次，片段就位后再绘弧线，让读者找到呼应的两端并回看语境。场次表达先后，弧线表达有依据的关系；它们不自动表示等时距、流动或因果。</p>
   <p><strong>改编空间：</strong>可换为原始报道与回应、作品意象或事件片段，重选序列和关系。需有可定位出处与核对依据，同词未必同义。两段已能讲清时可并置；多主题可分行或用矩阵，构图与运动随关系密度调整。</p>
-  <p><strong>代码入口：</strong><code>recurrenceExample</code> 配 <code>scenes / occurrences / links / stops</code>，<code>links.basis</code> 记录依据；<code>recurrenceGeometry / blendRecurrence</code> 管显露与连接。引用、卡片和正文一起改写；保留出处可接原文详情。</p>
+  <p><strong>代码入口：</strong><code>recurrenceExample</code> 配 <code>scenes / occurrences / links / stops</code>，<code>links.basis</code> 记录依据；<code>recurrenceGeometry / blendRecurrence</code> 管显露与连接。引用、卡片和正文一起改写；保留出处可接原文详情。滚动接入见 <a href="../../../references/implementation-stage.md#文字滚动与舞台更新"><code>connectReading</code> 用法</a>。</p>
   <p><a href="scene.mjs">本例数据与代码</a></p>
 </details></footer></main>
 <script type="module">import {mountRecurrence} from './scene.mjs';const story=mountRecurrence(document.querySelector('#recurrence-story'));addEventListener('pagehide',e=>{if(!e.persisted)story.dispose()});</script></body></html>

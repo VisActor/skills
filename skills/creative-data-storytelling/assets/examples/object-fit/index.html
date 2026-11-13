@@ -2,9 +2,13 @@
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>尺寸差异，变成使用后果 · 解释片段</title><link rel="stylesheet" href="../segment-preview.css">
 <style>
-  body[data-reading-state="2"]:has(#scene[data-samples-ready="false"]) :is(.metric, .metric-label) {
+  [data-field="description"]:empty { display: none; }
+  [data-field="description"] { font-size: 15px; line-height: 1.85; color: var(--ink); min-height: 0; }
+  [data-copy]:not([data-copy="2"]) :is(.metric, .metric-label) { display: none; }
+  body[data-reading-state="2"]:has(#scene[data-fit-results-ready="false"]) :is(.metric, .metric-label) {
     visibility: hidden;
   }
+  body[data-reading-state="2"] .metric-label { font-size: 13px; color: #4c6471; }
 </style></head>
 <body>
 <header class="site-header"><a class="brand" href="../index.html#object-fit"><span class="brand-mark" aria-hidden="true">↗</span><span>看见关系<small>VISUAL EXPLANATIONS</small></span></a><button id="about" class="text-button">设计与数据 ↗</button></header>
@@ -16,7 +20,7 @@
 </main>
 <footer class="playback"><span class="chapter-name" id="chapter-name"></span><div class="state-controls"><button id="prev" aria-label="上一步">←</button><span id="state-count"></span><button id="next">继续 →</button></div><div class="secondary-controls"><span class="scroll-hint">滚轮 / 方向键也可推进</span><button class="text-button" id="replay">↺ 重看本段</button></div></footer>
 <dialog id="notes"><button class="close-dialog" aria-label="关闭说明">×</button><details id="example-notes" open><summary>叙事、可视化选择与改编</summary>
-<p><strong>叙事设计：</strong><a href="../../../references/design.md#fit-constraints">多个条件与功能后果</a>。比较两个口袋的尺寸，让同一件物品进入轮廓，再把代表样本放回两组，观察功能差异是否普遍。收尾比较各组比例；换物品只回答适配结果如何变化。</p><p><strong>可视化选择：</strong>物品与容器共用厘米尺度，露出的部分直接解释使用后果。代表样本先带着物品缩到各组位置，其他样本随后显出，返回时顺序相反。几何与身份保留；图文共用各组计数与分母。</p><p><strong>改编空间：</strong>可换成电脑与包、车辆与车位、物品与柜格；也可只取试放或样本比较。重新设计轮廓、排列、方向与探索对象，按用途补足真实约束；不必沿用两个样本、两组或口袋阵列。</p><p><strong>数据与素材：</strong>演示只判断同一个凸五边形内的二维竖直容纳，不模拟布料、厚度或旋转。手机 8×16 cm，钱包 9.5×8.5 cm；素材为自绘矢量。</p><p><strong>代码入口：</strong>example.mount(svg, {rows}) 换样本，objects 换物品；itemTop / fits 共用轮廓，fitSummary 供正文和分组读数使用。render 的 collection 前段移动代表，后段显出其他样本；更换组数或扩大数量时另调排列。</p><p><a href="scene.mjs">本例数据与动画</a> · <a href="https://pudding.cool/2018/08/pockets/">Pockets · 设计参照</a></p>
+<p><strong>叙事设计：</strong><a href="../../../references/design.md#fit-constraints">多个条件与功能后果</a>。比较两个口袋的尺寸，让同一件物品进入轮廓，再把代表样本放回两组，观察功能差异是否普遍。收尾比较各组比例；换物品只回答适配结果如何变化。</p><p><strong>可视化选择：</strong>物品与容器共用厘米尺度，露出的部分直接解释使用后果。正文强调深度差或露出量，与当幕标注同色。代表样本先带着物品缩到各组位置，其他样本随后显出，返回时顺序相反。几何与身份保留；图文共用各组计数与分母。</p><p><strong>改编空间：</strong>可换成电脑与包、车辆与车位、物品与柜格；也可只取试放或样本比较。重新设计轮廓、排列、方向与探索对象，按用途补足真实约束；不必沿用两个样本、两组或口袋阵列。</p><p><strong>数据与素材：</strong>演示只判断同一个凸五边形内的二维竖直容纳，不模拟布料、厚度或旋转。手机 8×16 cm，钱包 9.5×8.5 cm；素材为自绘矢量。</p><p><strong>代码入口：</strong>example.mount(svg, {rows}) 换样本，objects 换物品；itemTop / fits 共用轮廓，fitSummary 供正文和分组读数使用。render 的 collection 前段移动代表，后段显出其他样本；更换组数或扩大数量时另调排列。滚动接入见 <a href="../../../references/implementation-stage.md#文字滚动与舞台更新"><code>connectReading</code> 用法</a>。</p><p><a href="scene.mjs">本例数据与动画</a> · <a href="https://pudding.cool/2018/08/pockets/">Pockets · 设计参照</a></p>
 </details></dialog>
 <script type="module">
 import { example } from './scene.mjs';

@@ -5,10 +5,31 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>同一批记录，改变观察问题 · 局部机制</title>
   <link rel="stylesheet" href="../mechanism.css">
+  <style>
+    .unit-workbench {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(248px, 25%);
+      gap: 24px;
+      align-items: start;
+    }
+    .unit-readout { min-width: 0; padding: 4px 0 0; }
+    .unit-readout .legend { flex-wrap: wrap; gap: 8px 16px; margin: 0 0 12px; }
+    .unit-readout .result { min-height: 3.6em; margin: 0 0 12px; line-height: 1.65; }
+    .unit-readout .explore-controls { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .unit-readout .segmented span { padding-inline: 10px; }
+    #unit-detail { font-size: 14px; }
+    [data-unit-moving] :is(#unit-summary, #unit-detail) { visibility: hidden; }
+    @media (max-height: 780px) {
+      .unit-workbench { grid-template-columns: minmax(0, 760px) minmax(248px, 1fr); }
+    }
+    @media (max-width: 920px) {
+      .unit-workbench { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
 </head>
 <body>
 <main>
-  <nav class="eyebrow"><a href="../index.html#mechanisms">全部示例</a> / 局部机制 · units</nav>
+  <nav class="eyebrow"><a href="../index.html#mechanisms">全部示例</a> / 基础机制 · 动作与读法 · units</nav>
   <section id="unit-example" class="unit-section">
     <h1>同一批记录，改变观察问题</h1>
     <p>项目数量多的类别，服务时长也一定多吗？让同一批模拟记录改变排列与面积，比较两种观察结果。书页轮廓只承担主题识别。</p>
@@ -18,33 +39,38 @@
       <button data-mode="groups" aria-pressed="false">按类别计数</button>
       <button data-mode="weights" aria-pressed="false">按服务时长</button>
     </div>
-    <div class="plot unit-stage">
-      <canvas id="units" width="860" height="460" role="img" aria-label="每个圆代表一个模拟项目" aria-describedby="unit-summary unit-detail"></canvas>
-      <svg id="unit-axis" viewBox="0 0 860 460" aria-hidden="true"></svg>
-    </div>
-    <div class="legend"><span><i style="background:#297c6c"></i>A 类</span><span><i style="background:#be633c"></i>B 类</span><span><i style="background:#7c74a8"></i>C 类</span></div>
-    <p id="unit-summary" class="result" aria-live="polite"></p>
-    <div class="controls explore-controls">
-      <fieldset class="choice-field">
-        <legend>类别</legend>
-        <div id="group-filter" class="segmented">
-          <label><input type="radio" name="project-group" value="all" checked><span>全部</span></label>
-          <label><input type="radio" name="project-group" value="A"><span>A 类</span></label>
-          <label><input type="radio" name="project-group" value="B"><span>B 类</span></label>
-          <label><input type="radio" name="project-group" value="C"><span>C 类</span></label>
+    <div class="unit-workbench">
+      <div class="plot unit-stage">
+        <canvas id="units" width="860" height="460" role="img" aria-label="每个圆代表一个模拟项目" aria-describedby="unit-summary unit-detail"></canvas>
+        <svg id="unit-axis" viewBox="0 0 860 460" aria-hidden="true"></svg>
+      </div>
+      <div class="unit-readout">
+        <div class="legend"><span><i style="background:#297c6c"></i>A 类</span><span><i style="background:#be633c"></i>B 类</span><span><i style="background:#7c74a8"></i>C 类</span></div>
+        <p id="unit-summary" class="result" aria-live="polite"></p>
+        <div class="controls explore-controls">
+          <fieldset class="choice-field">
+            <legend>类别</legend>
+            <div id="group-filter" class="segmented">
+              <label><input type="radio" name="project-group" value="all" checked><span>全部</span></label>
+              <label><input type="radio" name="project-group" value="A"><span>A 类</span></label>
+              <label><input type="radio" name="project-group" value="B"><span>B 类</span></label>
+              <label><input type="radio" name="project-group" value="C"><span>C 类</span></label>
+            </div>
+          </fieldset>
+          <label class="control-field">
+            <span class="control-label">项目详情</span>
+            <span class="select-wrap"><select id="record-select" aria-label="选择项目查看详情"></select></span>
+          </label>
         </div>
-      </fieldset>
-      <label class="control-field">
-        <span class="control-label">项目详情</span>
-        <span class="select-wrap"><select id="record-select" aria-label="选择项目查看详情"></select></span>
-      </label>
+        <p id="unit-detail" class="muted" aria-live="polite"></p>
+        <span id="unit-status" class="status"></span>
+      </div>
     </div>
-    <p id="unit-detail" class="muted" aria-live="polite"></p>
-    <span id="unit-status" class="status"></span>
     <details id="example-notes" class="scope"><summary>表达理由与改编</summary>
   <p><strong>表达理由：</strong><a href="../../../references/design.md#unit-intro">主题形象</a>、<a href="../../../references/design.md#unit-records">分布</a>与<a href="../../../references/design.md#unit-weight">数量转权重</a>各有用途：轮廓引入主题，等大点看记录数，面积看贡献。保留记录身份以跟住对象，散开动作本身不表示数据变化。</p>
   <p><strong>数量怎样转成贡献：</strong>本例先按类别排等大项目，再保持中心，将面积改为服务时长，看到少数长时项目改变各组的轻重。按最大圆预留间距，减少无关移动，代价是等大点阶段更松；只需精读组间总量时可改成长度，也可将同批项目排成贡献带。</p>
   <p><strong>改编与接线：</strong>需要有稳定 ID 的逐条记录；汇总量另定义固定量单元。<code>unitExample</code> 配数据、类别、域与面积系数，<code>slots</code> 改轮廓，<code>unitPose / blendUnits / renderUnits</code> 管布局和衔接。可换形状、素材、分组及顺序，按问题取用状态，修改权重编码时同步几何和单位。</p>
+  <p data-unit-area-scale></p>
   <p><a href="scene.mjs">本例数据与代码</a> · <a href="../design-frames.svg">简化构图示意 B</a></p>
 </details>
   </section>

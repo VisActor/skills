@@ -13,7 +13,7 @@ export async function loadCatalog(root = installedRoot) {
   const ids = new Set();
   for (const entry of catalog.examples) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(entry.id) || ids.has(entry.id) || !entry.title ||
-      !["story", "mechanism"].includes(entry.kind) ||
+      !["opening", "story", "mechanism"].includes(entry.kind) ||
       typeof entry.design !== "string" || !entry.design ||
       !Array.isArray(entry.relations) || !Array.isArray(entry.dependencies) || !Array.isArray(entry.assets))
       throw new Error("Invalid or duplicate example entry: " + entry.id);
@@ -156,7 +156,8 @@ async function inspectionView(details, root) {
       dependencies: details.copyAlongside.dependencies.map(file => file.relative),
       assets: details.copyAlongside.assets.map(file => file.relative),
     },
-    usage: "本地路径相对 root。explanation 用于设计理解；改编实现时按 entryLines 定位 code 中的相关部分，调整装配时读 layout。采用本例时连同 copyAlongside 复制并保持相对目录；运行依赖按接口导入，排错或扩展时再查源码。",
+    usage: (details.kind === "mechanism" ? "本例抽出局部机制，动作解说供作者理解；改编为作品时，正文围绕自己的问题与发现重写，只保留读者必要的读法提示。" : "") +
+      "本地路径相对 root。explanation 用于设计理解；改编实现时按 entryLines 定位 code 中的相关部分，调整装配时读 layout。采用本例时连同 copyAlongside 复制并保持相对目录；运行依赖按接口导入，排错或扩展时再查源码。",
   };
 }
 

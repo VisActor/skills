@@ -5,6 +5,8 @@ import {el,txt,line,attr,mix,lerp,clamp01} from '../segment-draw.mjs';
 export const fitData={body:{waist:84,hip:98},sizes:{M:{waist:76,hip:98},L:{waist:84,hip:106}}};
 export function fitDifferences(size){return {waist:fitData.sizes[size].waist-fitData.body.waist,hip:fitData.sizes[size].hip-fitData.body.hip};}
 const CX=1000,K=3,YW=254,YH=488;
+const sizeLabelOpacity = swap => Math.max(0, 1 - Math.min(swap, 1 - swap) * 6);
+const differenceOpacity = p => clamp01((p.hipFocus - .6) / .4) * sizeLabelOpacity(p.swap);
 // The two circumference measurements drive a schematic contour, not a 3D fit simulation.
 export function contourWidth(y,waist,hip){
  const anchors=[[80,waist*K+38],[YW,waist*K],[YH,hip*K],[665,hip*K*.87]];
@@ -20,9 +22,9 @@ export const example={
  theme:{paper:'#f3f0e7',ink:'#333e43',muted:'#727d80',accent:'#ba5436',line:'#d6d8d0',panel:'#faf8ef'},
  dataCaption:'身体与尺码为演示设定；轮廓不是穿着模拟。',
  states:[
-  {name:'按腰围，选 L',title:'腰围对上了。<br><em>这就合适了吗？</em>',description:'沿着腰围看：身体是 84 厘米，L 号也是 84 厘米。两条轮廓在这里相遇。',value:'',unit:'',metric:''},
-  {name:'还是 L，再看臀围',title:'同一个尺码，<br><em>臀围却偏大。</em>',description:'身体没有变，衣服也没有换。顺着轮廓往下看，L 号的臀围比身体多出 8 厘米。',value:'',unit:'',metric:''},
-  {name:'换成 M，两个部位一起变',title:'臀围对上了，<br><em>腰围又偏小。</em>',description:'换成 M 号，臀围正好是 98 厘米；腰围却缩到 76 厘米，比身体少 8 厘米。',value:'',unit:'',metric:''}
+  {name:'按腰围，选 L',title:'腰围对上了。<br><em>这就合适了吗？</em>',description:'身体的腰围和 L 号参照都是 84 厘米。按腰围选中了它，臀围也会合适吗？',highlights:['84 厘米'],value:'',unit:'',metric:''},
+  {name:'还是 L，再看臀围',title:'同一个尺码，<br><em>臀围却偏大。</em>',description:'L 号的臀围是 106 厘米，身体是 98 厘米，多出 8 厘米。腰围对上的同时，差异出现在了另一处。',highlights:['8 厘米'],value:'',unit:'',metric:''},
+  {name:'换成 M，两个部位一起变',title:'臀围对上了，<br><em>腰围又偏小。</em>',description:'M 号的臀围正好是 98 厘米；腰围却只有 76 厘米，比身体少 8 厘米。换小一码，没有让两处尺寸同时合适。',highlights:['少 8 厘米'],value:'',unit:'',metric:''}
  ],
  mount(svg){
   const defs=el(svg,'defs'),pattern=el(defs,'pattern',{id:'fit-paper-grid',width:28,height:28,patternUnits:'userSpaceOnUse'});el(pattern,'path',{d:'M28 0H0V28',fill:'none',stroke:'#d6d9cf','stroke-width':.6});
@@ -51,6 +53,10 @@ export const example={
   const detail=txt(callout,943,601,'',{'text-anchor':'end',style:'font-size:14px;fill:#99523c'});
   txt(svg,998,704,'横向按围度统一比例示意 · 不是实物正面尺寸',{'text-anchor':'middle',class:'tiny'});
   function pose(step){return {step,waist:fitData.sizes[step===2?'M':'L'].waist,hip:fitData.sizes[step===2?'M':'L'].hip,hipFocus:step===0?0:1,swap:step===2?1:0};}
+  function copyReady(step, p) {
+   const currentSizeMatches = (p.swap >= .5) === (step === 2);
+   return currentSizeMatches && (step === 0 ? sizeLabelOpacity(p.swap) : differenceOpacity(p)) >= .9;
+  }
   function render(p){
    const hw=p.hip,ww=p.waist,f=p.hipFocus,s=p.swap;
    attr(garment,{d:outline(ww,hw)});for(const [node,side] of [[gapLeft,-1],[gapRight,1]])attr(node,{d:gap(ww,hw,side),'fill-opacity':lerp(.14,.79,f)});
@@ -60,15 +66,15 @@ export const example={
    const activeYs=Array.from({length:30},(_,i)=>low+(high-low)*i/29);
    attr(active,{d:[-1,1].map(side=>activeYs.map((y,i)=>`${i?'L':'M'}${CX+side*contourWidth(y,ww,hw)},${y}`).join(' ')).join(' '),opacity:1});
    attr(waistRule,{opacity:1});attr(hipRule,{opacity:lerp(.3,1,f)});
-   const settled=Math.max(0,1-Math.min(s,1-s)*6);
+   const settled=sizeLabelOpacity(s);
    size.textContent=s<.5?'L':'M';attr(size,{opacity:.85*settled});
    for(const a of annotations){const v=p[a.key],isHip=a.key==='hip';attr(a.g,{opacity:isHip?lerp(.32,1,f):1});a.number.textContent=`${s<.5?fitData.sizes.L[a.key]:fitData.sizes.M[a.key]} cm`;a.labelText.textContent=`${s<.5?'L':'M'} 号${isHip?'臀围':'腰围'}`;attr(a.number,{opacity:settled});attr(a.labelText,{opacity:settled});attr(a.lead,{x1:CX+Math.max(v,a.target)*K+7,x2:1340,opacity:settled});}
    const delta=fitDifferences(s<.5?'L':'M')[s<.5?'hip':'waist'];difference.textContent=(delta<0?'−':delta>0?'+':'')+Math.abs(delta)+' cm';
    detail.textContent=s<.5?'臀围多出的部分':'腰围不足的部分';
    const cy=lerp(568,346,s),cx=lerp(943,1020,s);attr(difference,{x:cx,y:cy});attr(detail,{x:cx,y:cy+27});
    const anchorX=CX+(s<.5?contourWidth(YH,fitData.body.waist,fitData.body.hip)+12:contourWidth(YW,ww,hw)+12),anchorY=lerp(YH,YW,s);
-   attr(leader,{d:`M${cx+12} ${cy-12} L${anchorX-28} ${cy-12} L${anchorX} ${anchorY}`});attr(callout,{opacity:clamp01((f-.6)/.4)*settled});
+   attr(leader,{d:`M${cx+12} ${cy-12} L${anchorX-28} ${cy-12} L${anchorX} ${anchorY}`});attr(callout,{opacity:differenceOpacity(p)});
   }
-  return {pose,blend:mix,render};
+  return {pose,blend:mix,render,copyReady};
  }
 };

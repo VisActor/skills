@@ -1,34 +1,53 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>一份汉堡的价格 · 素材与走势</title>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>汉堡涨价，食材也一样吗？</title>
 <style>
-:root{color:#45392f;background:#f4eee2;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;--muted:#806f5a;--rule:#d8cbb7}*{box-sizing:border-box}body{margin:0}a{color:inherit;text-underline-offset:5px}p{line-height:1.9}header{margin:25px 5vw;display:flex;justify-content:space-between;border-bottom:1px solid var(--rule);padding-bottom:19px;font-size:13px;color:var(--muted)}
-.intro{min-height:70vh;display:flex;align-items:center;justify-content:center;gap:6vw;padding:4vh 8vw 9vh}.intro img{width:clamp(220px,28vw,360px);filter:drop-shadow(0 13px 13px #72502c15)}.intro div{max-width:440px}.kicker{font-size:12px!important;letter-spacing:.12em;color:var(--muted)!important;margin:0 0 18px}h1,h2{font-family:"Songti SC","Noto Serif CJK SC",serif;font-weight:600;line-height:1.4}h1{font-size:clamp(38px,4vw,58px);margin:0 0 22px}h2{font-size:clamp(29px,2.6vw,40px);margin:0 0 20px}.intro p{font-size:18px;margin:0}.cue{display:inline-block;margin-top:30px;font-size:13px;color:var(--muted)}
-.story{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,25%);gap:3vw;padding:0 6vw 0 2vw}.price-stage{grid-area:1/1;position:sticky;top:0;height:100vh;min-height:520px;display:flex;align-items:center}figure{margin:0;width:100%}svg{display:block;width:100%;max-height:87vh;overflow:visible}svg text{font-family:inherit}.axis line{stroke:#d7cdbb;stroke-width:1}.axis .zero{stroke:#9b8a73;stroke-width:1.5}.axis text{font-size:20px;fill:#82745e}.axis .axis-title{font-size:19px;fill:#6b5c49}.date-label{font-size:22px;fill:#6b5c49;font-variant-numeric:tabular-nums}.readout{font-size:27px;font-variant-numeric:tabular-nums}.series-name{font-size:19px}
-.reading-flow{grid-area:1/2;position:relative;padding-top:31vh}article{min-height:83vh}article:last-of-type{min-height:0}.copy{padding:12px 0 40px}.copy p{font-size:17px;color:#6b5c49;margin:0}.copy em{font-style:normal;color:#9d492f;white-space:nowrap}.reading-tail{height:0}footer{padding:38px 8vw 65px;border-top:1px solid var(--rule)}footer p{font-size:14px;color:var(--muted);max-width:880px;margin:14px 0}details{max-width:900px;margin-top:28px}summary{cursor:pointer}details h3{font-size:16px;margin:25px 0 8px}code{font-size:.95em}
-</style></head><body>
-<header><span>餐桌上的价格 / 澳大利亚 · 2017—2024</span><a href="../index.html#story-examples">示例索引 ↗</a></header>
+:root{--paper:#f6f0e5;--ink:#43362d;--muted:#786a59;--rule:#dfd5c5;--accent:#aa482f;color:var(--ink);background:var(--paper);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+*{box-sizing:border-box}body,figure{margin:0}a{color:inherit;text-underline-offset:5px}a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
+.story{position:relative;display:grid}.price-stage,.reading-flow{grid-area:1/1}.price-stage{position:sticky;top:0;height:100vh;min-height:620px;display:grid;grid-template-rows:58px 190px minmax(0,1fr) 46px;padding:0 5vw;z-index:1;background:var(--paper)}
+header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);font-size:12px;color:var(--muted);letter-spacing:.04em}.edition{display:flex;align-items:center;gap:12px}.edition b{color:var(--accent);font-size:17px;font-weight:650}header a{text-decoration:none}
+.stage-copy{padding:29px 1.2vw 0}.copy{width:100%;max-width:950px;margin:0 auto}.kicker{font-size:12px;letter-spacing:.1em;color:var(--muted);margin:0 0 12px}.copy h1,.copy h2,.ending h2{font-family:"Songti SC","Noto Serif CJK SC","STSong",serif;font-weight:600;line-height:1.3;letter-spacing:.01em}.copy h2{font-size:clamp(30px,2.8vw,40px);margin:0 0 13px}.copy p:not(.kicker){font-size:17px;line-height:1.85;margin:0;max-width:800px;color:#695b4c}.copy em{font-style:normal;color:var(--accent);white-space:nowrap}.copy.cover{text-align:center;max-width:800px}.copy.cover h1{font-size:clamp(40px,4vw,56px);margin:0 0 13px}.copy.cover p:not(.kicker){margin:auto;font-size:17px}
+figure{min-height:0;display:flex;justify-content:center;align-items:center}svg{display:block;width:100%;height:100%;max-width:1500px;overflow:visible}svg text{font-family:inherit}.axis line{stroke:var(--rule);stroke-width:1}.axis .zero{stroke:#ae9c86;stroke-width:1.5}.axis text{font-size:19px;fill:var(--muted)}.axis .axis-title{font-size:18px}.date-label{font-size:18px;fill:var(--muted);font-variant-numeric:tabular-nums}.readout{font-weight:550;font-variant-numeric:tabular-nums}.series-name{font-size:18px}.mark-image{filter:drop-shadow(0 3px 2px #5a371717)}
+.stage-bottom{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);border-top:1px solid var(--rule)}.stage-bottom a{text-decoration:none;color:var(--ink)}.stage-bottom .scope{max-width:65%;line-height:1.5}.reading-flow{pointer-events:none}.step{height:76vh;min-height:470px;scroll-margin-top:38vh}.step:first-child{height:100vh}.step:last-child{height:120vh}
+.ending{padding:90px max(8vw,24px) 80px;max-width:1200px;margin:auto}.ending .rule{width:40px;border-top:3px solid var(--accent);margin-bottom:24px}.ending h2{font-size:clamp(29px,2.8vw,39px);margin:0 0 22px}.ending>p{max-width:720px;font-size:18px;line-height:1.9;margin:12px 0;color:#695b4c}.ending .answer{color:var(--ink)}
+footer{border-top:1px solid var(--rule);padding:28px 8vw 60px}footer>p{font-size:13px;color:var(--muted);line-height:1.8;max-width:900px}details{max-width:950px;margin-top:24px;font-size:14px;line-height:1.85;color:#685b4d}summary{cursor:pointer;color:var(--ink)}details p{margin:16px 0}code{font-size:.94em;overflow-wrap:anywhere}
+@media(max-height:740px){.price-stage{grid-template-rows:48px 166px minmax(0,1fr) 40px}.stage-copy{padding-top:21px}.copy.cover h1{font-size:42px}.copy h2{font-size:32px}.copy p:not(.kicker){font-size:16px}.copy .kicker{margin-bottom:9px}}
+</style>
+</head>
+<body>
 <main id="trend-story">
-<section class="intro"><img src="images/burger.svg" alt="汉堡示意插画"><div><p class="kicker">一份熟悉的午餐</p><h1>汉堡涨价，<br>食材也一样吗？</h1><p>先沿着时间，看一份汉堡怎样变贵。再看看，它的食材有没有走同一条路。</p><span class="cue">从 2017 年开始 ↓</span></div></section>
-<section class="story" aria-label="汉堡价格逐期推进后比较同比涨幅">
-<div class="price-stage"><figure><svg viewBox="0 0 1000 650" role="img" aria-label="汉堡价格"></svg></figure></div>
-<div class="reading-flow">
-<article id="start"><div class="copy" data-state="start"><p class="kicker">2017 年初</p><h2>一份巨无霸，<br><span data-observation="burger-2017-1">5.8</span> 澳元。</h2><p>先记住这个价格。接下来每一个小汉堡，都是一次实际报价。</p></div></article>
-<article id="early"><div class="copy" data-state="early"><p class="kicker">2017 → 2019</p><h2>起初，<br>只是小步上涨。</h2><p>到 2019 年七月，价格来到 <em><span data-observation="burger-2019-2">6.15</span> 澳元</em>。新的报价接着旧的轨迹，变化还不算大。</p></div></article>
-<article id="pause"><div class="copy" data-state="pause"><p class="kicker">2020 → 2022 年初</p><h2>上涨，<br>也有停顿。</h2><p>价格在 6.4—6.55 澳元之间徘徊。2022 年初的报价还略低于一年前。</p></div></article>
-<article id="rise"><div class="copy" data-state="rise"><p class="kicker">2022 → 2024</p><h2>随后，<br>涨得更快了。</h2><p>到 2024 年七月，一份巨无霸卖 <em><span data-observation="burger-2024-2">7.75</span> 澳元</em>。这段上升，比前几年明显得多。</p></div></article>
-<article id="rate"><div class="copy" data-state="rate"><p class="kicker">从价格，转向涨幅</p><h2>比一年前，<br>贵了多少？</h2><p>同一批报价换成同比涨幅。高于零是在涨价，低于零是在降价；这下可以和不同食材放在一起看。</p></div></article>
-<article id="bread"><div class="copy" data-state="bread"><p class="kicker">先看面包</p><h2>面包，<br>也在那时涨得快。</h2><p>两条线都在 2022—2023 年明显抬升，随后放缓。单看这一路，似乎能解释汉堡的涨价。</p></div></article>
-<article id="beef"><div class="copy" data-state="beef"><p class="kicker">再看牛肉</p><h2>但另一种食材，<br>已经在降价。</h2><p>2024 年六月季度，牛肉与小牛肉价格同比为 <em><span data-observation="beef-2024-2" data-metric="yoy">−3.6%</span></em>；七月的汉堡报价同比仍在上涨。</p><p data-reading-end>食材与汉堡的价格，并不总是同步。这些走势提供了线索，却还不是餐厅的成本账。</p></div></article>
-<div class="reading-tail" aria-hidden="true"></div>
-</div></section>
+<section class="story" aria-label="一份汉堡，从价格看到涨幅">
+<div class="price-stage">
+<header><span class="edition"><b>食</b> 餐桌上的价格 · 澳大利亚</span><a href="../index.html#story-examples">示例索引 ↗</a></header>
+<div class="stage-copy">
+<article class="copy cover" data-copy="cover"><p class="kicker">2017—2024 / 一份熟悉的午餐</p><h1>汉堡涨价，食材也一样吗？</h1><p>把一份汉堡的价格翻回七年前，<br>再看看面包和牛肉，是否也走过同样的涨价路。</p></article>
+<article class="copy" data-copy="start" hidden><p class="kicker">2017 年 1 月</p><h2>当时，一份巨无霸 <em><span data-observation="burger-2017-1">5.8</span> 澳元</em>。</h2><p>头几年，这份午餐慢慢变贵，随后却停了一阵。</p></article>
+<article class="copy" data-copy="pause" hidden><p class="kicker">2017 → 2022 年初</p><h2>涨价并没有一路向上。</h2><p>2020 年后，报价一度停在 6.4—6.55 澳元之间。到 2022 年初，<em><span data-observation="burger-2022-1">6.4</span> 澳元</em>，还比一年前便宜一点。</p></article>
+<article class="copy" data-copy="rise" hidden><p class="kicker">2022 → 2024</p><h2>随后两年，价格明显抬高。</h2><p>2024 年七月，巨无霸卖到 <em><span data-observation="burger-2024-2">7.75</span> 澳元</em>。食材也在这段时间涨价了吗？</p></article>
+<article class="copy" data-copy="rate" hidden><p class="kicker">换一个问题 / 与一年前相比</p><h2>最贵的时候，未必涨得最快。</h2><p>到 2024 年七月，报价创下这段记录的新高，同比涨幅却已回落到 <em><span data-observation="burger-2024-2" data-metric="yoy">+4.0%</span></em>。涨得最快的时点，出现在 2023 年初。</p></article>
+<article class="copy" data-copy="bread" hidden><p class="kicker">加入一种食材 / 面包</p><h2>面包也经历了那一轮急涨。</h2><p>2022—2023 年，面包与汉堡的同比涨幅先后抬升，又逐渐回落。但汉堡里不只有面包，牛肉也同步吗？</p></article>
+<article class="copy" data-copy="beef" hidden><p class="kicker">再看另一种食材 / 牛肉与小牛肉</p><h2>牛肉同比下跌，汉堡仍比一年前贵。</h2><p>2024 年第二季度，牛肉与小牛肉价格比上年同期低 <em style="color:#406e66"><span data-observation="beef-2024-2" data-metric="absolute-yoy">3.6%</span></em>。同年七月的巨无霸报价，同比仍高 <em><span data-observation="burger-2024-2" data-metric="absolute-yoy">4.0%</span></em>。</p></article>
+</div>
+<figure><svg viewBox="0 0 1200 460" role="img" aria-label="汉堡价格，2017 年 1 月"></svg></figure>
+<div class="stage-bottom"><span class="scope" data-scope>巨无霸 · 2017 年 1 月 · 澳大利亚</span><a data-next href="#start">沿着报价往后看 ↓</a></div>
+</div>
+<div class="reading-flow" aria-hidden="true">
+<div class="step" id="top" data-step="cover"></div><div class="step" id="start" data-step="start"></div><div class="step" id="pause" data-step="pause"></div><div class="step" id="rise" data-step="rise"></div><div class="step" id="rate" data-step="rate"></div><div class="step" id="bread" data-step="bread"></div><div class="step" id="beef" data-step="beef"></div>
+</div>
+</section>
+<section class="ending" id="conclusion"><div class="rule"></div><p class="kicker">回到这份午餐</p><h2>汉堡与食材，并不总是一起涨。</h2><p class="answer">面包的走势与汉堡有相似之处，牛肉却给出了另一条线索：牛肉同比下跌，巨无霸报价仍高于一年前。</p><p>这些数据能看见价格是否同步。要解释一份汉堡为什么卖这个价，还需要餐厅的采购、人工、租金等成本资料。</p></section>
 <footer>
-<p>数据：<a href="https://github.com/TheEconomist/big-mac-data">The Economist 巨无霸价格数据</a>（澳大利亚半年报价）；<a href="https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia/jun-quarter-2024">ABS，2024 年六月季度，表 7</a>（面包 A2327061R、牛肉与小牛肉 A2327241X，八个首府城市加权平均）。展示 2017—2024 年观察，以 2016 年同半年度／同季度记录支持同比计算；季度值放在季末，保留各自频率，未补造相同日期。连线只连接观测。</p>
-<p>表达参考：<a href="https://www.abc.net.au/news/2024-08-05/cost-of-living-interest-rates-burgers/104156654">ABC：What's driving up burger prices?</a>。此页重写短篇叙事和代码，以静态 SVG 直接标记观测。采用冻结原始记录自行计算，不逐像素复制原作。</p>
+<p>数据：The Economist 巨无霸半年报价；ABS 面包、牛肉与小牛肉季度价格指数。素材标识观测，大小不表示价格。</p>
+<details><summary>数据、口径与来源</summary><p><a href="https://github.com/TheEconomist/big-mac-data">The Economist 巨无霸数据</a>：澳大利亚，2017—2024 年半年观察。<a href="https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia/jun-quarter-2024">ABS，2024 年六月季度，表 7</a>：面包 A2327061R、牛肉与小牛肉 A2327241X，八个首府城市加权平均。同比采用上一年同半年度或同季度记录；季度值标在季末，不补造共同日期。连线连接观测，不代表每日价格。</p><p>表达参考 <a href="https://www.abc.net.au/news/2024-08-05/cost-of-living-interest-rates-burgers/104156654">ABC：What's driving up burger prices?</a>。这里使用冻结原始记录重新计算，插画与代码为独立演示。</p></details>
 <details id="example-notes"><summary>叙事、可视化选择与改编</summary>
-  <p><strong>叙事设计：</strong><a href="../../../references/design.md#history">看变化</a> → <a href="../../../references/design.md#comparison-basis">换口径比较</a>。先看汉堡价格如何停顿与加速，再问食材是否同样上涨。换成同比后逐项引入参照，检验走势是否一致；走势相似本身不足以证明原因。</p>
-  <p><strong>可视化选择：</strong><a href="../../../references/design.md#objects">素材直接标记观测</a>，让具体物件与时间中的读数相连。转换同比时保留日期和记录身份，只改变纵向量值；各系列共用涨幅尺度，图片尺寸负责识别与重点。</p>
-  <p><strong>改编空间：</strong>可换对象、素材、指标、参照及先后顺序；图片也可换成普通标记，密集序列只突出关键观测。只问走势可保留原值；比较涨幅须有同期间正值基数，缺测不补成事实。价格指数不能相加成成本。</p>
-  <p><strong>代码入口：</strong><code>mountTrend(root, { config })</code> 换观测、素材与停留点，<code>metric / unit / formatValue</code> 换读数。只选 <code>raw</code> 不需去年数据；用到 <code>yoy</code> 的系列才需 <code>frequency / previousId</code>。<code>trendPose / blendTrend / trendMarks</code> 管位置与显露；新正文和相近端点的标注仍按画面安排。</p>
-  <p><a href="scene.mjs">本例数据与代码</a></p>
-</details></footer></main>
-<script type="module">import { mountTrend } from './scene.mjs';const story=mountTrend(document.querySelector('#trend-story'));addEventListener('pagehide',e=>{if(!e.persisted)story.dispose()});</script></body></html>
+<p><strong>叙事：</strong><a href="../../../references/design.md#history">价格怎样变化</a> → <a href="../../../references/design.md#comparison-basis">涨幅何时最大</a> → 食材是否同步。面包提供相似走势，牛肉补充反例；结尾回答同步性，留下成本原因的证据边界。</p>
+<p><strong>设计：</strong><a href="../../../references/design.md#objects">同一张汉堡素材</a>从开篇缩到首个报价位置，再逐期加入记录。宽图留给时间，短正文在上方独立区域，与图形同时开始交接，数字强调跟随对应观测。转同比时保留横向日期与记录身份，只改变纵向量值。参照逐项进入，末端直接标名。</p>
+<p><strong>改编：</strong>可借整段追问，也可只取时间推进或换指标。对象、素材、布局、参照和叙事顺序都能改；普通标记也成立。同比需要同期间正值基数，价格指数不能相加成成本。图片大小不编码量值。</p>
+<p><strong>代码：</strong><code>mountTrend(root,{config})</code> 接入；<code>series / stops</code> 换数据和阶段，不传 <code>layout</code> 随容器排开，传入时采用指定画布。<code>cover</code> 可省略；只用 <code>raw</code> 不需同比数据。<code>trendPose / blendTrend / trendMarks</code> 管几何，HTML 中 <code>data-copy / data-step</code> 配正文与触发位置，换题材时重排标注。滚动接入见 <a href="../../../references/implementation-stage.md#文字滚动与舞台更新"><code>connectReading</code> 用法</a>。</p>
+<p><a href="scene.mjs">本例数据与代码</a></p>
+</details></footer>
+</main>
+<script type="module">import {mountTrend} from './scene.mjs';const story=mountTrend(document.querySelector('#trend-story'));addEventListener('pagehide',e=>{if(!e.persisted)story.dispose()});</script>
+</body></html>

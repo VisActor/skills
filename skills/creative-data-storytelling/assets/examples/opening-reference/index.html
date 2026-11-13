@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>带着一张告示往下读 · 开篇短例</title>
+<style>
+:root{--paper:#f7f7f2;--ink:#203f36;--muted:#62766c;--accent:#aa5137;--reference:#315e4d;--rule:#d8dfd5;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}*{box-sizing:border-box}body,figure{margin:0}[hidden]{display:none!important}a{color:inherit;text-underline-offset:5px}:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
+header{height:56px;margin:0 6vw;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px}header a{text-decoration:none}.intro{min-height:calc(100vh - 56px);display:grid;grid-template-columns:1.1fr 1fr;align-content:center;align-items:center;gap:6vw;padding:70px 11vw}.kicker{font-size:12px;letter-spacing:.1em;color:var(--muted);margin:0 0 16px}h1{font-family:"Songti SC","STSong",serif;font-size:clamp(36px,3.9vw,56px);line-height:1.5;margin:0 0 24px;font-weight:600}.intro p:not(.kicker){font-size:18px;line-height:1.9;max-width:24em;color:var(--muted)}.enter{display:inline-block;font-size:15px;text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:8px;margin-top:14px}
+.notice{width:340px;justify-self:center;position:relative;background:#fffef9;border:1px solid #cdd7ca;padding:30px 32px 35px;box-shadow:0 8px 0 -4px #e0e6da,0 18px 25px #1c352409;transform:rotate(-3deg)}.notice:before{content:"";position:absolute;top:-8px;left:142px;width:55px;height:15px;background:#dcc9a9bb}.notice small{font-size:13px;color:var(--muted)}.notice h2{font-size:24px;font-weight:500;border-bottom:1px solid var(--rule);padding-bottom:20px;margin:14px 0 18px}.notice .amount{font:100px/1.2 Georgia,serif;color:var(--reference);font-variant-numeric:tabular-nums}.notice .unit{font-size:18px;margin-left:8px}.notice .caption{font-size:14px;color:var(--muted);margin:12px 0 0}
+.story{border-top:1px solid var(--rule);display:grid;position:relative}.record-stage,.scroll-track{grid-area:1/1}.record-stage{height:100vh;min-height:640px;position:sticky;top:0;align-self:start;background:var(--paper);display:grid;grid-template-rows:190px minmax(0,1fr) 64px}.scroll-track{pointer-events:none}.reading-panels{width:min(780px,84vw);margin:auto;padding:24px 0}.step p:not(.kicker){font-size:23px;line-height:1.85;margin:0}.step strong{color:var(--reference);font-weight:600}.step em{font-style:normal;color:var(--accent)}
+figure{padding:0 8vw;min-height:0}svg{width:100%;height:100%;display:block;overflow:visible}svg text{font-family:inherit}.axis line{stroke:var(--rule);stroke-dasharray:2 6}.axis .zero{stroke:#728c7b;stroke-dasharray:none}.axis text{font-size:17px;fill:var(--muted)}.axis-title{font-size:15px!important}.record-name{font-size:24px}.record-detail{font-size:15px;fill:var(--muted)}.record-value{font-family:Georgia,serif;font-size:30px;font-variant-numeric:tabular-nums}.gap{font-size:20px}
+.stage-bottom{border-top:1px solid var(--rule);margin:0 6vw;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:12px;color:var(--muted)}nav{display:flex;gap:12px;align-items:center}nav button,nav a{border:1px solid var(--rule);background:transparent;color:var(--ink);border-radius:24px;font:inherit;font-size:15px;min-height:42px;padding:0 20px;cursor:pointer;text-decoration:none;display:flex;align-items:center}nav button:disabled{opacity:.25;cursor:default}[data-next]{background:var(--ink);color:var(--paper)}
+footer{padding:30px 8vw 60px;border-top:1px solid var(--rule);font-size:14px;line-height:1.85}footer>p,details{max-width:860px}footer>p{color:var(--muted)}details{margin-top:24px}summary{cursor:pointer}details p{margin:14px 0}code{font-size:.94em}
+@media(max-height:740px){.intro{padding:45px 10vw}h1{font-size:40px}.notice .amount{font-size:84px}.record-stage{grid-template-rows:160px minmax(0,1fr) 64px}.step p:not(.kicker){font-size:21px}}
+</style></head><body>
+<header><span>一周的开放时间</span><a href="../index.html#openings">开篇示例 ↗</a></header>
+<main id="opening">
+<section class="intro" id="top"><div><p class="kicker">三家虚构图书馆 / 模拟数据</p><h1>新馆开了，<br>门会开得更久吗？</h1><p>带上老馆的这张开放告示，<br>看看后来者为读者留出了多少时间。</p><a class="enter" href="#comparison">看看后来者 ↓</a></div>
+<div class="notice"><small>2016 · 开馆安排</small><h2>青杉馆</h2><div><strong class="amount" data-record-value="cedar">42</strong><span class="unit">小时 / 周</span></div><div class="caption">每周开放总时长</div></div></section>
+<section class="story" id="comparison" aria-label="老馆参照与后来两家新馆的时长比较"><div class="record-stage">
+<div class="reading-panels" aria-live="polite">
+<article class="step" data-step="reference"><p class="kicker">同一张告示 / 同一个参照</p><p>老馆每周开放 <strong><span data-record-value="cedar">42</span> 小时</strong>。接下来比较的，都是各馆<strong>开馆时</strong>公布的安排。</p></article>
+<article class="step" data-step="arrivals" hidden><p class="kicker">2018 → 2020 / 后来的两家</p><p>枫桥馆每周 <em><span data-record-value="maple">30</span> 小时</em>，海湾馆 <em><span data-record-value="harbor">56</span> 小时</em>。<br>一家比老馆短，另一家更长。<strong>新馆不一定开得更久。</strong></p></article>
+</div><figure><svg viewBox="0 0 1200 490" role="img" aria-label="三家模拟图书馆开馆时每周开放时长"></svg></figure>
+<div class="stage-bottom"><span>各馆开馆时的每周时长 · 小时</span><nav aria-label="推进比较"><button type="button" data-prev aria-label="上一步" disabled>←</button><button type="button" data-next>加入新馆 →</button><a data-finish href="#notes" hidden>查看设计说明 ↓</a></nav><span>滚动 / 方向键也可推进</span></div></div><div class="scroll-track" aria-hidden="true"></div></section>
+<footer id="notes"><p>馆名、年份和开放时长均为模拟数据。新增记录是新馆的开馆安排，不表示老馆时长随时间变化；周总时长不能回答具体几点开门。</p><p><a href="../record-comparison/index.html">继续看完整片段：接入更多新馆，再检验最长者是否典型 ↗</a></p>
+<details id="example-notes"><summary>叙事、设计与改编</summary>
+<p><strong>叙事：</strong>先给读者一张可以带走的参照，再问新馆是否开放更久。属于情境引入与新记录比较；一短一长的结果，修正“新馆就会开得更久”的预期。</p>
+<p><strong>设计：</strong>告示里的 42 小时、馆名与绿色延续到条形，图形不必从纸张变形而来。正文自然带入同一量值，再在共同零点下加入新行；答案等端点读得清再出现。保留参照身份比装饰性的转场更重要。</p>
+<p><strong>改编：</strong>可换成旧报价、容量、成绩、使用年限等有依据的参照，素材、图形和叙事方向都可重设。告示只是一种入口；有意义的基准也可以直接写在正文。第一项比较要有相同口径，不把新记录画成原对象的更新。</p>
+<p><strong>代码：</strong><a href="scene.mjs">referenceOpening</a> 筛选三条记录与两态，复用 <code>mountRecords</code>；改 <code>records / stops / axis</code> 及 HTML。自然滚动的引入与后面的持续舞台分开布局，舞台仍使用共享 <code>connectReading</code>。进一步调整几何见 <a href="../record-comparison/scene.mjs">原场景代码</a>。</p>
+</details></footer></main>
+<script type="module">import {mountReferenceOpening} from './scene.mjs';const story=mountReferenceOpening(document.querySelector('#opening'));addEventListener('pagehide',e=>{if(!e.persisted)story.dispose()});</script>
+</body></html>
