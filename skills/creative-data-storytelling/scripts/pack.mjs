@@ -63,6 +63,9 @@ const isData = value => /^data:/i.test(value);
 const isRemote = value => /^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(value) && !isData(value);
 const literal = node => node?.type === "Literal" && typeof node.value === "string" ? node.value :
   node?.type === "TemplateLiteral" && !node.expressions.length ? node.quasis[0].value.cooked : null;
+const memberName = node => node?.type === "MemberExpression" ? node.computed ? literal(node.property) : node.property.name : null;
+const SVG_NS = "http://www.w3.org/2000/svg";
+const XLINK_NS = "http://www.w3.org/1999/xlink";
 
 export async function packHtml({ entry, output, root = path.dirname(path.resolve(entry)) }) {
   const tools = await loadTools();
@@ -120,8 +123,48 @@ export async function packHtml({ entry, output, root = path.dirname(path.resolve
     catch (error) { throw new Error(`${filename}：${error.message}`, { cause: error }); }
     const edits = [];
     const problem = (node, reason) => { throw new Error(`${filename}:${node.loc.start.line}：${reason}`); };
-    async function urlArgument(node, base) {
-      const value = literal(node);
+    // Resolve only unambiguous immutable aliases; never guess the target of href.
+    // Repeated names (including shadowing) deliberately fall back to an explicit asset import.
+    const bindings = new Map();
+    function children(node) {
+      return Object.entries(node).filter(([key]) => !["loc", "start", "end"].includes(key))
+        .flatMap(([, value]) => Array.isArray(value) ? value : [value]).filter(value => value && typeof value === "object");
+    }
+    function bind(pattern, value = null) {
+      if (!pattern) return;
+      if (pattern.type === "Identifier") bindings.set(pattern.name, bindings.has(pattern.name) ? null : value);
+      else for (const child of children(pattern)) bind(child);
+    }
+    function collect(node) {
+      if (node.type === "VariableDeclaration") for (const d of node.declarations) bind(d.id, node.kind === "const" ? d.init : null);
+      if (/Function/.test(node.type)) { bind(node.id); for (const param of node.params ?? []) bind(param); }
+      if (node.type === "ClassDeclaration" || node.type === "ClassExpression") bind(node.id);
+      if (node.type === "CatchClause") bind(node.param);
+      if (node.type === "ImportDeclaration") for (const specifier of node.specifiers) {
+        const image = specifier.type === "ImportDefaultSpecifier" && MIME[path.extname(node.source.value)]?.startsWith("image/");
+        bind(specifier.local, image ? { type: "PackedImageImport" } : null);
+      }
+      for (const child of children(node)) collect(child);
+    }
+    collect(tree);
+    function resolve(node, seen = new Set()) {
+      if (node?.type !== "Identifier") return node;
+      if (seen.has(node.name)) return null;
+      seen.add(node.name);
+      return resolve(bindings.get(node.name), seen);
+    }
+    function elementTarget(expression) {
+      const node = resolve(expression), method = memberName(node?.callee);
+      if (node?.type !== "CallExpression" || node.callee.object?.name !== "document" || bindings.has("document")) return null;
+      const arg = index => literal(resolve(node.arguments[index]));
+      if (method === "createElementNS" && arg(0) && arg(1)) return { namespaceURI: arg(0), tagName: arg(1) };
+      if (method === "createElement" && arg(0)) return { namespaceURI: "http://www.w3.org/1999/xhtml", tagName: arg(0).toLowerCase() };
+      if (method === "getElementById") return elements(document).find(element => attr(element, "id") === arg(0));
+      if (method === "querySelector" && /^#[\w-]+$/.test(arg(0) ?? ""))
+        return elements(document).find(element => attr(element, "id") === arg(0).slice(1));
+      return null;
+    }
+    async function urlArgument(node, base, value = literal(node)) {
       if (value === null) problem(node, "动态资源地址无法静态收集；改为显式本地 import、静态 fetch 或内联数据后重试");
       const valueUrl = await dataUrl(value, base);
       edits.push({ start: node.start, end: node.end, value: JSON.stringify(valueUrl) });
@@ -147,6 +190,22 @@ export async function packHtml({ entry, output, root = path.dirname(path.resolve
         await urlArgument(node.right, entry);
       if (node.type === "CallExpression" && node.callee.type === "MemberExpression" && node.callee.property.name === "setAttribute" && literal(node.arguments[0]) === "src")
         await urlArgument(node.arguments[1], entry);
+      const setter = memberName(node.callee), namespaced = setter === "setAttributeNS";
+      const attribute = literal(node.arguments?.[namespaced ? 1 : 0]);
+      if (node.type === "CallExpression" && ["setAttribute", "setAttributeNS"].includes(setter) && ["href", "xlink:href"].includes(attribute)) {
+        const argument = node.arguments[namespaced ? 2 : 1], resolved = resolve(argument), ref = literal(resolved);
+        const embeddedUrl = moduleUrl(resolved) || memberName(resolved) === "href" && moduleUrl(resolved.object);
+        if (resolved?.type !== "PackedImageImport" && !embeddedUrl && !(ref !== null && (!ref || ref.startsWith("#") || isData(ref)))) {
+          const target = elementTarget(node.callee.object);
+          if (target?.tagName === "a") { if (ref !== null) navigation.add(ref); }
+          else if (target?.namespaceURI === SVG_NS && target.tagName === "image") {
+            const namespace = resolve(node.arguments[0]);
+            if (namespaced && !(namespace?.type === "Literal" && namespace.value === null) && !["", XLINK_NS].includes(literal(namespace)))
+              problem(node, "SVG image href 使用了不支持的命名空间");
+            await urlArgument(argument ?? node, entry, ref);
+          } else problem(node, "无法确认 href 指向图片还是导航；图片可使用显式本地 import 或 new URL(静态路径, import.meta.url)，或保留目录交付");
+        }
+      }
       if (node.type === "MemberExpression" && node.object?.type === "MetaProperty" && node.property?.name === "url")
         problem(node, "import.meta.url 仅支持静态 new URL(resource, import.meta.url)");
       for (const [key, value] of Object.entries(node)) {

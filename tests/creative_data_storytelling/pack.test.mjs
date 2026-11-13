@@ -54,6 +54,78 @@ test("classic scripts keep execution order and shared globals", async t => {
   assert.equal(ctx.closing, "</script>");
 });
 
+const svgMark = '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="14" fill="red"/></svg>';
+
+for (const setter of [
+  'document.querySelector("#marker").setAttribute("href", "./images/mark.svg")',
+  'const marker = document.getElementById("marker"); marker.setAttribute("href", "./images/mark.svg")',
+  'document.querySelector("#marker").setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "./images/mark.svg")',
+]) test(`packs SVG image resources assigned by ${setter.split(";").at(-1).trim()}`, async t => {
+  const f = await fixture(t, {
+    "index.html": `<svg><image id="marker"/></svg><script>${setter};</script>`,
+    "images/mark.svg": svgMark,
+  });
+  f.output = path.join(f.root, "delivery", "story.html");
+  const report = await packHtml(f);
+  const { html } = await loadTools(), nodes = walk(html.parse(await readFile(f.output, "utf8")));
+  const attributes = new Map();
+  const marker = { setAttribute: (name, value) => attributes.set(name, value),
+    setAttributeNS: (_ns, name, value) => attributes.set(name, value) };
+  vm.runInNewContext(nodes.find(n => n.tagName === "script").childNodes[0].value,
+    { document: { querySelector: () => marker, getElementById: () => marker } });
+  const uri = attributes.get("href") ?? attributes.get("xlink:href");
+  assert.match(uri, /^data:image\/svg\+xml;base64,/);
+  assert.equal(Buffer.from(uri.split(",")[1], "base64").toString(), svgMark);
+  assert.ok(report.files.includes("images/mark.svg"));
+});
+
+test("packs script-created SVG images while preserving navigation hrefs", async t => {
+  const f = await fixture(t, {
+    "index.html": '<a id="source">来源</a><script type="module" src="src/main.mjs"></script>',
+    "src/main.mjs": 'const ns="http://www.w3.org/2000/svg"; const marker=document.createElementNS(ns,"image"); marker.setAttribute("href","./images/mark.svg"); const link=document.querySelector("#source"); link.setAttribute("href","https://example.com/source");',
+    "images/mark.svg": svgMark,
+  });
+  await packHtml(f);
+  const { html } = await loadTools(), nodes = walk(html.parse(await readFile(f.output, "utf8")));
+  const values = {};
+  vm.runInNewContext(nodes.find(n => n.tagName === "script").childNodes[0].value, {
+    document: { createElementNS: () => ({ setAttribute: (_name, value) => { values.image = value; } }),
+      querySelector: () => ({ setAttribute: (_name, value) => { values.link = value; } }) },
+  });
+  assert.match(values.image, /^data:image\/svg\+xml;base64,/);
+  assert.equal(values.link, "https://example.com/source");
+});
+
+test("keeps SVG fragment and embedded image hrefs unchanged", async t => {
+  const embedded = `data:image/svg+xml;base64,${Buffer.from(svgMark).toString("base64")}`;
+  const f = await fixture(t, { "index.html": `<svg><image id="marker"/></svg><script>const marker=document.querySelector("#marker"); marker.setAttribute("href","#local"); marker.setAttribute("href",${JSON.stringify(embedded)});</script>` });
+  const report = await packHtml(f);
+  const { html } = await loadTools(), nodes = walk(html.parse(await readFile(f.output, "utf8")));
+  const values = [];
+  vm.runInNewContext(nodes.find(n => n.tagName === "script").childNodes[0].value,
+    { document: { querySelector: () => ({ setAttribute: (_name, value) => values.push(value) }) } });
+  assert.deepEqual(values, ["#local", embedded]);
+  assert.equal(report.embeddedResources, 0);
+});
+
+for (const asset of [
+  'import asset from "../images/mark.svg";',
+  'const asset = new URL("../images/mark.svg", import.meta.url).href;',
+]) test(`supports explicit image resources for opaque targets: ${asset}`, async t => {
+  const f = await fixture(t, {
+    "index.html": '<script type="module" src="src/main.mjs"></script>',
+    "src/main.mjs": `${asset} globalThis.paint = target => target.setAttribute("href", asset);`,
+    "images/mark.svg": svgMark,
+  });
+  await packHtml(f);
+  const { html } = await loadTools(), nodes = walk(html.parse(await readFile(f.output, "utf8")));
+  const ctx = vm.createContext({ URL });
+  vm.runInContext(nodes.find(n => n.tagName === "script").childNodes[0].value, ctx);
+  let uri;
+  ctx.paint({ setAttribute: (_name, value) => { uri = value; } });
+  assert.equal(Buffer.from(uri.split(",")[1], "base64").toString(), svgMark);
+});
+
 test("copied tool works independently and retains top-level await in an inline module", async t => {
   const f = await fixture(t, {
     "index.html": '<script type="module">const data=await (await fetch("./rows.json")).json(); globalThis.__packedTest=data.n;</script>',
@@ -78,6 +150,11 @@ for (const [name, source, expected] of [
   ["multiple module entries", '<script type="module"></script><script type="module"></script>', /多个模块入口/],
   ["responsive image set", '<img srcset="a.png 1x,b.png 2x">', /srcset/],
   ["external CSS", '<style>@import "https://example.com/a.css";</style>', /需要联网/],
+  ["missing script-assigned SVG image", '<svg><image id="marker"/></svg><script>document.querySelector("#marker").setAttribute("href","missing.svg");</script>', /不能读取/],
+  ["remote script-assigned SVG image", '<svg><image id="marker"/></svg><script>document.querySelector("#marker").setAttribute("href","https://example.com/mark.svg");</script>', /需要联网/],
+  ["dynamic SVG image href", '<svg><image id="marker"/></svg><script>document.querySelector("#marker").setAttribute("href",location.hash.slice(1));</script>', /动态资源地址/],
+  ["ambiguous href target", '<script>function attach(marker){marker.setAttribute("href","mark.svg")}</script>', /无法确认.*href/],
+  ["shadowed href target", '<svg><image id="marker"/></svg><script>const marker=document.querySelector("#marker"); function attach(marker){marker.setAttribute("href","mark.svg")}</script>', /无法确认.*href/],
 ]) test(`rejects ${name} without publishing partial output`, async t => {
   const f = await fixture(t, { "index.html": source });
   await assert.rejects(packHtml(f), expected);
