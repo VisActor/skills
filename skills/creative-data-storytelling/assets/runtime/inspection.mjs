@@ -1,5 +1,28 @@
 import { measureBounds, checkBounds } from "./bounds.mjs";
 
+// Browser-facing output stays small; capture() retains its detailed return value.
+function brief(result) {
+  const observed = result.measured ? result : result.observation;
+  const items = observed?.measured?.items ?? [], bounds = observed?.bounds;
+  const groups = (result.groups ?? []).filter(group => group.status === "counted");
+  const issues = items.flatMap(item => {
+    if (!["measured", "not-applicable"].includes(item.status))
+      return [{ type: "unavailable", id: item.id, status: item.status }];
+    return item.match === false ? [{ type: "readout", id: item.id, expected: item.expected, actual: item.actual }] : [];
+  });
+  issues.push(...(bounds?.candidates ?? []));
+  for (const group of groups) if (group.duplicates || group.missingCount || group.unexpectedCount)
+    issues.push({ type: "identities", ...group });
+  const { instance, captureId, request, phase, stage, viewport, pending, error } = result;
+  return { instance, captureId, request, phase, stage, viewport, pending, error,
+    coverage: {
+      targets: items.filter(item => item.status === "measured").map(item => item.id),
+      readouts: items.filter(item => item.status === "measured" && Object.hasOwn(item, "match")).map(item => item.id),
+      relationships: bounds?.checked ?? 0, groups: groups.map(group => group.id),
+      skipped: bounds?.skipped ?? [],
+    }, issues };
+}
+
 // Optional, on-demand DOM observation. This never navigates or changes the story.
 // A captured result is evidence for declared checks, not a visual-quality verdict.
 export function createInspection(connection, {
@@ -24,8 +47,8 @@ export function createInspection(connection, {
     return { width: view.innerWidth, height: view.innerHeight, dpr: view.devicePixelRatio ?? 1,
       scrollX: view.scrollX ?? 0, scrollY: view.scrollY ?? 0 };
   }
-  function publish(result) {
-    if (!disposed && result.captureId === sequence) output.textContent = JSON.stringify(result);
+  function publish(result, detail = false) {
+    if (!disposed && result.captureId === sequence) output.textContent = JSON.stringify(detail ? result : brief(result));
     return result;
   }
   function measure(spec, context) {
@@ -48,13 +71,15 @@ export function createInspection(connection, {
         for (let parent = element; parent; parent = parent.parentElement)
           opacity *= Number(view.getComputedStyle(parent).opacity ?? 1);
         result.opacity = opacity;
-        const font = view.getComputedStyle(element).font;
+        const text = element.textContent?.trim(), font = text && view.getComputedStyle(element).font;
         if (font) result.font = font;
         if (element.tagName?.toLowerCase() === "img") {
-          if (!element.complete) result.status = "loading";
+          if (!element.complete) { result.status = "loading"; result.waiting = ["image"]; }
           else if (!element.naturalWidth) result.status = "resource-error";
         }
-        if (font && doc.fonts?.check && !doc.fonts.check(font, element.textContent || " ")) result.status = "loading";
+        if (font && doc.fonts?.check && !doc.fonts.check(font, text)) {
+          result.status = "loading"; result.waiting = [...(result.waiting ?? []), "font"];
+        }
       }
       if (Object.hasOwn(target, "expected")) {
         if (typeof target.expected !== "string" && !(typeof target.expected === "number" && Number.isFinite(target.expected)))
@@ -102,49 +127,59 @@ export function createInspection(connection, {
     });
   }
 
-  function validate({ target, after = -1, timeout = 2500 } = {}) {
+  function validate({ target, after = -1, timeout = 2500, detail = false } = {}) {
     if (typeof target !== "string" || !target || !Number.isInteger(after) || after < -1 ||
-        !Number.isFinite(timeout) || timeout < 0 || timeout > 30000)
-      throw new Error("Capture requires target, optional after revision and timeout within 0–30000 ms");
+        !Number.isFinite(timeout) || timeout < 0 || timeout > 30000 || typeof detail !== "boolean")
+      throw new Error("Capture requires target, optional after revision, timeout within 0–30000 ms and boolean detail");
   }
   async function capture(options = {}) {
     validate(options);
-    const { target, after = -1, timeout = 2500 } = options;
+    const { target, after = -1, timeout = 2500, detail = false } = options;
     const captureId = ++sequence, started = view.performance.now();
-    let version = null, spec, previous, last;
+    let version = null, spec, previous, last, pending;
     const result = (phase, extra = {}) => ({ instance, captureId, request: { target, after }, phase,
       stage: stage.status(), viewport: environment(), ...extra });
-    publish(result("waiting"));
+    const finish = (phase, extra) => publish(result(phase, extra), detail);
+    finish("waiting");
     try {
       while (true) {
-        if (disposed || stage.status().disposed) return publish(result("disposed"));
+        if (disposed || stage.status().disposed) return finish("disposed");
         if (captureId !== sequence) return result("superseded");
         const context = stage.status();
-        if (context.error) return publish(result("error", { error: context.error }));
-        if (version !== null && context.target.revision !== version) return publish(result("superseded"));
+        if (context.error) return finish("error", { error: context.error });
+        if (version !== null && context.target.revision !== version) return finish("superseded");
         const matches = context.target.id === target && context.target.revision > after;
         if (matches) version ??= context.target.revision;
         const drawn = matches && context.rendered?.revision === version && context.rendered.final;
         const actualSize = rect(stage.element);
-        if (drawn && actualSize.width === context.size.width && actualSize.height === context.size.height) {
+        const sized = actualSize.width === context.size.width && actualSize.height === context.size.height;
+        if (drawn && sized) {
           spec ??= checks(context);
           last = measure(spec, context);
           const signature = JSON.stringify(last);
+          const loading = last.measured.items.filter(item => item.status === "loading");
           // Two identical observations of declared layout/text/opacity only.
           // Unregistered animation and browser compositing remain outside this signal.
-          if (signature === previous && !last.measured.items.some(item => item.status === "loading")) {
+          if (signature === previous && !loading.length) {
             const counted = groups(spec, context);
-            if (stage.status().target.revision !== version) return publish(result("superseded"));
-            return publish(result("captured", { ...last, groups: counted }));
+            if (stage.status().target.revision !== version) return finish("superseded");
+            return finish("captured", { ...last, groups: counted });
           }
+          pending = loading.length ? { condition: "resources", items: loading.map(({ id, waiting }) => ({ id, waiting })) }
+            : { condition: "stability", consecutive: signature === previous ? 2 : 1, required: 2 };
           previous = signature;
-        } else previous = null;
+        } else {
+          previous = null; last = null;
+          pending = !matches ? { condition: "target", expected: { id: target, after }, observed: context.target }
+            : !drawn ? { condition: "render", expectedRevision: version, observed: context.rendered }
+            : { condition: "size", expected: context.size, observed: { width: actualSize.width, height: actualSize.height } };
+        }
         if (view.performance.now() - started >= timeout)
-          return publish(result("timeout", { reason: "Expected render or declared layout/resources did not settle", observation: last ?? null }));
+          return finish("timeout", { reason: "Expected render or declared layout/resources did not settle", pending, observation: last ?? null });
         await new Promise(resolve => view.setTimeout(resolve, 32));
       }
     } catch (cause) {
-      return publish(result("error", { error: { phase: "inspection", message: String(cause?.message ?? cause) } }));
+      return finish("error", { error: { phase: "inspection", message: String(cause?.message ?? cause) } });
     }
   }
   // DOM transport works without publishing application objects on window.

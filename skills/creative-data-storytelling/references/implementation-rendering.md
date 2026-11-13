@@ -28,7 +28,7 @@
 
 ### 实际占位与空间诊断
 
-在现有浏览器阅读与操作中，按需调用 [inspection.mjs](../assets/runtime/inspection.mjs) 的 `createInspection`，复用实际绘制状态与 [bounds.mjs](../assets/runtime/bounds.mjs) 测量。只声明本段关键读数与空间关系，不写全页测试配置；已有可靠测量可沿用。未接入或未调用时不扫描页面，也不启动另一套浏览器。
+简单页面沿用浏览器观察或 DOM 测量即可。[bounds.mjs](../assets/runtime/bounds.mjs) 可独立调用；需要诊断终态、过期帧／尺寸或异步更新时，再用 [inspection.mjs](../assets/runtime/inspection.mjs) 的 `createInspection`。只声明本次有风险的读数、对象与空间关系，不配置全页测试；未调用时不扫描页面。诊断在开发时按需启用，正式成品默认不带检查实例或面板，舞台自身的状态与错误记录保留。
 
 ```javascript
 import { createInspection } from "./runtime/inspection.mjs";
@@ -45,15 +45,15 @@ const inspection = createInspection(connection, {
 });
 // 浏览器实际滚动/操作后，明确期待的状态；同一状态换数据可加 after: 操作前的 revision。
 const report = await inspection.capture({ target: "comparison", timeout: 2500 });
-// 检查 phase、measured.items、bounds.candidates / skipped，仍看实际画面。
+// 浏览器默认读下方 DOM 简报；report 保留详细测量供代码定位，仍看实际画面。
 // 卸载时 inspection.dispose()。
 ```
 
-`checks` 在本次目标实际画完后求值；目标可用选择器或返回当前元素的函数，每次测量重新解析。`expected` 可为字符串或有限数值，默认核对 textContent，控件可传 `read: el => el.value`；不适用于当前状态的项标记 `when: false`，本应出现却缺失／隐藏的项会报告问题。需要核对节点或选项集合时再加 `groups: [{ id, elements: 选择器, expected: 数据ID数组, key: el => el.dataset.id }]`；只核对挂载身份、数量与重复，不证明单元的编码和可见性。
+`checks` 在本次目标实际画完后求值；选择器或元素函数每次测量重新解析。`expected` 来自数据与口径，可为字符串或有限数值，默认核对 textContent，控件可传 `read: el => el.value`。与渲染共用计算只验证状态同步，数据正确性沿用独立核验，不重复实现每个公式。非当前状态的项标记 `when: false`；需要核对集合时再加 `groups: [{ id, elements: 选择器, expected: 数据ID数组, key: el => el.dataset.id }]`，检查挂载身份、数量与重复，不证明编码或可见性。
 
-采集等待指定 `target` 的实际终态、容器尺寸一致和声明对象的两次稳定观测；声明的 HTML img 或可查询的字体未就绪时等到超时。`phase` 为 `captured / timeout / superseded / error / disposed`，独立的 `captureId` 区分每次采集。`captured` 表示取得当前证据，缺失、读数错误、越界仍在结果里，不能当作通过；SVG 内部图片、未声明的正文动画、异步绘制与浏览器合成仍需实际观察。
+采集等待指定 `target` 的实际终态、容器尺寸一致和声明对象的两次稳定观测；只等待声明对象用到的 HTML 图片或文字字体。`captured` 表示已采集，读数错误、缺失和越界仍会报告；不等于通过。未完成区分 `timeout / superseded / error / disposed`，超时的 `pending` 给出未满足条件及最后观测值，不推断根因。同一条件未改变时先定位，不重复采集、延长超时或为通过检查而改正常动画。
 
-结果也写入 `script#story-inspection[type="application/json"]`，浏览器可直接读取。支持页面脚本操作的工具可在该节点设置 `data-request='{"target":"comparison"}'` 后派发 `story-inspect` 事件；只支持只读 DOM 的工具通过开发预览按钮调用 capture，再读取 JSON。都需核对新 `captureId` 与请求目标，不能把旧报告当作新结果。[工程演示](../assets/stage-wiring/index.html?inspect)提供这种按钮，正式作品无需附带检查面板。
+`script#story-inspection[type="application/json"]` 默认只发布状态、实际窗口、检查覆盖和问题简报；未声明的内容不在覆盖内。`capture` 仍返回详细结果，调试时传 `detail: true` 也可将完整 JSON 发布到该节点。支持页面脚本的工具可设置 `data-request='{"target":"comparison"}'` 并派发 `story-inspect`；只读工具沿用开发预览按钮，再读取节点。核对 `captureId` 与目标，避免读旧报告；[工程演示](../assets/stage-wiring/index.html?inspect)已有按钮接法。
 
 - 底层 `measureBounds(root, targets)` 返回 `stage / viewport / items`，全部是**相对 root 外边界左上角的渲染后 CSS 像素**。HTML 与 SVG 已通过浏览器实际边界统一，不能再当作 SVG viewBox 坐标或 Canvas 设备像素。每项使用唯一 `id`；Canvas 等绘制器可直接调用底层接口并传 `{ id, box: { x, y, width, height }, visible }`，提供已换算的舞台相对边界，结果标明 `supplied`。
 - `inside` 检查 `ids` 是否位于 `within` 内，可用 `padding` 留边；`within` 可以是另一个已测量对象、`$stage` 或 `$viewport`。`separate` 检查两组对象；省略 `from` 则检查 `ids` 组内各对，可用 `gap` 保留矩形间距。只检查声明的关系，有意覆盖的素材不加入分离规则。
@@ -61,7 +61,7 @@ const report = await inspection.capture({ target: "comparison", timeout: 2500 })
 
 选择实际承载数据的局部标记或标签，不能只拿全屏 SVG／Canvas 容器与正文比较；背景延展在正文下方可能是有意设计。需要时按相同方式加入导航、图标题或标签之间的规则；正常滚出视口的正文不要求始终位于 `$viewport` 内。
 
-在当前字体和素材实际显示后采样；布局重排后再测受影响的状态。`checked` 为零或本应显示的对象出现在 `skipped` 中，不能当成“无重叠”；先核对目标与可见状态。边界是轴对齐矩形，并非实际着色区域：透明图片、斜线、描边、阴影、裁剪和不规则遮罩仍需看实际画面；Canvas 需由绘制器提供内容边界，未声明的关系、未采样的帧不在检测范围。演示页的作者面板仅展示接法，正式作品无需带上面板，也不逐帧运行检查。
+在当前字体和素材实际显示后采样，重排后只复查受影响处。`checked` 为零或对象在 `skipped` 中，不能当成“无重叠”。边界是轴对齐矩形，并非着色区域：透明素材、描边、裁剪等仍需看图；Canvas 需由绘制器提供内容边界。
 
 ## 渲染选择
 

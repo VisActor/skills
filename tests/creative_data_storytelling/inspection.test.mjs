@@ -36,14 +36,19 @@ function fixture() {
 const readout = () => ({ targets: [{ id: "value", element: "#readout", expected: 0 }],
   bounds: [{ type: "inside", ids: ["value"], within: "$stage" }] });
 
-test("each capture is distinct, reads real zero, and publishes a DOM JSON result", async () => {
+test("each capture retains detail for code and publishes only coverage and issues by default", async () => {
   const f = fixture(), probe = f.make(readout);
   const a = await probe.capture({ target: "all" }), b = await probe.capture({ target: "all" });
   assert.equal(a.phase, "captured");
   assert.equal(a.measured.items[0].match, true);
   assert.ok(b.captureId > a.captureId);
   assert.equal(b.stage.target.revision, a.stage.target.revision);
-  assert.equal(probe.output.textContent, JSON.stringify(b));
+  const summary = JSON.parse(probe.output.textContent);
+  assert.equal(summary.captureId, b.captureId);
+  assert.deepEqual(summary.coverage, { targets: ["value"], readouts: ["value"], relationships: 1, groups: [], skipped: [] });
+  assert.deepEqual(summary.issues, []);
+  assert.equal(Object.hasOwn(summary, "measured"), false);
+  assert.deepEqual(summary.viewport, b.viewport);
   probe.dispose(); assert.equal(f.children.length, 0);
 });
 
@@ -62,7 +67,9 @@ test("timeout reports a missing expected update instead of accepting a previous 
   const f = fixture(), probe = f.make(readout);
   const result = await probe.capture({ target: "all", after: 1, timeout: 64 });
   assert.equal(result.phase, "timeout");
+  assert.equal(typeof result.reason, "string");
   assert.equal(result.observation, null);
+  assert.deepEqual(result.pending, { condition: "target", expected: {id:"all",after:1}, observed:{id:"all",revision:1} });
 });
 
 test("replaced labels are resolved again and two observations use the current DOM", async () => {
@@ -87,6 +94,14 @@ test("missing, hidden, inactive and wrong readouts stay visible in the report", 
   assert.deepEqual(result.measured.items.map(item => item.status), ["missing","hidden","not-applicable","measured"]);
   assert.equal(result.measured.items[3].match, false);
   assert.deepEqual(result.bounds.notApplicable, [0]);
+  const summary = JSON.parse(probe.output.textContent);
+  assert.equal(summary.phase, "captured"); // Collection can finish with actual problems.
+  assert.deepEqual(summary.issues, [
+    {type:"unavailable",id:"missing",status:"missing"},
+    {type:"unavailable",id:"hidden",status:"hidden"},
+    {type:"readout",id:"wrong",expected:"7",actual:"9"},
+  ]);
+  assert.deepEqual(summary.coverage.targets, ["wrong"]);
 });
 
 test("layout waits for the measured container size and declared fonts/images, with bounded failure", async () => {
@@ -96,6 +111,7 @@ test("layout waits for the measured container size and declared fonts/images, wi
   const result = await probe.capture({ target: "all", timeout: 96 });
   assert.equal(result.phase, "timeout");
   assert.equal(result.observation.measured.items[0].status, "loading");
+  assert.deepEqual(result.pending, {condition:"resources",items:[{id:"value",waiting:["font"]}]});
   f.doc.fonts.check = () => true;
   Object.assign(f.label, { tagName: "IMG", complete: true, naturalWidth: 0 });
   const broken = await probe.capture({ target: "all" });
@@ -123,6 +139,10 @@ test("groups compare data identities to mounted records/options and retain missi
   const result = await probe.capture({ target: "all" });
   assert.deepEqual(result.groups[0], { id:"choices",status:"counted",expectedCount:2,actualCount:3,
     duplicates:1,missingCount:1,unexpectedCount:1,missing:["b"],unexpected:["c"] });
+  const summary = JSON.parse(probe.output.textContent);
+  assert.deepEqual(summary.coverage.groups, ["choices"]);
+  assert.equal(summary.issues[0].type, "identities");
+  assert.deepEqual(summary.issues[0].unexpected, ["c"]);
 });
 
 test("unknown targets, invalid group identities and capture options fail explicitly", async () => {
@@ -130,9 +150,67 @@ test("unknown targets, invalid group identities and capture options fail explici
   const result = await probe.capture({ target: "all" });
   assert.equal(result.phase, "error"); assert.match(result.error.message, /unknown target/);
   await assert.rejects(probe.capture({ target: "all", timeout: Infinity }), /Capture requires/);
+  await assert.rejects(probe.capture({ target: "all", detail: "true" }), /boolean detail/);
   probe.dispose();
   const other = f.make(() => ({ groups: [{ id:"invalid",expected:[undefined],elements:()=>[],key:el=>el.id }] }));
   assert.equal((await other.capture({ target:"all" })).phase, "error");
+});
+
+test("DOM transport can opt into detail without changing the capture checks", async () => {
+  const f = fixture(), probe = f.make(readout);
+  probe.output.setAttribute("data-request", JSON.stringify({target:"all",detail:true}));
+  probe.output.dispatchEvent(new Event("story-inspect"));
+  for (let i=0; i<5; i++) await Promise.resolve();
+  const report = JSON.parse(probe.output.textContent);
+  assert.equal(report.phase, "captured");
+  assert.equal(report.measured.items[0].actual, "0");
+  assert.equal(report.bounds.checked, 1);
+});
+
+test("timeouts distinguish unmet observations without calling them rendering failures", async t => {
+  for (const [condition, setup] of [
+    ["render", f => { f.state.rendered.final = false; }],
+    ["size", f => { f.root.rect.width = 600; }],
+    ["resources", f => { Object.assign(f.label, {tagName:"IMG",complete:false,textContent:""}); }],
+    ["stability", f => { f.wait(() => { f.label.rect.x++; }); }],
+  ]) await t.test(condition, async () => {
+    const f = fixture(); setup(f);
+    const probe = f.make(readout), result = await probe.capture({target:"all",timeout:64});
+    assert.equal(result.phase, "timeout");
+    assert.equal(result.pending.condition, condition);
+    assert.equal(result.stage.error, null);
+    assert.deepEqual(JSON.parse(probe.output.textContent).pending, result.pending);
+  });
+});
+
+test("unrelated fonts and images do not block a declared non-text mark", async () => {
+  const f = fixture();
+  f.doc.fonts.check = () => false;
+  const mark = f.element();
+  f.selectors.set("#mark", mark);
+  f.selectors.set("#unused-image", Object.assign(f.element(), {tagName:"IMG",complete:false}));
+  const probe = f.make(() => ({targets:[{id:"mark",element:"#mark"}]}));
+  assert.equal((await probe.capture({target:"all"})).phase, "captured");
+});
+
+test("a size change discards a stale observation before reporting incomplete coverage", async () => {
+  const f = fixture(), probe = f.make(readout);
+  f.wait(() => { f.root.rect.width = 600; });
+  const result = await probe.capture({target:"all",timeout:64});
+  assert.equal(result.pending.condition, "size");
+  assert.equal(result.observation, null);
+  assert.deepEqual(JSON.parse(probe.output.textContent).coverage.targets, []);
+});
+
+test("brief reports retain actual spatial candidates and skipped relationships", async () => {
+  const f = fixture(); f.label.rect.x = 790;
+  const probe = f.make(() => ({targets:[{id:"value",element:"#readout"},{id:"absent",element:"#absent"}],
+    bounds:[{type:"inside",ids:["value","absent"],within:"$stage"}]}));
+  await probe.capture({target:"all"});
+  const summary = JSON.parse(probe.output.textContent);
+  assert.equal(summary.issues.find(item => item.type === "outside").edges.right, 70);
+  assert.equal(summary.coverage.relationships, 1);
+  assert.deepEqual(summary.coverage.skipped[0].unavailable, [{id:"absent",status:"missing"}]);
 });
 
 test("DOM requests preserve capture identity and report malformed input", async () => {
