@@ -28,28 +28,34 @@
 
 ### 实际占位与空间诊断
 
-HTML 正文、SVG 标签、图片与导航共用空间时，用 [bounds.mjs](../assets/runtime/bounds.mjs) 或已有等效测量接入[最终检查](quality.md#一次检查怎样完成)。按自己的构图声明哪些对象应在区域内、哪些不能遮挡。测量只读当前画面，不改样式、不重排对象，也不启动浏览器或动画。下面示范核对当前正文与数据内容：
+在现有浏览器阅读与操作中，按需调用 [inspection.mjs](../assets/runtime/inspection.mjs) 的 `createInspection`，复用实际绘制状态与 [bounds.mjs](../assets/runtime/bounds.mjs) 测量。只声明本段关键读数与空间关系，不写全页测试配置；已有可靠测量可沿用。未接入或未调用时不扫描页面，也不启动另一套浏览器。
 
 ```javascript
-import { measureBounds, checkBounds } from "./runtime/bounds.mjs";
+import { createInspection } from "./runtime/inspection.mjs";
 
-function inspectLayout(stage, prose, dataItems) {
-  // dataItems 是当前应显示的标记与标签：[{ id, element }]。
-  const ids = dataItems.map((item) => item.id);
-  const measured = measureBounds(stage, [
-    { id: "prose", element: prose }, ...dataItems,
-  ]);
-  return checkBounds(measured, [
-    { type: "inside", ids, within: "$stage" },
-    { type: "separate", ids, from: ["prose"], gap: 4 },
-  ]);
-}
-// 在实际阅读到的画面调用；stage、activeProse、visibleDataItems 由作品提供。
-const report = inspectLayout(stage, activeProse, visibleDataItems);
-// 检查 report.checked / candidates / skipped，再回到画面核实。
+const inspection = createInspection(connection, {
+  root: stagePanel, // connection 来自 connectReading；复制 inspection.mjs 与 bounds.mjs
+  checks: ({ target }) => ({
+    targets: [
+      { id: "answer", element: "#answer", expected: answerFor(target.id) },
+      { id: "controls", element: "#controls" },
+    ], // answerFor 从当前数据与口径计算，不从 DOM 反抄预期值
+    bounds: [{ type: "separate", ids: ["answer"], from: ["controls"] }],
+  }),
+});
+// 浏览器实际滚动/操作后，明确期待的状态；同一状态换数据可加 after: 操作前的 revision。
+const report = await inspection.capture({ target: "comparison", timeout: 2500 });
+// 检查 phase、measured.items、bounds.candidates / skipped，仍看实际画面。
+// 卸载时 inspection.dispose()。
 ```
 
-- `measureBounds(root, targets)` 返回 `stage / viewport / items`，全部是**相对 root 外边界左上角的渲染后 CSS 像素**。HTML 与 SVG 已通过浏览器实际边界统一，不能再当作 SVG viewBox 坐标或 Canvas 设备像素。每项使用唯一 `id`；也可传 `{ id, box: { x, y, width, height }, visible }`，由 Canvas 等绘制器提供已换算的舞台相对边界，结果会标明 `supplied`。
+`checks` 在本次目标实际画完后求值；目标可用选择器或返回当前元素的函数，每次测量重新解析。`expected` 可为字符串或有限数值，默认核对 textContent，控件可传 `read: el => el.value`；不适用于当前状态的项标记 `when: false`，本应出现却缺失／隐藏的项会报告问题。需要核对节点或选项集合时再加 `groups: [{ id, elements: 选择器, expected: 数据ID数组, key: el => el.dataset.id }]`；只核对挂载身份、数量与重复，不证明单元的编码和可见性。
+
+采集等待指定 `target` 的实际终态、容器尺寸一致和声明对象的两次稳定观测；声明的 HTML img 或可查询的字体未就绪时等到超时。`phase` 为 `captured / timeout / superseded / error / disposed`，独立的 `captureId` 区分每次采集。`captured` 表示取得当前证据，缺失、读数错误、越界仍在结果里，不能当作通过；SVG 内部图片、未声明的正文动画、异步绘制与浏览器合成仍需实际观察。
+
+结果也写入 `script#story-inspection[type="application/json"]`，浏览器可直接读取。支持页面脚本操作的工具可在该节点设置 `data-request='{"target":"comparison"}'` 后派发 `story-inspect` 事件；只支持只读 DOM 的工具通过开发预览按钮调用 capture，再读取 JSON。都需核对新 `captureId` 与请求目标，不能把旧报告当作新结果。[工程演示](../assets/stage-wiring/index.html?inspect)提供这种按钮，正式作品无需附带检查面板。
+
+- 底层 `measureBounds(root, targets)` 返回 `stage / viewport / items`，全部是**相对 root 外边界左上角的渲染后 CSS 像素**。HTML 与 SVG 已通过浏览器实际边界统一，不能再当作 SVG viewBox 坐标或 Canvas 设备像素。每项使用唯一 `id`；Canvas 等绘制器可直接调用底层接口并传 `{ id, box: { x, y, width, height }, visible }`，提供已换算的舞台相对边界，结果标明 `supplied`。
 - `inside` 检查 `ids` 是否位于 `within` 内，可用 `padding` 留边；`within` 可以是另一个已测量对象、`$stage` 或 `$viewport`。`separate` 检查两组对象；省略 `from` 则检查 `ids` 组内各对，可用 `gap` 保留矩形间距。只检查声明的关系，有意覆盖的素材不加入分离规则。
 - 返回 `checked / candidates / skipped`，不提供“视觉通过”评分。缺失元素与隐藏元素分别记录；未知 ID 报错。默认容忍 0.5 CSS 像素误差，可通过第三参数 `{ tolerance }` 调整。
 
@@ -59,6 +65,6 @@ const report = inspectLayout(stage, activeProse, visibleDataItems);
 
 ## 渲染选择
 
-SVG 适合精确尺度、路径、少量至中等数量可单独交互的标记；Canvas 可承担大量重复单元；HTML 承担正文、控件与语义详情。按实际规模测量，不规定未经验证的数量阈值。Canvas 的可访问性、命中检测与文本需另行设计。
+连续舞台优先采用 SVG：精确尺度、路径、素材与可单独交互的标记由同一姿态更新；Canvas 可承担大量重复单元；HTML 承担正文、控件与语义详情。按实际规模测量，不规定未经验证的数量阈值。Canvas 的可访问性、命中检测与文本需另行设计。
 
-能用已有库可靠表达时可以用库；需要自定义身份和时间编排时，可直接算几何。不要为了统一技术把艺术细节全部手绘成复杂 SVG，也不要用图片替代可测量的轴与标记。
+ECharts 等整图配置库不作为连续舞台的默认实现，以免各状态重新生成独立图表。D3 的尺度、布局或数据绑定可按需使用；已有库能保留所需对象和过渡时也可沿用。素材可用静态图片配合 SVG 定位，不需要把艺术细节全部手绘成路径，也不用图片替代可测量的轴与标记。

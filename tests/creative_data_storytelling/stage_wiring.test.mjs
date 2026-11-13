@@ -198,3 +198,75 @@ test("visibility recovery reads a restored position without a scroll event and p
   connection.dispose(); f.emit("pageshow");
   assert.equal(f.frames.size, 0);
 });
+
+test("stage status distinguishes elapsed sampling from an actually rendered final frame", () => {
+  const f = fixture(), c = connectReading(f.options);
+  f.tick(); c.explore("manual"); f.tick(30);
+  const revision = c.stage.status().target.revision;
+  f.advance(200);
+  assert.equal(c.stage.sample().moving, false);
+  assert.deepEqual(c.stage.status().rendered, { revision, final: false });
+  f.tick();
+  assert.deepEqual(c.stage.status().rendered, { revision, final: true });
+  c.dispose();
+});
+
+test("explicit refresh invalidates immediately; a no-change resize notification does not", () => {
+  const f = fixture(), c = connectReading(f.options);
+  f.tick(); const before = c.stage.status();
+  f.observed[0].fn(); f.tick();
+  assert.equal(c.stage.status().target.revision, before.target.revision);
+  c.stage.refresh();
+  assert.ok(c.stage.status().target.revision > c.stage.status().rendered.revision);
+  f.tick();
+  assert.equal(c.stage.status().rendered.revision, c.stage.status().target.revision);
+  f.resize(600); f.tick();
+  assert.deepEqual(c.stage.status().size, { width: 600, height: 300 });
+  c.dispose();
+});
+
+test("an old scheduled animation frame cannot complete a freshly invalidated layout", () => {
+  const f = fixture(), c = connectReading(f.options);
+  f.tick(); c.explore("manual");
+  const old = c.stage.status().target.revision;
+  c.stage.refresh(); f.advance(200);
+  const [key, callback] = f.frames.entries().next().value;
+  f.frames.delete(key); callback();
+  assert.equal(c.stage.status().rendered.revision, old);
+  assert.ok(c.stage.status().target.revision > old);
+  f.tick();
+  assert.deepEqual(c.stage.status().rendered, { revision: c.stage.status().target.revision, final: true });
+  c.dispose();
+});
+
+test("same-state parameter updates produce distinct revisions and status snapshots are detached", () => {
+  const f = fixture(), c = connectReading(f.options);
+  f.tick(); c.explore("manual"); f.tick(100);
+  const first = c.stage.status();
+  c.explore("manual");
+  assert.ok(c.stage.status().target.revision > first.target.revision);
+  first.target.id = "wrong"; first.size.width = 0; first.rendered.final = false;
+  f.tick(100);
+  assert.equal(c.stage.status().target.id, "manual");
+  assert.equal(c.stage.status().size.width, 800);
+  c.dispose(); assert.equal(c.stage.status().disposed, true);
+});
+
+test("failed layout or render preserves the thrown error and cannot reuse an old completion", () => {
+  const f = fixture(); let failure;
+  const c = connectReading({ ...f.options,
+    layout: (...args) => { if (failure === "layout") throw new Error("bad layout"); return f.options.layout(...args); },
+    render: (...args) => { if (failure === "render") throw new Error("bad render"); return f.options.render(...args); },
+  });
+  f.tick();
+  for (const phase of ["layout", "render"]) {
+    failure = phase;
+    assert.throws(() => c.explore("manual"), new RegExp("bad " + phase));
+    assert.equal(c.stage.status().error.phase, phase);
+    assert.ok(c.stage.status().target.revision > c.stage.status().rendered.revision);
+  }
+  failure = null; c.explore("manual"); f.tick(100);
+  assert.equal(c.stage.status().error, null);
+  assert.deepEqual(c.stage.status().rendered, { revision: c.stage.status().target.revision, final: true });
+  c.dispose();
+});

@@ -4,33 +4,41 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>正文、舞台与探索的最小接线</title>
+  <link rel="stylesheet" href="./layout.css">
   <style>
     :root{font-family:system-ui,"PingFang SC",sans-serif;color:#233d38;background:#f5f3ed}
     *{box-sizing:border-box}body{margin:0}header,footer{padding:40px 5vw;max-width:1000px}
     h1{font-size:30px}h2{font-size:24px}p{line-height:1.8}a{color:inherit}
     .chapter{display:grid;grid-template-columns:minmax(240px,1fr) minmax(480px,2fr);gap:4vw;padding:0 5vw;align-items:start}
     .reading article{padding:100px 0 170px;max-width:32ch}.reading article:last-of-type{padding-bottom:24px}
-    .sticky{position:sticky;top:24px;padding:24px;background:#fffdf8;border:1px solid #d5dcd6}
-    svg{display:block;width:100%;height:clamp(300px,52vh,490px);overflow:visible}
+    .sticky{padding:24px;background:#fffdf8;border:1px solid #d5dcd6}
+    svg{overflow:visible}
     .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}select,button{font:inherit;padding:8px 12px;color:inherit;border:1px solid #9aafa3;background:transparent;border-radius:4px}
     #result{min-height:1.8em;font-variant-numeric:tabular-nums}.hint{font-size:13px;color:#60746b}
     footer{border-top:1px solid #d5dcd6;margin-top:40px}code{font-size:.95em}
+    #inspection-tools{border-top:1px solid #d5dcd6;padding-top:12px}#inspection-tools[hidden]{display:none}
+    #check-summary{display:block;font-size:13px;line-height:1.5;height:3em;overflow:auto;margin-top:8px}
   </style>
 </head>
 <body>
   <header><a href="../examples/index.html">示例索引</a><h1>把正文和动画接起来</h1>
-    <p>这是工程接线演示：滚动选择结果，动画自行完成，末段读完再退出。图形和这两段正文只用于运行接线；作品另定构图、内容和阅读顺序。</p></header>
+    <p>这是工程接线演示：滚动选择结果，动画自行完成，末段读完再退出。图形和这两段正文只用于运行接线；作品另定构图、内容和阅读顺序。</p>
+    <a href="?inspect">显示按需检查工具</a></header>
   <section class="chapter">
     <div class="reading">
-      <article data-story-state="all"><h2>先看三项记录</h2><p>模拟用时：甲18、乙42、丙29分钟。三根条共用零点。</p><p class="hint">继续滚动，同一批对象进入比较。停滚、倒回或快速跳转都可试。</p></article>
-      <article data-story-state="focus"><h2>再看甲与丙</h2><p>乙退出，甲和丙在原舞台中靠近，尺度同步调整。差额随当帧端点定位，完整结果到位后显示读数。</p><p data-reading-end>最后一段仍能看见完整比较。也可以选择另一项，再回到正文控制。</p></article>
+      <article><h2 data-story-state="all">先看三项记录</h2><p>模拟用时：甲18、乙42、丙29分钟。三根条共用零点。</p><p class="hint">继续滚动，同一批对象进入比较。停滚、倒回或快速跳转都可试。</p></article>
+      <article><h2 data-story-state="focus">再看甲与丙</h2><p>乙退出，甲和丙在原舞台中靠近，尺度同步调整。差额随当帧端点定位，完整结果到位后显示读数。</p><p data-reading-end>最后一段仍能看见完整比较。也可以选择另一项，再回到正文控制。</p></article>
       <div class="reading-tail" aria-hidden="true"></div>
     </div>
-    <div class="sticky">
-      <svg id="graphic" viewBox="0 0 720 360" role="img" aria-label="模拟用时的比较"></svg>
+    <div class="sticky" data-stage-space>
+      <div data-stage-plot><svg id="graphic" role="img" aria-label="模拟用时的比较"></svg></div>
       <p id="result" aria-live="polite"></p>
       <div class="controls"><label>与甲比较 <select id="choice"><option value="c">丙</option><option value="b">乙</option></select></label><button id="resume" type="button">回到正文</button></div>
       <p class="hint" id="mode">正文控制</p>
+      <div id="inspection-tools" hidden>
+        <div class="controls"><label>预期画面 <select id="inspect-target"><option value="all">三项记录</option><option value="focus">甲与丙</option><option value="explore">手动比较</option></select></label><button id="inspect" type="button">采集当前画面</button></div>
+        <output id="check-summary">操作图形后采集；结果只覆盖声明的读数、对象与边界。</output>
+      </div>
     </div>
   </section>
   <footer><p>后续普通图文从这里继续。探索是可选操作；只有滚动舞台时，可去掉控件和对应事件。</p>

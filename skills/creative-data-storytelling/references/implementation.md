@@ -16,7 +16,8 @@
 | 末段正文仍在阅读，舞台已经滚走 | 配置 `connectReading({ exit: ... })`；[几何条件与底层 reserveStageExit](implementation-stage.md#最后画面读完再退出) |
 | 独立播放、中断与反向 | [createPlayer](implementation-stage.md#自动完成的衔接动画) |
 | 图文共用读数；稳定更新 SVG | [createValueFormat / createSvgLayer](implementation-rendering.md#共用读数格式与-svg-更新) |
-| 最终检查中的越界或遮挡测量 | [measureBounds / checkBounds](implementation-rendering.md#实际占位与空间诊断) |
+| 实际终态、读数和布局的按需检查 | [createInspection](implementation-rendering.md#实际占位与空间诊断)；复用当前浏览器工具操作与取证 |
+| 舞台没有按窗口剩余空间布局 | [可用空间接法](implementation-stage.md#可用空间与实际绘图区)；容器尺寸传给作品几何 |
 | 轴、标记与素材同步映射或缩放 | [共同尺度、插值与锚点](implementation-geometry.md#几何) |
 | 保留历史并聚焦局部 | [显露范围与定位窗口](implementation-geometry.md#历史与当前从同一状态生成) |
 | 可加总部分展开或接入基底 | [accumulationSegments](implementation-geometry.md#组成与累积的区间几何) |
@@ -30,7 +31,7 @@
 
 ## 直接复用与参考的边界
 
-- [assets/runtime/](../assets/runtime/) 是可直接复制、导入的控制与计算模块。先读接口，只有排错或扩展时再查源码。相对依赖为 `stage → motion / scroll`、`copy → motion`、`motion / units / svg → geometry`，其他模块无内部依赖。
+- [assets/runtime/](../assets/runtime/) 是可直接复制、导入的控制与计算模块。先读接口，只有排错或扩展时再查源码。相对依赖为 `stage → motion / scroll`、`copy → motion`、`motion / units / svg → geometry`、`inspection → bounds`，其他模块无内部依赖。
 - [示例总览](../assets/examples/index.html)只供浏览导航，各示例在自己的页面运行。局部机制共用 [mechanism.css](../assets/examples/mechanism.css) 的预览与控件样式；需要外观接法时选读，并按作品主题改写。
 
 已有项目工具能可靠承担相同职责时可沿用。页面阅读与交互统一按[作品验收](quality.md)检查，稳定计算或控制行为按实际风险验证。

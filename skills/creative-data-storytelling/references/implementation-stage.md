@@ -50,10 +50,17 @@ const { stage } = connection;
 | --- | --- |
 | 进入探索或手动控制 | `connection.explore(id)`；`layout` 负责该状态及用户选择，过渡仍由同一播放器完成 |
 | 返回叙事 | `connection.resume()`，重新选择当前滚动位置对应的状态 |
-| 排查状态未更新 | `stage.sample()` 返回当前阅读索引、请求目标与按时钟推算的姿态；对照最近一次 `render(pose, frame)`，确认目标是否实际绘制，不能只凭 `sample().moving === false` 判断画面到位 |
+| 查询当前绘制 | `stage.status()` 返回 `target: { id, revision }`、最近一次同步 render 成功返回的 `rendered: { revision, final }`、`size`、`error` 与 `disposed`；同一状态换参数或显式 refresh 也会使旧绘制失效。两者 revision 相同且 final 为真，只说明图形终态已提交，不代表正文、素材和页面已验收 |
+| 采样当帧几何 | `stage.sample()` 仍按时钟返回姿态和 moving；时间已到不保证最后一帧实际画过。验收可用[按需采集](implementation-rendering.md#实际占位与空间诊断)，不改播放器时序 |
 | 卸载组件 | `connection.dispose()` 一次释放阅读轨道、导航、出口、尺寸观察与动画；仅滚出视口时保留控制器，支持反向阅读 |
 
 只需按钮动画时直接使用 `createPlayer`；已有播放器而只缺滚动选择时使用 `observeSteps`。这些是局部接法，新建完整滚动舞台仍用 `connectReading`。基础模块不推断前后对象对应、历史保留或组成关系，这些仍由[关系几何](implementation-geometry.md)与作品设计决定。
+
+### 可用空间与实际绘图区
+
+sticky 面板需要给标题、正文、图例与控件留出实际高度。可选用 [layout.css](../assets/stage-wiring/layout.css)：给面板加 `data-stage-space`，直接子绘图区加 `data-stage-plot`，SVG／Canvas 放在该区内；其他直接子元素占自己的内容高度，图占剩余空间。`--stage-top / --stage-bottom` 默认各 24px，可按页头等占用修改。它只提供可用空间，不决定上下、左右、浮层或正文长度。
+
+将实际图容器传给 `element`，在 `layout(id, { width, height })` 中据此计算范围、行距和边距；SVG viewBox 与当前尺寸同步。仅缩放固定大画布会把文字一起缩小，不能替代重新布局。内容挤满面板时，应调整内容安排或布局；这个接法不会自动缩字号或裁掉图形。[工程示范](../assets/stage-wiring/index.html?inspect)可同时试尺寸更新与按需检查。
 
 ### 最后画面读完再退出
 

@@ -23,11 +23,28 @@ export function createStage({
   const initialIndex = selectStep(elements.map((cue) => cue.getBoundingClientRect().top),
     view.innerHeight * viewportRatio);
   let readingIndex = initialIndex, targetId = steps[initialIndex].id, disposed = false, refreshRequested = false;
+  let revision = 1, renderVersion = 1, requestedId = targetId, rendered = null, error = null;
+  function status() {
+    return { target: { id: requestedId, revision }, rendered: rendered && { ...rendered },
+      size: { ...size }, readingIndex, disposed, error: error && { ...error } };
+  }
+  function invalidate(id) { requestedId = id; revision++; error = null; }
+  function attempt(phase, operation) {
+    try { return operation(); }
+    catch (cause) { error ??= { phase, message: String(cause?.message ?? cause) }; throw cause; }
+  }
   onReading?.({ id: targetId, index: readingIndex });
   let size = measure();
   const initial = layout(targetId, size);
   const player = createPlayer(initial, {
-    blend, render, duration, now: () => view.performance.now(),
+    blend: (...args) => attempt("blend", () => blend(...args)),
+    render(pose, frame) {
+      const version = renderVersion;
+      attempt("render", () => render(pose, frame));
+      // Record only a frame actually submitted by this request, not elapsed time.
+      if (version === revision) rendered = { revision: version, final: !frame.moving };
+    },
+    duration, now: () => view.performance.now(),
     requestFrame: (callback) => view.requestAnimationFrame(callback),
     cancelFrame: (id) => view.cancelAnimationFrame(id),
   });
@@ -40,14 +57,16 @@ export function createStage({
       throw new Error("Stage needs positive width and height; mount it after its element is measurable");
     return { width, height };
   }
-  function goTo(id, options = {}) {
+  function goTo(id, options = {}, alreadyInvalidated = false) {
     if (disposed) return;
     if (typeof id !== "string" || !id) throw new Error("Stage target id must be a nonempty string");
-    const nextSize = measure(), pose = layout(id, nextSize);
+    if (!alreadyInvalidated) invalidate(id);
+    const nextSize = attempt("measure", measure), pose = attempt("layout", () => layout(id, nextSize));
     targetId = id;
     size = nextSize;
     refreshRequested = false;
-    player.goTo(pose, options);
+    renderVersion = revision;
+    attempt("transition", () => player.goTo(pose, options));
   }
   const reader = observeSteps(elements, (index) => {
     const changed = index !== readingIndex || steps[index].id !== targetId;
@@ -57,9 +76,15 @@ export function createStage({
   }, {
     view, viewportRatio, hysteresis,
     onUpdate() {
-      const nextSize = measure();
+      let nextSize;
+      try { nextSize = measure(); }
+      catch (cause) {
+        if (!refreshRequested) invalidate(targetId);
+        error = { phase: "measure", message: String(cause?.message ?? cause) };
+        throw cause;
+      }
       if (refreshRequested || nextSize.width !== size.width || nextSize.height !== size.height)
-        goTo(targetId, { immediate: true });
+        goTo(targetId, { immediate: true }, refreshRequested);
     },
   });
   // Container reflow can happen without a window resize. This does not choose a layout.
@@ -67,17 +92,21 @@ export function createStage({
   resizeObserver?.observe(element);
 
   return {
+    element,
     goTo,
     syncReading() { if (!disposed) reader.sync(); },
     setReadingEnabled(enabled) { if (!disposed) reader.setEnabled(enabled); },
     // Recompute after data, fonts or surrounding content changes; reflow settles directly.
     refresh() {
       if (disposed) return;
+      invalidate(targetId);
       refreshRequested = true;
       reader.refresh();
     },
     // targetId is the requested state, not a claim that its transition has finished.
     sample: () => ({ readingIndex, targetId, ...player.sample() }),
+    // Additive observation; sample() keeps its existing pure clock semantics.
+    status,
     dispose() {
       if (disposed) return;
       disposed = true;
