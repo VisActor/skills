@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 1000">
+<title>哈利法塔建筑尖顶及逐层退台的简化立面</title>
+<defs>
+<linearGradient id="glass"><stop stop-color="#496b80"/><stop offset=".42" stop-color="#afc6cc"/><stop offset=".52" stop-color="#edf0df"/><stop offset=".62" stop-color="#98b9c8"/><stop offset="1" stop-color="#36586b"/></linearGradient>
+<pattern id="bands" width="200" height="9" patternUnits="userSpaceOnUse"><path d="M0 6H200" stroke="#eff2df" stroke-width="1.3" opacity=".6"/></pattern>
+<clipPath id="shape"><path d="M0 1000V912H12V846H23V775H34V697H45V615H57V536H68V453H79V353H88V247H93V137H98V0H102V137H107V247H113V353H121V453H132V536H143V615H155V697H166V775H177V846H188V912H200V1000Z"/></clipPath>
+</defs>
+<g clip-path="url(#shape)"><path d="M0 0H200V1000H0Z" fill="url(#glass)"/><path d="M0 220H200V1000H0Z" fill="url(#bands)"/>
+<path d="M101 137V1000M83 354V1000M63 536V1000M43 697V1000M23 847V1000M122 453V1000M144 615V1000M165 775V1000M186 913V1000" stroke="#d4d9d0" stroke-width="2" opacity=".8"/>
+<path d="M12 912H35M23 846H57M34 775H79M45 697H101M57 615H121M68 536H143M79 453H155M88 353H132M93 247H113" stroke="#dae5df" stroke-width="3"/>
+</g></svg>
