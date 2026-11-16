@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>新馆开了，门会开得更久吗？</title>
+<style>
+:root{--paper:#f7f7f2;--ink:#203f36;--muted:#62766c;--accent:#aa5137;--reference:#315e4d;--rule:#d8dfd5;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+*{box-sizing:border-box}body,figure{margin:0}[hidden]{display:none!important}a{color:inherit;text-underline-offset:5px}a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
+header{height:64px;margin:0 6vw;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--rule);color:var(--muted);font-size:12px}header a{text-decoration:none}.brand{font-weight:600;color:var(--ink);letter-spacing:.12em}
+.intro{min-height:calc(100vh - 64px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:42px 6vw 50px}.kicker{font-size:12px;letter-spacing:.12em;color:var(--muted);margin:0 0 18px}h1{font-size:clamp(34px,3.5vw,48px);line-height:1.45;font-weight:560;letter-spacing:-.02em;margin:0 0 18px}.intro>p:not(.kicker){max-width:620px;margin:0;font-size:17px;line-height:1.9;color:var(--muted)}
+.open-card{width:340px;position:relative;margin:32px 0 27px;padding:21px 28px 24px;background:#fffef9;border:1px solid #d1d9cc;box-shadow:0 8px 0 -5px #e7e9df,0 12px 22px #1c352407;transform:rotate(-2deg);text-align:left}.open-card:before{content:"";position:absolute;top:-6px;left:142px;width:54px;height:12px;background:#ddc9a6ab}.card-label{font-size:12px;letter-spacing:.12em;color:var(--muted);display:flex;justify-content:space-between;border-bottom:1px solid var(--rule);padding-bottom:12px}.card-value{display:flex;align-items:baseline;gap:10px;margin:10px 0 0}.card-value strong{font-family:Georgia,"Times New Roman",serif;font-size:76px;font-weight:400;font-variant-numeric:lining-nums tabular-nums;line-height:1.1}.card-value span{font-size:15px}.card-foot{margin-top:8px;font-size:12px;color:var(--muted)}.enter{font-size:13px;text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:8px}
+.story{border-top:1px solid var(--rule);display:grid;position:relative}.record-stage,.scroll-track{grid-area:1/1}.record-stage{position:sticky;top:0;align-self:start;z-index:1;background:var(--paper);height:100vh;height:100dvh;min-height:0;display:grid;grid-template-rows:180px minmax(0,1fr) 64px}.scroll-track{pointer-events:none}.reading-panels{width:min(800px,84vw);margin:auto;padding:24px 0 12px}.step .kicker{margin:0 0 12px;font-size:12px}.step p:not(.kicker){font-size:22px;line-height:1.8;margin:0;color:#42594f}.step strong{color:var(--ink);font-weight:600}.step em{font-style:normal;color:var(--accent);white-space:nowrap}
+figure{display:flex;align-items:center;justify-content:center;min-height:0;padding:0 5vw}svg{width:100%;height:100%;max-width:1500px;display:block;overflow:visible}svg text{font-family:inherit}.axis line{stroke:var(--rule);stroke-dasharray:2 6}.axis .zero{stroke:#728c7b;stroke-dasharray:none;stroke-width:1.5}.axis text{fill:var(--muted);font-size:19px}.axis-title{font-size:17px!important}.record-name{font-size:23px;font-weight:500}.record-detail{font-size:16px;fill:var(--muted)}.record-value{font-family:Georgia,"Times New Roman",serif;font-size:28px;font-variant-numeric:tabular-nums}.gap{font-size:20px;font-weight:500;font-variant-numeric:tabular-nums}
+.stage-bottom{margin:0 5vw;border-top:1px solid var(--rule);display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:24px;font-size:12px;color:var(--muted)}.step-controls{display:flex;align-items:center;gap:24px}.step-controls button,.step-controls a{border:1px solid var(--rule);border-radius:40px;background:transparent;color:var(--ink);font:inherit;font-size:15px;cursor:pointer;height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0 20px;text-decoration:none}.step-controls [data-prev]{width:44px;padding:0;font-size:24px}.step-controls [data-next],.step-controls [data-finish]{background:var(--ink);color:var(--paper);border-color:var(--ink);min-width:110px}.step-controls button:not(:disabled):hover,.step-controls a:hover{background:var(--reference);border-color:var(--reference);color:var(--paper)}.step-controls button:disabled{opacity:.28;cursor:default}.step-position{font-family:Georgia,serif;font-variant-numeric:tabular-nums;font-size:15px;min-width:34px;text-align:center}.key-hint{color:var(--muted);font-size:12px;text-align:right}
+footer{padding:28px 8vw 60px;border-top:1px solid var(--rule)}footer>p{font-size:13px;color:var(--muted);line-height:1.9;max-width:900px}details{max-width:940px;margin-top:24px;font-size:14px;color:#566b60;line-height:1.85}summary{cursor:pointer;color:var(--ink)}details p{margin:16px 0}code{font-size:.94em;overflow-wrap:anywhere}
+@media(max-height:740px){header{height:52px}.intro{min-height:calc(100vh - 52px);padding:30px 6vw}.intro h1{font-size:36px}.open-card{margin:24px 0 23px;padding:15px 26px 18px}.card-value strong{font-size:62px}.record-stage{grid-template-rows:150px minmax(0,1fr) 64px}.step p:not(.kicker){font-size:20px}}
+@media(max-height:680px){.record-stage{grid-template-rows:126px minmax(0,1fr) 56px}.record-name{font-size:20px}.record-detail{font-size:14px}.step p:not(.kicker){font-size:19px}}
+
+</style>
+</head>
+<body>
+<header><span class="brand">一周的阅读时间</span><a href="../index.html#story-examples">示例索引 ↗</a></header>
+<main id="record-story">
+<section class="intro" id="top"><p class="kicker">七家虚构图书馆 / 一次比较练习</p><h1>新馆开了，<br>门会开得更久吗？</h1><p>带着这张老馆的时间表，<br>看看后来者为读者留出了多少时间。</p>
+<div class="open-card"><div class="card-label"><span>青杉馆</span><span>2016 · 开馆安排</span></div><div class="card-value"><strong data-record-value="cedar">42</strong><span>小时 / 周</span></div></div>
+<a class="enter" href="#comparison">看看后来者 ↓</a></section>
+<section class="story" id="comparison" aria-label="在共同尺度上比较不同图书馆的开放时长">
+<div class="record-stage">
+<div class="reading-panels" aria-live="polite" aria-atomic="true">
+<article class="step" data-step="reference"><p class="kicker">2016 / 青杉馆</p><p>青杉馆开馆时，每周开放 <strong><span data-record-value="cedar">42</span> 小时</strong>。后面比较的，也都是各馆刚开馆时公布的安排。</p></article>
+<article class="step" data-step="arrivals" hidden><p class="kicker">2018 → 2020</p><p>枫桥馆比青杉馆短，海湾馆却更长。<strong>后来开门的新馆，开放时间并没有一起变长。</strong></p></article>
+<article class="step" data-step="branches" hidden><p class="kicker">2022 / 同年开馆</p><p>同在 2022 年开馆，童阅馆每周 <em><span data-record-value="family">28</span> 小时</em>，书桌馆 <em><span data-record-value="study">84</span> 小时</em>。<strong>相同的开馆年份，没有带来相近的开放安排。</strong></p></article>
+<article class="step" data-step="latest" hidden><p class="kicker">2025 / 更长的开放时间</p><p>星灯馆把最长时段推到 <em><span data-record-value="night">98</span> 小时</em>。不过，<strong>最长的这一家，能代表所有新馆吗？</strong></p></article>
+<article class="step" data-step="difference" hidden><p class="kicker">回到开头的问题 / 最新两家与老馆</p><p>最新两家仍分列老馆两侧，每周相差 <em><span data-pair-gap="difference">63</span> 小时</em>。<strong>“新”不保证开门更久，具体安排才决定读者能来多久。</strong></p></article>
+</div>
+<figure><svg viewBox="0 0 1200 490" role="img" aria-label="模拟图书馆每周开放时长"></svg></figure>
+<div class="stage-bottom"><span>开馆时公布的每周开放时长 · 模拟数据</span><nav class="step-controls" aria-label="推进比较"><button type="button" data-prev aria-label="上一步" disabled>←</button><span class="step-position" data-position aria-hidden="true">1 / 5</span><button type="button" data-next aria-label="下一步">继续 →</button><a href="#conclusion" data-finish hidden>数据与设计 ↓</a></nav><span class="key-hint">滚轮 / 方向键也可推进</span></div>
+</div>
+<div class="scroll-track" aria-hidden="true"></div>
+</section>
+<footer id="conclusion">
+<p>馆名、年份、定位与时长均为模拟数据，不对应真实图书馆或行业趋势。每条记录是各馆开馆时的安排，后续加入新馆，并不表示老馆的时长发生变化。</p>
+<details id="example-notes"><summary>叙事、可视化选择与改编</summary>
+<p><strong>叙事：</strong><a href="../../../references/design.md#record-comparison">先留一个参照，再加入新证据</a>。后来者先分列参照两侧，同年记录又拉开差距；最长时段继续增加后，追问它能否代表新馆，最后用最新一对与老参照回答“新是否等于更长”。比较终态直接收束主线。</p>
+<p><strong>设计：</strong>开放告示引入问题；短正文留在图形上方，滚轮、按钮或方向键共同触发正文交接与图形变化，动画自行完成，读者可停留。句子保持完整，数字随图内标注加强强调。同一组条形共用零点与尺度，旧行先让位，新行再显露，差值落在原端点之间。舞台保留整屏空间，记录组居中；网格与刻度随记录增减一起展开、收拢，少量记录不拉散。高亮随追问选择，关系清楚时可以不加。</p>
+<p><strong>改编：</strong>对象、加入理由、排序、素材和布局都可换。可只取新增、筛选或比较；图形也可按数据改用区间、点或轨迹。保留当前判断所需的参照与口径，独立记录不接成累计；改变尺度时，可比对象与刻度同步变化。</p>
+<p><strong>代码：</strong><code>mountRecords(root,{config})</code> 接入；<code>records / stops / axis / layout</code> 换数据、可见记录和空间。不传 <code>layout</code> 按实际图容器重排，传入则沿用指定画布等比适配；改编后核对标签大小与最长名称。<code>focus / pair</code> 引用可见对象。按钮采用 <a href="../records-composition/index.html">记录与构成</a> 的样式；本页用 <a href="../../../references/implementation-stage.md#文字滚动与舞台更新"><code>connectReading</code></a> 接入阅读轨道、箭头与按键；<code>track.ids</code> 取阅读状态，<code>exit.sticky</code> 按实际舞台高度补足末段停留。图文共用 <code>data-record-value / data-pair-gap</code>；<code>recordPose / blendRecords</code> 也可接入其他阅读方式。</p>
+<p><a href="scene.mjs">本例数据与代码</a></p>
+</details></footer>
+</main>
+<script type="module">import {mountRecords} from './scene.mjs';const story=mountRecords(document.querySelector('#record-story'));addEventListener('pagehide',e=>{if(!e.persisted)story.dispose()});</script>
+</body></html>

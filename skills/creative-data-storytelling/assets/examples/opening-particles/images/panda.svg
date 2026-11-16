@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <title>大熊猫的正面形象，原创示例素材</title>
+  <g fill="#192824">
+    <circle cx="97" cy="102" r="52"/>
+    <circle cx="303" cy="102" r="52"/>
+  </g>
+  <ellipse cx="200" cy="216" rx="136" ry="139" fill="#fff9eb"/>
+  <g fill="#192824">
+    <ellipse cx="146" cy="201" rx="33" ry="44" transform="rotate(28 146 201)"/>
+    <ellipse cx="254" cy="201" rx="33" ry="44" transform="rotate(-28 254 201)"/>
+    <path d="M181 251Q200 240 219 251Q216 269 200 274Q184 269 181 251Z"/>
+  </g>
+  <g fill="#fff9eb">
+    <circle cx="153" cy="196" r="9"/>
+    <circle cx="247" cy="196" r="9"/>
+  </g>
+  <path d="M200 273V283Q181 300 169 282M200 283Q219 300 231 282" fill="none" stroke="#192824" stroke-width="7" stroke-linecap="round"/>
+</svg>
