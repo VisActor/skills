@@ -168,6 +168,33 @@ test("inspect reads explanation updates from HTML and reports missing or empty n
   await assert.rejects(inspect(), /Missing #example-notes.*fixture\/index.html/);
 });
 
+test("inspect extracts inline text without leaking quoted attributes or comments", async (t) => {
+  const fixture = await explanationFixture(t, `<details id="example-notes">
+    <p><span title="A > B">A</span><strong>B</strong><!-- hidden -->C &amp; D.</p>
+    <p><code>&lt;script&gt;</code> is literal code, as is &lt;!-- comment --&gt;.</p>
+  </details>`);
+  const inspected = await inspectExample([fixture.entry], fixture.entry.id, fixture.installed);
+  assert.deepEqual(inspected.explanation.paragraphs, [
+    "ABC & D.",
+    "<script> is literal code, as is <!-- comment -->.",
+  ]);
+});
+
+test("inspect rejects malformed inline markup instead of reconstructing tags or comments", async (t) => {
+  const fixture = await explanationFixture(t, "");
+  for (const markup of [
+    "<scr<!-- hidden -->ipt", "<!<!---->--", "<script", "<!-- unclosed",
+    '<span title="unclosed>text', "<scr<!-- hidden -->ipt>text</script>",
+  ]) {
+    await writeFile(fixture.preview, `<details id="example-notes"><p>${markup}</p></details>`);
+    await assert.rejects(
+      inspectExample([fixture.entry], fixture.entry.id, fixture.installed),
+      /Malformed inline markup in #example-notes/,
+      markup,
+    );
+  }
+});
+
 test("each selected entry resolves to existing resources inside the installed skill", async () => {
   const entries = await loadCatalog();
   for (const entry of entries) {

@@ -60,8 +60,19 @@ async function resource(root, relativePath) {
 }
 
 function noteText(html) {
+  // Read owned inline notes as plain text for JSON, not as sanitized HTML.
+  // Consume the original markup once: deleting substrings can form new tags.
+  const parts = [];
+  let end = 0;
+  for (const match of html.matchAll(/<!--[\s\S]*?-->|<\/?[a-z](?:[^<>"']|"[^"]*"|'[^']*')*>|([^<]+)/gi)) {
+    if (match.index !== end) break;
+    if (match[1] !== undefined) parts.push(match[1]);
+    end = match.index + match[0].length;
+  }
+  if (end !== html.length)
+    throw new Error("Malformed inline markup in #example-notes; encode literal < as &lt;");
   const entities = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " " };
-  return html.replace(/<!--[\s\S]*?-->/g, "").replace(/<[^>]*>/g, "")
+  return parts.join("")
     .replace(/&(#x[\da-f]+|#\d+|amp|lt|gt|quot|apos|nbsp);/gi, (entity, name) => {
       if (name[0] !== "#") return entities[name.toLowerCase()];
       const point = name[1].toLowerCase() === "x" ? parseInt(name.slice(2), 16) : Number(name.slice(1));
