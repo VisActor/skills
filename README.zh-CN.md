@@ -29,6 +29,7 @@ VisActor Skills 提供图表、看板、数据故事和海报相关的技能，�
 | Skill | 能力 | 仓库 |
 | --- | --- | --- |
 | [VChart Skill](https://github.com/VisActor/VChart/blob/develop/skills/vchart-development-assistant/SKILL.md) | 图表生成、问题诊断、图片还原和 React 集成 | [VisActor/VChart](https://github.com/VisActor/VChart) |
+| [data-science-visualization](https://github.com/VisActor/VChart/tree/develop/skills/data-science-visualization) | 生成交互式数据科学图表（HTML），展示数据分布、变量相关性，以及已有的 PCA 投影和 SHAP 特征贡献。[查看案例](https://github.com/VisActor/VChart/tree/develop/examples/data-science-visualization) | [VisActor/VChart](https://github.com/VisActor/VChart) |
 | [VTable Skill](https://github.com/VisActor/VTable/blob/develop/skills/vtable-development-assistant/SKILL.md) | 明细表、透视表与透视图、交互和问题诊断 | [VisActor/VTable](https://github.com/VisActor/VTable) |
 
 每个 Skill 可单独安装，包含所需的指令、参考资料和脚本。模型调用和工具执行由 Agent 提供。
@@ -69,10 +70,11 @@ npx skills add VisActor/skills --skill visactor-chart-editor
 npx skills add VisActor/skills --skill visactor-map3d-dashboard
 ```
 
-如需图表和表格能力，从对应仓库安装：
+相关 Skill 从各自仓库安装：
 
 ```bash
 npx skills add VisActor/VChart --skill vchart-development-assistant
+npx skills add VisActor/VChart --skill data-science-visualization
 npx skills add VisActor/VTable --skill vtable-development-assistant
 ```
 
