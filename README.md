@@ -29,7 +29,7 @@ Chart and table Skills are maintained in their library repositories. Install the
 | Skill | Tasks | Repository |
 | --- | --- | --- |
 | [VChart Skill](https://github.com/VisActor/VChart/blob/develop/skills/vchart-development-assistant/SKILL.md) | Chart generation, diagnosis, image replication and React integration | [VisActor/VChart](https://github.com/VisActor/VChart) |
-| [data-science-visualization](https://github.com/VisActor/VChart/tree/develop/skills/data-science-visualization) | Interactive HTML charts for distributions, group comparisons, variable relationships and existing model results. [Examples](https://github.com/VisActor/VChart/tree/develop/examples/data-science-visualization) | [VisActor/VChart](https://github.com/VisActor/VChart) |
+| [data-science-visualization](https://github.com/VisActor/VChart/tree/develop/skills/data-science-visualization) | Create interactive data science visualizations in HTML for distributions, correlations, PCA projections and SHAP feature contributions. [Examples](https://github.com/VisActor/VChart/tree/develop/examples/data-science-visualization) | [VisActor/VChart](https://github.com/VisActor/VChart) |
 | [VTable Skill](https://github.com/VisActor/VTable/blob/develop/skills/vtable-development-assistant/SKILL.md) | List tables, pivot tables/charts, interactions and diagnosis | [VisActor/VTable](https://github.com/VisActor/VTable) |
 
 Each Skill can be installed separately and includes its instructions, references and scripts. The agent provides model access and runs the tools.
