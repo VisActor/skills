@@ -1,0 +1,46 @@
+// Synthetic paired responses. IDs identify simulated records, not real people.
+const cells = [
+  ["satisfied","satisfied","lower",5],
+  ["satisfied","satisfied","middle",8],
+  ["satisfied","satisfied","higher",15],
+  ["satisfied","neutral","lower",7],
+  ["satisfied","neutral","middle",6],
+  ["satisfied","neutral","higher",3],
+  ["satisfied","dissatisfied","lower",12],
+  ["satisfied","dissatisfied","middle",3],
+  ["satisfied","dissatisfied","higher",1],
+  ["neutral","satisfied","lower",1],
+  ["neutral","satisfied","middle",2],
+  ["neutral","satisfied","higher",3],
+  ["neutral","neutral","lower",5],
+  ["neutral","neutral","middle",8],
+  ["neutral","neutral","higher",3],
+  ["neutral","dissatisfied","lower",12],
+  ["neutral","dissatisfied","middle",5],
+  ["neutral","dissatisfied","higher",1],
+  ["dissatisfied","satisfied","middle",1],
+  ["dissatisfied","satisfied","higher",1],
+  ["dissatisfied","neutral","lower",1],
+  ["dissatisfied","neutral","middle",2],
+  ["dissatisfied","neutral","higher",1],
+  ["dissatisfied","dissatisfied","lower",7],
+  ["dissatisfied","dissatisfied","middle",5],
+  ["dissatisfied","dissatisfied","higher",2],
+];
+export const categoricalExample = {
+  subject: '社区服务',
+  categories: [
+    { id: 'satisfied', label: '满意' },
+    { id: 'neutral', label: '一般' },
+    { id: 'dissatisfied', label: '不满' },
+  ],
+  attributes: [
+    { id: 'lower', label: '较低收入', color: '#218d8c' },
+    { id: 'middle', label: '中等收入', color: '#6a75b8' },
+    { id: 'higher', label: '较高收入', color: '#bf8430' },
+  ],
+  attributeLabel: '初次收入档位',
+  periods: { before: '初次回答', after: '半年后' },
+  records: cells.flatMap(([before, after, attribute, count], cell) =>
+    Array.from({ length: count }, (_, i) => ({ id: 'response-' + cell + '-' + i, before, after, attribute }))),
+};

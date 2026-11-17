@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>只有总数，至少重合多少 · 解释片段</title><link rel="stylesheet" href="../segment-preview.css"><style>
+.site-header{height:64px;margin:0 4vw}.playback{height:72px;margin:0 4vw}
+#stage-shell{height:calc(100dvh - 136px);padding:28px 4vw 24px;grid-template-columns:minmax(270px,29%) minmax(0,1fr);gap:32px}
+.story{padding:20px 0 10px}.eyebrow{font-size:12px;letter-spacing:1px;margin-bottom:22px}
+.copy h1{font-size:clamp(30px,2.65vw,42px);line-height:1.4;min-height:0;margin-bottom:24px}
+.copy [data-field="description"]{font-size:17px;line-height:1.85;max-width:360px;min-height:0;color:var(--muted)}
+.metric,.metric-label,.choices{display:none}.story-bottom{padding-top:22px;max-width:360px}.story-bottom p{font-size:12px;line-height:1.7}.data-badge{font-size:11px}
+#scene text{font-size:21px;fill:var(--ink);font-variant-numeric:tabular-nums}#scene .label,#scene .reading{font-size:21px}
+#scene .name{font-size:27px;font-weight:600}#scene .number,#scene .headline{font-size:30px}#scene .caption,#scene .tick{font-size:20px;fill:var(--muted)}
+#scene .legend-label,#scene .category-change{font-size:22px;fill:var(--muted)}#scene .category-name{font-size:28px}#scene .category-count{font-size:27px}
+#scene .scope,#scene .note{font-size:22px;fill:var(--muted)}#scene .result{font-size:27px}#scene .inbar{fill:#fffdf7;font-size:25px}
+.chapter-name{font-size:13px}.scroll-hint{font-size:12px}.text-button{font-size:13px}
+@media(max-height:760px){#stage-shell{padding-top:18px;padding-bottom:14px}.copy h1{font-size:30px}.story{padding-top:6px}.eyebrow{margin-bottom:16px}.copy [data-field="description"]{font-size:16px}.story-bottom{padding-top:14px}}
+
+#stage-shell{display:grid;grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);gap:14px;padding:20px 5vw 12px}
+.story{padding:0;display:block}.eyebrow{margin-bottom:10px}.copy [data-copy]{display:grid;grid-template-columns:minmax(300px,42%) minmax(0,1fr);gap:30px;align-items:center}
+.copy h1{margin:0;font-size:clamp(28px,2.7vw,40px);line-height:1.35}.copy [data-field="description"]{max-width:640px;font-size:17px;line-height:1.8}.story-bottom{display:none}
+.visual{width:100%;min-height:0}#scene{max-width:1360px}
+@media(max-height:760px){#stage-shell{padding-top:14px;gap:6px}.eyebrow{margin-bottom:7px}.copy h1{font-size:28px}.copy [data-field="description"]{font-size:16px}}
+</style></head>
+<body>
+<header class="site-header"><a class="brand" href="../index.html#overlap-bound"><span class="brand-mark" aria-hidden="true">↗</span><span>看见关系<small>VISUAL EXPLANATIONS</small></span></a><button id="about" class="text-button">设计与数据 ↗</button></header>
+<main id="stage-shell">
+ <aside class="story"><div class="eyebrow" id="eyebrow"></div><div class="copy"><h1 id="headline"></h1><p id="description"></p></div>
+ <div class="metric"><span id="metric-value"></span><span id="metric-unit"></span></div><p class="metric-label" id="metric-label"></p><div class="choices" id="choices"></div>
+ <div class="story-bottom"><span class="data-badge"></span><p></p></div></aside>
+ <section class="visual" aria-label="连续可视化舞台"><svg id="scene" role="img"></svg></section>
+</main>
+<footer class="playback"><span class="chapter-name" id="chapter-name"></span><div class="state-controls"><button id="prev" aria-label="上一步">←</button><span id="state-count"></span><button id="next">继续 →</button></div><div class="secondary-controls"><span class="scroll-hint">滚轮 / 方向键也可推进</span><button class="text-button" id="replay">↺ 重看本段</button></div></footer>
+<dialog id="notes"><button class="close-dialog" aria-label="关闭说明">×</button><details id="example-notes" open><summary>叙事、可视化选择与改编</summary>
+<p><strong>叙事与设计：</strong><a href="../../../references/design.md#membership">只有边际人数，至少重合多少</a>。两条先共用总体与零点比较数量，再保持长度、将第二条移向总体另一端。即使尽量错开仍留下的重合，解释为什么交集有下限；这不是时间推进或人员流动。</p>
+<p><strong>数据条件：</strong>虚构意向调查，同一批 120 人中两项人数为 84 和 72；各项内部不重复。只用共同总体与边际计数，下界 max(0, A + B − N)，上界 min(A, B)。只有总数不能断言实际交集恰好是下界。若下界为零，只说明可能错开；已知成员对应则用 <a href="../shared-members/index.html">shared-members</a>。</p>
+<p><strong>改编空间：</strong>可以用于功能使用、回答重合或活动参与；需要同一范围的总体，两项允许重叠。可换方向、图符、长度条或已有单元集合；保留总体边界、两项数量与“尽量分开”这一解释。主题与布局可改，不必先铺满粒子。</p>
+<p><strong>代码：</strong><a href="scene.mjs">overlapExample / createOverlap</a> 集中输入与上下界，arrangement 给出假设排布；createOverlapScene 的 layout / blend / geometry 连续移动，mountOverlap 用同一模型绑定图文。可直接取上下界计算或错开过程，正文应随零下界、相等组或其他数据重新组织。</p>
+<p>预览沿用 <a href="../../../references/implementation-stage.md#正文固定交接">固定正文接法</a>与共享 <code>connectReading / createCopyHandoff</code>。预览装配可替换，构图与几何可接到自己的正文。</p>
+</details></dialog>
+<script type="module">
+import { example } from './scene.mjs';
+import { mountExamplePreview } from '../segment-preview.mjs';
+// 只装配本例预览；作品可将 pose / blend / render 接到自己的正文与舞台。
+const preview = mountExamplePreview(document.body, example);
+addEventListener('pagehide', event => { if (!event.persisted) preview.dispose(); });
+</script></body></html>

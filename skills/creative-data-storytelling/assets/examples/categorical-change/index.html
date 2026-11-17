@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>同一群人，回答变了 · 解释片段</title><link rel="stylesheet" href="../segment-preview.css"><style>
+.site-header{height:64px;margin:0 4vw}.playback{height:72px;margin:0 4vw}
+#stage-shell{height:calc(100dvh - 136px);padding:28px 4vw 24px;grid-template-columns:minmax(270px,29%) minmax(0,1fr);gap:32px}
+.story{padding:20px 0 10px}.eyebrow{font-size:12px;letter-spacing:1px;margin-bottom:22px}
+.copy h1{font-size:clamp(30px,2.65vw,42px);line-height:1.4;min-height:0;margin-bottom:24px}
+.copy [data-field="description"]{font-size:17px;line-height:1.85;max-width:360px;min-height:0;color:var(--muted)}
+.metric,.metric-label,.choices{display:none}.story-bottom{padding-top:22px;max-width:360px}.story-bottom p{font-size:12px;line-height:1.7}.data-badge{font-size:11px}
+#scene text{font-size:21px;fill:var(--ink);font-variant-numeric:tabular-nums}#scene .label,#scene .reading{font-size:21px}
+#scene .name{font-size:27px;font-weight:600}#scene .number,#scene .headline{font-size:30px}#scene .caption,#scene .tick{font-size:20px;fill:var(--muted)}
+#scene .legend-label,#scene .category-change{font-size:22px;fill:var(--muted)}#scene .category-name{font-size:28px}#scene .category-count{font-size:27px}
+#scene .scope,#scene .note{font-size:22px;fill:var(--muted)}#scene .result{font-size:27px}#scene .inbar{fill:#fffdf7;font-size:25px}
+.chapter-name{font-size:13px}.scroll-hint{font-size:12px}.text-button{font-size:13px}
+@media(max-height:760px){#stage-shell{padding-top:18px;padding-bottom:14px}.copy h1{font-size:30px}.story{padding-top:6px}.eyebrow{margin-bottom:16px}.copy [data-field="description"]{font-size:16px}.story-bottom{padding-top:14px}}
+
+#stage-shell{display:grid;grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);gap:14px;padding:20px 5vw 12px}
+.story{padding:0;display:block}.eyebrow{margin-bottom:10px}.copy [data-copy]{display:grid;grid-template-columns:minmax(300px,42%) minmax(0,1fr);gap:30px;align-items:center}
+.copy h1{margin:0;font-size:clamp(28px,2.7vw,40px);line-height:1.35}.copy [data-field="description"]{max-width:640px;font-size:17px;line-height:1.8}.story-bottom{display:none}
+.visual{width:100%;min-height:0}#scene{max-width:1360px}
+@media(max-height:760px){#stage-shell{padding-top:14px;gap:6px}.eyebrow{margin-bottom:7px}.copy h1{font-size:28px}.copy [data-field="description"]{font-size:16px}}
+</style></head>
+<body>
+<header class="site-header"><a class="brand" href="../index.html#categorical-change"><span class="brand-mark" aria-hidden="true">↗</span><span>看见关系<small>VISUAL EXPLANATIONS</small></span></a><button id="about" class="text-button">设计与数据 ↗</button></header>
+<main id="stage-shell">
+ <aside class="story"><div class="eyebrow" id="eyebrow"></div><div class="copy"><h1 id="headline"></h1><p id="description"></p></div>
+ <div class="metric"><span id="metric-value"></span><span id="metric-unit"></span></div><p class="metric-label" id="metric-label"></p><div class="choices" id="choices"></div>
+ <div class="story-bottom"><span class="data-badge"></span><p></p></div></aside>
+ <section class="visual" aria-label="连续可视化舞台"><svg id="scene" role="img"></svg></section>
+</main>
+<footer class="playback"><span class="chapter-name" id="chapter-name"></span><div class="state-controls"><button id="prev" aria-label="上一步">←</button><span id="state-count"></span><button id="next">继续 →</button></div><div class="secondary-controls"><span class="scroll-hint">滚轮 / 方向键也可推进</span><button class="text-button" id="replay">↺ 重看本段</button></div></footer>
+<dialog id="notes"><button class="close-dialog" aria-label="关闭说明">×</button><details id="example-notes" open><summary>叙事、可视化选择与改编</summary>
+<p><strong>叙事与设计：</strong><a href="../../../references/design.md#unit-cohorts">同批对象的两期变化</a>。先建立类别位置，再让同一批人按第二次回答跨组重排；停在新分布，保留原人数与差额。读者既看见总体改变，也能点选一个对象回看对应。前文已有分组时可直接接入。</p>
+<p><strong>条件：</strong>需要稳定 ID、同定义的前后分类；只有两期总数不能推造个人流向。默认 120 条配对记录全部模拟，不解释现实收入与满意度的因果，也未观察到中间过程。有新增、退出或缺测时应另行处理总体。</p>
+<p><strong>视觉选择：</strong>类别位置与等大人形计数保持；颜色表示初次收入档位，跨期不变，也不表示变好或变差。终态描边对应换了回答的人数，点选可单独追踪；若只需比较总体，不必保留这层强调。只追问某来源去了哪里时，可改用 <a href="../cohort-flow/index.html">cohort-flow</a>。</p>
+<p><strong>改编与代码：</strong><a href="data.mjs">data.mjs</a> 换分类、属性和配对记录；<a href="model.mjs">createCategoricalChange / layout / blend</a> 保留身份并连接前后分布。可换单元形象、分类数、方向、布局与路径；第二属性无用时可单色。geometry 与 width/height 决定绘图区，更多类别需另排空间。<a href="scene.mjs">mountCategorical</a> 负责 SVG 与读数，句子按新数据重写。</p>
+<p>预览沿用 <a href="../../../references/implementation-stage.md#正文固定交接">固定正文接法</a>与共享 <code>connectReading / createCopyHandoff</code>。预览装配可替换，构图与几何可接到自己的正文。</p>
+</details></dialog>
+<script type="module">
+import { example } from './scene.mjs';
+import { mountExamplePreview } from '../segment-preview.mjs';
+// 只装配本例预览；作品可将 pose / blend / render 接到自己的正文与舞台。
+const preview = mountExamplePreview(document.body, example);
+addEventListener('pagehide', event => { if (!event.persisted) preview.dispose(); });
+</script></body></html>
