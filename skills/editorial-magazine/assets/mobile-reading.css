@@ -1,0 +1,211 @@
+/* Editorial starting sizes for the default 1080x1440 mobile canvas. Adjust to
+   the actual manuscript. Classic layouts keep the dimensions in their source
+   template unless the user explicitly requests another ratio. */
+:root {
+  --page-height: 1440px;
+  --reading-body: calc(var(--page-width, 1080px) * .039);
+  --reading-label: calc(var(--page-width, 1080px) * .036);
+  --reading-caption: calc(var(--page-width, 1080px) * .030);
+}
+
+article[data-page] :is(.lead p, .news-item p, .analysis, .detail-summary p,
+  .detail-note p:not(.eyebrow), .module p, .stop p, .story-a p, .story-b p, .story-c p,
+  .milestone p:not(.year), .topic p:not(.ribbon), .bd-work-note p,
+  .bd-close, .notes p, [data-reading="body"]),
+article.bio-detail :is(section, figure) p:not(.bd-kicker, .bd-label),
+article[data-template^="explainer"] section p {
+  font-size: var(--reading-body);
+  line-height: 1.5;
+}
+
+article[data-page] :is(.stop h2, .leg b, .moment .eyebrow, .moment h3,
+  .look .thought, .milestone .year, .milestone h2, .topic .ribbon, [data-reading="label"]) {
+  font-size: var(--reading-label);
+  line-height: 1.28;
+}
+
+article[data-page] :is(figcaption, .caption, .hero-credit, [data-reading="caption"]) {
+  font-size: var(--reading-caption);
+  line-height: 1.4;
+}
+
+article[data-page] .story-b {
+  grid-template-columns: minmax(0, 1fr);
+  gap: .45em;
+}
+
+article[data-template="biography"] .work h3,
+article.culture .module h3 {
+  font-size: var(--reading-label);
+  line-height: 1.25;
+}
+article[data-template="biography"] .work p {
+  font-size: var(--reading-caption);
+  line-height: 1.4;
+}
+
+/* Biography keeps the defining two-sided contour wrap on mobile. The mobile
+   edition reduces copy and type size instead of replacing shape-outside with
+   fixed columns, so both independent reading flows can fill the portrait edge. */
+article[data-template="biography"] .bio-header {
+  min-height: 220px;
+  margin: 12px 0 8px;
+  padding: 6px 150px 0 180px;
+}
+article[data-template="biography"] .bio-header h1 {
+  font-size: 74px;
+}
+article[data-template="biography"] .bio-header .identity {
+  font-size: 23px;
+  line-height: 1.35;
+}
+article[data-template="biography"] .bio-header .intro {
+  font-size: 26px;
+  line-height: 1.42;
+}
+article[data-template="biography"] .early-portrait figcaption {
+  width: 160px;
+  font-size: 17px;
+  line-height: 1.28;
+  white-space: normal;
+}
+article[data-template="biography"] .bio-body {
+  --bio-left-copy-offset: 150px;
+  --bio-right-copy-offset: 36px;
+  display: block;
+  position: relative;
+  height: 850px;
+  margin: 0;
+}
+article[data-template="biography"] .portrait-exclusion {
+  display: block;
+  width: 100%;
+  height: 850px;
+  shape-margin: 0;
+}
+article[data-template="biography"] .bio-side {
+  width: 50%;
+  min-height: 850px;
+  height: 850px;
+  padding: 24px 8px 18px;
+  display: flow-root;
+  position: relative;
+  z-index: 2;
+}
+article[data-template="biography"] .chronology {
+  float: left;
+}
+article[data-template="biography"] .topics {
+  float: right;
+}
+article[data-template="biography"] .portrait {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 850px;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
+}
+article[data-template="biography"] .portrait img {
+  width: 100%;
+  max-width: none;
+  height: 760px;
+  margin-left: 0;
+  object-fit: contain;
+  object-position: center bottom;
+  transform: none;
+}
+article[data-template="biography"] .portrait figcaption {
+  bottom: 0;
+}
+article[data-template="biography"] .bio-side p:not(.year, .ribbon) {
+  font-size: 29px;
+  line-height: 1.46;
+  text-align: justify;
+}
+article[data-template="biography"] :is(.bio-side h2, .milestone .year, .topic .ribbon) {
+  font-size: 29px;
+  line-height: 1.34;
+}
+article[data-template="biography"] :is(.milestone, .topic) {
+  margin: 0 0 18px;
+}
+article[data-template="biography"] .chronology > section:first-of-type {
+  margin-top: var(--bio-left-copy-offset);
+}
+article[data-template="biography"] .topics > section:first-of-type {
+  margin-top: var(--bio-right-copy-offset);
+}
+article[data-template="biography"] .works {
+  margin: auto 0 8px;
+  padding: 12px 0 8px;
+}
+article[data-template="biography"] .works > h2 {
+  font-size: 24px;
+}
+article[data-template="biography"] .works h3 {
+  font-size: 30px;
+}
+article[data-template="biography"] .works :is(.date, p) {
+  font-size: 25px;
+  line-height: 1.38;
+}
+article[data-template="biography"] .scene-portrait figcaption {
+  font-size: 18px;
+  line-height: 1.3;
+  white-space: normal;
+}
+article[data-template="biography"] .scene-portrait img {
+  height: 118px;
+}
+
+/* The reading sizes and article count stay unchanged at 3:4. Reclaim height
+   from photographs and decorative spacing, rather than shrinking copy. */
+article[data-template="news"] {
+  padding-top: 28px;
+  padding-bottom: 34px;
+}
+article[data-template="news"] .issue {
+  margin: 8px 0 12px;
+}
+article[data-template="news"] .hero {
+  height: 240px;
+}
+article[data-template="news"] .lead {
+  margin: 10px 0 12px;
+  padding-bottom: 10px;
+}
+article[data-template="news"] .news-photo {
+  margin-bottom: 6px;
+}
+article[data-template="news"] .news-photo img {
+  height: 110px;
+}
+article[data-template="news"] .news-item h3 {
+  margin-bottom: 6px;
+}
+article[data-template="news"] .news-item .source {
+  margin-top: 5px;
+}
+
+article.culture {
+  row-gap: 18px;
+}
+article.culture .row {
+  gap: 24px;
+  padding: 0;
+}
+article.culture .circle {
+  width: min(70%, 190px);
+}
+article.culture .module h3 {
+  margin: 10px 0 6px;
+}
+article.culture .landscape-band {
+  padding-block: 30px;
+}
+article.route .map {
+  margin-block: 3%;
+  height: auto;
+}
