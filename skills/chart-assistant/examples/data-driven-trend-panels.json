@@ -1,0 +1,136 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "comparison-heading", "type": "text",
+        "position": { "x": 16, "y": 8, "width": 928, "height": 56 },
+        "options": {
+          "textConfig": [
+            { "text": "Child mortality: start and end levels", "fontSize": 22, "fontWeight": "600", "fontFamily": "monospace" },
+            { "text": "\nDeaths before age five (% of newborns); four observations, 1960–2020; shared 0–40% scale", "fontSize": 12, "fontFamily": "monospace" }
+          ],
+          "fontFamily": "monospace"
+        }
+      },
+      {
+        "id": "africa-trend", "type": "chart",
+        "position": { "x": 0, "y": 72, "width": 304, "height": 420 },
+        "options": {
+          "chartType": "line",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["Year", "Africa (UN)"], "rows": ["1960", "1980", "2000", "2020"],
+              "data": [
+                { "Year": "1960", "Africa (UN)": 27.344 },
+                { "Year": "1980", "Africa (UN)": 19.3276 },
+                { "Year": "2000", "Africa (UN)": 13.759 },
+                { "Year": "2020", "Africa (UN)": 6.8952 }
+              ],
+              "columnFormats": [{ "dataType": "text" }, { "dataType": "number", "dataFormat": { "fixed": 1, "postfix": "%" } }]
+            }
+          },
+          "config": {
+            "mappingSpec": { "x": "Year", "y": ["Africa (UN)"] }, "color": ["#718596"],
+            "modelSpec": [
+              { "id": "chart_title", "specKey": "title", "specIndex": 0, "spec": { "visible": true, "text": "Africa (UN)", "textStyle": { "fontSize": 18 } } },
+              { "id": "axis-left", "specKey": "axes", "specIndex": 0, "spec": { "type": "linear", "min": 0, "max": 40, "title": { "visible": false }, "label": { "styleMap": [{ "target": { "value": 10 }, "value": { "visible": false } }, { "target": { "value": 30 }, "value": { "visible": false } }] } } },
+              { "id": "axis-bottom", "specKey": "axes", "specIndex": 1, "spec": { "type": "band", "title": { "visible": false }, "grid": { "visible": false } } },
+              { "id": "legend-discrete", "specKey": "legends", "specIndex": 0, "spec": { "visible": false } },
+              { "specKey": "series", "target": { "measure": "Africa (UN)" }, "spec": {
+                "line": { "style": { "lineWidth": 2 } },
+                "point": { "visible": true, "style": { "fillOpacity": 0, "strokeOpacity": 0, "size": 6 } },
+                "label": { "visible": true, "displayType": "firstLast", "position": "top" },
+                "seriesLabel": { "visible": false }
+              } }
+            ],
+            "markStyle": [
+              { "markName": "point", "target": { "selector": { "Year": "1960" }, "measure": "Africa (UN)" }, "style": { "fillOpacity": 1, "strokeOpacity": 1 } },
+              { "markName": "point", "target": { "selector": { "Year": "2020" }, "measure": "Africa (UN)" }, "style": { "fillOpacity": 1, "strokeOpacity": 1 } }
+            ]
+          }
+        }
+      },
+      {
+        "id": "world-trend", "type": "chart",
+        "position": { "x": 328, "y": 72, "width": 304, "height": 420 },
+        "options": {
+          "chartType": "line",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["Year", "World"], "rows": ["1960", "1980", "2000", "2020"],
+              "data": [
+                { "Year": "1960", "World": 21.6414 },
+                { "Year": "1980", "World": 11.7767 },
+                { "Year": "2000", "World": 7.5533 },
+                { "Year": "2020", "World": 3.8282 }
+              ],
+              "columnFormats": [{ "dataType": "text" }, { "dataType": "number", "dataFormat": { "fixed": 1, "postfix": "%" } }]
+            }
+          },
+          "config": {
+            "mappingSpec": { "x": "Year", "y": ["World"] }, "color": ["#176B55"],
+            "modelSpec": [
+              { "id": "chart_title", "specKey": "title", "specIndex": 0, "spec": { "visible": true, "text": "World", "textStyle": { "fontSize": 18 } } },
+              { "id": "axis-left", "specKey": "axes", "specIndex": 0, "spec": { "type": "linear", "min": 0, "max": 40, "title": { "visible": false }, "label": { "styleMap": [{ "target": { "value": 10 }, "value": { "visible": false } }, { "target": { "value": 30 }, "value": { "visible": false } }] } } },
+              { "id": "axis-bottom", "specKey": "axes", "specIndex": 1, "spec": { "type": "band", "title": { "visible": false }, "grid": { "visible": false } } },
+              { "id": "legend-discrete", "specKey": "legends", "specIndex": 0, "spec": { "visible": false } },
+              { "specKey": "series", "target": { "measure": "World" }, "spec": {
+                "line": { "style": { "lineWidth": 3 } },
+                "point": { "visible": true, "style": { "fillOpacity": 0, "strokeOpacity": 0, "size": 6 } },
+                "label": { "visible": true, "displayType": "firstLast", "position": "top" },
+                "seriesLabel": { "visible": false }
+              } }
+            ],
+            "markStyle": [
+              { "markName": "point", "target": { "selector": { "Year": "1960" }, "measure": "World" }, "style": { "fillOpacity": 1, "strokeOpacity": 1 } },
+              { "markName": "point", "target": { "selector": { "Year": "2020" }, "measure": "World" }, "style": { "fillOpacity": 1, "strokeOpacity": 1 } }
+            ]
+          }
+        }
+      },
+      {
+        "id": "europe-trend", "type": "chart",
+        "position": { "x": 656, "y": 72, "width": 304, "height": 420 },
+        "options": {
+          "chartType": "line",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["Year", "Europe (UN)"], "rows": ["1960", "1980", "2000", "2020"],
+              "data": [
+                { "Year": "1960", "Europe (UN)": 4.8695 },
+                { "Year": "1980", "Europe (UN)": 2.237 },
+                { "Year": "2000", "Europe (UN)": 1.0413 },
+                { "Year": "2020", "Europe (UN)": 0.4516 }
+              ],
+              "columnFormats": [{ "dataType": "text" }, { "dataType": "number", "dataFormat": { "fixed": 1, "postfix": "%" } }]
+            }
+          },
+          "config": {
+            "mappingSpec": { "x": "Year", "y": ["Europe (UN)"] }, "color": ["#718596"],
+            "modelSpec": [
+              { "id": "chart_title", "specKey": "title", "specIndex": 0, "spec": { "visible": true, "text": "Europe (UN)", "textStyle": { "fontSize": 18 } } },
+              { "id": "axis-left", "specKey": "axes", "specIndex": 0, "spec": { "type": "linear", "min": 0, "max": 40, "title": { "visible": false }, "label": { "styleMap": [{ "target": { "value": 10 }, "value": { "visible": false } }, { "target": { "value": 30 }, "value": { "visible": false } }] } } },
+              { "id": "axis-bottom", "specKey": "axes", "specIndex": 1, "spec": { "type": "band", "title": { "visible": false }, "grid": { "visible": false } } },
+              { "id": "legend-discrete", "specKey": "legends", "specIndex": 0, "spec": { "visible": false } },
+              { "specKey": "series", "target": { "measure": "Europe (UN)" }, "spec": {
+                "line": { "style": { "lineWidth": 2 } },
+                "point": { "visible": true, "style": { "fillOpacity": 0, "strokeOpacity": 0, "size": 6 } },
+                "label": { "visible": true, "displayType": "firstLast", "position": "top" },
+                "seriesLabel": { "visible": false }
+              } }
+            ],
+            "markStyle": [
+              { "markName": "point", "target": { "selector": { "Year": "1960" }, "measure": "Europe (UN)" }, "style": { "fillOpacity": 1, "strokeOpacity": 1 } },
+              { "markName": "point", "target": { "selector": { "Year": "2020" }, "measure": "Europe (UN)" }, "style": { "fillOpacity": 1, "strokeOpacity": 1 } }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "option": { "loadContribute": "view" },
+  "note": "本任务比较三个地区1960–2020的起止水平与变化，因此小多图显示首尾值及对应点；仅选择四个等间隔真实观测，不声称完整年度曲线或原图版式复现。数据沿用已核实OWID快照，来源：https://ourworldindata.org/data-insights/child-mortality-has-declined-in-all-world-regions；此例截止2020，不含预测年。共同0–40%尺度支持跨面板比较，文字精度不改数据。"
+}

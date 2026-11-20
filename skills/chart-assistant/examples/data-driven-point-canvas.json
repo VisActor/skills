@@ -1,0 +1,97 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "regional-median-age",
+        "type": "chart",
+        "position": { "x": 24, "y": 16, "width": 912, "height": 458 },
+        "options": {
+          "chartType": "line",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["Year", "Latin America", "Asia", "Africa"],
+              "rows": ["2000", "2023"],
+              "data": [
+                { "Year": "2000", "Latin America": 23, "Asia": 25, "Africa": 17 },
+                { "Year": "2023", "Latin America": 31, "Asia": 32, "Africa": 19 }
+              ],
+              "columnFormats": [
+                { "dataType": "text" },
+                { "dataType": "number", "dataFormat": { "fixed": 0 } },
+                { "dataType": "number", "dataFormat": { "fixed": 0 } },
+                { "dataType": "number", "dataFormat": { "fixed": 0 } }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": { "x": "Year", "y": ["Latin America", "Asia", "Africa"] },
+            "color": ["#147D68", "#718F87", "#718F87"],
+            "modelSpec": [
+              {
+                "id": "chart_title", "specKey": "title", "specIndex": 0,
+                "spec": {
+                  "visible": true, "textType": "rich",
+                  "text": [
+                    { "text": "Change in median age in three regions", "fontSize": 22, "fontWeight": "600", "lineHeight": 28 },
+                    { "text": "\nMedian in 2000 and 2023, in years", "fontSize": 12, "lineHeight": 18 }
+                  ],
+                  "textStyle": { "align": "left" }
+                }
+              },
+              { "id": "axis-left", "specKey": "axes", "specIndex": 0, "spec": { "type": "linear", "visible": false, "min": 0, "max": 50, "title": { "visible": false } } },
+              { "id": "axis-bottom", "specKey": "axes", "specIndex": 1, "spec": { "type": "band", "title": { "visible": false }, "grid": { "visible": false } } },
+              { "id": "legend-discrete", "specKey": "legends", "specIndex": 0, "spec": { "visible": true, "orient": "bottom", "position": "middle", "padding": [16, 0, 0, 0] } },
+              {
+                "specKey": "series", "target": { "measure": "Latin America" },
+                "spec": { "line": { "style": { "lineWidth": 3 } }, "point": { "visible": true }, "label": { "visible": true, "displayType": "firstLast", "position": "bottom" }, "seriesLabel": { "visible": false } }
+              },
+              {
+                "specKey": "series", "target": { "measure": "Asia" },
+                "spec": { "line": { "style": { "lineWidth": 1.5 } }, "point": { "visible": true }, "label": { "visible": true, "displayType": "firstLast", "position": "top" }, "seriesLabel": { "visible": false } }
+              },
+              {
+                "specKey": "series", "target": { "measure": "Africa" },
+                "spec": { "line": { "style": { "lineWidth": 1.5 } }, "point": { "visible": true }, "label": { "visible": true, "displayType": "firstLast", "position": "bottom" }, "seriesLabel": { "visible": false } }
+              }
+            ],
+            "marker": {
+              "markPoint": [
+                {
+                  "id": "latin-america-median",
+                  "name": "mark-point",
+                  "target": { "match": { "Year": "2023" }, "metric": "Latin America" },
+                  "itemContent": {
+                    "type": "text", "offsetX": -120, "offsetY": 42,
+                    "text": {
+                      "type": "rich",
+                      "text": [
+                        { "text": "Latin America", "fill": "#147D68", "fontWeight": "600" },
+                        { "text": "\n23 to 31 years, 2000–2023" }
+                      ]
+                    }
+                  },
+                  "itemLine": { "visible": true, "type": "type-arc", "arcRatio": 0.8 },
+                  "targetSymbol": { "visible": false }
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "median-source",
+        "type": "text",
+        "position": { "x": 24, "y": 488, "width": 912, "height": 44 },
+        "options": {
+          "textConfig": [
+            { "text": "Data source: UN World Population Prospects (2024). Official image values, rounded to years.", "fontFamily": "monospace", "fontSize": 12, "fill": "#64748B" }
+          ],
+          "fontFamily": "monospace", "fontSize": 12, "fill": "#64748B"
+        }
+      }
+    ]
+  },
+  "option": { "loadContribute": "view" },
+  "note": "本场景需要独立来源文字：来源由画布text承担，地区说明由数据target锚定的原生点标注承担。用支持该target的两期折线验证弧线承载，不称为原图哑铃复现；当前哑铃的语义点定位未支持，指定哑铃时须保留图型并说明定位缺口。印值取自官方原图的三个地区：https://ourworldindata.org/data-insights/europe-is-older-but-latin-america-is-aging-faster。说明文字为当前数据快照，目标跟随不等于文字自动重算；未声称原生哑铃连接线已支持方向箭头。"
+}

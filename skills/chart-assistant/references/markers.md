@@ -172,8 +172,14 @@ type MarkPointSpec = {
     };
   };
   itemLine?: {
-    type?: 'type-s' | 'type-do' | 'type-po' | 'type-op' | 'type-arc';
+    type?: 'type-s' | 'type-do' | 'type-po' | 'type-op' | 'type-arc' | 'type-cubic';
     arcRatio?: number;
+    bezier?: {
+      tension?: number;
+      controlPoints?: [{ x: number; y: number }, { x: number; y: number }];
+      textGap?: number;
+      targetGap?: number;
+    };
     visible?: boolean;
     decorativeLine?: { visible?: boolean; length?: number };
     startSymbol?: { visible?: boolean; style?: SymbolStyle };

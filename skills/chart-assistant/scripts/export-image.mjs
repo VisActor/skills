@@ -5,7 +5,7 @@ import { open, link, unlink, access } from 'node:fs/promises';
 import { resolve, dirname, basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { randomUUID } from 'node:crypto';
-import { validateCommonOption } from './common-option-validation.mjs';
+import { validateCommonOption, validateTextureLayouts } from './common-option-validation.mjs';
 
 // 产品域名依据 chart-editor-app/src/utils/http.ts；新入口须部署后才可线上使用。
 export const DEFAULT_ENDPOINT = 'https://charteasy.visactor.com/api/v1/chart_assistant/export_image';
@@ -17,7 +17,7 @@ const MAX_INPUT_BYTES = 1024 * 1024;
 const PNG_SIGNATURE = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 
-export function buildRequest(value, { width, height, layoutWidth, autoLayoutWidth, dpr = 2, background = 'transparent' } = {}) {
+export function buildRequest(value, { width, height, layoutWidth, autoLayoutWidth, dpr = 2, background = 'transparent', validateStructure = false } = {}) {
   for (const [name, number] of Object.entries({ width, height, layoutWidth, autoLayoutWidth, dpr })) {
     if (number !== undefined && (!Number.isInteger(number) || number < 1)) throw new Error(`${name} 必须是正整数`);
   }
@@ -39,6 +39,15 @@ export function buildRequest(value, { width, height, layoutWidth, autoLayoutWidt
   }
   if (!input) throw new Error('输入必须是 commonOption、record 或 ILayerData[]');
   if (input.type === 'editorData' && input.editorData.length !== 1) throw new Error('图片导出只支持一个画布');
+  // 导出时由完整结构校验一次覆盖纹理；独立请求构造仍保留原有纹理检查。
+  // 保存态只检查实际保存配置，不检查 record 中的旧 commonOption。
+  if (validateStructure && input.type === 'commonOption') {
+    const errors = validateCommonOption(input.commonOption);
+    if (errors.length) throw new Error(`commonOption 结构校验失败：\n${errors.join('\n')}`);
+  } else {
+    const textureErrors = validateTextureLayouts(input);
+    if (textureErrors.length) throw new Error(`纹理参数无效：${textureErrors.join('\n')}`);
+  }
   const singleChart = input.type === 'commonOption' && input.commonOption.elements?.length === 1 && input.commonOption.elements[0]?.type === 'chart';
   if (layoutWidth !== undefined && !singleChart) throw new Error('layoutWidth 仅支持单图表 commonOption；保存态和多元素画布保留原布局');
   const targetLayoutWidth = layoutWidth ?? (singleChart ? autoLayoutWidth : undefined);
@@ -129,12 +138,7 @@ export async function exportImage({
   } finally {
     await file.close();
   }
-  const payload = buildRequest(value, { width, height, layoutWidth, autoLayoutWidth, dpr, background });
-  // 只校验实际选中的 commonOption，不给已有保存态套新建默认样式，也不检查旧配置。
-  if (payload.input.type === 'commonOption') {
-    const errors = validateCommonOption(payload.input.commonOption);
-    if (errors.length) throw new Error(`commonOption 结构校验失败：\n${errors.join('\n')}`);
-  }
+  const payload = buildRequest(value, { width, height, layoutWidth, autoLayoutWidth, dpr, background, validateStructure: true });
   const { bytes, headers } = await requestPng(endpoint, payload, timeoutMs, maxResponseBytes);
   if (
     bytes.length < 45 ||

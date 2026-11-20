@@ -2,6 +2,10 @@
 
 执行工具按实际输入类型校验，模型直接复用结果，不为同一产物追加完整复核。已有图局部编辑不套新建默认规则；URL record和browserData不强转commonOption。业务键定位失败、局部修正或待定请求只处理对应问题。普通配置任务不附加渲染门禁。
 
+纹理的显式尺寸/间距由同一模块的 `validateTextureLayouts` 检查，结构校验、图片导出和本地渲染入口已接入；支持 commonOption、record 和保存态并遵循保存态优先。检查系列图元前合并同名图元的 `EDITOR_ALL_DATA_GROUP` 覆盖，避免已修正或已关闭的底层纹理阻断导出。确定有效的 `textureSize <= 2 * texturePadding` 会返回具体样式路径，按 [纹理参数](model-spec.md) 修正即可。编辑态 `dataGroupSpec` / `markStyle` 的直接图元样式允许空尺寸等待运行时继承；原始 `spec` / `modelSpec` 的活动纹理仍检查空尺寸。涉及业务组、单图元或动态覆盖时，不对其可能覆盖的底层纹理作静态拒绝；通过不代表所有 datum 的最终几何已验证。局部 patch 不补原生默认值，不扫描业务数据或 target，不增加模型重复自检步骤。
+
+生成时按[数据驱动设计](data-driven-design.md#6-布局与完成检查)保留比较对象／参照／时间／尺度，配置必要的直标、值和解释，关闭用户要求省略的元素；复用已有工作记录和工具结果，不追加完整复核。按意图省略、已有可读证据、配置遗漏、缺数据与能力不支持分别记录；不把标题／脚注数量当作完成标准，也不把尚未正确使用的现有能力列成新功能缺口。
+
 ## commonOption 交付前校验
 
 必要结构检查应由执行出口对实际提交的最终输入完成一次：[图片导出客户端](../scripts/export-image.mjs)已接入包内[结构校验器](../scripts/common-option-validation.mjs)，选择保存态输入时不校验record中的旧commonOption。其他写卡工具已有相同覆盖时直接复用；未覆盖时由调用端对同一最终输入执行一次，不再追加人工逐字段复核。只生成配置时按DSL规则生成，不默认启动导出或写卡。
@@ -24,9 +28,9 @@ console.log('commonOption checks: OK (not a rendering or write verification)');
 NODE
 ```
 
-可选调试新建默认设计时保留 `--new`；已有图的局部编辑移除它，避免改变原样式。结构检查区分列类型与数值格式枚举。新建默认检查覆盖standard内置图的轴标题父级可见性、已有rich标题的文字层级及轴/图例/普通标签的字体继承；生成时轴标题可见则设置父轴 `visible:true`，用户明确隐藏轴则保留 `visible:false`。新建默认检查不自动接入导出，不覆盖全部MBB规则，也不证明视觉效果。
+可选调试新建默认设计时保留 `--new`；已有图的局部编辑移除它，避免改变原样式。结构检查区分列类型与数值格式枚举。新建默认检查覆盖standard内置图的轴标题父级可见性、已有rich标题的文字层级及轴/图例/普通标签的字体继承，不要求存在标题、轴标题或来源。生成时轴标题可见则设置父轴 `visible:true`，用户明确隐藏轴则保留 `visible:false`；不为过校验删掉必要表达。新建默认检查不自动接入导出，不覆盖全部MBB规则，也不证明视觉效果。
 
-用户明确指定字体时，由调用端结合原始请求向 `validateNewChartDefaults(commonOption, 'commonOption', { authorizedStylePaths: [...] })` 传入获准修改的精确字段路径，例如 `commonOption.elements[0].options.config.modelSpec[0].spec.text[0].fontSize`。不接受通配符或整块豁免，不向产品 JSON 添加授权字段，也不能为了校验通过自行声称用户已授权；记录覆盖的请求依据。其他样式、枚举和可见性仍正常检查。
+用户明确指定字体，或要求按参考图恢复可核实文字样式时，由调用端结合原始请求向 `validateNewChartDefaults(commonOption, 'commonOption', { authorizedStylePaths: [...] })` 传入获准修改的精确字段路径，例如 `commonOption.elements[0].options.config.modelSpec[0].spec.text[0].fontSize`。参考图的主标题换行仍可属于同一字号层级，按实际片段授权，不能由换行推断副标题。禁止通配符或整块豁免，不向产品 JSON 添加授权字段，不为过校验虚称用户授权；其他枚举、可见性及协议检查保持。
 
 交付文件名和链接直接复用工具实际返回的结果，不手工重拼URL/token或凭记忆抄写。工具未提供可访问性结果且用户需要在线访问时，再用当前身份做一次目标查询；不可读取时保留失败原因并提供已有可用附件/本地路径，不把上传成功等同下载成功。补交保留原始内容，重新生成时明确标为新产物。
 
@@ -38,7 +42,7 @@ NODE
 
 写卡工具校验与写入使用同一最终record；校验后改写内容时由执行出口检查新输入，不把中间文件的结果移用于其他内容。旧枚举 `category`/`number` 格式按[ColumnFormat](data-and-formatting.md#2-columnformat)改写；table保存态字段如 `showHeader` 混入 `options.config` 时按[表格组件](components.md)移出白名单层。工具已完成这些检查时不再串联独立预检。
 
-结构校验覆盖config白名单、模型协议、列格式及可确定的本层内容/模板冲突。生成时按[模型协议](model-spec.md)使用可靠identity、非空标题和 `visible:true`，新标题省略 `_initialize_`，已有占位标题不保留 `true`；默认设计按[MBB规则](mbb.md#11-默认设计配置验收)生成。工具结果只证明其覆盖范围；结构或保存配置结果不证明标题已在真实卡片中展示。
+结构校验覆盖config白名单、模型协议、列格式及可确定的本层内容/模板冲突。实际需要标题时按[模型协议](model-spec.md)使用可靠identity、非空文本和 `visible:true`，新标题省略 `_initialize_`，已有占位标题不保留 `true`；默认设计按[MBB规则](mbb.md#11-默认设计配置验收)生成，明确省略的元素无需补齐。工具结果只证明其覆盖范围；结构或保存配置结果不证明标题已在真实卡片中展示。
 
 ## 局部修正时保留完整表达
 

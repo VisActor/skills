@@ -133,7 +133,7 @@
 - 限制：不在 totalLabel 集合；不要写 `barLink`；无序类别连接会产生虚假趋势。
 - 最小映射：`{"x":"月份","y":["GMV","目标"]}`。
 - 分段虚实、实际/预测衔接及拆段标签去重：读 [虚实折线](solid-dashed-line.md)。
-- MBB：系列身份需要说明且未被图例充分表达时再标注线尾；单对象虚实分段按专题关闭冗余系列标签。弱化网格，只标关键点、拐点和目标差；多于 5 条线先筛选。
+- 表达：参考图有线头／线尾名称时用真实 `seriesLabel` 还原；名称与端点数值分别配置。两期斜率保留两期，数值标签可用 `displayType:"firstLast"`，不因数据有更多年就改成年度趋势。多线有叙事主角时保留背景线，降低其线宽／饱和度，主线与参照突出；不自动筛成五条。图例和直标按阅读路径选择，原图有横竖引线时核对实际支持的 seriesLabel 样式。虚实分段的单对象标签去重按专题处理。
 
 ## `area`
 
@@ -184,7 +184,8 @@
 ## `waterfallDecrease`
 
 - 用途：从基准逐项扣减至结果的递减桥图。
-- 数据与映射：同 waterfall；`x` 阶段、`y` 数值。
+- 新建基准扣减图：在 `config.modelSpec` 的 `id:"series-waterfall", specKey:"series"` 条目中写 `spec.decreaseMode:"baseline"`。`x` 阶段、`y` 数值；首行为非负基准，其后为同向扣减量（全正的幅度或全负的有符号扣减）。运行时从左向右逐项扣减，源值保持不变。E/e 起点按同组全部扣减量计算基准。
+- baseline 模式默认把首行作为总计并添加最终剩余值；`firstToTotal`、`addLastTotal` 可显式关闭。`stackType:"stack"` 合并各指标基准，`"group"` 分别保留各业务基准和剩余值。未声明模式或写 `"legacy"` 时保留旧图的有符号数据、总计默认值及引擎递减语义；不能仅按模板 v1/v2 自动改变存量图的计算方式。
 - 编辑：同 waterfall，包括 seriesLabel/totalLabel/barWidth/stackType/完整差异 marker。
 - 限制：只在每一步代表扣减或下行贡献时使用；混合正负时改普通 waterfall。
 - MBB：统一递减方向，突出最终剩余值和最大损失项。

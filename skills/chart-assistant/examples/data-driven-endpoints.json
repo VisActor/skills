@@ -1,0 +1,89 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "coverage-two-periods",
+        "type": "chart",
+        "position": { "x": 0, "y": 0, "width": 960, "height": 540 },
+        "options": {
+          "chartType": "line",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["Year", "World", "North Africa", "Sub-Saharan Africa"],
+              "rows": ["2015", "2023"],
+              "data": [
+                { "Year": "2015", "World": 44, "North Africa": 7, "Sub-Saharan Africa": 11 },
+                { "Year": "2023", "World": 90, "North Africa": 85, "Sub-Saharan Africa": 63 }
+              ],
+              "columnFormats": [
+                { "dataType": "text" },
+                { "dataType": "number", "dataFormat": { "dataType": "digit", "postfix": "%", "fixed": 0 } },
+                { "dataType": "number", "dataFormat": { "dataType": "digit", "postfix": "%", "fixed": 0 } },
+                { "dataType": "number", "dataFormat": { "dataType": "digit", "postfix": "%", "fixed": 0 } }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": { "x": "Year", "y": ["World", "North Africa", "Sub-Saharan Africa"] },
+            "color": ["#B45F68", "#8EA8BF", "#8EA8BF"],
+            "modelSpec": [
+              {
+                "id": "chart_title", "specKey": "title", "specIndex": 0,
+                "spec": {
+                  "visible": true, "textType": "rich",
+                  "text": [
+                    { "text": "4G coverage in 2015 and 2023", "fontSize": 22, "fontWeight": "600", "lineHeight": 28 },
+                    { "text": "\nThree selected populations; share of residents in coverage range; common 0–100% scale", "fontSize": 12, "lineHeight": 18 }
+                  ],
+                  "textStyle": { "align": "left" }
+                }
+              },
+              {
+                "id": "axis-left", "specKey": "axes", "specIndex": 0,
+                "spec": { "type": "linear", "visible": false, "min": 0, "max": 100, "title": { "visible": false } }
+              },
+              {
+                "id": "axis-bottom", "specKey": "axes", "specIndex": 1,
+                "spec": { "type": "band", "title": { "visible": false }, "grid": { "visible": false } }
+              },
+              {
+                "id": "legend-discrete", "specKey": "legends", "specIndex": 0,
+                "spec": { "visible": false }
+              },
+              {
+                "specKey": "series", "target": { "measure": "World" },
+                "spec": {
+                  "line": { "style": { "lineWidth": 3 } },
+                  "point": { "visible": true, "style": { "size": 8 } },
+                  "label": { "visible": true, "displayType": "firstLast", "position": "top" },
+                  "seriesLabel": { "visible": true, "position": "both-ends", "label": { "formatConfig": { "content": "series" } } }
+                }
+              },
+              {
+                "specKey": "series", "target": { "measure": "North Africa" },
+                "spec": {
+                  "line": { "style": { "lineWidth": 1.5 } },
+                  "point": { "visible": true, "style": { "size": 6 } },
+                  "label": { "visible": true, "displayType": "firstLast", "position": "bottom" },
+                  "seriesLabel": { "visible": true, "position": "both-ends", "label": { "formatConfig": { "content": "series" } } }
+                }
+              },
+              {
+                "specKey": "series", "target": { "measure": "Sub-Saharan Africa" },
+                "spec": {
+                  "line": { "style": { "lineWidth": 1.5 } },
+                  "point": { "visible": true, "style": { "size": 6 } },
+                  "label": { "visible": true, "displayType": "firstLast", "position": "top" },
+                  "seriesLabel": { "visible": true, "position": "both-ends", "label": { "formatConfig": { "content": "series" } } }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "option": { "loadContribute": "view" },
+  "note": "仅选取官方原图三个对象的两期印值，用于检验斜率结构、业务系列身份和首尾标签；不代表全案例复现。单位为地区居民中处在4G覆盖范围内的百分比，不代表实际使用者。原图来源：https://ourworldindata.org/data-insights/nine-in-ten-people-in-the-world-were-in-the-range-of-a-4g-network-in-2023。没有用户要求的来源脚注时不另绘制；溯源保留在本示例说明。"
+}

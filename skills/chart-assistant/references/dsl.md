@@ -98,6 +98,14 @@ interface ChartAttribute {
   stackType?: 'no_stack' | 'stack' | 'stack_percent';
   syncAxisDomain?: boolean;
   butterflyAxisPosition?: 'center' | 'both' | 'left' | 'right';
+  dumbbellArrow?: {
+    visible?: boolean;
+    from?: string;
+    to?: string;
+    size?: number;
+    gap?: number;
+    style?: { fill?: string; fillOpacity?: number; stroke?: string | false; lineWidth?: number };
+  };
   markZIndexRange?: { dataGroup?: [number, number]; mark?: [number, number] };
   originalOptions?: object;
   source?: ISource;
@@ -254,6 +262,7 @@ interface IModelSpec {
 - `barLink`：柱/条系列连接，不放进 `modelSpec.seriesLabel`。
 - `syncAxisDomain`：仅本地 `dualAxis`。
 - `butterflyAxisPosition`：仅本地 `butterfly`，控制类目轴位置，默认 `center`；只影响布局，不改数据与映射。`center` 时轴标题/轴线/刻度线/网格线与水平对齐不提供配置。
+- `dumbbellArrow`：仅本地 `dumbbell`，写入 `options.config`；按业务指标 `from → to` 显示连接线箭头，完整条件见[哑铃模板](template-catalog-specialized.md#dumbbell)。
 - `kpiCardLayout`、`kpiCardStyle`、`kpiCardStyleMap`：指标卡的组布局、共享样式和按唯一业务键定位的单卡样式，见 [指标卡模板](kpi-card.md)。
 - `markZIndexRange`：本地 `scatter` 气泡/单点层级。
 

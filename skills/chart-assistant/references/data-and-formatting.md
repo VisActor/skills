@@ -93,7 +93,9 @@ type FormatConfig<T extends string = FormatContent> = {
   prefix?: string;
   postfix?: string;
   unit?: 'none' | 'auto' | 'CN_K' | 'CN_W' | 'CN_BW' | 'CN_QW' | 'CN_Y' | 'K' | 'M' | 'B';
+  unitSymbol?: string;
   fixed?: number | 'auto';
+  significantDigits?: number;
   content?: T | T[];
   contentWrap?: boolean;
   separator?: boolean;
@@ -123,7 +125,9 @@ type FormatConfig<T extends string = FormatContent> = {
       prefix?: string;
       postfix?: string;
       unit?: FormatConfig['unit'];
+      unitSymbol?: string;
       fixed?: number | 'auto';
+      significantDigits?: number;
       dataType?: FormatConfig['dataType'];
       separator?: boolean;
     }
@@ -132,6 +136,8 @@ type FormatConfig<T extends string = FormatContent> = {
 ```
 
 ### 普通数值标签的必要性
+
+参考图明确使用完整缩放单位时，可用 `unit:"B", unitSymbol:" billion"` 或 `unit:"M", unitSymbol:" million"`；显示文字包含所需空格，只改变单位文字，保留原始数据与换算比例。`unitSymbol` 仅作用于显式单位，不改变 `auto` 的自动选单位。两位有效数字用 `significantDigits:2`（合法范围1–20），例如原始 `2268860000→2.3 billion`、`324190000→320 million`；显式数值 `fixed` 优先，不能同时写固定小数位再声称按有效数字舍入。已有格式和无新字段的行为保持；该可选扩展须在支持它的运行时实绘后确认，不能据此声明旧宿主已支持。
 
 趋势或构成图不因存在多个时点就自动打开首尾标签。先看用户是否要求精确值比较；没有此要求且数值在零值、薄层或端点附近拥挤时，可关闭普通标签，保留坐标轴、图例和 tooltip。明确要求的数值不能省略，应调整展示方式并验证可读性。`displayType:"firstLast"` 仅控制候选标签范围，不保证端点文字互不重叠。
 

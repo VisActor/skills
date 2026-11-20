@@ -289,8 +289,11 @@ Skill 新建卡片默认“首次贴合内容后固定”：写入 `__auto_fit_m
   __auto_fit_applied?: boolean;
   __auto_fit_content_size?: {width?:number;height?:number};
   __auto_fit_container_size?: {width?:number;height?:number};
+  __auto_fit_document_width?: boolean;
 }
 ```
+
+`__auto_fit_document_width` 由运行时记录首次适配使用了正文宽度。重新打开时以当前文档正文宽度恢复卡片、沿用已保存高度，不重新测量图表内容；用户显式设置宽度后退出此模式。正文宽度是运行时读取结果，不能在生成配置里写死某个像素值。该标记描述宽度来源，不要求宿主一直处于 `resizeType:"none"`；宿主最终必须保留正常正文占位。
 
 这些其余字段由浏览态在物化、测量和用户手动改尺寸时维护。复制 record 时保留原尺寸语义；从初始化配置创建新图时不要复制旧 `commonOption.component.size`，新卡使用自身确定的尺寸。已有卡片替换保留原 size 与尺寸模式。`record.url` 不进入 browserData 自动尺寸标记路径；URL 首次加载按 URL/commonOption 宿主流程处理。首次适配请求采用工具的已验证写入结果，结果不足时按第11节回读；打开卡片后的实际高度、固定状态和重开保持属于真实宿主验证，不以初始配置结果代替。
 

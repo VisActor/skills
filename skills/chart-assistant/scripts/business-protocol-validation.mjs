@@ -5,13 +5,38 @@ const finite = value => (typeof value === 'number' || (typeof value === 'string'
 export function validateBusinessProtocols(options, at) {
   const failures = [];
   const fail = message => failures.push(`${at}.options.config: ${message}`);
+  const effectiveMarker = object(options.config) && options.config.marker !== undefined
+    ? options.config.marker : options.marker;
+  const points = effectiveMarker?.markPoint ?? [];
+  for (const marker of Array.isArray(points) ? points : [points]) {
+    const label = marker?.itemContent?.text;
+    const template = label?.formatConfig?.valueTemplate;
+    if (template === undefined || label.text !== undefined || marker.label?.text !== undefined) continue;
+    let table = options.data?.value;
+    if (typeof table === 'string') { try { table = JSON.parse(table); } catch { table = undefined; } }
+    const content = label.formatConfig.content;
+    const rows = Array.isArray(table?.data) && object(marker.target?.match)
+      ? table.data.filter(row => object(row) && Object.entries(marker.target.match).every(([field, value]) => row[field] === value))
+      : [];
+    if (options.data?.type !== 'standard' || marker.target?.aggregate !== undefined ||
+        !(content === 'value' || (Array.isArray(content) && content.length === 1 && content[0] === 'value')) ||
+        rows.length !== 1 || !Array.isArray(template) || !template.length ||
+        template.some(part => !object(part) || Object.keys(part).some(key => !['text', 'field', 'style'].includes(key)) ||
+          Object.hasOwn(part, 'text') === Object.hasOwn(part, 'field') ||
+          (Object.hasOwn(part, 'text') && typeof part.text !== 'string') ||
+          (Object.hasOwn(part, 'field') && (typeof part.field !== 'string' || !table?.columns?.includes(part.field) ||
+            typeof rows[0][part.field] !== 'number' || !Number.isFinite(rows[0][part.field]))) ||
+          (Object.hasOwn(part, 'style') && !object(part.style)))) {
+      fail(`marker ${marker.id ?? ''} valueTemplate requires content:value, one standard business row and finite numeric fields or text runs`);
+    }
+  }
   const context = options.config?.businessContext;
   if (context !== undefined) {
     if (!object(context) || context.version !== 1 || !Array.isArray(context.comparisons) || Object.keys(context).some(key => !['version', 'comparisons', 'bulletComparisons'].includes(key))) {
       fail('businessContext requires version:1 and comparisons array');
     } else {
       const seen = new Set();
-      const markers = options.config?.marker?.markLine ?? options.marker?.markLine ?? [];
+      const markers = effectiveMarker?.markLine ?? [];
       context.comparisons.forEach(comparison => {
         if (!object(comparison) || typeof comparison.markerId !== 'string' || !comparison.markerId.trim() ||
             !['high', 'low', 'unknown'].includes(comparison.metricDirection) ||

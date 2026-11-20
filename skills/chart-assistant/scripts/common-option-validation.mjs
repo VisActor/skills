@@ -5,7 +5,7 @@ export const editableConfigKeys = new Set([
   'templateVersion', 'dataTransposed', 'transposed', 'dataGroupSpec', 'markStyle',
   'markZIndexRange', 'barLink', 'trendLine', 'partitionArea',
   'smallMultiplesChartType', 'smallMultiplesColumns',
-  'butterflyAxisPosition', 'kpiCardLayout', 'kpiCardStyle', 'kpiCardStyleMap'
+  'butterflyAxisPosition', 'dumbbellArrow', 'kpiCardLayout', 'kpiCardStyle', 'kpiCardStyleMap'
 ]);
 const elementTypes = new Set([
   'chart', 'table', 'text', 'rect', 'oval', 'diamond', 'callout', 'image', 'svg',
@@ -18,6 +18,158 @@ const ordinaryStackTemplates = new Set(['bar', 'area', 'mekko']);
 const columnDataTypes = new Set(['number', 'date', 'text']);
 const formatDataTypes = new Set(['digit', 'percent', 'permil']);
 const inheritedFontKeys = ['fontSize', 'fontFamily', 'fontWeight', 'lineHeight', 'fontStyle'];
+
+// 只检查样式中的确定性几何关系；不解释业务数据、target 或动态样式函数。
+// 仅合并确定适用于全部图元的覆盖；业务组/单图元的匹配交给运行时。
+// 局部 patch 不补默认值，也不修改输入。
+export function validateTextureLayouts(input, location = 'input') {
+  const failures = [];
+  const skippedKeys = new Set(['data', 'values', 'target', 'selector', 'sourceInfo']);
+  const layoutKeys = ['textureSize', 'texturePadding'];
+  const textureKeys = ['texture', ...layoutKeys];
+  const allGroup = 'EDITOR_ALL_DATA_GROUP';
+  const hasTexture = style => object(style) && textureKeys.some(key => style[key] !== undefined);
+  const inspectStyleTree = (value, path, policies = new Map()) => {
+    if (Array.isArray(value)) {
+      value.forEach((item, index) => inspectStyleTree(item, `${path}[${index}]`, policies));
+      return;
+    }
+    if (!object(value)) return;
+    const policy = policies.get(path);
+    const style = { ...value };
+    if (policy?.inheritNull) layoutKeys.forEach(key => { if (style[key] === null) delete style[key]; });
+    if (policy?.allStyle) {
+      textureKeys.forEach(key => {
+        const override = policy.allStyle[key];
+        // 编辑态空尺寸不写入图元；原始 spec 的空尺寸仍应检查。
+        if (override !== undefined && !(override === null && layoutKeys.includes(key))) style[key] = override;
+      });
+    }
+    if (!policy?.defer && style.texture !== null && typeof style.texture !== 'function') {
+      const active = text(style.texture);
+      const size = style.textureSize;
+      const padding = style.texturePadding;
+      const finiteSize = typeof size === 'number' && Number.isFinite(size) && size > 0;
+      const finitePadding = typeof padding === 'number' && Number.isFinite(padding) && padding >= 0;
+      if (size !== undefined && typeof size !== 'function' && !(size === null && !active) && !finiteSize) {
+        failures.push(`${path}.textureSize: must be a finite positive number for an active texture.`);
+      }
+      if (padding !== undefined && typeof padding !== 'function' && !(padding === null && !active) && !finitePadding) {
+        failures.push(`${path}.texturePadding: must be a finite non-negative number for an active texture.`);
+      }
+      if (finiteSize && finitePadding && size <= 2 * padding) {
+        failures.push(`${path}: textureSize must exceed 2 * texturePadding; otherwise the texture has no drawable area.`);
+      }
+    }
+    Object.entries(value).forEach(([key, child]) => {
+      if (!skippedKeys.has(key)) inspectStyleTree(child, `${path}.${key}`, policies);
+    });
+  };
+  const inspectChartOptions = (options, path) => {
+    if (!object(options)) return;
+    const config = object(options.config) ? options.config : {};
+    const valueOf = key => config[key] !== undefined ? config[key] : options[key];
+    const pathOf = key => `${path}${config[key] !== undefined ? '.config' : ''}.${key}`;
+    const groups = object(valueOf('dataGroupSpec')) ? valueOf('dataGroupSpec') : {};
+    const singles = valueOf('markStyle');
+    const singleEntries = object(singles) || Array.isArray(singles) ? Object.entries(singles) : [];
+    const singleOverrides = mark => singleEntries.some(([, entry]) => entry?.markName === mark && hasTexture(entry.style));
+    const specificOverrides = mark => Object.entries(groups)
+      .some(([group, entry]) => group !== allGroup && hasTexture(entry?.[mark]?.style));
+    const policies = new Map();
+    const addSeries = (spec, at) => {
+      if (!object(spec)) return;
+      Object.entries(spec).forEach(([mark, entry]) => {
+        if (!object(entry?.style) || skippedKeys.has(mark)) return;
+        policies.set(`${at}.${mark}.style`, {
+          allStyle: groups[allGroup]?.[mark]?.style,
+          defer: specificOverrides(mark) || singleOverrides(mark)
+        });
+      });
+    };
+    addSeries(options.spec, `${path}.spec`);
+    array(options.spec?.series).forEach((spec, index) => addSeries(spec, `${path}.spec.series[${index}]`));
+    const models = valueOf('modelSpec');
+    array(models).forEach((model, index) => {
+      if (model?.specKey === 'series') {
+        addSeries(model.spec, `${pathOf('modelSpec')}${Array.isArray(models) ? `[${index}]` : ''}.spec`);
+      }
+    });
+    Object.entries(groups).forEach(([group, entry]) => {
+      if (!object(entry)) return;
+      Object.keys(entry).forEach(mark => policies.set(`${pathOf('dataGroupSpec')}[${JSON.stringify(group)}].${mark}.style`, {
+        inheritNull: true,
+        defer: singleOverrides(mark) || (group === allGroup && specificOverrides(mark))
+      }));
+    });
+    singleEntries.forEach(([id]) => policies.set(
+      `${pathOf('markStyle')}${Array.isArray(singles) ? `[${id}]` : `.${id}`}.style`, { inheritNull: true }
+    ));
+    for (const key of ['spec', 'style']) inspectStyleTree(options[key], `${path}.${key}`, policies);
+    for (const key of ['modelSpec', 'dataGroupSpec', 'markStyle', 'marker', 'trendLine', 'partitionArea', 'theme']) {
+      const value = valueOf(key);
+      const at = pathOf(key);
+      if (key === 'dataGroupSpec' && object(value)) {
+        // 这里的 key 是业务组名；data/target 等名称也应检查其样式。
+        Object.entries(value).forEach(([group, style]) => inspectStyleTree(style, `${at}[${JSON.stringify(group)}]`, policies));
+      } else {
+        inspectStyleTree(value, at, policies);
+      }
+    }
+  };
+  const inspectElements = (elements, path, saved) => {
+    if (!Array.isArray(elements)) return;
+    elements.forEach((element, index) => {
+      const key = saved ? 'attribute' : 'options';
+      const at = `${path}[${index}].${key}`;
+      if (element?.type === 'chart') inspectChartOptions(element[key], at);
+      else inspectStyleTree(element?.[key], at);
+    });
+  };
+  const inspectSaved = (layers, path) => {
+    if (Array.isArray(layers)) layers.forEach((layer, index) => inspectElements(layer?.elements, `${path}[${index}].elements`, true));
+  };
+  if (Array.isArray(input)) inspectSaved(input, location);
+  else if (object(input)) {
+    const saved = input.editorData ?? input.browserData;
+    if (saved !== undefined) inspectSaved(saved, `${location}.${input.editorData != null ? 'editorData' : 'browserData'}`);
+    else if (object(input.commonOption)) inspectElements(input.commonOption.elements, `${location}.commonOption.elements`, false);
+    else inspectElements(input.elements, `${location}.elements`, false);
+  }
+  return failures;
+}
+
+function validateNumberPresentation(format, path) {
+  if (!object(format)) return [];
+  const failures = [];
+  if (format.significantDigits !== undefined &&
+      (!Number.isInteger(format.significantDigits) || format.significantDigits < 1 || format.significantDigits > 20)) {
+    failures.push(`${path}.significantDigits: must be an integer from 1 to 20.`);
+  }
+  if (format.unitSymbol !== undefined && typeof format.unitSymbol !== 'string') {
+    failures.push(`${path}.unitSymbol: must be a string.`);
+  }
+  if (object(format.contentFormat)) {
+    Object.entries(format.contentFormat).forEach(([key, value]) => {
+      failures.push(...validateNumberPresentation(value, `${path}.contentFormat[${JSON.stringify(key)}]`));
+    });
+  }
+  return failures;
+}
+
+function validateComponentNumberPresentation(config, at) {
+  const failures = [];
+  const visit = (value, path) => {
+    if (Array.isArray(value)) return value.forEach((item, i) => visit(item, `${path}[${i}]`));
+    if (!object(value)) return;
+    Object.entries(value).forEach(([key, item]) => {
+      if (key === 'formatConfig') failures.push(...validateNumberPresentation(item, `${path}.${key}`));
+      else if (!['data', 'target', 'selector'].includes(key)) visit(item, `${path}.${key}`);
+    });
+  };
+  visit(config, `${at}.options.config`);
+  return failures;
+}
 
 function validateStandardColumnFormats(options, at) {
   if (options.data?.type !== 'standard' || options.spec !== undefined || options.sourceType !== undefined) return [];
@@ -39,6 +191,7 @@ function validateStandardColumnFormats(options, at) {
     const path = `${valuePath}.columnFormats[${index}]`;
     inspectType(column, path, columnDataTypes);
     inspectType(column?.dataFormat, `${path}.dataFormat`, formatDataTypes);
+    failures.push(...validateNumberPresentation(column?.dataFormat, `${path}.dataFormat`));
     if (object(column?.dataFormat?.contentFormat)) {
       Object.entries(column.dataFormat.contentFormat).forEach(([content, format]) => {
         inspectType(format, `${path}.dataFormat.contentFormat[${JSON.stringify(content)}]`, formatDataTypes);
@@ -239,7 +392,7 @@ function validateConnectorTarget(options, at, elements) {
 }
 
 export function validateCommonOption(commonOption, location = 'commonOption') {
-  const failures = [];
+  const failures = validateTextureLayouts(commonOption, location);
   if (!Array.isArray(commonOption?.elements) || !commonOption.elements.length) {
     return [`${location}: commonOption.elements must be non-empty`];
   }
@@ -305,6 +458,7 @@ export function validateCommonOption(commonOption, location = 'commonOption') {
       failures.push(...validateBusinessProtocols(options, at));
       failures.push(...validateModelSpec(options, at));
       failures.push(...validateStandardColumnFormats(options, at));
+      failures.push(...validateComponentNumberPresentation(options.config, at));
       failures.push(...validateLayerShareContent(options, at));
       failures.push(...validateAxisGroupLabelPlacement(options, at));
     }
