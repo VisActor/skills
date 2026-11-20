@@ -12,21 +12,22 @@ ROOT = Path(__file__).resolve().parents[2]
 def test_copied_skill_checks_examples_and_imports_runtime(tmp_path):
     installed = tmp_path / "creative story skill"
     shutil.copytree(ROOT / "skills/creative-data-storytelling", installed)
-    audit = subprocess.run(
-        [
-            sys.executable,
-            str(installed / "scripts/preview.py"),
-            "audit",
-            str(installed / "assets"),
-            "--entry",
-            "examples/index.html",
-        ],
-        cwd=tmp_path,
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert json.loads(audit.stdout)["errors"] == []
+    for entry in ("assets/examples/index.html", "assets/stage-wiring/index.html"):
+        audit = subprocess.run(
+            [
+                sys.executable,
+                str(installed / "scripts/preview.py"),
+                "audit",
+                str(installed),
+                "--entry",
+                entry,
+            ],
+            cwd=tmp_path,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        assert json.loads(audit.stdout)["errors"] == []
     result = subprocess.run(
         [
             "node",

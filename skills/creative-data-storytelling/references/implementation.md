@@ -1,33 +1,39 @@
-# 实现参考：按当前问题取用
+# 数据叙事实现参考
 
-关键构图与前后关系确定后，按下表读取相关说明或独立示例；无需通读全部文件。构图未定先看[可视化设计](visualization-design.md)，阅读空间与节奏见[舞台与运动](stage-and-motion.md)。
+将叙事设计中的数据对象、视觉编码、比较基准和阅读关系落实为可运行的作品；按当前问题取用舞台、绘制、衔接、探索与交付能力。已从示例进入对应用法时，无需返回本页。
+
+## 改编示例
+
+`inspect <id>` 提供改编范围、源码入口和复制清单；按 `entryLines` 读取所需函数，页面装配变化时再读 HTML。关系不变时可保留模型与过渡，只换绘制和正文；改用不同编码时，相应几何仍需重算。采用代码时连同 `copyAlongside` 复制依赖，保持相对目录或同步修改引用。
 
 ## 按实现问题取用代码
 
-| 当前实现问题 | 接口说明与直接调用 | 需要具体接法时选读 |
-| --- | --- | --- |
-| 滚动选择状态，连接自动完成 | [createStage / observeSteps](implementation-stage.md#文字滚动与舞台更新) | [comparison.mjs](../assets/examples/comparison.mjs)：尺度、标注与阅读状态共用入口 |
-| 末段正文仍在阅读，舞台已经滚走 | [reserveStageExit](implementation-stage.md#最后画面读完再退出) | comparison 的末段正文、sticky 外层与 `.reading-tail` |
-| 独立播放、中断与反向 | [createPlayer](implementation-stage.md#自动完成的衔接动画) | [amounts.mjs](../assets/examples/amounts.mjs)：同批区间移动 |
-| 图文使用同一读数；稳定更新 SVG | [createValueFormat / createSvgLayer](implementation-rendering.md#共用读数格式与-svg-更新) | [difference.mjs](../assets/examples/difference.mjs)：数据、几何与读数接线 |
-| 最终检查中的越界或遮挡测量 | [measureBounds / checkBounds](implementation-rendering.md#实际占位与空间诊断) | comparison 的作者工具；按作品声明实际需测的空间关系 |
-| 共同尺度比较、轴与标记同步缩放 | [身份与几何](implementation-geometry.md#几何) | comparison：提取对象与比较标注 |
-| 保留历史并聚焦局部 | [显露范围与定位窗口](implementation-geometry.md#历史与当前从同一状态生成) | [history.mjs](../assets/examples/history.mjs) |
-| 从原日期换到共同起点，比较时长或偏移 | [尺度与插值](implementation-geometry.md#几何) | [sequence.mjs](../assets/examples/sequence.mjs) 每行只平移起点，保留行内间隔 |
-| 可加总部分展开或接入基底 | [accumulationSegments](implementation-geometry.md#组成与累积的区间几何) | amounts：非负分段展开与合并 |
-| 两期量值转为增减比较 | [端点到差值](implementation-geometry.md#两期端点到差值) | difference：两端区间移到零参照 |
-| 素材、数据点与标签共同移位 | [共同锚点](implementation-geometry.md#几何) | [identity.mjs](../assets/examples/identity.mjs) |
-| 同批单元重组、分布或权重布局 | [布局、身份与槽位](implementation-geometry.md#主题轮廓与单元重组) | [units.mjs](../assets/examples/units.mjs) |
-| 解释标注随对象交接 | [blendWithAnnotations](implementation-geometry.md#让解释标注与对象一起交接) | comparison / amounts / identity 的 blend 与 render |
-| 叙事与简洁探索共用入口 | [控制交接与控件](implementation-stage.md#探索交接与控件) | comparison 的比较控件、units 的筛选与详情 |
-| 静态 HTML、主题样式、预览与交付 | [工具与交付](implementation-delivery.md) | 按需取用 Tailwind 与现有预览器 |
+| 当前实现问题 | 接口说明与接法 |
+| --- | --- |
+| 新建滚动舞台 | [基本接入与尺寸](implementation-stage.md#基本接入与尺寸)，再选下方一种正文接法；默认用 `connectReading`，无需先读源码 |
+| 正文自然滚动，图形停留 | [自然滚动短例](implementation-stage.md#正文自然滚动)：DOM、绘图区、触发标记与末段退出一起接通 |
+| 正文固定，随状态交接 | [固定正文短例](implementation-stage.md#正文固定交接)：阅读轨道、首次显示、换段与退出；与上例共用极小绘图 |
+| 已有可靠接线，只需补充或排错 | [底层 createStage / observeSteps 与诊断入口](implementation-stage.md#底层接法与排错) |
+| 末段正文仍在阅读，舞台已经滚走 | 按[自然滚动](implementation-stage.md#正文自然滚动)或[固定正文](implementation-stage.md#正文固定交接)核对 `exit` 的结构条件；已有底层接线才单独使用 `reserveStageExit` |
+| 独立播放、中断与反向 | [createPlayer](implementation-stage.md#自动完成的衔接动画) |
+| 图文共用读数；稳定更新 SVG | [createValueFormat / createSvgLayer](implementation-rendering.md#共用读数格式与-svg-更新) |
+| 实际终态、读数和布局的按需检查 | [createInspection](implementation-rendering.md#实际占位与空间诊断)；复用当前浏览器工具操作与取证 |
+| 舞台没有按窗口剩余空间布局 | [可用空间接法](implementation-stage.md#可用空间与实际绘图区)；容器尺寸传给作品几何 |
+| 轴、标记与素材同步映射或缩放 | [共同尺度、插值与锚点](implementation-geometry.md#几何) |
+| 保留历史并聚焦局部 | [显露范围与定位窗口](implementation-geometry.md#历史与当前从同一状态生成) |
+| 可加总部分展开或接入基底 | [accumulationSegments](implementation-geometry.md#组成与累积的区间几何) |
+| 两期量值转为增减比较 | [端点到差值](implementation-geometry.md#两期端点到差值) |
+| 同批单元重组、分布或权重布局 | [布局、身份与槽位](implementation-geometry.md#主题轮廓与单元重组) |
+| 解释标注随对象交接 | [blendWithAnnotations](implementation-geometry.md#让解释标注与对象一起交接) |
+| 跳章节或进入简洁探索 | [navigate 与 explore / resume](implementation-stage.md#探索交接与控件)：分别处理阅读位置和同舞台的临时控制 |
+| 静态 HTML、主题样式、预览与交付 | [工具与交付](implementation-delivery.md) |
+| 需要双击可用的单 HTML，保留可编辑源码 | [本地离线打包](implementation-delivery.md#按需打包为单-html) |
 
-每个示例包含自身的数据、目标布局、过渡和绘制。按当前问题选读一个文件即可了解接法。
+每个示例集中在 `assets/examples/<id>/`：`scene.mjs` 提供数据与动画，`index.html` 提供页面装配与设计解释，专用素材在 `images/`。
 
 ## 直接复用与参考的边界
 
-- [assets/runtime/](../assets/runtime/) 是可直接复制、导入的控制与计算模块。先读接口，只有排错或扩展时再查源码。相对依赖为 `stage → motion / scroll`、`motion / units / svg → geometry`，其他模块无内部依赖。
-- `assets/examples/` 的各个 `.mjs` 是局部装配参考，记录、构图、尺度和状态顺序属于该示例。按自己的设计取用接法；不为复用示例改变叙事。
-- [演示页](../assets/examples/index.html) 直接调用上述示例模块，供观察动态效果。`demo.mjs` 只装配页面，普通创作无需读取它或整份 HTML；需要控件样式时再查相关片段。
+- [assets/runtime/](../assets/runtime/) 是可直接复制、导入的控制与计算模块。按所选接法或示例复制清单带齐依赖；先读接口，排错或扩展时再查源码。
+- [示例总览](../assets/examples/index.html)只供浏览导航，各示例在自己的页面运行。局部机制共用 [mechanism.css](../assets/examples/mechanism.css) 的预览与控件样式；需要外观接法时选读，并按作品主题改写。
 
-同一属性由一套控制机制驱动；已有项目工具能可靠承担相同职责时可沿用。页面阅读与交互统一按[作品验收](quality.md)检查，稳定计算或控制行为按实际风险验证。
+已有项目工具能可靠承担相同职责时可沿用。页面阅读与交互统一按[作品验收](quality.md)检查，稳定计算或控制行为按实际风险验证。

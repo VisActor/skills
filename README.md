@@ -14,7 +14,7 @@ VisActor Skills provides chart, dashboard, data story and poster tools for Claud
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | Analysis reports, business briefings and data features, with chart scrollytelling and annotations, delivered as HTML stories or Web-PPT |
 | [creative-data-storytelling](skills/creative-data-storytelling/SKILL.md) | Create interactive stories that compare quantities, trace patterns across ordered passages or events, or use familiar objects and individual records to explain data. Combine continuous reading with full-bleed stages and optional exploration. Deliver static HTML and assets. |
 | [unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) | Create interactive data stories in which each data unit represents a record or a fixed quantity. As readers scroll, particles can gather into a familiar image, then scatter and regroup by time, category, or value in a full-screen view, showing how individual records fit into a larger pattern. |
-| [editorial-magazine](skills/editorial-magazine/SKILL.md) | Magazine-style visual posts (杂志风图文): HTML / PNG series for news, biographies, outfits, travel, chronological stories and explainers |
+| [editorial-magazine](skills/editorial-magazine/SKILL.md) | Magazine-style HTML / PNG series for news, biographies, outfits, travel, chronological stories and explainers; defaults to a mobile-readable 3:4 edition and retains a classic 9:16 edition |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | Biography posters with photo walls, center grids, photo rings and editable timelines |
 | [person-poster](skills/person-poster/SKILL.md) | Person-led data posters with native VChart, editable HTML and high-resolution PNG |
 | [visactor-light-dashboard](skills/visactor-light-dashboard/SKILL.md) | Compact business dashboards with metrics, filters and further analysis |
@@ -29,6 +29,7 @@ Chart and table Skills are maintained in their library repositories. Install the
 | Skill | Tasks | Repository |
 | --- | --- | --- |
 | [VChart Skill](https://github.com/VisActor/VChart/blob/develop/skills/vchart-development-assistant/SKILL.md) | Chart generation, diagnosis, image replication and React integration | [VisActor/VChart](https://github.com/VisActor/VChart) |
+| [data-science-visualization](https://github.com/VisActor/VChart/tree/develop/skills/data-science-visualization) | Create interactive data science visualizations in HTML for distributions, correlations, PCA projections and SHAP feature contributions. [Examples](https://github.com/VisActor/VChart/tree/develop/examples/data-science-visualization) | [VisActor/VChart](https://github.com/VisActor/VChart) |
 | [VTable Skill](https://github.com/VisActor/VTable/blob/develop/skills/vtable-development-assistant/SKILL.md) | List tables, pivot tables/charts, interactions and diagnosis | [VisActor/VTable](https://github.com/VisActor/VTable) |
 
 Each Skill can be installed separately and includes its instructions, references and scripts. The agent provides model access and runs the tools.
@@ -70,10 +71,11 @@ npx skills add VisActor/skills --skill visactor-chart-editor
 npx skills add VisActor/skills --skill visactor-map3d-dashboard
 ```
 
-For chart and table tasks, install the related Skills from their owning repositories:
+Install related Skills directly from their repositories:
 
 ```bash
 npx skills add VisActor/VChart --skill vchart-development-assistant
+npx skills add VisActor/VChart --skill data-science-visualization
 npx skills add VisActor/VTable --skill vtable-development-assistant
 ```
 

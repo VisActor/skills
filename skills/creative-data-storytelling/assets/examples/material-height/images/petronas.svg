@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 1000">
+<title>国油双峰塔的简化立面，两座同高；桥不表示额外数量</title>
+<defs>
+<linearGradient id="silver"><stop stop-color="#718f97"/><stop offset=".32" stop-color="#c1d6d2"/><stop offset=".52" stop-color="#f3ead7"/><stop offset=".7" stop-color="#8eabb0"/><stop offset="1" stop-color="#345760"/></linearGradient>
+<pattern id="floors" width="170" height="18" patternUnits="userSpaceOnUse"><path d="M0 3H170M0 6H170" stroke="#d6e2d8" stroke-width="2"/><path d="M33 0V18M60 0V18M90 0V18M120 0V18M145 0V18" stroke="#334f5b" stroke-width="2"/></pattern>
+<path id="tower" d="M0 1000V843H8V714H17V535H27V361H38V255H48V202H59V162H68V123H77V82H82V0H88V82H93V123H102V162H111V202H122V255H132V361H143V535H153V714H162V843H170V1000Z"/>
+<clipPath id="shape"><use href="#tower"/></clipPath>
+<g id="facade" clip-path="url(#shape)"><path d="M0 0H170V1000H0Z" fill="url(#silver)"/><path d="M0 180H170V1000H0Z" fill="url(#floors)"/>
+<path d="M27 361H143M17 535H153M8 714H162M0 843H170M38 255H132M48 202H122" stroke="#f0ead4" stroke-width="7"/>
+<path d="M72 100L85 77L98 100M60 152L85 132L110 152" fill="none" stroke="#e9e4cc" stroke-width="5"/></g>
+</defs>
+<path d="M143 525H257V547H143Z" fill="#a5bdbd"/><path d="M143 544L189 642M257 544L211 642" fill="none" stroke="#779ca5" stroke-width="8"/>
+<use href="#facade"/><use href="#facade" x="230"/>
+</svg>

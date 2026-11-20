@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 245 1000">
+<title>克莱斯勒大厦简化立面，包含建筑尖顶</title>
+<defs>
+<linearGradient id="stone"><stop stop-color="#62757b"/><stop offset=".43" stop-color="#cbd4cb"/><stop offset=".6" stop-color="#d9d7c8"/><stop offset="1" stop-color="#73868a"/></linearGradient>
+<linearGradient id="crown"><stop stop-color="#5c7d86"/><stop offset=".49" stop-color="#f3efdf"/><stop offset=".53" stop-color="#b5cece"/><stop offset="1" stop-color="#52727e"/></linearGradient>
+<pattern id="windows" width="20" height="22" patternUnits="userSpaceOnUse"><path d="M6 4v13M12 4v13" stroke="#2b4751" stroke-width="3"/></pattern>
+<clipPath id="walls"><path d="M0 1000V836H22V640H38V462H53V350H192V462H207V640H223V836H245V1000Z"/></clipPath>
+</defs>
+<g clip-path="url(#walls)"><path d="M0 335H245V1000H0Z" fill="url(#stone)"/><path d="M0 365H245V1000H0Z" fill="url(#windows)" opacity=".75"/>
+<path d="M22 640H223M38 462H207M0 836H245" stroke="#d6dfd7" stroke-width="9"/><path d="M62 377V1000M93 377V1000M152 377V1000M183 377V1000" stroke="#d2d8cb" stroke-width="4"/></g>
+<path d="M120 0H125V113L139 162Q160 181 160 221Q181 240 180 281Q202 305 201 350H44Q43 305 65 281Q64 240 85 221Q85 181 106 162L120 113Z" fill="url(#crown)"/>
+<g fill="none" stroke="#e5e8da" stroke-width="5"><path d="M46 345Q122 227 199 345M64 285Q122 189 180 285M84 227Q122 153 161 227M105 166Q122 132 140 166"/></g>
+<g fill="#254650"><path d="M70 328L88 309L87 340ZM98 306L117 289L116 329ZM132 289L150 307L132 329ZM158 309L176 328L159 340Z"/><path d="M89 270L104 252L105 283ZM115 247L122 228L130 247L122 269ZM141 252L156 270L141 283Z"/></g>
+<path d="M38 459L9 451L18 441L53 447ZM207 459L236 451L227 441L192 447Z" fill="#d0dcd7"/>
+</svg>

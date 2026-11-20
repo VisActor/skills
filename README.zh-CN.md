@@ -14,7 +14,7 @@ VisActor Skills 提供图表、看板、数据故事和海报相关的技能，�
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | 分析报告、业务简报与数据专题，结合图表滚动叙事与标注，输出 HTML 数据故事或 Web-PPT |
 | [creative-data-storytelling](skills/creative-data-storytelling/SKILL.md) | 面向公众的交互式数据故事。按叙事需要比较量值、沿材料顺序揭示前后呼应，或用实物和单元表达数据。可结合连续阅读、全出血舞台和自由探索。交付静态 HTML 与资源。 |
 | [unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) | 用单元可视化讲述交互式数据故事，每个数据单元代表一条记录或固定数量。在随滚动推进的全屏画面中，点阵可以聚成读者熟悉的形象，再以粒子动画散开，按时间、类别或数值重排，让读者看见个体在整体中的位置。 |
-| [editorial-magazine](skills/editorial-magazine/SKILL.md) | 杂志风图文：新闻、生平、穿搭、旅行、时序故事与科普，导出 HTML / PNG |
+| [editorial-magazine](skills/editorial-magazine/SKILL.md) | 杂志风图文：新闻、生平、穿搭、旅行、时序故事与科普，默认采用手机易读的 3:4 版，保留经典 9:16 版，导出 HTML / PNG |
 | [life-chronicle](skills/life-chronicle/SKILL.md) | 人物生平海报：照片墙、中心网格、照片环与可编辑时间线 |
 | [person-poster](skills/person-poster/SKILL.md) | 人物主导的数据信息图，原生 VChart 图表、可编辑 HTML 与高清 PNG |
 | [visactor-light-dashboard](skills/visactor-light-dashboard/SKILL.md) | 经营概览、指标监测与专题分析，支持筛选联动和进一步探索 |
@@ -29,6 +29,7 @@ VisActor Skills 提供图表、看板、数据故事和海报相关的技能，�
 | Skill | 能力 | 仓库 |
 | --- | --- | --- |
 | [VChart Skill](https://github.com/VisActor/VChart/blob/develop/skills/vchart-development-assistant/SKILL.md) | 图表生成、问题诊断、图片还原和 React 集成 | [VisActor/VChart](https://github.com/VisActor/VChart) |
+| [data-science-visualization](https://github.com/VisActor/VChart/tree/develop/skills/data-science-visualization) | 生成交互式数据科学图表（HTML），展示数据分布、变量相关性，以及已有的 PCA 投影和 SHAP 特征贡献。[查看案例](https://github.com/VisActor/VChart/tree/develop/examples/data-science-visualization) | [VisActor/VChart](https://github.com/VisActor/VChart) |
 | [VTable Skill](https://github.com/VisActor/VTable/blob/develop/skills/vtable-development-assistant/SKILL.md) | 明细表、透视表与透视图、交互和问题诊断 | [VisActor/VTable](https://github.com/VisActor/VTable) |
 
 每个 Skill 可单独安装，包含所需的指令、参考资料和脚本。模型调用和工具执行由 Agent 提供。
@@ -69,10 +70,11 @@ npx skills add VisActor/skills --skill visactor-chart-editor
 npx skills add VisActor/skills --skill visactor-map3d-dashboard
 ```
 
-如需图表和表格能力，从对应仓库安装：
+相关 Skill 从各自仓库安装：
 
 ```bash
 npx skills add VisActor/VChart --skill vchart-development-assistant
+npx skills add VisActor/VChart --skill data-science-visualization
 npx skills add VisActor/VTable --skill vtable-development-assistant
 ```
 

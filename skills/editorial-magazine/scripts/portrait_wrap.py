@@ -8,8 +8,16 @@ from pathlib import Path
 from PIL import Image
 
 
-def contours(path, width=972, image_height=840, flow_height=870, gap=22, step=28):
-    if min(width, image_height, flow_height, step) <= 0 or gap < 0 or flow_height < image_height:
+def contours(
+    path, width=972, image_height=1112, flow_height=1200, gap=22, step=28, image_width=None
+):
+    image_width = width if image_width is None else image_width
+    if (
+        min(width, image_width, image_height, flow_height, step) <= 0
+        or gap < 0
+        or flow_height < image_height
+        or image_width > width
+    ):
         raise ValueError("Positive sizes required; flow height must cover image height")
     with Image.open(path) as im:
         if "A" not in im.getbands():
@@ -18,7 +26,7 @@ def contours(path, width=972, image_height=840, flow_height=870, gap=22, step=28
         if alpha.getextrema()[0] == 255 or not alpha.getbbox():
             raise ValueError("Portrait must contain both foreground and transparent space")
         iw, ih = im.size
-        scale = min(width / iw, image_height / ih)
+        scale = min(image_width / iw, image_height / ih)
         ox, oy = (width - iw * scale) / 2, (image_height - ih * scale) / 2
         px = alpha.load()
         rows = []
@@ -61,6 +69,7 @@ def contours(path, width=972, image_height=840, flow_height=870, gap=22, step=28
 
     return dict(
         canvasWidth=width,
+        imageWidth=image_width,
         imageHeight=image_height,
         flowHeight=flow_height,
         gap=gap,
@@ -68,7 +77,10 @@ def contours(path, width=972, image_height=840, flow_height=870, gap=22, step=28
         imagePosition="center",
         leftShape=polygon(left_pts),
         rightShape=polygon(right_pts),
-        minimumTextWidth=round(min(min(left, width - right) for _, _, left, right in bands), 2),
+        minimumTextWidth=round(
+            min(min(left_edge, width - right_edge) for _, _, left_edge, right_edge in bands),
+            2,
+        ),
     )
 
 
@@ -76,15 +88,22 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--image", type=Path, required=True)
     p.add_argument("--width", type=int, default=972)
-    p.add_argument("--image-height", type=int, default=840)
-    p.add_argument("--flow-height", type=int, default=870)
+    p.add_argument("--image-width", type=int, help="Centered portrait width inside the text canvas")
+    p.add_argument("--image-height", type=int, default=1112)
+    p.add_argument("--flow-height", type=int, default=1200)
     p.add_argument("--gap", type=int, default=22)
     p.add_argument("--step", type=int, default=28)
     args = p.parse_args()
     print(
         json.dumps(
             contours(
-                args.image, args.width, args.image_height, args.flow_height, args.gap, args.step
+                args.image,
+                args.width,
+                args.image_height,
+                args.flow_height,
+                args.gap,
+                args.step,
+                args.image_width,
             ),
             indent=2,
         )
