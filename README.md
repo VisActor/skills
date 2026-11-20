@@ -10,7 +10,7 @@ VisActor Skills provides chart, dashboard, data story and poster tools for Claud
 
 | Skill | Tasks |
 | --- | --- |
-| [chart-assistant](skills/chart-assistant/SKILL.md) | Business charts and composition recipes, native KPI cards, MBB analysis annotations, editable Feishu cards, transparent PNGs and document image insertion |
+| [chart-assistant](skills/chart-assistant/SKILL.md) | Data-driven business charts and composition recipes, native KPI cards, MBB analytical annotations, editable Feishu cards, transparent PNGs and document image insertion |
 | [chart-storytelling](skills/chart-storytelling/SKILL.md) | Analysis reports, business briefings and data features, with chart scrollytelling and annotations, delivered as HTML stories or Web-PPT |
 | [creative-data-storytelling](skills/creative-data-storytelling/SKILL.md) | Create interactive stories that compare quantities, trace patterns across ordered passages or events, or use familiar objects and individual records to explain data. Combine continuous reading with full-bleed stages and optional exploration. Deliver static HTML and assets. |
 | [unit-data-storytelling](skills/unit-data-storytelling/SKILL.md) | Create interactive data stories in which each data unit represents a record or a fixed quantity. As readers scroll, particles can gather into a familiar image, then scatter and regroup by time, category, or value in a full-screen view, showing how individual records fit into a larger pattern. |

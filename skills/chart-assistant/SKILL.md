@@ -12,8 +12,8 @@ compatibility: 纯配置生成与解释只需包内资料可读；执行包内�
 
 1. **确定交付。** 遵从用户指定的图型、语言、样式和产物；缺失信息只有在会改变结果时才澄清。输出形式与篇幅遵从用户限制；要求“只给”指定产物时不附验证过程、后续邀约或其他正文。默认中文，字段名、类型、模板ID和代码保持原文。仅问解释时只解释；分析加建图两项都做。常规建图不附长教程，读图/选图追问见[示例说明](references/examples.md#按需读图与选图理由)。
 2. **选协议和所需资料。** 按下表进入当前任务，只读相关章节；同会话已读且规则未变时复用。不按链接递归读完整目录，不为普通创建读取全部编辑/API文档；相关章节的前提与限制仍须一起读。
-3. **生成或最小编辑。** 新建内置图用 `commonOption`；已有图先读最新完整编辑态，保留身份、人工样式与未修改字段。默认设计和协议校验见下文。缺少能力时完成独立可做的部分，明确未完成项。
-4. **验证并按请求交付。** 对最终文件执行[交付校验](references/validation.md)，通过后才写入；外部写入必须readback。配置、渲染、保存重开、真实宿主和同步是不同证据，只报告实际完成的阶段。
+3. **生成或最小编辑。** 新建或整体优化先按[数据驱动设计](references/data-driven-design.md)确定比较任务、必要元素、标签职责与标注承载方式，再用 `commonOption`；已有图先读最新完整编辑态，保留身份、人工样式与未修改字段。局部编辑只应用相关判断，默认设计和协议校验见下文。缺少能力时完成独立可做的部分，明确未完成项。
+4. **按请求执行与交付。** 调用当前交付所需工具，复用其[校验与写入结果](references/validation.md)；结果不明确、工具报错或用户要求验证时才追加对应检查。旧卡替换仍按专用协议执行。配置、渲染、保存重开、真实宿主和同步是不同证据，只报告实际完成的阶段。
 
 新建飞书卡片默认首次按真实内容贴合高度，完成后固定；写入一次性尺寸标记，具体字段与用户显式高度/持续自适应的优先级见[卡片尺寸](references/feishu-doc-card.md#9-卡片尺寸与运行时字段)。已有卡片保留尺寸语义，不重新初始化。
 
@@ -24,7 +24,7 @@ compatibility: 纯配置生成与解释只需包内资料可读；执行包内�
 - 原始数据或已读取为standard的Sheet/Base首次建内置图：`commonOption.elements[]` 使用 `id/type/position/options`，`chartType/data/config` 属于 `options`。完整编辑态 `ILayerData[].elements[]` 才使用 `id/type/rect/attribute`；不能混写或凭空拼装browserData。可信导出fixture、已有readback或用户明确提供ILayerData时可原样编辑/保存。详细结构读[DSL对应章节](references/dsl.md)。
 - commonOption的标准 `data.value` 是对象；保存态 `attribute.data.value` 通常序列化为JSON字符串。编辑完整record时保留原 `commonOption`、来源、尺寸模式、`dataVersion` 和未知字段；新数据省略未知版本。首次飞书卡片使用固定尺寸模式，字段和三种来源trigger由[卡片协议](references/feishu-doc-card.md)定义。
 - 不用ECharts、HTML或静态图片替代用户要的可编辑配置。只交付一种匹配当前任务的最终结构；产物用业务主题命名，不把DSL/record等实现名当标题。
-- 数据、图型、映射、来源和已有样式遵从用户授权。未知单位不从字段名猜；0、缺失、未到期、未定义分别保留。不同参照、百分点/相对增长、因果/前后变化不能互换；不把示例数值带入答案。口径或能力待定时，最终JSON和回复都执行[待定请求检查](references/validation.md#待定请求的交付前检查)。
+- 数据、图型、映射、来源和已有样式遵从用户授权。未知单位不从字段名猜；0、缺失、未到期、未定义分别保留。不同参照、百分点/相对增长、因果/前后变化不能互换；不把示例数值带入答案。口径或能力待定时，仅说明必要缺口，继续交付独立可完成部分，不自行补造替代结论。
 - 标题和普通标签写入实际 `modelSpec` 组件，不写加载白名单外的 `config.title/label`；`modelSpec`、`dataGroupSpec`、`markStyle` 分别负责组件、分组、单图元样式。内部ID按已验证模板契约或当前实例取得，不猜；字段与身份见[模型协议](references/model-spec.md)。
 - 新建业务标注用[语义target](references/semantic-marker-anchors.md)，由Core解析坐标；API默认 `markerFormat:"editor-marker-authoring/v1"`、`markerCapabilityVersion:"core-semantic-v1"`，不恢复旧generatedMarkers生成路线。历史坐标只按兼容协议编辑，原生spec由Core实际导出。开发DSL不以发布版本作生成门禁，但不能据此声称线上可用。
 - URL不等于可同步，`source.pageUrl`只负责溯源。无用户指定来源时省略整个source；无真实URL不伪造链接或来源文字。Sheet direct-live保留读取结果，不聚合、派生、重排或额外生成columnSorts；风神可视化URL交插件导入既有图，不能取rows重选内置图。完整边界按[来源协议](references/sources-and-sync.md)执行。
@@ -32,10 +32,13 @@ compatibility: 纯配置生成与解释只需包内资料可读；执行包内�
 
 ## 新建默认设计
 
-所有新建/整体优化执行[MBB规范](references/mbb.md)的通用规则及当前图型策略；用户显式要求和既有编辑优先。按章节读取：通用部分、当前图型策略与配置验收；只有涉及品牌配色、单图元强调或四象限时再读对应专章。
+所有新建/整体优化先执行[数据驱动设计](references/data-driven-design.md)，无需风格关键词；按数据要支持的判断选择图型、样式、标签、标注与布局。[MBB规范](references/mbb.md)提供默认样式候选及图型策略，用户要求、参考图和已有作者表达优先。标题、副标题、轴、图例、来源、脚注和标注均按需绘制；用户要求省略时明确关闭，不生成占位元素。没有可核实来源不生成来源文字，没有必要说明不加脚注。按章节读取当前任务，不把默认样式当成必须添加组件。
 
-- 标题使用[rich title层级](references/model-spec.md#mbb-富文本标题)，必要说明必须有事实依据；基准比较优先[稳定主题标题](references/business/recipes/baseline-comparison.md#稳定主题标题)。值轴显式显示可解释标题；无轴图不加轴，无单位不造单位。
-- 轴标题/刻度/图例/普通标签的字体继承主题，保留模板位置；需要图例时默认bottom/middle和顶部16px留白。业务数值默认千分位，格式与单位去重遵从[数据格式](references/data-and-formatting.md)。这些规则不要求无条件增加标签或图例。
+MBB按通用部分、当前图型策略与默认设计生成规则读取；只有涉及品牌配色、单图元强调或四象限时再读对应专章。
+
+- 需要标题时使用[rich title层级](references/model-spec.md#mbb-富文本标题)，必要说明必须有事实依据；基准比较优先[稳定主题标题](references/business/recipes/baseline-comparison.md#稳定主题标题)。轴标题只在帮助识别指标时显示，已由其他文字清楚说明时可省略；隐藏刻度不改变尺度。无轴图不加轴，无单位不造单位。
+- 默认字体继承主题；按参考图、用户要求和布局职责配置必要的富文本、精度与位置。单图趋势不默认成对首尾值，但保留需要阅读的末期单值；小多图变化比较按需显示。折线／面积图保留的值标签靠近对应可见点，需移远时加短引线；线尾直标继承线色。堆叠只显示某层须有明确比较目的。横条空间与对比度足够时考察右侧内标签；薄段放不下且无需必显时省略标签，必须显示时优先条形内部的同段色衬底和对比色文字，不能自动移到远处；局部格式编辑保持位置。图例与来源／脚注分别留空间；需要图例且无其他布局依据时才回退bottom/middle和顶部16px留白。格式与单位去重遵从[数据格式](references/data-and-formatting.md)。
+- 标注先区分数据点、两端差异、阈值区域与固定画布说明，再选择图表 marker、画布线或文字；弧形引线按现有能力配置，完整职责见[数据驱动设计](references/data-driven-design.md#5-选择标注承载方式与引线)。不能把配置遗漏当成能力不支持。
 - 先做[表达增量检查](references/auto-insights.md#表达增量检查所有图型通用)，允许0个marker；明确标注/重点请求不能静默省略。需业务键定位时执行[唯一定位检查](references/validation.md#唯一定位与请求完成检查)，局部修正不能牺牲原需求的其他表达。
 - 配色可从原生/default、base、McKinsey、BCG绿、Bain候选选择，无依据时继承原生；保留已有和用户配色。不把某个颜色、最大值或四象限当默认结论。具体图型的默认环图、单组group、堆叠标签去重、连接线适用条件等以对应模板章节为准。
 
@@ -47,7 +50,7 @@ compatibility: 纯配置生成与解释只需包内资料可读；执行包内�
 | --- | --- |
 | 原生单卡/多卡KPI | [KPI字段、创建、布局与样式](references/kpi-card.md)；最小例已内含。只展示已有数值无需读取轴、图形标注或通用图元编辑协议 |
 | 卡内包含月度小图 | [月度KPI配方](references/business/recipes/monthly-kpi.md)：卡头、月图、唯一高亮与成组的两阶段交付 |
-| 新建普通内置图 | [DSL](references/dsl.md)的协议选择、标准数据、commonOption章节 → 对应[直角坐标](references/template-catalog-cartesian.md)、[专用图](references/template-catalog-specialized.md)或[层级图](references/template-catalog-hierarchy.md)章节；选型/能力不确定才读[模板总表](references/templates.md) |
+| 新建普通内置图 | [数据驱动设计](references/data-driven-design.md) → [DSL](references/dsl.md)的协议选择、标准数据、commonOption章节 → 对应[直角坐标](references/template-catalog-cartesian.md)、[专用图](references/template-catalog-specialized.md)或[层级图](references/template-catalog-hierarchy.md)章节；选型/能力不确定才读[模板总表](references/templates.md) |
 | 绩效/结构来源/Cohort/参照时间/比例流动缺口/指标小多图/排名/实际预测等业务任务 | [业务入口](references/business/index.md)选择当前配方；已知结果由外部提供，不生成预测/归因算法。统计与持续评价须确认配方声明的开发宿主能力 |
 | 表格、文本、形状、普通线、图片/SVG | [组件](references/components.md)相应元素章节；表格原生标题及编辑字段须在物化后处理 |
 | 参考图片还原 | 先读[图像还原](references/image-reproduction.md)，按用户指令优先于图片、图片优先于默认规范；保留文字、组合/堆叠、身份、颜色、图例、顺序和画布元素，不按默认推荐重设计 |
@@ -57,16 +60,16 @@ compatibility: 纯配置生成与解释只需包内资料可读；执行包内�
 | 指定单个标签、图形或组件子项 | [语义元素定位](references/element-editing.md)：业务target转原生身份，多维显式高亮不能降为整组着色；不扩大编辑范围 |
 | 差异/参考线/区域/点/四象限/趋势线 | [语义锚点](references/semantic-marker-anchors.md)的目标种类与来源/模板边界；共享样式读[标注](references/markers.md)，点说明读[布局](references/point-marker-layout.md)，仅编辑旧coordinates才读[旧坐标](references/legacy-marker-coordinates.md) |
 | 折线分段虚实或预测接点 | [分段线](references/solid-dashed-line.md)，核对接点不重复计数及系列标签冗余 |
-| 跨图表连接线 | [语义连接器](references/semantic-chart-connectors.md)：一次生成业务target，回读解析错误与保存态数量，不能只凭图表ready判断连线成功 |
+| 跨图表连接线 | [语义连接器](references/semantic-chart-connectors.md)：一次生成业务target；实际执行时采用工具返回的解析诊断和保存态，不能只凭图表ready判断连线成功 |
 | URL取数/导入/同步 | [来源](references/sources-and-sync.md)按URL角色；风神再读[风神能力](references/aeolus.md)，不套用同名内置模板 |
-| 飞书创建文档/插入卡片 | [卡片协议](references/feishu-doc-card.md)，仅用户明确要求时新建文档，写后readback；已有卡片先读[替换协议](references/existing-card-replacement.md)，已接受身份变化时不重复询问 |
+| 飞书创建文档/插入卡片 | [卡片协议](references/feishu-doc-card.md)，仅用户明确要求时新建文档；复用可信已验证的写入结果，结果不足时做一次目标回读；已有卡片先读[替换协议](references/existing-card-replacement.md)，已接受身份变化时不重复询问 |
 | PNG/透明背景/尺寸交付 | [图片交付](references/image-delivery.md)，实际生成并保存PNG；插入飞书普通图片块再读[图片插入](references/feishu-image-delivery.md) |
-| 流程分支、部分成功或不支持 | [任务流程](references/workflow.md)；交付前读[校验与完成检查](references/validation.md)的适用部分 |
+| 流程分支、部分成功或不支持 | [任务流程](references/workflow.md)；工具报错或结果不足时读[校验与完成检查](references/validation.md)的对应章节 |
 
 ## 宿主与验证边界
 
 Skill自带DSL、协议和零npm依赖图片客户端，不自带飞书授权、数据源插件、CLI/MCP或凭证。涉及外部动作时才核对宿主能力与权限；纯配置生成不要求安装应用。创建飞书卡片统一用ISV版，按卡片协议确认安装、文档及来源权限，不能用“技能已加载”替代可用性证据。
 
-只交付DSL/卡片时默认不启动本地渲染、截图、保存重开循环或修编译环境。用户要求图片时必须实际导出；参考图复刻必须看真实图面对照，没有渲染能力时标为待视觉核验。普通建图/编辑只有在用户要求看效果或排查视觉问题时才处理图面；不重复探测已确认不可用的环境，不承诺自动避让。
+只交付DSL/卡片时默认不启动本地渲染、截图、保存重开循环或修编译环境，参考图任务也遵循本次指定的交付范围。用户要求图片时必须实际导出；明确要求看效果、视觉对照/验收或排查视觉问题时，才处理对应图面。系列连接线、三次贝塞尔等新能力直接按协议配置并采用运行时结果，不另加控制点计算、逐项自检或保存重开门槛。不重复探测已确认不可用的环境；未观察图面时不声称视觉核验通过。
 
 需要外部能力却缺少时，交付合法配置或请求计划并说明未执行项，不虚称已写卡/导出/同步。新文档创建成功而插卡失败时保留文档并复用重试；结果不明先回读，不盲目重复创建或自行删除。

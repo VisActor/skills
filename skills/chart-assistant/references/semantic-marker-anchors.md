@@ -165,7 +165,7 @@ from/to 的端点契约：
 
    不要把 Mekko 示例的 `start` 直接套到 Development。底层示例保留动态 `layerShareDiff`（+31.36 pp）；仅将内容改为 `layerShareGrowthRate` 时为 +1189.13%，连接边界仍为 `end/end`。`areaPercent` 改为 `barPercent` 后同样核对实际层序和端点。
 
-3. **核对计算与配置。** 先用原始数据核算预期值，再保留动态 `content`，不把计算结果写死到 `label.text`。交付前运行 [commonOption 校验](workflow.md#commonoption-交付前校验)；核对动态内容类型、预期值及业务端点/边界；不把 `ready` 或存在标签当作视觉正确的证明，也不要求业务任务运行渲染验收。静态校验只拒绝可确定的配置冲突，不证明实际轴、分母及边界可比。
+3. **配置动态内容。** 按已确定的口径保留动态 `content` 与业务端点/边界，不把计算结果写死到 `label.text`。需要具体数值说明时采用已有数据计算或运行时结果，不由模型重复手算。复用[执行出口的结构与定位结果](workflow.md#commonoption-交付前校验)，不另跑交付前校验或渲染验收；错误反馈只处理对应内容或目标。不把 `ready` 或存在标签当作视觉正确的证明。静态校验只拒绝可确定的配置冲突，不证明实际轴、分母及边界可比。
 
 例：Development 在 2008 年为 `1.3/(40+8+1.3)`，2012 年为 `103/(15+185+103)`。占比差约 `+31.36 pp`，占比增长率约 `+1189.13%`，柱/面积占比图分别用 `barPercent`/`areaPercent`。Mekko 的 Labor 在 BU 1 为 `32/(32+42)`，BU 2 为 `27/(27+37)`，结果为 `-1.06 pp` / `-2.44%`；在本例实际最上层选两端 `start`，见 [Mekko 占比差完整配置](../examples/semantic-mekko-layer-share.json)。此处分母仅解释已知全正、同组示例，不推广为混合正负或未知归一组公式。
 
@@ -303,7 +303,11 @@ type AreaTarget = { ranges: [FieldRange] | [FieldRange, FieldRange] };
 
 需要数值随数据更新时使用 `itemContent.text.formatConfig: { "content": "value", "prefix": "当前值：" }`，省略 `itemContent.text.text` 和 `label.text`；省略 `target.aggregate` 时，值绑定 target 的真实 metric 原始值，不使用堆叠累计值，也不重新选择全局极值。若说明生成时选中的最大/最小点，前缀写“生成时最大值点，当前值为”等，不能在排序变化后仍断言它是当前全局极值。普通固定说明继续使用显式 text，历史静态文字不自动改写。
 
-柱图总值点显式使用 `target.aggregate: "sum"`，定位已核验整栈的总值端点，动态 `content: "value"` 显示该整栈总值。`match` 指定业务分组，`metric` 选择所属整栈；省略 metric 时必须能唯一确定整栈，不能选择第一个系列或自行猜测汇总范围。该能力仅限可核验的柱图，不扩展到折线、面积、散点或热力图。例如：
+standard 哑铃端点支持同一 `match` 与独立业务 `metric`，不按端点序号或最小/最大值定位；数字类别保留原类型。该准入仅限点标注，不扩大哑铃的差值标注支持。
+
+说明同时引用同一业务行的多个数值时，可使用 `itemContent.text.formatConfig.valueTemplate`，并保留 `content:"value"`，省略显式 `text`。例如 `[{ "text":"2000: " },{ "field":"Median in 2000" },{ "text":" → 2023: " },{ "field":"Median in 2023" }]`。`field` 必须是该 standard 唯一原始业务行中的有限数值列；不支持聚合、跨行或表达式。每段可带 `style`；`text.type:"rich"` 时保留各段样式。格式来自对应列与本标注 `formatConfig`，字面片段承担前后缀。目标更新时重新读取该行，显式静态文字仍优先。
+
+柱图或面积图总值点显式使用 `target.aggregate: "sum"`，定位已核验整栈的总值端点，动态 `content: "value"` 显示该整栈总值。`match` 指定业务分组，`metric` 选择所属整栈；省略 metric 时必须能唯一确定整栈，不能选择第一个系列或自行猜测汇总范围。普通面积的单成员点仍定位该成员累计终点；总值点必须显式声明 `aggregate`。百分比总值点定位归一边界、文字读取业务总量；混合正负没有唯一边界时保留诊断。该能力仅限可核验的柱图和面积图，不扩展到折线、散点或热力图。例如：
 
 ```json
 {
@@ -324,7 +328,7 @@ type AreaTarget = { ranges: [FieldRange] | [FieldRange, FieldRange] };
 }
 ```
 
-线/散点定位数据点，柱的成员原始值点定位实际柱段中心，显式 `aggregate: "sum"` 定位总值端点；多图元或无法唯一映射时报告不支持。不新增中心/上下边等方位枚举，文本偏移仍用现有字段；不因此扩大各模板的 mark-point 能力。
+线/散点定位数据点，柱的成员原始值点定位实际柱段中心；柱/面积显式 `aggregate: "sum"` 定位总值端点。多图元或无法唯一映射时报告不支持。不新增中心/上下边等方位枚举，文本偏移仍用现有字段；不因此扩大其他模板的 mark-point 能力。
 
 上面的偏移只是候选。新建点说明按 [点标注配置](point-marker-layout.md) 保留业务 target，检查偏移和引线字段；有用户截图或明确位置反馈时再针对性调整，不默认循环渲染或承诺自动避让。
 

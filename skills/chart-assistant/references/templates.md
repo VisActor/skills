@@ -95,6 +95,8 @@
 
 ## 选择约束
 
+先按[数据驱动设计](data-driven-design.md#1-先确定读者要核对的判断)锁定比较任务、对象、参照与时间。两期斜率、连续年度趋势与阈值分布是不同任务；参考图中的地区身份、log 尺度、面板共享方式和组合结构优先于默认模板外观。年度数据可以按原两期取数，不为已取得更多数据改变用户要求。小多图只在单位、尺度与实际能力匹配时使用，散点／超过六个面板等不能冒充已有 smallMultiples 支持。
+
 - 类别比较：只有一个可见数据组时，少量类别用 `barGroup`；标签长或类别多用 `horizontalBarGroup`。简单宽表可用单个 `y` 字段预判，长表/第二维度必须先核对物化后的 series 基数。多个可见数据组时，独立并列比较用 group、可相加的构成或总量用 `bar`/`horizontalBar`；部分占整体才用 percent。`barLink`、`seriesLabel`、`totalLabel` 是普通模板的显式能力例外，不可用时应说明后改选普通模板。
 - 左右对称比较两个指标（人口金字塔、正反面评价、两期对比等）使用 `butterfly`，映射写 `x` + `leftY` + `rightY`；
   **两侧数据都填正值**，向左生长由模板内部的轴 `inverse` 实现，不要为了绘图构造负数。
@@ -103,8 +105,8 @@
   可选 `center`（默认）、`both`、`left`、`right`。`butterfly` 支持完整差异 marker，但**仅用于同一侧内部比较**，
   不跨中轴连接左右两根柱子；用户要求跨侧差异时说明该限制。`butterfly` 不支持 `barLink`（左右分属两个
   region，连接线无法跨区），用户要求时说明限制，不要静默忽略。
-- 对 `bar`、`barPercent`、`horizontalBar`、`horizontalBarPercent`：`barLink` 默认关闭；只有用户明确要求，或类别顺序可靠、层含义稳定且任务明确分析相邻累计/构成边界变化时，首次创建才在 `options.config` 显式设置 `barLink:{enable:true}`。随后在每个实际 series 的 `modelSpec.spec` 显式设置 `seriesLabel.visible:true`。`barLink` 不依赖 identity，seriesLabel 必须先物化/readback 获取真实 `id/specIndex`；不能按 `mappingSpec.y` 的字段个数或数组序号猜 series。无序类别、排名快照、层集合不一致、单层、并列 group、密集或难解释的正负/零基数不自动开启。
-- 时间趋势：`line` 优先；强调累计规模用 `area`；份额变化用 `areaPercent`。
+- 对 `bar`、`barPercent`、`horizontalBar`、`horizontalBarPercent`：`barLink` 默认关闭；只有用户明确要求，或类别顺序可靠、层含义稳定且任务明确分析相邻累计/构成边界变化时，首次创建才在 `options.config` 显式设置 `barLink:{enable:true}`。需要层端直接名称时，再对相关实际 series 设置 `seriesLabel.visible:true`；完整图例或用户省略要求优先。`barLink` 不依赖 identity，seriesLabel 按 [系列标签](labels.md#3-series-label) 用唯一业务 target 或实际 `id/specIndex`，不按 `mappingSpec.y` 字段数或数组序号猜身份。无序类别、排名快照、层集合不一致、单层、并列 group、密集或难解释的正负/零基数不自动开启。
+- 时间趋势：`line` 优先；只有两期时保留端点比较及必要首尾标签，不补中间观测；强调累计规模用 `area`，份额变化用 `areaPercent`。参考图为对数阈值分布时按真实正值与 log scale 保留曲线和差异连接，不把不等距刻度当作任意类目。
 - 关系：两个数值指标才用 `scatter`；第三数值映射 `size`，类别映射 `group`。
 - 构成：饼图只用于少量类别和单一时间切片，默认以 `pie` 的 `innerRadius:0.5` 生成环图，并省略 `outerRadius` 以继承宿主主题和布局默认值；用户明确要求实心或参考图明确实心时才用 `innerRadius:0`。类别多时改排序条形图。
 - 流程：连续阶段规模用 funnel；来源到去向用 sankey；增减桥接用 waterfall。

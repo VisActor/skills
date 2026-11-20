@@ -32,11 +32,33 @@ DELETE /open-apis/docx/v1/documents/:document_id/blocks/:parent_id/children/batc
 1. 确定唯一 `document_id + old_block_id`。读取文档版本、旧 block 及其父 block 的 children；验证旧 block 恰好出现一次，类型为 40，component_type_id 可确认为图表助手组件，记录旧组件类型；旧组件类型不决定新卡类型。
 2. 原始响应在宿主内存中按步骤6检查和投影后，才保存本次任务的编辑基线、父 ID、位置、文档 revision 和稳定请求 ID；基线仅移除步骤6允许的实例字段，其余完整保留，不是精简证据投影。模型输出、日志和临时文件同样不能先接收原始凭证。任务资料置于受限存储，不包含 access token；对外仅给摘要和必要 ID。重读旧/新卡也须先过滤，不因首次创建无凭证就信任后续响应。
 3. 解析 `add_ons.record` JSON，再解码 browserData。数组、JSON 字符串和压缩保存态按真实编码读取。数据库引用必须由已有授权解析能力读取；不支持解析时拒绝，不能把引用当数组或重新生成空图。
-4. browserData 为当前保存态，commonOption 用于原有 hydration，不能取代人工修改后的 browserData。只有初始化 commonOption 且无 browserData、无非空顶层 URL 的单图 standard 卡片，可直接编辑已验证的初始化属性；当前只开放 options.config.color 配色数组。存在 browserData 时禁止回退，URL 驱动卡片仍需可靠物化。
+4. browserData 为当前保存态，commonOption 用于原有 hydration，不能取代人工修改后的 browserData。只有初始化 commonOption 且无 browserData、无非空顶层 URL 的单图 standard 卡片，可直接编辑已验证的初始化属性：options.config.color 配色数组；或内置 bar/barGroup 中由非空业务 selector 唯一定位的一格有限数值，须提供 column、expectedValue 与 value。列名不能重复，selector 不能包含被修改列，旧值变化即拒绝；standard 数据不能额外携带来源绑定。存在 browserData 时禁止回退，URL 驱动卡片仍需可靠物化。
 5. 在深拷贝上按用户意图修改支持的属性，完整比较变化。保留数据、映射、来源/同步、其他标注、未知扩展字段、原 dataVersion、commonOption、人工尺寸及自动适配状态。目标不唯一或需要未知 runtime identity 时返回候选/受限，不猜 key。
 6. 创建独立实例时，先显式投影：顶层 aeolusToken 是宿主会话缓存，不复制；只有 commentData.comments 确认为空、无未知评论字段且 comment.id 为有效字符串时，去掉空评论实例绑定。记录 removedRuntimeFields 字段名，不保存认证值；其他认证字段、非空评论或未知绑定拒绝。其余完整 record 保留，不能将投影称为逐字节复制。
 
-能力与写卡方式分别判断：允许替换不等于支持任意样式或标注。第一批本地执行器仅接受缺省格式版本或当前 `2.11.0`，支持单图中唯一稳定 id 普通文本点标注的 text、六位十六进制 color、1–200 fontSize；另支持步骤4限定的 standard commonOption 初始化配色数组；旧/未知版本和其他目标明确拒绝，不能靠删除 dataVersion 绕过。其他宿主按自身已验证的 runtime/DSL 能力判断。
+能力与写卡方式分别判断：允许替换不等于支持任意样式或标注。本地替换执行器仅接受缺省格式版本或已验证的 `2.11.0`，不自动跟随 Core 当前保存版本升级；支持单图中唯一稳定 id 普通文本点标注的 text、六位十六进制 color、1–200 fontSize；另支持步骤4限定的初始化配色与单元格修改；旧/未知版本和其他目标明确拒绝，不能靠删除 dataVersion 绕过。其他宿主按自身已验证的 runtime/DSL 能力判断。
+
+### 受控编辑页工具
+
+已接入新版编辑页的宿主可绑定当前 iframe 内的 `chartAssistantEditor`，包含 `getSessionState`、`open`、`inspect`、`apply`。此入口依赖真实编辑页及部署版本，Skill 加载不会自动创建工具权限；不得构造同名 HTTP 接口或向任意窗口转发调用。
+
+`open({card, controlledSession:true})` 先核实当前 document/block/record 身份、可写权限和图层就绪，再完成正常保存及回读，返回完整可读取的 snapshot 和短期 token。`controlledSession:true` 是受信任调用方对本次编辑范围的明确声明；本地保存租约不能替代飞书协作锁。初始化记录缺少 browserData 时通过编辑器物化，不重建显式空保存态。返回模型前只移除顶层会话 aeolusToken，未知认证字段拒绝输出；私有保存基线完整保留。
+
+使用 `apply` 时传入 `card`、最新 `token`、独立 `requestId` 和单项 `intents`：
+
+```json
+{"op":"setStandardCell","elementId":"chart","selector":{"地区":"北区","季度":"Q2"},"column":"实际","expectedValue":140,"value":150}
+```
+
+数据保存并完成实际渲染后，调用 `inspect(card)` 获取新 token，再提交普通标签样式：
+
+```json
+{"op":"setLabelStyle","elementId":"chart","selector":{"地区":"北区","季度":"Q2"},"measure":"实际","style":{"fill":"#7B2CBF","fontWeight":"bold"}}
+```
+
+单标签由当前 Core 实例编译为唯一原生系列身份与 `label.styleMap` key，保存编译结果和请求样式；不接受模型猜测原生 key。差异 Marker 的业务 target 保留，随数据更新重新解析。两次保存分别记入历史；若标签解析失败，准确报告“数据已保存，标签未完成”，不把部分执行称为完整成功。`SAVED_VERIFIED` 仅代表保存态完整回读匹配，真实宿主关闭重开和 PNG 验收按任务单独记录。重试同一 requestId 不重复写入；未知写入结果时保留保存租约并要求重开，禁止自动写回旧画布。
+
+编辑事务直接订阅宿主记录变化，并在订阅完成后读取基线，不复用UI防重复加载的时间窗过滤。当前飞书记录通知没有可靠的操作来源字段，无法确认是自身回声时同样使事务失效：即使配置回读一致也可能返回 `CONFLICT`，此时写入可能已发生，应重开并读取实际状态，不自动重试写入或回滚。该保守结果不能声称已保留所有并发编辑，也不构成服务端CAS。
 
 ## 2. 创建候选卡
 

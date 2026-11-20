@@ -6,15 +6,15 @@
 
 | 输入/请求 | 执行路径 | 完成证据 |
 | --- | --- | --- |
-| 原始/已读取standard数据、指定内置模板 | 对应模板字段 → [commonOption](dsl.md#5-icommonchartassistantdata) → [校验](validation.md#commonoption-交付前校验) | 最终合法配置；指定模板不擅自改型 |
+| 原始/已读取standard数据、指定内置模板 | 对应模板字段 → [commonOption](dsl.md#5-icommonchartassistantdata) → 所需交付工具 | 最终合法配置；复用工具的结构校验结果，指定模板不擅自改型 |
 | 已有ILayerData或完整record | 最新readback → 当前操作的[编辑协议](editing.md)/[特殊逻辑](special-logic.md) → 最小更新 | 原身份、未修改字段与人工样式保留 |
-| 已有飞书卡片 | [读取、原位编辑或已授权替换](existing-card-replacement.md) | readback；替换同时记录old/new身份，不重复询问已接受的身份变化 |
-| Sheet/Base/Common URL | [来源角色与同步资格](sources-and-sync.md) | 精确来源配置、live/snapshot及真实回读 |
+| 已有飞书卡片 | [读取、原位编辑或已授权替换](existing-card-replacement.md) | 工具的已验证更新结果；替换按专用协议记录old/new身份，不重复询问已接受的身份变化 |
+| Sheet/Base/Common URL | [来源角色与同步资格](sources-and-sync.md) | 精确来源配置、live/snapshot及工具返回的实际绑定结果 |
 | 风神可视化查询URL | [插件导入与同步](sources-and-sync.md)，再看[风神能力](aeolus.md) | Aeolus来源与既有图表身份；不把URL拆成rows重选内置图 |
 | PNG/透明背景图片 | [托管图片交付](image-delivery.md) | 实际保存的PNG，默认透明背景 |
-| 飞书静态图片 | PNG → [上传并插入普通图片块](feishu-image-delivery.md) | 文件及图片块回读 |
-| 飞书可编辑卡片 | 最终配置 → [卡片协议](feishu-doc-card.md) | block ID、record与尺寸模式回读 |
-| 新文档并插卡 | 明确title/folder/执行身份 → 同身份创建Docx和卡片 | document URL、block ID与回读；只在用户要求新文档时创建 |
+| 飞书静态图片 | PNG → [上传并插入普通图片块](feishu-image-delivery.md) | 文件及插入工具的已验证图片块结果 |
+| 飞书可编辑卡片 | 最终配置 → [卡片协议](feishu-doc-card.md) | 工具已验证的block ID、record与尺寸模式；结果不足时一次目标回读 |
+| 新文档并插卡 | 明确title/folder/执行身份 → 同身份创建Docx和卡片 | 工具已验证的document URL、block ID与配置结果；只在用户要求新文档时创建 |
 
 只要求文字解释时直接回答，不创建产物。新建内置图不手工构造browserData；已有readback、可信导出fixture或用户提供的ILayerData才沿完整状态编辑。飞书OpenAPI record的包装与序列化由[三层协议](dsl.md#1-三层协议不要混用)定义。
 
@@ -40,11 +40,11 @@
 
 ### 唯一定位与请求完成检查
 
-按[唯一定位检查](validation.md#唯一定位与请求完成检查)逐个核对业务target：0个为缺失，多个为歧义。没有可靠区分字段时不能用行号、取首行或未授权聚合凑唯一目标。
+按[唯一定位规则](validation.md#唯一定位与请求完成检查)生成完整业务target，并采用运行时定位结果：0个为缺失，多个为歧义。没有可靠区分字段时不能用行号、取首行或未授权聚合凑唯一目标。
 
 ### commonOption 交付前校验
 
-执行[最终文件校验](validation.md#commonoption-交付前校验)。该章保留可直接执行的Node命令、--new适用范围、用户样式精确豁免、结构失败处理、语义核对和同文件写入要求。校验未通过不能写卡或声称完整合法。
+复用[执行出口的一次结构校验](validation.md#commonoption-交付前校验)，检查的是实际提交的最终内容，不独立串联Node预检、人工白名单与MBB复核。工具报错时只修对应字段，重新提交受影响产物；已知非法配置不能写卡或声称完整合法。工具不覆盖必要结构检查时，由调用端对同一最终输入执行一次校验。
 
 ## 5. 示例：数据变柱图并开启两项能力
 
@@ -58,7 +58,7 @@
 
 ## 7. MBB 流程
 
-读[MBB适用章节](mbb.md)，先保存数据/映射/来源不变量，再配置标题、轴、标签、图例、配色和必要标注；完成其配置验收。配色只是其中一项，不以theme或图例检查代替完整设计，也不把静态配置通过称为图面无重叠。
+读[MBB适用章节](mbb.md)，保留数据/映射/来源，按默认设计规则生成标题、轴、标签、图例、配色和必要标注。用户显式样式与已有编辑优先，静态配置结果不能称为图面无重叠。
 
 ## 8. 文档与卡片流程
 
@@ -68,11 +68,11 @@
 
 ### 待定请求的交付前检查
 
-交付前按[待定检查](validation.md#待定请求的交付前检查)同时核对最终JSON与回复，涵盖标题、单位、标注、因果/变化措辞和备选方案。仅说明影响决策的已完成项、具体限制和必要澄清。
+仅说明影响决策的已完成项、具体限制和必要澄清；事实表达沿用[SKILL](../SKILL.md#协议与表达边界)。
 
 ## 跨图表连接器
 
-按[语义连接器](semantic-chart-connectors.md)一次生成两图及业务target，运行时核对唯一性和锚点能力；回读解析错误与保存态数量，不能只凭图表ready判断成功。
+按[语义连接器](semantic-chart-connectors.md)一次生成两图及业务target，运行时核对唯一性和锚点能力；采用工具返回的解析诊断与最终保存态，结果不足时才补取对应信息，不能只凭图表ready判断成功。
 
 ## 标注生成与历史读取
 

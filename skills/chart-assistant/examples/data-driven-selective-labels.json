@@ -1,0 +1,96 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "age-composition",
+        "type": "chart",
+        "position": { "x": 0, "y": 0, "width": 960, "height": 460 },
+        "options": {
+          "chartType": "horizontalBar",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["Population", "Under 15 years old", "15 to 64 years old", "65 years and older"],
+              "rows": ["Central African Republic", "Global average", "Japan"],
+              "data": [
+                { "Population": "Central African Republic", "Under 15 years old": 49, "15 to 64 years old": 49, "65 years and older": 2 },
+                { "Population": "Global average", "Under 15 years old": 25, "15 to 64 years old": 65, "65 years and older": 10 },
+                { "Population": "Japan", "Under 15 years old": 11, "15 to 64 years old": 59, "65 years and older": 30 }
+              ],
+              "columnFormats": [
+                { "dataType": "text" },
+                { "dataType": "number", "dataFormat": { "dataType": "digit", "postfix": "%", "fixed": 0 } },
+                { "dataType": "number", "dataFormat": { "dataType": "digit", "postfix": "%", "fixed": 0 } },
+                { "dataType": "number", "dataFormat": { "dataType": "digit", "postfix": "%", "fixed": 0 } }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": { "x": "Population", "y": ["Under 15 years old", "15 to 64 years old", "65 years and older"] },
+            "color": ["#DAE1E8", "#8DA7BE", "#0A345E"],
+            "modelSpec": [
+              { "id": "chart_title", "specKey": "title", "specIndex": 0, "spec": { "visible": false } },
+              { "id": "axis-left", "specKey": "axes", "specIndex": 0, "spec": { "type": "band", "title": { "visible": false }, "domainLine": { "visible": false }, "tick": { "visible": false } } },
+              { "id": "axis-bottom", "specKey": "axes", "specIndex": 1, "spec": { "type": "linear", "visible": false, "min": 0, "max": 100, "zero": true, "title": { "visible": false } } },
+              { "id": "legend-discrete", "specKey": "legends", "specIndex": 0, "spec": { "visible": true, "orient": "top", "position": "middle" } },
+              {
+                "id": "region-0", "specKey": "region", "specIndex": 0,
+                "spec": { "stackInverse": false }
+              },
+              {
+                "specKey": "series", "target": { "measure": "Under 15 years old" },
+                "spec": { "label": { "visible": false }, "totalLabel": { "visible": false }, "seriesLabel": { "visible": false } }
+              },
+              {
+                "specKey": "series", "target": { "measure": "15 to 64 years old" },
+                "spec": { "label": { "visible": false }, "totalLabel": { "visible": false }, "seriesLabel": { "visible": false } }
+              },
+              {
+                "specKey": "series", "target": { "measure": "65 years and older" },
+                "spec": {
+                  "label": {
+                    "visible": true, "position": "inside",
+                    "formatConfig": { "content": "value" },
+                    "styleMap": [
+                      {
+                        "target": { "selector": { "Population": "Central African Republic" } },
+                        "value": { "visible": false }
+                      }
+                    ]
+                  },
+                  "totalLabel": { "visible": false },
+                  "seriesLabel": { "visible": false }
+                }
+              }
+            ],
+            "marker": {
+              "markPoint": [
+                {
+                  "id": "thin-senior-share",
+                  "name": "mark-point",
+                  "target": { "match": { "Population": "Central African Republic" }, "metric": "65 years and older" },
+                  "itemContent": {
+                    "type": "text", "position": "insideMiddle",
+                    "offsetX": 0, "offsetY": 0, "refX": 0, "refY": 0,
+                    "autoRotate": false, "confine": false,
+                    "text": {
+                      "type": "rich", "visible": true,
+                      "formatConfig": { "content": "value", "fixed": 0, "postfix": "%" },
+                      "containerTextAlign": "right", "padding": 2, "dx": 0, "dy": 0,
+                      "style": { "fill": "#ffffff", "fontSize": 14, "textAlign": "right", "textBaseline": "middle", "lineWidth": 0 },
+                      "labelBackground": { "visible": true, "style": { "fill": "#0A345E", "fillOpacity": 1, "lineWidth": 0 } }
+                    }
+                  },
+                  "itemLine": { "visible": false },
+                  "targetSymbol": { "visible": false }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "option": { "loadContribute": "view" },
+  "note": "场景要求不画标题、数值轴和来源脚注，且三项65岁以上重点层值必须可读；完整三层与图例保留。原数据已经是份额且各行合计100，使用普通横向堆叠及0–100尺度，不再次归一化；百分比模板的语义点尚不支持，不能照搬此target。10/30段值采用普通内标签；薄段2%使用绑定真实层值的动态点标签，白字与同段色衬底放在条形内部，隐藏重复普通标签。衬底托住文字，真实段宽及累计边界保持不变。非必显且放不下时可省略该标签，不把它移远；此例不承诺任意尺寸自动避让。2025人口构成、分母为地区居民，取自官方原图：https://ourworldindata.org/data-insights/one-in-ten-people-in-the-world-is-over-65-how-does-this-compare-in-the-youngest-and-oldest-countries。"
+}

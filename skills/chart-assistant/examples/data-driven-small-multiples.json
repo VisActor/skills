@@ -1,0 +1,48 @@
+{
+  "commonOption": {
+    "elements": [
+      {
+        "id": "age-panels",
+        "type": "chart",
+        "position": { "x": 0, "y": 0, "width": 960, "height": 500 },
+        "options": {
+          "chartType": "smallMultiples",
+          "data": {
+            "type": "standard",
+            "value": {
+              "columns": ["Age group", "Central African Republic", "Global average", "Japan"],
+              "rows": ["Under 15", "15–64", "65+"],
+              "data": [
+                { "Age group": "Under 15", "Central African Republic": 49, "Global average": 25, "Japan": 11 },
+                { "Age group": "15–64", "Central African Republic": 49, "Global average": 65, "Japan": 59 },
+                { "Age group": "65+", "Central African Republic": 2, "Global average": 10, "Japan": 30 }
+              ],
+              "columnFormats": [
+                { "dataType": "text" },
+                { "dataType": "number", "dataFormat": { "dataType": "digit", "postfix": "%", "fixed": 0 } },
+                { "dataType": "number", "dataFormat": { "dataType": "digit", "postfix": "%", "fixed": 0 } },
+                { "dataType": "number", "dataFormat": { "dataType": "digit", "postfix": "%", "fixed": 0 } }
+              ]
+            }
+          },
+          "config": {
+            "mappingSpec": {
+              "x": "Age group",
+              "y": ["Central African Republic", "Global average", "Japan"]
+            },
+            "smallMultiplesChartType": "horizontalBar",
+            "smallMultiplesColumns": 1,
+            "color": ["#DAE1E8", "#8DA7BE", "#0A345E"],
+            "dataGroupSpec": {
+              "EDITOR_ALL_DATA_GROUP": {
+                "label": { "visible": true, "position": "outside", "formatConfig": { "content": "value" } }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "option": { "loadContribute": "view" },
+  "note": "原图2025三个地区、三年龄组的9个份额，分母各为地区居民，每个地区三项合计100。本场景要求各年龄层独立条形与末端外置值，便于跨地区逐项比较；是同数据共享尺度的另一种表达，不称原图堆叠版式复现。面板顺序与y字段一致；同一年龄组在各面板保持颜色，2%仍绘制和显示。该模板不支持seriesLabel/totalLabel/barLink，不能用这些字段伪造面板内直标。本样例不承诺任意尺寸自动避让。官方原图：https://ourworldindata.org/data-insights/one-in-ten-people-in-the-world-is-over-65-how-does-this-compare-in-the-youngest-and-oldest-countries。"
+}

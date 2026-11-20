@@ -19,10 +19,10 @@
               "value": {
                 "columns": [
                   "月份",
-                  "A实际",
-                  "A预测",
-                  "B实际",
-                  "B预测"
+                  "A",
+                  "A (预测)",
+                  "B",
+                  "B (预测)"
                 ],
                 "rows": [
                   "4月",
@@ -33,31 +33,31 @@
                 "data": [
                   {
                     "月份": "4月",
-                    "A实际": 25,
-                    "A预测": null,
-                    "B实际": 18,
-                    "B预测": null
+                    "A": 25,
+                    "A (预测)": null,
+                    "B": 18,
+                    "B (预测)": null
                   },
                   {
                     "月份": "5月",
-                    "A实际": 30,
-                    "A预测": 30,
-                    "B实际": 20,
-                    "B预测": 20
+                    "A": 30,
+                    "A (预测)": 30,
+                    "B": 20,
+                    "B (预测)": 20
                   },
                   {
                     "月份": "6月",
-                    "A实际": null,
-                    "A预测": 27,
-                    "B实际": null,
-                    "B预测": 22
+                    "A": null,
+                    "A (预测)": 27,
+                    "B": null,
+                    "B (预测)": 22
                   },
                   {
                     "月份": "7月",
-                    "A实际": null,
-                    "A预测": 32,
-                    "B实际": null,
-                    "B预测": 25
+                    "A": null,
+                    "A (预测)": 32,
+                    "B": null,
+                    "B (预测)": 25
                   }
                 ],
                 "columnFormats": [
@@ -95,10 +95,10 @@
               "mappingSpec": {
                 "x": "月份",
                 "y": [
-                  "A实际",
-                  "A预测",
-                  "B实际",
-                  "B预测"
+                  "A",
+                  "A (预测)",
+                  "B",
+                  "B (预测)"
                 ]
               },
               "modelSpec": [
@@ -182,7 +182,7 @@
     },
     "groups": [
       {
-        "groupField": "A实际",
+        "groupField": "A",
         "groupStyle": {
           "line": {
             "visible": true,
@@ -203,7 +203,7 @@
         }
       },
       {
-        "groupField": "A预测",
+        "groupField": "A (预测)",
         "groupStyle": {
           "line": {
             "visible": true,
@@ -225,7 +225,7 @@
         }
       },
       {
-        "groupField": "B实际",
+        "groupField": "B",
         "groupStyle": {
           "line": {
             "visible": true,
@@ -246,7 +246,7 @@
         }
       },
       {
-        "groupField": "B预测",
+        "groupField": "B (预测)",
         "groupStyle": {
           "line": {
             "visible": true,
@@ -271,7 +271,7 @@
     "mergeRule": "只按真实身份深合并modelSpec与dataGroupSpec；legendItems按实际图例可视索引合并到legend model的spec.item.styleMap[index]，保留图例文字、布局和选择状态。phase1不是最终虚实线样式；默认roundLine即使继承lineDash也不能代替实际/预测的不同符号。",
     "legendItems": [
       {
-        "legendLabel": "A实际",
+        "legendLabel": "A",
         "legendItemStyle": {
           "shape": {
             "style": {
@@ -283,7 +283,7 @@
         }
       },
       {
-        "legendLabel": "A预测",
+        "legendLabel": "A (预测)",
         "legendItemStyle": {
           "shape": {
             "style": {
@@ -295,7 +295,7 @@
         }
       },
       {
-        "legendLabel": "B实际",
+        "legendLabel": "B",
         "legendItemStyle": {
           "shape": {
             "style": {
@@ -307,7 +307,7 @@
         }
       },
       {
-        "legendLabel": "B预测",
+        "legendLabel": "B (预测)",
         "legendItemStyle": {
           "shape": {
             "style": {
@@ -320,5 +320,5 @@
       }
     ]
   },
-  "note": "只适用于本地数据或允许拆列的快照；本例按实际身份完成phase2后，Node渲染及保存态重载已验证图例实际/预测符号不同。模型生成评测与飞书浏览器编辑/保存/同步仍未验收。颜色是示例选择，用户/宿主已定义对象颜色优先。"
+  "note": "只适用于本地数据或允许拆列的快照。实线列A/B的阶段为实际，虚线列使用同名加括号的预测身份；没有长表时也保留可解析的对象身份。按实际身份完成phase2后仍需核对接点提示及保存重开；图例实际/预测符号的既有验证不等于提示已验收。颜色是示例选择，用户/宿主已定义对象颜色优先。"
 }

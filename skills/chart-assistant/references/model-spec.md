@@ -2,7 +2,7 @@
 
 `modelSpec` 是图表内部 VChart model 的持久化增量，不是任意配置袋。已有原生身份可直接复用；没有身份时，受支持的 series/axes/legends 可使用 [业务 target 输入](element-editing.md#0-语义-target只补现有-dsl-的定位)，实例编译后仍保存原结构。
 
-每个条目都必须包含 `specKey` 和对象形式的 `spec`。坐标轴写成 `{id:"axis-left",specKey:"axes",specIndex:0,spec:{...轴配置}}`，或受支持的 `{specKey:"axes",target:{field:"原始字段"},spec:{...轴配置}}`；不要把 `{orient:"left",type:"linear",label:...}` 裸轴对象放进 `modelSpec`。裸轴形状仅用于 `options.spec.axes` 的原生 VChart spec；编辑器会按 `specKey` 筛选组件，放错层级可能不报错却忽略轴设置。交付前运行结构校验，不能以加载没有崩溃判定设置已生效。
+每个条目都必须包含 `specKey` 和对象形式的 `spec`。坐标轴写成 `{id:"axis-left",specKey:"axes",specIndex:0,spec:{...轴配置}}`，或受支持的 `{specKey:"axes",target:{field:"原始字段"},spec:{...轴配置}}`；不要把 `{orient:"left",type:"linear",label:...}` 裸轴对象放进 `modelSpec`。裸轴形状仅用于 `options.spec.axes` 的原生 VChart spec；编辑器会按 `specKey` 筛选组件，放错层级可能不报错却忽略轴设置。结构检查按[执行出口规则](validation.md#commonoption-交付前校验)对最终输入完成一次，已有工具结果直接复用；只生成配置时按本契约生成。不能以结构通过或加载没有崩溃判定设置已在图面生效。
 
 ## 1. 组件身份：`id`、`specKey`、`specIndex`
 
@@ -89,14 +89,19 @@ type SymbolStyle = FillStyle & {
 type FormatConfig<T extends string = string> = {
   prefix?:string;postfix?:string;
   unit?:"none"|"auto"|"CN_K"|"CN_W"|"CN_BW"|"CN_QW"|"CN_Y"|"K"|"M"|"B";
+  unitSymbol?:string;significantDigits?:number;
   fixed?:number|"auto";content?:T|T[];contentWrap?:boolean;separator?:boolean;
   dataType?:"digit"|"percent"|"permil";dateFormat?:string;
-  contentFormat?:Record<string,{prefix?:string;postfix?:string;unit?:string;fixed?:number|"auto";
+  contentFormat?:Record<string,{prefix?:string;postfix?:string;unit?:string;unitSymbol?:string;significantDigits?:number;fixed?:number|"auto";
     dataType?:string;separator?:boolean}>;
 };
 ```
 
 上述样式对应源码 `elements/types/style.ts` 的 TextStyle、UnFillMarkStyle、FillMarkStyle、SymbolMarkStyle；不把源码的扩展索引签名作为任意属性生成入口。文本 `background` 是背景色，`boundsPadding` 是扩充文本包围盒的数值内边距，`underline` 用 1/0 开关。纹理写入实际填充图元的 `style`（例如 `series.spec.bar.style.texture`），不是 series 根字段；关闭时编辑器会写入四个纹理字段的 `null`，尺寸/间距无有效值时也可能为 `null`。省略表示不覆盖，不能把 `null` 泛化到 fill 等其他公共样式字段；分区面有独立类型，见 [markers.md](markers.md#6-scatter-趋势线与分区)。
+
+启用纹理且显式配置数值尺寸/间距时，`textureSize` 为有限正数、`texturePadding` 为有限非负数，满足 `textureSize > 2 * texturePadding`。原生纹理可绘制宽度取 `textureSize - 2 * texturePadding`；例如 `8/2` 或 `18/6` 有效，`8/4` 会使矩形、横竖线和网格纹理的绘制宽度变为零。小尺寸纹理要相应减小间距，不能沿用更大尺寸的间距。局部编辑只提供部分字段时保留其余继承值；关闭用 `texture:null`。`dataGroupSpec` / `markStyle` 的图元样式可保留编辑器产生的空尺寸：单数据组 bar 等运行时路径会跳过它们并继承下层或原生默认值；不要据此在原始 `spec` / `modelSpec` 的活动纹理中生成空尺寸。执行工具合并明确的全组覆盖后检查几何关系，选择性或动态覆盖留给运行时确认，模型无需另做逐图重复复核。
+
+纹理用于用户要求的区分或印刷表达，不默认给普通图表铺纹理。新启用且没有指定外观时，可用 `textureSize:12, texturePadding:5` 的细疏图案；纹理色在底色与白色（深底）或 `#2B2F36`（浅底）之间混合约28%，使用不透明色值，降低强白纹的视觉干扰。已有纹理颜色、尺寸、间距及显式用户要求优先。周期为 `textureSize`，不是尺寸加间距；`grid` 是原生交错方块纹理，不能把预览画成十字网线。
 
 额外 VChart 样式键只有在目标宿主已验证时才透传。不要输出函数；保存态 formatter/formatMethod 函数由运行时生成，OpenAPI JSON record 无法安全表达。
 
@@ -174,11 +179,13 @@ type CrosshairModelSpec = ModelIdentity & {specKey:"crosshair";spec:{visible?:bo
   yField?:Record<string,unknown>;categoryField?:Record<string,unknown>;valueField?:Record<string,unknown>}};
 ```
 
-Legend 的复合对象随离散/连续图例不同，只写已知意图所需字段。`padding` 的数组顺序为 `[top,right,bottom,left]`，控制图例组件与相邻布局区域的留白；`item.spaceRow/spaceCol` 只控制图例项彼此间距。新建图表需要离散图例时默认使用底部居中图例：`orient:"bottom"`、`position:"middle"`、`padding:[16,0,0,0]`；用户明确指定位置或编辑已有布局时不套用该默认值；左对齐的显式要求仍使用 `position:"start"`。不要用猜测的坐标模拟间距。Crosshair 只修改实际模板生成的方向字段。Tooltip 内容若需要函数格式化，应让运行时生成。
+Legend 的复合对象随离散/连续图例不同，只写已知意图所需字段。`padding` 的数组顺序为 `[top,right,bottom,left]`，控制图例组件与相邻布局区域的留白；`item.spaceRow/spaceCol` 只控制图例项彼此间距。需要离散图例且没有用户、参考图或数据布局依据时，回退底部居中：`orient:"bottom"`、`position:"middle"`、`padding:[16,0,0,0]`；编辑已有布局保留原位置，左对齐的显式要求使用 `position:"start"`。不要用猜测的坐标模拟间距。Crosshair 只修改实际模板生成的方向字段。Tooltip 内容若需要函数格式化，应让运行时生成。
+
+独立来源／脚注与图例不是同一区域；按图表含图例的实际边界分配画布文字位置，保留可读间距。窄尺寸需要更多行时调整相关区域，不把脚注压在图例上。
 
 ### 普通标题最小配置
 
-下面仅展示旧配置兼容及用户明确要求普通字符串标题时的合法层级，不是新建图表的默认设计示例。所有新图（无论是否说 MBB）默认使用下节 rich 标题和显式字体层级；将 `modelSpec` 合并进 `commonOption.elements[].options.config`，保留已有映射与其他组件配置：
+下面展示普通字符串标题的合法层级。需要新标题且无其他样式依据时使用下节默认 rich 层级；用户指定普通标题、隐藏标题或用画布公共标题时按其意图处理。将 `modelSpec` 合并进 `commonOption.elements[].options.config`，保留已有映射与其他组件：
 
 ```json
 {
@@ -204,7 +211,7 @@ title patch 建议始终显式携带 `visible:true`：仅写 `text` 运行时也
 
 ### MBB 富文本标题
 
-所有新建图表默认使用下面的 rich title 结构，配色可由模型从内置候选池选择，不影响标题规范；不要写 `subtext`。主标题22px、600字重、28px行高；次级说明12px、18px行高；左对齐并继承原生fontFamily。用户指定的主标题原文必须保留，次级说明仅在需要补充时间、范围、指标或单位时填写；已有表达充分时省略次级片段及换行，不编造业务单位。下面是**已确认浅色背景**且含必要次级说明的示例；其中颜色不是所有主题通用的固定值：
+需要图表标题且无其他样式依据时，使用下面的 rich title 默认结构；不要写 `subtext`。主标题22px、600字重、28px行高；必要次级说明12px、18px行高；左对齐并继承原生fontFamily。用户／参考图原文、富文本片段、换行与样式优先；同一主标题的第二行仍属于主标题，不按换行自动降成副标题。公共标题已由画布文字承担或用户要求隐藏时，设置标题 `visible:false`，不再补默认标题。下面是**已确认浅色背景**且含必要说明的示例，颜色不是所有主题通用值：
 
 ```json
 {
@@ -230,13 +237,13 @@ title patch 建议始终显式携带 `visible:true`：仅写 `text` 运行时也
 
 ### 默认字体与轴标题配置
 
-有值轴的新图显式设置轴 `title.visible:true` 和可解释的 `text`；省略新增title.style文字样式覆盖，字体字号继承图表助手主题。单指标使用指标名，多指标同口径可写“数值”，百分比写“占比”；只有已知单位才附加单位。scatter 连续两轴分别解释指标；无轴图型不增加轴。保留模板位置，省略title.position/angle/autoRotate。
+轴标题是否出现按[必要元素判断](data-driven-design.md#2-决定哪些元素需要绘制)决定。需要解释指标时写 `title.visible:true` 和真实 `text`，同时核对父轴 `visible:true`；已由其他文字表达、参考图没有或用户要求隐藏时可设 `title.visible:false`。隐藏标题不改 scale，隐藏整轴也不改变数据。scatter 的两项指标仍应可辨认，无轴图型不增加轴。默认字体继承主题，不写“数值”等占位文字；仅需要显示时不附带布局覆盖。
 
 轴标题与刻度不重复显示同一单位：标题已带单位时，仅覆盖该轴刻度的单位前后缀，普通标签和 Tooltip 继续使用列格式；字段写法、缩放单位和旧宿主边界见 [轴标题与刻度的单位去重](data-and-formatting.md#轴标题与刻度的单位去重)。
 
-轴标题、刻度 `axes.spec.label`、离散图例项 `legends.spec.item.label`、普通数据标签 `series.spec.label` 或共同 `dataGroupSpec.EDITOR_ALL_DATA_GROUP.label` 默认都省略新增 `fontSize/fontFamily` 等文字样式覆盖，继承图表助手主题，不写固定12px或其他替代字号，也不生成空style。保留必要的visible、内容和formatConfig；用户明确字号时才在对应style设置。深合并已有配置，不因字体继承删除用户样式或强制开启所有标签，不生成猜测series ID；普通label.position/offset不变。
+轴标题、刻度 `axes.spec.label`、离散图例项 `legends.spec.item.label`、普通标签 `series.spec.label` 或共同 `dataGroupSpec.EDITOR_ALL_DATA_GROUP.label` 无明确样式依据时继承主题。用户要求或可核实参考图样式按精确路径覆盖，保留必要的内容和格式，不写空style。局部格式编辑保持位置，新建或整体优化按空间和参考图选择最窄的位置覆盖。深合并已有配置，不删除用户样式、强制开启全部标签或猜series ID。
 
-rich主标题及有必要时的次级说明使用本页22/12信息层级；其余组件采用主题字体继承。必须同时核对rich标题、轴标题内容、布局和继承边界，不能只写theme名字后假定完整默认规范已经完成。已有图表编辑及用户明确样式优先，不能为改一处文案重排全图。
+无其他明确样式依据时，实际需要的 rich 主标题／次级说明采用22/12默认层级，其余组件继承主题。参考图、用户原文及样式优先；没有标题／次级说明时不新增占位文字。核对适用的内容、布局和继承边界，不能以主题名字代替完成检查；局部文案编辑不重排全图。
 
 ### 4.1 `player`、`dataZoom`、`scrollBar`
 
