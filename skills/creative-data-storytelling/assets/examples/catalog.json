@@ -854,6 +854,177 @@
       "relatedExample": "units"
     },
     {
+      "id": "categorical-change",
+      "title": "同一群人，回答变了",
+      "keywords": [
+        "类别变化",
+        "分类",
+        "两期",
+        "满意度",
+        "配对记录",
+        "单元",
+        "categorical change",
+        "matched records",
+        "migration"
+      ],
+      "relations": [
+        "两期分类变化",
+        "稳定身份",
+        "独立属性"
+      ],
+      "readerTask": "类别位置留下，同一批人按第二次回答重排，看到总体构成怎样变化，并能追踪某个对象。",
+      "dataNeeds": "稳定 ID、同一定义的前后类别及可选独立属性；两期边际总数不能推造个人流向。",
+      "dataKind": "120 条模拟配对回答；全部留存，颜色为初次收入档位，不支持现实因果判断。",
+      "design": "references/design.md#unit-cohorts",
+      "adapt": "data.mjs 换记录；model.mjs 的 createCategoricalChange / layout / blend 负责计数与同一 ID 跨组移动；scene.mjs 绑定图文。分类、单元形象、布局和第二属性可重选。",
+      "relatedExample": "cohort-flow",
+      "kind": "story",
+      "preview": "assets/examples/categorical-change/index.html",
+      "code": "assets/examples/categorical-change/scene.mjs",
+      "dependencies": [
+        "assets/examples/categorical-change/data.mjs",
+        "assets/examples/categorical-change/model.mjs",
+        "assets/examples/segment-preview.mjs",
+        "assets/examples/segment-preview.css",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/svg.mjs",
+        "assets/runtime/copy.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/stage-wiring/connect.mjs"
+      ],
+      "assets": []
+    },
+    {
+      "id": "distribution-and-exception",
+      "title": "平均变慢，谁在等待",
+      "keywords": [
+        "分布",
+        "主体",
+        "尾部",
+        "均值",
+        "中位数",
+        "个案",
+        "独立样本",
+        "distribution",
+        "tail",
+        "outlier",
+        "mean",
+        "median"
+      ],
+      "relations": [
+        "个案与分布",
+        "跨批比较",
+        "尾部聚焦"
+      ],
+      "readerTask": "把一件久等的包裹放回三批记录，在共同尺度上辨认均值与主体的差别，再放大久等部分。",
+      "dataNeeds": "三批可比的逐条量值、局部选择依据与完整分母；不同批次独立，不能当作个体更新。",
+      "dataKind": "三批各 24 条模拟处理时长；阈值用于示范，不是行业标准。",
+      "design": "references/design.md#unit-distribution",
+      "adapt": "distributionExample 换 batches / values / threshold；createDistribution 派生读数，layout / blend 保持轴与节点共享当帧映射。可从已有分布接入，尾部不特殊时另选解释。",
+      "relatedExample": "opening-question",
+      "kind": "story",
+      "preview": "assets/examples/distribution-and-exception/index.html",
+      "code": "assets/examples/distribution-and-exception/scene.mjs",
+      "dependencies": [
+        "assets/examples/distribution-and-exception/model.mjs",
+        "assets/examples/segment-preview.mjs",
+        "assets/examples/segment-preview.css",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/svg.mjs",
+        "assets/runtime/copy.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/stage-wiring/connect.mjs"
+      ],
+      "assets": []
+    },
+    {
+      "id": "shared-members",
+      "title": "相遇的人，来自哪里",
+      "keywords": [
+        "交集",
+        "共同成员",
+        "联合计数",
+        "提取",
+        "来源",
+        "intersection",
+        "membership",
+        "joint counts",
+        "source"
+      ],
+      "relations": [
+        "已知交集",
+        "原位识别",
+        "来源保留"
+      ],
+      "readerTask": "在来源组中辨认共同参与者，再把同一批名额提取为主体，保留来源颜色和未选中部分。",
+      "dataNeeds": "互斥且完整的来源分组，逐条成员关系或互斥联合计数；仅边际人数不能识别交集。",
+      "dataKind": "虚构活动的 120 个报名名额，由联合计数展开；报名后可能缺席，无真实个人 ID。",
+      "design": "references/design.md#membership",
+      "adapt": "membershipExample 换 origins / patterns / conditions，createMembership 派生交集与余量；layout / blendMembership 接原位识别与提取，clusterSlots 可替换。",
+      "relatedExample": "overlap-bound",
+      "kind": "story",
+      "preview": "assets/examples/shared-members/index.html",
+      "code": "assets/examples/shared-members/scene.mjs",
+      "dependencies": [
+        "assets/examples/shared-members/model.mjs",
+        "assets/examples/segment-preview.mjs",
+        "assets/examples/segment-preview.css",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/svg.mjs",
+        "assets/runtime/copy.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/stage-wiring/connect.mjs"
+      ],
+      "assets": []
+    },
+    {
+      "id": "overlap-bound",
+      "title": "只有总数，至少重合多少",
+      "keywords": [
+        "交集",
+        "边际总数",
+        "下界",
+        "重叠",
+        "总体",
+        "intersection",
+        "overlap bound",
+        "marginal counts",
+        "minimum"
+      ],
+      "relations": [
+        "交集下界",
+        "共同总体",
+        "假设排布"
+      ],
+      "readerTask": "两项数量在同一总体内尽量错开，保留下的重合解释交集下限，明确实际交集仍未知。",
+      "dataNeeds": "共同总体 N、内部不重复的两项计数 A 与 B，两项允许重叠；没有成员配对也能求界限。",
+      "dataKind": "模拟意向调查：120 人中两项分别 84 与 72 人；条带位置不是个体身份。",
+      "design": "references/design.md#membership",
+      "adapt": "overlapExample 换总数与两项；createOverlap 计算上下界，createOverlapScene 连接共起点与最大错开；mountOverlap 绑定 SVG 和正文。可单独取计算或错开过程。",
+      "relatedExample": "shared-members",
+      "kind": "story",
+      "preview": "assets/examples/overlap-bound/index.html",
+      "code": "assets/examples/overlap-bound/scene.mjs",
+      "dependencies": [
+        "assets/examples/segment-preview.mjs",
+        "assets/examples/segment-preview.css",
+        "assets/runtime/geometry.mjs",
+        "assets/runtime/motion.mjs",
+        "assets/runtime/svg.mjs",
+        "assets/runtime/copy.mjs",
+        "assets/runtime/stage.mjs",
+        "assets/runtime/scroll.mjs",
+        "assets/stage-wiring/connect.mjs"
+      ],
+      "assets": []
+    },
+    {
       "id": "comparison",
       "keywords": [
         "条形图",
